@@ -1,4 +1,5 @@
 import { Container } from "@/components/layout/container";
+import { Button } from "@/components/ui/button";
 import { Description } from "@/components/ui/description";
 import { Heading } from "@/components/ui/heading";
 import { Label } from "@/components/ui/label";
@@ -46,6 +47,12 @@ export function Hero() {
             системи резервного живлення — від інженерного рішення до запуску
             та сервісу.
           </Description>
+          <div className="flex flex-wrap gap-3 pt-2">
+            <Button href="#contact">Підібрати рішення</Button>
+            <Button href="#solar-stations" variant="secondary">
+              Сонячні станції
+            </Button>
+          </div>
         </Container>
       </div>
     </section>

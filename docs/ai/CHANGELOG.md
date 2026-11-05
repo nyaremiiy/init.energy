@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-05 — CTA-кнопки hero
+- **Агент:** Codex
+- **Гілка:** feature/hero-section (статус: в роботі)
+- **Що зроблено:** під описом hero додано CTA «Підібрати рішення» та «Сонячні станції»; стилі винесено в повторно використовуваний компонент `Button`.
+- **Файли:** src/components/ui/button.tsx, src/components/sections/home/hero.tsx, docs/ai/CONTEXT.md, docs/ai/CHANGELOG.md
+- **Нотатки / що далі:** CTA ведуть на майбутні секції `#contact` і `#solar-stations`.
+
 ## 2026-11-05 — Опис послуг у hero
 - **Агент:** Codex
 - **Гілка:** feature/hero-section (статус: в роботі)
