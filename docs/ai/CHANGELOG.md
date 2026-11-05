@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-05 — Шрифт Montserrat
+- **Агент:** Codex
+- **Гілка:** feature/hero-section (статус: в роботі)
+- **Що зроблено:** Montserrat застосовано глобально через оптимізований `next/font/google` з підтримкою кирилиці.
+- **Файли:** src/app/layout.tsx, docs/ai/CONTEXT.md, docs/ai/CHANGELOG.md
+- **Нотатки / що далі:** усі компоненти успадковують Montserrat без окремих font-класів.
+
 ## 2026-11-05 — Спрощений лейбл hero
 - **Агент:** Codex
 - **Гілка:** feature/hero-section (статус: в роботі)
