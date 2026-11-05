@@ -1,8 +1,9 @@
-import type { ComponentPropsWithoutRef } from "react";
+import type { ComponentPropsWithoutRef, ReactNode } from "react";
 
 type ButtonVariant = "primary" | "secondary";
 
 type ButtonProps = ComponentPropsWithoutRef<"a"> & {
+  icon?: ReactNode;
   variant?: ButtonVariant;
 };
 
@@ -14,13 +15,18 @@ const variantClasses: Record<ButtonVariant, string> = {
 
 export function Button({
   className,
+  icon,
   variant = "primary",
+  children,
   ...props
 }: ButtonProps) {
   return (
     <a
-      className={`inline-flex min-h-12 items-center justify-center rounded-full px-6 text-sm font-semibold transition-colors sm:px-7 ${variantClasses[variant]} ${className ?? ""}`}
+      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 text-sm font-semibold transition-colors sm:px-7 ${variantClasses[variant]} ${className ?? ""}`}
       {...props}
-    />
+    >
+      {children}
+      {icon}
+    </a>
   );
 }

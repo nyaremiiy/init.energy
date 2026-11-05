@@ -1,3 +1,5 @@
+import { ArrowUpRight } from "lucide-react";
+
 import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
 import { Description } from "@/components/ui/description";
@@ -48,8 +50,17 @@ export function Hero() {
             та сервісу.
           </Description>
           <div className="flex flex-wrap gap-3 pt-2">
-            <Button href="#contact">Підібрати рішення</Button>
-            <Button href="#solar-stations" variant="secondary">
+            <Button
+              href="#contact"
+              icon={<ArrowUpRight aria-hidden className="size-4" />}
+            >
+              Підібрати рішення
+            </Button>
+            <Button
+              href="#solar-stations"
+              variant="secondary"
+              icon={<ArrowUpRight aria-hidden className="size-4" />}
+            >
               Сонячні станції
             </Button>
           </div>

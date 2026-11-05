@@ -8,7 +8,7 @@ init.energy — вебпроєкт. Призначення та функціон
 
 ## Поточний стан
 
-- Чистий стартовий каркас на Next.js 16.4.5, React 19.3, TypeScript і Tailwind CSS v4.
+- Каркас на Next.js 16.4.5, React 19.3, TypeScript, Tailwind CSS v4 і Lucide React для іконок.
 - Реалізовано responsive hero-секцію з локальними AVIF/WebP-зображеннями.
 
 ## Структура

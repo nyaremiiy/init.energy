@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-05 — Іконки CTA hero
+- **Агент:** Codex
+- **Гілка:** feature/hero-section (статус: в роботі)
+- **Що зроблено:** додано `lucide-react`; CTA-кнопки hero отримали іконку `ArrowUpRight`, а `Button` — опційний проп `icon`.
+- **Файли:** package.json, package-lock.json, src/components/ui/button.tsx, src/components/sections/home/hero.tsx, docs/ai/CONTEXT.md, docs/ai/CHANGELOG.md
+- **Нотатки / що далі:** інші кнопки можуть передавати власну Lucide-іконку через проп `icon`.
+
 ## 2026-11-05 — CTA-кнопки hero
 - **Агент:** Codex
 - **Гілка:** feature/hero-section (статус: в роботі)
