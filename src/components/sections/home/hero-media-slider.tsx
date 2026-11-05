@@ -8,6 +8,8 @@ type HeroMediaSliderProps = {
   slide: HeroSlide;
 };
 
+const mediaTransitionDuration = 1.2;
+
 export function HeroMediaSlider({ slide }: HeroMediaSliderProps) {
   const prefersReducedMotion = useReducedMotion();
 
@@ -19,7 +21,10 @@ export function HeroMediaSlider({ slide }: HeroMediaSliderProps) {
           initial={prefersReducedMotion ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 1 }}
-          transition={{ duration: prefersReducedMotion ? 0 : 0.6, ease: "easeOut" }}
+          transition={{
+            duration: prefersReducedMotion ? 0 : mediaTransitionDuration,
+            ease: "easeInOut",
+          }}
           className="absolute inset-0"
         >
           <picture className="block size-full">
