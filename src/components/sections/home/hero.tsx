@@ -54,6 +54,7 @@ export function Hero() {
             <Button
               href="#contact"
               icon={<ArrowUpRight aria-hidden className="size-4" />}
+              size="wide"
             >
               Підібрати рішення
             </Button>
@@ -61,6 +62,7 @@ export function Hero() {
               href="#solar-stations"
               variant="secondary"
               icon={<ArrowUpRight aria-hidden className="size-4" />}
+              size="wide"
             >
               Сонячні станції
             </Button>

@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-05 — Ширші CTA-кнопки hero
+- **Агент:** Codex
+- **Гілка:** feature/hero-section (статус: в роботі)
+- **Що зроблено:** до `Button` додано модульний розмір `wide`; обидві CTA-кнопки hero стали трохи ширшими.
+- **Файли:** src/components/ui/button.tsx, src/components/sections/home/hero.tsx, docs/ai/CONTEXT.md, docs/ai/CHANGELOG.md
+- **Нотатки / що далі:** інші кнопки зберігають розмір `default`.
+
 ## 2026-11-05 — Більше простору в hero
 - **Агент:** Codex
 - **Гілка:** feature/hero-section (статус: в роботі)
