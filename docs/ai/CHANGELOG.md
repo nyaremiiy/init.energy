@@ -17,7 +17,7 @@
 
 ## 2026-11-05 — Очищення стартового шаблону
 - **Агент:** Codex
-- **Гілка:** chore/remove-template-files (статус: в роботі)
+- **Гілка:** chore/remove-template-files (статус: змерджено в develop)
 - **Що зроблено:** прибрано демонстраційний вміст і стилі `create-next-app`, шаблонні SVG та Google-шрифти; налаштовано нейтральні metadata і локаль `uk`.
 - **Файли:** src/app/layout.tsx, src/app/page.tsx, src/app/globals.css, public/*.svg, docs/ai/CONTEXT.md, docs/ai/CHANGELOG.md
 - **Нотатки / що далі:** каркас готовий для визначення структури та дизайну сайту.
