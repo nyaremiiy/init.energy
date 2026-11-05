@@ -1,4 +1,5 @@
 import { Container } from "@/components/layout/container";
+import { Label } from "@/components/ui/label";
 
 export default function Home() {
   return (
@@ -34,9 +35,9 @@ export default function Home() {
             <h1 id="hero-title" className="sr-only">
               init.energy
             </h1>
-            <p className="text-xs font-medium uppercase tracking-[0.12em] text-white/85 sm:text-sm">
+            <Label>
               Твоя енергетична незалежність
-            </p>
+            </Label>
           </Container>
         </div>
       </section>
