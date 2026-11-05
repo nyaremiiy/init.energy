@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-05 — Responsive hero-секція
+- **Агент:** Codex
+- **Гілка:** feature/hero-section (статус: в роботі)
+- **Що зроблено:** додано hero з responsive `<picture>` та локальними зображеннями; висота `100svh` для компактних екранів і `75vh` для великих desktop-дисплеїв.
+- **Файли:** src/app/page.tsx, src/app/globals.css, docs/ai/CONTEXT.md, docs/ai/CHANGELOG.md
+- **Нотатки / що далі:** контент і UI-елементи hero можна додати поверх зображення.
+
 ## 2026-11-05 — Правила чистого коду та SEO/GEO
 - **Агент:** Codex
 - **Гілка:** feature/hero-section (статус: в роботі)
