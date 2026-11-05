@@ -17,17 +17,16 @@ body {
 .hero::after {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    90deg,
-    rgb(0 2 23 / 90%) 0%,
-    rgb(0 2 23 / 86%) 12%,
-    rgb(0 2 23 / 78%) 26%,
-    rgb(0 2 23 / 66%) 42%,
-    rgb(0 2 23 / 50%) 58%,
-    rgb(0 2 23 / 32%) 74%,
-    rgb(0 2 23 / 14%) 90%,
-    transparent 100%
-  );
+  background:
+    linear-gradient(180deg, rgb(0 2 23 / 6%) 0%, rgb(0 2 23 / 18%) 100%),
+    radial-gradient(
+      ellipse 95% 135% at 0% 50%,
+      rgb(0 2 23 / 92%) 0%,
+      rgb(0 2 23 / 78%) 30%,
+      rgb(0 2 23 / 48%) 54%,
+      rgb(0 2 23 / 16%) 76%,
+      transparent 100%
+    );
   content: "";
   pointer-events: none;
 }
