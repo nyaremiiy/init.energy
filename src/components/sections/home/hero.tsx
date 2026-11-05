@@ -30,11 +30,14 @@ export function Hero() {
         />
       </picture>
       <div className="absolute inset-0 z-10 flex items-center">
-        <Container>
-          <h1 id="hero-title" className="sr-only">
-            init.energy
-          </h1>
+        <Container className="flex flex-col items-start gap-4">
           <Label>Твоя енергетична незалежність</Label>
+          <h1
+            id="hero-title"
+            className="max-w-3xl text-4xl font-semibold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl"
+          >
+            Комплексні енергетичні рішення
+          </h1>
         </Container>
       </div>
     </section>
