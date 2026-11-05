@@ -12,7 +12,7 @@ import { Label } from "@/components/ui/label";
 
 import { heroSlides } from "./hero-slides";
 
-const slideInterval = 6000;
+const slideInterval = 10000;
 
 export function HeroContentSlider() {
   const [activeIndex, setActiveIndex] = useState(0);
