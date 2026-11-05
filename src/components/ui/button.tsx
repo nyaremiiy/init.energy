@@ -22,11 +22,15 @@ export function Button({
 }: ButtonProps) {
   return (
     <a
-      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 text-sm font-semibold transition-colors sm:px-7 ${variantClasses[variant]} ${className ?? ""}`}
+      className={`group inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 text-sm font-semibold transition duration-200 hover:-translate-y-0.5 sm:px-7 ${variantClasses[variant]} ${className ?? ""}`}
       {...props}
     >
       {children}
-      {icon}
+      {icon ? (
+        <span className="transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
+          {icon}
+        </span>
+      ) : null}
     </a>
   );
 }
