@@ -5,23 +5,23 @@ export default function Home() {
         <picture className="hero__media">
           <source
             media="(max-width: 767px)"
-            srcSet="/images/w750.avif"
+            srcSet="/images/home/hero/w750.avif"
             type="image/avif"
           />
           <source
             media="(max-width: 1279px)"
-            srcSet="/images/w1280.avif"
+            srcSet="/images/home/hero/w1280.avif"
             type="image/avif"
           />
           <source
             media="(max-width: 1919px)"
-            srcSet="/images/w1920.avif"
+            srcSet="/images/home/hero/w1920.avif"
             type="image/avif"
           />
-          <source srcSet="/images/w2560.avif" type="image/avif" />
+          <source srcSet="/images/home/hero/w2560.avif" type="image/avif" />
           {/* The local responsive sources are already optimized for this hero. */}
           <img
-            src="/images/w2560.webp"
+            src="/images/home/hero/w2560.webp"
             alt=""
             aria-hidden="true"
             className="hero__image"

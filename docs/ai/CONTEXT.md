@@ -17,6 +17,7 @@ init.energy — вебпроєкт. Призначення та функціон
 src/app/        # App Router: layout.tsx, page.tsx, globals.css
 public/         # статичні файли
 public/images/  # зображення сайту
+public/images/home/hero/ # responsive-зображення hero головної сторінки
 docs/ai/        # спільний контекст для AI-агентів (цей файл + CHANGELOG)
 AGENTS.md       # правила для всіх агентів (Codex)
 CLAUDE.md       # точка входу для Claude Code (імпортує AGENTS.md)

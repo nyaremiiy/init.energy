@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-05 — Структура зображень hero
+- **Агент:** Codex
+- **Гілка:** feature/hero-section (статус: в роботі)
+- **Що зроблено:** переміщено responsive-зображення hero до `public/images/home/hero` та оновлено шляхи в компоненті.
+- **Файли:** public/images/home/hero/*, src/app/page.tsx, docs/ai/CONTEXT.md, docs/ai/CHANGELOG.md
+- **Нотатки / що далі:** для нових сторінок і секцій використовувати аналогічну структуру каталогів.
+
 ## 2026-11-05 — Responsive hero-секція
 - **Агент:** Codex
 - **Гілка:** feature/hero-section (статус: в роботі)
