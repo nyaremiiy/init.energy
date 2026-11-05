@@ -18,14 +18,15 @@ body {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgb(0 2 23 / 6%) 0%, rgb(0 2 23 / 18%) 100%),
-    radial-gradient(
-      ellipse 95% 135% at 0% 50%,
-      rgb(0 2 23 / 92%) 0%,
-      rgb(0 2 23 / 78%) 30%,
-      rgb(0 2 23 / 48%) 54%,
-      rgb(0 2 23 / 16%) 76%,
-      transparent 100%
+    linear-gradient(0deg, rgb(0 2 23 / 20%) 0%, transparent 48%),
+    linear-gradient(
+      90deg,
+      rgb(0 2 23 / 90%) 0%,
+      rgb(0 2 23 / 76%) 20%,
+      rgb(0 2 23 / 52%) 38%,
+      rgb(0 2 23 / 26%) 54%,
+      rgb(0 2 23 / 8%) 66%,
+      transparent 76%
     );
   content: "";
   pointer-events: none;
