@@ -49,7 +49,7 @@ export function Hero() {
             системи резервного живлення — від інженерного рішення до запуску
             та сервісу.
           </Description>
-          <div className="flex flex-wrap gap-3 pt-2">
+          <div className="flex flex-wrap gap-3 pt-4">
             <Button
               href="#contact"
               icon={<ArrowUpRight aria-hidden className="size-4" />}
