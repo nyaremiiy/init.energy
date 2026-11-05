@@ -17,9 +17,11 @@ body {
   background: linear-gradient(
     90deg,
     #000217 0%,
-    rgb(0 2 23 / 88%) 28%,
-    rgb(0 2 23 / 42%) 54%,
-    transparent 78%
+    rgb(0 2 23 / 96%) 16%,
+    rgb(0 2 23 / 78%) 34%,
+    rgb(0 2 23 / 48%) 55%,
+    rgb(0 2 23 / 18%) 76%,
+    transparent 100%
   );
   content: "";
   pointer-events: none;
