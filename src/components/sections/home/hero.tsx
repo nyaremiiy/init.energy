@@ -1,4 +1,5 @@
 import { Container } from "@/components/layout/container";
+import { Description } from "@/components/ui/description";
 import { Heading } from "@/components/ui/heading";
 import { Label } from "@/components/ui/label";
 
@@ -40,6 +41,11 @@ export function Hero() {
           >
             Комплексні енергетичні рішення
           </Heading>
+          <Description className="max-w-2xl">
+            Проєктуємо та встановлюємо сонячні електростанції, панелі й
+            системи резервного живлення — від інженерного рішення до запуску
+            та сервісу.
+          </Description>
         </Container>
       </div>
     </section>
