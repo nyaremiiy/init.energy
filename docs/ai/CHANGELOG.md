@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-05 — Модульний line-height заголовків
+- **Агент:** Codex
+- **Гілка:** feature/hero-section (статус: в роботі)
+- **Що зроблено:** line-height перенесено в проп `lineHeight` компонента `Heading`; hero використовує варіант `compact`.
+- **Файли:** src/components/ui/heading.tsx, src/components/sections/home/hero.tsx, docs/ai/CONTEXT.md, docs/ai/CHANGELOG.md
+- **Нотатки / що далі:** налаштування типографіки заголовків виконувати через API `Heading`, а не локальні utility-класи.
+
 ## 2026-11-05 — Щільніший заголовок hero
 - **Агент:** Codex
 - **Гілка:** feature/hero-section (статус: в роботі)

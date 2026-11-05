@@ -40,7 +40,8 @@ export function Hero() {
           <Heading
             as="h1"
             id="hero-title"
-            className="max-w-3xl text-4xl leading-none text-white sm:text-5xl lg:text-6xl"
+            lineHeight="compact"
+            className="max-w-3xl text-4xl text-white sm:text-5xl lg:text-6xl"
           >
             Комплексні енергетичні рішення
           </Heading>
