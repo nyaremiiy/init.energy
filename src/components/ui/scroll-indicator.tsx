@@ -1,12 +1,15 @@
 "use client";
 
 import { Mouse } from "lucide-react";
+import { motion, useReducedMotion } from "motion/react";
 
 type ScrollIndicatorProps = {
   className?: string;
 };
 
 export function ScrollIndicator({ className }: ScrollIndicatorProps) {
+  const prefersReducedMotion = useReducedMotion();
+
   function scrollToNextSection() {
     window.scrollBy({ top: window.innerHeight, behavior: "smooth" });
   }
@@ -16,13 +19,20 @@ export function ScrollIndicator({ className }: ScrollIndicatorProps) {
       type="button"
       aria-label="Прокрутити до наступної секції"
       onClick={scrollToNextSection}
-      className={`group flex flex-col items-center gap-2 text-white/70 transition duration-200 hover:text-white focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white ${className ?? ""}`}
+      className={`flex flex-col items-center gap-2 text-white/70 transition duration-200 hover:text-white focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white ${className ?? ""}`}
     >
-      <Mouse
+      <motion.span
         aria-hidden
-        className="size-5 transition-transform duration-200 group-hover:translate-y-1"
-      />
-      <span className="text-xs font-medium uppercase tracking-widest">
+        animate={prefersReducedMotion ? undefined : { y: [0, 4, 0] }}
+        transition={{
+          duration: 1.6,
+          ease: "easeInOut",
+          repeat: Infinity,
+        }}
+      >
+        <Mouse className="size-5" />
+      </motion.span>
+      <span className="text-[10px] font-medium uppercase tracking-widest">
         Гортайте далі
       </span>
     </button>
