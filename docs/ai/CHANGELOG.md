@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-05 — Оптимізація медіа-шарів hero
+- **Агент:** Codex
+- **Гілка:** feature/hero-section (статус: в роботі)
+- **Що зроблено:** градієнт піднято над медіа; crossfade обмежено двома різними фото з автоматичним видаленням попереднього; `main-2560.jpeg` оптимізується через `next/image`.
+- **Файли:** src/app/globals.css, src/components/sections/home/hero-slider.tsx, src/components/sections/home/hero-media-slider.tsx, src/components/sections/home/hero-slides.ts, docs/ai/CONTEXT.md, docs/ai/CHANGELOG.md
+- **Нотатки / що далі:** однакове фото сусідніх слайдів не дублюється в DOM.
+
 ## 2026-11-05 — Overlay crossfade фото hero
 - **Агент:** Codex
 - **Гілка:** feature/hero-section (статус: в роботі)

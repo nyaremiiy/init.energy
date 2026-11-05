@@ -8,6 +8,7 @@ body {
 .hero {
   position: relative;
   z-index: 1;
+  isolation: isolate;
   min-height: 100svh;
   overflow: hidden;
   border-radius: 0 0 50px 50px;
@@ -17,6 +18,7 @@ body {
 .hero::after {
   position: absolute;
   inset: 0;
+  z-index: 1;
   background:
     linear-gradient(0deg, rgb(0 2 23 / 20%) 0%, transparent 48%),
     linear-gradient(
@@ -42,6 +44,7 @@ body {
 .hero__media {
   position: absolute;
   inset: 0;
+  z-index: 0;
 }
 
 .hero__image {

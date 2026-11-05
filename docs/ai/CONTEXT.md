@@ -11,6 +11,7 @@ init.energy — вебпроєкт. Призначення та функціон
 - Каркас на Next.js 16.4.5, React 19.3, TypeScript, Tailwind CSS v4, Lucide React для іконок і Motion для анімацій.
 - Реалізовано responsive hero-секцію з локальними AVIF/WebP-зображеннями.
 - Hero містить модульний автоматичний слайдер контенту на Motion із переходом від правого краю viewport ліворуч і overlay crossfade медіа-шаром.
+- Медіа hero тримає максимум два різні фото лише під час crossfade; великий JPEG оптимізується через `next/image`.
 
 ## Структура
 

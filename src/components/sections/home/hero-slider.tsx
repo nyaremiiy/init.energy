@@ -39,6 +39,12 @@ export function HeroSlider() {
   });
   const prefersReducedMotion = useReducedMotion();
   const activeSlide = heroSlides[activeIndex];
+  const previousSlide =
+    previousIndex === null ? undefined : heroSlides[previousIndex];
+  const crossfadeSlide =
+    previousSlide?.image.desktop === activeSlide.image.desktop
+      ? undefined
+      : previousSlide;
 
   useEffect(() => {
     if (prefersReducedMotion) {
@@ -70,9 +76,7 @@ export function HeroSlider() {
     <>
       <HeroMediaSlider
         slide={activeSlide}
-        previousSlide={
-          previousIndex === null ? undefined : heroSlides[previousIndex]
-        }
+        previousSlide={crossfadeSlide}
       />
       <HeroContentSlider slide={activeSlide} />
     </>

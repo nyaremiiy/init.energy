@@ -16,6 +16,7 @@ type HeroImage = {
   desktop: string;
   fallback: string;
   mobile?: string;
+  optimized?: boolean;
   tablet?: string;
   type?: "image/avif";
 };
@@ -34,6 +35,7 @@ export const heroSlides: HeroSlide[] = [
     image: {
       desktop: "/images/home/hero/main-2560.jpeg",
       fallback: "/images/home/hero/main-2560.jpeg",
+      optimized: true,
     },
     label: "Твоя енергетична незалежність",
     heading: "Комплексні енергетичні рішення",
