@@ -42,6 +42,9 @@ const solarHeroImage: HeroImage = {
 const backupPowerHeroImage: HeroImage = {
   desktop: "/images/home/hero/03-2560.avif",
   fallback: "/images/home/hero/03-2560.avif",
+  laptop: "/images/home/hero/03-1920.avif",
+  mobile: "/images/home/hero/03-750.avif",
+  tablet: "/images/home/hero/03-1280.avif",
   type: "image/avif",
 };
 

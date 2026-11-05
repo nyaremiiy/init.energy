@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-05 — Responsive-фото та темніший градієнт hero
+- **Агент:** Codex
+- **Гілка:** feature/hero-section (статус: в роботі)
+- **Що зроблено:** додано responsive-версії третього фото hero; градієнт hero протягнуто до правого краю та посилено затемнення.
+- **Файли:** public/images/home/hero/03-750.avif, public/images/home/hero/03-1280.avif, public/images/home/hero/03-1920.avif, src/components/sections/home/hero-slides.ts, src/app/globals.css, docs/ai/CHANGELOG.md
+- **Нотатки / що далі:** третій слайд використовує оптимальне зображення для кожного брейкпоінта.
+
 ## 2026-11-05 — Тестове фото третього слайда hero
 - **Агент:** Codex
 - **Гілка:** feature/hero-section (статус: в роботі)

@@ -20,15 +20,16 @@ body {
   inset: 0;
   z-index: 1;
   background:
-    linear-gradient(0deg, rgb(0 2 23 / 20%) 0%, transparent 48%),
+    linear-gradient(0deg, rgb(0 2 23 / 28%) 0%, transparent 60%),
     linear-gradient(
       90deg,
-      rgb(0 2 23 / 90%) 0%,
-      rgb(0 2 23 / 76%) 20%,
-      rgb(0 2 23 / 52%) 38%,
-      rgb(0 2 23 / 26%) 54%,
-      rgb(0 2 23 / 8%) 66%,
-      transparent 76%
+      rgb(0 2 23 / 94%) 0%,
+      rgb(0 2 23 / 86%) 22%,
+      rgb(0 2 23 / 68%) 44%,
+      rgb(0 2 23 / 46%) 62%,
+      rgb(0 2 23 / 24%) 78%,
+      rgb(0 2 23 / 8%) 92%,
+      transparent 100%
     );
   content: "";
   pointer-events: none;
