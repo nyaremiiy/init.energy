@@ -32,9 +32,6 @@ export function ScrollIndicator({ className }: ScrollIndicatorProps) {
       >
         <Mouse className="size-5" />
       </motion.span>
-      <span className="text-[10px] font-medium uppercase tracking-widest">
-        Гортайте далі
-      </span>
     </button>
   );
 }
