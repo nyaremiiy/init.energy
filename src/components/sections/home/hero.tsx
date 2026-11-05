@@ -1,4 +1,5 @@
 import { Container } from "@/components/layout/container";
+import { Heading } from "@/components/ui/heading";
 import { Label } from "@/components/ui/label";
 
 export function Hero() {
@@ -32,12 +33,13 @@ export function Hero() {
       <div className="absolute inset-0 z-10 flex items-center">
         <Container className="flex flex-col items-start gap-4">
           <Label>Твоя енергетична незалежність</Label>
-          <h1
+          <Heading
+            as="h1"
             id="hero-title"
-            className="max-w-3xl text-4xl font-semibold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl"
+            className="max-w-3xl text-4xl text-white sm:text-5xl lg:text-6xl"
           >
             Комплексні енергетичні рішення
-          </h1>
+          </Heading>
         </Container>
       </div>
     </section>

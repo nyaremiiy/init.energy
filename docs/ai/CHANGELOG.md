@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-05 — Спільний компонент Heading
+- **Агент:** Codex
+- **Гілка:** feature/hero-section (статус: в роботі)
+- **Що зроблено:** заголовок hero винесено в повторно використовуваний компонент `Heading` із вибором семантичного рівня через `as`.
+- **Файли:** src/components/ui/heading.tsx, src/components/sections/home/hero.tsx, docs/ai/CONTEXT.md, docs/ai/CHANGELOG.md
+- **Нотатки / що далі:** нові заголовки створювати через `Heading`, передаючи коректний HTML-рівень.
+
 ## 2026-11-05 — Заголовок hero
 - **Агент:** Codex
 - **Гілка:** feature/hero-section (статус: в роботі)
