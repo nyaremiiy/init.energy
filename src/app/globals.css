@@ -11,6 +11,20 @@ body {
   overflow: hidden;
 }
 
+.hero::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    #000217 0%,
+    rgb(0 2 23 / 88%) 28%,
+    rgb(0 2 23 / 42%) 54%,
+    transparent 78%
+  );
+  content: "";
+  pointer-events: none;
+}
+
 .hero__media,
 .hero__image {
   display: block;
