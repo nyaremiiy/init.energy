@@ -17,6 +17,7 @@ init.energy — вебпроєкт. Призначення та функціон
 src/app/        # App Router: layout.tsx, page.tsx, globals.css
 src/components/layout/ # повторно використовувані layout-компоненти
 src/components/ui/ # повторно використовувані UI-компоненти
+src/components/sections/home/ # секції головної сторінки
 public/         # статичні файли
 public/images/  # зображення сайту
 public/images/home/hero/ # responsive-зображення hero головної сторінки
@@ -38,6 +39,7 @@ CLAUDE.md       # точка входу для Claude Code (імпортує AGE
 - Усі секції використовують `Container`: максимум `1440px`, центрування та адаптивні горизонтальні відступи.
 - Лейбли секцій використовують компонент `Label` із спільною mobile-first типографікою.
 - Базовий шрифт сайту — Montserrat, підключений через `next/font/google`.
+- Кожна секція головної сторінки є окремим модулем у `src/components/sections/home/`.
 
 ## Відкриті питання / TODO
 
