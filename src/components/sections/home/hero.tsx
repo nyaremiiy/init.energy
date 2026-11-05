@@ -35,7 +35,7 @@ export function Hero() {
         />
       </picture>
       <div className="absolute inset-0 z-10 flex items-center">
-        <Container className="flex flex-col items-start gap-4">
+        <Container className="flex flex-col items-start gap-5">
           <Label>Твоя енергетична незалежність</Label>
           <Heading
             as="h1"
