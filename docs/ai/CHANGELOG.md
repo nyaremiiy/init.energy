@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-05 — Оновлені зображення hero
+- **Агент:** Codex
+- **Гілка:** feature/hero-section (статус: в роботі)
+- **Що зроблено:** старі ресурси hero замінено наборами `01-*` і `02-*`; перший і третій слайди використовують `01`, слайд сонячних станцій — `02`.
+- **Файли:** public/images/home/hero/01-*, public/images/home/hero/02-*, src/components/sections/home/hero-slides.ts, src/components/sections/home/hero-media-slider.tsx, docs/ai/CONTEXT.md, docs/ai/CHANGELOG.md
+- **Нотатки / що далі:** зображення мають responsive AVIF-варіанти для мобільних і desktop-екранів.
+
 ## 2026-11-05 — Оптимізація медіа-шарів hero
 - **Агент:** Codex
 - **Гілка:** feature/hero-section (статус: в роботі)

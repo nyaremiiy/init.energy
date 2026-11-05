@@ -15,28 +15,34 @@ export type HeroSlide = {
 type HeroImage = {
   desktop: string;
   fallback: string;
+  laptop?: string;
   mobile?: string;
-  optimized?: boolean;
   tablet?: string;
   type?: "image/avif";
 };
 
-const existingHeroImage: HeroImage = {
-  desktop: "/images/home/hero/w2560.avif",
-  fallback: "/images/home/hero/w2560.webp",
-  mobile: "/images/home/hero/w750.avif",
-  tablet: "/images/home/hero/w1280.avif",
+const generalHeroImage: HeroImage = {
+  desktop: "/images/home/hero/01-2560.avif",
+  fallback: "/images/home/hero/01-2560.avif",
+  laptop: "/images/home/hero/01-1920.avif",
+  mobile: "/images/home/hero/01-750.avif",
+  tablet: "/images/home/hero/01-1280.avif",
+  type: "image/avif",
+};
+
+const solarHeroImage: HeroImage = {
+  desktop: "/images/home/hero/02-2560.avif",
+  fallback: "/images/home/hero/02-2560.webp",
+  laptop: "/images/home/hero/02-1920.avif",
+  mobile: "/images/home/hero/02-750.avif",
+  tablet: "/images/home/hero/02-1280.avif",
   type: "image/avif",
 };
 
 export const heroSlides: HeroSlide[] = [
   {
     id: "hero-title",
-    image: {
-      desktop: "/images/home/hero/main-2560.jpeg",
-      fallback: "/images/home/hero/main-2560.jpeg",
-      optimized: true,
-    },
+    image: generalHeroImage,
     label: "Твоя енергетична незалежність",
     heading: "Комплексні енергетичні рішення",
     headingLevel: "h1",
@@ -57,7 +63,7 @@ export const heroSlides: HeroSlide[] = [
   },
   {
     id: "solar-stations-title",
-    image: existingHeroImage,
+    image: solarHeroImage,
     label: "Сонячна енергія під ключ",
     heading: "Встановлюємо сонячні електростанції",
     headingLevel: "h2",
@@ -78,7 +84,7 @@ export const heroSlides: HeroSlide[] = [
   },
   {
     id: "backup-power-title",
-    image: existingHeroImage,
+    image: generalHeroImage,
     label: "Резервне живлення під ключ",
     heading: "Системи резервного живлення",
     headingLevel: "h2",

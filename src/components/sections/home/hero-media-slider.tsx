@@ -1,7 +1,6 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
-import Image from "next/image";
 
 import type { HeroSlide } from "./hero-slides";
 import { heroMediaTransitionDuration } from "./hero-slider.constants";
@@ -16,19 +15,6 @@ type HeroMediaImageProps = {
 };
 
 function HeroMediaImage({ slide }: HeroMediaImageProps) {
-  if (slide.image.optimized) {
-    return (
-      <Image
-        src={slide.image.desktop}
-        alt=""
-        fill
-        sizes="100vw"
-        preload={slide.id === "hero-title"}
-        className="object-cover object-center"
-      />
-    );
-  }
-
   return (
     <picture className="block size-full">
       {slide.image.mobile ? (
@@ -42,6 +28,13 @@ function HeroMediaImage({ slide }: HeroMediaImageProps) {
         <source
           media="(max-width: 1279px)"
           srcSet={slide.image.tablet}
+          type={slide.image.type}
+        />
+      ) : null}
+      {slide.image.laptop ? (
+        <source
+          media="(max-width: 1919px)"
+          srcSet={slide.image.laptop}
           type={slide.image.type}
         />
       ) : null}
