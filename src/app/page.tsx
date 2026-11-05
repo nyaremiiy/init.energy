@@ -34,7 +34,7 @@ export default function Home() {
             <h1 id="hero-title" className="sr-only">
               init.energy
             </h1>
-            <p className="inline-flex rounded-full border border-white/25 bg-white/10 px-4 py-2 text-sm font-medium text-white backdrop-blur-sm sm:px-5 sm:text-base">
+            <p className="text-sm font-medium uppercase tracking-[0.12em] text-white/70 sm:text-base">
               Твоя енергетична незалежність
             </p>
           </Container>
