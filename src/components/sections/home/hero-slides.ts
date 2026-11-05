@@ -39,6 +39,12 @@ const solarHeroImage: HeroImage = {
   type: "image/avif",
 };
 
+const backupPowerHeroImage: HeroImage = {
+  desktop: "/images/home/hero/03-2560.avif",
+  fallback: "/images/home/hero/03-2560.avif",
+  type: "image/avif",
+};
+
 export const heroSlides: HeroSlide[] = [
   {
     id: "hero-title",
@@ -84,7 +90,7 @@ export const heroSlides: HeroSlide[] = [
   },
   {
     id: "backup-power-title",
-    image: generalHeroImage,
+    image: backupPowerHeroImage,
     label: "Резервне живлення під ключ",
     heading: "Системи резервного живлення",
     headingLevel: "h2",
