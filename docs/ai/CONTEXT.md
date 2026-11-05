@@ -15,6 +15,7 @@ init.energy — вебпроєкт. Призначення та функціон
 
 ```
 src/app/        # App Router: layout.tsx, page.tsx, globals.css
+src/components/layout/ # повторно використовувані layout-компоненти
 public/         # статичні файли
 public/images/  # зображення сайту
 public/images/home/hero/ # responsive-зображення hero головної сторінки
@@ -33,6 +34,7 @@ CLAUDE.md       # точка входу для Claude Code (імпортує AGE
 
 - Агенти: Claude Code і Codex, синхронізуються через `AGENTS.md` + `docs/ai/`.
 - Remote на GitHub поки не підключений, нічого не пушимо.
+- Усі секції використовують `Container`: максимум `1440px`, центрування та адаптивні горизонтальні відступи.
 
 ## Відкриті питання / TODO
 

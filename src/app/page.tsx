@@ -1,3 +1,5 @@
+import { Container } from "@/components/layout/container";
+
 export default function Home() {
   return (
     <main>
@@ -27,9 +29,11 @@ export default function Home() {
             className="hero__image"
           />
         </picture>
-        <h1 id="hero-title" className="sr-only">
-          init.energy
-        </h1>
+        <Container className="relative z-10">
+          <h1 id="hero-title" className="sr-only">
+            init.energy
+          </h1>
+        </Container>
       </section>
     </main>
   );
