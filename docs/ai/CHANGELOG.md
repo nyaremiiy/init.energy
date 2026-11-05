@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-05 — Індикатор прокрутки hero
+- **Агент:** Codex
+- **Гілка:** feature/hero-section (статус: в роботі)
+- **Що зроблено:** у нижньому центрі hero додано клікабельний `ScrollIndicator` з іконкою `ChevronDown`.
+- **Файли:** src/components/ui/scroll-indicator.tsx, src/components/sections/home/hero.tsx, docs/ai/CONTEXT.md, docs/ai/CHANGELOG.md
+- **Нотатки / що далі:** індикатор плавно прокручує сторінку на висоту поточного viewport.
+
 ## 2026-11-05 — Кадрування третього фото hero
 - **Агент:** Codex
 - **Гілка:** feature/hero-section (статус: в роботі)

@@ -43,6 +43,7 @@ CLAUDE.md       # точка входу для Claude Code (імпортує AGE
 - Заголовки використовують компонент `Heading` із семантичним рівнем через проп `as`, варіантами line-height через `lineHeight` і letter-spacing через `letterSpacing`.
 - Описові тексти секцій використовують компонент `Description`.
 - CTA-посилання використовують компонент `Button` із варіантами `primary` і `secondary` та розмірами `default` і `wide`.
+- Повноекранні секції можуть використовувати `ScrollIndicator` для переходу до наступного viewport.
 - Базовий шрифт сайту — Montserrat, підключений через `next/font/google`.
 - Кожна секція головної сторінки є окремим модулем у `src/components/sections/home/`.
 - Контентні варіанти hero та їхні зображення зберігаються в `hero-slides.ts`; анімація розділена між `hero-content-slider.tsx`, `hero-media-slider.tsx` і `hero-slider.tsx`.
