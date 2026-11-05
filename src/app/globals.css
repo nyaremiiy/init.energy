@@ -9,7 +9,7 @@ body {
   position: relative;
   z-index: 1;
   isolation: isolate;
-  min-height: 100svh;
+  min-height: 100vh;
   overflow: hidden;
   border-radius: 0 0 50px 50px;
   box-shadow: 0 24px 32px rgb(0 2 23 / 30%);
@@ -19,18 +19,7 @@ body {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background:
-    linear-gradient(0deg, rgb(0 2 23 / 28%) 0%, transparent 60%),
-    linear-gradient(
-      90deg,
-      rgb(0 2 23 / 94%) 0%,
-      rgb(0 2 23 / 86%) 22%,
-      rgb(0 2 23 / 68%) 44%,
-      rgb(0 2 23 / 46%) 62%,
-      rgb(0 2 23 / 24%) 78%,
-      rgb(0 2 23 / 8%) 92%,
-      transparent 100%
-    );
+  background: rgb(0 2 23 / 84%);
   content: "";
   pointer-events: none;
 }
@@ -50,6 +39,23 @@ body {
 
 .hero__image {
   object-fit: cover;
+}
+
+@media (min-width: 768px) {
+  .hero::after {
+    background:
+      linear-gradient(0deg, rgb(0 2 23 / 28%) 0%, transparent 60%),
+      linear-gradient(
+        90deg,
+        rgb(0 2 23 / 94%) 0%,
+        rgb(0 2 23 / 86%) 22%,
+        rgb(0 2 23 / 68%) 44%,
+        rgb(0 2 23 / 46%) 62%,
+        rgb(0 2 23 / 24%) 78%,
+        rgb(0 2 23 / 8%) 92%,
+        transparent 100%
+      );
+  }
 }
 
 @media (min-width: 1920px) and (min-height: 1000px) {
