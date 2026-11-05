@@ -52,4 +52,24 @@ export const heroSlides: HeroSlide[] = [
       },
     ],
   },
+  {
+    id: "backup-power-title",
+    label: "Резервне живлення під ключ",
+    heading: "Системи резервного живлення",
+    headingLevel: "h2",
+    description:
+      "Розробляємо та встановлюємо готові комплекси на 300 Вт, 5 кВт і 16 кВт, а також масштабовані системи до 1 044 кВт для дому, бізнесу й критичної інфраструктури.",
+    actions: [
+      {
+        href: "#contact",
+        label: "Підібрати рішення",
+        variant: "primary",
+      },
+      {
+        href: "#contact",
+        label: "Залишити заявку",
+        variant: "secondary",
+      },
+    ],
+  },
 ];
