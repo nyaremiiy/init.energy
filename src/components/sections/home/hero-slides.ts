@@ -2,7 +2,7 @@ export type HeroSlide = {
   id: string;
   image: HeroImage;
   label: string;
-  heading: string;
+  heading: [string, string];
   headingLevel: "h1" | "h2";
   description: string;
   actions: Array<{
@@ -55,7 +55,7 @@ export const heroSlides: HeroSlide[] = [
     id: "hero-title",
     image: generalHeroImage,
     label: "Енергетична незалежність для дому та бізнесу",
-    heading: "Енергетична незалежність",
+    heading: ["Енергетична", "незалежність"],
     headingLevel: "h1",
     description:
       "Проєктуємо та встановлюємо сонячні електростанції, сонячні панелі й системи резервного живлення для приватних будинків, квартир і підприємств.",
@@ -76,7 +76,7 @@ export const heroSlides: HeroSlide[] = [
     id: "solar-stations-title",
     image: solarHeroImage,
     label: "Сонячні електростанції під ключ",
-    heading: "Сонячні електростанції",
+    heading: ["Сонячні", "електростанції"],
     headingLevel: "h2",
     description:
       "Виконуємо проєктування, монтаж і підключення сонячних панелей та обладнання для СЕС — від розрахунку потужності до запуску станції.",
@@ -97,7 +97,7 @@ export const heroSlides: HeroSlide[] = [
     id: "backup-power-title",
     image: backupPowerHeroImage,
     label: "Резервне живлення для дому та бізнесу",
-    heading: "Резервне живлення",
+    heading: ["Резервне", "живлення"],
     headingLevel: "h2",
     description:
       "Розробляємо та встановлюємо системи резервного живлення й готові комплекси на 300 Вт, 5 кВт, 16 кВт і до 1 044 кВт для квартир, будинків, бізнесу та критичної інфраструктури.",

@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-05 — Дворядкові заголовки hero
+- **Агент:** Codex
+- **Гілка:** feature/hero-section (статус: в роботі)
+- **Що зроблено:** заголовки hero переведено на модульний формат із двох текстових рядків і відображено окремими блоками.
+- **Файли:** src/components/sections/home/hero-slides.ts, src/components/sections/home/hero-content-slider.tsx, docs/ai/CONTEXT.md, docs/ai/CHANGELOG.md
+- **Нотатки / що далі:** кожен hero-заголовок гарантовано зберігає дворядкову композицію на всіх екранах.
+
 ## 2026-11-05 — Природніший перший заголовок hero
 - **Агент:** Codex
 - **Гілка:** feature/hero-section (статус: в роботі)

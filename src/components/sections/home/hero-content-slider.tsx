@@ -46,7 +46,11 @@ export function HeroContentSlider({ slide }: HeroContentSliderProps) {
                 lineHeight="compact"
                 className="max-w-3xl text-4xl text-white sm:text-5xl lg:text-6xl"
               >
-                {slide.heading}
+                {slide.heading.map((line) => (
+                  <span key={line} className="block">
+                    {line}
+                  </span>
+                ))}
               </Heading>
               <Description size="compactMobile" className="mt-2 max-w-2xl">
                 {slide.description}
