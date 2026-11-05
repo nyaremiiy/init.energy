@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-05 — Overlay crossfade фото hero
+- **Агент:** Codex
+- **Гілка:** feature/hero-section (статус: в роботі)
+- **Що зроблено:** медіа hero змінюється через накладання нового фото з `opacity: 0` поверх нерухомого попереднього та плавний перехід до `opacity: 1`.
+- **Файли:** src/components/sections/home/hero-slider.constants.ts, src/components/sections/home/hero-slider.tsx, src/components/sections/home/hero-media-slider.tsx, docs/ai/CONTEXT.md, docs/ai/CHANGELOG.md
+- **Нотатки / що далі:** тривалість crossfade централізована в `hero-slider.constants.ts`.
+
 ## 2026-11-05 — Плавніша зміна фото hero
 - **Агент:** Codex
 - **Гілка:** feature/hero-section (статус: в роботі)
