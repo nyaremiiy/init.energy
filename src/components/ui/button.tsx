@@ -10,7 +10,7 @@ type ButtonProps = ComponentPropsWithoutRef<"a"> & {
 const variantClasses: Record<ButtonVariant, string> = {
   primary: "bg-white text-slate-950 hover:bg-white/90",
   secondary:
-    "border border-white/40 text-white hover:border-white hover:bg-white/10",
+    "border border-white/40 text-white backdrop-blur-sm hover:border-white hover:bg-white/10",
 };
 
 export function Button({
