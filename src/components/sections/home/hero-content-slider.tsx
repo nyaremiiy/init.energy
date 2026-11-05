@@ -56,6 +56,7 @@ export function HeroContentSlider() {
               <Heading
                 as={activeSlide.headingLevel}
                 id={activeSlide.id}
+                letterSpacing="normal"
                 lineHeight="compact"
                 className="max-w-3xl text-4xl text-white sm:text-5xl lg:text-6xl"
               >

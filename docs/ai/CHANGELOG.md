@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-05 — Letter-spacing заголовка hero
+- **Агент:** Codex
+- **Гілка:** feature/hero-section (статус: в роботі)
+- **Що зроблено:** до `Heading` додано модульний проп `letterSpacing`; заголовок hero використовує `normal` для трохи вільнішої типографіки.
+- **Файли:** src/components/ui/heading.tsx, src/components/sections/home/hero-content-slider.tsx, docs/ai/CONTEXT.md, docs/ai/CHANGELOG.md
+- **Нотатки / що далі:** інші секції можуть обирати `tight`, `normal` або `wide` без локальних класів.
+
 ## 2026-11-05 — Motion-анімація слайдів hero
 - **Агент:** Codex
 - **Гілка:** feature/hero-section (статус: в роботі)
