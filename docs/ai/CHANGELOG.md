@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-05 — Слайдер контенту hero
+- **Агент:** Codex
+- **Гілка:** feature/hero-section (статус: в роботі)
+- **Що зроблено:** контент hero перетворено на модульний автоматичний слайдер із швидким переходом справа наліво; додано варіант про встановлення сонячних електростанцій із CTA «Залишити заявку» та «Розрахувати вартість».
+- **Файли:** src/components/sections/home/hero.tsx, src/components/sections/home/hero-content-slider.tsx, src/components/sections/home/hero-slides.ts, docs/ai/CONTEXT.md, docs/ai/CHANGELOG.md
+- **Нотатки / що далі:** нові варіанти додаються в масив `heroSlides`; автоперемикання вимкнене для `prefers-reduced-motion`.
+
 ## 2026-11-05 — Ширші CTA-кнопки hero
 - **Агент:** Codex
 - **Гілка:** feature/hero-section (статус: в роботі)

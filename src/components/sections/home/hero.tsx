@@ -1,10 +1,4 @@
-import { ArrowUpRight } from "lucide-react";
-
-import { Container } from "@/components/layout/container";
-import { Button } from "@/components/ui/button";
-import { Description } from "@/components/ui/description";
-import { Heading } from "@/components/ui/heading";
-import { Label } from "@/components/ui/label";
+import { HeroContentSlider } from "./hero-content-slider";
 
 export function Hero() {
   return (
@@ -34,41 +28,7 @@ export function Hero() {
           className="hero__image"
         />
       </picture>
-      <div className="absolute inset-0 z-10 flex items-center">
-        <Container className="flex flex-col items-start gap-5">
-          <Label>Твоя енергетична незалежність</Label>
-          <Heading
-            as="h1"
-            id="hero-title"
-            lineHeight="compact"
-            className="max-w-3xl text-4xl text-white sm:text-5xl lg:text-6xl"
-          >
-            Комплексні енергетичні рішення
-          </Heading>
-          <Description className="mt-2 max-w-2xl">
-            Проєктуємо та встановлюємо сонячні електростанції, панелі й
-            системи резервного живлення — від інженерного рішення до запуску
-            та сервісу.
-          </Description>
-          <div className="flex flex-wrap gap-3 pt-4">
-            <Button
-              href="#contact"
-              icon={<ArrowUpRight aria-hidden className="size-4" />}
-              size="wide"
-            >
-              Підібрати рішення
-            </Button>
-            <Button
-              href="#solar-stations"
-              variant="secondary"
-              icon={<ArrowUpRight aria-hidden className="size-4" />}
-              size="wide"
-            >
-              Сонячні станції
-            </Button>
-          </div>
-        </Container>
-      </div>
+      <HeroContentSlider />
     </section>
   );
 }
