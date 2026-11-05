@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-05 — Компактний mobile-опис hero
+- **Агент:** Codex
+- **Гілка:** feature/hero-section (статус: в роботі)
+- **Що зроблено:** до `Description` додано варіант `compactMobile`; опис hero зменшено до `text-sm` на мобільному зі збереженням `text-lg` від `sm`.
+- **Файли:** src/components/ui/description.tsx, src/components/sections/home/hero-content-slider.tsx, docs/ai/CONTEXT.md, docs/ai/CHANGELOG.md
+- **Нотатки / що далі:** інші секції можуть використовувати той самий варіант без локальних класів.
+
 ## 2026-11-05 — Світліший mobile-overlay hero
 - **Агент:** Codex
 - **Гілка:** feature/hero-section (статус: в роботі)

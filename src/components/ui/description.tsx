@@ -1,11 +1,24 @@
 import type { ComponentPropsWithoutRef } from "react";
 
-type DescriptionProps = ComponentPropsWithoutRef<"p">;
+type DescriptionSize = "default" | "compactMobile";
 
-export function Description({ className, ...props }: DescriptionProps) {
+type DescriptionProps = ComponentPropsWithoutRef<"p"> & {
+  size?: DescriptionSize;
+};
+
+const sizeClasses: Record<DescriptionSize, string> = {
+  default: "text-base sm:text-lg",
+  compactMobile: "text-sm sm:text-lg",
+};
+
+export function Description({
+  className,
+  size = "default",
+  ...props
+}: DescriptionProps) {
   return (
     <p
-      className={`text-base leading-relaxed text-white/85 sm:text-lg ${className ?? ""}`}
+      className={`${sizeClasses[size]} leading-relaxed text-white/85 ${className ?? ""}`}
       {...props}
     />
   );

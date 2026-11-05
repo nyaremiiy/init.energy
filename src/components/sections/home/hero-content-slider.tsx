@@ -48,7 +48,7 @@ export function HeroContentSlider({ slide }: HeroContentSliderProps) {
               >
                 {slide.heading}
               </Heading>
-              <Description className="mt-2 max-w-2xl">
+              <Description size="compactMobile" className="mt-2 max-w-2xl">
                 {slide.description}
               </Description>
               <div className="flex flex-wrap gap-3 pt-4">
