@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-05 — Кадрування третього фото hero
+- **Агент:** Codex
+- **Гілка:** feature/hero-section (статус: в роботі)
+- **Що зроблено:** для третього зображення hero задано `object-top` через модульні дані слайда.
+- **Файли:** src/components/sections/home/hero-slides.ts, src/components/sections/home/hero-media-slider.tsx, src/app/globals.css, docs/ai/CHANGELOG.md
+- **Нотатки / що далі:** кожне hero-зображення може задавати власне кадрування через поле `position`.
+
 ## 2026-11-05 — Позиціювання першого слайда hero
 - **Агент:** Codex
 - **Гілка:** feature/hero-section (статус: в роботі)

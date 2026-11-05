@@ -14,7 +14,14 @@ type HeroMediaImageProps = {
   slide: HeroSlide;
 };
 
+const imagePositionClasses = {
+  center: "object-center",
+  top: "object-top",
+};
+
 function HeroMediaImage({ slide }: HeroMediaImageProps) {
+  const imagePosition = imagePositionClasses[slide.image.position ?? "center"];
+
   return (
     <picture className="block size-full">
       {slide.image.mobile ? (
@@ -42,7 +49,11 @@ function HeroMediaImage({ slide }: HeroMediaImageProps) {
         <source srcSet={slide.image.desktop} type={slide.image.type} />
       ) : null}
       {/* The local responsive sources are already optimized for this hero. */}
-      <img src={slide.image.fallback} alt="" className="hero__image" />
+      <img
+        src={slide.image.fallback}
+        alt=""
+        className={`hero__image ${imagePosition}`}
+      />
     </picture>
   );
 }

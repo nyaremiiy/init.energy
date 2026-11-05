@@ -50,7 +50,6 @@ body {
 
 .hero__image {
   object-fit: cover;
-  object-position: center;
 }
 
 @media (min-width: 1920px) and (min-height: 1000px) {

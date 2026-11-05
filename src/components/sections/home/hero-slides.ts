@@ -17,6 +17,7 @@ type HeroImage = {
   fallback: string;
   laptop?: string;
   mobile?: string;
+  position?: "center" | "top";
   tablet?: string;
   type?: "image/avif";
 };
@@ -44,6 +45,7 @@ const backupPowerHeroImage: HeroImage = {
   fallback: "/images/home/hero/03-2560.avif",
   laptop: "/images/home/hero/03-1920.avif",
   mobile: "/images/home/hero/03-750.avif",
+  position: "top",
   tablet: "/images/home/hero/03-1280.avif",
   type: "image/avif",
 };
