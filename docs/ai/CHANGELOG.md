@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-05 — Motion-анімація слайдів hero
+- **Агент:** Codex
+- **Гілка:** feature/hero-section (статус: в роботі)
+- **Що зроблено:** додано Motion; слайди hero тепер входять із правого краю viewport (`100vw`) і швидко виходять ліворуч.
+- **Файли:** package.json, package-lock.json, src/components/sections/home/hero-content-slider.tsx, docs/ai/CONTEXT.md, docs/ai/CHANGELOG.md
+- **Нотатки / що далі:** Motion використовується для плавних і продуктивних UI-анімацій.
+
 ## 2026-11-05 — Слайдер контенту hero
 - **Агент:** Codex
 - **Гілка:** feature/hero-section (статус: в роботі)
