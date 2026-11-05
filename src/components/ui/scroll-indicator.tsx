@@ -30,7 +30,7 @@ export function ScrollIndicator({ className }: ScrollIndicatorProps) {
           repeat: Infinity,
         }}
       >
-        <Mouse className="size-5" />
+        <Mouse className="size-6" />
       </motion.span>
     </button>
   );
