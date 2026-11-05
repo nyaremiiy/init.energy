@@ -2,7 +2,6 @@
 
 import { ArrowUpRight } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { useEffect, useState } from "react";
 
 import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
@@ -10,27 +9,14 @@ import { Description } from "@/components/ui/description";
 import { Heading } from "@/components/ui/heading";
 import { Label } from "@/components/ui/label";
 
-import { heroSlides } from "./hero-slides";
+import type { HeroSlide } from "./hero-slides";
 
-const slideInterval = 10000;
+type HeroContentSliderProps = {
+  slide: HeroSlide;
+};
 
-export function HeroContentSlider() {
-  const [activeIndex, setActiveIndex] = useState(0);
+export function HeroContentSlider({ slide }: HeroContentSliderProps) {
   const prefersReducedMotion = useReducedMotion();
-  const activeSlide = heroSlides[activeIndex];
-
-  useEffect(() => {
-    if (prefersReducedMotion) {
-      return;
-    }
-
-    const intervalId = window.setInterval(
-      () => setActiveIndex((index) => (index + 1) % heroSlides.length),
-      slideInterval,
-    );
-
-    return () => window.clearInterval(intervalId);
-  }, [prefersReducedMotion]);
 
   return (
     <div className="absolute inset-0 z-10 flex items-center overflow-hidden">
@@ -38,7 +24,7 @@ export function HeroContentSlider() {
         <div className="relative" aria-live="polite">
           <AnimatePresence initial={false} mode="popLayout">
             <motion.div
-              key={activeSlide.id}
+              key={slide.id}
               initial={
                 prefersReducedMotion ? false : { opacity: 0, x: "100vw" }
               }
@@ -52,21 +38,21 @@ export function HeroContentSlider() {
               }}
               className="flex flex-col items-start gap-5"
             >
-              <Label>{activeSlide.label}</Label>
+              <Label>{slide.label}</Label>
               <Heading
-                as={activeSlide.headingLevel}
-                id={activeSlide.id}
+                as={slide.headingLevel}
+                id={slide.id}
                 letterSpacing="normal"
                 lineHeight="compact"
                 className="max-w-3xl text-4xl text-white sm:text-5xl lg:text-6xl"
               >
-                {activeSlide.heading}
+                {slide.heading}
               </Heading>
               <Description className="mt-2 max-w-2xl">
-                {activeSlide.description}
+                {slide.description}
               </Description>
               <div className="flex flex-wrap gap-3 pt-4">
-                {activeSlide.actions.map((action) => (
+                {slide.actions.map((action) => (
                   <Button
                     key={action.label}
                     href={action.href}

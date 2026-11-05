@@ -1,5 +1,6 @@
 export type HeroSlide = {
   id: string;
+  image: HeroImage;
   label: string;
   heading: string;
   headingLevel: "h1" | "h2";
@@ -11,9 +12,29 @@ export type HeroSlide = {
   }>;
 };
 
+type HeroImage = {
+  desktop: string;
+  fallback: string;
+  mobile?: string;
+  tablet?: string;
+  type?: "image/avif";
+};
+
+const existingHeroImage: HeroImage = {
+  desktop: "/images/home/hero/w2560.avif",
+  fallback: "/images/home/hero/w2560.webp",
+  mobile: "/images/home/hero/w750.avif",
+  tablet: "/images/home/hero/w1280.avif",
+  type: "image/avif",
+};
+
 export const heroSlides: HeroSlide[] = [
   {
     id: "hero-title",
+    image: {
+      desktop: "/images/home/hero/main-2560.jpeg",
+      fallback: "/images/home/hero/main-2560.jpeg",
+    },
     label: "Твоя енергетична незалежність",
     heading: "Комплексні енергетичні рішення",
     headingLevel: "h1",
@@ -34,6 +55,7 @@ export const heroSlides: HeroSlide[] = [
   },
   {
     id: "solar-stations-title",
+    image: existingHeroImage,
     label: "Сонячна енергія під ключ",
     heading: "Встановлюємо сонячні електростанції",
     headingLevel: "h2",
@@ -54,6 +76,7 @@ export const heroSlides: HeroSlide[] = [
   },
   {
     id: "backup-power-title",
+    image: existingHeroImage,
     label: "Резервне живлення під ключ",
     heading: "Системи резервного живлення",
     headingLevel: "h2",

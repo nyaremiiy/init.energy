@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-05 — Плавна зміна фото hero
+- **Агент:** Codex
+- **Гілка:** feature/hero-section (статус: в роботі)
+- **Що зроблено:** додано `main-2560.jpeg` для першого слайду hero; медіа слайдів винесено в окремий Motion-модуль, який плавно накладає наступне фото поверх попереднього.
+- **Файли:** public/images/home/hero/main-2560.jpeg, src/components/sections/home/hero.tsx, src/components/sections/home/hero-slider.tsx, src/components/sections/home/hero-media-slider.tsx, src/components/sections/home/hero-content-slider.tsx, src/components/sections/home/hero-slides.ts, docs/ai/CONTEXT.md, docs/ai/CHANGELOG.md
+- **Нотатки / що далі:** для наступного слайду достатньо вказати нове зображення в `heroSlides`.
+
 ## 2026-11-05 — Довший показ слайдів hero
 - **Агент:** Codex
 - **Гілка:** feature/hero-section (статус: в роботі)
