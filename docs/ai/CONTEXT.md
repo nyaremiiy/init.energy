@@ -76,6 +76,7 @@ CLAUDE.md       # точка входу для Claude Code (імпортує AGE
 - **Рух:** hover — легкий підйом і зсув стрілки; поява при скролі через `Reveal` зі stagger; усе з `motion-safe` / prefers-reduced-motion.
 - **Факти про компанію:** лише з init.energy (цитата-джерело поруч у `src/content/*.ts`). LITHIUMVALLEY — партнерський бренд (INIT ENERGY — офіційний представник та інсталятор), не «власне виробництво»; власне виробництво SVIT не підтверджене — так не пишемо без рішення власника.
 - **Зображення:** `next/image` віддає AVIF (потім WebP); якість за замовчуванням 75, для великих фото на всю ширину — `quality={90}` (дозволені значення — `images.qualities` у next.config.ts).
+- **Переходи фото → темний фон:** клас `.fade-from-ink` (eased-градієнт у globals.css), не лінійний `bg-linear-to-*` з 2–3 точками.
 - **Числа:** лише через `formatQuantity`/`formatNumber` (`src/lib/format.ts`), одиниці — у `messages`.
 - **Контраст:** текст ≥ 4.5:1 на всіх фонах.
 
