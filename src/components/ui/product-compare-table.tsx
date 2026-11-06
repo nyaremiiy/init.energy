@@ -68,7 +68,8 @@ export function ProductCompareTable({
                 {row.capacity}
               </td>
               <td className="py-5 pr-6 text-ink/70">{row.audience}</td>
-              <td className="py-5 text-right">
+              {/* pr-1 leaves room for the arrow's hover shift inside the scroll box. */}
+              <td className="py-5 pr-1 text-right">
                 <Link
                   href={row.href}
                   aria-label={row.linkLabel}
