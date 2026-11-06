@@ -42,7 +42,7 @@ export function TrustBlock({
     <section
       id={id}
       aria-labelledby={titleId}
-      className="scroll-mt-24 bg-white px-2 pt-section-sm sm:px-4 lg:pt-section"
+      className="scroll-mt-24 bg-white px-2.5 pt-section-sm sm:px-4 lg:pt-section"
     >
       <Reveal className="overflow-hidden rounded-panel bg-ink text-white">
         <Container className="flex flex-col gap-section-head py-section-sm lg:py-section">
