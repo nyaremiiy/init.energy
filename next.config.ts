@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Match init.energy URLs (/cec/, /svit-600/ ...) to preserve indexed pages.
+  trailingSlash: true,
   turbopack: {
     rules: {
       "*.css": {

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/ui/logo";
+import { routes } from "@/content/routes";
 
 import { DesktopNav } from "./desktop-nav";
 import { offices } from "./header-data";
@@ -32,13 +33,14 @@ export function HeaderMainBar() {
         >
           <Phone aria-hidden className="size-5" />
         </a>
-        <Button
-          href="#contact"
-          className="hidden lg:inline-flex"
-          icon={<ArrowUpRight aria-hidden className="size-4" />}
-        >
-          Залишити заявку
-        </Button>
+        <div className="hidden lg:block">
+          <Button
+            href={routes.sections.contacts}
+            icon={<ArrowUpRight aria-hidden className="size-4" />}
+          >
+            Залишити заявку
+          </Button>
+        </div>
         <MobileMenu />
       </div>
     </Container>

@@ -1,3 +1,5 @@
+import { routes } from "@/content/routes";
+
 export type HeroSlide = {
   id: string;
   image: HeroImage;
@@ -61,12 +63,12 @@ export const heroSlides: HeroSlide[] = [
       "INIT ENERGY проєктує та встановлює сонячні електростанції (СЕС) і системи резервного живлення для приватних будинків, квартир і підприємств — від розрахунку споживання й підбору обладнання до монтажу та запуску.",
     actions: [
       {
-        href: "#contact",
+        href: routes.sections.contacts,
         label: "Підібрати рішення",
         variant: "primary",
       },
       {
-        href: "#solar-stations",
+        href: routes.services.turnkeySes,
         label: "Сонячні електростанції",
         variant: "secondary",
       },
@@ -82,12 +84,12 @@ export const heroSlides: HeroSlide[] = [
       "Сонячна електростанція під ключ: розрахунок потужності під ваше споживання, проєкт, монтаж сонячних панелей, інвертора й акумуляторів, підключення та запуск станції.",
     actions: [
       {
-        href: "#contact",
+        href: routes.sections.contacts,
         label: "Залишити заявку",
         variant: "primary",
       },
       {
-        href: "#calculator",
+        href: routes.sections.contacts,
         label: "Розрахувати вартість",
         variant: "secondary",
       },
@@ -103,12 +105,12 @@ export const heroSlides: HeroSlide[] = [
       "Системи резервного живлення та готові комплекси потужністю 300 Вт, 5 кВт, 16 кВт і до 1 044 кВт на базі інверторів і акумуляторів (АКБ) — для квартир, приватних будинків, бізнесу та критичної інфраструктури.",
     actions: [
       {
-        href: "#contact",
+        href: routes.sections.contacts,
         label: "Підібрати рішення",
         variant: "primary",
       },
       {
-        href: "#contact",
+        href: routes.sections.contacts,
         label: "Залишити заявку",
         variant: "secondary",
       },

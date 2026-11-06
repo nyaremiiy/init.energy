@@ -73,7 +73,9 @@ export function HeroMediaSlider({
       ) : null}
       <motion.div
         key={slide.id}
-        initial={previousSlide && !prefersReducedMotion ? { opacity: 0 } : false}
+        initial={
+          previousSlide && !prefersReducedMotion ? { opacity: 0 } : false
+        }
         animate={{ opacity: 1 }}
         transition={{
           duration: prefersReducedMotion ? 0 : heroMediaTransitionDuration,

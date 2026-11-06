@@ -30,7 +30,9 @@ export function HeroContentSlider({ slide }: HeroContentSliderProps) {
               }
               animate={{ opacity: 1, x: 0 }}
               exit={
-                prefersReducedMotion ? { opacity: 0 } : { opacity: 0, x: "-100vw" }
+                prefersReducedMotion
+                  ? { opacity: 0 }
+                  : { opacity: 0, x: "-100vw" }
               }
               transition={{
                 duration: prefersReducedMotion ? 0 : 0.35,
