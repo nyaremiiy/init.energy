@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { Container } from "@/components/layout/container";
 import { Label } from "@/components/ui/label";
+import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
 import { SegmentCard } from "@/components/ui/segment-card";
 import { routes } from "@/content/routes";
@@ -28,64 +29,75 @@ export function SolutionsBySegment() {
       className="-mt-12 bg-white pt-28 pb-16 lg:pt-36 lg:pb-24"
     >
       <Container className="flex flex-col gap-10 lg:gap-14">
-        <SectionHeader
-          eyebrow={t.eyebrow}
-          title={t.title}
-          titleId={titleId}
-          lead={t.lead}
-          aside={
-            <Link
-              href={routes.sections.contacts}
-              className="group inline-flex items-center gap-2 font-semibold text-ink underline decoration-ink/30 underline-offset-4 transition-colors hover:decoration-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
-            >
-              {t.calculatorLink}
-              <ArrowUpRight
-                aria-hidden
-                className="size-4 transition-transform duration-200 motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5"
-              />
-            </Link>
-          }
-        />
+        <Reveal>
+          <SectionHeader
+            eyebrow={t.eyebrow}
+            title={t.title}
+            titleId={titleId}
+            lead={t.lead}
+            aside={
+              <Link
+                href={routes.sections.contacts}
+                className="group inline-flex items-center gap-2 font-semibold text-ink underline decoration-ink/30 underline-offset-4 transition-colors hover:decoration-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
+              >
+                {t.calculatorLink}
+                <ArrowUpRight
+                  aria-hidden
+                  className="size-4 transition-transform duration-200 motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5"
+                />
+              </Link>
+            }
+          />
+        </Reveal>
 
         <div className="flex flex-col gap-4">
           <div className="grid gap-4 lg:grid-cols-3">
-            {solutions.map((solution) => (
-              <SegmentCard
+            {solutions.map((solution, cardIndex) => (
+              <Reveal
                 key={solution.id}
-                index={solution.index}
-                segment={solution.segment}
-                title={solution.title}
-                description={solution.description}
-                product={getSolutionProduct(solution)}
-                productTerm={t.productTerm}
-                specTerm={t.capacityTerm}
-                links={getSolutionLinks(solution)}
-                navLabel={format(t.cardNavLabel, { segment: solution.segment })}
-                tone={solution.tone}
-              />
+                delay={cardIndex * 0.12}
+                className="h-full"
+              >
+                <SegmentCard
+                  index={solution.index}
+                  segment={solution.segment}
+                  title={solution.title}
+                  description={solution.description}
+                  product={getSolutionProduct(solution)}
+                  productTerm={t.productTerm}
+                  specTerm={t.capacityTerm}
+                  links={getSolutionLinks(solution)}
+                  navLabel={format(t.cardNavLabel, {
+                    segment: solution.segment,
+                  })}
+                  tone={solution.tone}
+                />
+              </Reveal>
             ))}
           </div>
 
           <ul className="grid gap-4 md:grid-cols-2">
-            {hubs.map((hub) => (
+            {hubs.map((hub, hubIndex) => (
               <li key={hub.href}>
-                <Link
-                  href={hub.href}
-                  className="group flex h-full items-center justify-between gap-6 rounded-3xl bg-sky p-6 text-ink transition duration-300 motion-safe:hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink lg:p-8"
-                >
-                  <span className="flex flex-col items-start gap-3">
-                    <Label tone="onLight">{hub.label}</Label>
-                    <span className="font-heading text-xl leading-tight font-semibold tracking-tight sm:text-2xl">
-                      {hub.title}
+                <Reveal delay={hubIndex * 0.12} className="h-full">
+                  <Link
+                    href={hub.href}
+                    className="group flex h-full items-center justify-between gap-6 rounded-3xl bg-sky p-6 text-ink transition duration-300 motion-safe:hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink lg:p-8"
+                  >
+                    <span className="flex flex-col items-start gap-3">
+                      <Label tone="onLight">{hub.label}</Label>
+                      <span className="font-heading text-xl leading-tight font-semibold tracking-tight sm:text-2xl">
+                        {hub.title}
+                      </span>
                     </span>
-                  </span>
-                  <span className="inline-flex size-12 shrink-0 items-center justify-center rounded-full border border-ink/20 transition-colors duration-200 group-hover:border-ink group-hover:bg-ink group-hover:text-white">
-                    <ArrowUpRight
-                      aria-hidden
-                      className="size-5 transition-transform duration-200 motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5"
-                    />
-                  </span>
-                </Link>
+                    <span className="inline-flex size-12 shrink-0 items-center justify-center rounded-full border border-ink/20 transition-colors duration-200 group-hover:border-ink group-hover:bg-ink group-hover:text-white">
+                      <ArrowUpRight
+                        aria-hidden
+                        className="size-5 transition-transform duration-200 motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5"
+                      />
+                    </span>
+                  </Link>
+                </Reveal>
               </li>
             ))}
           </ul>
