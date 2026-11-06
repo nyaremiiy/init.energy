@@ -34,6 +34,8 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Новий код пиши з урахуванням **SEO**: семантична HTML-структура, коректні metadata, ієрархія заголовків, доступні `alt`-описи, швидке завантаження та індексація.
 - Новий контент і структуру також готуй для **GEO (Generative Engine Optimization)**: чіткі самодостатні формулювання, зрозумілий контекст, структуровані дані та відповіді на реальні запити користувачів.
 
+- Іконки інтерфейсу — лише `lucide-react`. Виняток: логотипи соцмереж (Facebook, Instagram, LinkedIn, TikTok) — власні SVG у `src/components/ui/social-icons.tsx`, бо в lucide-react v1 бренд-іконок немає.
+
 ## Git workflow (обов'язково)
 
 - `main` — стабільна гілка. **Мерджить у `main` тільки власник.** Агентам заборонено комітити чи мерджити в `main`.

@@ -132,5 +132,46 @@
     "from": "від {value}",
     "upTo": "до {value}",
     "plus": "{value}+"
+  },
+  "footer": {
+    "description": "Проєктуємо, постачаємо й монтуємо сонячні електростанції та системи резервного живлення для бізнесу, будинків і квартир.",
+    "socialLabel": "INIT ENERGY у {network}",
+    "socialNavLabel": "Соціальні мережі",
+    "languageLabel": "Мова сайту",
+    "logoLabel": "INIT ENERGY — головна",
+    "pageNavTitle": "На цій сторінці",
+    "sectionsTitle": "Розділи сайту",
+    "links": {
+      "solutions": "Рішення за типом об'єкта",
+      "products": "Накопичувачі SVIT",
+      "aboutUs": "Про компанію",
+      "projects": "Реалізовані проєкти",
+      "consultation": "Консультація",
+      "turnkeySes": "Сонячні електростанції",
+      "svitCatalog": "Продукти SVIT",
+      "about": "Про компанію",
+      "contacts": "Контакти"
+    },
+    "newsletter": {
+      "title": "Розсилка",
+      "text": "Нові проєкти, статті бази знань і оновлення лінійки SVIT.",
+      "emailLabel": "Електронна пошта",
+      "emailPlaceholder": "Ваш email",
+      "submit": "Підписатися",
+      "submitting": "Надсилаємо…",
+      "note": "Підписуючись, ви погоджуєтеся з політикою конфіденційності. Відписатися можна будь-коли.",
+      "success": "Дякуємо! Ви підписалися на розсилку.",
+      "failure": "Не вдалося підписатися. Спробуйте пізніше.",
+      "errors": {
+        "email": "Вкажіть коректну електронну пошту."
+      }
+    },
+    "copyright": "Copyright © {year} INIT ENERGY | Всі права захищені",
+    "legalNavLabel": "Правова інформація",
+    "legal": {
+      "privacy": "Політика конфіденційності",
+      "cookies": "Політика cookie",
+      "terms": "Умови використання"
+    }
   }
 }

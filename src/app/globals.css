@@ -26,6 +26,8 @@
   --radius-field: 14px;
   --text-caption: 0.8125rem;
   --text-caption--line-height: 1.25rem;
+  --text-small: 0.9375rem;
+  --text-small--line-height: 1.6;
 
   /* Technical motion: short ease-out, no springs or bounces. */
   --ease-tech: cubic-bezier(0.2, 0.7, 0.2, 1);

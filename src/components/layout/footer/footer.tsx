@@ -1,0 +1,146 @@
+import Link from "next/link";
+
+import { Container } from "@/components/layout/container";
+import { LanguageSwitcher } from "@/components/layout/header/language-switcher";
+import {
+  socialLinks,
+  type SocialNetwork,
+} from "@/components/layout/header/header-data";
+import { Logo } from "@/components/ui/logo";
+import {
+  FacebookIcon,
+  InstagramIcon,
+  LinkedInIcon,
+  TikTokIcon,
+} from "@/components/ui/social-icons";
+import { siteSections } from "@/content/navigation";
+import { routes } from "@/content/routes";
+import { format, messages } from "@/lib/messages";
+
+import { FooterColumns } from "./footer-columns";
+import { FooterMark } from "./footer-mark";
+import { focusClasses, footerLinkClasses } from "./footer-styles";
+import { NewsletterForm } from "./newsletter-form";
+
+const socialIcons: Record<SocialNetwork, typeof FacebookIcon> = {
+  facebook: FacebookIcon,
+  instagram: InstagramIcon,
+  linkedin: LinkedInIcon,
+  tiktok: TikTokIcon,
+};
+
+// Rendered at build time (SSG), so the year is the build year.
+const year = new Date().getFullYear();
+
+export function Footer() {
+  const t = messages.footer;
+
+  const brand = (
+    <div className="flex flex-col items-start gap-6">
+      <Link
+        href={routes.home}
+        aria-label={t.logoLabel}
+        className={`rounded-sm text-white ${focusClasses}`}
+      >
+        <Logo className="h-10 w-auto" />
+      </Link>
+      <p className="max-w-80 text-small text-white/75">{t.description}</p>
+
+      <nav aria-label={t.socialNavLabel}>
+        <ul className="flex flex-wrap gap-3">
+          {socialLinks.map((link) => {
+            const Icon = socialIcons[link.network];
+
+            return (
+              <li key={link.network}>
+                <a
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener"
+                  aria-label={format(t.socialLabel, { network: link.label })}
+                  className={`inline-flex size-11 items-center justify-center rounded-full border border-white/22 text-white motion-safe:transition-opacity motion-safe:duration-150 hover:opacity-75 ${focusClasses}`}
+                >
+                  <Icon className="size-4.5" />
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+
+      <div
+        className="inline-flex rounded-full border border-white/22 p-1"
+        aria-label={t.languageLabel}
+      >
+        <LanguageSwitcher />
+      </div>
+    </div>
+  );
+
+  const sections = (
+    <nav aria-label={t.sectionsTitle}>
+      <p className="mb-5 font-heading text-sm font-semibold text-white">
+        {t.sectionsTitle}
+      </p>
+      <ul className="flex flex-col gap-3">
+        {siteSections.map((item) => (
+          <li key={item.href}>
+            <Link href={item.href} className={footerLinkClasses}>
+              {t.links[item.labelKey]}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+
+  const newsletter = (
+    <div className="flex flex-col gap-5">
+      <p className="font-heading text-sm font-semibold text-white">
+        {t.newsletter.title}
+      </p>
+      <p className="text-small text-white/75">{t.newsletter.text}</p>
+      <NewsletterForm />
+    </div>
+  );
+
+  const legalLinks = [
+    { href: routes.privacy, label: t.legal.privacy },
+    { href: routes.cookies, label: t.legal.cookies },
+    { href: routes.terms, label: t.legal.terms },
+  ];
+
+  return (
+    <footer className="bg-white px-4 pb-4">
+      <div className="overflow-hidden rounded-panel bg-ink text-white">
+        <Container className="pt-14 lg:pt-24">
+          <FooterColumns
+            brand={brand}
+            sections={sections}
+            newsletter={newsletter}
+          />
+
+          <div className="mt-18 flex flex-col gap-4 border-t border-white/14 pt-6 text-sm text-white/75 lg:flex-row lg:items-center lg:justify-between">
+            <p>{format(t.copyright, { year: String(year) })}</p>
+            <nav aria-label={t.legalNavLabel}>
+              <ul className="flex flex-wrap gap-x-6 gap-y-2">
+                {legalLinks.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className={`rounded-sm motion-safe:transition-opacity motion-safe:duration-150 hover:opacity-75 ${focusClasses}`}
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </div>
+        </Container>
+
+        <FooterMark />
+      </div>
+    </footer>
+  );
+}

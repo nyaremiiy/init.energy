@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-06 — Спільний футер сайту
+- **Агент:** Claude Code
+- **Гілка:** feature/footer (статус: змерджено в develop)
+- **Що зроблено:** темна панель  з відступом 16 px; сітка 24 колонки (8/5/5/6, без «На цій сторінці» — 10/6/8): бренд (логотип, опис, соцмережі 44×44 з власними SVG, перемикач мов як у header), «На цій сторінці» (якорі з  за pathname), «Розділи сайту» (), розсилка (Server Action з валідацією і honeypot, адаптер-заглушка, стани помилка/надсилаємо/успіх,  у dataLayer лише після згоди на cookie). Нижній рядок з роком збірки і правовими посиланнями; велика марка SVG  на всю ширину. Секція «Рішення» отримала якір . Токен  (15/1.6).
+- **Файли:** src/components/layout/footer/*, src/content/{navigation,routes}.ts, src/lib/{analytics,newsletter}.ts, src/app/actions/newsletter.ts, src/app/{layout.tsx,globals.css}, src/components/sections/home/solutions-by-segment.tsx, messages/{uk,en}.json, AGENTS.md, docs/ai/*
+- **Нотатки / що далі:** TODO(content): сторінки /polityka-cookie/, /umovy-vykorystannya/, /polityka-konfidentsiinosti/; пункти «Резервне живлення», «Калькулятори», «База знань» — коли з’являться в структурі. TODO(integration): сервіс розсилки, банер згоди на cookie. EN-перемикач неактивний до i18n.
+
 ## 2026-11-06 — М'якший фокус і щільніші поля форми заявки
 - **Агент:** Claude Code
 - **Гілка:** fix/lead-form-focus-spacing (статус: змерджено в develop)

@@ -9,6 +9,9 @@ export const slugs = {
   projects: "proekty",
   // TODO(content): privacy policy page is planned, not built yet.
   privacy: "polityka-konfidentsiinosti",
+  // TODO(content): cookie policy and terms pages are planned, not built yet.
+  cookies: "polityka-cookie",
+  terms: "umovy-vykorystannya",
   products: {
     svit600: "svit-600",
     svitPlus5000: "svit-plus-5000",
@@ -27,6 +30,7 @@ export const slugs = {
 
 /** Home page section anchors. */
 export const anchors = {
+  solutions: "solutions",
   aboutUs: "about-us",
   products: "products",
   projects: "projects",
@@ -47,6 +51,8 @@ export const routes = {
   about: toPath(slugs.about),
   projects: toPath(slugs.projects),
   privacy: toPath(slugs.privacy),
+  cookies: toPath(slugs.cookies),
+  terms: toPath(slugs.terms),
   products: {
     svit600: toPath(slugs.products.svit600),
     svitPlus5000: toPath(slugs.products.svitPlus5000),
@@ -61,6 +67,9 @@ export const routes = {
     hotelSes: toPath(slugs.solutions.hub, slugs.solutions.hotelSes),
   },
   sections: {
+    solutions: toAnchor(anchors.solutions),
+    aboutUs: toAnchor(anchors.aboutUs),
+    projects: toAnchor(anchors.projects),
     products: toAnchor(anchors.products),
     contacts: toAnchor(anchors.contacts),
   },
