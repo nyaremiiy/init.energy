@@ -40,11 +40,11 @@ const fieldOrder = ["name", "phone", "consent"] as const;
 
 /**
  * Field states: default (white, `line` border) · hover (`ink/40` border) ·
- * focus-visible (`ink` border + 2px `ink` outline, offset 2) · error (`ink` border) ·
+ * focus-visible (`ink` border + soft 3px `ink/10` ring) · error (`ink` border) ·
  * disabled (`surface` background, muted text). Colour-only transitions.
  */
 const fieldClasses =
-  "w-full rounded-field border bg-white px-4 text-base text-ink placeholder:text-ink/45 transition-colors duration-200 ease-tech hover:border-ink/40 focus-visible:border-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink disabled:cursor-not-allowed disabled:bg-surface disabled:text-ink/70 disabled:hover:border-line";
+  "w-full rounded-field border bg-white px-4 text-base text-ink placeholder:text-ink/45 transition-colors duration-200 ease-tech hover:border-ink/40 focus-visible:border-ink focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-ink/10 disabled:cursor-not-allowed disabled:bg-surface disabled:text-ink/70 disabled:hover:border-line";
 
 const borderFor = (error?: string) => (error ? "border-ink" : "border-line");
 
@@ -53,7 +53,7 @@ function FieldError({ id, message }: { id: string; message?: string }) {
   return (
     <p
       id={id}
-      className={`min-h-5 text-caption text-ink transition-opacity duration-200 ease-tech ${message ? "opacity-100" : "opacity-0"}`}
+      className={`-mt-0.5 min-h-4 text-caption leading-4 text-ink transition-opacity duration-200 ease-tech ${message ? "opacity-100" : "opacity-0"}`}
     >
       {message}
     </p>
@@ -164,9 +164,9 @@ export function LeadForm({ defaultObjectType }: LeadFormProps) {
       {/* Disabling the fieldset disables every control while sending. */}
       <fieldset
         disabled={submitting}
-        className="m-0 flex min-w-0 flex-col gap-4 border-0 p-0"
+        className="m-0 flex min-w-0 flex-col gap-3 border-0 p-0"
       >
-        <fieldset className="m-0 border-0 p-0 pb-4">
+        <fieldset className="m-0 border-0 p-0 pb-2">
           <legend className="mb-3 text-sm font-medium text-ink">
             {t.objectType}
           </legend>
@@ -181,7 +181,7 @@ export function LeadForm({ defaultObjectType }: LeadFormProps) {
                   defaultChecked={defaultObjectType === objectType}
                   className="peer sr-only"
                 />
-                <span className="inline-flex min-h-10 items-center rounded-full border border-line bg-white px-5 text-sm font-medium text-ink transition-colors duration-180 ease-tech hover:border-ink/40 peer-checked:border-ink peer-checked:bg-ink peer-checked:text-white peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-ink peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                <span className="inline-flex min-h-10 items-center rounded-full border border-line bg-white px-5 text-sm font-medium text-ink transition-colors duration-180 ease-tech hover:border-ink/40 peer-checked:border-ink peer-checked:bg-ink peer-checked:text-white peer-focus-visible:ring-3 peer-focus-visible:ring-ink/15 peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
                   {t.objectTypes[objectType]}
                 </span>
               </label>
@@ -220,7 +220,7 @@ export function LeadForm({ defaultObjectType }: LeadFormProps) {
           <FieldError id="lead-phone-error" message={errors.phone} />
         </label>
 
-        <label className="flex flex-col gap-2 pb-4">
+        <label className="flex flex-col gap-2 pb-2">
           <FieldLabel>
             {t.comment}{" "}
             <span className="font-normal text-ink/70">({t.optional})</span>
@@ -255,7 +255,7 @@ export function LeadForm({ defaultObjectType }: LeadFormProps) {
                 required
                 aria-invalid={errors.consent ? true : undefined}
                 aria-describedby="lead-consent-error"
-                className={`peer size-5 cursor-pointer appearance-none rounded-md border bg-white transition-colors duration-200 ease-tech hover:border-ink/40 checked:border-ink checked:bg-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink disabled:cursor-not-allowed disabled:not-checked:bg-surface ${borderFor(errors.consent)}`}
+                className={`peer size-5 cursor-pointer appearance-none rounded-md border bg-white transition-colors duration-200 ease-tech hover:border-ink/40 checked:border-ink checked:bg-ink focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-ink/15 disabled:cursor-not-allowed disabled:not-checked:bg-surface ${borderFor(errors.consent)}`}
               />
               <Check
                 aria-hidden
