@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
+import { Header } from "@/components/layout/header/header";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -15,7 +16,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="uk" className={`${montserrat.className} h-full`}>
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="relative min-h-full flex flex-col">
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }

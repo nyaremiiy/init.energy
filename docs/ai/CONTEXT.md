@@ -9,6 +9,7 @@ init.energy — вебпроєкт. Призначення та функціон
 ## Поточний стан
 
 - Каркас на Next.js 16.4.5, React 19.3, TypeScript, Tailwind CSS v4, Lucide React для іконок і Motion для анімацій.
+- Header поверх hero з двох смуг: контакти/мови зверху (lg+), логотип/меню/CTA знизу; на мобільних — бургер-меню.
 - Реалізовано responsive hero-секцію з локальними AVIF/WebP-зображеннями.
 - Hero містить модульний автоматичний слайдер контенту на Motion із переходом від правого краю viewport ліворуч і overlay crossfade медіа-шаром.
 - Медіа hero тримає максимум два різні фото лише під час crossfade та використовує responsive AVIF-зображення.
@@ -18,6 +19,7 @@ init.energy — вебпроєкт. Призначення та функціон
 ```
 src/app/        # App Router: layout.tsx, page.tsx, globals.css
 src/components/layout/ # повторно використовувані layout-компоненти
+src/components/layout/header/ # header: дані (header-data.ts), верхня й основна смуги, мобільне меню
 src/components/ui/ # повторно використовувані UI-компоненти
 src/components/sections/home/ # секції головної сторінки
 public/         # статичні файли
@@ -47,6 +49,7 @@ CLAUDE.md       # точка входу для Claude Code (імпортує AGE
 - CTA-посилання використовують компонент `Button` із варіантами `primary` і `secondary` та розмірами `default` і `wide`.
 - Повноекранні секції можуть використовувати `ScrollIndicator` для переходу до наступного viewport.
 - Базовий шрифт сайту — Montserrat, підключений через `next/font/google`.
+- Контакти офісів, email, пункти меню й мови зберігаються в src/components/layout/header/header-data.ts — єдине джерело для header (і надалі для footer/JSON-LD).
 - Кожна секція головної сторінки є окремим модулем у `src/components/sections/home/`.
 - Контентні варіанти hero та їхні зображення зберігаються в `hero-slides.ts`; анімація розділена між `hero-content-slider.tsx`, `hero-media-slider.tsx` і `hero-slider.tsx`.
 - Hero-заголовки зберігаються двома лініями в даних слайда для послідовної дворядкової композиції.
