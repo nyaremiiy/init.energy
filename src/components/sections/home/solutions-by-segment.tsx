@@ -72,7 +72,7 @@ export function SolutionsBySegment() {
               <li key={hub.href}>
                 <Link
                   href={hub.href}
-                  className="group flex h-full items-center justify-between gap-6 rounded-3xl bg-sky p-6 text-ink transition-colors hover:bg-sky/70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink lg:p-8"
+                  className="group flex h-full items-center justify-between gap-6 rounded-3xl bg-sky p-6 text-ink shadow-card transition duration-300 hover:shadow-card-hover motion-safe:hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink lg:p-8"
                 >
                   <span className="flex flex-col items-start gap-3">
                     <Label tone="onLight">{hub.label}</Label>

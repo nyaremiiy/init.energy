@@ -64,7 +64,7 @@ export function SegmentCard({
 
   return (
     <article
-      className={`flex h-full flex-col gap-6 rounded-3xl p-6 lg:p-8 ${classes.card}`}
+      className={`flex h-full flex-col gap-6 rounded-3xl p-6 shadow-card transition duration-300 hover:shadow-card-hover motion-safe:hover:-translate-y-0.5 lg:p-8 ${classes.card}`}
     >
       <div className="flex items-start justify-between gap-4">
         <span
