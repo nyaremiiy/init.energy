@@ -89,7 +89,12 @@ export const productList: Product[] = [
       },
     ],
     segment: "Приватний будинок",
-    // TODO(content): фото
+    image: {
+      src: "/images/products/svit-home.avif",
+      alt: "Комплекс SVIT HOME: гібридний інвертор над акумуляторною батареєю на білій стійці в інтер'єрі будинку",
+      width: 1448,
+      height: 1086,
+    },
   },
   {
     id: "svitPlus5000",
