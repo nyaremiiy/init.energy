@@ -70,7 +70,7 @@ export function MobileMenu() {
               <address key={office.id} className="flex flex-col gap-2 not-italic">
                 <span className="inline-flex items-center gap-2">
                   <MapPin aria-hidden className="size-4 shrink-0" />
-                  Офіс {office.city}, {office.address}
+                  {office.city}, {office.address}
                 </span>
                 <a
                   href={office.phone.href}

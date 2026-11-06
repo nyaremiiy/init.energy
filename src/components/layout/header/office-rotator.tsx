@@ -45,7 +45,7 @@ export function OfficeRotator() {
           <span className="inline-flex items-center gap-2">
             <MapPin aria-hidden className="size-4 shrink-0" />
             <span>
-              Офіс {office.city}, {office.address}
+              {office.city}, {office.address}
             </span>
           </span>
           <a
