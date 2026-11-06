@@ -68,7 +68,12 @@ export const productList: Product[] = [
     ],
     segment: "Квартира",
     featured: true,
-    // TODO(content): предметне фото на світлому фоні (4:3, продукт вписаний з однаковими полями).
+    image: {
+      src: "/images/products/svit-600.avif",
+      alt: "Портативна станція SVIT 600 з двома розетками 220 В, USB-портами і дисплеєм заряду на столі в квартирі",
+      width: 2560,
+      height: 1920,
+    },
   },
   {
     id: "svitHome",
@@ -88,7 +93,12 @@ export const productList: Product[] = [
     ],
     segment: "Приватний будинок",
     featured: true,
-    // TODO(content): предметне фото на світлому фоні (4:3, продукт вписаний з однаковими полями).
+    image: {
+      src: "/images/products/svit-home.avif",
+      alt: "Комплекс SVIT HOME: гібридний інвертор над акумуляторною батареєю на білій стійці в інтер'єрі будинку",
+      width: 1448,
+      height: 1086,
+    },
   },
   {
     id: "svitPlus5000",
@@ -105,7 +115,12 @@ export const productList: Product[] = [
       { key: "power", value: { value: 5, unit: "kW" } },
       { key: "chemistry", value: "LiFePO₄" },
     ],
-    // TODO(content): предметне фото на світлому фоні (4:3, продукт вписаний з однаковими полями).
+    image: {
+      src: "/images/products/svit-plus-5000.avif",
+      alt: "Акумуляторна батарея SVIT PLUS 5000 з клемами, автоматичним вимикачем, індикатором заряду та портами CAN і RS485 на стелажі",
+      width: 1448,
+      height: 1086,
+    },
   },
   {
     id: "svitPlus16000",
@@ -121,7 +136,12 @@ export const productList: Product[] = [
       { key: "capacity", value: { value: 16.07, unit: "kWh" } },
       { key: "chemistry", value: "LiFePO₄" },
     ],
-    // TODO(content): предметне фото на світлому фоні (4:3, продукт вписаний з однаковими полями).
+    image: {
+      src: "/images/products/svit-plus-16000.avif",
+      alt: "Батарея SVIT PLUS 16000 під гібридним інвертором на стійці біля стіни приватного будинку",
+      width: 1448,
+      height: 1086,
+    },
   },
   {
     id: "lithiumvalley",
@@ -138,7 +158,12 @@ export const productList: Product[] = [
     ],
     segment: "Бізнес",
     featured: true,
-    // TODO(content): предметне фото на світлому фоні (4:3, продукт вписаний з однаковими полями).
+    image: {
+      src: "/images/products/lithiumvalley.avif",
+      alt: "Промислова система накопичення енергії LITHIUMVALLEY у шафі з інвертором біля сонячної електростанції",
+      width: 1448,
+      height: 1086,
+    },
   },
 ];
 

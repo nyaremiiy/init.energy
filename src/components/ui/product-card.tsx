@@ -32,17 +32,15 @@ export function ProductCard({
   return (
     <article className="flex h-full flex-col gap-6 rounded-3xl bg-surface p-6 text-ink transition duration-300 motion-safe:hover:-translate-y-1 lg:p-8">
       {image ? (
-        // Product shots sit on a uniform light background, fitted with equal margins.
-        <div className="aspect-4/3 w-full rounded-2xl bg-white p-6">
-          <Image
-            src={image.src}
-            alt={image.alt}
-            width={image.width}
-            height={image.height}
-            sizes="(min-width: 1024px) 325px, (min-width: 768px) 45vw, 75vw"
-            className="size-full object-contain"
-          />
-        </div>
+        <Image
+          src={image.src}
+          alt={image.alt}
+          width={image.width}
+          height={image.height}
+          // Card media width: ~380px in the 3-col grid, half / 5/6 of the viewport below lg.
+          sizes="(min-width: 1440px) 380px, (min-width: 1024px) 26vw, (min-width: 768px) 45vw, 80vw"
+          className="aspect-4/3 w-full rounded-2xl object-cover"
+        />
       ) : (
         <MediaPlaceholder caption={photoPendingCaption} />
       )}

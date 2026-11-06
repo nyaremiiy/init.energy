@@ -20,7 +20,7 @@
 - **Гілка:** feature/solutions-by-segment (статус: в роботі)
 - **Що зроблено:** «Що вам потрібно живити?» — прибрано плашку продукту, пігулки в картках замінено рядками-посиланнями (назва, характеристика muted, стрілка), залишено одну смугу «Сонячні електростанції під ключ». «Накопичувачі SVIT» — 3 світлі картки (SVIT 600, SVIT HOME, LITHIUMVALLEY, поле `featured`), статична сітка на lg і scroll-snap без кнопок на mobile/md; карусель видалено; фото з інтер'єрами відключено (TODO(content): предметні фото на світлому фоні), майбутні фото — `object-contain` на білому. Загальне: токени відступів `section-sm`/`section`/`section-head` для всіх секцій, текст у картках ≥ 16 px, прибрано тінь hero. Видалено мертвий код: `ProductCarousel`, варіанти `Button` для світлого фону й `compact`, `shortName`, `getSolutionProduct`.
 - **Файли:** src/app/globals.css, src/components/sections/home/{solutions-by-segment,product-line}.tsx, src/components/ui/{segment-card,product-card,media-placeholder,button}.tsx, src/components/ui/product-carousel.tsx (видалено), src/content/{solutions,products,services}.ts, messages/uk.json, docs/ai/*
-- **Нотатки / що далі:** файли фото в `public/images/products/` залишено (не використовуються) до рішення власника; розділ «Візуальний стиль головної» в CONTEXT переписано.
+- **Нотатки / що далі:** за рішенням власника фото товарів повернуто (наявні фото з `public/images/products/`, `object-cover` на весь блок 4:3); розділ «Візуальний стиль головної» в CONTEXT переписано.
 
 ## 2026-11-06 — Слайдер накопичувачів SVIT
 - **Агент:** Claude Code
