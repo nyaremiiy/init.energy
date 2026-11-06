@@ -15,6 +15,12 @@
 
 ---
 
+## 2026-11-06 — Нижчий перемикач мов
+- **Агент:** Claude Code
+- **Гілка:** fix/language-switcher-height (статус: змерджено в develop)
+- **Що зроблено:** кнопки перемикача мов 40×28 → 40×24 (загальна висота 34 → 30 px).
+- **Файли:** src/components/layout/header/language-switcher.tsx, docs/ai/CHANGELOG.md
+
 ## 2026-11-06 — Перемикач мов з анімацією
 - **Агент:** Claude Code
 - **Гілка:** fix/language-switcher (статус: змерджено в develop)
