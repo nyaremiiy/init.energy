@@ -1,4 +1,4 @@
-import { products, type ProductId } from "@/content/products";
+import { products, productSummaries, type ProductId } from "@/content/products";
 import { routes } from "@/content/routes";
 import { services, type ServiceId } from "@/content/services";
 
@@ -101,7 +101,7 @@ export const socialLinks: SocialLink[] = [
 const productLink = (id: ProductId): NavMenuLink => ({
   href: products[id].href,
   label: products[id].name,
-  description: products[id].summary,
+  description: productSummaries[id],
 });
 
 const serviceLink = (id: ServiceId): NavMenuLink => ({

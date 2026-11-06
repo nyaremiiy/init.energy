@@ -1,3 +1,5 @@
+import { formatQuantity } from "@/lib/format";
+
 import { products, type ProductId } from "./products";
 import { services, type ServiceId } from "./services";
 
@@ -81,7 +83,7 @@ export function getSolutionProduct(solution: Solution) {
 
   return {
     name: [solution.productPrefix, ...names].filter(Boolean).join(" + "),
-    spec: products[solution.specProductId].capacity,
+    spec: formatQuantity(products[solution.specProductId].capacity),
   };
 }
 

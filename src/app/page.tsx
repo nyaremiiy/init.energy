@@ -1,4 +1,5 @@
 import { Hero } from "@/components/sections/home/hero";
+import { ProductLine } from "@/components/sections/home/product-line";
 import { SolutionsBySegment } from "@/components/sections/home/solutions-by-segment";
 
 export default function Home() {
@@ -6,6 +7,7 @@ export default function Home() {
     <main>
       <Hero />
       <SolutionsBySegment />
+      <ProductLine />
     </main>
   );
 }

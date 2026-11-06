@@ -17,5 +17,46 @@
         "title": "Усі накопичувачі SVIT"
       }
     }
+  },
+  "productLine": {
+    "eyebrow": "Власне виробництво",
+    "title": "Накопичувачі SVIT",
+    "lead": "INIT ENERGY виробляє накопичувачі SVIT на LiFePO₄ — від портативної станції для квартири до промислових систем для підприємств.",
+    "productLink": "Детальніше про {name}",
+    "specsLabel": "Характеристики {name}",
+    "photoPending": "фото буде додано",
+    "compareTitle": "Порівняння лінійки",
+    "compareCaption": "Порівняння накопичувачів SVIT: тип, ємність і призначення кожної моделі",
+    "columns": {
+      "model": "Модель",
+      "type": "Тип",
+      "capacity": "Ємність",
+      "audience": "Для кого",
+      "link": "Посилання"
+    },
+    "more": "Детальніше",
+    "notStated": "—"
+  },
+  "specs": {
+    "capacity": "Ємність",
+    "power": "Потужність",
+    "chemistry": "Хімія",
+    "inverter": "Інвертор",
+    "cycles": "Цикли",
+    "minCapacity": "Ємність (мінімальна)",
+    "maxCapacity": "Максимум",
+    "type": "Тип"
+  },
+  "units": {
+    "W": "Вт",
+    "kW": "кВт",
+    "Wh": "Вт·год",
+    "kWh": "кВт·год",
+    "cycles": "циклів"
+  },
+  "quantity": {
+    "from": "від {value}",
+    "upTo": "до {value}",
+    "plus": "{value}+"
   }
 }

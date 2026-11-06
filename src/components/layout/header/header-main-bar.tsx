@@ -33,13 +33,14 @@ export function HeaderMainBar() {
         >
           <Phone aria-hidden className="size-5" />
         </a>
-        <Button
-          href={routes.sections.contacts}
-          className="hidden lg:inline-flex"
-          icon={<ArrowUpRight aria-hidden className="size-4" />}
-        >
-          Залишити заявку
-        </Button>
+        <div className="hidden lg:block">
+          <Button
+            href={routes.sections.contacts}
+            icon={<ArrowUpRight aria-hidden className="size-4" />}
+          >
+            Залишити заявку
+          </Button>
+        </div>
         <MobileMenu />
       </div>
     </Container>

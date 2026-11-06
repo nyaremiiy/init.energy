@@ -22,7 +22,7 @@ src/components/layout/ # повторно використовувані layout-
 src/components/layout/header/ # header: дані (header-data.ts), верхня й основна смуги, мобільне меню
 src/components/ui/ # повторно використовувані UI-компоненти
 src/components/sections/home/ # секції головної сторінки
-src/content/    # дані сайту: products.ts, routes.ts (slug-и та шляхи), solutions.ts
+src/content/    # дані сайту: products.ts (productList), services.ts, routes.ts (slug-и, якорі), solutions.ts
 src/lib/        # утиліти (messages.ts — тимчасовий завантажувач текстів UI)
 messages/       # тексти інтерфейсу (uk.json; en.json — з появою i18n)
 public/         # статичні файли
@@ -66,6 +66,9 @@ CLAUDE.md       # точка входу для Claude Code (імпортує AGE
 - **Плашки даних:** pill (``sm:rounded-full``), на світлому білі з рамкою ``line``, на темному ``bg-white/6``.
 - **Смуги-посилання:** ``bg-sky``, ``rounded-3xl``, стрілка в круглій кнопці ``size-12`` (як іконки в header), при hover заливається ``ink``.
 - **Рух:** hover — легкий підйом ``-translate-y-0.5`` і зсув стрілки; поява при скролі через ``Reveal`` зі stagger; усе з ``motion-safe`` / prefers-reduced-motion.
+- **Продуктові картки:** `ProductCard` — медіа 4/3 (`MediaPlaceholder`, поки немає фото), лейбл сегмента, H3 + опис, кругла контурна кнопка `size-12`, `<dl>` характеристик з лініями `line` (на темному `white/16`) притиснутий до низу. Hover картки — `-translate-y-1`.
+- **Таблиці:** лише горизонтальні лінії `line`, без фону; на мобільному — `overflow-x-auto` з `relative` (щоб sr-only не розширював сторінку).
+- **Числа:** лише через `formatQuantity`/`formatNumber` (`src/lib/format.ts`), одиниці — у `messages`.
 - **Контраст:** текст ≥ 4.5:1 на всіх фонах.
 
 ## Гілки
@@ -83,7 +86,7 @@ CLAUDE.md       # точка входу для Claude Code (імпортує AGE
 - Лейбли секцій використовують компонент `Label` із спільною mobile-first типографікою та декоративним білим кругом.
 - Заголовки використовують компонент `Heading` із семантичним рівнем через проп `as`, варіантами line-height через `lineHeight` і letter-spacing через `letterSpacing`.
 - Описові тексти секцій використовують компонент `Description` із типографічними варіантами через `size`.
-- CTA-посилання використовують компонент `Button` (pill, стрілка зсувається при hover; внутрішні шляхи через `next/link`): варіанти `primary`/`secondary` для темного фону, `primaryOnLight`/`secondaryOnLight` для світлого; розміри `default`, `wide`, `compact`. У групі посилань перше — primary, решта — secondary (як у hero).
+- CTA-посилання використовують компонент `Button` (pill, стрілка зсувається при hover; внутрішні шляхи через `next/link`): варіанти `primary`/`secondary` для темного фону, `primaryOnLight`/`secondaryOnLight` для світлого; розміри `default`, `wide`, `compact`. Посилання-кнопки всередині карток — усі контурні (`secondaryOnLight` / `secondary`); заповнені primary — лише для головних CTA (hero, header).
 - Повноекранні секції можуть використовувати `ScrollIndicator` для переходу до наступного viewport.
 - Шрифти через `next/font/google` і токени `@theme`: основний текст — Inter (`font-sans`), заголовки (`Heading`) і лейбли (`Label`) — Montserrat (`font-heading`). `Heading` має проп `weight` (`semibold` за замовчуванням, `medium`).
 - Контакти офісів, email, пункти меню й мови зберігаються в src/components/layout/header/header-data.ts — єдине джерело для header (і надалі для footer/JSON-LD).

@@ -27,8 +27,8 @@ const toneClasses: Record<
     text: string;
     muted: string;
     productRow: string;
-    primary: "primary" | "primaryOnLight";
-    secondary: "secondary" | "secondaryOnLight";
+    /** Outline button variant for card links. */
+    link: "secondary" | "secondaryOnLight";
   }
 > = {
   light: {
@@ -37,8 +37,7 @@ const toneClasses: Record<
     text: "text-ink",
     muted: "text-ink/70",
     productRow: "border border-line bg-white",
-    primary: "primaryOnLight",
-    secondary: "secondaryOnLight",
+    link: "secondaryOnLight",
   },
   dark: {
     card: "bg-ink text-white",
@@ -46,8 +45,7 @@ const toneClasses: Record<
     text: "text-white",
     muted: "text-white/75",
     productRow: "bg-white/6 text-white",
-    primary: "primary",
-    secondary: "secondary",
+    link: "secondary",
   },
 };
 
@@ -103,13 +101,13 @@ export function SegmentCard({
 
       <nav aria-label={navLabel} className="mt-auto pt-2">
         <ul className="flex flex-wrap gap-2">
-          {links.map((link, linkIndex) => (
+          {links.map((link) => (
             <li key={link.href}>
               <Button
                 href={link.href}
                 title={link.title}
                 size="compact"
-                variant={linkIndex === 0 ? classes.primary : classes.secondary}
+                variant={classes.link}
                 icon={<ArrowUpRight aria-hidden className="size-4" />}
               >
                 {link.label}
