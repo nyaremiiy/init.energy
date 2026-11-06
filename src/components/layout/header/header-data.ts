@@ -8,10 +8,21 @@ export type Office = {
   };
 };
 
-export type NavItem = {
+export type NavLink = {
   href: string;
   label: string;
 };
+
+export type NavGroup = {
+  label: string;
+  items: NavLink[];
+};
+
+export type NavItem = NavLink | NavGroup;
+
+export function isNavGroup(item: NavItem): item is NavGroup {
+  return "items" in item;
+}
 
 export type Language = {
   code: string;
@@ -67,11 +78,31 @@ export const socialLinks: SocialLink[] = [
   },
 ];
 
+// URLs match the current init.energy site to preserve indexed pages.
 export const navItems: NavItem[] = [
-  { href: "#solar-stations", label: "Сонячні електростанції" },
-  { href: "#backup-power", label: "Резервне живлення" },
-  { href: "#calculator", label: "Калькулятор" },
-  { href: "#contact", label: "Контакти" },
+  {
+    label: "SVIT",
+    items: [
+      { href: "/svit-600/", label: "SVIT 600" },
+      { href: "/svit-plus-5000/", label: "SVIT PLUS 5000" },
+      { href: "/svit-plus-16000/", label: "SVIT PLUS 16000" },
+      { href: "/svit-home/", label: "SVIT HOME" },
+      { href: "/bess/", label: "LITHIUMVALLEY" },
+    ],
+  },
+  {
+    label: "Рішення",
+    items: [
+      { href: "/cec/", label: "СЕС під ключ" },
+      {
+        href: "/rishennya/ses-dlya-gotelyu/",
+        label: "СЕС для готелю та відпочинкового комплексу",
+      },
+    ],
+  },
+  { href: "#about-us", label: "Про нас" },
+  { href: "#projects", label: "Проєкти" },
+  { href: "#contacts", label: "Контакти" },
 ];
 
 // TODO: add `href` for other locales once i18n routing exists.

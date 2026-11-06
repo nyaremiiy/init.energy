@@ -1,10 +1,11 @@
 "use client";
 
-import { Mail, MapPin, Menu, Phone, X } from "lucide-react";
+import { ChevronDown, Mail, MapPin, Menu, Phone, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
-import { contactEmail, navItems, offices } from "./header-data";
+import { contactEmail, isNavGroup, navItems, offices } from "./header-data";
 import { LanguageSwitcher } from "./language-switcher";
+import { NavLink } from "./nav-link";
 import { SocialLinks } from "./social-links";
 
 export function MobileMenu() {
@@ -56,13 +57,36 @@ export function MobileMenu() {
         >
           <nav aria-label="Мобільне меню">
             <ul className="flex flex-col gap-5 text-2xl font-semibold">
-              {navItems.map((item) => (
-                <li key={item.href}>
-                  <a href={item.href} onClick={close}>
-                    {item.label}
-                  </a>
-                </li>
-              ))}
+              {navItems.map((item) =>
+                isNavGroup(item) ? (
+                  <li key={item.label}>
+                    <details className="group">
+                      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 [&::-webkit-details-marker]:hidden">
+                        {item.label}
+                        <ChevronDown
+                          aria-hidden
+                          className="size-6 transition-transform duration-200 group-open:rotate-180"
+                        />
+                      </summary>
+                      <ul className="mt-4 flex flex-col gap-3 border-l border-white/15 pl-4 text-base font-medium text-white/80">
+                        {item.items.map((link) => (
+                          <li key={link.href}>
+                            <NavLink href={link.href} onClick={close}>
+                              {link.label}
+                            </NavLink>
+                          </li>
+                        ))}
+                      </ul>
+                    </details>
+                  </li>
+                ) : (
+                  <li key={item.href}>
+                    <NavLink href={item.href} onClick={close}>
+                      {item.label}
+                    </NavLink>
+                  </li>
+                ),
+              )}
             </ul>
           </nav>
 

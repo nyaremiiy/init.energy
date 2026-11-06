@@ -5,7 +5,8 @@ import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/ui/logo";
 
-import { navItems, offices } from "./header-data";
+import { DesktopNav } from "./desktop-nav";
+import { offices } from "./header-data";
 import { MobileMenu } from "./mobile-menu";
 
 export function HeaderMainBar() {
@@ -21,17 +22,7 @@ export function HeaderMainBar() {
         <Logo className="h-8 w-auto lg:h-10" />
       </Link>
 
-      <nav aria-label="Головне меню" className="hidden lg:block">
-        <ul className="flex items-center gap-8 text-sm font-medium text-white/85">
-          {navItems.map((item) => (
-            <li key={item.href}>
-              <a href={item.href} className="transition-colors hover:text-white">
-                {item.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
+      <DesktopNav />
 
       <div className="flex items-center gap-3">
         <a
