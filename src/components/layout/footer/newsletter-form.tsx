@@ -7,6 +7,7 @@ import { subscribe } from "@/app/actions/newsletter";
 import { trackEvent } from "@/lib/analytics";
 import { messages } from "@/lib/messages";
 import { validateNewsletter } from "@/lib/newsletter";
+import { inputClasses } from "@/components/ui/input-styles";
 
 import { focusClasses } from "./footer-styles";
 
@@ -84,7 +85,11 @@ export function NewsletterForm() {
           aria-invalid={error ? true : undefined}
           aria-describedby="footer-newsletter-error footer-newsletter-note"
           onInput={() => setError(undefined)}
-          className={`h-14 w-full rounded-full border bg-white/6 pr-16 pl-6 text-base text-white placeholder:text-white/55 transition-colors duration-200 ease-tech hover:border-white/40 focus-visible:border-white focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-white/20 disabled:cursor-not-allowed disabled:opacity-70 ${error ? "border-white" : "border-white/16"}`}
+          className={inputClasses({
+            tone: "dark",
+            invalid: Boolean(error),
+            className: "pr-16",
+          })}
         />
         <button
           type="submit"
