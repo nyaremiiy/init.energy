@@ -68,12 +68,7 @@ export function Footer() {
         </ul>
       </nav>
 
-      <div
-        className="inline-flex rounded-full border border-white/22 p-1"
-        aria-label={t.languageLabel}
-      >
-        <LanguageSwitcher />
-      </div>
+      <LanguageSwitcher />
     </div>
   );
 
