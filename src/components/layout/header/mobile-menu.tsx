@@ -68,15 +68,33 @@ export function MobileMenu() {
                           className="size-6 transition-transform duration-200 group-open:rotate-180"
                         />
                       </summary>
-                      <ul className="mt-4 flex flex-col gap-3 border-l border-white/15 pl-4 text-base font-medium text-white/80">
-                        {item.items.map((link) => (
-                          <li key={link.href}>
-                            <NavLink href={link.href} onClick={close}>
-                              {link.label}
-                            </NavLink>
-                          </li>
+                      <div className="mt-5 flex flex-col gap-6 border-l border-white/15 pl-4">
+                        {item.columns.map((column) => (
+                          <div key={column.title} className="flex flex-col gap-3">
+                            <p className="text-xs font-medium tracking-[0.12em] text-white/50 uppercase">
+                              {column.title}
+                            </p>
+                            <ul className="flex flex-col gap-4">
+                              {column.items.map((link) => (
+                                <li key={link.href}>
+                                  <NavLink
+                                    href={link.href}
+                                    onClick={close}
+                                    className="flex flex-col gap-1"
+                                  >
+                                    <span className="text-base font-semibold">
+                                      {link.label}
+                                    </span>
+                                    <span className="text-xs font-normal text-white/55">
+                                      {link.description}
+                                    </span>
+                                  </NavLink>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
                         ))}
-                      </ul>
+                      </div>
                     </details>
                   </li>
                 ) : (

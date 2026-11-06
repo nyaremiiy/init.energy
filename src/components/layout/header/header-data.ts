@@ -13,15 +13,31 @@ export type NavLink = {
   label: string;
 };
 
+export type NavMenuLink = NavLink & {
+  description: string;
+};
+
+export type NavColumn = {
+  title: string;
+  items: NavMenuLink[];
+};
+
 export type NavGroup = {
   label: string;
-  items: NavLink[];
+  columns: NavColumn[];
+};
+
+export const navCta = {
+  title: "Не знаєте, що обрати?",
+  text: "Інженер INIT ENERGY підбере систему під ваше споживання та бюджет.",
+  href: "#contacts",
+  label: "Отримати розрахунок",
 };
 
 export type NavItem = NavLink | NavGroup;
 
 export function isNavGroup(item: NavItem): item is NavGroup {
-  return "items" in item;
+  return "columns" in item;
 }
 
 export type Language = {
@@ -82,21 +98,71 @@ export const socialLinks: SocialLink[] = [
 export const navItems: NavItem[] = [
   {
     label: "SVIT",
-    items: [
-      { href: "/svit-600/", label: "SVIT 600" },
-      { href: "/svit-plus-5000/", label: "SVIT PLUS 5000" },
-      { href: "/svit-plus-16000/", label: "SVIT PLUS 16000" },
-      { href: "/svit-home/", label: "SVIT HOME" },
-      { href: "/bess/", label: "LITHIUMVALLEY" },
+    columns: [
+      {
+        title: "Резервне живлення",
+        items: [
+          {
+            href: "/svit-home/",
+            label: "SVIT HOME",
+            description: "Гібридний інвертор 6 кВт і АКБ 5,12 кВт·год",
+          },
+          {
+            href: "/svit-600/",
+            label: "SVIT 600",
+            description: "Станція 600 Вт, LiFePO₄ 865 Вт·год",
+          },
+        ],
+      },
+      {
+        title: "Акумулятори",
+        items: [
+          {
+            href: "/svit-plus-5000/",
+            label: "SVIT PLUS 5000",
+            description: "LiFePO₄ 5,12 кВт·год, потужність 5 кВт",
+          },
+          {
+            href: "/svit-plus-16000/",
+            label: "SVIT PLUS 16000",
+            description: "LiFePO₄ 16,07 кВт·год для автономних систем",
+          },
+        ],
+      },
+      {
+        title: "Для бізнесу",
+        items: [
+          {
+            href: "/bess/",
+            label: "LITHIUMVALLEY",
+            description: "Промислове зберігання енергії від 208 до 1 044 кВт·год",
+          },
+        ],
+      },
     ],
   },
   {
     label: "Рішення",
-    items: [
-      { href: "/cec/", label: "СЕС під ключ" },
+    columns: [
       {
-        href: "/rishennya/ses-dlya-gotelyu/",
-        label: "СЕС для готелю та відпочинкового комплексу",
+        title: "Сонячні електростанції",
+        items: [
+          {
+            href: "/cec/",
+            label: "СЕС під ключ",
+            description: "Проєктування та монтаж для бізнесу й приватних об'єктів",
+          },
+        ],
+      },
+      {
+        title: "Галузеві рішення",
+        items: [
+          {
+            href: "/rishennya/ses-dlya-gotelyu/",
+            label: "СЕС для готелю та відпочинкового комплексу",
+            description: "Енергонезалежність для готелів і баз відпочинку",
+          },
+        ],
       },
     ],
   },
