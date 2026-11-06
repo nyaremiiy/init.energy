@@ -32,6 +32,8 @@ export type ProductImage = {
 
 export type Product = {
   id: ProductId;
+  /** SVIT = INIT ENERGY line; LITHIUMVALLEY = partner brand (INIT ENERGY is the official representative and installer). */
+  brand: "SVIT" | "LITHIUMVALLEY";
   name: string;
   href: string;
   /** Product type for the comparison table. */
@@ -55,6 +57,7 @@ export type Product = {
 export const productList: Product[] = [
   {
     id: "svit600",
+    brand: "SVIT",
     name: "SVIT 600",
     href: routes.products.svit600,
     type: "Портативна станція",
@@ -77,6 +80,7 @@ export const productList: Product[] = [
   },
   {
     id: "svitHome",
+    brand: "SVIT",
     name: "SVIT HOME",
     href: routes.products.svitHome,
     type: "Комплекс резервного живлення",
@@ -102,6 +106,7 @@ export const productList: Product[] = [
   },
   {
     id: "svitPlus5000",
+    brand: "SVIT",
     name: "SVIT PLUS 5000",
     href: routes.products.svitPlus5000,
     type: "Батарея",
@@ -124,6 +129,7 @@ export const productList: Product[] = [
   },
   {
     id: "svitPlus16000",
+    brand: "SVIT",
     name: "SVIT PLUS 16000",
     href: routes.products.svitPlus16000,
     type: "Батарея",
@@ -145,6 +151,7 @@ export const productList: Product[] = [
   },
   {
     id: "lithiumvalley",
+    brand: "LITHIUMVALLEY",
     name: "LITHIUMVALLEY",
     href: routes.products.lithiumvalley,
     type: "BESS",
