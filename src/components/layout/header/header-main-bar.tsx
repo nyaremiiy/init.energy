@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
+import { Logo } from "@/components/ui/logo";
 
 import { navItems, offices } from "./header-data";
 import { MobileMenu } from "./mobile-menu";
@@ -12,13 +13,12 @@ export function HeaderMainBar() {
 
   return (
     <Container className="flex h-20 items-center justify-between gap-6">
-      {/* TODO: replace text logo with the SVG logo. */}
       <Link
         href="/"
         aria-label="INIT ENERGY — головна"
-        className="relative z-50 text-lg font-bold tracking-wide text-white uppercase"
+        className="relative z-50 shrink-0 text-white"
       >
-        INIT ENERGY
+        <Logo className="h-10 w-auto lg:h-12" />
       </Link>
 
       <nav aria-label="Головне меню" className="hidden lg:block">
