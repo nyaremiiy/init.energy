@@ -17,7 +17,7 @@
 
 ## 2026-11-06 — Секція «Заявка на розрахунок»
 - **Агент:** Codex
-- **Гілка:** feature/lead-section (статус: готово до merge в develop)
+- **Гілка:** feature/lead-section (статус: змерджено в develop)
 - **Що зроблено:** останньою на головній додано світлу секцію заявки за макетом: кроки консультації, контакти з `company.ts` і responsive-форма в `surface`-картці. Додано нативну radio-групу, доступні поля й помилки, honeypot, спільну клієнтсько-серверну валідацію міжнародного телефону, Server Action із page URL та UTM/click-id полями, стани submitting/success. Перевірено 1440/360 px і повний keyboard flow.
 - **Файли:** src/components/sections/LeadSection.tsx, src/components/forms/LeadForm.tsx, src/app/actions/lead.ts, src/lib/lead-form-schema.ts, src/content/{company,routes}.ts, src/components/layout/container.tsx, src/components/layout/header/header-data.ts, src/app/page.tsx, messages/{uk,en}.json, design-qa.md, docs/ai/*
 - **Нотатки / що далі:** TODO(integration): передати валідовану заявку в CRM; TODO(content): створити сторінку політики конфіденційності за вже доданим URL.
