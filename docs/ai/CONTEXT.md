@@ -19,6 +19,7 @@ public/         # статичні файли
 docs/ai/        # спільний контекст для AI-агентів (цей файл + CHANGELOG)
 AGENTS.md       # правила для всіх агентів (Codex)
 CLAUDE.md       # точка входу для Claude Code (імпортує AGENTS.md)
+.claude/        # спільні налаштування Claude Code (settings.json: маркетплейси й плагіни)
 ```
 
 ## Гілки
@@ -31,6 +32,7 @@ CLAUDE.md       # точка входу для Claude Code (імпортує AGE
 
 - Агенти: Claude Code і Codex, синхронізуються через `AGENTS.md` + `docs/ai/`.
 - Remote на GitHub поки не підключений, нічого не пушимо.
+- Плагіни Claude Code для SEO/GEO/маркетингу підключені на рівні репо через .claude/settings.json: searchfit-seo (основний), marketing (Anthropic knowledge-work), rampstack-seo. Плагіни з платними MCP вмикати лише з підтвердження власника.
 
 ## Відкриті питання / TODO
 

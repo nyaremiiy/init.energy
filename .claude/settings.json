@@ -1,0 +1,18 @@
+{
+  "extraKnownMarketplaces": {
+    "searchfit-seo": {
+      "source": { "source": "github", "repo": "searchfit/searchfit-seo" }
+    },
+    "knowledge-work-plugins": {
+      "source": { "source": "github", "repo": "anthropics/knowledge-work-plugins" }
+    },
+    "rampstack": {
+      "source": { "source": "github", "repo": "rampstackco/plugins" }
+    }
+  },
+  "enabledPlugins": {
+    "searchfit-seo@searchfit-seo": true,
+    "marketing@knowledge-work-plugins": true,
+    "rampstack-seo@rampstack": true
+  }
+}
