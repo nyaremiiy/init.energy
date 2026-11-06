@@ -15,6 +15,12 @@
 
 ---
 
+## 2026-11-06 — 10 px від краю екрана на мобільному скрізь
+- **Агент:** Claude Code
+- **Гілка:** fix/mobile-gutter-everywhere (статус: змерджено в develop)
+- **Що зроблено:** на мобільному власні відступи від краю приведено до 10 px: футер (16 → 10 px, також знизу), темна панель блоку довіри (8 → 10 px), мобільне меню (20 → 10 px). З `sm` — як було. Перевірено на 360 px: усі контейнери й панелі на 10 px від краю, переповнення немає.
+- **Файли:** src/components/layout/footer/footer.tsx, src/components/sections/trust-block.tsx, src/components/layout/header/mobile-menu.tsx, docs/ai/*
+
 ## 2026-11-06 — Єдиний стиль полів вводу
 - **Агент:** Claude Code
 - **Гілка:** fix/unified-inputs (статус: змерджено в develop)
