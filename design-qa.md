@@ -1,26 +1,34 @@
-# Design QA — секція «Реалізовані проєкти»
+# Design QA — секція «Заявка на розрахунок»
 
-- **Source visual truth:** `C:\Users\nyare\Pictures\Screenshots\Screenshot 2026-11-06 121958.png`
-- **Implementation evidence:** `output/playwright/projects-desktop-section.png`, `output/playwright/projects-mobile-section.png`
-- **Viewports:** desktop 1440 × 1000 CSS px; mobile 360 × 800 CSS px; device scale factor 1.
-- **State:** початкова активна пігулка «Усі»; три featured записи; медіа навмисно замінено заглушками на вимогу власника.
+- **Source visual truth:** `C:\Users\nyare\Pictures\Screenshots\Screenshot 2026-11-06 124539.png` (1080 × 730 px).
+- **Implementation evidence:** `output/playwright/lead-desktop.png` (1440 × 1000 CSS px) and `output/playwright/lead-mobile.png` (360 × 800 CSS px).
+- **Density:** device scale factor 1; comparison focused on the section region because the source includes an editorial presentation frame while the implementation includes the live sticky header.
+- **State:** empty form for visual comparison; keyboard test additionally covered validation and success states.
 
 ## Findings
 
-- Очікуване відхилення: реальні фотографії у референсі замінено на темні `MediaPlaceholder`. Це не є дефектом QA, бо це пряма вимога задачі; `TODO(content)` у `src/content/projects.ts` перелічує дані, які треба замінити перед публікацією.
-- P1/P2-відхилень не знайдено: на 1440 px велика картка займає 7 із 12 колонок і дві строки, дві малі — 5 колонок; на 360 px картки розташовані в одну колонку з висотою 420 px.
+- No actionable P0/P1/P2 differences remain. The implementation preserves the reference composition: light section, equal columns, left process list, `surface` form card, pill radio group, white fields and one dark submit button.
+- Expected project-system adaptation: exact screenshot colors and radii are mapped to existing `ink`, `surface`, `line`, `rounded-xl`, `rounded-3xl` and `rounded-full` utilities; no new visual token was added.
 
 ## Fidelity surfaces
 
-- **Typography:** Montserrat для H2/H3 та лейблів, Inter для метаданих; заголовки не обрізаються на перевірених розмірах.
-- **Spacing and layout:** повторно використано контейнер, відступи секцій і радіус `rounded-3xl`; gap сітки — 16 px.
-- **Colors and contrast:** світла секція, активний фільтр `ink`; текст карток білий поверх затемнення `ink`, що забезпечує контраст.
-- **Image quality:** фото відсутні за вимогою; компонент уже підтримує `next/image` з `fill`, `object-cover` і змістовним alt після додавання даних.
-- **Copy and interaction:** усі UI-тексти з `messages/uk.json`; фільтри — звичайні посилання, обладнання веде на сторінку продукту, картки мають видимі focus-стани та reduced-motion hover.
+- **Typography:** Montserrat heading/labels and Inter body copy follow the project system; H2 wraps to two lines at desktop and scales down on mobile.
+- **Spacing and layout:** 1240 px content container, 64 px desktop grid gap, 40 px mobile stack gap, 120/88 px section padding and 24/40 px card padding verified.
+- **Colors and surfaces:** white section, `surface` card, `line` dividers, `ink` active/submit states; no shadow, photo, gradient, blur or translucent glass styles.
+- **Images:** the reference contains no section imagery, so no raster assets are required.
+- **Copy and content:** Ukrainian copy matches the brief; English equivalents exist in `messages/en.json`.
+- **Accessibility and interactions:** semantic section, H2, ordered list, fieldset/legend, native radios, visible labels, `aria-invalid`/`aria-describedby`, honeypot, checkbox and live success status.
+
+## Interaction evidence
+
+- ArrowRight moved selection from «Квартира» to «Будинок».
+- Tab reached each field; Space checked consent; Enter submitted the form.
+- Client and Server Action validation ran; valid submission rendered the success state.
+- Browser console after the completed flow: 0 errors, 0 warnings.
 
 ## Comparison history
 
-1. У першому mobile-capture підпис заглушки перетинався з текстом картки. Виправлено: текст заглушки прибрано з видимої області, а `TODO(content)` лишено в data layer. Повторний mobile-capture не має перетину.
+- First keyboard script missed the visually hidden radio because the automation clicked the input rather than its label. The product UI was unchanged; the corrected label-focus run confirmed native arrow-key behavior and the complete submit flow.
 
 ## Final result
 

@@ -7,6 +7,8 @@ export const slugs = {
   about: "pro-nas",
   // TODO(content): projects archive and individual case pages are planned.
   projects: "proekty",
+  // TODO(content): privacy policy page is planned, not built yet.
+  privacy: "polityka-konfidentsiinosti",
   products: {
     svit600: "svit-600",
     svitPlus5000: "svit-plus-5000",
@@ -44,6 +46,7 @@ export const routes = {
   catalog: toPath(slugs.catalog),
   about: toPath(slugs.about),
   projects: toPath(slugs.projects),
+  privacy: toPath(slugs.privacy),
   products: {
     svit600: toPath(slugs.products.svit600),
     svitPlus5000: toPath(slugs.products.svitPlus5000),

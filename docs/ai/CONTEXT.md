@@ -12,6 +12,7 @@ init.energy — вебпроєкт. Призначення та функціон
 - Header поверх hero з двох смуг: контакти/мови зверху (lg+), логотип/меню/CTA знизу; на мобільних — бургер-меню.
 - Реалізовано responsive hero-секцію з локальними AVIF/WebP-зображеннями.
 - На головній після блоку довіри є секція «Реалізовані проєкти»: дані з `src/content/projects.ts`, повторно використовувана `ProjectCard`, фільтри-посилання на запланований `/proekty/` та перелінковка на обладнання зі `products.ts`.
+- Остання секція головної — «Заявка на розрахунок»: Server Component `LeadSection`, клієнтський `LeadForm`, спільна клієнтсько-серверна схема валідації та Server Action із honeypot і логуванням tracking-полів; CRM ще не підключена.
 - Hero містить модульний автоматичний слайдер контенту на Motion із переходом від правого краю viewport ліворуч і overlay crossfade медіа-шаром.
 - Медіа hero тримає максимум два різні фото лише під час crossfade та використовує responsive AVIF-зображення.
 
@@ -24,8 +25,10 @@ src/components/layout/header/ # header: дані (header-data.ts), верхня 
 src/components/ui/ # повторно використовувані UI-компоненти
 src/components/sections/home/ # секції головної сторінки
 src/components/sections/      # секції для кількох сторінок (trust-block.tsx — дані через пропси)
+src/components/forms/         # інтерактивні форми (LeadForm)
 src/content/    # дані сайту: products.ts (productList), projects.ts (projectList), services.ts, company.ts (trust), routes.ts (slug-и, якорі), solutions.ts
-src/lib/        # утиліти (messages.ts — тимчасовий завантажувач текстів UI)
+src/lib/        # утиліти й спільні схеми валідації (lead-form-schema.ts)
+src/app/actions/ # Server Actions форм
 messages/       # тексти інтерфейсу (uk.json; en.json — з появою i18n)
 public/         # статичні файли
 public/images/  # зображення сайту
@@ -52,6 +55,7 @@ CLAUDE.md       # точка входу для Claude Code (імпортує AGE
 /bess/                            LITHIUMVALLEY
 /svit/                            каталог усіх накопичувачів SVIT (заплановано власником 2026-11-06, ще не створено)
 /pro-nas/                         про компанію (заплановано власником 2026-11-06, ще не створено)
+/polityka-konfidentsiinosti/      політика конфіденційності (заплановано, ще не створено)
 /en/...                           англійські дзеркала всіх сторінок (з появою i18n)
 ```
 
