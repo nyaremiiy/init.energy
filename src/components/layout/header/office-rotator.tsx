@@ -4,6 +4,8 @@ import { MapPin, Phone } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useState } from "react";
 
+import { formatPhone } from "@/lib/format";
+
 import { offices, officeRotationInterval } from "./header-data";
 
 export function OfficeRotator() {
@@ -53,7 +55,7 @@ export function OfficeRotator() {
             className="inline-flex items-center gap-2 transition-colors hover:text-white"
           >
             <Phone aria-hidden className="size-3.5 shrink-0" />
-            {office.phone.display}
+            {formatPhone(office.phone.display)}
           </a>
         </motion.address>
       </AnimatePresence>

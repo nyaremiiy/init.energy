@@ -3,6 +3,8 @@
 import { ChevronDown, Mail, MapPin, Menu, Phone, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
+import { formatPhone } from "@/lib/format";
+
 import { contactEmail, isNavGroup, navItems, offices } from "./header-data";
 import { LanguageSwitcher } from "./language-switcher";
 import { NavLink } from "./nav-link";
@@ -120,7 +122,7 @@ export function MobileMenu() {
                   className="inline-flex items-center gap-2 hover:text-white"
                 >
                   <Phone aria-hidden className="size-4 shrink-0" />
-                  {office.phone.display}
+                  {formatPhone(office.phone.display)}
                 </a>
               </address>
             ))}
