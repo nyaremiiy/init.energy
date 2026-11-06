@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Heading } from "./heading";
 import { Label } from "./label";
 
-type SegmentCardTone = "light" | "mid" | "dark";
+type SegmentCardTone = "light" | "dark";
 
 type SegmentCardProps = {
   index: string;
@@ -35,24 +35,16 @@ const toneClasses: Record<
     index: "text-ink",
     text: "text-ink",
     muted: "text-ink/70",
-    productRow: "bg-white",
+    productRow: "border border-line bg-white",
     link: "border-line focus-visible:outline-ink",
-  },
-  mid: {
-    card: "bg-ink-mid text-white",
-    index: "text-white",
-    text: "text-white",
-    muted: "text-white/75",
-    productRow: "bg-white/10",
-    link: "border-white/20 focus-visible:outline-white",
   },
   dark: {
     card: "bg-ink text-white",
     index: "text-white",
     text: "text-white",
     muted: "text-white/75",
-    productRow: "bg-white/10",
-    link: "border-white/20 focus-visible:outline-white",
+    productRow: "bg-white/6 text-white",
+    link: "border-white/16 focus-visible:outline-white",
   },
 };
 
@@ -72,7 +64,7 @@ export function SegmentCard({
 
   return (
     <article
-      className={`flex h-full flex-col gap-6 rounded-3xl p-6 shadow-card transition duration-300 hover:shadow-card-hover motion-safe:hover:-translate-y-0.5 lg:p-8 ${classes.card}`}
+      className={`flex h-full flex-col gap-6 rounded-3xl p-6 transition duration-300 motion-safe:hover:-translate-y-0.5 lg:p-8 ${classes.card}`}
     >
       <div className="flex items-start justify-between gap-4">
         <span

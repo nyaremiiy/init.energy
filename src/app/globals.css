@@ -7,19 +7,12 @@
 
   /* Brand ink: the same navy used by the hero overlay. */
   --color-ink: rgb(0 2 23);
-  /* Mid step between the light surface and ink (same navy hue). */
-  --color-ink-mid: rgb(46 52 84);
   /* Light section background. */
   --color-surface: rgb(244 246 250);
   /* Hairlines and dividers on light surfaces. */
   --color-line: rgb(0 2 23 / 12%);
   /* Soft blue for hub link strips. */
-  --color-sky: rgb(228 238 251);
-
-  /* Soft ink-tinted shadows for cards (same hue as the hero shadow). */
-  --shadow-card: 0 1px 2px rgb(0 2 23 / 4%), 0 8px 24px rgb(0 2 23 / 6%);
-  --shadow-card-hover: 0 2px 4px rgb(0 2 23 / 6%), 0 18px 40px rgb(0 2 23 / 12%);
-}
+  --color-sky: rgb(228 238 251);}
 
 body {
   margin: 0;

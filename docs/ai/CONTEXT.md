@@ -54,7 +54,7 @@ CLAUDE.md       # точка входу для Claude Code (імпортує AGE
 - Шрифти через `next/font/google` і токени `@theme`: основний текст — Inter (`font-sans`), заголовки (`Heading`) і лейбли (`Label`) — Montserrat (`font-heading`). `Heading` має проп `weight` (`semibold` за замовчуванням, `medium`).
 - Контакти офісів, email, пункти меню й мови зберігаються в src/components/layout/header/header-data.ts — єдине джерело для header (і надалі для footer/JSON-LD).
 - Меню header містить лише SVIT і «Рішення» (мега-меню з URL поточного init.energy). Пункти на секції головної (Про нас, Проєкти, Контакти тощо) додаються в `navItems` (`header-data.ts`) лише тоді, коли відповідна секція створена.
-- Кольори задаються токенами `@theme` у globals.css: `ink` (rgb(0 2 23), як overlay hero), `ink-mid` (проміжний темно-синій), `surface` (світлий фон секцій), `line` (лінії), `sky` (смуги-посилання); тіні `shadow-card` і `shadow-card-hover` (у тон `ink`). Нові кольори й тіні — лише через токени.
+- Кольори задаються токенами `@theme` у globals.css: `ink` (rgb(0 2 23), як overlay hero), `surface` (світлий фон секцій), `line` (лінії), `sky` (смуги-посилання). Нові кольори — лише через токени. Картки й смуги розділяються лише фоном, без тіней і рамок; картки бувають тільки світлі (`surface`) або темні (`ink`).
 - `Label` і `Description` мають проп `tone` (`onDark` за замовчуванням, `onLight` для світлих секцій).
 - Дані (продукти, slug-и, рішення) — у `src/content/`, URL будуються через `routes`/`toPath`, не хардкодяться в JSX. Тексти UI — у `messages/`.
 - Секції після hero світлі (`bg-surface`) і заходять під заокруглений низ hero (`-mt-12`).
