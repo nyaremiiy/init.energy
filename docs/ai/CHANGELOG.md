@@ -15,6 +15,12 @@
 
 ---
 
+## 2026-11-06 — Якісніше фото й плавніший градієнт блоку довіри
+- **Агент:** Claude Code
+- **Гілка:** fix/trust-photo (статус: змерджено в develop)
+- **Що зроблено:** замінено `public/images/home/solar.avif` (6016×4016), оновлено розміри в `company.ts`; градієнт над фото — `h-3/5`, `from-ink via-ink/40 via-35% to-transparent` замість `h-1/3 from-ink to-transparent`.
+- **Файли:** public/images/home/solar.avif, src/content/company.ts, src/components/sections/trust-block.tsx, docs/ai/CHANGELOG.md
+
 ## 2026-11-06 — Перевірені тексти про компанію та фото блоку довіри
 - **Агент:** Claude Code
 - **Гілка:** feature/trust-content (статус: змерджено в develop)
