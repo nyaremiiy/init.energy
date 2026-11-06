@@ -22,6 +22,9 @@ src/components/layout/ # повторно використовувані layout-
 src/components/layout/header/ # header: дані (header-data.ts), верхня й основна смуги, мобільне меню
 src/components/ui/ # повторно використовувані UI-компоненти
 src/components/sections/home/ # секції головної сторінки
+src/content/    # дані сайту: products.ts, routes.ts (slug-и та шляхи), solutions.ts
+src/lib/        # утиліти (messages.ts — тимчасовий завантажувач текстів UI)
+messages/       # тексти інтерфейсу (uk.json; en.json — з появою i18n)
 public/         # статичні файли
 public/images/  # зображення сайту
 public/images/home/hero/ # responsive-зображення hero головної сторінки
@@ -51,6 +54,10 @@ CLAUDE.md       # точка входу для Claude Code (імпортує AGE
 - Базовий шрифт сайту — Montserrat, підключений через `next/font/google`.
 - Контакти офісів, email, пункти меню й мови зберігаються в src/components/layout/header/header-data.ts — єдине джерело для header (і надалі для footer/JSON-LD).
 - Меню header містить лише SVIT і «Рішення» (мега-меню з URL поточного init.energy). Пункти на секції головної (Про нас, Проєкти, Контакти тощо) додаються в `navItems` (`header-data.ts`) лише тоді, коли відповідна секція створена.
+- Кольори задаються токенами `@theme` у globals.css: `ink` (rgb(0 2 23), як overlay hero), `surface` (світлий фон секцій), `line` (лінії), `sky` (смуги-посилання). Нові кольори — лише через токени.
+- `Label` і `Description` мають проп `tone` (`onDark` за замовчуванням, `onLight` для світлих секцій).
+- Дані (продукти, slug-и, рішення) — у `src/content/`, URL будуються через `routes`/`toPath`, не хардкодяться в JSX. Тексти UI — у `messages/`.
+- Секції після hero світлі (`bg-surface`) і заходять під заокруглений низ hero (`-mt-12`).
 - Кожна секція головної сторінки є окремим модулем у `src/components/sections/home/`.
 - Контентні варіанти hero та їхні зображення зберігаються в `hero-slides.ts`; анімація розділена між `hero-content-slider.tsx`, `hero-media-slider.tsx` і `hero-slider.tsx`.
 - Hero-заголовки зберігаються двома лініями в даних слайда для послідовної дворядкової композиції.
