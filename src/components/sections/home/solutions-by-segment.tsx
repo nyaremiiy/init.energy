@@ -7,7 +7,7 @@ import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
 import { SegmentCard } from "@/components/ui/segment-card";
 import { TextLink } from "@/components/ui/text-link";
-import { routes } from "@/content/routes";
+import { anchors, routes } from "@/content/routes";
 import { getSolutionLinks, solutions } from "@/content/solutions";
 import { format, messages } from "@/lib/messages";
 
@@ -18,8 +18,9 @@ export function SolutionsBySegment() {
 
   return (
     <section
+      id={anchors.solutions}
       aria-labelledby={titleId}
-      className="bg-white pt-section-sm lg:pt-section"
+      className="scroll-mt-24 bg-white pt-section-sm lg:pt-section"
     >
       <Container className="flex flex-col gap-section-head">
         <Reveal>

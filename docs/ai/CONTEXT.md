@@ -22,6 +22,7 @@ init.energy — вебпроєкт. Призначення та функціон
 src/app/        # App Router: layout.tsx, page.tsx, globals.css
 src/components/layout/ # повторно використовувані layout-компоненти
 src/components/layout/header/ # header: дані (header-data.ts), верхня й основна смуги, мобільне меню
+src/components/layout/footer/ # футер: footer.tsx (Server), footer-columns.tsx (client, pageNav за pathname), newsletter-form.tsx, footer-mark.tsx
 src/components/ui/ # повторно використовувані UI-компоненти
 src/components/sections/home/ # секції головної сторінки
 src/components/sections/      # секції для кількох сторінок (trust-block.tsx — дані через пропси)
@@ -84,6 +85,8 @@ CLAUDE.md       # точка входу для Claude Code (імпортує AGE
 - **Переходи фото → темний фон:** клас `.fade-from-ink` (eased-градієнт у globals.css), не лінійний `bg-linear-to-*` з 2–3 точками.
 - **Числа й телефони:** числа лише через `formatQuantity`/`formatNumber`, українські телефони для показу — через `formatPhone` (`src/lib/format.ts`); у `tel:` зберігається E.164. Одиниці — у `messages`.
 - **Форми:** поля `rounded-field` (14 px), `h-14`, рамка `line` → hover `ink/40` → focus-visible рамка `ink` + м'яке кільце `ring-3 ring-ink/10` (без outline з відступом); помилка — рамка `ink`, `aria-invalid`, `aria-describedby` на завжди присутній `<p>` з `min-h-4 text-caption` впритул під полем (без стрибків верстки); помилка поля зникає при редагуванні, після валідації фокус на першому полі з помилкою; `autocomplete="off"` (без історії введених значень); під час надсилання — `fieldset disabled`; переходи 150–200 ms `ease-tech`, transform лише з `motion-safe:`.
+- **Футер:** спільний у . Колонка «На цій сторінці» береться з  у  — додавай туди якорі нової сторінки (секціям — uid=197611(nyare) gid=197611 groups=197611 з  і ); немає запису — колонки немає. «Розділи сайту» —  (лише сторінки зі структури сайту).
+- **Аналітика:** події лише через  (), який нічого не надсилає без згоди на cookie (); банера згоди ще немає.
 - **Контраст:** текст ≥ 4.5:1 на всіх фонах.
 
 

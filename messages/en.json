@@ -45,5 +45,46 @@
         "consent": "You must agree to the privacy policy."
       }
     }
+  },
+  "footer": {
+    "description": "We design, supply and install solar power plants and backup power systems for businesses, homes and apartments.",
+    "socialLabel": "INIT ENERGY on {network}",
+    "socialNavLabel": "Social media",
+    "languageLabel": "Site language",
+    "logoLabel": "INIT ENERGY — home",
+    "pageNavTitle": "On this page",
+    "sectionsTitle": "Site sections",
+    "links": {
+      "solutions": "Solutions by property type",
+      "products": "SVIT batteries",
+      "aboutUs": "About the company",
+      "projects": "Completed projects",
+      "consultation": "Consultation",
+      "turnkeySes": "Solar power plants",
+      "svitCatalog": "SVIT products",
+      "about": "About us",
+      "contacts": "Contacts"
+    },
+    "newsletter": {
+      "title": "Newsletter",
+      "text": "New projects, knowledge base articles and SVIT line-up updates.",
+      "emailLabel": "Email",
+      "emailPlaceholder": "Your email",
+      "submit": "Subscribe",
+      "submitting": "Sending…",
+      "note": "By subscribing you agree to the privacy policy. You can unsubscribe at any time.",
+      "success": "Thank you! You are subscribed.",
+      "failure": "Could not subscribe. Please try again later.",
+      "errors": {
+        "email": "Enter a valid email address."
+      }
+    },
+    "copyright": "Copyright © {year} INIT ENERGY | All rights reserved",
+    "legalNavLabel": "Legal information",
+    "legal": {
+      "privacy": "Privacy Policy",
+      "cookies": "Cookie Policy",
+      "terms": "Terms of Service"
+    }
   }
 }
