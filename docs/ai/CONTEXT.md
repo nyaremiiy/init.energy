@@ -48,6 +48,7 @@ CLAUDE.md       # точка входу для Claude Code (імпортує AGE
 /svit-plus-16000/                 SVIT PLUS 16000
 /svit-home/                       SVIT HOME
 /bess/                            LITHIUMVALLEY
+/svit/                            каталог усіх накопичувачів SVIT (заплановано власником 2026-11-06, ще не створено)
 /en/...                           англійські дзеркала всіх сторінок (з появою i18n)
 ```
 

@@ -1,6 +1,8 @@
 // Single source of URL slugs. Build paths with `toPath`, never hardcode them in JSX.
 // Page structure mirrors https://init.energy (see docs/ai/CONTEXT.md).
 export const slugs = {
+  // TODO(content): catalog page with all SVIT products — planned, not built yet.
+  catalog: "svit",
   products: {
     svit600: "svit-600",
     svitPlus5000: "svit-plus-5000",
@@ -35,6 +37,7 @@ export function toAnchor(anchor: string): string {
 
 export const routes = {
   home: toPath(),
+  catalog: toPath(slugs.catalog),
   products: {
     svit600: toPath(slugs.products.svit600),
     svitPlus5000: toPath(slugs.products.svitPlus5000),

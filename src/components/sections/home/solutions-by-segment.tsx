@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
 import { SegmentCard } from "@/components/ui/segment-card";
+import { TextLink } from "@/components/ui/text-link";
 import { routes } from "@/content/routes";
 import {
   getSolutionLinks,
@@ -36,16 +37,9 @@ export function SolutionsBySegment() {
             titleId={titleId}
             lead={t.lead}
             aside={
-              <Link
-                href={routes.sections.contacts}
-                className="group inline-flex items-center gap-2 font-semibold text-ink underline decoration-ink/30 underline-offset-4 transition-colors hover:decoration-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
-              >
+              <TextLink href={routes.sections.contacts}>
                 {t.calculatorLink}
-                <ArrowUpRight
-                  aria-hidden
-                  className="size-4 transition-transform duration-200 motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5"
-                />
-              </Link>
+              </TextLink>
             }
           />
         </Reveal>

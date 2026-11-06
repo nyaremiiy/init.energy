@@ -4,8 +4,9 @@ import { ProductCarousel } from "@/components/ui/product-carousel";
 import { ProductCompareTable } from "@/components/ui/product-compare-table";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
+import { TextLink } from "@/components/ui/text-link";
 import { productList } from "@/content/products";
-import { anchors } from "@/content/routes";
+import { anchors, routes } from "@/content/routes";
 import { formatQuantity } from "@/lib/format";
 import { format, messages } from "@/lib/messages";
 
@@ -23,12 +24,12 @@ export function ProductLine() {
     >
       <Container className="flex flex-col gap-10 lg:gap-14">
         <Reveal>
-          {/* TODO(content): "Усі накопичувачі SVIT" link needs a /svit/ page, which is not in the site structure. */}
           <SectionHeader
             eyebrow={t.eyebrow}
             title={t.title}
             titleId={titleId}
             lead={t.lead}
+            aside={<TextLink href={routes.catalog}>{t.catalogLink}</TextLink>}
           />
         </Reveal>
 
