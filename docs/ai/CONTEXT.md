@@ -67,6 +67,7 @@ CLAUDE.md       # точка входу для Claude Code (імпортує AGE
 - **Смуги-посилання:** `bg-sky`, `rounded-3xl`, стрілка в круглій кнопці `size-12` (як іконки в header), при hover заливається `ink`.
 - **Рух:** hover — легкий підйом `-translate-y-0.5` і зсув стрілки; поява при скролі через `Reveal` зі stagger; усе з `motion-safe` / prefers-reduced-motion.
 - **Продуктові картки:** `ProductCard` — медіа 4/3 (`MediaPlaceholder`, поки немає фото), лейбл сегмента, H3 + опис, кругла контурна кнопка `size-12`, `<dl>` характеристик з лініями `line` (на темному `white/16`) притиснутий до низу. Hover картки — `-translate-y-1`.
+- **Слайдери:** `ProductCarousel` — scroll-snap (свайп на мобільному) + круглі стрілки `size-12` праворуч над треком; 1/2/3 картки на mobile/md/lg; на lg третя видима картка завжди темна (`ink`), решта світлі; scrollbar прихований класом `.scrollbar-none`.
 - **Таблиці:** лише горизонтальні лінії `line`, без фону; на мобільному — `overflow-x-auto` з `relative` (щоб sr-only не розширював сторінку).
 - **Числа:** лише через `formatQuantity`/`formatNumber` (`src/lib/format.ts`), одиниці — у `messages`.
 - **Контраст:** текст ≥ 4.5:1 на всіх фонах.

@@ -1,6 +1,6 @@
 import { Container } from "@/components/layout/container";
 import { Heading } from "@/components/ui/heading";
-import { ProductCard } from "@/components/ui/product-card";
+import { ProductCarousel } from "@/components/ui/product-carousel";
 import { ProductCompareTable } from "@/components/ui/product-compare-table";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
@@ -14,7 +14,6 @@ const compareTitleId = "product-line-compare-title";
 
 export function ProductLine() {
   const t = messages.productLine;
-  const featured = productList.filter((product) => product.featured);
 
   return (
     <section
@@ -33,30 +32,32 @@ export function ProductLine() {
           />
         </Reveal>
 
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {featured.map((product, index) => (
-            <Reveal key={product.id} delay={index * 0.12} className="h-full">
-              <ProductCard
-                name={product.name}
-                href={product.href}
-                segment={product.featured!.segment}
-                description={product.description}
-                specs={product.specs.map((spec) => ({
-                  label: messages.specs[spec.key],
-                  value:
-                    typeof spec.value === "string"
-                      ? spec.value
-                      : formatQuantity(spec.value),
-                }))}
-                image={product.image}
-                linkLabel={format(t.productLink, { name: product.name })}
-                specsLabel={format(t.specsLabel, { name: product.name })}
-                photoPendingCaption={`${product.name} — ${t.photoPending}`}
-                tone={product.featured!.tone}
-              />
-            </Reveal>
-          ))}
-        </div>
+        <Reveal className="min-w-0">
+          <ProductCarousel
+            label={t.carouselLabel}
+            prevLabel={t.prev}
+            nextLabel={t.next}
+            slideLabel={t.slideLabel}
+            items={productList.map((product) => ({
+              id: product.id,
+              name: product.name,
+              href: product.href,
+              segment: product.segment,
+              description: product.description,
+              specs: product.specs.map((spec) => ({
+                label: messages.specs[spec.key],
+                value:
+                  typeof spec.value === "string"
+                    ? spec.value
+                    : formatQuantity(spec.value),
+              })),
+              image: product.image,
+              linkLabel: format(t.productLink, { name: product.name }),
+              specsLabel: format(t.specsLabel, { name: product.name }),
+              photoPendingCaption: `${product.name} — ${t.photoPending}`,
+            }))}
+          />
+        </Reveal>
 
         <Reveal className="mt-8 flex min-w-0 flex-col gap-6 lg:mt-4">
           <Heading

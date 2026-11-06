@@ -44,8 +44,8 @@ export type Product = {
   capacity: Quantity;
   /** Rows of the product card spec list. */
   specs: ProductSpec[];
-  /** Featured in the product line cards. */
-  featured?: { segment: string; tone: "light" | "dark" };
+  /** Segment label shown on the product card. */
+  segment: string;
   image?: ProductImage;
 };
 
@@ -64,7 +64,7 @@ export const productList: Product[] = [
       { key: "power", value: { value: 600, unit: "W" } },
       { key: "chemistry", value: "LiFePO₄" },
     ],
-    featured: { segment: "Квартира", tone: "light" },
+    segment: "Квартира",
     // TODO(content): фото
   },
   {
@@ -83,7 +83,7 @@ export const productList: Product[] = [
         value: { value: 6000, unit: "cycles", qualifier: "plus" },
       },
     ],
-    featured: { segment: "Приватний будинок", tone: "light" },
+    segment: "Приватний будинок",
     // TODO(content): фото
   },
   {
@@ -93,6 +93,7 @@ export const productList: Product[] = [
     type: "Батарея",
     // Source: /svit-plus-5000/ — «Підходить як для дому, так і для бізнесу».
     audience: "Дім і бізнес",
+    segment: "Дім і бізнес",
     description: "Акумуляторна батарея LiFePO₄",
     capacity: { value: 5.12, unit: "kWh" },
     specs: [
@@ -109,6 +110,7 @@ export const productList: Product[] = [
     type: "Батарея",
     // Source: /svit-plus-16000/ names use cases, not an audience.
     audience: "Сонячні станції та автономні системи",
+    segment: "Автономні системи",
     description: "Акумуляторна батарея LiFePO₄ для автономних систем",
     capacity: { value: 16.07, unit: "kWh" },
     specs: [
@@ -130,7 +132,7 @@ export const productList: Product[] = [
       { key: "maxCapacity", value: { value: 1044, unit: "kWh" } },
       { key: "type", value: "BESS" },
     ],
-    featured: { segment: "Бізнес", tone: "dark" },
+    segment: "Бізнес",
     // TODO(content): фото
   },
 ];

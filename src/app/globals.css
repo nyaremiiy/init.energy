@@ -78,6 +78,15 @@ body {
   }
 }
 
+/* Hide the scrollbar of swipeable carousels (arrows and swipe stay available). */
+.scrollbar-none {
+  scrollbar-width: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;

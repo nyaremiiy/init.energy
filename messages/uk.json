@@ -35,6 +35,10 @@
       "link": "Посилання"
     },
     "more": "Детальніше",
+    "carouselLabel": "Лінійка накопичувачів SVIT",
+    "prev": "Попередній продукт",
+    "next": "Наступний продукт",
+    "slideLabel": "{current} з {total}",
     "notStated": "—"
   },
   "specs": {
