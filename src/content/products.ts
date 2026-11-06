@@ -91,7 +91,8 @@ export const productList: Product[] = [
     name: "SVIT PLUS 5000",
     href: routes.products.svitPlus5000,
     type: "Батарея",
-    // TODO(content): audience is not stated on init.energy.
+    // Source: /svit-plus-5000/ — «Підходить як для дому, так і для бізнесу».
+    audience: "Дім і бізнес",
     description: "Акумуляторна батарея LiFePO₄",
     capacity: { value: 5.12, unit: "kWh" },
     specs: [
@@ -106,7 +107,8 @@ export const productList: Product[] = [
     name: "SVIT PLUS 16000",
     href: routes.products.svitPlus16000,
     type: "Батарея",
-    // TODO(content): audience is not stated on init.energy.
+    // Source: /svit-plus-16000/ names use cases, not an audience.
+    audience: "Сонячні станції та автономні системи",
     description: "Акумуляторна батарея LiFePO₄ для автономних систем",
     capacity: { value: 16.07, unit: "kWh" },
     specs: [
