@@ -5,6 +5,7 @@ import { Container } from "@/components/layout/container";
 import { contactEmail } from "./header-data";
 import { LanguageSwitcher } from "./language-switcher";
 import { OfficeRotator } from "./office-rotator";
+import { SocialLinks } from "./social-links";
 
 export function HeaderTopBar() {
   return (
@@ -19,6 +20,7 @@ export function HeaderTopBar() {
             <Mail aria-hidden className="size-3.5 shrink-0" />
             {contactEmail}
           </a>
+          <SocialLinks />
           <LanguageSwitcher />
         </div>
       </Container>

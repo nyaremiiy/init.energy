@@ -36,6 +36,37 @@ export const offices: Office[] = [
 
 export const contactEmail = "initenergy@gmail.com";
 
+export type SocialNetwork = "facebook" | "instagram" | "linkedin" | "tiktok";
+
+export type SocialLink = {
+  network: SocialNetwork;
+  label: string;
+  href: string;
+};
+
+export const socialLinks: SocialLink[] = [
+  {
+    network: "facebook",
+    label: "Facebook",
+    href: "https://www.facebook.com/init.energy",
+  },
+  {
+    network: "instagram",
+    label: "Instagram",
+    href: "https://www.instagram.com/init.energy/",
+  },
+  {
+    network: "linkedin",
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/company/init-energy",
+  },
+  {
+    network: "tiktok",
+    label: "TikTok",
+    href: "https://www.tiktok.com/@init.energy",
+  },
+];
+
 export const navItems: NavItem[] = [
   { href: "#solar-stations", label: "Сонячні електростанції" },
   { href: "#backup-power", label: "Резервне живлення" },

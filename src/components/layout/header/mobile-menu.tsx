@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 import { contactEmail, navItems, offices } from "./header-data";
 import { LanguageSwitcher } from "./language-switcher";
+import { SocialLinks } from "./social-links";
 
 export function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -89,6 +90,8 @@ export function MobileMenu() {
               {contactEmail}
             </a>
           </div>
+
+          <SocialLinks iconClassName="size-6" className="gap-5" />
 
           <LanguageSwitcher className="mt-auto" />
         </div>
