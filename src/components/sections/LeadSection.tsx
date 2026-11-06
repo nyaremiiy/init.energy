@@ -66,20 +66,31 @@ export function LeadSection({
               ))}
             </ol>
 
-            <address className="mt-3 flex flex-wrap gap-x-8 gap-y-3 text-sm not-italic text-ink sm:text-base">
-              {offices.map((office) => (
-                <span key={office.id} className="contents">
+            <address className="mt-3 w-full border-y border-line text-sm not-italic text-ink sm:text-base">
+              <div className="grid grid-cols-1 sm:grid-cols-2">
+                {offices.map((office, index) => (
+                  <div
+                    key={office.id}
+                    className={`flex flex-col gap-3 py-5 ${
+                      index > 0
+                        ? "border-t border-line sm:border-t-0 sm:border-l sm:pl-6"
+                        : "sm:pr-6"
+                    }`}
+                  >
+                    <span className="font-heading text-sm font-semibold uppercase tracking-wide text-ink/70">
+                      {office.city}
+                    </span>
                   <a
                     href={office.mapHref}
-                    className="inline-flex items-center gap-2.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
+                    className="inline-flex items-start gap-2.5 leading-relaxed focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
                   >
                     <MapPin
                       aria-hidden
                       size={20}
                       strokeWidth={1.7}
-                      className="text-ink/70"
+                      className="mt-0.5 shrink-0 text-ink/70"
                     />
-                    {office.city}, {office.address}
+                    {office.address}
                   </a>
                   <a
                     href={office.phone.href}
@@ -93,11 +104,12 @@ export function LeadSection({
                     />
                     {office.phone.display}
                   </a>
-                </span>
-              ))}
+                  </div>
+                ))}
+              </div>
               <a
                 href={companyContacts.email.href}
-                className="inline-flex items-center gap-2.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
+                className="flex items-center gap-2.5 border-t border-line py-5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
               >
                 <Mail aria-hidden size={20} strokeWidth={1.7} className="text-ink/70" />
                 {companyContacts.email.display}
