@@ -106,8 +106,8 @@ export function Footer() {
   ];
 
   return (
-    <footer className="bg-white px-2.5 pb-2.5 sm:px-4 sm:pb-4">
-      <div className="overflow-hidden rounded-panel bg-ink text-white">
+    <footer className="bg-white sm:px-4 sm:pb-4">
+      <div className="overflow-hidden rounded-t-panel bg-ink text-white sm:rounded-panel">
         <Container className="pt-14 lg:pt-24">
           <FooterColumns
             brand={brand}
