@@ -18,7 +18,7 @@ export function HeaderMainBar() {
         aria-label="INIT ENERGY — головна"
         className="relative z-50 shrink-0 text-white"
       >
-        <Logo className="h-10 w-auto lg:h-12" />
+        <Logo className="h-8 w-auto lg:h-10" />
       </Link>
 
       <nav aria-label="Головне меню" className="hidden lg:block">
