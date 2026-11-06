@@ -44,7 +44,7 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
               lang={language.code}
               aria-pressed={isSelected}
               onClick={() => setSelected(language.code)}
-              className={`relative z-10 inline-flex h-7 w-10 items-center justify-center rounded-full text-xs font-semibold transition-colors duration-200 ease-tech focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${isSelected ? "text-ink" : "text-white/70 hover:text-white"}`}
+              className={`relative z-10 inline-flex h-6 w-10 items-center justify-center rounded-full text-xs font-semibold transition-colors duration-200 ease-tech focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${isSelected ? "text-ink" : "text-white/70 hover:text-white"}`}
             >
               {language.label}
             </button>
