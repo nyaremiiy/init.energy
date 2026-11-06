@@ -64,7 +64,7 @@ export const trust: TrustContent = {
   image: {
     src: "/images/home/solar.avif",
     alt: "Монтажники в касках встановлюють сонячні панелі на даху будинку",
-    width: 1920,
-    height: 1282,
+    width: 6016,
+    height: 4016,
   },
 };
