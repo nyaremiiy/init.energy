@@ -37,7 +37,7 @@ export function ProductLine() {
         {/* Mobile/tablet: swipeable scroll-snap row; lg: static 3-column grid. */}
         <ul
           aria-label={t.listLabel}
-          className="scrollbar-none -mx-5 -my-2 flex snap-x snap-mandatory scroll-px-5 gap-4 overflow-x-auto px-5 py-2 sm:-mx-8 sm:scroll-px-8 sm:px-8 lg:mx-0 lg:grid lg:grid-cols-3 lg:overflow-visible lg:px-0"
+          className="scrollbar-none -mx-2.5 -my-2 flex snap-x snap-mandatory scroll-px-2.5 gap-4 overflow-x-auto px-2.5 py-2 sm:-mx-8 sm:scroll-px-8 sm:px-8 lg:mx-0 lg:grid lg:grid-cols-3 lg:overflow-visible lg:px-0"
         >
           {featured.map((product, index) => (
             <li
