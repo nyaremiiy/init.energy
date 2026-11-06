@@ -131,7 +131,7 @@ export function TrustBlock({
           {/* Fade the photo out of the dark panel. */}
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-x-0 top-0 h-2/5 bg-linear-to-b from-ink via-ink/50 via-25% to-transparent"
+            className="fade-from-ink pointer-events-none absolute inset-x-0 top-0 h-1/2"
           />
         </div>
       </Reveal>

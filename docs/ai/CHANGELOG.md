@@ -15,6 +15,12 @@
 
 ---
 
+## 2026-11-06 — Плавний (eased) градієнт над фото блоку довіри
+- **Агент:** Claude Code
+- **Гілка:** fix/trust-gradient (статус: змерджено в develop)
+- **Що зроблено:** лінійний градієнт замінено класом `.fade-from-ink` у globals.css — 12 точок прозорості за кривою ease-out від токена `ink` (через `color-mix`), висота `h-1/2`. Межа переходу не видна, серпанку на фото немає.
+- **Файли:** src/app/globals.css, src/components/sections/trust-block.tsx, docs/ai/*
+
 ## 2026-11-06 — Чіткість фото блоку довіри
 - **Агент:** Claude Code
 - **Гілка:** fix/trust-photo-sharpness (статус: змерджено в develop)
