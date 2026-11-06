@@ -4,14 +4,18 @@ import { Container } from "@/components/layout/container";
 import { ProjectCard } from "@/components/ui/project-card";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
-import { TextLink } from "@/components/ui/text-link";
-import { projectList, type ProjectSegment } from "@/content/projects";
+import { ArrowLink } from "@/components/ui/arrow-link";
+
+import { featuredProjects, type ProjectSegment } from "@/content/projects";
 import { anchors, routes } from "@/content/routes";
 import { messages } from "@/lib/messages";
 
 const titleId = "projects-showcase-title";
 
-const filterSegments: Array<{ id: "all" | ProjectSegment; labelKey: "all" | ProjectSegment }> = [
+const filterSegments: Array<{
+  id: "all" | ProjectSegment;
+  labelKey: "all" | ProjectSegment;
+}> = [
   { id: "all", labelKey: "all" },
   { id: "apartment", labelKey: "apartment" },
   { id: "house", labelKey: "house" },
@@ -20,9 +24,8 @@ const filterSegments: Array<{ id: "all" | ProjectSegment; labelKey: "all" | Proj
 
 export function ProjectsShowcase() {
   const t = messages.projects;
-  const featuredProjects = projectList.filter((project) => project.featured).slice(0, 3);
 
-  // Keep placeholders and temporary test records out of production once content removes them.
+  // Drafts (test records) are visible only in development; no projects → no section.
   if (featuredProjects.length === 0) {
     return null;
   }
@@ -42,7 +45,9 @@ export function ProjectsShowcase() {
             title={t.title}
             titleId={titleId}
             lead={t.lead}
-            aside={<TextLink href={routes.projects}>{t.allProjects}</TextLink>}
+            aside={
+              <ArrowLink href={routes.projects}>{t.allProjects}</ArrowLink>
+            }
           />
         </Reveal>
 

@@ -1,8 +1,8 @@
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 
+import { Eyebrow } from "./eyebrow";
 import { Heading } from "./heading";
-import { Label } from "./label";
 
 type SegmentCardTone = "light" | "dark";
 
@@ -54,15 +54,15 @@ export function SegmentCard({
       <div className="flex items-start justify-between gap-4">
         <span
           aria-hidden
-          className={`font-heading text-5xl leading-none font-light tabular-nums lg:text-6xl ${classes.index}`}
+          className={`font-heading text-number-sm font-light tabular-nums lg:text-number ${classes.index}`}
         >
           {index}
         </span>
-        <Label tone={tone === "light" ? "onLight" : "onDark"}>{segment}</Label>
+        <Eyebrow tone={tone}>{segment}</Eyebrow>
       </div>
 
       <div className="flex flex-col gap-3">
-        <Heading as="h3" className={`text-2xl ${classes.text}`}>
+        <Heading as="h3" size="h3" className={classes.text}>
           {title}
         </Heading>
         <p className={`text-base leading-relaxed ${classes.muted}`}>

@@ -5,7 +5,7 @@ import { Container } from "@/components/layout/container";
 import { contactEmail } from "./header-data";
 import { LanguageSwitcher } from "./language-switcher";
 import { OfficeRotator } from "./office-rotator";
-import { SocialLinks } from "./social-links";
+import { SocialLinks } from "@/components/ui/social-links";
 
 export function HeaderTopBar() {
   return (

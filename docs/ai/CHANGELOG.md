@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-06 — Уніфікація UI-стилю
+- **Агент:** Claude Code (роботу завершив і зафіксував Codex після вичерпання ліміту Claude)
+- **Гілка:** refactor/unified-style (статус: змерджено в develop)
+- **Що зроблено:** уніфіковано типографічну шкалу, геометрію великих панелей, шапки секцій, лейбли, стрілочні посилання й круглі icon-кнопки. Додано спільні `Eyebrow`, `ArrowLink`, `IconButton`, `Panel`, `SocialLinks`; видалено дублікати `Label`, `TextLink` і header-only `SocialLinks`. На нові модулі переведено header, hero, контентні секції, картки проєктів і footer; заглушки проєктів отримали світлий стиль замість темних карток без фото.
+- **Файли:** src/app/globals.css, src/components/{forms,layout,sections,ui}/**, src/content/{navigation,projects}.ts, docs/ai/*
+- **Нотатки / що далі:** `npm run lint` і `npm run build` проходять. Реальні фото й дані кейсів усе ще позначені `TODO(content)`.
+
 ## 2026-11-06 — Футер на мобільному на всю ширину
 - **Агент:** Claude Code
 - **Гілка:** fix/footer-mobile-bleed (статус: змерджено в develop)

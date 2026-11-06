@@ -23,11 +23,13 @@ export function HeaderShell({ topBar, mainBar }: HeaderShellProps) {
 
   return (
     <header
-      className={`group/header fixed inset-x-0 top-0 z-30 isolate transition-transform duration-300 ease-out ${isScrolled ? "lg:-translate-y-11" : ""}`}
+      // At the top of the page the header sits inside the hero panel (same gap
+      // as Panel); once scrolled it becomes a full-width bar.
+      className={`group/header fixed z-30 isolate transition-all duration-300 ease-tech ${isScrolled ? "inset-x-0 top-0 lg:-translate-y-11" : "inset-x-panel-sm top-panel-sm sm:inset-x-panel sm:top-panel"}`}
     >
       <div
         aria-hidden
-        className={`absolute inset-0 -z-10 bg-slate-950/95 shadow-lg backdrop-blur-md transition-opacity duration-300 group-has-[[data-mega-menu]:hover]/header:opacity-100 group-has-[[data-mega-menu]:focus-within]/header:opacity-100 ${isScrolled ? "opacity-100" : "opacity-0"}`}
+        className={`absolute inset-0 -z-10 bg-slate-950/95 backdrop-blur-md transition-opacity duration-300 group-has-[[data-mega-menu]:hover]/header:opacity-100 group-has-[[data-mega-menu]:focus-within]/header:opacity-100 ${isScrolled ? "opacity-100" : "rounded-t-panel-sm opacity-0 sm:rounded-t-panel"}`}
       />
       <div
         className={`transition-opacity duration-300 ${isScrolled ? "lg:opacity-0" : ""}`}

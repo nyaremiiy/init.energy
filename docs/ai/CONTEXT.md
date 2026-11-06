@@ -103,19 +103,20 @@ CLAUDE.md       # точка входу для Claude Code (імпортує AGE
 ## Прийняті рішення
 
 - Агенти: Claude Code і Codex, синхронізуються через `AGENTS.md` + `docs/ai/`.
-- Remote на GitHub поки не підключений, нічого не пушимо.
+- GitHub remote `origin`: `https://github.com/nyaremiiy/init.energy.git`. Робочі зміни пушимо лише після lint/build і merge task-гілки в `develop`; `main` не мерджимо без прямої вказівки власника.
 - Плагіни Claude Code для SEO/GEO/маркетингу підключені на рівні репо через .claude/settings.json: searchfit-seo (основний), marketing (Anthropic knowledge-work), rampstack-seo. Плагіни з платними MCP вмикати лише з підтвердження власника.
 - Усі секції використовують `Container`: максимум `1440px`, центрування та адаптивні горизонтальні відступи.
-- Лейбли секцій використовують компонент `Label` із спільною mobile-first типографікою та декоративним білим кругом.
-- Заголовки використовують компонент `Heading` із семантичним рівнем через проп `as`, варіантами line-height через `lineHeight` і letter-spacing через `letterSpacing`.
+- Лейбли секцій використовують компонент `Eyebrow` зі спільною mobile-first типографікою та декоративним кругом.
+- Заголовки використовують компонент `Heading` із семантичним рівнем через проп `as` і типовими розмірами `h2`/`h3` із токенів `globals.css`.
 - Описові тексти секцій використовують компонент `Description` із типографічними варіантами через `size`.
-- Головні CTA та submit-кнопки використовують компонент `Button` (Montserrat, pill, `cursor-pointer`, стрілка зсувається при hover; внутрішні шляхи через `next/link`): варіанти `primary`/`secondary` для темного фону та `dark` для світлого, розміри `default`, `wide` і `form`. Компонент підтримує посилання та нативний `<button>`; кастомні CTA-кнопки не створюємо.
+- Головні CTA та submit-кнопки використовують `Button`; підкреслені текстові CTA — `ArrowLink`; круглі дії зі стрілкою — `IconButton`. Компоненти підтримують потрібну семантику посилання/кнопки; локальні дублікати не створюємо.
 - Повноекранні секції можуть використовувати `ScrollIndicator` для переходу до наступного viewport.
-- Шрифти через `next/font/google` і токени `@theme`: основний текст — Inter (`font-sans`), заголовки (`Heading`) і лейбли (`Label`) — Montserrat (`font-heading`). `Heading` має проп `weight` (`semibold` за замовчуванням, `medium`).
+- Шрифти через `next/font/google` і токени `@theme`: основний текст — Inter (`font-sans`), заголовки (`Heading`) і лейбли (`Eyebrow`) — Montserrat (`font-heading`). Типографіка секцій і карток використовує токени `text-h2-*`, `text-h3`, `text-number-*`, `text-eyebrow`.
 - Контакти, які використовують контентні секції, зберігаються в `src/content/company.ts`: офіси Львова й Києва, їхні телефони та email. Header поки має власну конфігурацію навігації й контактів у `src/components/layout/header/header-data.ts`.
 - Меню header містить лише SVIT і «Рішення» (мега-меню з URL поточного init.energy). Пункти на секції головної (Про нас, Проєкти, Контакти тощо) додаються в `navItems` (`header-data.ts`) лише тоді, коли відповідна секція створена.
 - Кольори задаються токенами `@theme` у globals.css: `ink` (rgb(0 2 23), як overlay hero), `surface` (світлий фон секцій), `line` (лінії), `sky` (смуги-посилання); відступи `section-sm`/`section`/`section-head`. Нові кольори й відступи — лише через токени.
-- `Label` і `Description` мають проп `tone` (`onDark` за замовчуванням, `onLight` для світлих секцій).
+- Великі округлені блоки використовують `Panel` із токенами зовнішнього відступу `panel-sm`/`panel` та радіусів `rounded-panel-sm`/`rounded-panel`. Соцмережі header/footer використовують один `SocialLinks`.
+- `Eyebrow` має `tone` (`light`/`dark`), `Description` — `onLight`/`onDark`.
 - Дані (продукти, slug-и, рішення) — у `src/content/`, URL будуються через `routes`/`toPath`, не хардкодяться в JSX. Тексти UI — у `messages/`.
 - Секції після hero білі й ідуть з однаковим відступом (див. «Візуальний стиль головної»).
 - Анімація появи при скролі — клієнтський `Reveal` (`src/components/ui/reveal.tsx`, Motion `whileInView`, один раз, вимикається при prefers-reduced-motion). Секції лишаються Server Components і обгортають блоки в `Reveal`; картки — зі stagger `delay`.

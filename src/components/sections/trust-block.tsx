@@ -1,12 +1,12 @@
 import Image from "next/image";
-import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
 
 import { Container } from "@/components/layout/container";
+import { ArrowLink } from "@/components/ui/arrow-link";
 import { Heading } from "@/components/ui/heading";
-import { Label } from "@/components/ui/label";
 import { MediaPlaceholder } from "@/components/ui/media-placeholder";
+import { Panel } from "@/components/ui/panel";
 import { Reveal } from "@/components/ui/reveal";
+import { SectionHeader } from "@/components/ui/section-header";
 
 type TrustBlockProps = {
   /** Optional anchor id for the section (e.g. "about-us" on the home page). */
@@ -39,42 +39,30 @@ export function TrustBlock({
   photoPendingCaption,
 }: TrustBlockProps) {
   return (
-    <section
+    <Panel
+      as="section"
+      variant="dark"
       id={id}
       aria-labelledby={titleId}
-      className="scroll-mt-24 bg-white px-2.5 pt-section-sm sm:px-4 lg:pt-section"
+      className="scroll-mt-24 bg-white pt-section-sm lg:pt-section"
     >
-      <Reveal className="overflow-hidden rounded-panel bg-ink text-white">
+      <Reveal>
         <Container className="flex flex-col gap-section-head py-section-sm lg:py-section">
-          <div className="grid gap-6 lg:grid-cols-12 lg:items-end lg:gap-10">
-            <div className="flex flex-col items-start gap-5 lg:col-span-7">
-              <Label tone="onDark">{eyebrow}</Label>
-              <Heading
-                as="h2"
-                id={titleId}
-                className="text-3xl text-white sm:text-4xl lg:text-5xl"
-              >
-                {title}
-              </Heading>
-            </div>
-            <div className="flex flex-col items-start gap-5 lg:col-span-5">
-              <p className="text-base leading-relaxed text-white/75 sm:text-lg">
-                {lead}
-              </p>
-              {link ? (
-                <Link
-                  href={link.href}
-                  className="group inline-flex items-center gap-2 font-semibold text-white underline decoration-white/40 underline-offset-4 transition-colors hover:decoration-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
-                >
+          <SectionHeader
+            tone="dark"
+            layout="split"
+            eyebrow={eyebrow}
+            title={title}
+            titleId={titleId}
+            lead={lead}
+            aside={
+              link ? (
+                <ArrowLink href={link.href} tone="dark">
                   {link.label}
-                  <ArrowUpRight
-                    aria-hidden
-                    className="size-4 transition-transform duration-200 motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5"
-                  />
-                </Link>
-              ) : null}
-            </div>
-          </div>
+                </ArrowLink>
+              ) : undefined
+            }
+          />
 
           <dl className="grid grid-cols-2 gap-x-4 gap-y-8 lg:grid-cols-4">
             {stats.map((stat) => (
@@ -83,7 +71,7 @@ export function TrustBlock({
                 className="flex flex-col-reverse justify-end gap-3 border-t border-white/16 pt-6"
               >
                 <dt className="text-base text-white/75">{stat.label}</dt>
-                <dd className="font-heading text-4xl leading-none font-light whitespace-nowrap tabular-nums sm:text-5xl lg:text-6xl">
+                <dd className="font-heading text-number-sm font-light whitespace-nowrap tabular-nums lg:text-number">
                   {stat.value}
                 </dd>
               </div>
@@ -99,7 +87,7 @@ export function TrustBlock({
                 >
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <Heading as="h3" className="text-xl text-white">
+                <Heading as="h3" size="h3" className="text-white">
                   {item.title}
                 </Heading>
                 <p className="text-base leading-relaxed text-white/75">
@@ -135,6 +123,6 @@ export function TrustBlock({
           />
         </div>
       </Reveal>
-    </section>
+    </Panel>
   );
 }

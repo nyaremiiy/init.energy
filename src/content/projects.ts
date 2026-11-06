@@ -22,6 +22,8 @@ export type Project = {
   /** `null` renders MediaPlaceholder until content supplies a real photo. */
   image: ProjectImage | null;
   featured: boolean;
+  /** Demo/test record: shown only in development, never in production. */
+  draft?: boolean;
 };
 
 /**
@@ -41,6 +43,7 @@ export const projectList: Project[] = [
     year: 2025,
     image: null,
     featured: true,
+    draft: true,
   },
   {
     slug: "test-private-house-lviv",
@@ -53,6 +56,7 @@ export const projectList: Project[] = [
     year: 2025,
     image: null,
     featured: true,
+    draft: true,
   },
   {
     slug: "test-apartment-kyiv",
@@ -65,5 +69,16 @@ export const projectList: Project[] = [
     year: 2025,
     image: null,
     featured: true,
+    draft: true,
   },
 ];
+
+/** Projects that may be shown: drafts only in development. */
+export const visibleProjects = projectList.filter(
+  (project) => !project.draft || process.env.NODE_ENV === "development",
+);
+
+/** Featured projects for the home page showcase (max 3). */
+export const featuredProjects = visibleProjects
+  .filter((project) => project.featured)
+  .slice(0, 3);

@@ -1,12 +1,12 @@
-import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 
 import { Container } from "@/components/layout/container";
-import { Label } from "@/components/ui/label";
+import { ArrowLink } from "@/components/ui/arrow-link";
+import { Eyebrow } from "@/components/ui/eyebrow";
+import { IconButton } from "@/components/ui/icon-button";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
 import { SegmentCard } from "@/components/ui/segment-card";
-import { TextLink } from "@/components/ui/text-link";
 import { anchors, routes } from "@/content/routes";
 import { getSolutionLinks, solutions } from "@/content/solutions";
 import { format, messages } from "@/lib/messages";
@@ -30,9 +30,9 @@ export function SolutionsBySegment() {
             titleId={titleId}
             lead={t.lead}
             aside={
-              <TextLink href={routes.sections.contacts}>
+              <ArrowLink href={routes.sections.contacts}>
                 {t.calculatorLink}
-              </TextLink>
+              </ArrowLink>
             }
           />
         </Reveal>
@@ -66,17 +66,12 @@ export function SolutionsBySegment() {
               className="group flex items-center justify-between gap-6 rounded-3xl bg-sky p-6 text-ink transition duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink motion-safe:hover:-translate-y-0.5 lg:p-8"
             >
               <span className="flex flex-col items-start gap-3">
-                <Label tone="onLight">{t.hub.label}</Label>
-                <span className="font-heading text-xl leading-tight font-semibold tracking-tight sm:text-2xl">
+                <Eyebrow tone="light">{t.hub.label}</Eyebrow>
+                <span className="font-heading text-h3 font-semibold tracking-tight">
                   {t.hub.title}
                 </span>
               </span>
-              <span className="inline-flex size-12 shrink-0 items-center justify-center rounded-full border border-ink/20 transition-colors duration-200 group-hover:border-ink group-hover:bg-ink group-hover:text-white">
-                <ArrowUpRight
-                  aria-hidden
-                  className="size-5 transition-transform duration-200 motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5"
-                />
-              </span>
+              <IconButton decorative variant="outline-light" />
             </Link>
           </Reveal>
         </div>

@@ -46,7 +46,7 @@ function FieldError({ id, message }: { id: string; message?: string }) {
   return (
     <p
       id={id}
-      className={`-mt-0.5 min-h-4 text-caption leading-4 text-ink transition-opacity duration-200 ease-tech ${message ? "opacity-100" : "opacity-0"}`}
+      className={`-mt-0.5 min-h-5 text-sm text-ink transition-opacity duration-200 ease-tech ${message ? "opacity-100" : "opacity-0"}`}
     >
       {message}
     </p>

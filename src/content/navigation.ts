@@ -1,4 +1,7 @@
+import { featuredProjects } from "./projects";
 import { routes } from "./routes";
+
+const hasProjects = featuredProjects.length > 0;
 
 /** A navigation link; `labelKey` points to `messages.footer.links`. */
 export type NavEntry = {
@@ -27,7 +30,10 @@ export const pageNavigation: Record<string, NavEntry[]> = {
     { href: routes.sections.solutions, labelKey: "solutions" },
     { href: routes.sections.products, labelKey: "products" },
     { href: routes.sections.aboutUs, labelKey: "aboutUs" },
-    { href: routes.sections.projects, labelKey: "projects" },
+    // The projects section renders only when there are visible (non-draft) cases.
+    ...(hasProjects
+      ? [{ href: routes.sections.projects, labelKey: "projects" } as const]
+      : []),
     { href: routes.sections.contacts, labelKey: "consultation" },
   ],
 };
@@ -39,7 +45,9 @@ export const pageNavigation: Record<string, NavEntry[]> = {
 export const siteSections: NavEntry[] = [
   { href: routes.services.turnkeySes, labelKey: "turnkeySes" },
   { href: routes.catalog, labelKey: "svitCatalog" },
-  { href: routes.sections.projects, labelKey: "projects" },
+  ...(hasProjects
+    ? [{ href: routes.sections.projects, labelKey: "projects" } as const]
+    : []),
   { href: routes.about, labelKey: "about" },
   { href: routes.sections.contacts, labelKey: "contacts" },
   // TODO(content): «Резервне живлення», «Калькулятори», «База знань» — add when these pages enter the site structure.

@@ -19,15 +19,40 @@
   --spacing-section: 8rem;
   --spacing-section-head: 3.5rem;
 
-  /* Large panel radius — same as the hero's bottom corners. */
-  --radius-panel: 50px;
+  /* Panels (hero, trust block, footer): gap from screen edges and radius, mobile / sm+. */
+  --spacing-panel-sm: 0.5rem;
+  --spacing-panel: 1rem;
+  --radius-panel-sm: 1.5rem;
+  --radius-panel: 2rem;
 
   /* Form controls. */
   --radius-field: 14px;
-  --text-caption: 0.8125rem;
-  --text-caption--line-height: 1.25rem;
+
+  /*
+   * Type scale — use only these (plus text-sm/base for UI text).
+   * h2: section titles (mobile / md / lg) · h3: every card title ·
+   * number: big figures and card indices · eyebrow: dotted uppercase labels ·
+   * small: 15px secondary copy · caption: 13px, legal fine print only.
+   */
+  --text-h2-sm: 1.875rem;
+  --text-h2-sm--line-height: 1.15;
+  --text-h2-md: 2.25rem;
+  --text-h2-md--line-height: 1.12;
+  --text-h2: 3rem;
+  --text-h2--line-height: 1.1;
+  --text-h3: 1.5rem;
+  --text-h3--line-height: 1.25;
+  --text-number-sm: 2.5rem;
+  --text-number-sm--line-height: 1;
+  --text-number: 3.75rem;
+  --text-number--line-height: 1;
+  --text-eyebrow: 0.875rem;
+  --text-eyebrow--line-height: 1.25rem;
+  --tracking-eyebrow: 0.12em;
   --text-small: 0.9375rem;
   --text-small--line-height: 1.6;
+  --text-caption: 0.8125rem;
+  --text-caption--line-height: 1.25rem;
 
   /* Technical motion: short ease-out, no springs or bounces. */
   --ease-tech: cubic-bezier(0.2, 0.7, 0.2, 1);
@@ -54,9 +79,15 @@ button:not(:disabled) {
   position: relative;
   z-index: 1;
   isolation: isolate;
-  min-height: 100vh;
+  /* Full screen minus the panel gap above and below. */
+  min-height: calc(100svh - 2 * var(--spacing-panel-sm));
   overflow: hidden;
-  border-radius: 0 0 var(--radius-panel) var(--radius-panel);
+}
+
+@media (min-width: 40rem) {
+  .hero {
+    min-height: calc(100svh - 2 * var(--spacing-panel));
+  }
 }
 
 .hero::after {

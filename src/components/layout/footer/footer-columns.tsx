@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 
+import { Eyebrow } from "@/components/ui/eyebrow";
 import { pageNavigation } from "@/content/navigation";
 import { messages } from "@/lib/messages";
 
@@ -40,9 +41,9 @@ export function FooterColumns({
 
       {hasPageNav ? (
         <nav aria-label={t.pageNavTitle} className="lg:col-span-5">
-          <p className="mb-5 font-heading text-sm font-semibold text-white">
+          <Eyebrow tone="dark" as="p" className="mb-5">
             {t.pageNavTitle}
-          </p>
+          </Eyebrow>
           <ul className="flex flex-col gap-3">
             {pageNav.map((item) => (
               <li key={item.href}>
