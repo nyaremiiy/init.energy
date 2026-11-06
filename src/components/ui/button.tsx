@@ -24,10 +24,10 @@ type ButtonProps = ButtonLinkProps | ButtonElementProps;
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    "bg-white text-ink hover:bg-white/90 focus-visible:outline-white",
+    "bg-white text-ink hover:bg-white/90 focus-visible:outline-white/60",
   secondary:
-    "border border-white/40 text-white backdrop-blur-sm hover:border-white hover:bg-white/10 focus-visible:outline-white",
-  dark: "bg-ink text-white hover:opacity-90 focus-visible:outline-ink",
+    "border border-white/40 text-white backdrop-blur-sm hover:border-white hover:bg-white/10 focus-visible:outline-white/50",
+  dark: "bg-ink text-white hover:opacity-90 focus-visible:outline-ink/20",
 };
 
 const sizeClasses: Record<ButtonSize, string> = {
@@ -45,7 +45,7 @@ export function Button(props: ButtonProps) {
     children,
     ...elementProps
   } = props;
-  const classes = `group inline-flex cursor-pointer items-center justify-center gap-2 rounded-full font-heading text-sm font-semibold transition duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 motion-safe:hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70 ${sizeClasses[size]} ${variantClasses[variant]} ${className ?? ""}`;
+  const classes = `group inline-flex cursor-pointer items-center justify-center gap-2 rounded-full font-heading text-sm font-semibold transition duration-200 focus-visible:outline-4 focus-visible:outline-offset-2 motion-safe:hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70 ${sizeClasses[size]} ${variantClasses[variant]} ${className ?? ""}`;
   const content = (
     <>
       {children}

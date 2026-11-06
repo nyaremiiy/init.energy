@@ -39,7 +39,7 @@ const trackingKeys = [
 ] as const;
 
 const fieldClasses =
-  "w-full rounded-xl border border-line bg-white px-4 text-base text-ink placeholder:text-ink/45 transition-colors focus:border-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink";
+  "w-full rounded-xl border border-line bg-white px-4 text-base text-ink placeholder:text-ink/45 transition duration-200 focus:border-ink/50 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ink/10";
 
 export function LeadForm({ defaultObjectType }: LeadFormProps) {
   const t = messages.leadSection.form;
@@ -96,27 +96,27 @@ export function LeadForm({ defaultObjectType }: LeadFormProps) {
         onSubmit={handleSubmit}
         className="flex flex-col gap-6 rounded-3xl bg-surface p-6 sm:p-10"
       >
-      <fieldset className="m-0 border-0 p-0">
-        <legend className="mb-3 text-sm font-medium text-ink">
-          {t.objectType}
-        </legend>
-        <div className="flex flex-wrap gap-2">
-          {objectTypes.map((objectType) => (
-            <label key={objectType} className="cursor-pointer">
-              <input
-                type="radio"
-                name="objectType"
-                value={objectType}
-                defaultChecked={defaultObjectType === objectType}
-                className="peer sr-only"
-              />
-              <span className="inline-flex min-h-10 items-center rounded-full border border-line bg-white px-5 text-sm font-medium text-ink transition-colors peer-checked:border-ink peer-checked:bg-ink peer-checked:text-white peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-ink">
-                {t.objectTypes[objectType]}
-              </span>
-            </label>
-          ))}
-        </div>
-      </fieldset>
+        <fieldset className="m-0 border-0 p-0">
+          <legend className="mb-3 text-sm font-medium text-ink">
+            {t.objectType}
+          </legend>
+          <div className="flex flex-wrap gap-2">
+            {objectTypes.map((objectType) => (
+              <label key={objectType} className="cursor-pointer">
+                <input
+                  type="radio"
+                  name="objectType"
+                  value={objectType}
+                  defaultChecked={defaultObjectType === objectType}
+                  className="peer sr-only"
+                />
+                <span className="inline-flex min-h-10 items-center rounded-full border border-line bg-white px-5 text-sm font-medium text-ink transition duration-200 peer-checked:border-ink peer-checked:bg-ink peer-checked:text-white peer-focus-visible:outline-none peer-focus-visible:ring-4 peer-focus-visible:ring-ink/15">
+                  {t.objectTypes[objectType]}
+                </span>
+              </label>
+            ))}
+          </div>
+        </fieldset>
 
       <label className="flex flex-col gap-2 text-sm font-medium text-ink">
         {t.name}
@@ -182,13 +182,13 @@ export function LeadForm({ defaultObjectType }: LeadFormProps) {
           required
           aria-invalid={Boolean(errors.consent)}
           aria-describedby={errors.consent ? "lead-consent-error" : undefined}
-          className="mt-0.5 size-5 shrink-0 accent-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+          className="mt-0.5 size-5 shrink-0 rounded-sm accent-ink transition duration-200 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ink/15"
         />
         <span>
           {t.consentBefore}{" "}
           <Link
             href={routes.privacy}
-            className="text-ink underline decoration-ink/40 underline-offset-2 hover:decoration-ink"
+            className="rounded-sm text-ink underline decoration-ink/40 underline-offset-2 transition-colors hover:decoration-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink/30"
           >
             {t.privacyPolicy}
           </Link>{" "}
