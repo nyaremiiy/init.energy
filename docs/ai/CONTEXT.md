@@ -50,6 +50,7 @@ CLAUDE.md       # точка входу для Claude Code (імпортує AGE
 - Повноекранні секції можуть використовувати `ScrollIndicator` для переходу до наступного viewport.
 - Базовий шрифт сайту — Montserrat, підключений через `next/font/google`.
 - Контакти офісів, email, пункти меню й мови зберігаються в src/components/layout/header/header-data.ts — єдине джерело для header (і надалі для footer/JSON-LD).
+- Меню header містить лише SVIT і «Рішення» (мега-меню з URL поточного init.energy). Пункти на секції головної (Про нас, Проєкти, Контакти тощо) додаються в `navItems` (`header-data.ts`) лише тоді, коли відповідна секція створена.
 - Кожна секція головної сторінки є окремим модулем у `src/components/sections/home/`.
 - Контентні варіанти hero та їхні зображення зберігаються в `hero-slides.ts`; анімація розділена між `hero-content-slider.tsx`, `hero-media-slider.tsx` і `hero-slider.tsx`.
 - Hero-заголовки зберігаються двома лініями в даних слайда для послідовної дворядкової композиції.
