@@ -2,10 +2,10 @@
   "leadSection": {
     "eyebrow": "Consultation",
     "title": "We will size a system for your property",
-    "lead": "Leave your phone number — an INIT ENERGY manager will call, clarify your energy needs and prepare a turnkey configuration with pricing.",
+    "lead": "Leave your phone number — a manager will call, clarify your energy needs and prepare a turnkey configuration with pricing.",
     "steps": [
       {
-        "title": "Engineer consultation",
+        "title": "Manager consultation",
         "description": "We clarify what needs backup power and how many hours it must operate off-grid."
       },
       {
