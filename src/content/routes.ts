@@ -17,6 +17,18 @@ export const slugs = {
     hub: "rishennya",
     hotelSes: "ses-dlya-gotelyu",
   },
+  // TODO(content): segment pages below do not exist on init.energy yet.
+  ses: {
+    hub: "ses",
+    home: "dlya-domu",
+    business: "dlya-biznesu",
+  },
+  backupPower: {
+    hub: "rezervne-zhyvlennya",
+    apartment: "dlya-kvartyry",
+    house: "dlya-budynku",
+    business: "dlya-biznesu",
+  },
 } as const;
 
 export function toPath(...segments: string[]): string {
@@ -37,5 +49,16 @@ export const routes = {
   },
   solutions: {
     hotelSes: toPath(slugs.solutions.hub, slugs.solutions.hotelSes),
+  },
+  ses: {
+    hub: toPath(slugs.ses.hub),
+    home: toPath(slugs.ses.hub, slugs.ses.home),
+    business: toPath(slugs.ses.hub, slugs.ses.business),
+  },
+  backupPower: {
+    hub: toPath(slugs.backupPower.hub),
+    apartment: toPath(slugs.backupPower.hub, slugs.backupPower.apartment),
+    house: toPath(slugs.backupPower.hub, slugs.backupPower.house),
+    business: toPath(slugs.backupPower.hub, slugs.backupPower.business),
   },
 } as const;

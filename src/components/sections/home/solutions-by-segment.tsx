@@ -6,7 +6,6 @@ import { Label } from "@/components/ui/label";
 import { SectionHeader } from "@/components/ui/section-header";
 import { SegmentCard } from "@/components/ui/segment-card";
 import { routes } from "@/content/routes";
-import { services } from "@/content/services";
 import {
   getSolutionLinks,
   getSolutionProduct,
@@ -18,8 +17,11 @@ const titleId = "solutions-by-segment-title";
 
 export function SolutionsBySegment() {
   const t = messages.solutionsBySegment;
-  // TODO(content): add the backup power hub once that page exists.
-  const hubs = [{ ...t.hubs.ses, href: services.turnkeySes.href }];
+  // TODO(content): hub pages are not built yet.
+  const hubs = [
+    { ...t.hubs.ses, href: routes.ses.hub },
+    { ...t.hubs.backupPower, href: routes.backupPower.hub },
+  ];
 
   return (
     <section
@@ -65,9 +67,7 @@ export function SolutionsBySegment() {
             ))}
           </div>
 
-          <ul
-            className={`grid gap-4 ${hubs.length > 1 ? "md:grid-cols-2" : ""}`}
-          >
+          <ul className="grid gap-4 md:grid-cols-2">
             {hubs.map((hub) => (
               <li key={hub.href}>
                 <Link
