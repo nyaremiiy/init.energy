@@ -27,7 +27,7 @@ export function OfficeRotator() {
 
   return (
     <div
-      className="relative h-5 overflow-hidden"
+      className="relative h-4 overflow-hidden"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onFocus={() => setIsPaused(true)}
@@ -43,7 +43,7 @@ export function OfficeRotator() {
           className="flex items-center gap-6 not-italic"
         >
           <span className="inline-flex items-center gap-2">
-            <MapPin aria-hidden className="size-4 shrink-0" />
+            <MapPin aria-hidden className="size-3.5 shrink-0" />
             <span>
               {office.city}, {office.address}
             </span>
@@ -52,7 +52,7 @@ export function OfficeRotator() {
             href={office.phone.href}
             className="inline-flex items-center gap-2 transition-colors hover:text-white"
           >
-            <Phone aria-hidden className="size-4 shrink-0" />
+            <Phone aria-hidden className="size-3.5 shrink-0" />
             {office.phone.display}
           </a>
         </motion.address>
