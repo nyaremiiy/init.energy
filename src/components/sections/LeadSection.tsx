@@ -5,7 +5,7 @@ import { LeadForm, type LeadObjectType } from "@/components/forms/LeadForm";
 import { Description } from "@/components/ui/description";
 import { Heading } from "@/components/ui/heading";
 import { Label } from "@/components/ui/label";
-import { companyContacts } from "@/content/company";
+import { companyContacts, offices } from "@/content/company";
 import { anchors } from "@/content/routes";
 import { messages } from "@/lib/messages";
 
@@ -23,7 +23,6 @@ export function LeadSection({
   defaultObjectType,
 }: LeadSectionProps) {
   const t = messages.leadSection;
-  const office = companyContacts.primaryOffice;
 
   return (
     <section
@@ -31,7 +30,7 @@ export function LeadSection({
       aria-labelledby={titleId}
       className="scroll-mt-24 bg-white py-section-sm lg:py-section"
     >
-      <Container size="content">
+      <Container>
         <div className="grid grid-cols-1 items-start gap-10 md:grid-cols-2 md:gap-16">
           <div className="flex flex-col items-start gap-5">
             <Label tone="onLight">{t.eyebrow}</Label>
@@ -68,26 +67,40 @@ export function LeadSection({
             </ol>
 
             <address className="mt-3 flex flex-wrap gap-x-8 gap-y-3 text-sm not-italic text-ink sm:text-base">
-              <a
-                href={office.phone.href}
-                className="inline-flex items-center gap-2.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
-              >
-                <Phone aria-hidden size={20} strokeWidth={1.7} className="text-ink/70" />
-                {office.phone.display}
-              </a>
+              {offices.map((office) => (
+                <span key={office.id} className="contents">
+                  <a
+                    href={office.mapHref}
+                    className="inline-flex items-center gap-2.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
+                  >
+                    <MapPin
+                      aria-hidden
+                      size={20}
+                      strokeWidth={1.7}
+                      className="text-ink/70"
+                    />
+                    {office.city}, {office.address}
+                  </a>
+                  <a
+                    href={office.phone.href}
+                    className="inline-flex items-center gap-2.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
+                  >
+                    <Phone
+                      aria-hidden
+                      size={20}
+                      strokeWidth={1.7}
+                      className="text-ink/70"
+                    />
+                    {office.phone.display}
+                  </a>
+                </span>
+              ))}
               <a
                 href={companyContacts.email.href}
                 className="inline-flex items-center gap-2.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
               >
                 <Mail aria-hidden size={20} strokeWidth={1.7} className="text-ink/70" />
                 {companyContacts.email.display}
-              </a>
-              <a
-                href={office.mapHref}
-                className="inline-flex items-center gap-2.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
-              >
-                <MapPin aria-hidden size={20} strokeWidth={1.7} className="text-ink/70" />
-                {office.city}, {office.address}
               </a>
             </address>
           </div>

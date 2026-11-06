@@ -1,38 +1,51 @@
 import Link from "next/link";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 
-type ButtonVariant = "primary" | "secondary";
-type ButtonSize = "default" | "wide";
+type ButtonVariant = "primary" | "secondary" | "dark";
+type ButtonSize = "default" | "wide" | "form";
 
-type ButtonProps = ComponentPropsWithoutRef<"a"> & {
-  href: string;
+type SharedButtonProps = {
   icon?: ReactNode;
   size?: ButtonSize;
   variant?: ButtonVariant;
 };
 
+type ButtonLinkProps = SharedButtonProps &
+  Omit<ComponentPropsWithoutRef<"a">, "href"> & {
+    href: string;
+  };
+
+type ButtonElementProps = SharedButtonProps &
+  ComponentPropsWithoutRef<"button"> & {
+    href?: never;
+  };
+
+type ButtonProps = ButtonLinkProps | ButtonElementProps;
+
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    "bg-white text-slate-950 hover:bg-white/90 focus-visible:outline-white",
+    "bg-white text-ink hover:bg-white/90 focus-visible:outline-white",
   secondary:
     "border border-white/40 text-white backdrop-blur-sm hover:border-white hover:bg-white/10 focus-visible:outline-white",
+  dark: "bg-ink text-white hover:opacity-90 focus-visible:outline-ink",
 };
 
 const sizeClasses: Record<ButtonSize, string> = {
   default: "min-h-12 px-6 sm:px-7",
   wide: "min-h-12 px-7 sm:px-9",
+  form: "h-14 w-full px-6 text-base",
 };
 
-export function Button({
-  className,
-  href,
-  icon,
-  size = "default",
-  variant = "primary",
-  children,
-  ...props
-}: ButtonProps) {
-  const classes = `group inline-flex items-center justify-center gap-2 rounded-full text-sm font-semibold transition duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 motion-safe:hover:-translate-y-0.5 ${sizeClasses[size]} ${variantClasses[variant]} ${className ?? ""}`;
+export function Button(props: ButtonProps) {
+  const {
+    className,
+    icon,
+    size = "default",
+    variant = "primary",
+    children,
+    ...elementProps
+  } = props;
+  const classes = `group inline-flex cursor-pointer items-center justify-center gap-2 rounded-full font-heading text-sm font-semibold transition duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 motion-safe:hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70 ${sizeClasses[size]} ${variantClasses[variant]} ${className ?? ""}`;
   const content = (
     <>
       {children}
@@ -44,17 +57,30 @@ export function Button({
     </>
   );
 
-  if (href.startsWith("/")) {
+  if ("href" in elementProps && elementProps.href) {
+    const { href, ...linkProps } = elementProps;
+
+    if (href.startsWith("/")) {
+      return (
+        <Link href={href} className={classes} {...linkProps}>
+          {content}
+        </Link>
+      );
+    }
+
     return (
-      <Link href={href} className={classes} {...props}>
+      <a href={href} className={classes} {...linkProps}>
         {content}
-      </Link>
+      </a>
     );
   }
 
+  const { type = "button", ...buttonProps } =
+    elementProps as ComponentPropsWithoutRef<"button">;
+
   return (
-    <a href={href} className={classes} {...props}>
+    <button type={type} className={classes} {...buttonProps}>
       {content}
-    </a>
+    </button>
   );
 }

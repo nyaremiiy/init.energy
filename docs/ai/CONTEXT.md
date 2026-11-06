@@ -101,10 +101,10 @@ CLAUDE.md       # точка входу для Claude Code (імпортує AGE
 - Лейбли секцій використовують компонент `Label` із спільною mobile-first типографікою та декоративним білим кругом.
 - Заголовки використовують компонент `Heading` із семантичним рівнем через проп `as`, варіантами line-height через `lineHeight` і letter-spacing через `letterSpacing`.
 - Описові тексти секцій використовують компонент `Description` із типографічними варіантами через `size`.
-- CTA-посилання використовують компонент `Button` (pill, стрілка зсувається при hover; внутрішні шляхи через `next/link`): варіанти `primary`/`secondary` для темного фону, розміри `default` і `wide`. Лише для головних CTA (hero, header).
+- Головні CTA та submit-кнопки використовують компонент `Button` (Montserrat, pill, `cursor-pointer`, стрілка зсувається при hover; внутрішні шляхи через `next/link`): варіанти `primary`/`secondary` для темного фону та `dark` для світлого, розміри `default`, `wide` і `form`. Компонент підтримує посилання та нативний `<button>`; кастомні CTA-кнопки не створюємо.
 - Повноекранні секції можуть використовувати `ScrollIndicator` для переходу до наступного viewport.
 - Шрифти через `next/font/google` і токени `@theme`: основний текст — Inter (`font-sans`), заголовки (`Heading`) і лейбли (`Label`) — Montserrat (`font-heading`). `Heading` має проп `weight` (`semibold` за замовчуванням, `medium`).
-- Контакти офісів, email, пункти меню й мови зберігаються в src/components/layout/header/header-data.ts — єдине джерело для header (і надалі для footer/JSON-LD).
+- Контакти, які використовують контентні секції, зберігаються в `src/content/company.ts`: офіси Львова й Києва, їхні телефони та email. Header поки має власну конфігурацію навігації й контактів у `src/components/layout/header/header-data.ts`.
 - Меню header містить лише SVIT і «Рішення» (мега-меню з URL поточного init.energy). Пункти на секції головної (Про нас, Проєкти, Контакти тощо) додаються в `navItems` (`header-data.ts`) лише тоді, коли відповідна секція створена.
 - Кольори задаються токенами `@theme` у globals.css: `ink` (rgb(0 2 23), як overlay hero), `surface` (світлий фон секцій), `line` (лінії), `sky` (смуги-посилання); відступи `section-sm`/`section`/`section-head`. Нові кольори й відступи — лише через токени.
 - `Label` і `Description` мають проп `tone` (`onDark` за замовчуванням, `onLight` для світлих секцій).

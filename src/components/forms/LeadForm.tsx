@@ -5,6 +5,8 @@ import Link from "next/link";
 import { type FormEvent, useState } from "react";
 
 import { submitLead } from "@/app/actions/lead";
+import { Button } from "@/components/ui/button";
+import { Toast } from "@/components/ui/toast";
 import { routes } from "@/content/routes";
 import {
   validateLeadForm,
@@ -42,13 +44,16 @@ const fieldClasses =
 export function LeadForm({ defaultObjectType }: LeadFormProps) {
   const t = messages.leadSection.form;
   const [errors, setErrors] = useState<LeadFieldErrors>({});
-  const [status, setStatus] = useState<"idle" | "submitting" | "success">(
-    "idle",
-  );
+  const [status, setStatus] = useState<"idle" | "submitting">("idle");
+  const [toast, setToast] = useState<{
+    message: string;
+    tone: "success" | "error";
+  } | null>(null);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const formData = new FormData(form);
     const url = new URL(window.location.href);
 
     formData.set("pageUrl", url.href);
@@ -59,39 +64,38 @@ export function LeadForm({ defaultObjectType }: LeadFormProps) {
     const clientResult = validateLeadForm(formData, t);
     if (!clientResult.data && !clientResult.isSpam) {
       setErrors(clientResult.errors);
+      setToast({ message: t.validationSummary, tone: "error" });
       return;
     }
 
     setErrors({});
     setStatus("submitting");
-    const result = await submitLead(formData);
+    try {
+      const result = await submitLead(formData);
 
-    if (!result.success) {
-      setErrors(result.errors);
+      if (!result.success) {
+        setErrors(result.errors);
+        setStatus("idle");
+        setToast({ message: t.failure, tone: "error" });
+        return;
+      }
+
+      form.reset();
       setStatus("idle");
-      return;
+      setToast({ message: t.success, tone: "success" });
+    } catch {
+      setStatus("idle");
+      setToast({ message: t.failure, tone: "error" });
     }
-
-    setStatus("success");
-  }
-
-  if (status === "success") {
-    return (
-      <div
-        role="status"
-        className="flex min-h-96 items-center rounded-3xl bg-surface p-6 text-lg leading-relaxed text-ink sm:p-10"
-      >
-        {t.success}
-      </div>
-    );
   }
 
   return (
-    <form
-      noValidate
-      onSubmit={handleSubmit}
-      className="flex flex-col gap-6 rounded-3xl bg-surface p-6 sm:p-10"
-    >
+    <>
+      <form
+        noValidate
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-6 rounded-3xl bg-surface p-6 sm:p-10"
+      >
       <fieldset className="m-0 border-0 p-0">
         <legend className="mb-3 text-sm font-medium text-ink">
           {t.objectType}
@@ -119,6 +123,7 @@ export function LeadForm({ defaultObjectType }: LeadFormProps) {
         <input
           name="name"
           type="text"
+          required
           autoComplete="name"
           placeholder={t.namePlaceholder}
           aria-invalid={Boolean(errors.name)}
@@ -137,6 +142,7 @@ export function LeadForm({ defaultObjectType }: LeadFormProps) {
         <input
           name="phone"
           type="tel"
+          required
           inputMode="tel"
           autoComplete="tel"
           placeholder={t.phonePlaceholder}
@@ -173,6 +179,7 @@ export function LeadForm({ defaultObjectType }: LeadFormProps) {
         <input
           name="consent"
           type="checkbox"
+          required
           aria-invalid={Boolean(errors.consent)}
           aria-describedby={errors.consent ? "lead-consent-error" : undefined}
           className="mt-0.5 size-5 shrink-0 accent-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
@@ -194,17 +201,24 @@ export function LeadForm({ defaultObjectType }: LeadFormProps) {
         </p>
       ) : null}
 
-      <button
+      <Button
         type="submit"
+        variant="dark"
+        size="form"
         disabled={status === "submitting"}
-        className="group inline-flex h-14 w-full items-center justify-center gap-2 rounded-full bg-ink px-6 text-base font-semibold text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink disabled:cursor-wait disabled:opacity-70"
+        icon={<ArrowUpRight aria-hidden className="size-4.5" />}
       >
         {status === "submitting" ? t.submitting : t.submit}
-        <ArrowUpRight
-          aria-hidden
-          className="size-4.5 transition-transform duration-200 motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5"
+      </Button>
+      </form>
+
+      {toast ? (
+        <Toast
+          message={toast.message}
+          tone={toast.tone}
+          onDismiss={() => setToast(null)}
         />
-      </button>
-    </form>
+      ) : null}
+    </>
   );
 }
