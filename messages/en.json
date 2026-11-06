@@ -1,0 +1,48 @@
+{
+  "leadSection": {
+    "eyebrow": "Consultation",
+    "title": "We will size a system for your property",
+    "lead": "Leave your phone number — an INIT ENERGY engineer will call, clarify your energy needs and prepare a turnkey configuration with pricing.",
+    "steps": [
+      {
+        "title": "Engineer consultation",
+        "description": "We clarify what needs backup power and how many hours it must operate off-grid."
+      },
+      {
+        "title": "System sizing and configuration",
+        "description": "We select a SVIT system, an inverter and, when needed, solar panels."
+      },
+      {
+        "title": "Turnkey estimate",
+        "description": "Equipment, installation and commissioning in one total."
+      }
+    ],
+    "form": {
+      "objectType": "Property type",
+      "objectTypes": {
+        "apartment": "Apartment",
+        "house": "House",
+        "business": "Business",
+        "other": "Other"
+      },
+      "name": "Name",
+      "namePlaceholder": "How should we address you?",
+      "phone": "Phone",
+      "phonePlaceholder": "+380 __ ___ __ __",
+      "comment": "Comment",
+      "optional": "optional",
+      "commentPlaceholder": "What needs power, roof area, and other details",
+      "consentBefore": "I agree to the",
+      "privacyPolicy": "privacy policy",
+      "consentAfter": "and the processing of personal data",
+      "submit": "Get a system estimate",
+      "submitting": "Sending…",
+      "success": "Thank you! Your request has been received. An INIT ENERGY engineer will contact you shortly.",
+      "errors": {
+        "name": "Please enter your name.",
+        "phone": "Please enter a valid phone number.",
+        "consent": "You must agree to the privacy policy."
+      }
+    }
+  }
+}

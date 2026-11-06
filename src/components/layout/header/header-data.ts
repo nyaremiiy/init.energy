@@ -1,16 +1,9 @@
+import { companyContacts, offices, type Office } from "@/content/company";
 import { products, productSummaries, type ProductId } from "@/content/products";
 import { routes } from "@/content/routes";
 import { services, type ServiceId } from "@/content/services";
 
-export type Office = {
-  id: string;
-  city: string;
-  address: string;
-  phone: {
-    display: string;
-    href: string;
-  };
-};
+export type { Office };
 
 export type NavLink = {
   href: string;
@@ -50,22 +43,9 @@ export type Language = {
   href?: string;
 };
 
-export const offices: Office[] = [
-  {
-    id: "lviv",
-    city: "Львів",
-    address: "вул. Шевченка, 317б",
-    phone: { display: "+38 067 198 55 50", href: "tel:+380671985550" },
-  },
-  {
-    id: "kyiv",
-    city: "Київ",
-    address: "вул. Є. Сверстюка, 19",
-    phone: { display: "+38 067 555 12 50", href: "tel:+380675551250" },
-  },
-];
+export { offices };
 
-export const contactEmail = "initenergy@gmail.com";
+export const contactEmail = companyContacts.email.display;
 
 export type SocialNetwork = "facebook" | "instagram" | "linkedin" | "tiktok";
 

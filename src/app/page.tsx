@@ -2,6 +2,7 @@ import { Hero } from "@/components/sections/home/hero";
 import { ProductLine } from "@/components/sections/home/product-line";
 import { SolutionsBySegment } from "@/components/sections/home/solutions-by-segment";
 import { ProjectsShowcase } from "@/components/sections/projects-showcase";
+import { LeadSection } from "@/components/sections/LeadSection";
 import { TrustBlock } from "@/components/sections/trust-block";
 import { trust } from "@/content/company";
 import { anchors, routes } from "@/content/routes";
@@ -12,7 +13,7 @@ export default function Home() {
 
   return (
     // Sections add top spacing only; the page adds the final bottom spacing once.
-    <main className="pb-section-sm lg:pb-section">
+    <main>
       <Hero />
       <SolutionsBySegment />
       <ProductLine />
@@ -29,6 +30,7 @@ export default function Home() {
         photoPendingCaption={t.photoPending}
       />
       <ProjectsShowcase />
+      <LeadSection />
     </main>
   );
 }
