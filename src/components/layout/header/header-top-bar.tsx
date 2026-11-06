@@ -9,8 +9,8 @@ import { SocialLinks } from "./social-links";
 
 export function HeaderTopBar() {
   return (
-    <div className="hidden border-b border-white/15 text-xs text-white/80 lg:block">
-      <Container className="flex h-11 items-center justify-between gap-6">
+    <div className="hidden h-11 border-b border-white/15 text-xs text-white/80 lg:block">
+      <Container className="flex h-full items-center justify-between gap-6">
         <OfficeRotator />
         <div className="flex items-center gap-6">
           <a
