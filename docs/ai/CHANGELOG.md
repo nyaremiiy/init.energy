@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-06 — Плагіни Claude Code для SEO/GEO/маркетингу
+- **Агент:** Claude Code
+- **Гілка:** chore/claude-plugins (статус: змерджено в develop)
+- **Що зроблено:** створено `.claude/settings.json` з маркетплейсами (`extraKnownMarketplaces`) і плагінами (`enabledPlugins`): `searchfit-seo@searchfit-seo`, `marketing@knowledge-work-plugins`, `rampstack-seo@rampstack`. Назви взяті з `marketplace.json` на GitHub; самі плагіни встановлюються після перезапуску Claude Code (trust-запит) і перевіряються через `/plugin`.
+- **Файли:** .claude/settings.json, docs/ai/CONTEXT.md, docs/ai/CHANGELOG.md
+- **Нотатки / що далі:** `marketing` має опційні MCP-конектори (Ahrefs, Similarweb, HubSpot, Klaviyo, Amplitude, Supermetrics тощо, більшість платні); частина скілів `rampstack-seo` розрахована на Ahrefs MCP. Без підключення цих сервісів скіли працюють частково. `docs/SEO-GEO.md` ще не створено.
+
 ## 2026-11-05 — Очищення стартового шаблону
 - **Агент:** Codex
 - **Гілка:** chore/remove-template-files (статус: змерджено в develop)
