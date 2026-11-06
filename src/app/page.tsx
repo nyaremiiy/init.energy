@@ -1,6 +1,7 @@
 import { Hero } from "@/components/sections/home/hero";
 import { ProductLine } from "@/components/sections/home/product-line";
 import { SolutionsBySegment } from "@/components/sections/home/solutions-by-segment";
+import { ProjectsShowcase } from "@/components/sections/projects-showcase";
 import { TrustBlock } from "@/components/sections/trust-block";
 import { trust } from "@/content/company";
 import { anchors, routes } from "@/content/routes";
@@ -27,6 +28,7 @@ export default function Home() {
         image={trust.image}
         photoPendingCaption={t.photoPending}
       />
+      <ProjectsShowcase />
     </main>
   );
 }
