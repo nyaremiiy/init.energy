@@ -5,6 +5,7 @@ import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/ui/logo";
 import { routes } from "@/content/routes";
+import { formatPhone } from "@/lib/format";
 
 import { DesktopNav } from "./desktop-nav";
 import { offices } from "./header-data";
@@ -28,7 +29,7 @@ export function HeaderMainBar() {
       <div className="flex items-center gap-3">
         <a
           href={primaryPhone.href}
-          aria-label={`Подзвонити ${primaryPhone.display}`}
+          aria-label={`Подзвонити ${formatPhone(primaryPhone.display)}`}
           className="relative z-50 inline-flex size-11 items-center justify-center rounded-full border border-white/40 text-white transition-colors hover:bg-white/10 lg:hidden"
         >
           <Phone aria-hidden className="size-5" />
