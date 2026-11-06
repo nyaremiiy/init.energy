@@ -1,5 +1,4 @@
 import { products, type ProductId } from "./products";
-import { segmentPages, type SegmentPageId } from "./segment-pages";
 import { services, type ServiceId } from "./services";
 
 export type SolutionLink = {
@@ -7,10 +6,7 @@ export type SolutionLink = {
   href: string;
 };
 
-type LinkRef =
-  | { page: SegmentPageId }
-  | { product: ProductId }
-  | { service: ServiceId };
+type LinkRef = { product: ProductId } | { service: ServiceId };
 
 export type Solution = {
   id: "apartment" | "house" | "business";
@@ -39,7 +35,7 @@ export const solutions: Solution[] = [
       "Роутер, освітлення, ноутбук і телефони. Працює від розетки, без монтажу.",
     productIds: ["svit600"],
     specProductId: "svit600",
-    links: [{ page: "backupApartment" }, { product: "svit600" }],
+    links: [{ product: "svit600" }],
     tone: "light",
   },
   {
@@ -52,8 +48,6 @@ export const solutions: Solution[] = [
     productIds: ["svitHome"],
     specProductId: "svitHome",
     links: [
-      { page: "backupHouse" },
-      { page: "sesHome" },
       { product: "svitHome" },
       { product: "svitPlus5000" },
       { service: "turnkeySes" },
@@ -71,8 +65,6 @@ export const solutions: Solution[] = [
     productPrefix: "СЕС",
     specProductId: "lithiumvalley",
     links: [
-      { page: "backupBusiness" },
-      { page: "sesBusiness" },
       { product: "lithiumvalley" },
       { service: "turnkeySes" },
       { service: "hotelSes" },
@@ -92,12 +84,7 @@ export function getSolutionProduct(solution: Solution) {
 
 export function getSolutionLinks(solution: Solution): SolutionLink[] {
   return solution.links.map((ref) => {
-    const item =
-      "page" in ref
-        ? segmentPages[ref.page]
-        : "product" in ref
-          ? products[ref.product]
-          : services[ref.service];
+    const item = "product" in ref ? products[ref.product] : services[ref.service];
 
     return { label: item.name, href: item.href };
   });

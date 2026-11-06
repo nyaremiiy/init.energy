@@ -1,4 +1,5 @@
 import { products, type ProductId } from "@/content/products";
+import { routes } from "@/content/routes";
 import { services, type ServiceId } from "@/content/services";
 
 export type Office = {
@@ -33,7 +34,7 @@ export type NavGroup = {
 export const navCta = {
   title: "Не знаєте, що обрати?",
   text: "Інженер INIT ENERGY підбере систему під ваше споживання та бюджет.",
-  href: "#contacts",
+  href: routes.sections.contacts,
   label: "Отримати розрахунок",
 };
 

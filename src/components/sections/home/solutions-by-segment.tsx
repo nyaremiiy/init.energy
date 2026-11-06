@@ -17,10 +17,9 @@ const titleId = "solutions-by-segment-title";
 
 export function SolutionsBySegment() {
   const t = messages.solutionsBySegment;
-  // TODO(content): hub pages are not built yet.
   const hubs = [
-    { ...t.hubs.ses, href: routes.ses.hub },
-    { ...t.hubs.backupPower, href: routes.backupPower.hub },
+    { ...t.hubs.ses, href: routes.services.turnkeySes },
+    { ...t.hubs.products, href: routes.sections.products },
   ];
 
   return (
@@ -36,7 +35,7 @@ export function SolutionsBySegment() {
           lead={t.lead}
           aside={
             <Link
-              href={routes.calculator}
+              href={routes.sections.contacts}
               className="group inline-flex items-center gap-2 font-semibold text-ink underline decoration-ink/30 underline-offset-4 transition-colors hover:decoration-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
             >
               {t.calculatorLink}

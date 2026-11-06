@@ -20,7 +20,7 @@
 - **Гілка:** feature/solutions-by-segment (статус: в роботі)
 - **Що зроблено:** секція після hero: SectionHeader (eyebrow, H2, lead, посилання на калькулятор), 3 картки SegmentCard (квартира, будинок, бізнес — темна), 2 смуги-посилання на хаби СЕС і резервного живлення. Додано токени `@theme` (ink, surface, line, sky), проп `tone` у Label і Description (дефолт не змінено), дані в `src/content/` (products, routes, solutions), тексти UI в `messages/uk.json`. Перевірено на 1440 і 360 px.
 - **Файли:** src/app/globals.css, src/app/page.tsx, src/components/ui/{label,description,section-header,segment-card}.tsx, src/components/sections/home/solutions-by-segment.tsx, src/content/*.ts, src/lib/messages.ts, messages/uk.json, docs/ai/*
-- **Нотатки / що далі:** посилання карток і хаба беруться з реальних сторінок init.energy (продукти SVIT, /cec/, /rishennya/ses-dlya-gotelyu/) через `src/content/` (products, services, routes); header-меню теж читає ці дані. Картки також ведуть на сторінки сегментів (`src/content/segment-pages.ts`), внизу два хаби /ses/ і /rezervne-zhyvlennya/; ці сторінки й /kalkulyator/ — TODO(content), ще не створені. i18n — окрема задача.
+- **Нотатки / що далі:** посилання карток і хаба беруться з реальних сторінок init.energy (продукти SVIT, /cec/, /rishennya/ses-dlya-gotelyu/) через `src/content/` (products, services, routes); header-меню теж читає ці дані. Після рішення власника про структуру як на init.energy посилання ведуть лише на її сторінки: картки — продукти SVIT, /cec/, готель; смуги — /cec/ і /#products; «Розрахувати систему», CTA hero/header/мега-меню — /#contacts (`routes.sections`). Увімкнено `trailingSlash: true`. i18n — окрема задача.
 
 ## 2026-11-06 — Header у дві смуги
 - **Агент:** Claude Code
