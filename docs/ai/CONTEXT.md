@@ -11,6 +11,7 @@ init.energy — вебпроєкт. Призначення та функціон
 - Каркас на Next.js 16.4.5, React 19.3, TypeScript, Tailwind CSS v4, Lucide React для іконок і Motion для анімацій.
 - Header поверх hero з двох смуг: контакти/мови зверху (lg+), логотип/меню/CTA знизу; на мобільних — бургер-меню.
 - Реалізовано responsive hero-секцію з локальними AVIF/WebP-зображеннями.
+- На головній після блоку довіри є секція «Реалізовані проєкти»: дані з `src/content/projects.ts`, повторно використовувана `ProjectCard`, фільтри-посилання на запланований `/proekty/` та перелінковка на обладнання зі `products.ts`.
 - Hero містить модульний автоматичний слайдер контенту на Motion із переходом від правого краю viewport ліворуч і overlay crossfade медіа-шаром.
 - Медіа hero тримає максимум два різні фото лише під час crossfade та використовує responsive AVIF-зображення.
 
@@ -23,7 +24,7 @@ src/components/layout/header/ # header: дані (header-data.ts), верхня 
 src/components/ui/ # повторно використовувані UI-компоненти
 src/components/sections/home/ # секції головної сторінки
 src/components/sections/      # секції для кількох сторінок (trust-block.tsx — дані через пропси)
-src/content/    # дані сайту: products.ts (productList), services.ts, company.ts (trust), routes.ts (slug-и, якорі), solutions.ts
+src/content/    # дані сайту: products.ts (productList), projects.ts (projectList), services.ts, company.ts (trust), routes.ts (slug-и, якорі), solutions.ts
 src/lib/        # утиліти (messages.ts — тимчасовий завантажувач текстів UI)
 messages/       # тексти інтерфейсу (uk.json; en.json — з появою i18n)
 public/         # статичні файли

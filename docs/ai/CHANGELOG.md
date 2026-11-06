@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-06 — Секція «Реалізовані проєкти»
+- **Агент:** Codex
+- **Гілка:** feature/projects-showcase (статус: готово до merge в develop)
+- **Що зроблено:** після блоку довіри додано світлу секцію з `SectionHeader`, фільтрами-посиланнями, адаптивною bento-сіткою 7/5 і повторно використовуваною `ProjectCard`. Картка має семантичний `<article>`, `<dl>`, перелінковку на обладнання з `products.ts`, доступні підписи й reduced-motion hover. Дані винесено у `projects.ts`; усі три тимчасові записи та фото-заглушки позначено `TODO(content)`.
+- **Файли:** src/components/{sections/projects-showcase,ui/project-card}.tsx, src/content/{projects,routes}.ts, src/app/page.tsx, messages/uk.json, docs/ai/*
+- **Нотатки / що далі:** перед запуском заповнити для кожного кейсу `slug`, сегмент, назву, місто/регіон, потужність, обладнання, рік, змістовний alt і локальне фото; маршрути `/proekty/` та `/proekty/[slug]/` ще не створені.
+
 ## 2026-11-06 — Плавний (eased) градієнт над фото блоку довіри
 - **Агент:** Claude Code
 - **Гілка:** fix/trust-gradient (статус: змерджено в develop)
