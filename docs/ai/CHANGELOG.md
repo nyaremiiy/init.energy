@@ -15,6 +15,12 @@
 
 ---
 
+## 2026-11-06 — Hover у футері світлішає
+- **Агент:** Claude Code
+- **Гілка:** fix/footer-hover (статус: змерджено в develop)
+- **Що зроблено:** посилання футера при наведенні — `white/75` → `white` (замість `opacity-75`, що затемнювало); іконки соцмереж — текст `white/80` → `white`, рамка `white/22` → `white/60`, фон `white/8`. Перехід кольору 150 ms `ease-tech`.
+- **Файли:** src/components/layout/footer/{footer.tsx,footer-styles.ts}, docs/ai/*
+
 ## 2026-11-06 — Розмір логотипа через ширину
 - **Агент:** Claude Code
 - **Гілка:** fix/logo-sizing (статус: змерджено в develop)
