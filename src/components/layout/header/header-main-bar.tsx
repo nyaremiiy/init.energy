@@ -21,7 +21,7 @@ export function HeaderMainBar() {
         aria-label="INIT ENERGY — головна"
         className="relative z-50 shrink-0 text-white"
       >
-        <Logo className="h-8 w-auto lg:h-10" />
+        <Logo className="h-auto w-14 shrink-0 lg:w-18" />
       </Link>
 
       <DesktopNav />
