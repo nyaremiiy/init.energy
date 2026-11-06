@@ -19,7 +19,7 @@ export function Label({
 }: LabelProps) {
   return (
     <span
-      className={`inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.12em] sm:text-sm ${toneClasses[tone].text} ${className ?? ""}`}
+      className={`inline-flex items-center gap-2 font-heading text-xs font-medium uppercase tracking-[0.12em] sm:text-sm ${toneClasses[tone].text} ${className ?? ""}`}
       {...props}
     >
       <span

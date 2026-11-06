@@ -51,7 +51,7 @@ CLAUDE.md       # точка входу для Claude Code (імпортує AGE
 - Описові тексти секцій використовують компонент `Description` із типографічними варіантами через `size`.
 - CTA-посилання використовують компонент `Button` із варіантами `primary` і `secondary` та розмірами `default` і `wide`.
 - Повноекранні секції можуть використовувати `ScrollIndicator` для переходу до наступного viewport.
-- Базовий шрифт сайту — Montserrat, підключений через `next/font/google`.
+- Шрифти через `next/font/google` і токени `@theme`: основний текст — Inter (`font-sans`), заголовки (`Heading`) і лейбли (`Label`) — Montserrat (`font-heading`). `Heading` має проп `weight` (`semibold` за замовчуванням, `medium`).
 - Контакти офісів, email, пункти меню й мови зберігаються в src/components/layout/header/header-data.ts — єдине джерело для header (і надалі для footer/JSON-LD).
 - Меню header містить лише SVIT і «Рішення» (мега-меню з URL поточного init.energy). Пункти на секції головної (Про нас, Проєкти, Контакти тощо) додаються в `navItems` (`header-data.ts`) лише тоді, коли відповідна секція створена.
 - Кольори задаються токенами `@theme` у globals.css: `ink` (rgb(0 2 23), як overlay hero), `surface` (світлий фон секцій), `line` (лінії), `sky` (смуги-посилання). Нові кольори — лише через токени.

@@ -21,7 +21,7 @@ export function SolutionsBySegment() {
   return (
     <section
       aria-labelledby={titleId}
-      className="-mt-12 bg-surface pt-28 pb-16 lg:pt-36 lg:pb-24"
+      className="-mt-12 bg-white pt-28 pb-16 lg:pt-36 lg:pb-24"
     >
       <Container className="flex flex-col gap-10 lg:gap-14">
         <SectionHeader
@@ -71,7 +71,7 @@ export function SolutionsBySegment() {
                 >
                   <span className="flex flex-col items-start gap-3">
                     <Label tone="onLight">{hub.label}</Label>
-                    <span className="text-xl leading-tight font-semibold tracking-tight sm:text-2xl">
+                    <span className="font-heading text-xl leading-tight font-medium tracking-tight sm:text-2xl">
                       {hub.title}
                     </span>
                   </span>

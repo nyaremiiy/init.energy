@@ -31,16 +31,16 @@ const toneClasses: Record<
   }
 > = {
   light: {
-    card: "bg-white text-ink ring-1 ring-line",
-    index: "text-ink/25",
+    card: "bg-surface text-ink",
+    index: "text-ink",
     text: "text-ink",
     muted: "text-ink/70",
-    productRow: "bg-surface",
+    productRow: "bg-white",
     link: "border-line focus-visible:outline-ink",
   },
   dark: {
     card: "bg-ink text-white",
-    index: "text-white/30",
+    index: "text-white",
     text: "text-white",
     muted: "text-white/75",
     productRow: "bg-white/10",
@@ -69,7 +69,7 @@ export function SegmentCard({
       <div className="flex items-start justify-between gap-4">
         <span
           aria-hidden
-          className={`text-5xl leading-none font-semibold tabular-nums ${classes.index}`}
+          className={`font-heading text-5xl leading-none font-light tabular-nums lg:text-6xl ${classes.index}`}
         >
           {index}
         </span>
@@ -77,7 +77,7 @@ export function SegmentCard({
       </div>
 
       <div className="flex flex-col gap-3">
-        <Heading as="h3" className={`text-2xl ${classes.text}`}>
+        <Heading as="h3" weight="medium" className={`text-2xl ${classes.text}`}>
           {title}
         </Heading>
         <p className={`text-base leading-relaxed ${classes.muted}`}>
@@ -90,7 +90,7 @@ export function SegmentCard({
       >
         <div className="flex flex-col">
           <dt className="sr-only">{productTerm}</dt>
-          <dd className="font-semibold">{product.name}</dd>
+          <dd className="font-medium">{product.name}</dd>
         </div>
         <div className="flex flex-col">
           <dt className="sr-only">{specTerm}</dt>
@@ -104,7 +104,7 @@ export function SegmentCard({
             <li key={link.href}>
               <Link
                 href={link.href}
-                className={`group flex items-center justify-between gap-4 border-t py-4 font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 ${classes.link}`}
+                className={`group flex items-center justify-between gap-4 border-t py-4 font-medium focus-visible:outline-2 focus-visible:outline-offset-2 ${classes.link}`}
               >
                 {link.label}
                 <ArrowUpRight

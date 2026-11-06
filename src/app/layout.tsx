@@ -1,11 +1,18 @@
 import type { Metadata } from "next";
-import { Montserrat } from "next/font/google";
+import { Inter, Montserrat } from "next/font/google";
 import { Header } from "@/components/layout/header/header";
 import "./globals.css";
+
+const inter = Inter({
+  subsets: ["cyrillic", "latin"],
+  display: "swap",
+  variable: "--font-inter",
+});
 
 const montserrat = Montserrat({
   subsets: ["cyrillic", "latin"],
   display: "swap",
+  variable: "--font-montserrat",
 });
 
 export const metadata: Metadata = {
@@ -15,7 +22,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="uk" className={`${montserrat.className} h-full`}>
+    <html lang="uk" className={`${inter.variable} ${montserrat.variable} h-full font-sans`}>
       <body className="relative min-h-full flex flex-col">
         <Header />
         {children}
