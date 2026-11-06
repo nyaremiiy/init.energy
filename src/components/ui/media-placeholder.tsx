@@ -1,20 +1,30 @@
+type MediaPlaceholderTone = "light" | "dark";
+
 type MediaPlaceholderProps = {
   caption: string;
+  tone?: MediaPlaceholderTone;
+  /** Size, aspect ratio and radius; defaults to a 4:3 rounded block. */
   className?: string;
 };
 
+const toneClasses: Record<MediaPlaceholderTone, string> = {
+  light: "bg-white text-ink/70",
+  dark: "bg-white/6 text-white/75",
+};
+
 /**
- * Stand-in for a product photo. Keeps the same aspect ratio, radius and
- * background as the future product photo, so swapping it in causes no layout shift.
+ * Stand-in for a photo. Keeps the same aspect ratio and radius as the future
+ * image, so swapping it in causes no layout shift.
  */
 export function MediaPlaceholder({
   caption,
-  className,
+  tone = "light",
+  className = "aspect-4/3 w-full rounded-2xl",
 }: MediaPlaceholderProps) {
   return (
     <div
       aria-hidden="true"
-      className={`flex aspect-4/3 w-full items-center justify-center rounded-2xl bg-white px-6 text-center text-sm text-ink/70 ${className ?? ""}`}
+      className={`flex items-center justify-center px-6 text-center text-sm ${toneClasses[tone]} ${className}`}
     >
       {caption}
     </div>

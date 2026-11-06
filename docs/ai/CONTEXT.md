@@ -22,7 +22,8 @@ src/components/layout/ # повторно використовувані layout-
 src/components/layout/header/ # header: дані (header-data.ts), верхня й основна смуги, мобільне меню
 src/components/ui/ # повторно використовувані UI-компоненти
 src/components/sections/home/ # секції головної сторінки
-src/content/    # дані сайту: products.ts (productList), services.ts, routes.ts (slug-и, якорі), solutions.ts
+src/components/sections/      # секції для кількох сторінок (trust-block.tsx — дані через пропси)
+src/content/    # дані сайту: products.ts (productList), services.ts, company.ts (trust), routes.ts (slug-и, якорі), solutions.ts
 src/lib/        # утиліти (messages.ts — тимчасовий завантажувач текстів UI)
 messages/       # тексти інтерфейсу (uk.json; en.json — з появою i18n)
 public/         # статичні файли
@@ -49,6 +50,7 @@ CLAUDE.md       # точка входу для Claude Code (імпортує AGE
 /svit-home/                       SVIT HOME
 /bess/                            LITHIUMVALLEY
 /svit/                            каталог усіх накопичувачів SVIT (заплановано власником 2026-11-06, ще не створено)
+/pro-nas/                         про компанію (заплановано власником 2026-11-06, ще не створено)
 /en/...                           англійські дзеркала всіх сторінок (з появою i18n)
 ```
 
@@ -60,10 +62,10 @@ CLAUDE.md       # точка входу для Claude Code (імпортує AGE
 
 Затверджено власником 2026-11-06, оновлено того ж дня («повернути цілісність стилю»). Нові секції робимо за цими правилами:
 
-- **Ритм секцій:** кожна секція головної має однаковий верхній відступ `pt-section-sm lg:pt-section` (токени `--spacing-section-sm` = 88 px, `--spacing-section` = 128 px); остання секція додає такий самий нижній (`py-…`). Шапка секції → контент — `gap-section-head` (56 px). Жодних `-mt-*` під hero.
-- **Фон секцій:** білий (`bg-white`).
+- **Ритм секцій:** кожна секція має лише верхній відступ `pt-section-sm lg:pt-section` (токени `--spacing-section-sm` = 88 px, `--spacing-section` = 128 px); нижній відступ сторінки один раз задає `<main className="pb-section-sm lg:pb-section">`. Шапка секції → контент — `gap-section-head` (56 px). Жодних `-mt-*` під hero.
+- **Фон секцій:** білий (`bg-white`). Темна секція — велика панель `bg-ink rounded-panel` (`--radius-panel` = 50 px, як низ hero) з полями `px-2 sm:px-4` від країв екрана, без карток (зараз — `TrustBlock`).
 - **Тіні:** немає ніде (включно з hero). Розділяємо лише фоном, без тіней і рамок.
-- **Картки:** `rounded-3xl`, `p-6 lg:p-8`, світлі `bg-surface`. **Темний акцент (`bg-ink`) — один на всю сторінку** (зараз — картка «Бізнес» у «Що вам потрібно живити?»).
+- **Картки:** `rounded-3xl`, `p-6 lg:p-8`, світлі `bg-surface`. **Темна картка (`bg-ink`) — одна на всю сторінку** (зараз — «Бізнес» у «Що вам потрібно живити?»); темна панель-секція до цього ліміту не входить.
 - **Шапка секції:** `SectionHeader` — лейбл з крапкою (`Label`, без нумерації), H2 Montserrat semibold, lead `Description tone="onLight"`, праворуч опційний `TextLink` (підкреслене посилання зі стрілкою).
 - **Типографіка:** заголовки й лейбли Montserrat (`font-heading`), текст Inter; великі індекси `01/02/03` — Montserrat light; текст у картках (описи, характеристики, рядки-посилання) — не менше 16 px (`text-base`); приглушений текст `ink/70` на світлому, `white/75` на темному.
 - **Посилання в картках:** лише список рядків на всю ширину — лінія зверху (`line`, на темному `white/16`), назва ліворуч, ключова характеристика muted праворуч (для продуктів), `ArrowUpRight` у кінці; список притиснутий до низу (`mt-auto`). Жодних пігулок у картках. Pill-кнопки `Button` (`primary`/`secondary`) — лише головні CTA в hero і header.

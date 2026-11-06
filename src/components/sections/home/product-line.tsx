@@ -21,7 +21,7 @@ export function ProductLine() {
     <section
       id={anchors.products}
       aria-labelledby={titleId}
-      className="scroll-mt-24 bg-white py-section-sm lg:py-section"
+      className="scroll-mt-24 bg-white pt-section-sm lg:pt-section"
     >
       <Container className="flex flex-col gap-section-head">
         <Reveal>
