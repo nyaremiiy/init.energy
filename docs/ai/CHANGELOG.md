@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-06 — Header у дві смуги
+- **Агент:** Claude Code
+- **Гілка:** feature/header (статус: змерджено в develop)
+- **Що зроблено:** створено header поверх hero (absolute, у layout.tsx). Верхня смуга (lg+): офіс і телефон змінюються по черзі кожні 5 с з анімацією (пауза при наведенні/фокусі), пошта статична, перемикач мов. Основна смуга: текстовий логотип, меню в nav, CTA «Залишити заявку»; на мобільних — кнопка дзвінка й бургер-меню з усіма контактами та мовами. Контенту hero додано верхній відступ під header.
+- **Файли:** src/components/layout/header/*, src/app/layout.tsx, src/components/sections/home/hero-content-slider.tsx, docs/ai/CONTEXT.md, docs/ai/CHANGELOG.md
+- **Нотатки / що далі:** email — initenergy@gmail.com; EN неактивна до появи i18n-маршрутизації; далі додано соцмережі, SVG-логотип, фіксований header зі згортанням верхньої смуги, мега-меню SVIT і «Рішення» (URL як на init.energy) з затемненням header; сторінки з меню ще не створені (404), потрібен `trailingSlash: true`.
+
 ## 2026-11-06 — Плагіни Claude Code для SEO/GEO/маркетингу
 - **Агент:** Claude Code
 - **Гілка:** chore/claude-plugins (статус: змерджено в develop)
