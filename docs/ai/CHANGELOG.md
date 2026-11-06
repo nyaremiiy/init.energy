@@ -17,28 +17,28 @@
 
 ## 2026-11-06 — Цілісність стилю головної
 - **Агент:** Claude Code
-- **Гілка:** feature/solutions-by-segment (статус: в роботі)
+- **Гілка:** feature/solutions-by-segment (статус: змерджено в develop)
 - **Що зроблено:** «Що вам потрібно живити?» — прибрано плашку продукту, пігулки в картках замінено рядками-посиланнями (назва, характеристика muted, стрілка), залишено одну смугу «Сонячні електростанції під ключ». «Накопичувачі SVIT» — 3 світлі картки (SVIT 600, SVIT HOME, LITHIUMVALLEY, поле `featured`), статична сітка на lg і scroll-snap без кнопок на mobile/md; карусель видалено; фото з інтер'єрами відключено (TODO(content): предметні фото на світлому фоні), майбутні фото — `object-contain` на білому. Загальне: токени відступів `section-sm`/`section`/`section-head` для всіх секцій, текст у картках ≥ 16 px, прибрано тінь hero. Видалено мертвий код: `ProductCarousel`, варіанти `Button` для світлого фону й `compact`, `shortName`, `getSolutionProduct`.
 - **Файли:** src/app/globals.css, src/components/sections/home/{solutions-by-segment,product-line}.tsx, src/components/ui/{segment-card,product-card,media-placeholder,button}.tsx, src/components/ui/product-carousel.tsx (видалено), src/content/{solutions,products,services}.ts, messages/uk.json, docs/ai/*
 - **Нотатки / що далі:** за рішенням власника фото товарів повернуто (наявні фото з `public/images/products/`, `object-cover` на весь блок 4:3); розділ «Візуальний стиль головної» в CONTEXT переписано.
 
 ## 2026-11-06 — Слайдер накопичувачів SVIT
 - **Агент:** Claude Code
-- **Гілка:** feature/solutions-by-segment (статус: в роботі)
+- **Гілка:** feature/solutions-by-segment (статус: змерджено в develop)
 - **Що зроблено:** картки «Накопичувачі SVIT» перетворено на слайдер `ProductCarousel` з усіма 5 продуктами, стрілками й свайпом; на десктопі третя видима картка завжди темна. У `products.ts` поле `featured` замінено на `segment` для кожного продукту (SVIT PLUS 5000 — «Дім і бізнес», 16000 — «Автономні системи»).
 - **Файли:** src/components/ui/product-carousel.tsx, src/components/sections/home/product-line.tsx, src/content/products.ts, src/app/globals.css, messages/uk.json, docs/ai/*
 - **Нотатки / що далі:** на mobile/md темної картки немає (видно 1–2 картки). Додано фото всіх 5 продуктів (`public/images/products/*.avif`, 1448×1086); для LITHIUMVALLEY файл названо `lithiumvalley.avif`. У шапку секції додано посилання «Усі накопичувачі SVIT» → `/svit/` (каталог, заплановано); підкреслені посилання винесено в `TextLink`.
 
 ## 2026-11-06 — Секція «Накопичувачі SVIT»
 - **Агент:** Claude Code
-- **Гілка:** feature/solutions-by-segment (статус: в роботі)
+- **Гілка:** feature/solutions-by-segment (статус: змерджено в develop)
 - **Що зроблено:** секція `#products` після «Що вам потрібно живити?»: SectionHeader, 3 ProductCard (SVIT 600, SVIT HOME — світлі; LITHIUMVALLEY — темна) з MediaPlaceholder замість фото, списком характеристик і круглою кнопкою-посиланням; таблиця «Порівняння лінійки» (5 моделей, семантична `<table>`, горизонтальний скрол на мобільному). `content/products.ts` переписано: єдиний `productList` з числовими характеристиками, `image?`, `featured`; числа форматує `src/lib/format.ts` (Intl, кома в UA). Кнопки в картках «Що вам потрібно живити?» тепер усі контурні. Виправлено: «Залишити заявку» в header показувалась на мобільному/планшеті (`hidden` перебивався `inline-flex` у Button).
 - **Файли:** src/components/sections/home/product-line.tsx, src/components/ui/{product-card,product-compare-table,media-placeholder,segment-card}.tsx, src/content/{products,solutions}.ts, src/lib/format.ts, src/components/layout/header/{header-data,header-main-bar}.ts(x), src/app/page.tsx, messages/uk.json, docs/ai/*
 - **Нотатки / що далі:** TODO(content): фото всіх 5 продуктів; «Для кого» для SVIT PLUS 5000 («Дім і бізнес») і 16000 (сфера застосування) взято зі сторінок продуктів init.energy; посилання «Усі накопичувачі SVIT» → /svit не зроблено (сторінки немає в структурі). Урок: `sr-only` усередині `overflow-x-auto` потребує `relative` на контейнері, інакше розширює сторінку на мобільному.
 
 ## 2026-11-06 — Секція «Рішення за типом об'єкта»
 - **Агент:** Claude Code
-- **Гілка:** feature/solutions-by-segment (статус: в роботі)
+- **Гілка:** feature/solutions-by-segment (статус: змерджено в develop)
 - **Що зроблено:** секція після hero: SectionHeader (eyebrow, H2, lead, посилання на калькулятор), 3 картки SegmentCard (квартира, будинок, бізнес — темна), 2 смуги-посилання на хаби СЕС і резервного живлення. Додано токени `@theme` (ink, surface, line, sky), проп `tone` у Label і Description (дефолт не змінено), дані в `src/content/` (products, routes, solutions), тексти UI в `messages/uk.json`. Перевірено на 1440 і 360 px.
 - **Файли:** src/app/globals.css, src/app/page.tsx, src/components/ui/{label,description,section-header,segment-card}.tsx, src/components/sections/home/solutions-by-segment.tsx, src/content/*.ts, src/lib/messages.ts, messages/uk.json, docs/ai/*
 - **Нотатки / що далі:** посилання карток і хаба беруться з реальних сторінок init.energy (продукти SVIT, /cec/, /rishennya/ses-dlya-gotelyu/) через `src/content/` (products, services, routes); header-меню теж читає ці дані. Після рішення власника про структуру як на init.energy посилання ведуть лише на її сторінки: картки — продукти SVIT, /cec/, готель; смуги — /cec/ і /#products; «Розрахувати систему», CTA hero/header/мега-меню — /#contacts (`routes.sections`). Увімкнено `trailingSlash: true`. i18n — окрема задача.
