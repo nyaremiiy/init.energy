@@ -20,7 +20,7 @@
 - **Гілка:** feature/solutions-by-segment (статус: в роботі)
 - **Що зроблено:** картки «Накопичувачі SVIT» перетворено на слайдер `ProductCarousel` з усіма 5 продуктами, стрілками й свайпом; на десктопі третя видима картка завжди темна. У `products.ts` поле `featured` замінено на `segment` для кожного продукту (SVIT PLUS 5000 — «Дім і бізнес», 16000 — «Автономні системи»).
 - **Файли:** src/components/ui/product-carousel.tsx, src/components/sections/home/product-line.tsx, src/content/products.ts, src/app/globals.css, messages/uk.json, docs/ai/*
-- **Нотатки / що далі:** на mobile/md темної картки немає (видно 1–2 картки).
+- **Нотатки / що далі:** на mobile/md темної картки немає (видно 1–2 картки). Додано фото всіх 5 продуктів (`public/images/products/*.avif`, 1448×1086); для LITHIUMVALLEY файл названо `lithiumvalley.avif`.
 
 ## 2026-11-06 — Секція «Накопичувачі SVIT»
 - **Агент:** Claude Code
