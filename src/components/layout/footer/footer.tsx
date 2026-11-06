@@ -42,7 +42,7 @@ export function Footer() {
         aria-label={t.logoLabel}
         className={`rounded-sm text-white ${focusClasses}`}
       >
-        <Logo className="h-10 w-auto" />
+        <Logo className="h-auto w-18 shrink-0" />
       </Link>
       <p className="max-w-80 text-small text-white/75">{t.description}</p>
 

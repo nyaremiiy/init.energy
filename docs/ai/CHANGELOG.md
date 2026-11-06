@@ -15,6 +15,12 @@
 
 ---
 
+## 2026-11-06 — Розмір логотипа через ширину
+- **Агент:** Claude Code
+- **Гілка:** fix/logo-sizing (статус: змерджено в develop)
+- **Що зроблено:** `Logo` у header і футері задається шириною з `h-auto shrink-0` (header `w-14 lg:w-18`, футер `w-18`) замість висоти з `w-auto`, щоб логотип не сплющувався; пропорція 1000:550 перевірена в браузері.
+- **Файли:** src/components/layout/header/header-main-bar.tsx, src/components/layout/footer/footer.tsx, docs/ai/*
+
 ## 2026-11-06 — Спільний футер сайту
 - **Агент:** Claude Code
 - **Гілка:** feature/footer (статус: змерджено в develop)
