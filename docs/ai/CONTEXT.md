@@ -28,6 +28,7 @@ messages/       # тексти інтерфейсу (uk.json; en.json — з п�
 public/         # статичні файли
 public/images/  # зображення сайту
 public/images/home/hero/ # responsive-зображення hero головної сторінки
+public/images/products/  # фото продуктів, 4:3, ≥1200×900, назва = slug (svit-600.avif …)
 docs/ai/        # спільний контекст для AI-агентів (цей файл + CHANGELOG)
 AGENTS.md       # правила для всіх агентів (Codex)
 CLAUDE.md       # точка входу для Claude Code (імпортує AGENTS.md)

@@ -74,7 +74,8 @@ export function ProductCard({
           alt={image.alt}
           width={image.width}
           height={image.height}
-          sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+          // Matches the real card media width: 3 / 2 / 1 cards per row minus gutters and padding.
+          sizes="(min-width: 1440px) 373px, (min-width: 1024px) calc((100vw - 80px) / 3 - 80px), (min-width: 768px) calc((100vw - 64px) / 2 - 64px), calc(100vw - 88px)"
           className="aspect-4/3 w-full rounded-2xl object-cover"
         />
       ) : (
