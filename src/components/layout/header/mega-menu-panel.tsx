@@ -2,6 +2,7 @@ import { ArrowUpRight } from "lucide-react";
 
 import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
+import { Eyebrow } from "@/components/ui/eyebrow";
 
 import { navCta, type NavGroup } from "./header-data";
 import { NavLink } from "./nav-link";
@@ -13,14 +14,14 @@ type MegaMenuPanelProps = {
 export function MegaMenuPanel({ group }: MegaMenuPanelProps) {
   return (
     <div className="invisible absolute inset-x-0 top-full opacity-0 transition duration-200 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
-      <div className="rounded-b-3xl border-t border-white/10 bg-slate-950/95 shadow-2xl backdrop-blur-md">
-        <Container className="grid grid-cols-[1fr_auto] gap-10 py-10">
-          <div className="grid auto-cols-fr grid-flow-col gap-10">
+      <div className="rounded-b-3xl border-t border-white/10 bg-slate-950/95 backdrop-blur-md">
+        <Container className="flex gap-10 py-10">
+          <div className="grid flex-1 auto-cols-fr grid-flow-col gap-10">
             {group.columns.map((column) => (
               <div key={column.title} className="flex flex-col gap-5">
-                <p className="text-xs font-medium tracking-[0.12em] text-white/50 uppercase">
+                <Eyebrow tone="dark" as="p">
                   {column.title}
-                </p>
+                </Eyebrow>
                 <ul className="flex flex-col gap-5">
                   {column.items.map((link) => (
                     <li key={link.href}>
@@ -28,10 +29,10 @@ export function MegaMenuPanel({ group }: MegaMenuPanelProps) {
                         href={link.href}
                         className="group/link flex flex-col gap-1"
                       >
-                        <span className="text-base font-semibold text-white transition-colors group-hover/link:text-white/75">
+                        <span className="text-base font-semibold text-white/90 transition-colors duration-150 ease-tech group-hover/link:text-white">
                           {link.label}
                         </span>
-                        <span className="text-xs text-white/55">
+                        <span className="text-sm text-white/70">
                           {link.description}
                         </span>
                       </NavLink>

@@ -1,15 +1,14 @@
 "use client";
 
-import { ArrowRight, Loader2 } from "lucide-react";
 import { type FormEvent, useState } from "react";
+
+import { IconButton } from "@/components/ui/icon-button";
 
 import { subscribe } from "@/app/actions/newsletter";
 import { trackEvent } from "@/lib/analytics";
 import { messages } from "@/lib/messages";
 import { validateNewsletter } from "@/lib/newsletter";
 import { inputClasses } from "@/components/ui/input-styles";
-
-import { focusClasses } from "./footer-styles";
 
 type Status = "idle" | "submitting" | "success" | "failure";
 
@@ -91,24 +90,18 @@ export function NewsletterForm() {
             className: "pr-16",
           })}
         />
-        <button
+        <IconButton
           type="submit"
           aria-label={t.submit}
           disabled={submitting}
-          className={`absolute top-1.5 right-1.5 inline-flex size-11 items-center justify-center rounded-full bg-white text-ink motion-safe:transition-opacity motion-safe:duration-150 hover:opacity-85 disabled:cursor-not-allowed ${focusClasses}`}
-        >
-          {submitting ? (
-            <Loader2
-              aria-hidden
-              className="size-4.5 motion-safe:animate-spin"
-            />
-          ) : (
-            <ArrowRight aria-hidden className="size-4.5" />
-          )}
-          <span className="sr-only" aria-live="polite">
-            {submitting ? t.submitting : ""}
-          </span>
-        </button>
+          loading={submitting}
+          variant="solid-light"
+          size="sm"
+          className="absolute top-1.5 right-1.5"
+        />
+        <span className="sr-only" aria-live="polite">
+          {submitting ? t.submitting : ""}
+        </span>
       </div>
 
       {/* Honeypot: hidden from people, filled only by bots. */}

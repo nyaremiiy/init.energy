@@ -4,7 +4,7 @@ import { ProductCard } from "@/components/ui/product-card";
 import { ProductCompareTable } from "@/components/ui/product-compare-table";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
-import { TextLink } from "@/components/ui/text-link";
+import { ArrowLink } from "@/components/ui/arrow-link";
 import { productList } from "@/content/products";
 import { anchors, routes } from "@/content/routes";
 import { formatQuantity } from "@/lib/format";
@@ -30,7 +30,7 @@ export function ProductLine() {
             title={t.title}
             titleId={titleId}
             lead={t.lead}
-            aside={<TextLink href={routes.catalog}>{t.catalogLink}</TextLink>}
+            aside={<ArrowLink href={routes.catalog}>{t.catalogLink}</ArrowLink>}
           />
         </Reveal>
 
@@ -68,11 +68,7 @@ export function ProductLine() {
         </ul>
 
         <Reveal className="mt-4 flex min-w-0 flex-col gap-6">
-          <Heading
-            as="h3"
-            id={compareTitleId}
-            className="text-2xl text-ink sm:text-3xl"
-          >
+          <Heading as="h3" id={compareTitleId} size="h3" className="text-ink">
             {t.compareTitle}
           </Heading>
           <ProductCompareTable

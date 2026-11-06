@@ -2,10 +2,9 @@ import { Mail, Phone } from "lucide-react";
 
 import { Container } from "@/components/layout/container";
 import { LeadForm, type LeadObjectType } from "@/components/forms/LeadForm";
-import { Description } from "@/components/ui/description";
 import { Heading } from "@/components/ui/heading";
-import { Label } from "@/components/ui/label";
 import { Reveal } from "@/components/ui/reveal";
+import { SectionHeader } from "@/components/ui/section-header";
 import { companyContacts, offices } from "@/content/company";
 import { anchors } from "@/content/routes";
 import { formatPhone } from "@/lib/format";
@@ -36,31 +35,26 @@ export function LeadSection({
       <Container>
         <div className="grid grid-cols-1 items-start gap-10 md:grid-cols-2 md:gap-16">
           <div className="flex flex-col items-start gap-5">
-            <Label tone="onLight">{t.eyebrow}</Label>
-            <Heading
-              as="h2"
-              id={titleId}
-              className="text-3xl text-ink sm:text-4xl lg:text-5xl"
-            >
-              {title ?? t.title}
-            </Heading>
-            <Description tone="onLight" className="max-w-xl">
-              {lead ?? t.lead}
-            </Description>
+            <SectionHeader
+              eyebrow={t.eyebrow}
+              title={title ?? t.title}
+              titleId={titleId}
+              lead={lead ?? t.lead}
+            />
 
             <ol className="mt-6 w-full list-none border-b border-line p-0">
               {t.steps.map((step, index) => (
                 <li
                   key={step.title}
-                  className="grid grid-cols-[2.5rem_1fr] gap-4 border-t border-line py-5"
+                  className="flex gap-4 border-t border-line py-5"
                 >
-                  <span className="font-heading text-sm font-medium text-ink/70">
+                  <span className="w-10 shrink-0 pt-1 font-heading text-sm font-medium text-ink/70">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <span className="flex flex-col gap-1">
-                    <span className="font-heading text-lg leading-tight font-semibold tracking-tight text-ink">
+                    <Heading as="h3" size="h3" className="text-ink">
                       {step.title}
-                    </span>
+                    </Heading>
                     <span className="text-base leading-relaxed text-ink/70">
                       {step.description}
                     </span>

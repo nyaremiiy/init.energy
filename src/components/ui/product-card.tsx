@@ -1,9 +1,8 @@
-import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 
+import { Eyebrow } from "./eyebrow";
 import { Heading } from "./heading";
-import { Label } from "./label";
+import { IconButton } from "./icon-button";
 import { MediaPlaceholder } from "./media-placeholder";
 
 type ProductCardProps = {
@@ -46,26 +45,21 @@ export function ProductCard({
       )}
 
       <div className="flex flex-col gap-4">
-        <Label tone="onLight">{segment}</Label>
+        <Eyebrow tone="light">{segment}</Eyebrow>
         <div className="flex items-start justify-between gap-4">
           <div className="flex flex-col gap-2">
-            <Heading as="h3" className="text-2xl text-ink">
+            <Heading as="h3" size="h3" className="text-ink">
               {name}
             </Heading>
             <p className="text-base leading-relaxed text-ink/70">
               {description}
             </p>
           </div>
-          <Link
+          <IconButton
             href={href}
             aria-label={linkLabel}
-            className="group inline-flex size-12 shrink-0 items-center justify-center rounded-full border border-ink/20 text-ink transition-colors duration-200 hover:border-ink hover:bg-ink hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
-          >
-            <ArrowUpRight
-              aria-hidden
-              className="size-5 transition-transform duration-200 motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5"
-            />
-          </Link>
+            variant="outline-light"
+          />
         </div>
       </div>
 

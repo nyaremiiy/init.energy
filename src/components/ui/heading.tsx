@@ -4,6 +4,13 @@ type HeadingLevel = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 type HeadingLineHeight = "default" | "compact";
 type HeadingLetterSpacing = "tight" | "normal" | "wide";
 type HeadingWeight = "medium" | "semibold";
+/** Type-scale presets: every section H2 and every card H3 uses one of these. */
+type HeadingSize = "h2" | "h3";
+
+const sizeClasses: Record<HeadingSize, string> = {
+  h2: "text-h2-sm sm:text-h2-md lg:text-h2",
+  h3: "text-h3",
+};
 
 const weightClasses: Record<HeadingWeight, string> = {
   medium: "font-medium",
@@ -20,6 +27,8 @@ type HeadingProps = Omit<
   letterSpacing?: HeadingLetterSpacing;
   lineHeight?: HeadingLineHeight;
   weight?: HeadingWeight;
+  /** Scale preset; its line-height replaces `lineHeight`. */
+  size?: HeadingSize;
 };
 
 const lineHeightClasses: Record<HeadingLineHeight, string> = {
@@ -40,11 +49,12 @@ export function Heading({
   letterSpacing = "tight",
   lineHeight = "default",
   weight = "semibold",
+  size,
   ...props
 }: HeadingProps) {
   return (
     <Tag
-      className={`font-heading ${weightClasses[weight]} ${letterSpacingClasses[letterSpacing]} ${lineHeightClasses[lineHeight]} ${className ?? ""}`}
+      className={`font-heading ${weightClasses[weight]} ${letterSpacingClasses[letterSpacing]} ${size ? sizeClasses[size] : lineHeightClasses[lineHeight]} ${className ?? ""}`}
       {...props}
     >
       {children}

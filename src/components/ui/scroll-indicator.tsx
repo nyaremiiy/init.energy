@@ -32,7 +32,7 @@ export function ScrollIndicator({ className }: ScrollIndicatorProps) {
       >
         <Mouse className="size-6 transition-transform duration-200 group-hover:scale-110" />
       </motion.span>
-      <span className="pointer-events-none absolute bottom-full mb-2 whitespace-nowrap text-[10px] font-medium uppercase tracking-widest opacity-0 transition duration-200 group-hover:-translate-y-1 group-hover:opacity-100 group-focus-visible:-translate-y-1 group-focus-visible:opacity-100">
+      <span className="pointer-events-none absolute bottom-full mb-2 whitespace-nowrap font-heading text-eyebrow font-medium tracking-eyebrow uppercase opacity-0 transition duration-200 group-hover:-translate-y-1 group-hover:opacity-100 group-focus-visible:-translate-y-1 group-focus-visible:opacity-100">
         Гортайте далі
       </span>
     </button>

@@ -8,7 +8,8 @@ import { formatPhone } from "@/lib/format";
 import { contactEmail, isNavGroup, navItems, offices } from "./header-data";
 import { LanguageSwitcher } from "./language-switcher";
 import { NavLink } from "./nav-link";
-import { SocialLinks } from "./social-links";
+import { Eyebrow } from "@/components/ui/eyebrow";
+import { SocialLinks } from "@/components/ui/social-links";
 
 export function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -72,10 +73,13 @@ export function MobileMenu() {
                       </summary>
                       <div className="mt-5 flex flex-col gap-6 border-l border-white/15 pl-4">
                         {item.columns.map((column) => (
-                          <div key={column.title} className="flex flex-col gap-3">
-                            <p className="text-xs font-medium tracking-[0.12em] text-white/50 uppercase">
+                          <div
+                            key={column.title}
+                            className="flex flex-col gap-3"
+                          >
+                            <Eyebrow tone="dark" as="p">
                               {column.title}
-                            </p>
+                            </Eyebrow>
                             <ul className="flex flex-col gap-4">
                               {column.items.map((link) => (
                                 <li key={link.href}>
@@ -87,7 +91,7 @@ export function MobileMenu() {
                                     <span className="text-base font-semibold">
                                       {link.label}
                                     </span>
-                                    <span className="text-xs font-normal text-white/55">
+                                    <span className="text-sm font-normal text-white/70">
                                       {link.description}
                                     </span>
                                   </NavLink>
@@ -112,7 +116,10 @@ export function MobileMenu() {
 
           <div className="flex flex-col gap-6 text-sm text-white/80">
             {offices.map((office) => (
-              <address key={office.id} className="flex flex-col gap-2 not-italic">
+              <address
+                key={office.id}
+                className="flex flex-col gap-2 not-italic"
+              >
                 <span className="inline-flex items-center gap-2">
                   <MapPin aria-hidden className="size-4 shrink-0" />
                   {office.city}, {office.address}

@@ -7,7 +7,7 @@ import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
 import { Description } from "@/components/ui/description";
 import { Heading } from "@/components/ui/heading";
-import { Label } from "@/components/ui/label";
+import { Eyebrow } from "@/components/ui/eyebrow";
 
 import type { HeroSlide } from "./hero-slides";
 
@@ -40,7 +40,7 @@ export function HeroContentSlider({ slide }: HeroContentSliderProps) {
               }}
               className="flex flex-col items-start gap-5"
             >
-              <Label>{slide.label}</Label>
+              <Eyebrow tone="dark">{slide.label}</Eyebrow>
               <Heading
                 as={slide.headingLevel}
                 id={slide.id}

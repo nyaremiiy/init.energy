@@ -30,7 +30,10 @@ export function DesktopNav() {
             </li>
           ) : (
             <li key={item.href}>
-              <NavLink href={item.href} className="transition-colors hover:text-white">
+              <NavLink
+                href={item.href}
+                className="transition-colors hover:text-white"
+              >
                 {item.label}
               </NavLink>
             </li>

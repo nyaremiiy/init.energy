@@ -1,5 +1,4 @@
-import { ArrowUpRight } from "lucide-react";
-import Link from "next/link";
+import { ArrowLink } from "./arrow-link";
 
 type CompareRow = {
   id: string;
@@ -61,7 +60,7 @@ export function ProductCompareTable({
         <thead role="rowgroup" className="max-md:sr-only">
           <tr
             role="row"
-            className="border-b border-line font-heading text-xs tracking-[0.12em] text-ink/70 uppercase"
+            className="border-b border-line font-heading text-eyebrow tracking-eyebrow text-ink/70 uppercase"
           >
             <th
               role="columnheader"
@@ -136,17 +135,9 @@ export function ProductCompareTable({
                 role="cell"
                 className="block pt-3 md:table-cell md:py-5 md:pr-1 md:text-right"
               >
-                <Link
-                  href={row.href}
-                  aria-label={row.linkLabel}
-                  className="group inline-flex items-center gap-1.5 font-semibold whitespace-nowrap underline decoration-ink/30 underline-offset-4 transition-colors hover:decoration-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
-                >
+                <ArrowLink href={row.href} aria-label={row.linkLabel}>
                   {moreLabel}
-                  <ArrowUpRight
-                    aria-hidden
-                    className="size-4 transition-transform duration-200 motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5"
-                  />
-                </Link>
+                </ArrowLink>
               </td>
             </tr>
           ))}
