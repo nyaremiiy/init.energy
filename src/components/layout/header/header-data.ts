@@ -34,8 +34,7 @@ export const offices: Office[] = [
   },
 ];
 
-// TODO: replace with the real company email.
-export const contactEmail = "info@init.energy";
+export const contactEmail = "initenergy@gmail.com";
 
 export const navItems: NavItem[] = [
   { href: "#solar-stations", label: "Сонячні електростанції" },
