@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-06 — Стани й анімації форми «Заявка на розрахунок»
+- **Агент:** Claude Code
+- **Гілка:** feature/lead-form-states (статус: змерджено в develop)
+- **Що зроблено:** поля — default/hover (`ink/40`)/focus-visible (рамка `ink` + outline 2px offset 2)/error (`ink`, `aria-invalid`, текст 13 px з плавною появою, місце зарезервоване `min-h-5`)/disabled (`surface`); помилка зникає при редагуванні поля; після валідації фокус на першому полі з помилкою. Власний чекбокс (20 px, `rounded-md`, `ink` + lucide Check, без accent-color). Пігулки — нативні radio (стрілки), перехід 180 ms, hover `ink/40`, focus outline. Кнопка — власна в формі: стрілка зсувається при hover, active scale .98/120 ms, focus outline offset 3, loading із Loader2 і `fieldset disabled`, помилка сервера над кнопкою, success замінює форму (`animate-enter`). Автозаповнення: `autocomplete="off"` на формі й полях (без історії введених значень), телефон з `inputMode="tel"`. Секція заявки з'являється через `Reveal` (12 px, 400 ms). Токени: `--radius-field`, `--text-caption`, `--ease-tech`, `--animate-enter`. Видалено `Toast` і варіанти `dark`/`form` у `Button`; `Reveal` отримав `distance`/`duration`, крива — `ease-tech`.
+- **Файли:** src/components/forms/LeadForm.tsx, src/components/sections/LeadSection.tsx, src/components/ui/{button,reveal}.tsx, src/components/ui/toast.tsx (видалено), src/app/globals.css, messages/{uk,en}.json, docs/ai/*
+- **Нотатки / що далі:** колір помилки — `ink` (окремого токена немає). Уже збережені в браузері тестові значення сайт видалити не може — їх треба прибрати в самому браузері (Shift+Delete на підказці).
+
 ## 2026-11-06 — М’якші focus-стани форми
 - **Агент:** Codex
 - **Гілка:** fix/lead-form-focus (статус: змерджено в develop)

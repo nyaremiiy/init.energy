@@ -37,9 +37,8 @@
       "consentAfter": "and the processing of personal data",
       "submit": "Get a system estimate",
       "submitting": "Sending…",
-      "success": "Thank you! Your request has been received. An INIT ENERGY manager will contact you shortly.",
+      "success": "Thank you! Your request is with our manager — we will call you back during business hours.",
       "failure": "We could not send your request. Please try again or call us.",
-      "validationSummary": "Please check the required form fields.",
       "errors": {
         "name": "Please enter your name.",
         "phone": "Please enter a valid phone number.",
