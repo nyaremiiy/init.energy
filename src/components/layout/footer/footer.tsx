@@ -58,7 +58,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener"
                   aria-label={format(t.socialLabel, { network: link.label })}
-                  className={`inline-flex size-11 items-center justify-center rounded-full border border-white/22 text-white motion-safe:transition-opacity motion-safe:duration-150 hover:opacity-75 ${focusClasses}`}
+                  className={`inline-flex size-11 items-center justify-center rounded-full border border-white/22 text-white/80 transition-colors duration-150 ease-tech hover:border-white/60 hover:bg-white/8 hover:text-white ${focusClasses}`}
                 >
                   <Icon className="size-4.5" />
                 </a>
@@ -128,7 +128,7 @@ export function Footer() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className={`rounded-sm motion-safe:transition-opacity motion-safe:duration-150 hover:opacity-75 ${focusClasses}`}
+                      className={`rounded-sm transition-colors duration-150 ease-tech hover:text-white ${focusClasses}`}
                     >
                       {link.label}
                     </Link>
