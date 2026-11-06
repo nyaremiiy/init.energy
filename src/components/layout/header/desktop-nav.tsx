@@ -10,7 +10,11 @@ export function DesktopNav() {
       <ul className="flex h-full items-center gap-8 text-sm font-medium text-white/85">
         {navItems.map((item) =>
           isNavGroup(item) ? (
-            <li key={item.label} className="group flex h-full items-center">
+            <li
+              key={item.label}
+              data-mega-menu
+              className="group flex h-full items-center"
+            >
               <button
                 type="button"
                 aria-haspopup="true"

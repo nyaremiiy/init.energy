@@ -23,21 +23,19 @@ export function HeaderShell({ topBar, mainBar }: HeaderShellProps) {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-30 transition-transform duration-300 ease-out ${isScrolled ? "lg:-translate-y-11" : ""}`}
+      className={`group/header fixed inset-x-0 top-0 z-30 isolate transition-transform duration-300 ease-out ${isScrolled ? "lg:-translate-y-11" : ""}`}
     >
+      <div
+        aria-hidden
+        className={`absolute inset-0 -z-10 bg-slate-950/95 shadow-lg backdrop-blur-md transition-opacity duration-300 group-has-[[data-mega-menu]:hover]/header:opacity-100 group-has-[[data-mega-menu]:focus-within]/header:opacity-100 ${isScrolled ? "opacity-100" : "opacity-0"}`}
+      />
       <div
         className={`transition-opacity duration-300 ${isScrolled ? "lg:opacity-0" : ""}`}
         inert={isScrolled ? true : undefined}
       >
         {topBar}
       </div>
-      <div className="relative isolate">
-        <div
-          aria-hidden
-          className={`absolute inset-0 -z-10 bg-slate-950/85 shadow-lg backdrop-blur-md transition-opacity duration-300 ${isScrolled ? "opacity-100" : "opacity-0"}`}
-        />
-        {mainBar}
-      </div>
+      <div className="relative">{mainBar}</div>
     </header>
   );
 }
