@@ -166,9 +166,7 @@ export const navItems: NavItem[] = [
       },
     ],
   },
-  { href: "#about-us", label: "Про нас" },
-  { href: "#projects", label: "Проєкти" },
-  { href: "#contacts", label: "Контакти" },
+  // Add links to home page sections (about, projects, contacts) as they are built.
 ];
 
 // TODO: add `href` for other locales once i18n routing exists.
