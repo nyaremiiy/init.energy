@@ -5,8 +5,8 @@ import { services, type ServiceId } from "./services";
 
 export type SolutionLink = {
   label: string;
-  /** Full name when `label` is shortened. */
-  title?: string;
+  /** Key spec shown muted on the right (products only). */
+  spec?: string;
   href: string;
 };
 
@@ -18,12 +18,6 @@ export type Solution = {
   segment: string;
   title: string;
   description: string;
-  /** Products shown in the card's product row. */
-  productIds: ProductId[];
-  /** Optional prefix before product names, e.g. "СЕС". */
-  productPrefix?: string;
-  /** Product whose capacity is shown as the key spec. */
-  specProductId: ProductId;
   links: LinkRef[];
   tone: "light" | "dark";
 };
@@ -37,8 +31,6 @@ export const solutions: Solution[] = [
     title: "Світло й зв'язок під час відключень",
     description:
       "Роутер, освітлення, ноутбук і телефони. Працює від розетки, без монтажу.",
-    productIds: ["svit600"],
-    specProductId: "svit600",
     links: [{ product: "svit600" }],
     tone: "light",
   },
@@ -49,8 +41,6 @@ export const solutions: Solution[] = [
     title: "Весь будинок без перебоїв",
     description:
       "Котел, насос і холодильник під час відключень, а вдень — власна сонячна енергія.",
-    productIds: ["svitHome"],
-    specProductId: "svitHome",
     links: [
       { product: "svitHome" },
       { product: "svitPlus5000" },
@@ -66,9 +56,6 @@ export const solutions: Solution[] = [
     title: "Безперервна робота підприємства",
     description:
       "Виробництво, склад, готель чи критичний об'єкт: резерв і генерація під навантаження.",
-    productIds: ["lithiumvalley"],
-    productPrefix: "СЕС",
-    specProductId: "lithiumvalley",
     links: [
       { product: "lithiumvalley" },
       { service: "turnkeySes" },
@@ -78,29 +65,20 @@ export const solutions: Solution[] = [
   },
 ];
 
-export function getSolutionProduct(solution: Solution) {
-  const names = solution.productIds.map((id) => products[id].name);
-
-  return {
-    name: [solution.productPrefix, ...names].filter(Boolean).join(" + "),
-    spec: formatQuantity(products[solution.specProductId].capacity),
-  };
-}
-
 export function getSolutionLinks(solution: Solution): SolutionLink[] {
   return solution.links.map((ref) => {
     if ("product" in ref) {
       const product = products[ref.product];
 
-      return { label: product.name, href: product.href };
+      return {
+        label: product.name,
+        spec: formatQuantity(product.capacity),
+        href: product.href,
+      };
     }
 
     const service = services[ref.service];
 
-    return {
-      label: service.shortName ?? service.name,
-      title: service.shortName ? service.name : undefined,
-      href: service.href,
-    };
+    return { label: service.name, href: service.href };
   });
 }

@@ -1,12 +1,8 @@
 import Link from "next/link";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 
-type ButtonVariant =
-  | "primary"
-  | "secondary"
-  | "primaryOnLight"
-  | "secondaryOnLight";
-type ButtonSize = "default" | "wide" | "compact";
+type ButtonVariant = "primary" | "secondary";
+type ButtonSize = "default" | "wide";
 
 type ButtonProps = ComponentPropsWithoutRef<"a"> & {
   href: string;
@@ -20,15 +16,11 @@ const variantClasses: Record<ButtonVariant, string> = {
     "bg-white text-slate-950 hover:bg-white/90 focus-visible:outline-white",
   secondary:
     "border border-white/40 text-white backdrop-blur-sm hover:border-white hover:bg-white/10 focus-visible:outline-white",
-  primaryOnLight: "bg-ink text-white hover:bg-ink/85 focus-visible:outline-ink",
-  secondaryOnLight:
-    "border border-ink/20 text-ink hover:border-ink hover:bg-white focus-visible:outline-ink",
 };
 
 const sizeClasses: Record<ButtonSize, string> = {
   default: "min-h-12 px-6 sm:px-7",
   wide: "min-h-12 px-7 sm:px-9",
-  compact: "min-h-10 px-5",
 };
 
 export function Button({

@@ -12,7 +12,13 @@
   /* Hairlines and dividers on light surfaces. */
   --color-line: rgb(0 2 23 / 12%);
   /* Soft blue for hub link strips. */
-  --color-sky: rgb(228 238 251);}
+  --color-sky: rgb(228 238 251);
+
+  /* Vertical rhythm: space between home sections (mobile / lg) and header → content. */
+  --spacing-section-sm: 5.5rem;
+  --spacing-section: 8rem;
+  --spacing-section-head: 3.5rem;
+}
 
 body {
   margin: 0;
@@ -26,7 +32,6 @@ body {
   min-height: 100vh;
   overflow: hidden;
   border-radius: 0 0 50px 50px;
-  box-shadow: 0 24px 32px rgb(0 2 23 / 30%);
 }
 
 .hero::after {

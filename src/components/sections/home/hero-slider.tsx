@@ -18,10 +18,7 @@ type SliderState = {
 
 type SliderAction = { type: "next" } | { type: "clearPrevious" };
 
-function sliderReducer(
-  state: SliderState,
-  action: SliderAction,
-): SliderState {
+function sliderReducer(state: SliderState, action: SliderAction): SliderState {
   if (action.type === "clearPrevious") {
     return { ...state, previousIndex: null };
   }
@@ -74,10 +71,7 @@ export function HeroSlider() {
 
   return (
     <>
-      <HeroMediaSlider
-        slide={activeSlide}
-        previousSlide={crossfadeSlide}
-      />
+      <HeroMediaSlider slide={activeSlide} previousSlide={crossfadeSlide} />
       <HeroContentSlider slide={activeSlide} />
     </>
   );

@@ -1,6 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
 
-import { Button } from "./button";
 import { Heading } from "./heading";
 import { Label } from "./label";
 
@@ -11,41 +11,28 @@ type SegmentCardProps = {
   segment: string;
   title: string;
   description: string;
-  product: { name: string; spec: string };
-  productTerm: string;
-  specTerm: string;
-  links: Array<{ label: string; title?: string; href: string }>;
+  links: Array<{ label: string; spec?: string; href: string }>;
   navLabel: string;
   tone?: SegmentCardTone;
 };
 
 const toneClasses: Record<
   SegmentCardTone,
-  {
-    card: string;
-    index: string;
-    text: string;
-    muted: string;
-    productRow: string;
-    /** Outline button variant for card links. */
-    link: "secondary" | "secondaryOnLight";
-  }
+  { card: string; index: string; text: string; muted: string; link: string }
 > = {
   light: {
     card: "bg-surface text-ink",
     index: "text-ink",
     text: "text-ink",
     muted: "text-ink/70",
-    productRow: "border border-line bg-white",
-    link: "secondaryOnLight",
+    link: "border-line focus-visible:outline-ink",
   },
   dark: {
     card: "bg-ink text-white",
     index: "text-white",
     text: "text-white",
     muted: "text-white/75",
-    productRow: "bg-white/6 text-white",
-    link: "secondary",
+    link: "border-white/16 focus-visible:outline-white",
   },
 };
 
@@ -54,9 +41,6 @@ export function SegmentCard({
   segment,
   title,
   description,
-  product,
-  productTerm,
-  specTerm,
   links,
   navLabel,
   tone = "light",
@@ -65,7 +49,7 @@ export function SegmentCard({
 
   return (
     <article
-      className={`flex h-full flex-col gap-6 rounded-3xl p-6 lg:p-8 ${classes.card}`}
+      className={`flex h-full flex-col gap-6 rounded-3xl p-6 transition duration-300 motion-safe:hover:-translate-y-0.5 lg:p-8 ${classes.card}`}
     >
       <div className="flex items-start justify-between gap-4">
         <span
@@ -86,32 +70,27 @@ export function SegmentCard({
         </p>
       </div>
 
-      <dl
-        className={`flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 rounded-2xl px-5 py-3 sm:rounded-full text-sm ${classes.productRow}`}
-      >
-        <div>
-          <dt className="sr-only">{productTerm}</dt>
-          <dd className="font-semibold">{product.name}</dd>
-        </div>
-        <div>
-          <dt className="sr-only">{specTerm}</dt>
-          <dd className={`tabular-nums ${classes.muted}`}>{product.spec}</dd>
-        </div>
-      </dl>
-
-      <nav aria-label={navLabel} className="mt-auto pt-2">
-        <ul className="flex flex-wrap gap-2">
+      <nav aria-label={navLabel} className="mt-auto">
+        <ul>
           {links.map((link) => (
             <li key={link.href}>
-              <Button
+              <Link
                 href={link.href}
-                title={link.title}
-                size="compact"
-                variant={classes.link}
-                icon={<ArrowUpRight aria-hidden className="size-4" />}
+                className={`group flex items-center gap-3 border-t py-4 text-base font-medium focus-visible:outline-2 focus-visible:outline-offset-2 ${classes.link}`}
               >
-                {link.label}
-              </Button>
+                <span className="flex-1">{link.label}</span>
+                {link.spec ? (
+                  <span
+                    className={`text-right whitespace-nowrap tabular-nums ${classes.muted}`}
+                  >
+                    {link.spec}
+                  </span>
+                ) : null}
+                <ArrowUpRight
+                  aria-hidden
+                  className="size-5 shrink-0 transition-transform duration-200 motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5"
+                />
+              </Link>
             </li>
           ))}
         </ul>

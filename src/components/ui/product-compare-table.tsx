@@ -27,7 +27,10 @@ type ProductCompareTableProps = {
 /** Visible only on mobile, where each row is stacked; screen readers use the column headers. */
 function MobileLabel({ children }: { children: string }) {
   return (
-    <span aria-hidden className="shrink-0 whitespace-nowrap text-ink/70 md:hidden">
+    <span
+      aria-hidden
+      className="shrink-0 whitespace-nowrap text-ink/70 md:hidden"
+    >
       {children}
     </span>
   );
