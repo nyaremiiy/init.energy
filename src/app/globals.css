@@ -7,6 +7,8 @@
 
   /* Brand ink: the same navy used by the hero overlay. */
   --color-ink: rgb(0 2 23);
+  /* Mid step between the light surface and ink (same navy hue). */
+  --color-ink-mid: rgb(46 52 84);
   /* Light section background. */
   --color-surface: rgb(244 246 250);
   /* Hairlines and dividers on light surfaces. */

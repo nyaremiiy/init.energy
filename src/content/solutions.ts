@@ -21,7 +21,7 @@ export type Solution = {
   /** Product whose capacity is shown as the key spec. */
   specProductId: ProductId;
   links: LinkRef[];
-  tone: "light" | "dark";
+  tone: "light" | "mid" | "dark";
 };
 
 // Ukrainian only for now; EN arrives with i18n routing.
@@ -52,7 +52,7 @@ export const solutions: Solution[] = [
       { product: "svitPlus5000" },
       { service: "turnkeySes" },
     ],
-    tone: "light",
+    tone: "mid",
   },
   {
     id: "business",

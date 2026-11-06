@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Heading } from "./heading";
 import { Label } from "./label";
 
-type SegmentCardTone = "light" | "dark";
+type SegmentCardTone = "light" | "mid" | "dark";
 
 type SegmentCardProps = {
   index: string;
@@ -37,6 +37,14 @@ const toneClasses: Record<
     muted: "text-ink/70",
     productRow: "bg-white",
     link: "border-line focus-visible:outline-ink",
+  },
+  mid: {
+    card: "bg-ink-mid text-white",
+    index: "text-white",
+    text: "text-white",
+    muted: "text-white/75",
+    productRow: "bg-white/10",
+    link: "border-white/20 focus-visible:outline-white",
   },
   dark: {
     card: "bg-ink text-white",
@@ -73,7 +81,7 @@ export function SegmentCard({
         >
           {index}
         </span>
-        <Label tone={tone === "dark" ? "onDark" : "onLight"}>{segment}</Label>
+        <Label tone={tone === "light" ? "onLight" : "onDark"}>{segment}</Label>
       </div>
 
       <div className="flex flex-col gap-3">
