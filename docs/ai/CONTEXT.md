@@ -83,6 +83,7 @@ CLAUDE.md       # точка входу для Claude Code (імпортує AGE
 - **Зображення:** `next/image` віддає AVIF (потім WebP); якість за замовчуванням 75, для великих фото на всю ширину — `quality={90}` (дозволені значення — `images.qualities` у next.config.ts).
 - **Переходи фото → темний фон:** клас `.fade-from-ink` (eased-градієнт у globals.css), не лінійний `bg-linear-to-*` з 2–3 точками.
 - **Числа й телефони:** числа лише через `formatQuantity`/`formatNumber`, українські телефони для показу — через `formatPhone` (`src/lib/format.ts`); у `tel:` зберігається E.164. Одиниці — у `messages`.
+- **Форми:** поля `rounded-field` (14 px), `h-14`, рамка `line` → hover `ink/40` → focus-visible рамка `ink` + `outline-2 outline-offset-2 outline-ink`; помилка — рамка `ink`, `aria-invalid`, `aria-describedby` на завжди присутній `<p>` з `min-h-5 text-caption` (без стрибків верстки); помилка поля зникає при редагуванні, після валідації фокус на першому полі з помилкою; `autocomplete="off"` (без історії введених значень); під час надсилання — `fieldset disabled`; переходи 150–200 ms `ease-tech`, transform лише з `motion-safe:`.
 - **Контраст:** текст ≥ 4.5:1 на всіх фонах.
 
 
