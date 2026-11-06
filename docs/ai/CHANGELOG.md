@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-06 — Секція «Чому INIT ENERGY» (блок довіри)
+- **Агент:** Claude Code
+- **Гілка:** feature/trust-block (статус: змерджено в develop)
+- **Що зроблено:** перевикористовуваний `TrustBlock` (темна панель `rounded-panel`, шапка 7/5, цифри `<dl>` 4/2×2, три аргументи, широке медіа 21:8 / 4:3 з градієнтом; поки `MediaPlaceholder`). На головній після «Накопичувачі SVIT», якір `#about-us`, посилання «Більше про компанію» → `/pro-nas/` (заплановано). Дані в `src/content/company.ts` → `trust`: 30+, 20+, 1 МВт+ звірено з init.energy, кількість моделей = `productList.length`. Токен `--radius-panel` (hero теж його використовує). Правило відступів: секції — лише `pt-section`, `<main>` — `pb-section`. `MediaPlaceholder` отримав `tone` і `className` для пропорцій.
+- **Файли:** src/components/sections/trust-block.tsx, src/content/{company,routes}.ts, src/components/ui/media-placeholder.tsx, src/components/sections/home/product-line.tsx, src/app/{page.tsx,globals.css}, messages/uk.json, docs/ai/*
+- **Нотатки / що далі:** TODO(content): фото блоку (21:8); умови гарантії; формулювання «виробник, а не перепродавець» / «не перепродаємо чуже обладнання» — на init.energy сказано «Працюємо тільки з перевіреними світовими виробниками», треба підтвердити власником.
+
 ## 2026-11-06 — Цілісність стилю головної
 - **Агент:** Claude Code
 - **Гілка:** feature/solutions-by-segment (статус: змерджено в develop)

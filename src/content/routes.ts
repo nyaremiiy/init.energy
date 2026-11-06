@@ -3,6 +3,8 @@
 export const slugs = {
   // TODO(content): catalog page with all SVIT products — planned, not built yet.
   catalog: "svit",
+  // TODO(content): about page — planned by the owner, not built yet.
+  about: "pro-nas",
   products: {
     svit600: "svit-600",
     svitPlus5000: "svit-plus-5000",
@@ -38,6 +40,7 @@ export function toAnchor(anchor: string): string {
 export const routes = {
   home: toPath(),
   catalog: toPath(slugs.catalog),
+  about: toPath(slugs.about),
   products: {
     svit600: toPath(slugs.products.svit600),
     svitPlus5000: toPath(slugs.products.svitPlus5000),
