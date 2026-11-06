@@ -3,6 +3,8 @@ import { services, type ServiceId } from "./services";
 
 export type SolutionLink = {
   label: string;
+  /** Full name when `label` is shortened. */
+  title?: string;
   href: string;
 };
 
@@ -84,8 +86,18 @@ export function getSolutionProduct(solution: Solution) {
 
 export function getSolutionLinks(solution: Solution): SolutionLink[] {
   return solution.links.map((ref) => {
-    const item = "product" in ref ? products[ref.product] : services[ref.service];
+    if ("product" in ref) {
+      const product = products[ref.product];
 
-    return { label: item.name, href: item.href };
+      return { label: product.name, href: product.href };
+    }
+
+    const service = services[ref.service];
+
+    return {
+      label: service.shortName ?? service.name,
+      title: service.shortName ? service.name : undefined,
+      href: service.href,
+    };
   });
 }

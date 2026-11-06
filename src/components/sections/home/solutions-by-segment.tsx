@@ -75,14 +75,16 @@ export function SolutionsBySegment() {
                 >
                   <span className="flex flex-col items-start gap-3">
                     <Label tone="onLight">{hub.label}</Label>
-                    <span className="font-heading text-xl leading-tight font-medium tracking-tight sm:text-2xl">
+                    <span className="font-heading text-xl leading-tight font-semibold tracking-tight sm:text-2xl">
                       {hub.title}
                     </span>
                   </span>
-                  <ArrowUpRight
-                    aria-hidden
-                    className="size-6 shrink-0 transition-transform duration-200 motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5"
-                  />
+                  <span className="inline-flex size-12 shrink-0 items-center justify-center rounded-full border border-ink/20 transition-colors duration-200 group-hover:border-ink group-hover:bg-ink group-hover:text-white">
+                    <ArrowUpRight
+                      aria-hidden
+                      className="size-5 transition-transform duration-200 motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5"
+                    />
+                  </span>
                 </Link>
               </li>
             ))}

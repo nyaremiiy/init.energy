@@ -69,7 +69,7 @@ CLAUDE.md       # точка входу для Claude Code (імпортує AGE
 - Лейбли секцій використовують компонент `Label` із спільною mobile-first типографікою та декоративним білим кругом.
 - Заголовки використовують компонент `Heading` із семантичним рівнем через проп `as`, варіантами line-height через `lineHeight` і letter-spacing через `letterSpacing`.
 - Описові тексти секцій використовують компонент `Description` із типографічними варіантами через `size`.
-- CTA-посилання використовують компонент `Button` із варіантами `primary` і `secondary` та розмірами `default` і `wide`.
+- CTA-посилання використовують компонент `Button` (pill, стрілка зсувається при hover; внутрішні шляхи через `next/link`): варіанти `primary`/`secondary` для темного фону, `primaryOnLight`/`secondaryOnLight` для світлого; розміри `default`, `wide`, `compact`. У групі посилань перше — primary, решта — secondary (як у hero).
 - Повноекранні секції можуть використовувати `ScrollIndicator` для переходу до наступного viewport.
 - Шрифти через `next/font/google` і токени `@theme`: основний текст — Inter (`font-sans`), заголовки (`Heading`) і лейбли (`Label`) — Montserrat (`font-heading`). `Heading` має проп `weight` (`semibold` за замовчуванням, `medium`).
 - Контакти офісів, email, пункти меню й мови зберігаються в src/components/layout/header/header-data.ts — єдине джерело для header (і надалі для footer/JSON-LD).

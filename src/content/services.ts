@@ -6,6 +6,8 @@ export type ServiceId = "turnkeySes" | "hotelSes";
 export type Service = {
   id: ServiceId;
   name: string;
+  /** Short name for compact UI (buttons, chips). */
+  shortName?: string;
   href: string;
   summary: string;
 };
@@ -20,6 +22,7 @@ export const services: Record<ServiceId, Service> = {
   hotelSes: {
     id: "hotelSes",
     name: "СЕС для готелю та відпочинкового комплексу",
+    shortName: "СЕС для готелю",
     href: routes.solutions.hotelSes,
     summary: "Енергонезалежність для готелів і баз відпочинку",
   },
