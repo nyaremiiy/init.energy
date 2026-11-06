@@ -21,6 +21,22 @@
 
   /* Large panel radius — same as the hero's bottom corners. */
   --radius-panel: 50px;
+
+  /* Form controls. */
+  --radius-field: 14px;
+  --text-caption: 0.8125rem;
+  --text-caption--line-height: 1.25rem;
+
+  /* Technical motion: short ease-out, no springs or bounces. */
+  --ease-tech: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --animate-enter: enter 300ms var(--ease-tech) both;
+
+  @keyframes enter {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+  }
 }
 
 body {

@@ -1,8 +1,8 @@
 import Link from "next/link";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 
-type ButtonVariant = "primary" | "secondary" | "dark";
-type ButtonSize = "default" | "wide" | "form";
+type ButtonVariant = "primary" | "secondary";
+type ButtonSize = "default" | "wide";
 
 type SharedButtonProps = {
   icon?: ReactNode;
@@ -23,17 +23,14 @@ type ButtonElementProps = SharedButtonProps &
 type ButtonProps = ButtonLinkProps | ButtonElementProps;
 
 const variantClasses: Record<ButtonVariant, string> = {
-  primary:
-    "bg-white text-ink hover:bg-white/90 focus-visible:outline-white/60",
+  primary: "bg-white text-ink hover:bg-white/90 focus-visible:outline-white/60",
   secondary:
     "border border-white/40 text-white backdrop-blur-sm hover:border-white hover:bg-white/10 focus-visible:outline-white/50",
-  dark: "bg-ink text-white hover:opacity-90 focus-visible:outline-ink/20",
 };
 
 const sizeClasses: Record<ButtonSize, string> = {
   default: "min-h-12 px-6 sm:px-7",
   wide: "min-h-12 px-7 sm:px-9",
-  form: "h-14 w-full px-6 text-base",
 };
 
 export function Button(props: ButtonProps) {

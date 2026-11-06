@@ -5,6 +5,7 @@ import { LeadForm, type LeadObjectType } from "@/components/forms/LeadForm";
 import { Description } from "@/components/ui/description";
 import { Heading } from "@/components/ui/heading";
 import { Label } from "@/components/ui/label";
+import { Reveal } from "@/components/ui/reveal";
 import { companyContacts, offices } from "@/content/company";
 import { anchors } from "@/content/routes";
 import { formatPhone } from "@/lib/format";
@@ -96,7 +97,9 @@ export function LeadSection({
             </address>
           </div>
 
-          <LeadForm defaultObjectType={defaultObjectType} />
+          <Reveal distance={12} duration={0.4}>
+            <LeadForm defaultObjectType={defaultObjectType} />
+          </Reveal>
         </div>
       </Container>
     </section>
