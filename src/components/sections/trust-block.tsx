@@ -118,6 +118,7 @@ export function TrustBlock({
               width={image.width}
               height={image.height}
               sizes="100vw"
+              quality={90}
               className="aspect-4/3 w-full object-cover md:aspect-21/8"
             />
           ) : (
@@ -130,7 +131,7 @@ export function TrustBlock({
           {/* Fade the photo out of the dark panel. */}
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-x-0 top-0 h-3/5 bg-linear-to-b from-ink via-ink/40 via-35% to-transparent"
+            className="pointer-events-none absolute inset-x-0 top-0 h-2/5 bg-linear-to-b from-ink via-ink/50 via-25% to-transparent"
           />
         </div>
       </Reveal>
