@@ -8,14 +8,21 @@ init.energy — вебпроєкт. Призначення та функціон
 
 ## Поточний стан
 
-- Чистий стартовий каркас на Next.js 16.4.5, React 19.3, TypeScript і Tailwind CSS v4.
-- Власного функціоналу та статичних ресурсів поки немає.
+- Каркас на Next.js 16.4.5, React 19.3, TypeScript, Tailwind CSS v4, Lucide React для іконок і Motion для анімацій.
+- Реалізовано responsive hero-секцію з локальними AVIF/WebP-зображеннями.
+- Hero містить модульний автоматичний слайдер контенту на Motion із переходом від правого краю viewport ліворуч і overlay crossfade медіа-шаром.
+- Медіа hero тримає максимум два різні фото лише під час crossfade та використовує responsive AVIF-зображення.
 
 ## Структура
 
 ```
 src/app/        # App Router: layout.tsx, page.tsx, globals.css
+src/components/layout/ # повторно використовувані layout-компоненти
+src/components/ui/ # повторно використовувані UI-компоненти
+src/components/sections/home/ # секції головної сторінки
 public/         # статичні файли
+public/images/  # зображення сайту
+public/images/home/hero/ # responsive-зображення hero головної сторінки
 docs/ai/        # спільний контекст для AI-агентів (цей файл + CHANGELOG)
 AGENTS.md       # правила для всіх агентів (Codex)
 CLAUDE.md       # точка входу для Claude Code (імпортує AGENTS.md)
@@ -33,6 +40,18 @@ CLAUDE.md       # точка входу для Claude Code (імпортує AGE
 - Агенти: Claude Code і Codex, синхронізуються через `AGENTS.md` + `docs/ai/`.
 - Remote на GitHub поки не підключений, нічого не пушимо.
 - Плагіни Claude Code для SEO/GEO/маркетингу підключені на рівні репо через .claude/settings.json: searchfit-seo (основний), marketing (Anthropic knowledge-work), rampstack-seo. Плагіни з платними MCP вмикати лише з підтвердження власника.
+- Усі секції використовують `Container`: максимум `1440px`, центрування та адаптивні горизонтальні відступи.
+- Лейбли секцій використовують компонент `Label` із спільною mobile-first типографікою та декоративним білим кругом.
+- Заголовки використовують компонент `Heading` із семантичним рівнем через проп `as`, варіантами line-height через `lineHeight` і letter-spacing через `letterSpacing`.
+- Описові тексти секцій використовують компонент `Description` із типографічними варіантами через `size`.
+- CTA-посилання використовують компонент `Button` із варіантами `primary` і `secondary` та розмірами `default` і `wide`.
+- Повноекранні секції можуть використовувати `ScrollIndicator` для переходу до наступного viewport.
+- Базовий шрифт сайту — Montserrat, підключений через `next/font/google`.
+- Кожна секція головної сторінки є окремим модулем у `src/components/sections/home/`.
+- Контентні варіанти hero та їхні зображення зберігаються в `hero-slides.ts`; анімація розділена між `hero-content-slider.tsx`, `hero-media-slider.tsx` і `hero-slider.tsx`.
+- Hero-заголовки зберігаються двома лініями в даних слайда для послідовної дворядкової композиції.
+- Проєкт розробляється модульно: секції, UI та layout-компоненти мають окремі відповідальні модулі.
+- У стилізації застосовується актуальний канонічний синтаксис Tailwind CSS; стандартні utility-класи мають пріоритет над довільними значеннями.
 
 ## Відкриті питання / TODO
 
