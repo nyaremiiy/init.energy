@@ -52,6 +52,7 @@ export const solutions: Solution[] = [
     links: [
       { product: "svitHome" },
       { product: "svitPlus5000" },
+      { product: "svitPlus16000" },
       { service: "turnkeySes" },
     ],
     tone: "light",
