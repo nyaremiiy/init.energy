@@ -1,3 +1,6 @@
+import { products, type ProductId } from "@/content/products";
+import { services, type ServiceId } from "@/content/services";
+
 export type Office = {
   id: string;
   city: string;
@@ -94,50 +97,33 @@ export const socialLinks: SocialLink[] = [
   },
 ];
 
-// URLs match the current init.energy site to preserve indexed pages.
+const productLink = (id: ProductId): NavMenuLink => ({
+  href: products[id].href,
+  label: products[id].name,
+  description: products[id].summary,
+});
+
+const serviceLink = (id: ServiceId): NavMenuLink => ({
+  href: services[id].href,
+  label: services[id].name,
+  description: services[id].summary,
+});
+
 export const navItems: NavItem[] = [
   {
     label: "SVIT",
     columns: [
       {
         title: "Резервне живлення",
-        items: [
-          {
-            href: "/svit-home/",
-            label: "SVIT HOME",
-            description: "Гібридний інвертор 6 кВт і АКБ 5,12 кВт·год",
-          },
-          {
-            href: "/svit-600/",
-            label: "SVIT 600",
-            description: "Станція 600 Вт, LiFePO₄ 865 Вт·год",
-          },
-        ],
+        items: [productLink("svitHome"), productLink("svit600")],
       },
       {
         title: "Акумулятори",
-        items: [
-          {
-            href: "/svit-plus-5000/",
-            label: "SVIT PLUS 5000",
-            description: "LiFePO₄ 5,12 кВт·год, потужність 5 кВт",
-          },
-          {
-            href: "/svit-plus-16000/",
-            label: "SVIT PLUS 16000",
-            description: "LiFePO₄ 16,07 кВт·год для автономних систем",
-          },
-        ],
+        items: [productLink("svitPlus5000"), productLink("svitPlus16000")],
       },
       {
         title: "Для бізнесу",
-        items: [
-          {
-            href: "/bess/",
-            label: "LITHIUMVALLEY",
-            description: "Промислове зберігання енергії від 208 до 1 044 кВт·год",
-          },
-        ],
+        items: [productLink("lithiumvalley")],
       },
     ],
   },
@@ -146,23 +132,11 @@ export const navItems: NavItem[] = [
     columns: [
       {
         title: "Сонячні електростанції",
-        items: [
-          {
-            href: "/cec/",
-            label: "СЕС під ключ",
-            description: "Проєктування та монтаж для бізнесу й приватних об'єктів",
-          },
-        ],
+        items: [serviceLink("turnkeySes")],
       },
       {
         title: "Галузеві рішення",
-        items: [
-          {
-            href: "/rishennya/ses-dlya-gotelyu/",
-            label: "СЕС для готелю та відпочинкового комплексу",
-            description: "Енергонезалежність для готелів і баз відпочинку",
-          },
-        ],
+        items: [serviceLink("hotelSes")],
       },
     ],
   },

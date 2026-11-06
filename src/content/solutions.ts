@@ -1,10 +1,12 @@
 import { products, type ProductId } from "./products";
-import { routes } from "./routes";
+import { services, type ServiceId } from "./services";
 
 export type SolutionLink = {
   label: string;
   href: string;
 };
+
+type LinkRef = { product: ProductId } | { service: ServiceId };
 
 export type Solution = {
   id: "apartment" | "house" | "business";
@@ -18,7 +20,7 @@ export type Solution = {
   productPrefix?: string;
   /** Product whose capacity is shown as the key spec. */
   specProductId: ProductId;
-  links: SolutionLink[];
+  links: LinkRef[];
   tone: "light" | "dark";
 };
 
@@ -33,12 +35,7 @@ export const solutions: Solution[] = [
       "Роутер, освітлення, ноутбук і телефони. Працює від розетки, без монтажу.",
     productIds: ["svit600"],
     specProductId: "svit600",
-    links: [
-      {
-        label: "Резервне живлення для квартири",
-        href: routes.backupPower.apartment,
-      },
-    ],
+    links: [{ product: "svit600" }],
     tone: "light",
   },
   {
@@ -51,11 +48,9 @@ export const solutions: Solution[] = [
     productIds: ["svitHome"],
     specProductId: "svitHome",
     links: [
-      {
-        label: "Резервне живлення для будинку",
-        href: routes.backupPower.house,
-      },
-      { label: "СЕС для дому", href: routes.ses.home },
+      { product: "svitHome" },
+      { product: "svitPlus5000" },
+      { service: "turnkeySes" },
     ],
     tone: "light",
   },
@@ -70,11 +65,9 @@ export const solutions: Solution[] = [
     productPrefix: "СЕС",
     specProductId: "lithiumvalley",
     links: [
-      {
-        label: "Резервне живлення для бізнесу",
-        href: routes.backupPower.business,
-      },
-      { label: "СЕС для бізнесу", href: routes.ses.business },
+      { product: "lithiumvalley" },
+      { service: "turnkeySes" },
+      { service: "hotelSes" },
     ],
     tone: "dark",
   },
@@ -87,4 +80,12 @@ export function getSolutionProduct(solution: Solution) {
     name: [solution.productPrefix, ...names].filter(Boolean).join(" + "),
     spec: products[solution.specProductId].capacity,
   };
+}
+
+export function getSolutionLinks(solution: Solution): SolutionLink[] {
+  return solution.links.map((ref) => {
+    const item = "product" in ref ? products[ref.product] : services[ref.service];
+
+    return { label: item.name, href: item.href };
+  });
 }

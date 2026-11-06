@@ -6,17 +6,20 @@ import { Label } from "@/components/ui/label";
 import { SectionHeader } from "@/components/ui/section-header";
 import { SegmentCard } from "@/components/ui/segment-card";
 import { routes } from "@/content/routes";
-import { getSolutionProduct, solutions } from "@/content/solutions";
+import { services } from "@/content/services";
+import {
+  getSolutionLinks,
+  getSolutionProduct,
+  solutions,
+} from "@/content/solutions";
 import { format, messages } from "@/lib/messages";
 
 const titleId = "solutions-by-segment-title";
 
 export function SolutionsBySegment() {
   const t = messages.solutionsBySegment;
-  const hubs = [
-    { ...t.hubs.ses, href: routes.ses.hub },
-    { ...t.hubs.backupPower, href: routes.backupPower.hub },
-  ];
+  // TODO(content): add the backup power hub once that page exists.
+  const hubs = [{ ...t.hubs.ses, href: services.turnkeySes.href }];
 
   return (
     <section
@@ -55,14 +58,16 @@ export function SolutionsBySegment() {
                 product={getSolutionProduct(solution)}
                 productTerm={t.productTerm}
                 specTerm={t.capacityTerm}
-                links={solution.links}
+                links={getSolutionLinks(solution)}
                 navLabel={format(t.cardNavLabel, { segment: solution.segment })}
                 tone={solution.tone}
               />
             ))}
           </div>
 
-          <ul className="grid gap-4 md:grid-cols-2">
+          <ul
+            className={`grid gap-4 ${hubs.length > 1 ? "md:grid-cols-2" : ""}`}
+          >
             {hubs.map((hub) => (
               <li key={hub.href}>
                 <Link

@@ -20,7 +20,7 @@
 - **Гілка:** feature/solutions-by-segment (статус: в роботі)
 - **Що зроблено:** секція після hero: SectionHeader (eyebrow, H2, lead, посилання на калькулятор), 3 картки SegmentCard (квартира, будинок, бізнес — темна), 2 смуги-посилання на хаби СЕС і резервного живлення. Додано токени `@theme` (ink, surface, line, sky), проп `tone` у Label і Description (дефолт не змінено), дані в `src/content/` (products, routes, solutions), тексти UI в `messages/uk.json`. Перевірено на 1440 і 360 px.
 - **Файли:** src/app/globals.css, src/app/page.tsx, src/components/ui/{label,description,section-header,segment-card}.tsx, src/components/sections/home/solutions-by-segment.tsx, src/content/*.ts, src/lib/messages.ts, messages/uk.json, docs/ai/*
-- **Нотатки / що далі:** i18n (next-intl, /en, messages/en.json) — окрема задача; сторінки /ses, /rezervne-zhyvlennya/*, /kalkulyator ще не створені (404).
+- **Нотатки / що далі:** посилання карток і хаба беруться з реальних сторінок init.energy (продукти SVIT, /cec/, /rishennya/ses-dlya-gotelyu/) через `src/content/` (products, services, routes); header-меню теж читає ці дані. Хаб резервного живлення і /kalkulyator/ — TODO(content), сторінок немає. i18n — окрема задача.
 
 ## 2026-11-06 — Header у дві смуги
 - **Агент:** Claude Code
