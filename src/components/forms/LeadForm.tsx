@@ -5,6 +5,7 @@ import Link from "next/link";
 import { type FormEvent, type ReactNode, useRef, useState } from "react";
 
 import { submitLead } from "@/app/actions/lead";
+import { inputClasses } from "@/components/ui/input-styles";
 import { routes } from "@/content/routes";
 import { validateLeadForm, type LeadFieldErrors } from "@/lib/lead-form-schema";
 import { messages } from "@/lib/messages";
@@ -37,14 +38,6 @@ const trackingKeys = [
 
 /** Order used to move focus to the first invalid field. */
 const fieldOrder = ["name", "phone", "consent"] as const;
-
-/**
- * Field states: default (white, `line` border) · hover (`ink/40` border) ·
- * focus-visible (`ink` border + soft 3px `ink/10` ring) · error (`ink` border) ·
- * disabled (`surface` background, muted text). Colour-only transitions.
- */
-const fieldClasses =
-  "w-full rounded-field border bg-white px-4 text-base text-ink placeholder:text-ink/45 transition-colors duration-200 ease-tech hover:border-ink/40 focus-visible:border-ink focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-ink/10 disabled:cursor-not-allowed disabled:bg-surface disabled:text-ink/70 disabled:hover:border-line";
 
 const borderFor = (error?: string) => (error ? "border-ink" : "border-line");
 
@@ -199,7 +192,7 @@ export function LeadForm({ defaultObjectType }: LeadFormProps) {
             placeholder={t.namePlaceholder}
             aria-invalid={errors.name ? true : undefined}
             aria-describedby="lead-name-error"
-            className={`${fieldClasses} h-14 ${borderFor(errors.name)}`}
+            className={inputClasses({ invalid: Boolean(errors.name) })}
           />
           <FieldError id="lead-name-error" message={errors.name} />
         </label>
@@ -215,7 +208,7 @@ export function LeadForm({ defaultObjectType }: LeadFormProps) {
             placeholder={t.phonePlaceholder}
             aria-invalid={errors.phone ? true : undefined}
             aria-describedby="lead-phone-error"
-            className={`${fieldClasses} h-14 ${borderFor(errors.phone)}`}
+            className={inputClasses({ invalid: Boolean(errors.phone) })}
           />
           <FieldError id="lead-phone-error" message={errors.phone} />
         </label>
@@ -230,7 +223,7 @@ export function LeadForm({ defaultObjectType }: LeadFormProps) {
             rows={3}
             autoComplete="off"
             placeholder={t.commentPlaceholder}
-            className={`${fieldClasses} min-h-28 resize-none py-4 border-line`}
+            className={inputClasses({ multiline: true })}
           />
         </label>
 

@@ -15,6 +15,12 @@
 
 ---
 
+## 2026-11-06 — Єдиний стиль полів вводу
+- **Агент:** Claude Code
+- **Гілка:** fix/unified-inputs (статус: змерджено в develop)
+- **Що зроблено:** спільний `inputClasses({ tone, invalid, multiline })` у `src/components/ui/input-styles.ts`: висота 56 px, `rounded-field` 14 px, рамка 1px, відступ 16 px, шрифт 16 px, однакові hover / focus-visible (суцільна рамка + кільце 3 px) / error / disabled; тони `light` і `dark`. Перенесено поля форми заявки й розсилки у футері (розсилка більше не `rounded-full`).
+- **Файли:** src/components/ui/input-styles.ts, src/components/forms/LeadForm.tsx, src/components/layout/footer/newsletter-form.tsx, docs/ai/*
+
 ## 2026-11-06 — Нижчий перемикач мов
 - **Агент:** Claude Code
 - **Гілка:** fix/language-switcher-height (статус: змерджено в develop)
