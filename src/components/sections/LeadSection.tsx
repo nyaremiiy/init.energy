@@ -1,7 +1,6 @@
 import { Mail, Phone } from "lucide-react";
 
 import { Container } from "@/components/layout/container";
-import { Panel } from "@/components/ui/panel";
 import { LeadForm, type LeadObjectType } from "@/components/forms/LeadForm";
 import { Heading } from "@/components/ui/heading";
 import { Reveal } from "@/components/ui/reveal";
@@ -28,14 +27,12 @@ export function LeadSection({
   const primaryPhone = offices[0].phone;
 
   return (
-    <Panel
-      as="section"
-      variant="sky"
+    <section
       id={anchors.contacts}
       aria-labelledby={titleId}
-      className="scroll-mt-24 bg-white pt-section-sm lg:pt-section"
+      className="scroll-mt-24 bg-white py-section-sm lg:py-section"
     >
-      <Container className="py-section-sm lg:py-section">
+      <Container>
         <div className="grid grid-cols-1 items-start gap-10 md:grid-cols-2 md:gap-16">
           <div className="flex flex-col items-start gap-5">
             <SectionHeader
@@ -99,6 +96,6 @@ export function LeadSection({
           </Reveal>
         </div>
       </Container>
-    </Panel>
+    </section>
   );
 }

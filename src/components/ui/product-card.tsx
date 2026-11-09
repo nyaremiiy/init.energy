@@ -32,7 +32,7 @@ export function ProductCard({
   photoPendingCaption,
 }: ProductCardProps) {
   return (
-    <article className="group relative flex h-full flex-col gap-6 rounded-3xl bg-white p-2 text-ink shadow-card transition duration-300 hover:bg-navy hover:text-white motion-safe:hover:-translate-y-1">
+    <article className="group relative flex h-full flex-col gap-6 rounded-3xl bg-surface p-2 text-ink shadow-card transition duration-300 hover:bg-navy hover:text-white motion-safe:hover:-translate-y-1">
       {image ? (
         <Image
           src={image.src}

@@ -32,7 +32,7 @@ const toneClasses: Record<
   }
 > = {
   light: {
-    card: "bg-white text-ink hover:bg-navy hover:text-white",
+    card: "bg-surface text-ink hover:bg-navy hover:text-white",
     index: "text-ink group-hover:text-white",
     text: "text-ink group-hover:text-white",
     muted: "text-ink/70 group-hover:text-white/75",
