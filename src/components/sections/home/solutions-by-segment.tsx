@@ -88,7 +88,7 @@ export function SolutionsBySegment() {
           {t.keywords.map((keyword, index) => (
             <span key={keyword} className="inline-flex items-center gap-3">
               {index > 0 ? (
-                <span aria-hidden className="text-ink/30">
+                <span aria-hidden className="font-bold text-ink/50">
                   ·
                 </span>
               ) : null}
