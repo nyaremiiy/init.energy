@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { Container } from "@/components/layout/container";
 import { ArrowLink } from "@/components/ui/arrow-link";
-import { Eyebrow } from "@/components/ui/eyebrow";
+import { CardLabel } from "@/components/ui/card-label";
 import { IconButton } from "@/components/ui/icon-button";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
@@ -74,7 +74,7 @@ export function SolutionsBySegment() {
               className="group flex items-center justify-between gap-6 rounded-3xl shadow-card bg-surface p-6 text-ink transition duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink motion-safe:hover:-translate-y-0.5 lg:p-8"
             >
               <span className="flex flex-col items-start gap-3">
-                <Eyebrow tone="light">{t.hub.label}</Eyebrow>
+                <CardLabel>{t.hub.label}</CardLabel>
                 <span className="font-heading text-h3 font-semibold tracking-tight">
                   {t.hub.title}
                 </span>
