@@ -53,7 +53,6 @@ export function ProductFocusTabs({
 }: ProductFocusTabsProps) {
   const baseId = useId();
   const rootRef = useRef<HTMLDivElement>(null);
-  const listRef = useRef<HTMLDivElement>(null);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const [active, setActive] = useState(defaultIndex);
   // null until the visitor picks a tab; reduced motion starts paused, others on auto.
@@ -90,20 +89,6 @@ export function ProductFocusTabs({
     return () => document.removeEventListener("visibilitychange", onChange);
   }, []);
 
-  // Keep the active tab visible in the scrollable row without moving the page.
-  useEffect(() => {
-    const list = listRef.current;
-    const tab = tabRefs.current[active];
-    if (!list || !tab) return;
-    const left = tab.offsetLeft - list.offsetLeft;
-    if (
-      left < list.scrollLeft ||
-      left + tab.offsetWidth > list.scrollLeft + list.clientWidth
-    ) {
-      list.scrollTo({ left, behavior: "smooth" });
-    }
-  }, [active]);
-
   function select(index: number, moveFocus: boolean) {
     setActive(index);
     setMode("stopped");
@@ -139,10 +124,9 @@ export function ProductFocusTabs({
     >
       <div>
         <div
-          ref={listRef}
           role="tablist"
           aria-label={labels.tablist}
-          className="scrollbar-none -mx-2.5 flex min-w-0 flex-1 snap-x snap-mandatory scroll-px-2.5 gap-2 overflow-x-auto px-2.5 py-1 sm:mx-0 sm:px-0"
+          className="flex flex-wrap gap-2"
         >
           {products.map((product, index) => {
             const selected = index === active;
@@ -161,7 +145,7 @@ export function ProductFocusTabs({
                 tabIndex={selected ? 0 : -1}
                 onClick={() => select(index, false)}
                 onKeyDown={onTabKeyDown}
-                className={`relative snap-start overflow-hidden ${chipClasses({ selected, tone: "dark" })}`}
+                className={`relative overflow-hidden ${chipClasses({ selected, tone: "dark" })}`}
               >
                 {product.name}
                 {selected && mode === "auto" ? (

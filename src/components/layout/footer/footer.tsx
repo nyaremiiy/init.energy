@@ -80,7 +80,7 @@ export function Footer() {
       panelClassName="bg-ink-glow"
       className="bg-white pb-panel-sm sm:pb-panel"
     >
-      <Container className="pt-14 lg:pt-24">
+      <Container inPanel className="pt-14 lg:pt-24">
         <FooterColumns
           brand={brand}
           sections={sections}

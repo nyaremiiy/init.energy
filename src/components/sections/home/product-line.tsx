@@ -52,7 +52,10 @@ export function ProductLine() {
     >
       <Panel variant="dark" panelClassName="bg-ink-glow">
         <SectionWatermark text="STORAGE" side="right" tone="dark" />
-        <Container className="relative flex flex-col gap-section-head py-section-sm lg:py-section">
+        <Container
+          inPanel
+          className="relative flex flex-col gap-section-head py-section-sm lg:py-section"
+        >
           <Reveal>
             <SectionHeader
               tone="dark"

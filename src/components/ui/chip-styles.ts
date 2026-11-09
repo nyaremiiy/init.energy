@@ -10,7 +10,7 @@ export type ChipTone = "light" | "dark";
 
 /** Geometry and type shared by every chip. */
 export const chipBase =
-  "inline-flex h-11 shrink-0 items-center rounded-full border px-5 text-sm font-medium whitespace-nowrap transition-colors duration-200 ease-tech focus-visible:outline-2 focus-visible:outline-offset-2";
+  "inline-flex h-10 shrink-0 items-center rounded-full border px-4 text-sm font-medium sm:h-11 sm:px-5 whitespace-nowrap transition-colors duration-200 ease-tech focus-visible:outline-2 focus-visible:outline-offset-2";
 
 const tones: Record<ChipTone, { on: string; off: string; focus: string }> = {
   light: {

@@ -23,7 +23,7 @@ export function Eyebrow({
 }: EyebrowProps) {
   return (
     <Tag
-      className={`inline-flex items-center gap-2 font-heading text-eyebrow font-medium tracking-eyebrow uppercase ${toneClasses[tone].text} ${className ?? ""}`}
+      className={`inline-flex items-center gap-2 font-heading text-eyebrow-sm font-medium sm:text-eyebrow tracking-eyebrow uppercase ${toneClasses[tone].text} ${className ?? ""}`}
       {...props}
     >
       <span

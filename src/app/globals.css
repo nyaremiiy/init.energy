@@ -70,6 +70,8 @@
   --text-number-sm--line-height: 1;
   --text-number: 3.75rem;
   --text-number--line-height: 1;
+  --text-eyebrow-sm: 0.75rem;
+  --text-eyebrow-sm--line-height: 1rem;
   --text-eyebrow: 0.875rem;
   --text-eyebrow--line-height: 1.25rem;
   --tracking-eyebrow: 0.12em;

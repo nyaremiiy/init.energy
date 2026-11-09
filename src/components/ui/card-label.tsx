@@ -32,7 +32,7 @@ export function CardLabel({
 
   return (
     <span
-      className={`inline-flex w-fit shrink-0 items-center gap-1.5 self-start rounded-full border px-3 py-1 text-sm font-medium whitespace-nowrap transition-colors duration-200 ease-tech ${toneClasses[tone]} ${hover} ${className ?? ""}`}
+      className={`inline-flex w-fit shrink-0 items-center gap-1.5 self-start rounded-full border px-2.5 py-1 text-xs font-medium sm:px-3 sm:text-sm whitespace-nowrap transition-colors duration-200 ease-tech ${toneClasses[tone]} ${hover} ${className ?? ""}`}
       {...props}
     >
       {Icon ? <Icon aria-hidden className="size-4 shrink-0" /> : null}
