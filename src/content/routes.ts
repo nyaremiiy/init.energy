@@ -12,6 +12,8 @@ export const slugs = {
   // TODO(content): cookie policy and terms pages are planned, not built yet.
   cookies: "polityka-cookie",
   terms: "umovy-vykorystannya",
+  // TODO(content): detailed payback calculator page — planned, not built yet.
+  calculatorPayback: "kalkulyator/okupnist-ses",
   products: {
     svit600: "svit-600",
     svitPlus5000: "svit-plus-5000",
@@ -34,6 +36,7 @@ export const anchors = {
   aboutUs: "about-us",
   products: "products",
   projects: "projects",
+  calculator: "calculator",
   contacts: "contacts",
 } as const;
 
@@ -53,6 +56,7 @@ export const routes = {
   privacy: toPath(slugs.privacy),
   cookies: toPath(slugs.cookies),
   terms: toPath(slugs.terms),
+  calculatorPayback: toPath(slugs.calculatorPayback),
   products: {
     svit600: toPath(slugs.products.svit600),
     svitPlus5000: toPath(slugs.products.svitPlus5000),
@@ -71,6 +75,7 @@ export const routes = {
     aboutUs: toAnchor(anchors.aboutUs),
     projects: toAnchor(anchors.projects),
     products: toAnchor(anchors.products),
+    calculator: toAnchor(anchors.calculator),
     contacts: toAnchor(anchors.contacts),
   },
 } as const;

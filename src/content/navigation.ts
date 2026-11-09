@@ -14,6 +14,7 @@ type FooterLinkLabels = {
   products: string;
   aboutUs: string;
   projects: string;
+  calculator: string;
   consultation: string;
   turnkeySes: string;
   svitCatalog: string;
@@ -34,6 +35,7 @@ export const pageNavigation: Record<string, NavEntry[]> = {
     ...(hasProjects
       ? [{ href: routes.sections.projects, labelKey: "projects" } as const]
       : []),
+    { href: routes.sections.calculator, labelKey: "calculator" },
     { href: routes.sections.contacts, labelKey: "consultation" },
   ],
 };

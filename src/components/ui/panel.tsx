@@ -1,6 +1,6 @@
 import type { ComponentPropsWithoutRef, ElementType, ReactNode } from "react";
 
-type PanelVariant = "dark" | "light";
+type PanelVariant = "dark" | "light" | "sky";
 
 type PanelProps = {
   variant?: PanelVariant;
@@ -14,6 +14,7 @@ type PanelProps = {
 const variantClasses: Record<PanelVariant, string> = {
   dark: "bg-ink text-white",
   light: "bg-surface text-ink",
+  sky: "bg-sky text-ink",
 };
 
 /**

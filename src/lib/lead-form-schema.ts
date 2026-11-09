@@ -15,12 +15,23 @@ export type ValidLead = {
   phone: string;
   comment: string;
   objectType: string;
+  /** JSON from the quick calculator (inputs + recommendation), empty if unused. */
+  calculatorData: string;
   pageUrl: string;
   tracking: Record<string, string>;
 };
 
 const internationalPhone = /^\+[1-9]\d{7,14}$/;
-const trackingKeys = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "gclid", "fbclid", "ttclid"] as const;
+const trackingKeys = [
+  "utm_source",
+  "utm_medium",
+  "utm_campaign",
+  "utm_term",
+  "utm_content",
+  "gclid",
+  "fbclid",
+  "ttclid",
+] as const;
 
 const getText = (formData: FormData, key: string) =>
   String(formData.get(key) ?? "").trim();
@@ -50,6 +61,7 @@ export function validateLeadForm(
       phone,
       comment: getText(formData, "comment"),
       objectType: getText(formData, "objectType"),
+      calculatorData: getText(formData, "calculatorData"),
       pageUrl: getText(formData, "pageUrl"),
       tracking: Object.fromEntries(
         trackingKeys.map((key) => [key, getText(formData, key)]),
