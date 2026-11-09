@@ -29,7 +29,7 @@ export function ProductCard({
   photoPendingCaption,
 }: ProductCardProps) {
   return (
-    <article className="flex h-full flex-col gap-6 rounded-3xl shadow-soft bg-surface p-6 text-ink transition duration-300 motion-safe:hover:-translate-y-1 lg:p-8">
+    <article className="flex h-full flex-col gap-6 rounded-3xl shadow-card bg-surface p-6 text-ink transition duration-300 motion-safe:hover:-translate-y-1 lg:p-8">
       {image ? (
         <Image
           src={image.src}
