@@ -6,6 +6,7 @@ import Image from "next/image";
 import { type KeyboardEvent, useEffect, useId, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
+import { chipClasses } from "@/components/ui/chip-styles";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { MediaPlaceholder } from "@/components/ui/media-placeholder";
 import { trackEvent } from "@/lib/analytics";
@@ -158,11 +159,7 @@ export function ProductFocusTabs({
                 tabIndex={selected ? 0 : -1}
                 onClick={() => select(index, false)}
                 onKeyDown={onTabKeyDown}
-                className={`relative inline-flex h-11 shrink-0 snap-start items-center overflow-hidden rounded-full border px-5 text-sm font-medium whitespace-nowrap transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
-                  selected
-                    ? "border-white bg-white text-ink"
-                    : "border-white/20 text-white hover:border-white"
-                }`}
+                className={`relative snap-start overflow-hidden ${chipClasses({ selected, tone: "dark" })}`}
               >
                 {product.name}
                 {selected && mode === "auto" ? (

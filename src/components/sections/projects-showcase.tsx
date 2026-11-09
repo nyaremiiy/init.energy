@@ -6,6 +6,7 @@ import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
 import { SectionWatermark } from "@/components/ui/section-watermark";
 import { ArrowLink } from "@/components/ui/arrow-link";
+import { chipClasses } from "@/components/ui/chip-styles";
 
 import { featuredProjects, type ProjectSegment } from "@/content/projects";
 import { anchors, routes } from "@/content/routes";
@@ -64,11 +65,7 @@ export function ProjectsShowcase() {
                   key={segment.id}
                   href={href}
                   aria-current={isActive ? "page" : undefined}
-                  className={`rounded-full border px-4 py-2 text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink ${
-                    isActive
-                      ? "border-ink bg-ink text-white"
-                      : "border-ink/20 text-ink hover:border-ink"
-                  }`}
+                  className={chipClasses({ selected: isActive })}
                 >
                   {t.filters[segment.labelKey]}
                 </Link>
