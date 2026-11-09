@@ -3,6 +3,7 @@ import { ChevronDown } from "lucide-react";
 import { isNavGroup, navItems } from "./header-data";
 import { MegaMenuPanel } from "./mega-menu-panel";
 import { NavLink } from "./nav-link";
+import { SectionNavLink } from "./section-nav-link";
 
 export function DesktopNav() {
   return (
@@ -30,12 +31,20 @@ export function DesktopNav() {
             </li>
           ) : (
             <li key={item.href}>
-              <NavLink
-                href={item.href}
-                className="transition-colors hover:text-white"
-              >
-                {item.label}
-              </NavLink>
+              {item.sectionId ? (
+                <SectionNavLink
+                  href={item.href}
+                  label={item.label}
+                  sectionId={item.sectionId}
+                />
+              ) : (
+                <NavLink
+                  href={item.href}
+                  className="transition-colors hover:text-white"
+                >
+                  {item.label}
+                </NavLink>
+              )}
             </li>
           ),
         )}
