@@ -23,7 +23,7 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
     <div
       role="group"
       aria-label={messages.footer.languageLabel}
-      className={`inline-flex items-center gap-2 text-sm font-semibold ${className ?? ""}`}
+      className={`inline-flex items-center gap-1.5 font-heading text-eyebrow font-medium tracking-eyebrow uppercase ${className ?? ""}`}
     >
       {languages.map((language, index) => {
         const isSelected = language.code === selected;
@@ -31,7 +31,7 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
         return (
           <span key={language.code} className="inline-flex items-center gap-2">
             {index > 0 ? (
-              <span aria-hidden className="text-white/40">
+              <span aria-hidden className="text-white/25">
                 /
               </span>
             ) : null}
@@ -40,7 +40,7 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
               lang={language.code}
               aria-pressed={isSelected}
               onClick={() => setSelected(language.code)}
-              className={`rounded-sm transition-colors duration-200 ease-tech focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${isSelected ? "text-white" : "text-white/55 hover:text-white"}`}
+              className={`rounded-sm transition-colors duration-200 ease-tech focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-white ${isSelected ? "text-white/90" : "text-white/40 hover:text-white/75"}`}
             >
               {language.label}
             </button>
