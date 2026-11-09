@@ -52,6 +52,24 @@
       "note": "This is an estimate. An engineer confirms the exact configuration and price — the calculator parameters are added to your request."
     }
   },
+  "faq": {
+    "eyebrow": "Questions and answers",
+    "title": "FAQ about solar plants and backup power",
+    "lead": "Short answers to what people ask most before buying.",
+    "filterLabel": "Question topics",
+    "all": "All",
+    "topics": {
+      "backup": "Backup power",
+      "solar": "Solar plants",
+      "products": "Products",
+      "warranty": "Warranty and service"
+    },
+    "help": {
+      "title": "Didn't find an answer?",
+      "text": "An engineer will answer questions about your site.",
+      "link": "Ask a question"
+    }
+  },
   "leadSection": {
     "eyebrow": "Consultation",
     "title": "We will size a system for your property",
@@ -118,7 +136,8 @@
       "svitCatalog": "SVIT products",
       "about": "About us",
       "contacts": "Contacts",
-      "calculator": "Calculator"
+      "calculator": "Calculator",
+      "faq": "FAQ"
     },
     "newsletter": {
       "title": "Newsletter",

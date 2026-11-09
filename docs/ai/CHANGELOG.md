@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-09 — Секція FAQ на головній
+- **Агент:** Claude Code
+- **Гілка:** feature/faq-section (статус: змерджено в develop)
+- **Що зроблено:** секція «Часті питання про СЕС і резервне живлення» між калькулятором і заявкою: 5/7, ліва колонка sticky з карткою «Не знайшли відповідь?» (телефон з `company.ts`, посилання на #contacts), фільтр тем і акордеон на 8 питань (перше відкрите за замовчуванням), водяний знак FAQ (CONTACT перенесено ліворуч для чергування). JSON-LD FAQPage з усіх 8 питань. Тексти UI — uk/en; пункт «Питання й відповіді» у футері.
+- **Файли:** src/content/faq.ts, src/components/faq/FaqAccordion.tsx, src/components/sections/home/faq-section.tsx, src/components/seo/JsonLd.tsx, src/lib/seo/schema.ts, src/content/{routes,navigation}.ts, src/components/sections/LeadSection.tsx, src/app/page.tsx, messages/{uk,en}.json, docs/ai/*
+- **Нотатки / що далі:** відповідь 02 — без «батарея LiFePO₄» для SVIT 600 (на init.energy тип батареї суперечливий); відповідь 07 починається з «Ні.» (пряма відповідь, GEO). «По всій Україні» — з тексту секції проєктів, на init.energy не перевірено. JSON-LD перевірено парсингом (8 питань); Rich Results Test — вручну після публікації.
+
 ## 2026-11-09 — Єдиний стиль секцій (крім hero)
 - **Агент:** Claude Code
 - **Гілка:** style/unify-site (статус: змерджено в develop)

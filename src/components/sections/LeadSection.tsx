@@ -33,7 +33,7 @@ export function LeadSection({
       aria-labelledby={titleId}
       className="relative scroll-mt-24 overflow-hidden bg-white pt-section-sm lg:pt-section"
     >
-      <SectionWatermark text="CONTACT" side="right" />
+      <SectionWatermark text="CONTACT" />
       <Container className="relative">
         <div className="grid grid-cols-1 items-start gap-10 md:grid-cols-2 md:gap-16">
           <div className="flex flex-col items-start gap-5">
