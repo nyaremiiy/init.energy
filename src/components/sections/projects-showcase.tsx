@@ -61,13 +61,13 @@ export function ProjectsShowcase() {
               const href = `${routes.projects}?segment=${segment.id}`;
 
               return (
-                // Filters stay greyed out until there are enough projects to filter.
+                // Only "all" is active while there are few projects; other filters stay greyed out.
                 <Link
                   key={segment.id}
                   href={href}
                   aria-current={isActive ? "page" : undefined}
-                  aria-disabled
-                  tabIndex={-1}
+                  aria-disabled={!isActive}
+                  tabIndex={isActive ? undefined : -1}
                   className={chipClasses({
                     selected: isActive,
                     disabled: true,
