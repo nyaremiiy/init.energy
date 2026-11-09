@@ -1,5 +1,6 @@
 import { segmentIcons } from "@/content/segments";
 import { Container } from "@/components/layout/container";
+import { Panel } from "@/components/ui/panel";
 import { Heading } from "@/components/ui/heading";
 import { ProductCard } from "@/components/ui/product-card";
 import { ProductCompareTable } from "@/components/ui/product-compare-table";
@@ -19,12 +20,14 @@ export function ProductLine() {
   const t = messages.productLine;
 
   return (
-    <section
+    <Panel
+      as="section"
+      variant="sky"
       id={anchors.products}
       aria-labelledby={titleId}
       className="scroll-mt-24 bg-white pt-section-sm lg:pt-section"
     >
-      <Container className="flex flex-col gap-section-head">
+      <Container className="flex flex-col gap-section-head py-section-sm lg:py-section">
         <Reveal>
           <SectionHeader
             eyebrow={t.eyebrow}
@@ -86,6 +89,6 @@ export function ProductLine() {
           />
         </Reveal>
       </Container>
-    </section>
+    </Panel>
   );
 }

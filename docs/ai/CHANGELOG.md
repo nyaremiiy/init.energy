@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-09 — Кольори калькулятора на всій головній
+- **Агент:** Claude Code
+- **Гілка:** style/sky-sections (статус: змерджено в develop)
+- **Що зроблено:** «Рішення», «Накопичувачі», «Проєкти» і «Заявка» перенесено на блакитні панелі `Panel variant="sky"`; світлі картки (сегментів, товарів, проєктів, смуга СЕС, форма заявки) — `bg-white` замість `bg-surface`. Лейбл «Рекомендація» в результаті калькулятора — пігулка `CardLabel` замість `Eyebrow`.
+- **Файли:** src/components/sections/{home/solutions-by-segment,home/product-line,projects-showcase,LeadSection}.tsx, src/components/ui/{segment-card,product-card,project-card}.tsx, src/components/forms/LeadForm.tsx, src/components/calculator/QuickCalculator.tsx, docs/ai/*
+- **Нотатки / що далі:** hero і «Про компанію» не змінювались.
+
 ## 2026-11-09 — Секція «Калькулятор» на головній
 - **Агент:** Claude Code
 - **Гілка:** feature/quick-calculator (статус: змерджено в develop)

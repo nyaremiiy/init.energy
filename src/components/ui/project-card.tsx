@@ -42,7 +42,7 @@ export function ProjectCard({ project, variant }: ProjectCardProps) {
         button: "outline-dark" as const,
       }
     : {
-        card: "bg-surface text-ink",
+        card: "bg-white text-ink",
         title: "text-ink",
         muted: "text-ink/70",
         divider: "border-line",
