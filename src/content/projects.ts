@@ -38,9 +38,10 @@ export const projectList: Project[] = [
     segment: "business",
     title: "Система резервного живлення",
     region: "Львівська область",
-    // TODO(content): ~180 kW is the owner's estimate from the photo — confirm power, equipment and capacity.
+    // Owner: 3 racks × 13 SVIT PLUS 5000 modules = 39 × 5,12 ≈ 200 kWh of storage.
+    // TODO(content): owner estimated "~180" — confirm whether that is inverter power (kW) or storage (kWh).
     powerKw: 180,
-    equipment: "lithiumvalley",
+    equipment: "svitPlus5000",
     year: 2025,
     image: {
       src: "/images/projects/03.avif",
