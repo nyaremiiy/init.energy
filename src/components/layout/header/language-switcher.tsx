@@ -23,13 +23,13 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
     <div
       role="group"
       aria-label={messages.footer.languageLabel}
-      className={`inline-flex items-center gap-1.5 font-heading text-eyebrow font-medium tracking-eyebrow uppercase ${className ?? ""}`}
+      className={`inline-flex items-center gap-1 font-heading text-eyebrow font-medium tracking-eyebrow uppercase ${className ?? ""}`}
     >
       {languages.map((language, index) => {
         const isSelected = language.code === selected;
 
         return (
-          <span key={language.code} className="inline-flex items-center gap-2">
+          <span key={language.code} className="inline-flex items-center gap-1">
             {index > 0 ? (
               <span aria-hidden className="text-white/25">
                 /
