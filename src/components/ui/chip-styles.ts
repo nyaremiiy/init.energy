@@ -1,0 +1,38 @@
+/**
+ * The one pill-button style for the whole site: filter chips, product tabs,
+ * radio pills. Same height, padding and type everywhere; only colours follow
+ * the background tone.
+ *
+ * Use `chipClasses` for buttons and links. Radio pills (`PillRadio`) add
+ * `peer-checked:` states on top of `chipBase`.
+ */
+export type ChipTone = "light" | "dark";
+
+/** Geometry and type shared by every chip. */
+export const chipBase =
+  "inline-flex h-11 shrink-0 items-center rounded-full border px-5 text-sm font-medium whitespace-nowrap transition-colors duration-200 ease-tech focus-visible:outline-2 focus-visible:outline-offset-2";
+
+const tones: Record<ChipTone, { on: string; off: string; focus: string }> = {
+  light: {
+    on: "border-ink bg-ink text-white",
+    off: "border-ink/20 text-ink hover:border-ink",
+    focus: "focus-visible:outline-ink",
+  },
+  dark: {
+    on: "border-white bg-white text-ink",
+    off: "border-white/20 text-white hover:border-white",
+    focus: "focus-visible:outline-white",
+  },
+};
+
+export function chipClasses({
+  selected,
+  tone = "light",
+}: {
+  selected: boolean;
+  tone?: ChipTone;
+}): string {
+  const colours = tones[tone];
+
+  return `${chipBase} ${colours.focus} ${selected ? colours.on : colours.off}`;
+}
