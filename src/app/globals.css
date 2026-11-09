@@ -13,8 +13,8 @@
   --color-surface: rgb(244 246 250);
   /* Hairlines and dividers on light surfaces. */
   --color-line: rgb(0 2 23 / 12%);
-  /* Fresh light blue: the second solution card. */
-  --color-sky: rgb(208 226 255);
+  /* Warm sunny tint: the second solution card. */
+  --color-sky: rgb(254 243 217);
 
   /* Vertical rhythm: space between home sections (mobile / lg) and header → content. */
   --spacing-section-sm: 5.5rem;
