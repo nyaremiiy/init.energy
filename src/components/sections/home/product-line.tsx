@@ -1,6 +1,7 @@
 import { segmentIcons } from "@/content/segments";
 import { Container } from "@/components/layout/container";
 import { Heading } from "@/components/ui/heading";
+import { Panel } from "@/components/ui/panel";
 import { ProductCard } from "@/components/ui/product-card";
 import { ProductCompareTable } from "@/components/ui/product-compare-table";
 import { Reveal } from "@/components/ui/reveal";
@@ -20,13 +21,15 @@ export function ProductLine() {
   const t = messages.productLine;
 
   return (
-    <section
+    <Panel
+      as="section"
+      variant="sky"
       id={anchors.products}
       aria-labelledby={titleId}
-      className="relative scroll-mt-24 overflow-hidden bg-white pt-section-sm lg:pt-section"
+      className="scroll-mt-24 bg-white pt-section-sm lg:pt-section"
     >
       <SectionWatermark text="STORAGE" side="right" />
-      <Container className="relative flex flex-col gap-section-head">
+      <Container className="relative flex flex-col gap-section-head py-section-sm lg:py-section">
         <Reveal>
           <SectionHeader
             eyebrow={t.eyebrow}
@@ -88,6 +91,6 @@ export function ProductLine() {
           />
         </Reveal>
       </Container>
-    </section>
+    </Panel>
   );
 }
