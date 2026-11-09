@@ -50,7 +50,10 @@ export function TrustBlock({
     >
       <SectionWatermark text="ENERGY" tone="dark" align="upper" />
       <Reveal className="relative">
-        <Container className="flex flex-col gap-section-head py-section-sm lg:py-section">
+        <Container
+          inPanel
+          className="flex flex-col gap-section-head py-section-sm lg:py-section"
+        >
           <SectionHeader
             tone="dark"
             layout="split"

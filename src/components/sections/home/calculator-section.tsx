@@ -22,7 +22,10 @@ export function CalculatorSection() {
       className="scroll-mt-24 bg-white pt-section-sm lg:pt-section"
     >
       <SectionWatermark text="SYSTEM" />
-      <Container className="relative flex flex-col gap-section-head py-section-sm lg:py-section">
+      <Container
+        inPanel
+        className="relative flex flex-col gap-section-head py-section-sm lg:py-section"
+      >
         <Reveal>
           <SectionHeader
             eyebrow={t.eyebrow}

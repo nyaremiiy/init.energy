@@ -15,6 +15,12 @@
 
 ---
 
+## 2026-11-09 — Мобільні лейбли, таби й відступи
+- **Агент:** Claude Code
+- **Гілка:** style/mobile-labels-tabs-gutter (статус: змерджено в develop)
+- **Що зроблено:** лейбли на мобільному 12 px (`Eyebrow` — токен `--text-eyebrow-sm`, `CardLabel` — `text-xs`); усі пігулки-таби 40 px на мобільному / 44 px з `sm`; вкладки накопичувачів переносяться замість горизонтального скролу (прибрано ефект автопрокрутки ряду); `Container` отримав `inPanel` — вміст на мобільному скрізь на 18 px від краю (білі секції, панелі, футер, мобільне меню).
+- **Файли:** src/components/layout/{container.tsx,footer/footer.tsx,header/mobile-menu.tsx}, src/components/ui/{eyebrow,card-label}.tsx, src/components/ui/chip-styles.ts, src/components/products/ProductFocusTabs.tsx, src/components/sections/{home/calculator-section,home/hero-content-slider,home/product-line,trust-block}.tsx, src/app/globals.css, docs/ai/*
+
 ## 2026-11-09 — Мобільна версія: переповнення і типографічні токени
 - **Агент:** Claude Code
 - **Гілка:** style/mobile-polish (статус: змерджено в develop)
