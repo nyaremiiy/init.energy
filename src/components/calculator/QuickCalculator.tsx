@@ -11,7 +11,7 @@ import {
 } from "react";
 
 import { Button } from "@/components/ui/button";
-import { Eyebrow } from "@/components/ui/eyebrow";
+import { CardLabel } from "@/components/ui/card-label";
 import { IconButton } from "@/components/ui/icon-button";
 import { inputClasses } from "@/components/ui/input-styles";
 import { PillRadio } from "@/components/ui/pill-radio";
@@ -440,7 +440,7 @@ export function QuickCalculator() {
       <div className="flex flex-col gap-8 rounded-3xl bg-ink p-6 text-white lg:col-span-5 lg:p-10">
         <div aria-live="polite" className="flex flex-col gap-6">
           <div className="flex items-center justify-between gap-4">
-            <Eyebrow tone="dark">{t.result.eyebrow}</Eyebrow>
+            <CardLabel tone="dark">{t.result.eyebrow}</CardLabel>
             <span className="text-sm text-white/75">
               {t.result.approximate}
             </span>
