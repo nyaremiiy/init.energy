@@ -38,10 +38,16 @@ export const projectList: Project[] = [
     title: "Тестовий логістичний комплекс",
     city: "Київ",
     region: "Київська область",
-    powerKw: 500,
+    // TODO(content): ~180 kW is the owner's estimate from the photo — confirm power, equipment and capacity.
+    powerKw: 180,
     equipment: "lithiumvalley",
     year: 2025,
-    image: null,
+    image: {
+      src: "/images/projects/03.avif",
+      alt: "Технічне приміщення з трьома стійками акумуляторних модулів і гібридними інверторами та розподільчими шафами",
+      width: 1672,
+      height: 941,
+    },
     featured: true,
     draft: true,
   },
