@@ -1,4 +1,34 @@
 {
+  "solutionsBySegment": {
+    "eyebrow": "Solutions",
+    "title": "What do you need to power?",
+    "lead": "Choose your property type to explore backup power and solar generation options with SVIT and LITHIUMVALLEY storage.",
+    "calculatorLink": "Size your system",
+    "cardNavLabel": "Solutions for {segment}",
+    "recommend": "Recommended",
+    "capacityLabels": {
+      "apartment": "SVIT 600 capacity",
+      "house": "capacity per battery",
+      "business": "LITHIUMVALLEY capacity"
+    },
+    "cardCtas": {
+      "apartment": "Backup for apartments",
+      "house": "Backup and solar for homes",
+      "business": "Solutions for business"
+    },
+    "hub": {
+      "title": "Turnkey solar power plants",
+      "description": "For businesses and private properties: design, equipment, installation and commissioning.",
+      "details": "Learn more"
+    },
+    "keywords": [
+      "Solar power plants",
+      "Backup power",
+      "SVIT storage",
+      "Turnkey installation",
+      "Maintenance"
+    ]
+  },
   "productLine": {
     "eyebrow": "Battery line-up",
     "title": "SVIT and LITHIUMVALLEY energy storage",

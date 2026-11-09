@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-09 — Картки рішень за ємністю
+- **Агент:** Codex
+- **Гілка:** feature/solution-capacity-cards (статус: змерджено в develop)
+- **Що зроблено:** секцію «Що вам потрібно живити?» переверстано за макетом: ємність із `products.ts` стала головною цифрою; рекомендації показано рядками з характеристиками, а сегментні CTA — спільним `Button`. Смугу СЕС оновлено на світлу картку з Sun, описом і круглою дією. `SegmentCard` отримав режим `showcase`, а його використання на сторінці продукту зберегло попередню структуру. Додано контурний світлий варіант `Button` і темний заповнений варіант `IconButton`; URL-и й прив’язки продуктів зберігаються в `content/`.
+- **Файли:** src/components/sections/home/solutions-by-segment.tsx, src/components/ui/{segment-card,button,icon-button}.tsx, src/content/{solutions,routes}.ts, messages/{uk,en}.json, docs/ai/*
+- **Нотатки / що далі:** lint/build проходять; перевірено 1440, 768 і 360 px, переповнення цифр та секції немає. Маршрути `/ses/` і `/rezervne-zhyvlennya/dlya-*/` задано за макетом, але відповідні сторінки ще не реалізовано. Незалежні незакомічені `next.config.ts` і `public/images/products/svit600.png` залишено недоторканими.
+
 ## 2026-11-09 — Сторінка продукту SVIT PLUS 5000
 - **Агент:** Claude Code
 - **Гілка:** feature/product-page-svit-plus-5000 (статус: змерджено в develop)

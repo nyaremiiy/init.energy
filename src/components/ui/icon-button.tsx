@@ -2,7 +2,7 @@ import { ArrowUpRight, Loader2 } from "lucide-react";
 import Link from "next/link";
 import type { ComponentPropsWithoutRef } from "react";
 
-type IconButtonVariant = "outline-light" | "outline-dark" | "solid-light";
+type IconButtonVariant = "outline-light" | "outline-dark" | "solid-light" | "solid-dark";
 type IconButtonSize = "md" | "sm";
 
 type SharedProps = {
@@ -36,6 +36,8 @@ const variantClasses: Record<IconButtonVariant, string> = {
   /** Filled white (e.g. the newsletter submit). */
   "solid-light":
     "bg-white text-ink hover:bg-white/90 focus-visible:outline-white",
+  "solid-dark":
+    "bg-ink text-white hover:bg-ink/85 focus-visible:outline-ink",
 };
 
 const sizeClasses: Record<IconButtonSize, string> = {
