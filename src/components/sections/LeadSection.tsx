@@ -5,6 +5,7 @@ import { LeadForm, type LeadObjectType } from "@/components/forms/LeadForm";
 import { Heading } from "@/components/ui/heading";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
+import { SectionWatermark } from "@/components/ui/section-watermark";
 import { companyContacts, offices } from "@/content/company";
 import { anchors } from "@/content/routes";
 import { formatPhone } from "@/lib/format";
@@ -30,9 +31,10 @@ export function LeadSection({
     <section
       id={anchors.contacts}
       aria-labelledby={titleId}
-      className="scroll-mt-24 bg-white py-section-sm lg:py-section"
+      className="relative scroll-mt-24 overflow-hidden bg-white py-section-sm lg:py-section"
     >
-      <Container>
+      <SectionWatermark text="CONTACT" side="right" />
+      <Container className="relative">
         <div className="grid grid-cols-1 items-start gap-10 md:grid-cols-2 md:gap-16">
           <div className="flex flex-col items-start gap-5">
             <SectionHeader

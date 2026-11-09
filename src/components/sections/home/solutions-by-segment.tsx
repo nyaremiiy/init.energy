@@ -6,6 +6,7 @@ import { CardLabel } from "@/components/ui/card-label";
 import { IconButton } from "@/components/ui/icon-button";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
+import { SectionWatermark } from "@/components/ui/section-watermark";
 import { SegmentCard } from "@/components/ui/segment-card";
 import { anchors, routes } from "@/content/routes";
 import { segmentIcons } from "@/content/segments";
@@ -23,14 +24,7 @@ export function SolutionsBySegment() {
       aria-labelledby={titleId}
       className="relative scroll-mt-24 overflow-hidden bg-white pt-section-sm lg:pt-section"
     >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute top-1/2 left-20 size-0"
-      >
-        <span className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 -rotate-90 font-heading text-display font-semibold tracking-tight whitespace-nowrap text-ink/5 uppercase">
-          SOLAR
-        </span>
-      </div>
+      <SectionWatermark text="SOLAR" />
       <Container className="relative flex flex-col gap-section-head">
         <Reveal>
           <SectionHeader

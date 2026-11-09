@@ -3,6 +3,7 @@ import { Container } from "@/components/layout/container";
 import { Panel } from "@/components/ui/panel";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
+import { SectionWatermark } from "@/components/ui/section-watermark";
 import { anchors } from "@/content/routes";
 import { messages } from "@/lib/messages";
 
@@ -20,7 +21,8 @@ export function CalculatorSection() {
       aria-labelledby={titleId}
       className="scroll-mt-24 bg-white pt-section-sm lg:pt-section"
     >
-      <Container className="flex flex-col gap-section-head py-section-sm lg:py-section">
+      <SectionWatermark text="SYSTEM" />
+      <Container className="relative flex flex-col gap-section-head py-section-sm lg:py-section">
         <Reveal>
           <SectionHeader
             eyebrow={t.eyebrow}
