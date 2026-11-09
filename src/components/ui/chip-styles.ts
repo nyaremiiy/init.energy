@@ -25,14 +25,21 @@ const tones: Record<ChipTone, { on: string; off: string; focus: string }> = {
   },
 };
 
+/** Greyed-out chip: not clickable, muted text and border (e.g. filters with too few items). */
+const disabledClasses = "pointer-events-none border-ink/10 text-ink/35";
+
 export function chipClasses({
   selected,
   tone = "light",
+  disabled = false,
 }: {
   selected: boolean;
   tone?: ChipTone;
+  disabled?: boolean;
 }): string {
   const colours = tones[tone];
+
+  if (disabled) return `${chipBase} ${disabledClasses}`;
 
   return `${chipBase} ${colours.focus} ${selected ? colours.on : colours.off}`;
 }
