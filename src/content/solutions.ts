@@ -19,7 +19,7 @@ export type Solution = {
   title: string;
   description: string;
   links: LinkRef[];
-  tone: "light" | "dark";
+  tone: "light" | "sky" | "dark";
 };
 
 // Ukrainian only for now; EN arrives with i18n routing.
@@ -47,7 +47,7 @@ export const solutions: Solution[] = [
       { product: "svitPlus16000" },
       { service: "turnkeySes" },
     ],
-    tone: "light",
+    tone: "sky",
   },
   {
     id: "business",
