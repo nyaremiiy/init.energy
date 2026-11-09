@@ -151,22 +151,23 @@ button:not(:disabled) {
 
 /*
  * Eased fade from ink to transparent (top → bottom). Many stops on an
- * ease-out curve hide the edge that a 2–3 stop linear gradient leaves.
+ * gentle ease-in-out curve hide the edge that a 2–3 stop linear gradient leaves.
  */
 .fade-from-ink {
   background: linear-gradient(
     to bottom,
     var(--color-ink) 0%,
-    color-mix(in srgb, var(--color-ink) 74%, transparent) 19%,
-    color-mix(in srgb, var(--color-ink) 54%, transparent) 34%,
-    color-mix(in srgb, var(--color-ink) 38%, transparent) 47%,
-    color-mix(in srgb, var(--color-ink) 28%, transparent) 56.5%,
-    color-mix(in srgb, var(--color-ink) 19%, transparent) 65%,
-    color-mix(in srgb, var(--color-ink) 13%, transparent) 73%,
-    color-mix(in srgb, var(--color-ink) 8%, transparent) 80.2%,
-    color-mix(in srgb, var(--color-ink) 4%, transparent) 86.1%,
-    color-mix(in srgb, var(--color-ink) 2%, transparent) 91%,
-    color-mix(in srgb, var(--color-ink) 1%, transparent) 95.2%,
+    color-mix(in srgb, var(--color-ink) 99%, transparent) 6%,
+    color-mix(in srgb, var(--color-ink) 96%, transparent) 12%,
+    color-mix(in srgb, var(--color-ink) 90%, transparent) 19%,
+    color-mix(in srgb, var(--color-ink) 81%, transparent) 27%,
+    color-mix(in srgb, var(--color-ink) 69%, transparent) 36%,
+    color-mix(in srgb, var(--color-ink) 55%, transparent) 46%,
+    color-mix(in srgb, var(--color-ink) 41%, transparent) 56%,
+    color-mix(in srgb, var(--color-ink) 28%, transparent) 66%,
+    color-mix(in srgb, var(--color-ink) 17%, transparent) 76%,
+    color-mix(in srgb, var(--color-ink) 9%, transparent) 85%,
+    color-mix(in srgb, var(--color-ink) 3%, transparent) 93%,
     transparent 100%
   );
 }
