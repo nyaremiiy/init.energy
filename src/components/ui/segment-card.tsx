@@ -25,21 +25,21 @@ const toneClasses: Record<
     index: "text-ink group-hover:text-white",
     text: "text-ink group-hover:text-white",
     muted: "text-ink/70 group-hover:text-white/75",
-    link: "border-line group-hover:border-white/16 focus-visible:outline-ink",
+    link: "border-ink/20 group-hover:border-white/25 focus-visible:outline-ink",
   },
   sky: {
     card: "bg-sky text-ink hover:bg-ink hover:text-white",
     index: "text-ink group-hover:text-white",
     text: "text-ink group-hover:text-white",
     muted: "text-ink/70 group-hover:text-white/75",
-    link: "border-line group-hover:border-white/16 focus-visible:outline-ink",
+    link: "border-ink/20 group-hover:border-white/25 focus-visible:outline-ink",
   },
   dark: {
     card: "bg-ink text-white",
     index: "text-white",
     text: "text-white",
     muted: "text-white/75",
-    link: "border-white/16 focus-visible:outline-white",
+    link: "border-white/25 focus-visible:outline-white",
   },
 };
 
@@ -83,12 +83,12 @@ export function SegmentCard({
       </div>
 
       <nav aria-label={navLabel} className="mt-auto">
-        <ul>
+        <ul className="flex flex-col gap-2">
           {links.map((link) => (
             <li key={link.href}>
               <Link
                 href={link.href}
-                className={`group flex items-center gap-3 border-t py-4 text-base font-medium focus-visible:outline-2 focus-visible:outline-offset-2 ${classes.link}`}
+                className={`group flex items-center gap-3 rounded-full border px-5 py-3 text-base font-medium transition-colors duration-200 ease-tech focus-visible:outline-2 focus-visible:outline-offset-2 ${classes.link}`}
               >
                 <span className="flex-1">{link.label}</span>
                 {link.spec ? (
