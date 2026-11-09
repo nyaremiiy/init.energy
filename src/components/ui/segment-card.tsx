@@ -21,18 +21,18 @@ const toneClasses: Record<
   { card: string; index: string; text: string; muted: string; link: string }
 > = {
   light: {
-    card: "bg-surface text-ink",
-    index: "text-ink",
-    text: "text-ink",
-    muted: "text-ink/70",
-    link: "border-line focus-visible:outline-ink",
+    card: "bg-surface text-ink hover:bg-ink hover:text-white",
+    index: "text-ink group-hover:text-white",
+    text: "text-ink group-hover:text-white",
+    muted: "text-ink/70 group-hover:text-white/75",
+    link: "border-line group-hover:border-white/16 focus-visible:outline-ink",
   },
   sky: {
-    card: "bg-sky text-ink",
-    index: "text-ink",
-    text: "text-ink",
-    muted: "text-ink/70",
-    link: "border-line focus-visible:outline-ink",
+    card: "bg-sky text-ink hover:bg-ink hover:text-white",
+    index: "text-ink group-hover:text-white",
+    text: "text-ink group-hover:text-white",
+    muted: "text-ink/70 group-hover:text-white/75",
+    link: "border-line group-hover:border-white/16 focus-visible:outline-ink",
   },
   dark: {
     card: "bg-ink text-white",
@@ -56,7 +56,7 @@ export function SegmentCard({
 
   return (
     <article
-      className={`flex h-full flex-col gap-6 rounded-3xl shadow-soft p-6 transition duration-300 motion-safe:hover:-translate-y-0.5 lg:p-8 ${classes.card}`}
+      className={`group flex h-full flex-col gap-6 rounded-3xl shadow-soft p-6 transition duration-300 motion-safe:hover:-translate-y-0.5 lg:p-8 ${classes.card}`}
     >
       <div className="flex items-start justify-between gap-4">
         <span
@@ -65,7 +65,12 @@ export function SegmentCard({
         >
           {index}
         </span>
-        <Eyebrow tone={tone === "dark" ? "dark" : "light"}>{segment}</Eyebrow>
+        <Eyebrow
+          tone={tone === "dark" ? "dark" : "light"}
+          className="group-hover:!text-white/75"
+        >
+          {segment}
+        </Eyebrow>
       </div>
 
       <div className="flex flex-col gap-3">
