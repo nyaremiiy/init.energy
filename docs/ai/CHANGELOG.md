@@ -15,6 +15,12 @@
 
 ---
 
+## 2026-11-09 — Вертикальні написи в секціях
+- **Агент:** Claude Code
+- **Гілка:** feature/section-watermarks (статус: змерджено в develop)
+- **Що зроблено:** напис SOLAR з «Рішень» винесено в `SectionWatermark`; додано STORAGE, ENERGY, PROJECTS, SYSTEM, CONTACT в інші секції головної з чергуванням сторін. На мобільному (до `md`) приховано, щоб не лягати під текст.
+- **Файли:** src/components/ui/section-watermark.tsx, src/components/sections/{home/solutions-by-segment,home/product-line,home/calculator-section,projects-showcase,LeadSection,trust-block}.tsx, docs/ai/*
+
 ## 2026-11-09 — Секція «Калькулятор» на головній
 - **Агент:** Claude Code
 - **Гілка:** feature/quick-calculator (статус: змерджено в develop)

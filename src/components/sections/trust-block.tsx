@@ -5,6 +5,7 @@ import { ArrowLink } from "@/components/ui/arrow-link";
 import { Heading } from "@/components/ui/heading";
 import { MediaPlaceholder } from "@/components/ui/media-placeholder";
 import { Panel } from "@/components/ui/panel";
+import { SectionWatermark } from "@/components/ui/section-watermark";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
 
@@ -47,7 +48,8 @@ export function TrustBlock({
       aria-labelledby={titleId}
       className="scroll-mt-24 bg-white pt-section-sm lg:pt-section"
     >
-      <Reveal>
+      <SectionWatermark text="ENERGY" tone="dark" />
+      <Reveal className="relative">
         <Container className="flex flex-col gap-section-head py-section-sm lg:py-section">
           <SectionHeader
             tone="dark"

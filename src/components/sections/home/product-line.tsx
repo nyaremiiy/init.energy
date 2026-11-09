@@ -6,6 +6,7 @@ import { ProductCompareTable } from "@/components/ui/product-compare-table";
 import { Reveal } from "@/components/ui/reveal";
 import { ScrollSlider } from "@/components/ui/scroll-slider";
 import { SectionHeader } from "@/components/ui/section-header";
+import { SectionWatermark } from "@/components/ui/section-watermark";
 import { ArrowLink } from "@/components/ui/arrow-link";
 import { productList } from "@/content/products";
 import { anchors, routes } from "@/content/routes";
@@ -22,9 +23,10 @@ export function ProductLine() {
     <section
       id={anchors.products}
       aria-labelledby={titleId}
-      className="scroll-mt-24 bg-white pt-section-sm lg:pt-section"
+      className="relative scroll-mt-24 overflow-hidden bg-white pt-section-sm lg:pt-section"
     >
-      <Container className="flex flex-col gap-section-head">
+      <SectionWatermark text="STORAGE" side="right" />
+      <Container className="relative flex flex-col gap-section-head">
         <Reveal>
           <SectionHeader
             eyebrow={t.eyebrow}

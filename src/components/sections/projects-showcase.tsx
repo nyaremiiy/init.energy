@@ -4,6 +4,7 @@ import { Container } from "@/components/layout/container";
 import { ProjectCard } from "@/components/ui/project-card";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
+import { SectionWatermark } from "@/components/ui/section-watermark";
 import { ArrowLink } from "@/components/ui/arrow-link";
 
 import { featuredProjects, type ProjectSegment } from "@/content/projects";
@@ -36,9 +37,10 @@ export function ProjectsShowcase() {
     <section
       id={anchors.projects}
       aria-labelledby={titleId}
-      className="scroll-mt-24 bg-white pt-section-sm lg:pt-section"
+      className="relative scroll-mt-24 overflow-hidden bg-white pt-section-sm lg:pt-section"
     >
-      <Container className="flex flex-col gap-section-head">
+      <SectionWatermark text="PROJECTS" side="right" />
+      <Container className="relative flex flex-col gap-section-head">
         <Reveal>
           <SectionHeader
             eyebrow={t.eyebrow}
