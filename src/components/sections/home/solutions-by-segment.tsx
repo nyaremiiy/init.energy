@@ -25,7 +25,7 @@ export function SolutionsBySegment() {
       className="relative scroll-mt-24 overflow-hidden bg-white pt-section-sm lg:pt-section"
     >
       <SectionWatermark text="SOLAR" />
-      <Container className="relative flex flex-col gap-section-head">
+      <Container className="relative flex flex-col gap-section-head-sm lg:gap-section-head">
         <Reveal>
           <SectionHeader
             eyebrow={t.eyebrow}
@@ -67,7 +67,7 @@ export function SolutionsBySegment() {
           <Reveal>
             <Link
               href={routes.services.turnkeySes}
-              className="group flex items-center justify-between gap-6 rounded-3xl shadow-card bg-surface p-6 text-ink transition duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink motion-safe:hover:-translate-y-0.5 lg:p-8"
+              className="group flex items-center justify-between gap-6 rounded-3xl shadow-card bg-surface p-card-sm text-ink transition duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink motion-safe:hover:-translate-y-0.5 lg:p-card"
             >
               <span className="flex flex-col items-start gap-3">
                 <CardLabel icon={segmentIcons.solar}>{t.hub.label}</CardLabel>

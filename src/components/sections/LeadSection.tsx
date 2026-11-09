@@ -31,7 +31,7 @@ export function LeadSection({
     <section
       id={anchors.contacts}
       aria-labelledby={titleId}
-      className="relative scroll-mt-24 overflow-hidden bg-white py-section-sm lg:py-section"
+      className="relative scroll-mt-24 overflow-hidden bg-white pt-section-sm lg:pt-section"
     >
       <SectionWatermark text="CONTACT" side="right" />
       <Container className="relative">

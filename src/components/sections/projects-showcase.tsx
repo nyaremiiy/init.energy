@@ -42,7 +42,7 @@ export function ProjectsShowcase() {
       className="relative scroll-mt-24 overflow-hidden bg-white pt-section-sm lg:pt-section"
     >
       <SectionWatermark text="PROJECTS" side="right" />
-      <Container className="relative flex flex-col gap-section-head">
+      <Container className="relative flex flex-col gap-section-head-sm lg:gap-section-head">
         <Reveal>
           <SectionHeader
             eyebrow={t.eyebrow}

@@ -335,7 +335,7 @@ export function QuickCalculator() {
       <form
         aria-label={t.formLabel}
         onSubmit={(event) => event.preventDefault()}
-        className="flex flex-col gap-8 rounded-3xl bg-white p-6 lg:col-span-7 lg:p-10"
+        className="flex flex-col gap-8 rounded-3xl bg-white p-card-sm lg:col-span-7 lg:p-card"
       >
         <Group legend={t.segment}>
           {calculatorSegments.map((item) => (
@@ -437,7 +437,7 @@ export function QuickCalculator() {
         ) : null}
       </form>
 
-      <div className="flex flex-col gap-8 rounded-3xl bg-ink p-6 text-white lg:col-span-5 lg:p-10">
+      <div className="flex flex-col gap-8 rounded-3xl bg-ink p-card-sm text-white lg:col-span-5 lg:p-card">
         <div aria-live="polite" className="flex flex-col gap-6">
           <div className="flex items-center justify-between gap-4">
             <CardLabel tone="dark">{t.result.eyebrow}</CardLabel>

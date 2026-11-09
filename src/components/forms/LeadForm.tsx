@@ -156,7 +156,7 @@ export function LeadForm({ defaultObjectType }: LeadFormProps) {
     return (
       <div
         role="status"
-        className="flex flex-col items-start gap-4 rounded-3xl shadow-card bg-surface p-6 motion-safe:animate-enter sm:p-10"
+        className="flex flex-col items-start gap-4 rounded-3xl shadow-card bg-surface p-card-sm motion-safe:animate-enter lg:p-card"
       >
         <CircleCheck
           aria-hidden
@@ -180,7 +180,7 @@ export function LeadForm({ defaultObjectType }: LeadFormProps) {
       onInput={clearFieldError}
       onChange={clearFieldError}
       aria-busy={submitting}
-      className="rounded-3xl shadow-card bg-surface p-6 sm:p-10"
+      className="rounded-3xl shadow-card bg-surface p-card-sm lg:p-card"
     >
       {/* Disabling the fieldset disables every control while sending. */}
       <fieldset
