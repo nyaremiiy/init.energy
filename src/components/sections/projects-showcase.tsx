@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { Container } from "@/components/layout/container";
+import { Panel } from "@/components/ui/panel";
 import { ProjectCard } from "@/components/ui/project-card";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
@@ -33,12 +34,14 @@ export function ProjectsShowcase() {
   const [featuredProject, ...secondaryProjects] = featuredProjects;
 
   return (
-    <section
+    <Panel
+      as="section"
+      variant="sky"
       id={anchors.projects}
       aria-labelledby={titleId}
       className="scroll-mt-24 bg-white pt-section-sm lg:pt-section"
     >
-      <Container className="flex flex-col gap-section-head">
+      <Container className="flex flex-col gap-section-head py-section-sm lg:py-section">
         <Reveal>
           <SectionHeader
             eyebrow={t.eyebrow}
@@ -90,6 +93,6 @@ export function ProjectsShowcase() {
           </div>
         </div>
       </Container>
-    </section>
+    </Panel>
   );
 }
