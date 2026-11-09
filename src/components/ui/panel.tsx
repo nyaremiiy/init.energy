@@ -20,7 +20,7 @@ const variantClasses: Record<PanelVariant, string> = {
 /**
  * Large section panel (hero, trust block, footer): the same gap from the
  * screen edges (8px mobile / 16px sm+) and the same radius on every side
- * (24px / 32px), overflow hidden.
+ * (24px / 32px), overflow clipped (`overflow-clip` keeps `sticky` working inside).
  */
 export function Panel({
   variant = "dark",
@@ -33,7 +33,7 @@ export function Panel({
   return (
     <Tag className={`px-panel-sm sm:px-panel ${className ?? ""}`} {...props}>
       <div
-        className={`relative overflow-hidden rounded-panel-sm sm:rounded-panel ${variantClasses[variant]} ${panelClassName ?? ""}`}
+        className={`relative overflow-clip rounded-panel-sm sm:rounded-panel ${variantClasses[variant]} ${panelClassName ?? ""}`}
       >
         {children}
       </div>

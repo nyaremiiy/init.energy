@@ -19,6 +19,9 @@ init.energy — вебпроєкт. Призначення та функціон
 - Hero містить модульний автоматичний слайдер контенту на Motion із переходом від правого краю viewport ліворуч і overlay crossfade медіа-шаром.
 - Медіа hero тримає максимум два різні фото лише під час crossfade та використовує responsive AVIF-зображення.
 
+- Сторінки продуктів — шаблон `src/app/[product]/page.tsx` (кореневі slug-и, `dynamicParams = false`, лише продукти з `src/content/product-pages.ts`; зараз /svit-plus-5000/). Секції — `src/components/product-page/*` (hero з хлібними крихтами, sticky-навігація сторінкою, переваги, характеристики, масштабування з віджетом, застосування через `SegmentCard`, FAQ, інші накопичувачі, заявка на блакитній панелі з прихованим полем `product`). Метадані — `buildMetadata` (`src/lib/seo/metadata.ts`), JSON-LD Product/BreadcrumbList/FAQPage — `src/lib/seo/schema.ts`, `app/sitemap.ts`. Перевикористовувані: `FaqSection` (`page`, `title`, `lead`, `filter`), `LeadSection` (`panel`, `summary`, `product`, `submitLabel`), `SegmentCard` без `index`, `PillRadio tone="dark"`, `Breadcrumbs`.
+- `Panel` обрізає вміст через `overflow-clip` (не `overflow-hidden`) — так усередині панелей працює `sticky`.
+
 ## Структура
 
 ```

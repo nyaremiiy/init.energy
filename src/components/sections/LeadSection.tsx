@@ -1,8 +1,10 @@
 import { Mail, Phone } from "lucide-react";
+import type { ReactNode } from "react";
 
 import { Container } from "@/components/layout/container";
 import { LeadForm, type LeadObjectType } from "@/components/forms/LeadForm";
 import { Heading } from "@/components/ui/heading";
+import { Panel } from "@/components/ui/panel";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
 import { SectionWatermark } from "@/components/ui/section-watermark";
@@ -15,6 +17,13 @@ type LeadSectionProps = {
   title?: string;
   lead?: string;
   defaultObjectType?: LeadObjectType;
+  /** Replaces the three steps (e.g. «У заявці вже вказано» on product pages). */
+  summary?: ReactNode;
+  /** Product slug sent with the lead as a hidden field. */
+  product?: string;
+  submitLabel?: string;
+  /** Light-blue panel (product pages) instead of the white section. */
+  panel?: boolean;
 };
 
 const titleId = "lead-section-title";
@@ -23,18 +32,21 @@ export function LeadSection({
   title,
   lead,
   defaultObjectType,
+  summary,
+  product,
+  submitLabel,
+  panel = false,
 }: LeadSectionProps) {
   const t = messages.leadSection;
   const primaryPhone = offices[0].phone;
 
-  return (
-    <section
-      id={anchors.contacts}
-      aria-labelledby={titleId}
-      className="relative scroll-mt-24 overflow-hidden bg-white pt-section-sm lg:pt-section"
-    >
+  const content = (
+    <>
       <SectionWatermark text="CONTACT" />
-      <Container className="relative">
+      <Container
+        inPanel={panel}
+        className={`relative ${panel ? "py-panel-y-sm lg:py-panel-y" : ""}`}
+      >
         <div className="grid grid-cols-1 items-start gap-10 md:grid-cols-2 md:gap-16">
           <div className="flex flex-col items-start gap-5">
             <SectionHeader
@@ -44,26 +56,28 @@ export function LeadSection({
               lead={lead ?? t.lead}
             />
 
-            <ol className="mt-6 w-full list-none border-b border-line p-0">
-              {t.steps.map((step, index) => (
-                <li
-                  key={step.title}
-                  className="flex gap-4 border-t border-line py-5"
-                >
-                  <span className="w-10 shrink-0 pt-1 font-heading text-sm font-medium text-ink/70">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <span className="flex flex-col gap-1">
-                    <Heading as="h3" size="h3" className="text-ink">
-                      {step.title}
-                    </Heading>
-                    <span className="text-base leading-relaxed text-ink/70">
-                      {step.description}
+            {summary ?? (
+              <ol className="mt-6 w-full list-none border-b border-line p-0">
+                {t.steps.map((step, index) => (
+                  <li
+                    key={step.title}
+                    className="flex gap-4 border-t border-line py-5"
+                  >
+                    <span className="w-10 shrink-0 pt-1 font-heading text-sm font-medium text-ink/70">
+                      {String(index + 1).padStart(2, "0")}
                     </span>
-                  </span>
-                </li>
-              ))}
-            </ol>
+                    <span className="flex flex-col gap-1">
+                      <Heading as="h3" size="h3" className="text-ink">
+                        {step.title}
+                      </Heading>
+                      <span className="text-base leading-relaxed text-ink/70">
+                        {step.description}
+                      </span>
+                    </span>
+                  </li>
+                ))}
+              </ol>
+            )}
 
             <address className="mt-6 flex flex-wrap gap-x-8 gap-y-3 text-sm not-italic text-ink sm:text-base">
               <a
@@ -94,10 +108,39 @@ export function LeadSection({
           </div>
 
           <Reveal distance={12} duration={0.4}>
-            <LeadForm defaultObjectType={defaultObjectType} />
+            <LeadForm
+              defaultObjectType={defaultObjectType}
+              product={product}
+              submitLabel={submitLabel}
+              cardTone={panel ? "white" : "surface"}
+            />
           </Reveal>
         </div>
       </Container>
+    </>
+  );
+
+  if (panel) {
+    return (
+      <Panel
+        as="section"
+        variant="sky"
+        id={anchors.contacts}
+        aria-labelledby={titleId}
+        className="scroll-mt-24 bg-white pt-section-sm lg:pt-section"
+      >
+        {content}
+      </Panel>
+    );
+  }
+
+  return (
+    <section
+      id={anchors.contacts}
+      aria-labelledby={titleId}
+      className="relative scroll-mt-24 overflow-hidden bg-white pt-section-sm lg:pt-section"
+    >
+      {content}
     </section>
   );
 }

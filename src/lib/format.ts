@@ -7,7 +7,7 @@ const intlLocales: Record<Locale, string> = {
   en: "en-US",
 };
 
-export type Unit = "W" | "kW" | "Wh" | "kWh" | "cycles";
+export type Unit = "W" | "kW" | "Wh" | "kWh" | "cycles" | "V";
 
 export type Quantity = {
   value: number;

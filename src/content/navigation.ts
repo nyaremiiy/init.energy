@@ -1,5 +1,6 @@
+import { productPages } from "./product-pages";
 import { featuredProjects } from "./projects";
-import { routes } from "./routes";
+import { anchors, routes, toPath } from "./routes";
 
 const hasProjects = featuredProjects.length > 0;
 
@@ -10,6 +11,10 @@ export type NavEntry = {
 };
 
 type FooterLinkLabels = {
+  advantages: string;
+  specs: string;
+  scaling: string;
+  applications: string;
   solutions: string;
   products: string;
   aboutUs: string;
@@ -41,6 +46,19 @@ export const pageNavigation: Record<string, NavEntry[]> = {
     { href: routes.sections.contacts, labelKey: "consultation" },
   ],
 };
+
+/** Product pages: the same anchors as the sticky in-page nav. */
+for (const page of productPages) {
+  const path = toPath(page.slug);
+  const anchor = (id: string) => `${path}#${id}`;
+  pageNavigation[path] = [
+    { href: anchor(anchors.advantages), labelKey: "advantages" },
+    { href: anchor(anchors.specs), labelKey: "specs" },
+    { href: anchor(anchors.scaling), labelKey: "scaling" },
+    { href: anchor(anchors.applications), labelKey: "applications" },
+    { href: anchor(anchors.faq), labelKey: "faq" },
+  ];
+}
 
 /**
  * Site sections. Built from the same routes as the header menu; only pages

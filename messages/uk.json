@@ -200,7 +200,8 @@
     "kW": "кВт",
     "Wh": "Вт·год",
     "kWh": "кВт·год",
-    "cycles": "циклів"
+    "cycles": "циклів",
+    "V": "В"
   },
   "quantity": {
     "from": "від {value}",
@@ -226,7 +227,11 @@
       "about": "Про компанію",
       "contacts": "Контакти",
       "calculator": "Калькулятор",
-      "faq": "Питання й відповіді"
+      "faq": "Питання й відповіді",
+      "advantages": "Переваги",
+      "specs": "Характеристики",
+      "scaling": "Масштабування",
+      "applications": "Застосування"
     },
     "newsletter": {
       "title": "Розсилка",
@@ -248,6 +253,62 @@
       "privacy": "Політика конфіденційності",
       "cookies": "Політика cookie",
       "terms": "Умови використання"
+    }
+  },
+  "productPage": {
+    "breadcrumbsLabel": "Навігаційний ланцюжок",
+    "home": "Головна",
+    "catalog": "Продукти SVIT",
+    "navLabel": "Розділи сторінки",
+    "nav": {
+      "advantages": "Переваги",
+      "specs": "Характеристики",
+      "scaling": "Масштабування",
+      "applications": "Застосування",
+      "faq": "Питання"
+    },
+    "getOffer": "Отримати пропозицію",
+    "allSpecs": "Усі характеристики",
+    "photoPending": "Фото {name} буде додано",
+    "advantages": {
+      "eyebrow": "Переваги",
+      "title": "Чому {name}"
+    },
+    "specs": {
+      "eyebrow": "Характеристики",
+      "title": "Технічні характеристики {name}",
+      "tableLabel": "Характеристики {name}",
+      "datasheet": "Технічний паспорт",
+      "datasheetNote": "PDF"
+    },
+    "scaling": {
+      "eyebrow": "Масштабування",
+      "legend": "Кількість модулів",
+      "option": "{count} мод.",
+      "caption": "кВт·год сумарної ємності · {count} × {name}",
+      "approx": "≈ {value}",
+      "note": "Розрахунок: кількість модулів × {capacity}. Конфігурацію під ваш інвертор підбере інженер.",
+      "tilesLabel": "Обрано {count} з {max} модулів"
+    },
+    "applications": {
+      "eyebrow": "Застосування",
+      "title": "Де працює {name}",
+      "navLabel": "Посилання: {segment}"
+    },
+    "faq": {
+      "title": "Питання про {name}",
+      "lead": "Коротко про ресурс, безпеку, гарантію й підключення."
+    },
+    "related": {
+      "eyebrow": "Лінійка",
+      "title": "Інші накопичувачі SVIT",
+      "compareAll": "Порівняти всю лінійку",
+      "link": "Детальніше про {name}"
+    },
+    "consultation": {
+      "title": "Готові обговорити проєкт?",
+      "submit": "Надіслати заявку",
+      "summaryTitle": "У заявці вже вказано"
     }
   }
 }
