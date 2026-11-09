@@ -8,7 +8,7 @@ import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
 import { SectionWatermark } from "@/components/ui/section-watermark";
 import { offices } from "@/content/company";
-import { faqForPage, faqTopics } from "@/content/faq";
+import { faqForPage, faqTopics, type FaqPage } from "@/content/faq";
 import { anchors, routes } from "@/content/routes";
 import { formatPhone } from "@/lib/format";
 import { messages } from "@/lib/messages";
@@ -18,10 +18,27 @@ const titleId = "faq-title";
 // Ukrainian only for now; pass the locale once i18n routing lands.
 const locale = "uk";
 
-/** Server section: header + contact card (sticky on lg) and the client accordion. */
-export function FaqSection() {
+type FaqSectionProps = {
+  /** Which entries of content/faq.ts to show (home page or a product slug). */
+  page?: FaqPage;
+  title?: string;
+  lead?: string;
+  /** Topic filter above the accordion (home page); off on product pages. */
+  filter?: boolean;
+};
+
+/**
+ * Server section: header + contact card (sticky on lg) and the client
+ * accordion. Reused on product pages with their own questions and title.
+ */
+export function FaqSection({
+  page = "home",
+  title,
+  lead,
+  filter = true,
+}: FaqSectionProps) {
   const t = messages.faq;
-  const faqs = faqForPage("home");
+  const faqs = faqForPage(page);
   const phone = offices[0].phone;
   const items = faqs.map((faq) => ({
     id: faq.id,
@@ -44,9 +61,9 @@ export function FaqSection() {
           <Reveal className="flex flex-col gap-section-head-sm lg:sticky lg:top-28">
             <SectionHeader
               eyebrow={t.eyebrow}
-              title={t.title}
+              title={title ?? t.title}
               titleId={titleId}
-              lead={t.lead}
+              lead={lead ?? t.lead}
             />
             <div className="flex flex-col items-start gap-3 rounded-3xl bg-surface p-card-sm lg:p-card">
               <p className="font-heading text-h3-sm font-medium text-ink sm:text-h3">
@@ -70,10 +87,10 @@ export function FaqSection() {
         <div className="min-w-0 lg:col-span-7">
           <FaqAccordion
             items={items}
-            topics={faqTopics.map((topic) => ({
-              id: topic,
-              label: t.topics[topic],
-            }))}
+            // Only topics present on this page; with one topic the filter is hidden.
+            topics={(filter ? faqTopics : [])
+              .filter((topic) => items.some((item) => item.topic === topic))
+              .map((topic) => ({ id: topic, label: t.topics[topic] }))}
             labels={{ filter: t.filterLabel, all: t.all }}
           />
         </div>

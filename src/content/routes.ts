@@ -39,6 +39,11 @@ export const anchors = {
   calculator: "calculator",
   faq: "faq",
   contacts: "contacts",
+  // Product pages.
+  advantages: "advantages",
+  specs: "specs",
+  scaling: "scaling",
+  applications: "applications",
 } as const;
 
 export function toPath(...segments: string[]): string {

@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-09 — Сторінка продукту SVIT PLUS 5000
+- **Агент:** Claude Code
+- **Гілка:** feature/product-page-svit-plus-5000 (статус: змерджено в develop)
+- **Що зроблено:** шаблон сторінки продукту на кореневому slug /svit-plus-5000/ з даних `content/product-pages.ts` (uk/en) і `products.ts`: hero з хлібними крихтами, мітками, H1, 4 ключовими характеристиками, CTA і фото з бейджем гарантії; sticky-навігація з активним станом; переваги (4 картки); характеристики (13 рядків `<dl>`, фото sticky, посилання на паспорт лише за наявності файлу); масштабування 1–16 модулів (клієнтський віджет, SSR — 4 модулі); застосування (3 `SegmentCard`); FAQ (7 питань у `faq.ts`); інші накопичувачі; заявка на блакитній панелі з карткою «У заявці вже вказано» і прихованим `product`. SEO: title 45 симв., description 151, canonical https://init.energy/svit-plus-5000/, hreflang uk + x-default, JSON-LD Product (без offers і manufacturer), BreadcrumbList, FAQPage; `app/sitemap.ts`. `Panel` → `overflow-clip`; `Button` використовується в sticky-навігації; одиниця `V` у форматері.
+- **Файли:** src/app/[product]/page.tsx, src/app/sitemap.ts, src/components/product-page/*, src/components/ui/{breadcrumbs,panel,pill-radio,segment-card}.tsx, src/components/sections/{LeadSection,home/faq-section}.tsx, src/components/{forms/LeadForm,faq/FaqAccordion}.tsx, src/content/{product-pages,faq,navigation,routes}.ts, src/lib/seo/{metadata,schema}.ts, src/lib/{format,lead-form-schema}.ts, messages/{uk,en}.json, docs/ai/*
+- **Нотатки / що далі:** TODO(content): технічний паспорт PDF, OG-зображення 1200×630, власне фото для сторінки (зараз наявне фото з products.ts). TODO(i18n): маршрут /en/svit-plus-5000/ і hreflang en (не додано, щоб не вести на 404). Розбіжності з init.energy: паралельно до 16 модулів (на сайті в таблиці 6, у тексті 16 — взято дані власника); «активне балансування» на сторінці 5000 не згадане (є лише в 16000). Посилання «Резервне живлення для будинку/бізнесу», «СЕС для дому/бізнесу» ведуть на наявні сторінки (/svit-home/, /cec/, /rishennya/ses-dlya-gotelyu/, /bess/) — окремих сторінок немає. Якір заявки — #contacts (як на головній), не #consultation.
+
 ## 2026-11-09 — Секція FAQ на головній
 - **Агент:** Claude Code
 - **Гілка:** feature/faq-section (статус: змерджено в develop)

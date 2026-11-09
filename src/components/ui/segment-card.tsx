@@ -8,7 +8,8 @@ import { Heading } from "./heading";
 type SegmentCardTone = "light" | "navy" | "dark";
 
 type SegmentCardProps = {
-  index: string;
+  /** Big «01» in the corner; omitted on cards without an order. */
+  index?: string;
   segment: string;
   segmentIcon: LucideIcon;
   title: string;
@@ -77,12 +78,14 @@ export function SegmentCard({
       className={`group flex h-full flex-col gap-6 rounded-3xl shadow-card p-card-sm transition duration-300 motion-safe:hover:-translate-y-0.5 lg:p-card ${classes.card}`}
     >
       <div className="flex items-start justify-between gap-4">
-        <span
-          aria-hidden
-          className={`font-heading text-number-sm font-light tabular-nums lg:text-number ${classes.index}`}
-        >
-          {index}
-        </span>
+        {index ? (
+          <span
+            aria-hidden
+            className={`font-heading text-number-sm font-light tabular-nums lg:text-number ${classes.index}`}
+          >
+            {index}
+          </span>
+        ) : null}
         <CardLabel
           tone={tone === "light" ? "light" : "dark"}
           hoverInverse={tone === "light"}

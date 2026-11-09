@@ -1,9 +1,13 @@
 import type { Locale } from "@/lib/format";
 
+import type { ProductPageSlug } from "./product-pages";
+
 export type FaqTopic = "backup" | "solar" | "products" | "warranty";
 
 /** Pages where an entry is shown; the home page shows all of them. */
-export type FaqPage = "home" | "solar" | "backup" | "products";
+/** Product pages use their slug. */
+export type FaqPage =
+  "home" | "solar" | "backup" | "products" | ProductPageSlug;
 
 export type Faq = {
   id: string;
@@ -129,6 +133,97 @@ export const faqList: Faq[] = [
     answer: {
       uk: "Вартість залежить від споживання, потрібних годин резерву і потужності СЕС. Залиште заявку — інженер підбере конфігурацію і назве вартість обладнання, монтажу й запуску однією сумою.",
       en: "The price depends on your consumption, the hours of backup you need and the solar plant size. Leave a request — an engineer will choose the configuration and quote equipment, installation and commissioning as one sum.",
+    },
+  },
+  {
+    id: "svit-plus-5000-lifetime",
+    topic: "products",
+    pages: ["svit-plus-5000"],
+    question: {
+      uk: "Скільки прослужить SVIT PLUS 5000?",
+      en: "How long does SVIT PLUS 5000 last?",
+    },
+    answer: {
+      uk: "Близько 15 років: батарея витримує понад 6 000 циклів заряду й розряду при глибині 80%.",
+      en: "About 15 years: the battery withstands over 6,000 charge and discharge cycles at 80% depth.",
+    },
+  },
+  {
+    id: "svit-plus-5000-safety",
+    topic: "products",
+    pages: ["svit-plus-5000"],
+    question: {
+      uk: "Чи безпечна батарея?",
+      en: "Is the battery safe?",
+    },
+    answer: {
+      uk: "Так. Хімія LiFePO₄ стабільна при нагріванні, а батарея має захист від перегріву й перевантаження.",
+      en: "Yes. LiFePO₄ chemistry stays stable when heated, and the battery is protected against overheating and overload.",
+    },
+  },
+  {
+    id: "svit-plus-5000-parallel",
+    topic: "products",
+    pages: ["svit-plus-5000"],
+    question: {
+      uk: "Скільки батарей можна підключити паралельно?",
+      en: "How many batteries can be connected in parallel?",
+    },
+    answer: {
+      uk: "До 16 модулів, сумарно до 81 кВт·год. Конфігурацію під ваш інвертор підбере інженер.",
+      en: "Up to 16 modules, up to 81 kWh in total. An engineer will choose the configuration for your inverter.",
+    },
+  },
+  {
+    id: "svit-plus-5000-warranty",
+    topic: "warranty",
+    pages: ["svit-plus-5000"],
+    question: {
+      uk: "Яка гарантія?",
+      en: "What is the warranty?",
+    },
+    answer: {
+      uk: "5 років офіційної гарантії з можливістю продовження.",
+      en: "A 5-year official warranty that can be extended.",
+    },
+  },
+  {
+    id: "svit-plus-5000-expand",
+    topic: "products",
+    pages: ["svit-plus-5000"],
+    question: {
+      uk: "Чи можна додати батареї пізніше?",
+      en: "Can I add batteries later?",
+    },
+    answer: {
+      uk: "Так. Систему можна почати з одного модуля й розширити, коли зросте споживання.",
+      en: "Yes. Start with one module and expand the system as consumption grows.",
+    },
+  },
+  {
+    id: "svit-plus-5000-maintenance",
+    topic: "warranty",
+    pages: ["svit-plus-5000"],
+    question: {
+      uk: "Чи потрібне обслуговування?",
+      en: "Does it need maintenance?",
+    },
+    answer: {
+      uk: "Ні, спеціального обслуговування не потрібно — лише періодична діагностика.",
+      en: "No special maintenance is needed — only periodic diagnostics.",
+    },
+  },
+  {
+    id: "svit-plus-5000-cold",
+    topic: "products",
+    pages: ["svit-plus-5000"],
+    question: {
+      uk: "Чи працює батарея в холодному приміщенні?",
+      en: "Does the battery work in a cold room?",
+    },
+    answer: {
+      uk: "Так, від −10 °C: робочий діапазон — від −10 до +50 °C. У неопалюваних приміщеннях рекомендуємо мінімальний захист від морозу.",
+      en: "Yes, from −10 °C: the operating range is −10 to +50 °C. In unheated rooms we recommend basic frost protection.",
     },
   },
 ];

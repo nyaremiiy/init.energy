@@ -137,7 +137,11 @@
       "about": "About us",
       "contacts": "Contacts",
       "calculator": "Calculator",
-      "faq": "FAQ"
+      "faq": "FAQ",
+      "advantages": "Advantages",
+      "specs": "Specifications",
+      "scaling": "Scaling",
+      "applications": "Applications"
     },
     "newsletter": {
       "title": "Newsletter",
@@ -159,6 +163,62 @@
       "privacy": "Privacy Policy",
       "cookies": "Cookie Policy",
       "terms": "Terms of Service"
+    }
+  },
+  "productPage": {
+    "breadcrumbsLabel": "Breadcrumbs",
+    "home": "Home",
+    "catalog": "SVIT products",
+    "navLabel": "Page sections",
+    "nav": {
+      "advantages": "Advantages",
+      "specs": "Specifications",
+      "scaling": "Scaling",
+      "applications": "Applications",
+      "faq": "FAQ"
+    },
+    "getOffer": "Get an offer",
+    "allSpecs": "All specifications",
+    "photoPending": "{name} photo coming soon",
+    "advantages": {
+      "eyebrow": "Advantages",
+      "title": "Why {name}"
+    },
+    "specs": {
+      "eyebrow": "Specifications",
+      "title": "{name} technical specifications",
+      "tableLabel": "{name} specifications",
+      "datasheet": "Datasheet",
+      "datasheetNote": "PDF"
+    },
+    "scaling": {
+      "eyebrow": "Scaling",
+      "legend": "Number of modules",
+      "option": "{count} mod.",
+      "caption": "kWh total capacity · {count} × {name}",
+      "approx": "≈ {value}",
+      "note": "Calculation: number of modules × {capacity}. An engineer will choose the configuration for your inverter.",
+      "tilesLabel": "{count} of {max} modules selected"
+    },
+    "applications": {
+      "eyebrow": "Applications",
+      "title": "Where {name} works",
+      "navLabel": "Links: {segment}"
+    },
+    "faq": {
+      "title": "{name} FAQ",
+      "lead": "Short answers on lifetime, safety, warranty and connection."
+    },
+    "related": {
+      "eyebrow": "Line-up",
+      "title": "Other SVIT batteries",
+      "compareAll": "Compare the whole line-up",
+      "link": "More about {name}"
+    },
+    "consultation": {
+      "title": "Ready to discuss your project?",
+      "submit": "Send request",
+      "summaryTitle": "Already in your request"
     }
   }
 }

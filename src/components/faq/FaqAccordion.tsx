@@ -47,23 +47,25 @@ export function FaqAccordion({ items, topics, labels }: FaqAccordionProps) {
 
   return (
     <div className="flex flex-col gap-8">
-      <div
-        role="group"
-        aria-label={labels.filter}
-        className="flex flex-wrap gap-2"
-      >
-        {filters.map((filter) => (
-          <button
-            key={filter.id}
-            type="button"
-            aria-pressed={topic === filter.id}
-            onClick={() => setTopic(filter.id)}
-            className={chipClasses({ selected: topic === filter.id })}
-          >
-            {filter.label}
-          </button>
-        ))}
-      </div>
+      {topics.length > 1 ? (
+        <div
+          role="group"
+          aria-label={labels.filter}
+          className="flex flex-wrap gap-2"
+        >
+          {filters.map((filter) => (
+            <button
+              key={filter.id}
+              type="button"
+              aria-pressed={topic === filter.id}
+              onClick={() => setTopic(filter.id)}
+              className={chipClasses({ selected: topic === filter.id })}
+            >
+              {filter.label}
+            </button>
+          ))}
+        </div>
+      ) : null}
 
       <ul className="border-b border-line">
         {items.map((item, index) => {

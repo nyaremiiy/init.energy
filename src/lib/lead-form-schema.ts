@@ -17,6 +17,8 @@ export type ValidLead = {
   objectType: string;
   /** JSON from the quick calculator (inputs + recommendation), empty if unused. */
   calculatorData: string;
+  /** Product slug when the form is on a product page. */
+  product: string;
   pageUrl: string;
   tracking: Record<string, string>;
 };
@@ -62,6 +64,7 @@ export function validateLeadForm(
       comment: getText(formData, "comment"),
       objectType: getText(formData, "objectType"),
       calculatorData: getText(formData, "calculatorData"),
+      product: getText(formData, "product"),
       pageUrl: getText(formData, "pageUrl"),
       tracking: Object.fromEntries(
         trackingKeys.map((key) => [key, getText(formData, key)]),

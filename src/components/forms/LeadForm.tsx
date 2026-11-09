@@ -26,6 +26,11 @@ export type LeadObjectType = "apartment" | "house" | "business" | "other";
 
 type LeadFormProps = {
   defaultObjectType?: LeadObjectType;
+  /** Product slug sent as a hidden field (product pages). */
+  product?: string;
+  submitLabel?: string;
+  /** Card background: "surface" on white sections, "white" on the light-blue panel. */
+  cardTone?: "surface" | "white";
 };
 
 type Status = "idle" | "submitting" | "success" | "serverError";
@@ -69,7 +74,12 @@ function FieldLabel({ children }: { children: ReactNode }) {
   return <span className="text-sm font-medium text-ink">{children}</span>;
 }
 
-export function LeadForm({ defaultObjectType }: LeadFormProps) {
+export function LeadForm({
+  defaultObjectType,
+  product,
+  submitLabel,
+  cardTone = "surface",
+}: LeadFormProps) {
   const t = messages.leadSection.form;
   const formRef = useRef<HTMLFormElement>(null);
   const [errors, setErrors] = useState<LeadFieldErrors>({});
@@ -80,6 +90,7 @@ export function LeadForm({ defaultObjectType }: LeadFormProps) {
   // Parameters handed over by the quick calculator (hidden field → CRM).
   const [calculator, setCalculator] = useState<CalculatorApplyDetail>();
   const submitting = status === "submitting";
+  const cardBg = cardTone === "white" ? "bg-white" : "bg-surface";
 
   useEffect(() => {
     function onApply(event: Event) {
@@ -157,7 +168,7 @@ export function LeadForm({ defaultObjectType }: LeadFormProps) {
     return (
       <div
         role="status"
-        className="flex flex-col items-start gap-4 rounded-3xl shadow-card bg-surface p-card-sm motion-safe:animate-enter lg:p-card"
+        className={`flex flex-col items-start gap-4 rounded-3xl shadow-card ${cardBg} p-card-sm motion-safe:animate-enter lg:p-card`}
       >
         <CircleCheck
           aria-hidden
@@ -181,7 +192,7 @@ export function LeadForm({ defaultObjectType }: LeadFormProps) {
       onInput={clearFieldError}
       onChange={clearFieldError}
       aria-busy={submitting}
-      className="rounded-3xl shadow-card bg-surface p-card-sm lg:p-card"
+      className={`rounded-3xl shadow-card ${cardBg} p-card-sm lg:p-card`}
     >
       {/* Disabling the fieldset disables every control while sending. */}
       <fieldset
@@ -214,6 +225,7 @@ export function LeadForm({ defaultObjectType }: LeadFormProps) {
             <span className="font-medium text-ink">{calculator.summary}</span>
           </p>
         ) : null}
+        <input type="hidden" name="product" value={product ?? ""} />
         <input
           type="hidden"
           name="calculatorData"
@@ -332,7 +344,7 @@ export function LeadForm({ defaultObjectType }: LeadFormProps) {
             )
           }
         >
-          {submitting ? t.submitting : t.submit}
+          {submitting ? t.submitting : (submitLabel ?? t.submit)}
         </Button>
       </fieldset>
     </form>
