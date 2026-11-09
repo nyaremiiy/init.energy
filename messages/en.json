@@ -17,7 +17,7 @@
       "economy": "Savings",
       "both": "Backup + savings"
     },
-    "apartmentGoalHint": "Apartments: backup only.",
+    "apartmentGoalHint": "Apartments: backup only — the battery charges from the grid.",
     "consumption": "Monthly consumption",
     "consumptionHint": "Not sure? Check your electricity bill.",
     "region": "Region",

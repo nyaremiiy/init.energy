@@ -91,3 +91,19 @@ test("calculate: goals switch parts on and off", () => {
   assert.equal(economy.battery, undefined);
   assert.equal(economy.solarKw, 5);
 });
+
+test("apartment: bigger need moves from SVIT 600 to grid-charged batteries", () => {
+  const apartment = [
+    { id: "svit600", capacityKwh: 0.865, usableDepth: 0.9, maxModules: 1 },
+    { id: "svitHome", capacityKwh: 5.12, usableDepth: 0.9, maxModules: 1 },
+    { id: "svitPlus5000", capacityKwh: 5.12, usableDepth: 0.9, maxModules: 3 },
+  ];
+  // 200 kWh → 0.278 kW × 8 h × 0.3 ÷ 0.9 = 0.74 kWh → SVIT 600
+  assert.equal(pickBattery(200, 8, 0.3, apartment).id, "svit600");
+  // 400 kWh × 12 h → 0.556 × 12 × 0.3 ÷ 0.9 = 2.22 kWh → SVIT HOME
+  assert.equal(pickBattery(400, 12, 0.3, apartment).id, "svitHome");
+  // 600 kWh × 24 h → 0.833 × 24 × 0.3 ÷ 0.9 = 6.67 kWh → 2 × SVIT PLUS 5000
+  const big = pickBattery(600, 24, 0.3, apartment);
+  assert.equal(big.id, "svitPlus5000");
+  assert.equal(big.modules, 2);
+});
