@@ -29,6 +29,8 @@
 
   /* Soft light shadow: under the hero and the header mega menu only. */
   --shadow-soft: 0 14px 36px -14px rgb(0 2 23 / 26%);
+  /* Lighter shadow for cards only (hero and mega menu keep shadow-soft). */
+  --shadow-card: 0 8px 22px -14px rgb(0 2 23 / 18%);
 
   /* Form controls. */
   --radius-field: 14px;
