@@ -1,6 +1,6 @@
 "use client";
 
-import { MessageCircle, X } from "lucide-react";
+import { Phone, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 import { companyContacts, offices } from "@/content/company";
@@ -45,12 +45,12 @@ export function ContactWidget() {
         <div
           id="contact-widget-panel"
           role="dialog"
-          aria-label="Контакти INIT ENERGY"
+          aria-label="Контакти"
           className="absolute right-0 bottom-16 w-72 rounded-3xl bg-ink p-6 text-white shadow-card motion-safe:animate-enter"
         >
           <div className="flex items-start justify-between gap-4">
             <p className="font-heading text-base font-medium">
-              Менеджер онлайн
+              Контакти
             </p>
             <button
               type="button"
@@ -65,9 +65,14 @@ export function ContactWidget() {
           <ul className="mt-5 flex flex-col gap-5 text-sm">
             {offices.map((office) => (
               <li key={office.id} className="flex flex-col gap-1">
-                <span className="text-white/75">
+                <a
+                  href={office.mapHref}
+                  target="_blank"
+                  rel="noopener"
+                  className="text-white/75 underline underline-offset-4 decoration-white/30 hover:text-white hover:decoration-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                >
                   {office.city}, {office.address}
-                </span>
+                </a>
                 <a
                   href={office.phone.href}
                   className="font-medium text-white underline underline-offset-4 decoration-white/30 hover:decoration-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
@@ -94,13 +99,13 @@ export function ContactWidget() {
 
       <button
         type="button"
-        aria-label="Менеджер онлайн: контакти"
+        aria-label="Контакти"
         aria-expanded={open}
         aria-controls="contact-widget-panel"
         onClick={() => setOpen((value) => !value)}
         className="inline-flex size-12 items-center justify-center rounded-full bg-ink text-white shadow-soft transition-colors duration-200 ease-tech hover:bg-ink/85 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
       >
-        <MessageCircle aria-hidden className="size-5" />
+        <Phone aria-hidden className="size-5" />
       </button>
     </div>
   );
