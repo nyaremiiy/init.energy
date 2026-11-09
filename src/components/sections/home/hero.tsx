@@ -10,7 +10,7 @@ export function Hero() {
       variant="dark"
       aria-labelledby="hero-title"
       className="bg-white pt-panel-sm sm:pt-panel"
-      panelClassName="hero"
+      panelClassName="hero shadow-soft"
     >
       <HeroSlider />
       {/* Darken the top so the transparent header stays readable. */}
