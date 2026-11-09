@@ -20,9 +20,17 @@ export function SolutionsBySegment() {
     <section
       id={anchors.solutions}
       aria-labelledby={titleId}
-      className="scroll-mt-24 bg-white pt-section-sm lg:pt-section"
+      className="relative scroll-mt-24 overflow-hidden bg-white pt-section-sm lg:pt-section"
     >
-      <Container className="flex flex-col gap-section-head">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute top-1/2 left-0 size-0"
+      >
+        <span className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 -rotate-90 font-heading text-display font-semibold tracking-tight whitespace-nowrap text-ink/5 uppercase">
+          SOLAR
+        </span>
+      </div>
+      <Container className="relative flex flex-col gap-section-head">
         <Reveal>
           <SectionHeader
             eyebrow={t.eyebrow}

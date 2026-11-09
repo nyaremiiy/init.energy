@@ -56,6 +56,9 @@
   --text-eyebrow: 0.875rem;
   --text-eyebrow--line-height: 1.25rem;
   --tracking-eyebrow: 0.12em;
+  /* Oversized decorative wordmark (background, sections). */
+  --text-display: 10rem;
+  --text-display--line-height: 1;
   --text-small: 0.9375rem;
   --text-small--line-height: 1.6;
   --text-caption: 0.8125rem;
