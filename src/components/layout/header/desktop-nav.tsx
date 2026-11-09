@@ -51,7 +51,7 @@ export function DesktopNav() {
             <button
               type="button"
               aria-haspopup="true"
-              className="inline-flex items-center gap-1 transition-colors group-focus-within:text-white group-hover:text-white"
+              className="inline-flex items-center gap-1 underline underline-offset-8 decoration-transparent transition-colors group-focus-within:text-white group-focus-within:decoration-white group-hover:text-white group-hover:decoration-white"
             >
               {item.label}
               <ChevronDown
