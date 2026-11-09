@@ -1,6 +1,11 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "motion/react";
 
 import type { HeroSlide } from "./hero-slides";
 import { heroMediaTransitionDuration } from "./hero-slider.constants";
@@ -63,9 +68,18 @@ export function HeroMediaSlider({
   previousSlide,
 }: HeroMediaSliderProps) {
   const prefersReducedMotion = useReducedMotion();
+  // Parallax: the photo moves down at 30% of the page scroll (off with reduced motion).
+  const { scrollY } = useScroll();
+  const parallaxY = useTransform(scrollY, (value) =>
+    prefersReducedMotion ? 0 : value * 0.3,
+  );
 
   return (
-    <div className="hero__media" aria-hidden="true">
+    <motion.div
+      className="hero__media will-change-transform"
+      style={{ y: parallaxY }}
+      aria-hidden="true"
+    >
       {previousSlide ? (
         <div className="absolute inset-0">
           <HeroMediaImage slide={previousSlide} />
@@ -85,6 +99,6 @@ export function HeroMediaSlider({
       >
         <HeroMediaImage slide={slide} />
       </motion.div>
-    </div>
+    </motion.div>
   );
 }
