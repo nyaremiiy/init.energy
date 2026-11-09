@@ -70,7 +70,7 @@ export function ProjectsShowcase() {
                   tabIndex={isActive ? undefined : -1}
                   className={chipClasses({
                     selected: isActive,
-                    disabled: true,
+                    disabled: !isActive,
                   })}
                 >
                   {t.filters[segment.labelKey]}
