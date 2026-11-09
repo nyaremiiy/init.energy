@@ -84,7 +84,7 @@ export function SolutionsBySegment() {
           </Reveal>
         </div>
 
-        <p className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 font-heading text-eyebrow font-medium tracking-eyebrow text-ink/60 uppercase">
+        <p className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 font-heading text-eyebrow font-medium tracking-eyebrow text-ink/80 uppercase">
           {t.keywords.map((keyword, index) => (
             <span key={keyword} className="inline-flex items-center gap-3">
               {index > 0 ? (
