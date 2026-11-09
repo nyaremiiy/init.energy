@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-09 — Накопичувачі: один продукт у фокусі + вкладки
+- **Агент:** Claude Code
+- **Гілка:** feature/product-focus-tabs (статус: змерджено в develop)
+- **Що зроблено:** секцію переверстано: темна панель, SectionHeader на темному з «Усі накопичувачі» → /svit/, вкладки ARIA Tabs (←/→, Home/End, roving tabindex) з автоперемиканням кожні 6 с (CSS-анімація смуги прогресу, без інтервалів), паузами (hover, фокус, visibilityState, IntersectionObserver), зупинкою після ручного вибору, кнопкою Pause/Play і без автоперемикання при reduced motion. SSR — SVIT HOME; усі 5 панелей у HTML. Поле `focusDescription` у `products.ts` (лише з фактів init.energy). `IconButton` отримав проп `icon`. Таблиця порівняння під панеллю з `id="compare"`. Подія `product_tab_select` лише при ручному виборі. Видалено `ProductCard` і `ScrollSlider` (більше не використовуються) та невикористані тексти.
+- **Файли:** src/components/products/ProductFocusTabs.tsx, src/components/sections/home/product-line.tsx, src/components/ui/icon-button.tsx, src/components/ui/{product-card,scroll-slider}.tsx (видалено), src/content/{products,routes}.ts, src/app/globals.css, messages/{uk,en}.json, docs/ai/*
+- **Нотатки / що далі:** TODO(content): третя ключова характеристика SVIT PLUS 16000 (на init.energy лише ємність і хімія). Токенів `rounded-media` і display-розміру немає — використано `rounded-3xl` і `text-4xl lg:text-6xl`; значення характеристик `text-2xl` (32 px не вміщались у 3 колонки). /svit/ ще не створена.
+
 ## 2026-11-09 — Вертикальні написи в секціях
 - **Агент:** Claude Code
 - **Гілка:** feature/section-watermarks (статус: змерджено в develop)
