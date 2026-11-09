@@ -71,7 +71,8 @@
       "year": "Рік"
     },
     "details": "Детальніше: {title}",
-    "imagePending": "Фото кейсу буде додано"
+    "imagePending": "Фото кейсу буде додано",
+    "filterSoon": "Цей фільтр ще в розробці"
   },
   "calculator": {
     "eyebrow": "Калькулятор",

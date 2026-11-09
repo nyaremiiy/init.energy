@@ -6,6 +6,7 @@ import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
 import { SectionWatermark } from "@/components/ui/section-watermark";
 import { ArrowLink } from "@/components/ui/arrow-link";
+import { Tooltip } from "@/components/ui/tooltip";
 import { chipClasses } from "@/components/ui/chip-styles";
 
 import { featuredProjects, type ProjectSegment } from "@/content/projects";
@@ -60,13 +61,15 @@ export function ProjectsShowcase() {
               const isActive = segment.id === "all";
               const href = `${routes.projects}?segment=${segment.id}`;
 
-              return (
+              const chip = (
                 // Only "all" is active while there are few projects; other filters stay greyed out.
                 <Link
-                  key={segment.id}
                   href={href}
                   aria-current={isActive ? "page" : undefined}
                   aria-disabled={!isActive}
+                  aria-describedby={
+                    isActive ? undefined : `projects-filter-soon-${segment.id}`
+                  }
                   tabIndex={isActive ? undefined : -1}
                   className={chipClasses({
                     selected: isActive,
@@ -75,6 +78,20 @@ export function ProjectsShowcase() {
                 >
                   {t.filters[segment.labelKey]}
                 </Link>
+              );
+
+              return isActive ? (
+                <span key={segment.id} className="inline-flex">
+                  {chip}
+                </span>
+              ) : (
+                <Tooltip
+                  key={segment.id}
+                  id={`projects-filter-soon-${segment.id}`}
+                  text={t.filterSoon}
+                >
+                  {chip}
+                </Tooltip>
               );
             })}
           </nav>
