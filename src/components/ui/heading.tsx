@@ -9,7 +9,7 @@ type HeadingSize = "h2" | "h3";
 
 const sizeClasses: Record<HeadingSize, string> = {
   h2: "text-h2-sm sm:text-h2-md lg:text-h2",
-  h3: "text-h3",
+  h3: "text-h3-sm sm:text-h3",
 };
 
 const weightClasses: Record<HeadingWeight, string> = {

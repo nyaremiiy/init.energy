@@ -184,7 +184,7 @@ export function ProductFocusTabs({
 
       {/* All panels stay in the HTML (SEO) and share one grid cell, so the
           height is set by the tallest product and never jumps. */}
-      <div className="grid">
+      <div className="grid grid-cols-1">
         {products.map((product, index) => {
           const selected = index === active;
           const eager = selected || index === next;
@@ -197,7 +197,7 @@ export function ProductFocusTabs({
               aria-labelledby={`${baseId}-tab-${index}`}
               tabIndex={selected ? 0 : -1}
               inert={!selected}
-              className={`col-start-1 row-start-1 grid items-center gap-8 rounded-3xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white lg:grid-cols-2 lg:gap-16 ${
+              className={`col-start-1 row-start-1 grid min-w-0 grid-cols-1 items-center gap-8 rounded-3xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white lg:grid-cols-2 lg:gap-16 ${
                 selected ? "motion-safe:animate-enter" : "invisible"
               }`}
             >
@@ -231,16 +231,16 @@ export function ProductFocusTabs({
                 >
                   {product.segment}
                 </CardLabel>
-                <h3 className="font-heading text-4xl font-semibold tracking-tight text-white lg:text-6xl">
+                <h3 className="font-heading text-hero-sm font-semibold tracking-tight text-white md:text-hero-md lg:text-hero">
                   {product.name}
                 </h3>
-                <p className="text-lg leading-relaxed text-white/75">
+                <p className="text-base leading-relaxed text-white/75 sm:text-lg">
                   {product.description}
                 </p>
 
                 <dl
                   aria-label={product.specsLabel}
-                  className="grid w-full gap-4 md:grid-cols-3 lg:grid-cols-1 2xl:grid-cols-3"
+                  className="grid w-full grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-1 2xl:grid-cols-3"
                 >
                   {product.specs.map((spec) => (
                     <div
@@ -248,7 +248,7 @@ export function ProductFocusTabs({
                       className="flex flex-col-reverse gap-1 border-t border-white/16 pt-4"
                     >
                       <dt className="text-sm text-white/75">{spec.label}</dt>
-                      <dd className="font-heading text-2xl font-medium whitespace-nowrap text-white">
+                      <dd className="font-heading text-stat-sm font-medium whitespace-nowrap text-white sm:text-stat">
                         {spec.value}
                       </dd>
                     </div>

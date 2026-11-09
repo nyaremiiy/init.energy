@@ -39,7 +39,8 @@
 
   /*
    * Type scale — use only these (plus text-sm/base for UI text).
-   * h2: section titles (mobile / md / lg) · h3: every card title ·
+   * h2: section titles (mobile / md / lg) · h3: every card title (h3-sm on mobile) ·
+ * hero: H1 and the focused product name · stat: spec and result values ·
    * number: big figures and card indices · eyebrow: dotted uppercase labels ·
    * small: 15px secondary copy · caption: 13px, legal fine print only.
    */
@@ -49,8 +50,22 @@
   --text-h2-md--line-height: 1.12;
   --text-h2: 3rem;
   --text-h2--line-height: 1.1;
+  --text-h3-sm: 1.25rem;
+  --text-h3-sm--line-height: 1.3;
   --text-h3: 1.5rem;
   --text-h3--line-height: 1.25;
+  /* Hero H1 and the focused product name (mobile / md / lg). */
+  --text-hero-sm: 2rem;
+  --text-hero-sm--line-height: 1.1;
+  --text-hero-md: 3rem;
+  --text-hero-md--line-height: 1.05;
+  --text-hero: 3.75rem;
+  --text-hero--line-height: 1;
+  /* Values in spec lists and calculator results (mobile / sm+). */
+  --text-stat-sm: 1.25rem;
+  --text-stat-sm--line-height: 1.3;
+  --text-stat: 1.5rem;
+  --text-stat--line-height: 1.25;
   --text-number-sm: 2.5rem;
   --text-number-sm--line-height: 1;
   --text-number: 3.75rem;
