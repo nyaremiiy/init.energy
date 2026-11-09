@@ -13,7 +13,8 @@ export type Project = {
   slug: string;
   segment: ProjectSegment;
   title: string;
-  city: string;
+  /** Omit when only the oblast is known. */
+  city?: string;
   region: string;
   powerKw: number;
   /** Product from `products.ts`, used for the equipment cross-link. */
@@ -33,11 +34,10 @@ export type Project = {
  */
 export const projectList: Project[] = [
   {
-    slug: "test-logistics-complex-kyiv-region",
+    slug: "reserve-power-system-lviv-region",
     segment: "business",
-    title: "Тестовий логістичний комплекс",
-    city: "Київ",
-    region: "Київська область",
+    title: "Система резервного живлення",
+    region: "Львівська область",
     // TODO(content): ~180 kW is the owner's estimate from the photo — confirm power, equipment and capacity.
     powerKw: 180,
     equipment: "lithiumvalley",

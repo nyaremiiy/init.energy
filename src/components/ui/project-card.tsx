@@ -29,7 +29,10 @@ export function ProjectCard({ project, variant }: ProjectCardProps) {
   const isLarge = variant === "large";
   const hasPhoto = Boolean(project.image);
   const projectHref = toPath(slugs.projects, project.slug);
-  const title = `${project.title} · ${project.city}${isLarge ? `, ${project.region}` : ""}`;
+  const place = project.city
+    ? `${project.city}${isLarge ? `, ${project.region}` : ""}`
+    : project.region;
+  const title = `${project.title} · ${place}`;
 
   const tone = hasPhoto
     ? {
