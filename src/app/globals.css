@@ -191,3 +191,23 @@ button:not(:disabled) {
   white-space: nowrap;
   border: 0;
 }
+
+/*
+ * Dark panel background: ink base with soft navy glows from the top corners.
+ * The bottom stays pure ink so photos faded with .fade-from-ink blend in.
+ */
+.bg-ink-glow {
+  background:
+    radial-gradient(
+      ellipse 70% 60% at 100% 0%,
+      color-mix(in srgb, var(--color-navy) 100%, transparent) 0%,
+      color-mix(in srgb, var(--color-navy) 55%, transparent) 40%,
+      transparent 75%
+    ),
+    radial-gradient(
+      ellipse 45% 40% at 0% 10%,
+      color-mix(in srgb, var(--color-navy) 70%, transparent) 0%,
+      transparent 70%
+    ),
+    var(--color-ink);
+}

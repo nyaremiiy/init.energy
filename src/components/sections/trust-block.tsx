@@ -42,7 +42,7 @@ export function TrustBlock({
     <Panel
       as="section"
       variant="dark"
-      panelClassName="bg-linear-to-b from-navy to-ink"
+      panelClassName="bg-ink-glow"
       id={id}
       aria-labelledby={titleId}
       className="scroll-mt-24 bg-white pt-section-sm lg:pt-section"
