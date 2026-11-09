@@ -212,7 +212,12 @@ type CandidateRule = { product: ProductId; maxModules: number };
  * the LITHIUMVALLEY step (208 kWh blocks up to 1 044 kWh assumed).
  */
 const candidateRules: Record<CalculatorSegment, CandidateRule[]> = {
-  apartment: [{ product: "svit600", maxModules: 1 }],
+  // Apartments: no panels, batteries charge from the grid.
+  apartment: [
+    { product: "svit600", maxModules: 1 },
+    { product: "svitHome", maxModules: 1 },
+    { product: "svitPlus5000", maxModules: 3 },
+  ],
   house: [
     { product: "svitHome", maxModules: 1 },
     { product: "svitPlus5000", maxModules: 3 },
