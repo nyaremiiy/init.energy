@@ -32,7 +32,7 @@ export function ProductCard({
   photoPendingCaption,
 }: ProductCardProps) {
   return (
-    <article className="flex h-full flex-col gap-6 rounded-3xl bg-surface p-2 text-ink shadow-card transition duration-300 motion-safe:hover:-translate-y-1">
+    <article className="group flex h-full flex-col gap-6 rounded-3xl bg-surface p-2 text-ink shadow-card transition duration-300 hover:bg-ink hover:text-white motion-safe:hover:-translate-y-1">
       {image ? (
         <Image
           src={image.src}
@@ -49,15 +49,19 @@ export function ProductCard({
 
       <div className="flex flex-1 flex-col gap-6 px-4 pb-4 lg:px-6 lg:pb-6">
         <div className="flex flex-col gap-4">
-          <CardLabel tone="light" icon={segmentIcon}>
+          <CardLabel tone="light" hoverInverse icon={segmentIcon}>
             {segment}
           </CardLabel>
           <div className="flex items-start justify-between gap-4">
             <div className="flex flex-col gap-2">
-              <Heading as="h3" size="h3" className="text-ink">
+              <Heading
+                as="h3"
+                size="h3"
+                className="text-ink group-hover:text-white"
+              >
                 {name}
               </Heading>
-              <p className="text-base leading-relaxed text-ink/70">
+              <p className="text-base leading-relaxed text-ink/70 group-hover:text-white/75">
                 {description}
               </p>
             </div>
@@ -65,20 +69,23 @@ export function ProductCard({
               href={href}
               aria-label={linkLabel}
               variant="outline-light"
+              className="group-hover:!border-white/60"
             />
           </div>
         </div>
 
         <dl
           aria-label={specsLabel}
-          className="mt-auto divide-y divide-line border-t border-line"
+          className="mt-auto divide-y divide-line border-t border-line group-hover:divide-white/16 group-hover:border-white/16"
         >
           {specs.map((spec) => (
             <div
               key={spec.label}
               className="flex items-baseline justify-between gap-4 py-3 text-base"
             >
-              <dt className="text-ink/70">{spec.label}</dt>
+              <dt className="text-ink/70 group-hover:text-white/75">
+                {spec.label}
+              </dt>
               <dd className="text-right font-medium tabular-nums">
                 {spec.value}
               </dd>
