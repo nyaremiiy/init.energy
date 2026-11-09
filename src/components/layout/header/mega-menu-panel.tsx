@@ -9,11 +9,14 @@ import { NavLink } from "./nav-link";
 
 type MegaMenuPanelProps = {
   group: NavGroup;
+  open: boolean;
 };
 
-export function MegaMenuPanel({ group }: MegaMenuPanelProps) {
+export function MegaMenuPanel({ group, open }: MegaMenuPanelProps) {
   return (
-    <div className="invisible absolute inset-x-0 top-full opacity-0 transition duration-200 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
+    <div
+      className={`absolute inset-x-0 top-full transition duration-200 ${open ? "visible opacity-100" : "invisible opacity-0"}`}
+    >
       <div className="rounded-b-3xl border-t border-white/10 bg-slate-950/95 backdrop-blur-md">
         <Container className="flex gap-10 py-10">
           <div className="grid flex-1 auto-cols-fr grid-flow-col gap-10">

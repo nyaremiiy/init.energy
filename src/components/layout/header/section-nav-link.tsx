@@ -13,7 +13,11 @@ type SectionNavLinkProps = {
  * Header link that lights up (white pill) while its home section is in the
  * middle band of the viewport. Uses IntersectionObserver; no scroll listeners.
  */
-export function SectionNavLink({ href, label, sectionId }: SectionNavLinkProps) {
+export function SectionNavLink({
+  href,
+  label,
+  sectionId,
+}: SectionNavLinkProps) {
   const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
