@@ -9,8 +9,8 @@ type EyebrowProps = {
 } & ComponentPropsWithoutRef<"span">;
 
 const toneClasses: Record<EyebrowTone, { text: string; dot: string }> = {
-  light: { text: "text-ink/70", dot: "bg-ink" },
-  dark: { text: "text-white/75", dot: "bg-white" },
+  light: { text: "text-ink/70", dot: "bg-current" },
+  dark: { text: "text-white/75", dot: "bg-current" },
 };
 
 /** Dotted uppercase label — one size and tracking across the whole site. */
