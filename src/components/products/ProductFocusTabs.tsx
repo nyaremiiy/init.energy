@@ -148,12 +148,13 @@ export function ProductFocusTabs({
                 className={`relative overflow-hidden ${chipClasses({ selected, tone: "dark" })}`}
               >
                 {product.name}
+                {/* Invisible timer: its animation end advances to the next tab. */}
                 {selected && mode === "auto" ? (
                   <span
                     key={active}
                     aria-hidden
                     onAnimationEnd={() => setActive(next)}
-                    className="absolute inset-x-0 bottom-0 h-0.5 origin-left bg-ink"
+                    className="absolute inset-x-0 bottom-0 h-0.5 origin-left opacity-0"
                     style={{
                       animation: `tab-progress ${AUTO_ADVANCE_MS}ms linear forwards`,
                       animationPlayState: running ? "running" : "paused",
