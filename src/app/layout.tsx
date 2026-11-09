@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Montserrat } from "next/font/google";
 import { Footer } from "@/components/layout/footer/footer";
+import { BackToTop } from "@/components/ui/back-to-top";
 import { Header } from "@/components/layout/header/header";
 import "./globals.css";
 
@@ -28,6 +29,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Header />
         {children}
         <Footer />
+        <BackToTop />
       </body>
     </html>
   );
