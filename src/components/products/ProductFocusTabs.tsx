@@ -207,6 +207,7 @@ export function ProductFocusTabs({
                     src={product.image.src}
                     alt={product.image.alt}
                     fill
+                    quality={90}
                     loading={eager ? "eager" : "lazy"}
                     sizes="(min-width: 1440px) 640px, (min-width: 1024px) 45vw, 100vw"
                     className="object-cover"
