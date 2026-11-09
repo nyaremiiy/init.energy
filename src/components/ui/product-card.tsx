@@ -32,7 +32,7 @@ export function ProductCard({
   photoPendingCaption,
 }: ProductCardProps) {
   return (
-    <article className="flex h-full flex-col gap-6 rounded-3xl shadow-card bg-surface p-6 text-ink transition duration-300 motion-safe:hover:-translate-y-1 lg:p-8">
+    <article className="flex h-full flex-col gap-6 rounded-3xl bg-surface p-2 text-ink shadow-card transition duration-300 motion-safe:hover:-translate-y-1">
       {image ? (
         <Image
           src={image.src}
@@ -47,43 +47,45 @@ export function ProductCard({
         <MediaPlaceholder caption={photoPendingCaption} />
       )}
 
-      <div className="flex flex-col gap-4">
-        <CardLabel tone="light" icon={segmentIcon}>
-          {segment}
-        </CardLabel>
-        <div className="flex items-start justify-between gap-4">
-          <div className="flex flex-col gap-2">
-            <Heading as="h3" size="h3" className="text-ink">
-              {name}
-            </Heading>
-            <p className="text-base leading-relaxed text-ink/70">
-              {description}
-            </p>
+      <div className="flex flex-1 flex-col gap-6 px-4 pb-4 lg:px-6 lg:pb-6">
+        <div className="flex flex-col gap-4">
+          <CardLabel tone="light" icon={segmentIcon}>
+            {segment}
+          </CardLabel>
+          <div className="flex items-start justify-between gap-4">
+            <div className="flex flex-col gap-2">
+              <Heading as="h3" size="h3" className="text-ink">
+                {name}
+              </Heading>
+              <p className="text-base leading-relaxed text-ink/70">
+                {description}
+              </p>
+            </div>
+            <IconButton
+              href={href}
+              aria-label={linkLabel}
+              variant="outline-light"
+            />
           </div>
-          <IconButton
-            href={href}
-            aria-label={linkLabel}
-            variant="outline-light"
-          />
         </div>
-      </div>
 
-      <dl
-        aria-label={specsLabel}
-        className="mt-auto divide-y divide-line border-t border-line"
-      >
-        {specs.map((spec) => (
-          <div
-            key={spec.label}
-            className="flex items-baseline justify-between gap-4 py-3 text-base"
-          >
-            <dt className="text-ink/70">{spec.label}</dt>
-            <dd className="text-right font-medium tabular-nums">
-              {spec.value}
-            </dd>
-          </div>
-        ))}
-      </dl>
+        <dl
+          aria-label={specsLabel}
+          className="mt-auto divide-y divide-line border-t border-line"
+        >
+          {specs.map((spec) => (
+            <div
+              key={spec.label}
+              className="flex items-baseline justify-between gap-4 py-3 text-base"
+            >
+              <dt className="text-ink/70">{spec.label}</dt>
+              <dd className="text-right font-medium tabular-nums">
+                {spec.value}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </div>
     </article>
   );
 }
