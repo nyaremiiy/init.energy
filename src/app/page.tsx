@@ -16,7 +16,6 @@ export default function Home() {
     <main>
       <Hero />
       <SolutionsBySegment />
-      <ProductLine />
       <TrustBlock
         id={anchors.aboutUs}
         titleId="trust-title"
@@ -29,6 +28,7 @@ export default function Home() {
         image={trust.image}
         photoPendingCaption={t.photoPending}
       />
+      <ProductLine />
       <ProjectsShowcase />
       <LeadSection />
     </main>
