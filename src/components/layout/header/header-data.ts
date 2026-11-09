@@ -1,5 +1,6 @@
 import { companyContacts, offices, type Office } from "@/content/company";
 import { products, productSummaries, type ProductId } from "@/content/products";
+import { featuredProjects } from "@/content/projects";
 import { routes } from "@/content/routes";
 import { services, type ServiceId } from "@/content/services";
 
@@ -8,6 +9,8 @@ export type { Office };
 export type NavLink = {
   href: string;
   label: string;
+  /** Home section id; when set, the link highlights while that section is in view. */
+  sectionId?: string;
 };
 
 export type NavMenuLink = NavLink & {
@@ -121,6 +124,19 @@ export const navItems: NavItem[] = [
       },
     ],
   },
+  { href: routes.sections.products, label: "Продукти", sectionId: "products" },
+  { href: routes.sections.aboutUs, label: "Про компанію", sectionId: "about-us" },
+  // The projects section renders only when there are visible cases; hide the link otherwise.
+  ...(featuredProjects.length > 0
+    ? [
+        {
+          href: routes.sections.projects,
+          label: "Проєкти",
+          sectionId: "projects",
+        },
+      ]
+    : []),
+  { href: routes.sections.contacts, label: "Контакти", sectionId: "contacts" },
   // TEST: temporary menu link to the test page. Remove together with src/app/test/.
   { href: "/test/", label: "Тест" },
   // Add links to home page sections (about, projects, contacts) as they are built.
