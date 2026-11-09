@@ -3,6 +3,7 @@ import { ProductLine } from "@/components/sections/home/product-line";
 import { SolutionsBySegment } from "@/components/sections/home/solutions-by-segment";
 import { ProjectsShowcase } from "@/components/sections/projects-showcase";
 import { LeadSection } from "@/components/sections/LeadSection";
+import { CalculatorSection } from "@/components/sections/home/calculator-section";
 import { TrustBlock } from "@/components/sections/trust-block";
 import { trust } from "@/content/company";
 import { anchors, routes } from "@/content/routes";
@@ -30,6 +31,7 @@ export default function Home() {
         photoPendingCaption={t.photoPending}
       />
       <ProjectsShowcase />
+      <CalculatorSection />
       <LeadSection />
     </main>
   );

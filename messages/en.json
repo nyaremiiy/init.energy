@@ -1,4 +1,50 @@
 {
+  "calculator": {
+    "eyebrow": "Calculator",
+    "title": "Which system do you need",
+    "lead": "Enter the property type, consumption and region — the calculator suggests a solar plant size and an SVIT battery.",
+    "paybackLink": "Detailed payback calculator",
+    "formLabel": "Property parameters",
+    "segment": "Property type",
+    "segments": {
+      "apartment": "Apartment",
+      "house": "House",
+      "business": "Business"
+    },
+    "goal": "What you need",
+    "goals": {
+      "reserve": "Backup",
+      "economy": "Savings",
+      "both": "Backup + savings"
+    },
+    "apartmentGoalHint": "Apartments: backup only.",
+    "consumption": "Monthly consumption",
+    "consumptionHint": "Not sure? Check your electricity bill.",
+    "region": "Region",
+    "regionHint": "The region sets how much energy the panels produce.",
+    "hours": "Hours without the grid",
+    "hoursUnit": "h",
+    "maxPlus": "{value}+",
+    "result": {
+      "eyebrow": "Recommendation",
+      "approximate": "estimate",
+      "configSolar": "{power} solar plant",
+      "configBattery": "{battery} battery",
+      "configJoin": " + ",
+      "modules": "{count} × {name}",
+      "solarPower": "solar plant power",
+      "generation": "kWh generated per year",
+      "capacity": "battery capacity",
+      "backup": "of backup for critical loads",
+      "approx": "≈ {value}",
+      "hoursValue": "{value} h",
+      "custom": "This needs a custom configuration — an engineer will size the system for your site.",
+      "product": "Product",
+      "solution": "Solution",
+      "cta": "Get an exact quote",
+      "note": "This is an estimate. An engineer confirms the exact configuration and price — the calculator parameters are added to your request."
+    }
+  },
   "leadSection": {
     "eyebrow": "Consultation",
     "title": "We will size a system for your property",
@@ -43,7 +89,8 @@
         "name": "Please enter your name.",
         "phone": "Please enter a valid phone number.",
         "consent": "You must agree to the privacy policy."
-      }
+      },
+      "calculatorAttached": "Calculator parameters:"
     }
   },
   "footer": {
@@ -63,7 +110,8 @@
       "turnkeySes": "Solar power plants",
       "svitCatalog": "SVIT products",
       "about": "About us",
-      "contacts": "Contacts"
+      "contacts": "Contacts",
+      "calculator": "Calculator"
     },
     "newsletter": {
       "title": "Newsletter",

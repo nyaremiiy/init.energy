@@ -2,11 +2,22 @@
 
 import { ArrowUpRight, Check, CircleCheck, Loader2 } from "lucide-react";
 import Link from "next/link";
-import { type FormEvent, type ReactNode, useRef, useState } from "react";
+import {
+  type FormEvent,
+  type ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 import { submitLead } from "@/app/actions/lead";
 import { inputClasses } from "@/components/ui/input-styles";
+import { PillRadio } from "@/components/ui/pill-radio";
 import { routes } from "@/content/routes";
+import {
+  CALCULATOR_APPLY_EVENT,
+  type CalculatorApplyDetail,
+} from "@/lib/calculator-bridge";
 import { validateLeadForm, type LeadFieldErrors } from "@/lib/lead-form-schema";
 import { messages } from "@/lib/messages";
 
@@ -62,7 +73,23 @@ export function LeadForm({ defaultObjectType }: LeadFormProps) {
   const formRef = useRef<HTMLFormElement>(null);
   const [errors, setErrors] = useState<LeadFieldErrors>({});
   const [status, setStatus] = useState<Status>("idle");
+  const [objectType, setObjectType] = useState<LeadObjectType | undefined>(
+    defaultObjectType,
+  );
+  // Parameters handed over by the quick calculator (hidden field → CRM).
+  const [calculator, setCalculator] = useState<CalculatorApplyDetail>();
   const submitting = status === "submitting";
+
+  useEffect(() => {
+    function onApply(event: Event) {
+      const detail = (event as CustomEvent<CalculatorApplyDetail>).detail;
+      setObjectType(detail.objectType);
+      setCalculator(detail);
+    }
+
+    window.addEventListener(CALCULATOR_APPLY_EVENT, onApply);
+    return () => window.removeEventListener(CALCULATOR_APPLY_EVENT, onApply);
+  }, []);
 
   const focusFirstError = (fieldErrors: LeadFieldErrors) => {
     const first = fieldOrder.find((key) => fieldErrors[key]);
@@ -118,6 +145,7 @@ export function LeadForm({ defaultObjectType }: LeadFormProps) {
       }
 
       form.reset();
+      setCalculator(undefined);
       setStatus("success");
     } catch {
       setStatus("serverError");
@@ -165,22 +193,31 @@ export function LeadForm({ defaultObjectType }: LeadFormProps) {
           </legend>
           {/* Native radios: arrow keys move the selection inside the group. */}
           <div className="flex flex-wrap gap-2">
-            {objectTypes.map((objectType) => (
-              <label key={objectType} className="cursor-pointer">
-                <input
-                  type="radio"
-                  name="objectType"
-                  value={objectType}
-                  defaultChecked={defaultObjectType === objectType}
-                  className="peer sr-only"
-                />
-                <span className="inline-flex min-h-10 items-center rounded-full border border-line bg-white px-5 text-sm font-medium text-ink transition-colors duration-180 ease-tech hover:border-ink/40 peer-checked:border-ink peer-checked:bg-ink peer-checked:text-white peer-focus-visible:ring-3 peer-focus-visible:ring-ink/15 peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                  {t.objectTypes[objectType]}
-                </span>
-              </label>
+            {objectTypes.map((type) => (
+              <PillRadio
+                key={type}
+                name="objectType"
+                value={type}
+                checked={objectType === type}
+                onChange={() => setObjectType(type)}
+              >
+                {t.objectTypes[type]}
+              </PillRadio>
             ))}
           </div>
         </fieldset>
+
+        {calculator ? (
+          <p className="rounded-field border border-line bg-white px-4 py-3 text-sm text-ink/70 motion-safe:animate-enter">
+            {t.calculatorAttached}{" "}
+            <span className="font-medium text-ink">{calculator.summary}</span>
+          </p>
+        ) : null}
+        <input
+          type="hidden"
+          name="calculatorData"
+          value={calculator?.data ?? ""}
+        />
 
         <label className="flex flex-col gap-2">
           <FieldLabel>{t.name}</FieldLabel>
