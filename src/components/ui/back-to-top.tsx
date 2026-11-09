@@ -32,7 +32,7 @@ export function BackToTop() {
       aria-label="Нагору"
       onClick={scrollToTop}
       tabIndex={visible ? 0 : -1}
-      className={`fixed right-5 bottom-5 z-40 inline-flex size-12 items-center justify-center rounded-full bg-ink text-white shadow-soft transition-all duration-200 ease-tech focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink sm:right-8 sm:bottom-8 ${visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-3 opacity-0"}`}
+      className={`fixed right-5 bottom-20 z-40 inline-flex size-12 items-center justify-center rounded-full bg-ink text-white shadow-soft transition-all duration-200 ease-tech focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink sm:right-8 sm:bottom-24 ${visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-3 opacity-0"}`}
     >
       <ArrowUpRight aria-hidden className="size-4.5 -rotate-45" />
     </button>
