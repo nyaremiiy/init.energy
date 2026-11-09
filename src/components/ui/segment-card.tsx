@@ -20,7 +20,16 @@ type SegmentCardProps = {
 
 const toneClasses: Record<
   SegmentCardTone,
-  { card: string; index: string; text: string; muted: string; link: string }
+  {
+    card: string;
+    index: string;
+    text: string;
+    muted: string;
+    link: string;
+    /** First link of the card: filled light pill. */
+    featuredLink: string;
+    featuredMuted: string;
+  }
 > = {
   light: {
     card: "bg-surface text-ink hover:bg-ink hover:text-white",
@@ -28,6 +37,8 @@ const toneClasses: Record<
     text: "text-ink group-hover:text-white",
     muted: "text-ink/70 group-hover:text-white/75",
     link: "border-ink/20 group-hover:border-white/25 focus-visible:outline-ink",
+    featuredLink: "border-ink/20 bg-white text-ink hover:border-ink",
+    featuredMuted: "text-ink/70",
   },
   navy: {
     card: "bg-navy text-white hover:bg-ink",
@@ -35,6 +46,8 @@ const toneClasses: Record<
     text: "text-white",
     muted: "text-white/75",
     link: "border-white/25 focus-visible:outline-white",
+    featuredLink: "border-white bg-white text-ink hover:bg-white/90",
+    featuredMuted: "text-ink/70",
   },
   dark: {
     card: "bg-ink text-white",
@@ -42,6 +55,8 @@ const toneClasses: Record<
     text: "text-white",
     muted: "text-white/75",
     link: "border-white/25 focus-visible:outline-white",
+    featuredLink: "border-white bg-white text-ink hover:bg-white/90",
+    featuredMuted: "text-ink/70",
   },
 };
 
@@ -88,27 +103,31 @@ export function SegmentCard({
 
       <nav aria-label={navLabel} className="mt-auto">
         <ul className="flex flex-col gap-2">
-          {links.map((link) => (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                className={`group flex items-center gap-3 rounded-full border px-5 py-3 text-base font-medium transition-colors duration-200 ease-tech focus-visible:outline-2 focus-visible:outline-offset-2 ${classes.link}`}
-              >
-                <span className="flex-1">{link.label}</span>
-                {link.spec ? (
-                  <span
-                    className={`text-right whitespace-nowrap tabular-nums ${classes.muted}`}
-                  >
-                    {link.spec}
-                  </span>
-                ) : null}
-                <ArrowUpRight
-                  aria-hidden
-                  className="size-5 shrink-0 transition-transform duration-200 motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5"
-                />
-              </Link>
-            </li>
-          ))}
+          {links.map((link, linkIndex) => {
+            const featured = linkIndex === 0;
+
+            return (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className={`group flex items-center gap-3 rounded-full border px-5 py-3 text-base font-medium transition-colors duration-200 ease-tech focus-visible:outline-2 focus-visible:outline-offset-2 ${featured ? classes.featuredLink : classes.link}`}
+                >
+                  <span className="flex-1">{link.label}</span>
+                  {link.spec ? (
+                    <span
+                      className={`text-right whitespace-nowrap tabular-nums ${featured ? classes.featuredMuted : classes.muted}`}
+                    >
+                      {link.spec}
+                    </span>
+                  ) : null}
+                  <ArrowUpRight
+                    aria-hidden
+                    className="size-5 shrink-0 transition-transform duration-200 motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5"
+                  />
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </nav>
     </article>
