@@ -24,7 +24,7 @@ export function SolutionsBySegment() {
     >
       <div
         aria-hidden
-        className="pointer-events-none absolute top-1/2 left-0 size-0"
+        className="pointer-events-none absolute top-1/2 left-22 size-0"
       >
         <span className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 -rotate-90 font-heading text-display font-semibold tracking-tight whitespace-nowrap text-ink/5 uppercase">
           SOLAR
