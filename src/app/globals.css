@@ -32,8 +32,8 @@
   --spacing-panel-y: 6rem;
   --spacing-section-head-sm: 2rem;
   --spacing-section-head: 3.5rem;
-  --spacing-card-sm: 1.25rem;
-  --spacing-card: 2rem;
+  --spacing-card-sm: 1.5rem;
+  --spacing-card: 2.5rem;
 
   /* Panels (hero, trust block, footer): gap from screen edges and radius, mobile / sm+. */
   --spacing-panel-sm: 0.5rem;
