@@ -8,6 +8,7 @@ init.energy — вебпроєкт. Призначення та функціон
 
 ## Поточний стан
 
+- `next.config.ts` дозволяє доступ до dev-сервера з `192.168.0.24` через `allowedDevOrigins`. У `public/images/products/svit600.png` збережено зображення продукту, ще не підключене до UI.
 - Каркас на Next.js 16.4.5, React 19.3, TypeScript, Tailwind CSS v4, Lucide React для іконок і Motion для анімацій.
 - Header поверх hero з двох смуг: контакти/мови зверху (lg+), логотип/меню/CTA знизу; на мобільних — бургер-меню.
 - Реалізовано responsive hero-секцію з локальними AVIF/WebP-зображеннями.
