@@ -83,6 +83,21 @@ export function SolutionsBySegment() {
             </Link>
           </Reveal>
         </div>
+
+        <Reveal>
+          <p className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 font-heading text-eyebrow font-medium tracking-eyebrow text-ink/60 uppercase">
+            {t.keywords.map((keyword, index) => (
+              <span key={keyword} className="inline-flex items-center gap-3">
+                {index > 0 ? (
+                  <span aria-hidden className="text-ink/30">
+                    ·
+                  </span>
+                ) : null}
+                {keyword}
+              </span>
+            ))}
+          </p>
+        </Reveal>
       </Container>
     </section>
   );
