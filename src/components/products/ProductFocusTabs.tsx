@@ -1,13 +1,12 @@
 "use client";
 
-import { ArrowUpRight, Pause, Play } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { useReducedMotion } from "motion/react";
 import Image from "next/image";
 import { type KeyboardEvent, useEffect, useId, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Eyebrow } from "@/components/ui/eyebrow";
-import { IconButton } from "@/components/ui/icon-button";
 import { MediaPlaceholder } from "@/components/ui/media-placeholder";
 import { trackEvent } from "@/lib/analytics";
 
@@ -32,16 +31,13 @@ type ProductFocusTabsProps = {
   defaultIndex: number;
   labels: {
     tablist: string;
-    pause: string;
-    play: string;
     compare: string;
   };
   compareHref: string;
 };
 
 /**
- * "auto" — advances on a timer; "paused" — stopped by the pause button or
- * reduced motion (the play button resumes); "stopped" — the visitor picked a
+ * "auto" — advances on a timer; "paused" — reduced motion only; "stopped" — the visitor picked a
  * tab, so the carousel never moves on its own again (until reload).
  */
 type Mode = "auto" | "paused" | "stopped";
@@ -57,8 +53,7 @@ export function ProductFocusTabs({
   const listRef = useRef<HTMLDivElement>(null);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const [active, setActive] = useState(defaultIndex);
-  // null until the visitor uses the pause/play button or picks a tab;
-  // reduced motion then starts paused, everyone else on auto.
+  // null until the visitor picks a tab; reduced motion starts paused, others on auto.
   const [chosenMode, setMode] = useState<Mode | null>(null);
   const prefersReducedMotion = useReducedMotion();
   const mode: Mode = chosenMode ?? (prefersReducedMotion ? "paused" : "auto");
@@ -139,7 +134,7 @@ export function ProductFocusTabs({
         }
       }}
     >
-      <div className="flex items-center gap-3">
+      <div>
         <div
           ref={listRef}
           role="tablist"
@@ -186,14 +181,6 @@ export function ProductFocusTabs({
             );
           })}
         </div>
-
-        <IconButton
-          variant="outline-dark"
-          size="sm"
-          icon={mode === "auto" ? Pause : Play}
-          aria-label={mode === "auto" ? labels.pause : labels.play}
-          onClick={() => setMode(mode === "auto" ? "paused" : "auto")}
-        />
       </div>
 
       {/* All panels stay in the HTML (SEO) and share one grid cell, so the

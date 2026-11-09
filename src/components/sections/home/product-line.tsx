@@ -75,8 +75,6 @@ export function ProductLine() {
             )}
             labels={{
               tablist: t.tablist,
-              pause: t.pause,
-              play: t.play,
               compare: t.compareAll,
             }}
             compareHref={toAnchor(anchors.compare)}
