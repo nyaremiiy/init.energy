@@ -5,6 +5,7 @@ import type { Project } from "@/content/projects";
 import { products } from "@/content/products";
 import { slugs, toPath } from "@/content/routes";
 import { formatQuantity } from "@/lib/format";
+import { segmentIcons } from "@/content/segments";
 import { format, messages } from "@/lib/messages";
 
 import { CardLabel } from "./card-label";
@@ -107,7 +108,10 @@ export function ProjectCard({ project, variant }: ProjectCardProps) {
       >
         <div className="flex items-end justify-between gap-4">
           <div className="flex min-w-0 flex-col gap-3">
-            <CardLabel tone={tone.eyebrow === "dark" ? "dark" : "light"}>
+            <CardLabel
+              tone={tone.eyebrow === "dark" ? "dark" : "light"}
+              icon={segmentIcons[project.segment]}
+            >
               {t.segments[project.segment]}
             </CardLabel>
             <Heading as="h3" size="h3" className={tone.title}>

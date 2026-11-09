@@ -1,3 +1,4 @@
+import type { LucideIcon } from "lucide-react";
 import Image from "next/image";
 
 import { CardLabel } from "./card-label";
@@ -9,6 +10,7 @@ type ProductCardProps = {
   name: string;
   href: string;
   segment: string;
+  segmentIcon: LucideIcon;
   description: string;
   specs: Array<{ label: string; value: string }>;
   image?: { src: string; alt: string; width: number; height: number };
@@ -21,6 +23,7 @@ export function ProductCard({
   name,
   href,
   segment,
+  segmentIcon,
   description,
   specs,
   image,
@@ -45,7 +48,9 @@ export function ProductCard({
       )}
 
       <div className="flex flex-col gap-4">
-        <CardLabel tone="light">{segment}</CardLabel>
+        <CardLabel tone="light" icon={segmentIcon}>
+          {segment}
+        </CardLabel>
         <div className="flex items-start justify-between gap-4">
           <div className="flex flex-col gap-2">
             <Heading as="h3" size="h3" className="text-ink">

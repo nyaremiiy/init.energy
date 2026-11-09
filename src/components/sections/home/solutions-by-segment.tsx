@@ -8,6 +8,7 @@ import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
 import { SegmentCard } from "@/components/ui/segment-card";
 import { anchors, routes } from "@/content/routes";
+import { segmentIcons } from "@/content/segments";
 import { getSolutionLinks, solutions } from "@/content/solutions";
 import { format, messages } from "@/lib/messages";
 
@@ -56,6 +57,7 @@ export function SolutionsBySegment() {
                 <SegmentCard
                   index={solution.index}
                   segment={solution.segment}
+                  segmentIcon={segmentIcons[solution.segmentIcon]}
                   title={solution.title}
                   description={solution.description}
                   links={getSolutionLinks(solution)}
@@ -74,7 +76,7 @@ export function SolutionsBySegment() {
               className="group flex items-center justify-between gap-6 rounded-3xl shadow-card bg-surface p-6 text-ink transition duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink motion-safe:hover:-translate-y-0.5 lg:p-8"
             >
               <span className="flex flex-col items-start gap-3">
-                <CardLabel>{t.hub.label}</CardLabel>
+                <CardLabel icon={segmentIcons.solar}>{t.hub.label}</CardLabel>
                 <span className="font-heading text-h3 font-semibold tracking-tight">
                   {t.hub.title}
                 </span>
