@@ -95,7 +95,7 @@ const serviceLink = (id: ServiceId): NavMenuLink => ({
 
 export const navItems: NavItem[] = [
   {
-    label: "SVIT",
+    label: "Каталог",
     columns: [
       {
         title: "Резервне живлення",
