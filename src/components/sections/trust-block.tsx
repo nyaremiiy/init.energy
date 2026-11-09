@@ -48,7 +48,7 @@ export function TrustBlock({
       aria-labelledby={titleId}
       className="scroll-mt-24 bg-white pt-section-sm lg:pt-section"
     >
-      <SectionWatermark text="ENERGY" tone="dark" />
+      <SectionWatermark text="ENERGY" tone="dark" align="upper" />
       <Reveal className="relative">
         <Container className="flex flex-col gap-section-head py-section-sm lg:py-section">
           <SectionHeader
