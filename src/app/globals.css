@@ -7,6 +7,8 @@
 
   /* Brand ink: the same navy used by the hero overlay. */
   --color-ink: rgb(0 2 23);
+  /* Section titles on light backgrounds: a touch bluer than ink. */
+  --color-heading: rgb(4 18 62);
   /* Light section background. */
   --color-surface: rgb(244 246 250);
   /* Hairlines and dividers on light surfaces. */

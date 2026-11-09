@@ -29,7 +29,7 @@ export function SectionHeader({
   tone = "light",
   layout = "stacked",
 }: SectionHeaderProps) {
-  const titleColor = tone === "dark" ? "text-white" : "text-ink";
+  const titleColor = tone === "dark" ? "text-white" : "text-heading";
   const descriptionTone = tone === "dark" ? "onDark" : "onLight";
   const heading = (
     <Heading as="h2" id={titleId} size="h2" className={titleColor}>
