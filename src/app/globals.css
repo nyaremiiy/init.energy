@@ -14,7 +14,8 @@
   /* Hairlines and dividers on light surfaces. */
   --color-line: rgb(0 2 23 / 12%);
   /* Navy, lighter than ink: the second solution card. */
-  --color-navy: rgb(8 18 54);
+  /* Saved alternative (owner liked it): rgb(8 18 54). */
+  --color-navy: rgb(4 12 40);
 
   /* Vertical rhythm: space between home sections (mobile / lg) and header → content. */
   --spacing-section-sm: 5.5rem;
