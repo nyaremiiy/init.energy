@@ -1,4 +1,4 @@
-import { ArrowUpRight, Loader2 } from "lucide-react";
+import { ArrowUpRight, Loader2, type LucideIcon } from "lucide-react";
 import Link from "next/link";
 import type { ComponentPropsWithoutRef } from "react";
 
@@ -10,6 +10,8 @@ type SharedProps = {
   size?: IconButtonSize;
   /** Shows a spinner instead of the arrow (e.g. while a form is sending). */
   loading?: boolean;
+  /** Another icon instead of the arrow (e.g. Pause/Play); it does not move on hover. */
+  icon?: LucideIcon;
   className?: string;
 };
 
@@ -49,11 +51,14 @@ export function IconButton(props: IconButtonProps) {
     variant = "outline-light",
     size = "md",
     loading = false,
+    icon: Icon,
     className,
   } = props;
   const classes = `group/icon inline-flex shrink-0 items-center justify-center rounded-full transition-colors duration-150 ease-tech focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed ${sizeClasses[size]} ${variantClasses[variant]} ${className ?? ""}`;
   const icon = loading ? (
     <Loader2 aria-hidden className="size-4.5 motion-safe:animate-spin" />
+  ) : Icon ? (
+    <Icon aria-hidden className="size-4.5" />
   ) : (
     <ArrowUpRight
       aria-hidden
@@ -75,12 +80,14 @@ export function IconButton(props: IconButtonProps) {
       variant: _v,
       size: _s,
       loading: _l,
+      icon: _i,
       className: _c,
       ...linkProps
     } = props;
     void _v;
     void _s;
     void _l;
+    void _i;
     void _c;
 
     return (
@@ -94,6 +101,7 @@ export function IconButton(props: IconButtonProps) {
     variant: _v,
     size: _s,
     loading: _l,
+    icon: _i,
     className: _c,
     type = "button",
     ...buttonProps
@@ -101,6 +109,7 @@ export function IconButton(props: IconButtonProps) {
   void _v;
   void _s;
   void _l;
+  void _i;
   void _c;
 
   return (

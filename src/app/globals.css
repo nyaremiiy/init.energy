@@ -279,3 +279,13 @@ button:not(:disabled) {
 .range-input:focus-visible::-moz-range-thumb {
   box-shadow: 0 0 0 4px rgb(0 2 23 / 15%);
 }
+
+/* Progress bar of the auto-advancing product tabs (duration set inline). */
+@keyframes tab-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}

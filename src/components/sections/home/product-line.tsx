@@ -1,77 +1,94 @@
-import { segmentIcons } from "@/content/segments";
 import { Container } from "@/components/layout/container";
+import {
+  ProductFocusTabs,
+  type FocusProduct,
+} from "@/components/products/ProductFocusTabs";
+import { ArrowLink } from "@/components/ui/arrow-link";
 import { Heading } from "@/components/ui/heading";
 import { Panel } from "@/components/ui/panel";
-import { ProductCard } from "@/components/ui/product-card";
 import { ProductCompareTable } from "@/components/ui/product-compare-table";
 import { Reveal } from "@/components/ui/reveal";
-import { ScrollSlider } from "@/components/ui/scroll-slider";
 import { SectionHeader } from "@/components/ui/section-header";
 import { SectionWatermark } from "@/components/ui/section-watermark";
-import { ArrowLink } from "@/components/ui/arrow-link";
-import { productList } from "@/content/products";
-import { anchors, routes } from "@/content/routes";
+import { productList, type ProductId } from "@/content/products";
+import { anchors, routes, toAnchor } from "@/content/routes";
 import { formatQuantity } from "@/lib/format";
 import { format, messages } from "@/lib/messages";
 
 const titleId = "product-line-title";
 const compareTitleId = "product-line-compare-title";
+/** Product in focus on first render (SSR). */
+const defaultProduct: ProductId = "svitHome";
 
+/** Server section: header, focused-product tabs (client) and the comparison table. */
 export function ProductLine() {
   const t = messages.productLine;
 
+  const focusProducts: FocusProduct[] = productList.map((product) => ({
+    id: product.id,
+    name: product.name,
+    href: product.href,
+    segment: product.segment,
+    description: product.focusDescription,
+    specs: product.specs.slice(0, 3).map((spec) => ({
+      label: messages.specs[spec.key],
+      value:
+        typeof spec.value === "string"
+          ? spec.value
+          : formatQuantity(spec.value),
+    })),
+    image: product.image,
+    detailsLabel: format(t.details, { name: product.name }),
+    specsLabel: format(t.specsLabel, { name: product.name }),
+    photoPending: `${product.name} — ${t.photoPending}`,
+  }));
+
   return (
-    <Panel
-      as="section"
-      variant="sky"
+    <section
       id={anchors.products}
       aria-labelledby={titleId}
       className="scroll-mt-24 bg-white pt-section-sm lg:pt-section"
     >
-      <SectionWatermark text="STORAGE" side="right" />
-      <Container className="relative flex flex-col gap-section-head py-section-sm lg:py-section">
-        <Reveal>
-          <SectionHeader
-            eyebrow={t.eyebrow}
-            title={t.title}
-            titleId={titleId}
-            lead={t.lead}
-            aside={<ArrowLink href={routes.catalog}>{t.catalogLink}</ArrowLink>}
+      <Panel variant="dark" panelClassName="bg-ink-glow">
+        <SectionWatermark text="STORAGE" side="right" tone="dark" />
+        <Container className="relative flex flex-col gap-section-head py-section-sm lg:py-section">
+          <Reveal>
+            <SectionHeader
+              tone="dark"
+              eyebrow={t.eyebrow}
+              title={t.title}
+              titleId={titleId}
+              lead={t.lead}
+              aside={
+                <ArrowLink href={routes.catalog} tone="dark">
+                  {t.catalogLink}
+                </ArrowLink>
+              }
+            />
+          </Reveal>
+
+          <ProductFocusTabs
+            products={focusProducts}
+            defaultIndex={Math.max(
+              0,
+              productList.findIndex((product) => product.id === defaultProduct),
+            )}
+            labels={{
+              tablist: t.tablist,
+              pause: t.pause,
+              play: t.play,
+              compare: t.compareAll,
+            }}
+            compareHref={toAnchor(anchors.compare)}
           />
-        </Reveal>
+        </Container>
+      </Panel>
 
-        {/* All products: swipe on touch screens, arrow buttons from lg. */}
-        <Reveal>
-          <ScrollSlider
-            label={t.listLabel}
-            previousLabel={t.previous}
-            nextLabel={t.next}
-          >
-            {productList.map((product) => (
-              <ProductCard
-                key={product.id}
-                name={product.name}
-                href={product.href}
-                segment={product.segment}
-                segmentIcon={segmentIcons[product.segmentIcon]}
-                description={product.description}
-                specs={product.specs.map((spec) => ({
-                  label: messages.specs[spec.key],
-                  value:
-                    typeof spec.value === "string"
-                      ? spec.value
-                      : formatQuantity(spec.value),
-                }))}
-                image={product.image}
-                linkLabel={format(t.productLink, { name: product.name })}
-                specsLabel={format(t.specsLabel, { name: product.name })}
-                photoPendingCaption={`${product.name} — ${t.photoPending}`}
-              />
-            ))}
-          </ScrollSlider>
-        </Reveal>
-
-        <Reveal className="mt-4 flex min-w-0 flex-col gap-6">
+      <Container
+        id={anchors.compare}
+        className="scroll-mt-24 pt-section-sm lg:pt-section"
+      >
+        <Reveal className="flex min-w-0 flex-col gap-6">
           <Heading as="h3" id={compareTitleId} size="h3" className="text-ink">
             {t.compareTitle}
           </Heading>
@@ -91,6 +108,6 @@ export function ProductLine() {
           />
         </Reveal>
       </Container>
-    </Panel>
+    </section>
   );
 }

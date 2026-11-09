@@ -43,6 +43,11 @@ export type Product = {
   audience?: string;
   /** Short description for product cards. */
   description: string;
+  /**
+   * Longer description for the focused product in the home tabs. Built only
+   * from facts already on init.energy (see the specs and summaries below).
+   */
+  focusDescription: string;
   /** Main capacity, shown in tables and solution cards. */
   capacity: Quantity;
   /** Rows of the product card spec list. */
@@ -63,6 +68,8 @@ export const productList: Product[] = [
     type: "Портативна станція",
     audience: "Квартира",
     description: "Портативна станція для квартири",
+    focusDescription:
+      "Портативна станція на LiFePO₄: 865 Вт·год і 600 Вт для квартири — роутер, освітлення, ноутбук і телефони працюють під час відключень.",
     capacity: { value: 865, unit: "Wh" },
     specs: [
       { key: "capacity", value: { value: 865, unit: "Wh" } },
@@ -86,6 +93,8 @@ export const productList: Product[] = [
     type: "Комплекс резервного живлення",
     audience: "Приватний будинок",
     description: "Резервне живлення для всього будинку",
+    focusDescription:
+      "Комплекс резервного живлення для приватного будинку: гібридний інвертор 6 кВт і акумулятор 5,12 кВт·год із ресурсом понад 6 000 циклів.",
     capacity: { value: 5.12, unit: "kWh" },
     specs: [
       { key: "capacity", value: { value: 5.12, unit: "kWh" } },
@@ -115,6 +124,8 @@ export const productList: Product[] = [
     segment: "Дім і бізнес",
     segmentIcon: "homeBusiness",
     description: "Акумуляторна батарея LiFePO₄",
+    focusDescription:
+      "Акумуляторна батарея LiFePO₄ на 5,12 кВт·год і 5 кВт для дому та бізнесу — для резервного живлення і сонячних станцій.",
     capacity: { value: 5.12, unit: "kWh" },
     specs: [
       { key: "capacity", value: { value: 5.12, unit: "kWh" } },
@@ -139,10 +150,13 @@ export const productList: Product[] = [
     segment: "Автономні системи",
     segmentIcon: "autonomous",
     description: "Акумуляторна батарея LiFePO₄ для автономних систем",
+    focusDescription:
+      "Акумуляторна батарея LiFePO₄ на 16,07 кВт·год для сонячних станцій та автономних систем.",
     capacity: { value: 16.07, unit: "kWh" },
     specs: [
       { key: "capacity", value: { value: 16.07, unit: "kWh" } },
       { key: "chemistry", value: "LiFePO₄" },
+      // TODO(content): a third key spec (power or cycles) is not on init.energy yet.
     ],
     image: {
       src: "/images/products/svit-plus-16000.avif",
@@ -159,6 +173,8 @@ export const productList: Product[] = [
     type: "BESS",
     audience: "Бізнес",
     description: "Промислові системи накопичення для підприємств",
+    focusDescription:
+      "Промислові системи накопичення енергії (BESS) від 208 до 1 044 кВт·год для підприємств. INIT ENERGY — офіційний представник та інсталятор LITHIUMVALLEY.",
     capacity: { value: 208, unit: "kWh", qualifier: "from" },
     specs: [
       { key: "minCapacity", value: { value: 208, unit: "kWh" } },

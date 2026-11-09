@@ -33,6 +33,8 @@ export const anchors = {
   solutions: "solutions",
   aboutUs: "about-us",
   products: "products",
+  /** Comparison table under the product tabs. */
+  compare: "compare",
   projects: "projects",
   calculator: "calculator",
   contacts: "contacts",
