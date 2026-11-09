@@ -15,11 +15,12 @@ export type Project = {
   title: string;
   /** Omit when only the oblast is known. */
   city?: string;
-  region: string;
-  powerKw: number;
+  /** Unknown values are omitted and their rows are hidden on the card. */
+  region?: string;
+  powerKw?: number;
   /** Battery from `products.ts` (equipment cross-link); omit for solar-only plants. */
   equipment?: ProductId;
-  year: number;
+  year?: number;
   /** `null` renders MediaPlaceholder until content supplies a real photo. */
   image: ProjectImage | null;
   featured: boolean;
@@ -70,15 +71,16 @@ export const projectList: Project[] = [
     draft: true,
   },
   {
-    slug: "test-apartment-kyiv",
-    segment: "apartment",
-    title: "Тестова квартира з резервом",
-    city: "Київ",
-    region: "місто Київ",
-    powerKw: 0.6,
-    equipment: "svit600",
-    year: 2025,
-    image: null,
+    slug: "ses-outbuilding-roof",
+    segment: "house",
+    title: "СЕС на даху господарської будівлі",
+    // TODO(content): power, region, year and equipment are unknown — fill in when confirmed.
+    image: {
+      src: "/images/projects/01.jpg",
+      alt: "Монтаж сонячних панелей на даху господарської будівлі",
+      width: 1280,
+      height: 720,
+    },
     featured: true,
     draft: true,
   },
