@@ -48,13 +48,15 @@ export function Heading({
   children,
   letterSpacing = "tight",
   lineHeight = "default",
-  weight = "semibold",
+  weight,
   size,
   ...props
 }: HeadingProps) {
+  // H3 cards use medium (500); other headings default to semibold.
+  const fontWeight = weight ?? (size === "h3" ? "medium" : "semibold");
   return (
     <Tag
-      className={`font-heading ${weightClasses[weight]} ${letterSpacingClasses[letterSpacing]} ${size ? sizeClasses[size] : lineHeightClasses[lineHeight]} ${className ?? ""}`}
+      className={`font-heading ${weightClasses[fontWeight]} ${letterSpacingClasses[letterSpacing]} ${size ? sizeClasses[size] : lineHeightClasses[lineHeight]} ${className ?? ""}`}
       {...props}
     >
       {children}
