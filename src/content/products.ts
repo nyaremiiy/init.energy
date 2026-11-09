@@ -50,8 +50,6 @@ export type Product = {
   /** Segment label shown on the product card. */
   segment: string;
   segmentIcon: SegmentIconId;
-  /** Shown as a card on the home page (others appear only in the table). */
-  featured?: boolean;
   image?: ProductImage;
 };
 
@@ -73,7 +71,6 @@ export const productList: Product[] = [
     ],
     segment: "Квартира",
     segmentIcon: "apartment",
-    featured: true,
     image: {
       src: "/images/products/svit-600.avif",
       alt: "Портативна станція SVIT 600 з двома розетками 220 В, USB-портами і дисплеєм заряду на столі в квартирі",
@@ -100,7 +97,6 @@ export const productList: Product[] = [
     ],
     segment: "Приватний будинок",
     segmentIcon: "house",
-    featured: true,
     image: {
       src: "/images/products/svit-home.avif",
       alt: "Комплекс SVIT HOME: гібридний інвертор над акумуляторною батареєю на білій стійці в інтер'єрі будинку",
@@ -171,7 +167,6 @@ export const productList: Product[] = [
     ],
     segment: "Бізнес",
     segmentIcon: "business",
-    featured: true,
     image: {
       src: "/images/products/lithiumvalley.avif",
       alt: "Промислова система накопичення енергії LITHIUMVALLEY у шафі з інвертором біля сонячної електростанції",

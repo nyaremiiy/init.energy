@@ -4,6 +4,7 @@ import { Heading } from "@/components/ui/heading";
 import { ProductCard } from "@/components/ui/product-card";
 import { ProductCompareTable } from "@/components/ui/product-compare-table";
 import { Reveal } from "@/components/ui/reveal";
+import { ScrollSlider } from "@/components/ui/scroll-slider";
 import { SectionHeader } from "@/components/ui/section-header";
 import { ArrowLink } from "@/components/ui/arrow-link";
 import { productList } from "@/content/products";
@@ -16,7 +17,6 @@ const compareTitleId = "product-line-compare-title";
 
 export function ProductLine() {
   const t = messages.productLine;
-  const featured = productList.filter((product) => product.featured);
 
   return (
     <section
@@ -35,39 +35,36 @@ export function ProductLine() {
           />
         </Reveal>
 
-        {/* Mobile/tablet: swipeable scroll-snap row; lg: static 3-column grid. */}
-        <ul
-          aria-label={t.listLabel}
-          className="scrollbar-none -mx-2.5 -my-2 flex snap-x snap-mandatory scroll-px-2.5 gap-4 overflow-x-auto px-2.5 py-2 sm:-mx-8 sm:scroll-px-8 sm:px-8 lg:mx-0 lg:grid lg:grid-cols-3 lg:overflow-visible lg:px-0"
-        >
-          {featured.map((product, index) => (
-            <li
-              key={product.id}
-              className="w-5/6 shrink-0 snap-start md:w-1/2 lg:w-auto"
-            >
-              <Reveal delay={index * 0.12} className="h-full">
-                <ProductCard
-                  name={product.name}
-                  href={product.href}
-                  segment={product.segment}
-                  segmentIcon={segmentIcons[product.segmentIcon]}
-                  description={product.description}
-                  specs={product.specs.map((spec) => ({
-                    label: messages.specs[spec.key],
-                    value:
-                      typeof spec.value === "string"
-                        ? spec.value
-                        : formatQuantity(spec.value),
-                  }))}
-                  image={product.image}
-                  linkLabel={format(t.productLink, { name: product.name })}
-                  specsLabel={format(t.specsLabel, { name: product.name })}
-                  photoPendingCaption={`${product.name} — ${t.photoPending}`}
-                />
-              </Reveal>
-            </li>
-          ))}
-        </ul>
+        {/* All products: swipe on touch screens, arrow buttons from lg. */}
+        <Reveal>
+          <ScrollSlider
+            label={t.listLabel}
+            previousLabel={t.previous}
+            nextLabel={t.next}
+          >
+            {productList.map((product) => (
+              <ProductCard
+                key={product.id}
+                name={product.name}
+                href={product.href}
+                segment={product.segment}
+                segmentIcon={segmentIcons[product.segmentIcon]}
+                description={product.description}
+                specs={product.specs.map((spec) => ({
+                  label: messages.specs[spec.key],
+                  value:
+                    typeof spec.value === "string"
+                      ? spec.value
+                      : formatQuantity(spec.value),
+                }))}
+                image={product.image}
+                linkLabel={format(t.productLink, { name: product.name })}
+                specsLabel={format(t.specsLabel, { name: product.name })}
+                photoPendingCaption={`${product.name} — ${t.photoPending}`}
+              />
+            ))}
+          </ScrollSlider>
+        </Reveal>
 
         <Reveal className="mt-4 flex min-w-0 flex-col gap-6">
           <Heading as="h3" id={compareTitleId} size="h3" className="text-ink">
