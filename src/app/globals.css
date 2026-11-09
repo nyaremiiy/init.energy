@@ -25,6 +25,9 @@
   --radius-panel-sm: 1.5rem;
   --radius-panel: 2rem;
 
+  /* Soft light shadow: under the hero and the header mega menu only. */
+  --shadow-soft: 0 12px 32px -12px rgb(0 2 23 / 22%);
+
   /* Form controls. */
   --radius-field: 14px;
 
