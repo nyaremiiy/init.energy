@@ -10,8 +10,8 @@ type CardLabelProps = {
 } & ComponentPropsWithoutRef<"span">;
 
 const toneClasses: Record<CardLabelTone, string> = {
-  light: "border-ink/20 text-ink/70",
-  dark: "border-white/25 text-white/75",
+  light: "border-ink/20 text-ink",
+  dark: "border-white/25 text-white",
 };
 
 /** Pill label for cards: same look as the filter chips on the site. */
@@ -23,12 +23,12 @@ export function CardLabel({
   ...props
 }: CardLabelProps) {
   const hover = hoverInverse
-    ? "group-hover:border-white/25 group-hover:text-white/75"
+    ? "group-hover:border-white/25 group-hover:text-white"
     : "";
 
   return (
     <span
-      className={`inline-flex items-center rounded-full border px-3 py-1 font-heading text-eyebrow font-medium tracking-eyebrow whitespace-nowrap uppercase transition-colors duration-200 ease-tech ${toneClasses[tone]} ${hover} ${className ?? ""}`}
+      className={`inline-flex w-fit shrink-0 items-center self-start rounded-full border px-3 py-1 text-sm font-medium whitespace-nowrap transition-colors duration-200 ease-tech ${toneClasses[tone]} ${hover} ${className ?? ""}`}
       {...props}
     >
       {children}
