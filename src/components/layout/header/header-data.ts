@@ -124,8 +124,17 @@ export const navItems: NavItem[] = [
       },
     ],
   },
+  {
+    href: routes.sections.solutions,
+    label: "Рішення",
+    sectionId: "solutions",
+  },
   { href: routes.sections.products, label: "Продукти", sectionId: "products" },
-  { href: routes.sections.aboutUs, label: "Про компанію", sectionId: "about-us" },
+  {
+    href: routes.sections.aboutUs,
+    label: "Про компанію",
+    sectionId: "about-us",
+  },
   // The projects section renders only when there are visible cases; hide the link otherwise.
   ...(featuredProjects.length > 0
     ? [
