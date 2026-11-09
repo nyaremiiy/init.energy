@@ -52,11 +52,16 @@ export function ProjectCard({ project, variant }: ProjectCardProps) {
         button: "outline-light" as const,
       };
 
+  // Unknown values are left out instead of showing placeholders.
   const specs = [
-    {
-      label: t.fields.power,
-      value: formatQuantity({ value: project.powerKw, unit: "kW" }),
-    },
+    ...(project.powerKw !== undefined
+      ? [
+          {
+            label: t.fields.power,
+            value: formatQuantity({ value: project.powerKw, unit: "kW" }),
+          },
+        ]
+      : []),
     // Solar-only plants have no battery row.
     ...(equipment
       ? [
@@ -73,8 +78,12 @@ export function ProjectCard({ project, variant }: ProjectCardProps) {
           },
         ]
       : []),
-    ...(isLarge ? [{ label: t.fields.region, value: project.region }] : []),
-    { label: t.fields.year, value: String(project.year) },
+    ...(isLarge && project.region
+      ? [{ label: t.fields.region, value: project.region }]
+      : []),
+    ...(project.year !== undefined
+      ? [{ label: t.fields.year, value: String(project.year) }]
+      : []),
   ];
 
   return (
@@ -131,18 +140,20 @@ export function ProjectCard({ project, variant }: ProjectCardProps) {
           />
         </div>
 
-        <dl
-          className={`mt-6 grid border-t pt-4 text-base ${tone.divider} ${
-            isLarge ? "grid-cols-2 sm:grid-cols-4" : "grid-cols-3"
-          }`}
-        >
-          {specs.map((spec) => (
-            <div key={spec.label} className="min-w-0 pr-3 last:pr-0">
-              <dt className={`text-sm ${tone.muted}`}>{spec.label}</dt>
-              <dd className="mt-1 truncate font-medium">{spec.value}</dd>
-            </div>
-          ))}
-        </dl>
+        {specs.length > 0 ? (
+          <dl
+            className={`mt-6 grid border-t pt-4 text-base ${tone.divider} ${
+              isLarge ? "grid-cols-2 sm:grid-cols-4" : "grid-cols-3"
+            }`}
+          >
+            {specs.map((spec) => (
+              <div key={spec.label} className="min-w-0 pr-3 last:pr-0">
+                <dt className={`text-sm ${tone.muted}`}>{spec.label}</dt>
+                <dd className="mt-1 truncate font-medium">{spec.value}</dd>
+              </div>
+            ))}
+          </dl>
+        ) : null}
       </div>
     </article>
   );
