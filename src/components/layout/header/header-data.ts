@@ -121,6 +121,8 @@ export const navItems: NavItem[] = [
       },
     ],
   },
+  // TEST: temporary menu link to the test page. Remove together with src/app/test/.
+  { href: "/test/", label: "Тест" },
   // Add links to home page sections (about, projects, contacts) as they are built.
 ];
 
