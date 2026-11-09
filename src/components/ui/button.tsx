@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 
-type ButtonVariant = "primary" | "secondary" | "dark";
+type ButtonVariant = "primary" | "secondary" | "dark" | "outline-light";
 type ButtonSize = "default" | "wide";
 
 type SharedButtonProps = {
@@ -28,6 +28,8 @@ const variantClasses: Record<ButtonVariant, string> = {
     "border border-white/40 text-white backdrop-blur-sm hover:border-white hover:bg-white/10 focus-visible:outline-white/50",
   /** Main action on light backgrounds (forms). */
   dark: "bg-ink text-white hover:bg-ink/90 focus-visible:outline-ink/30",
+  "outline-light":
+    "border border-ink/30 text-ink hover:border-ink hover:bg-ink hover:text-white focus-visible:outline-ink/30",
 };
 
 const sizeClasses: Record<ButtonSize, string> = {

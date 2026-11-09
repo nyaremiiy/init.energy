@@ -1,8 +1,8 @@
+import { Sun } from "lucide-react";
 import Link from "next/link";
 
 import { Container } from "@/components/layout/container";
 import { ArrowLink } from "@/components/ui/arrow-link";
-import { CardLabel } from "@/components/ui/card-label";
 import { IconButton } from "@/components/ui/icon-button";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
@@ -10,7 +10,11 @@ import { SectionWatermark } from "@/components/ui/section-watermark";
 import { SegmentCard } from "@/components/ui/segment-card";
 import { anchors, routes } from "@/content/routes";
 import { segmentIcons } from "@/content/segments";
-import { getSolutionLinks, solutions } from "@/content/solutions";
+import {
+  getSolutionCapacity,
+  getSolutionLinks,
+  solutions,
+} from "@/content/solutions";
 import { format, messages } from "@/lib/messages";
 
 const titleId = "solutions-by-segment-title";
@@ -59,6 +63,13 @@ export function SolutionsBySegment() {
                     segment: solution.segment,
                   })}
                   tone={solution.tone}
+                  showcase={{
+                    capacity: getSolutionCapacity(solution),
+                    capacityLabel: t.capacityLabels[solution.id],
+                    recommendLabel: t.recommend,
+                    ctaLabel: t.cardCtas[solution.id],
+                    ctaHref: solution.ctaHref,
+                  }}
                 />
               </Reveal>
             ))}
@@ -66,16 +77,22 @@ export function SolutionsBySegment() {
 
           <Reveal>
             <Link
-              href={routes.services.turnkeySes}
-              className="group flex items-center justify-between gap-6 rounded-3xl shadow-card bg-surface p-card-sm text-ink transition duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink motion-safe:hover:-translate-y-0.5 lg:p-card"
+              href={routes.services.solar}
+              className="group grid grid-cols-1 items-center gap-4 rounded-3xl bg-surface p-card-sm text-ink transition duration-200 ease-tech focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink motion-safe:hover:-translate-y-0.5 sm:grid-cols-12 lg:p-card"
             >
-              <span className="flex flex-col items-start gap-3">
-                <CardLabel icon={segmentIcons.solar}>{t.hub.label}</CardLabel>
+              <span className="flex size-12 items-center justify-center rounded-full bg-white sm:col-span-1">
+                <Sun aria-hidden className="size-5" strokeWidth={1.7} />
+              </span>
+              <span className="flex flex-col gap-2 sm:col-span-8">
                 <span className="font-heading text-h3-sm font-semibold tracking-tight sm:text-h3">
                   {t.hub.title}
                 </span>
+                <span className="text-small text-ink/70">{t.hub.description}</span>
               </span>
-              <IconButton decorative variant="outline-light" />
+              <span className="flex items-center gap-3 sm:col-span-3 sm:justify-end">
+                <span className="text-base font-medium">{t.hub.details}</span>
+                <IconButton decorative variant="solid-dark" />
+              </span>
             </Link>
           </Reveal>
         </div>

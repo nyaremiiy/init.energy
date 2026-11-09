@@ -1,8 +1,9 @@
-import { formatQuantity } from "@/lib/format";
+import { formatNumber, formatQuantity } from "@/lib/format";
+import { messages } from "@/lib/messages";
 
 import { products, type ProductId } from "./products";
 import type { SegmentIconId } from "./segments";
-import { services, type ServiceId } from "./services";
+import { routes } from "./routes";
 
 export type SolutionLink = {
   label: string;
@@ -11,7 +12,7 @@ export type SolutionLink = {
   href: string;
 };
 
-type LinkRef = { product: ProductId } | { service: ServiceId };
+type ProductRef = { product: ProductId; count?: number };
 
 export type Solution = {
   id: "apartment" | "house" | "business";
@@ -20,7 +21,9 @@ export type Solution = {
   segmentIcon: SegmentIconId;
   title: string;
   description: string;
-  links: LinkRef[];
+  products: ProductRef[];
+  capacityProducts: ProductId[];
+  ctaHref: string;
   tone: "light" | "navy" | "dark";
 };
 
@@ -34,7 +37,9 @@ export const solutions: Solution[] = [
     title: "Світло й зв'язок під час відключень",
     description:
       "Роутер, освітлення, ноутбук і телефони. Працює від розетки, без монтажу.",
-    links: [{ product: "svit600" }],
+    products: [{ product: "svit600" }],
+    capacityProducts: ["svit600"],
+    ctaHref: routes.backup.apartment,
     tone: "light",
   },
   {
@@ -45,12 +50,13 @@ export const solutions: Solution[] = [
     title: "Весь будинок без перебоїв",
     description:
       "Котел, насос і холодильник під час відключень, а вдень — власна сонячна енергія.",
-    links: [
+    products: [
       { product: "svitHome" },
       { product: "svitPlus5000" },
       { product: "svitPlus16000" },
-      { service: "turnkeySes" },
     ],
+    capacityProducts: ["svitHome", "svitPlus5000", "svitPlus16000"],
+    ctaHref: routes.backup.house,
     tone: "navy",
   },
   {
@@ -61,29 +67,49 @@ export const solutions: Solution[] = [
     title: "Безперервна робота підприємства",
     description:
       "Виробництво, склад, готель чи критичний об'єкт: резерв і генерація під навантаження.",
-    links: [
+    products: [
       { product: "lithiumvalley" },
-      { service: "turnkeySes" },
-      { service: "hotelSes" },
+      { product: "svitPlus5000", count: 16 },
     ],
+    capacityProducts: ["lithiumvalley"],
+    ctaHref: routes.backup.business,
     tone: "dark",
   },
 ];
 
 export function getSolutionLinks(solution: Solution): SolutionLink[] {
-  return solution.links.map((ref) => {
-    if ("product" in ref) {
-      const product = products[ref.product];
+  return solution.products.map((ref) => {
+    const product = products[ref.product];
+    const total = ref.count
+      ? formatQuantity({
+          value: Math.floor(product.capacity.value * ref.count),
+          unit: product.capacity.unit,
+          qualifier: "upTo",
+        })
+      : formatQuantity(product.capacity);
 
-      return {
-        label: product.name,
-        spec: formatQuantity(product.capacity),
-        href: product.href,
-      };
-    }
-
-    const service = services[ref.service];
-
-    return { label: service.name, href: service.href };
+    return {
+      label: ref.count ? `${product.name} × ${ref.count}` : product.name,
+      spec: total,
+      href: product.href,
+    };
   });
+}
+
+export function getSolutionCapacity(solution: Solution): string {
+  const values = solution.capacityProducts.map((id) => products[id].capacity.value);
+  const first = products[solution.capacityProducts[0]].capacity;
+  const unit = messages.units[first.unit];
+  const minimum = Math.min(...values);
+  const maximum = Math.max(...values);
+
+  if (solution.id === "apartment") {
+    return formatQuantity(first);
+  }
+
+  if (solution.id === "business") {
+    return `${formatNumber(minimum)}+ ${unit}`;
+  }
+
+  return `${formatNumber(Math.round(minimum))}–${formatNumber(Math.round(maximum))} ${unit}`;
 }

@@ -21,6 +21,13 @@ export const slugs = {
   },
   services: {
     turnkeySes: "cec",
+    solar: "ses",
+  },
+  backup: {
+    hub: "rezervne-zhyvlennya",
+    apartment: "dlya-kvartyry",
+    house: "dlya-budynku",
+    business: "dlya-biznesu",
   },
   solutions: {
     hub: "rishennya",
@@ -71,6 +78,12 @@ export const routes = {
   },
   services: {
     turnkeySes: toPath(slugs.services.turnkeySes),
+    solar: toPath(slugs.services.solar),
+  },
+  backup: {
+    apartment: toPath(slugs.backup.hub, slugs.backup.apartment),
+    house: toPath(slugs.backup.hub, slugs.backup.house),
+    business: toPath(slugs.backup.hub, slugs.backup.business),
   },
   solutions: {
     hotelSes: toPath(slugs.solutions.hub, slugs.solutions.hotelSes),
