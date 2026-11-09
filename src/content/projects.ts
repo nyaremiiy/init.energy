@@ -29,7 +29,11 @@ export type Project = {
 };
 
 /**
- * TODO(content): Temporary demonstration records requested by the owner.
+ * TODO(content): Records with real photos but partly invented specs (marked
+ * PLACEHOLDER) at the owner's request. Keep `draft: true` until every value
+ * is confirmed — drafts are shown only in development.
+ *
+ * Earlier note: temporary demonstration records requested by the owner.
  * Replace every field with verified project data and a meaningful image before
  * publishing the projects archive or individual case pages.
  */
@@ -43,6 +47,7 @@ export const projectList: Project[] = [
     // TODO(content): owner estimated "~180" — confirm whether that is inverter power (kW) or storage (kWh).
     powerKw: 180,
     equipment: "svitPlus5000",
+    // PLACEHOLDER (invented at the owner's request): year not confirmed.
     year: 2025,
     image: {
       src: "/images/projects/03.avif",
@@ -58,9 +63,10 @@ export const projectList: Project[] = [
     segment: "business",
     title: "СЕС на даху пивоварного заводу",
     region: "Львівська область",
-    // TODO(content): owner's estimate "about 200 kW" — confirm power and the year.
+    // TODO(content): owner's estimate "about 200 kW" — confirm power.
     powerKw: 200,
-    year: 2025,
+    // PLACEHOLDER (invented at the owner's request): year not confirmed.
+    year: 2024,
     image: {
       src: "/images/projects/02.avif",
       alt: "Сонячні панелі на даху цеху пивоварного заводу у Львівській області",
@@ -74,7 +80,11 @@ export const projectList: Project[] = [
     slug: "ses-outbuilding-roof",
     segment: "house",
     title: "СЕС на даху господарської будівлі",
-    // TODO(content): power, region, year and equipment are unknown — fill in when confirmed.
+    // PLACEHOLDER (invented at the owner's request): ~30 panels on the photo ≈ 15 kW;
+    // region and year are not confirmed. Replace before removing `draft`.
+    region: "Львівська область",
+    powerKw: 15,
+    year: 2025,
     image: {
       src: "/images/projects/01.jpg",
       alt: "Монтаж сонячних панелей на даху господарської будівлі",
