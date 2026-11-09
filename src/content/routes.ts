@@ -37,6 +37,7 @@ export const anchors = {
   compare: "compare",
   projects: "projects",
   calculator: "calculator",
+  faq: "faq",
   contacts: "contacts",
 } as const;
 
@@ -75,6 +76,7 @@ export const routes = {
     projects: toAnchor(anchors.projects),
     products: toAnchor(anchors.products),
     calculator: toAnchor(anchors.calculator),
+    faq: toAnchor(anchors.faq),
     contacts: toAnchor(anchors.contacts),
   },
 } as const;

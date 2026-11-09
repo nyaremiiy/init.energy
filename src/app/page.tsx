@@ -4,6 +4,7 @@ import { SolutionsBySegment } from "@/components/sections/home/solutions-by-segm
 import { ProjectsShowcase } from "@/components/sections/projects-showcase";
 import { LeadSection } from "@/components/sections/LeadSection";
 import { CalculatorSection } from "@/components/sections/home/calculator-section";
+import { FaqSection } from "@/components/sections/home/faq-section";
 import { TrustBlock } from "@/components/sections/trust-block";
 import { trust } from "@/content/company";
 import { anchors, routes } from "@/content/routes";
@@ -32,6 +33,7 @@ export default function Home() {
       />
       <ProjectsShowcase />
       <CalculatorSection />
+      <FaqSection />
       <LeadSection />
     </main>
   );
