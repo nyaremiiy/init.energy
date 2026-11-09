@@ -169,7 +169,7 @@ function Stat({ value, label }: { value: string; label: string }) {
   return (
     <div className="flex flex-col-reverse gap-1 border-t border-white/16 pt-4">
       <dt className="text-sm text-white/75">{label}</dt>
-      <dd className="font-heading text-2xl font-medium tabular-nums">
+      <dd className="font-heading text-stat-sm font-medium whitespace-nowrap tabular-nums sm:text-stat">
         {value}
       </dd>
     </div>
@@ -331,7 +331,7 @@ export function QuickCalculator() {
   }
 
   return (
-    <div className="grid gap-4 lg:grid-cols-12">
+    <div className="grid grid-cols-1 gap-4 lg:grid-cols-12">
       <form
         aria-label={t.formLabel}
         onSubmit={(event) => event.preventDefault()}
@@ -446,7 +446,7 @@ export function QuickCalculator() {
             </span>
           </div>
 
-          <p className="font-heading text-h3 font-medium tracking-tight">
+          <p className="font-heading text-h3-sm font-medium tracking-tight sm:text-h3">
             {config}
           </p>
 

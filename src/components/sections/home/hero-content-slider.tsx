@@ -46,7 +46,7 @@ export function HeroContentSlider({ slide }: HeroContentSliderProps) {
                 id={slide.id}
                 letterSpacing="normal"
                 lineHeight="compact"
-                className="max-w-3xl text-4xl text-white sm:text-5xl lg:text-6xl"
+                className="max-w-3xl text-hero-sm text-white md:text-hero-md lg:text-hero"
               >
                 {slide.heading.map((line) => (
                   <span key={line} className="block">

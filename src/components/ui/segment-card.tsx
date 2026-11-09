@@ -110,7 +110,7 @@ export function SegmentCard({
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className={`group flex items-center gap-3 rounded-full border px-5 py-3 text-base font-medium transition-colors duration-200 ease-tech focus-visible:outline-2 focus-visible:outline-offset-2 ${featured ? classes.featuredLink : classes.link}`}
+                  className={`group flex items-center gap-3 rounded-full border px-4 py-3 text-sm font-medium sm:px-5 sm:text-base transition-colors duration-200 ease-tech focus-visible:outline-2 focus-visible:outline-offset-2 ${featured ? classes.featuredLink : classes.link}`}
                 >
                   <span className="flex-1">{link.label}</span>
                   {link.spec ? (

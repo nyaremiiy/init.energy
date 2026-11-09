@@ -39,7 +39,7 @@ export function SectionHeader({
 
   if (layout === "split") {
     return (
-      <div className="grid gap-6 lg:grid-cols-12 lg:items-end lg:gap-10">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-end lg:gap-10">
         <div className="flex flex-col items-start gap-5 lg:col-span-7">
           <Eyebrow tone={tone}>{eyebrow}</Eyebrow>
           {heading}

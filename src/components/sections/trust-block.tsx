@@ -81,7 +81,7 @@ export function TrustBlock({
             ))}
           </dl>
 
-          <ol className="grid gap-10 lg:grid-cols-3">
+          <ol className="grid grid-cols-1 gap-10 lg:grid-cols-3">
             {items.map((item, index) => (
               <li key={item.id} className="flex flex-col gap-3">
                 <span

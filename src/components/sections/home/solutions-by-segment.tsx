@@ -41,7 +41,7 @@ export function SolutionsBySegment() {
         </Reveal>
 
         <div className="flex flex-col gap-4">
-          <div className="grid gap-4 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
             {solutions.map((solution, cardIndex) => (
               <Reveal
                 key={solution.id}
@@ -71,7 +71,7 @@ export function SolutionsBySegment() {
             >
               <span className="flex flex-col items-start gap-3">
                 <CardLabel icon={segmentIcons.solar}>{t.hub.label}</CardLabel>
-                <span className="font-heading text-h3 font-semibold tracking-tight">
+                <span className="font-heading text-h3-sm font-semibold tracking-tight sm:text-h3">
                   {t.hub.title}
                 </span>
               </span>
@@ -80,7 +80,7 @@ export function SolutionsBySegment() {
           </Reveal>
         </div>
 
-        <p className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 font-heading text-eyebrow font-medium tracking-eyebrow text-ink/80 uppercase">
+        <p className="hidden flex-wrap items-center justify-center sm:flex gap-x-3 gap-y-2 font-heading text-eyebrow font-medium tracking-eyebrow text-ink/80 uppercase">
           {t.keywords.map((keyword, index) => (
             <span key={keyword} className="inline-flex items-center gap-3">
               {index > 0 ? (

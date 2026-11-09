@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-09 — Мобільна версія: переповнення і типографічні токени
+- **Агент:** Claude Code
+- **Гілка:** style/mobile-polish (статус: змерджено в develop)
+- **Що зроблено:** виправлено вихід карток «Рішення» за екран на мобільному (сітки без базових колонок розтягувались під рядки без переносу) — додано `grid-cols-1` у всі такі сітки (рішення, калькулятор, вкладки продуктів, блок довіри, SectionHeader). Нові токени `--text-h3-sm`, `--text-hero-sm/md/hero`, `--text-stat-sm/stat`; `Heading h3` тепер 20 → 24 px; H1 hero і назва продукту на hero-шкалі; значення характеристик у вкладках і калькуляторі — stat-шкала без переносу; опис продукту `text-base sm:text-lg`; пігулки-посилання карток рішень `text-sm px-4` на мобільному; рядок ключових слів під «Рішеннями» прихований до `sm` (на вузькому екрані рядки починались із крапки).
+- **Файли:** src/app/globals.css, src/components/ui/{heading,segment-card,section-header}.tsx, src/components/{calculator/QuickCalculator,products/ProductFocusTabs}.tsx, src/components/sections/{home/solutions-by-segment,home/hero-content-slider,trust-block}.tsx, docs/ai/*
+- **Нотатки / що далі:** перевірено 360 і 390 px — горизонтального переповнення немає.
+
 ## 2026-11-09 — Накопичувачі: один продукт у фокусі + вкладки
 - **Агент:** Claude Code
 - **Гілка:** feature/product-focus-tabs (статус: змерджено в develop)
