@@ -158,7 +158,7 @@ export function ProductFocusTabs({
                 tabIndex={selected ? 0 : -1}
                 onClick={() => select(index, false)}
                 onKeyDown={onTabKeyDown}
-                className={`relative inline-flex w-44 shrink-0 snap-start items-center justify-center overflow-hidden rounded-full border px-4 py-2 text-sm font-medium whitespace-nowrap transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
+                className={`relative inline-flex h-11 shrink-0 snap-start items-center overflow-hidden rounded-full border px-5 text-sm font-medium whitespace-nowrap transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
                   selected
                     ? "border-white bg-white text-ink"
                     : "border-white/20 text-white hover:border-white"
