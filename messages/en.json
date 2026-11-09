@@ -3,7 +3,6 @@
     "eyebrow": "Calculator",
     "title": "Which system do you need",
     "lead": "Enter the property type, consumption and region — the calculator suggests a solar plant size and an SVIT battery.",
-    "paybackLink": "Detailed payback calculator",
     "formLabel": "Property parameters",
     "segment": "Property type",
     "segments": {
