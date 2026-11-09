@@ -5,7 +5,7 @@ import Link from "next/link";
 import { CardLabel } from "./card-label";
 import { Heading } from "./heading";
 
-type SegmentCardTone = "light" | "sky" | "dark";
+type SegmentCardTone = "light" | "navy" | "dark";
 
 type SegmentCardProps = {
   index: string;
@@ -29,12 +29,12 @@ const toneClasses: Record<
     muted: "text-ink/70 group-hover:text-white/75",
     link: "border-ink/20 group-hover:border-white/25 focus-visible:outline-ink",
   },
-  sky: {
-    card: "bg-sky text-ink hover:bg-ink hover:text-white",
-    index: "text-ink group-hover:text-white",
-    text: "text-ink group-hover:text-white",
-    muted: "text-ink/70 group-hover:text-white/75",
-    link: "border-ink/20 group-hover:border-white/25 focus-visible:outline-ink",
+  navy: {
+    card: "bg-navy text-white hover:bg-ink",
+    index: "text-white",
+    text: "text-white",
+    muted: "text-white/75",
+    link: "border-white/25 focus-visible:outline-white",
   },
   dark: {
     card: "bg-ink text-white",
@@ -69,8 +69,8 @@ export function SegmentCard({
           {index}
         </span>
         <CardLabel
-          tone={tone === "dark" ? "dark" : "light"}
-          hoverInverse={tone !== "dark"}
+          tone={tone === "light" ? "light" : "dark"}
+          hoverInverse={tone === "light"}
           icon={segmentIcon}
         >
           {segment}
