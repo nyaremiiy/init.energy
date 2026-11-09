@@ -72,7 +72,7 @@ export function ProjectCard({ project, variant }: ProjectCardProps) {
 
   return (
     <article
-      className={`group relative isolate flex h-full flex-col overflow-hidden rounded-3xl ${tone.card}`}
+      className={`group relative isolate flex h-full flex-col overflow-hidden rounded-3xl shadow-soft ${tone.card}`}
     >
       {project.image ? (
         <>
