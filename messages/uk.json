@@ -36,7 +36,9 @@
     },
     "more": "Детальніше",
     "listLabel": "Накопичувачі SVIT і LITHIUMVALLEY",
-    "notStated": "—"
+    "notStated": "—",
+    "previous": "Попередні накопичувачі",
+    "next": "Наступні накопичувачі"
   },
   "trust": {
     "eyebrow": "Про компанію",
