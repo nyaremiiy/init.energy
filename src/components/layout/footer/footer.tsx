@@ -77,6 +77,7 @@ export function Footer() {
     <Panel
       as="footer"
       variant="dark"
+      panelClassName="bg-ink-glow"
       className="bg-white pb-panel-sm sm:pb-panel"
     >
       <Container className="pt-14 lg:pt-24">
