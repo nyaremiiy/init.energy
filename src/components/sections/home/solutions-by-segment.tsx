@@ -63,7 +63,7 @@ export function SolutionsBySegment() {
           <Reveal>
             <Link
               href={routes.services.turnkeySes}
-              className="group flex items-center justify-between gap-6 rounded-3xl shadow-soft bg-sky p-6 text-ink transition duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink motion-safe:hover:-translate-y-0.5 lg:p-8"
+              className="group flex items-center justify-between gap-6 rounded-3xl shadow-soft bg-surface p-6 text-ink transition duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink motion-safe:hover:-translate-y-0.5 lg:p-8"
             >
               <span className="flex flex-col items-start gap-3">
                 <Eyebrow tone="light">{t.hub.label}</Eyebrow>
