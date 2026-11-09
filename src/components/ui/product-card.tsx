@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { Eyebrow } from "./eyebrow";
+import { CardLabel } from "./card-label";
 import { Heading } from "./heading";
 import { IconButton } from "./icon-button";
 import { MediaPlaceholder } from "./media-placeholder";
@@ -45,7 +45,7 @@ export function ProductCard({
       )}
 
       <div className="flex flex-col gap-4">
-        <Eyebrow tone="light">{segment}</Eyebrow>
+        <CardLabel tone="light">{segment}</CardLabel>
         <div className="flex items-start justify-between gap-4">
           <div className="flex flex-col gap-2">
             <Heading as="h3" size="h3" className="text-ink">

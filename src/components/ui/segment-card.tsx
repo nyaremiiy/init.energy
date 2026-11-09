@@ -1,7 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 
-import { Eyebrow } from "./eyebrow";
+import { CardLabel } from "./card-label";
 import { Heading } from "./heading";
 
 type SegmentCardTone = "light" | "sky" | "dark";
@@ -65,12 +65,12 @@ export function SegmentCard({
         >
           {index}
         </span>
-        <Eyebrow
+        <CardLabel
           tone={tone === "dark" ? "dark" : "light"}
-          className="group-hover:!text-white/75"
+          hoverInverse={tone !== "dark"}
         >
           {segment}
-        </Eyebrow>
+        </CardLabel>
       </div>
 
       <div className="flex flex-col gap-3">

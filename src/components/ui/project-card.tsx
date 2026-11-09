@@ -7,7 +7,7 @@ import { slugs, toPath } from "@/content/routes";
 import { formatQuantity } from "@/lib/format";
 import { format, messages } from "@/lib/messages";
 
-import { Eyebrow } from "./eyebrow";
+import { CardLabel } from "./card-label";
 import { Heading } from "./heading";
 import { IconButton } from "./icon-button";
 import { MediaPlaceholder } from "./media-placeholder";
@@ -107,7 +107,9 @@ export function ProjectCard({ project, variant }: ProjectCardProps) {
       >
         <div className="flex items-end justify-between gap-4">
           <div className="flex min-w-0 flex-col gap-3">
-            <Eyebrow tone={tone.eyebrow}>{t.segments[project.segment]}</Eyebrow>
+            <CardLabel tone={tone.eyebrow === "dark" ? "dark" : "light"}>
+              {t.segments[project.segment]}
+            </CardLabel>
             <Heading as="h3" size="h3" className={tone.title}>
               {title}
             </Heading>
