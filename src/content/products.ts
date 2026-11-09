@@ -85,8 +85,8 @@ export const productList: Product[] = [
     image: {
       src: "/images/products/svit-600.avif",
       alt: "Портативна станція SVIT 600 з двома розетками 220 В, USB-портами і дисплеєм заряду на столі в квартирі",
-      width: 2560,
-      height: 1920,
+      width: 1448,
+      height: 1086,
     },
   },
   {
