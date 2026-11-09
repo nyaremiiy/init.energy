@@ -7,8 +7,9 @@ import { type KeyboardEvent, useEffect, useId, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { chipClasses } from "@/components/ui/chip-styles";
-import { Eyebrow } from "@/components/ui/eyebrow";
+import { CardLabel } from "@/components/ui/card-label";
 import { MediaPlaceholder } from "@/components/ui/media-placeholder";
+import { segmentIcons, type SegmentIconId } from "@/content/segments";
 import { trackEvent } from "@/lib/analytics";
 
 /** How long each product stays in focus before the next one, ms. */
@@ -19,6 +20,7 @@ export type FocusProduct = {
   name: string;
   href: string;
   segment: string;
+  segmentIcon: SegmentIconId;
   description: string;
   specs: { label: string; value: string }[];
   image?: { src: string; alt: string; width: number; height: number };
@@ -219,7 +221,13 @@ export function ProductFocusTabs({
               )}
 
               <div className="flex flex-col items-start gap-6">
-                <Eyebrow tone="dark">{product.segment}</Eyebrow>
+                <CardLabel
+                  tone="dark"
+                  icon={segmentIcons[product.segmentIcon]}
+                  className="border-white text-white"
+                >
+                  {product.segment}
+                </CardLabel>
                 <h3 className="font-heading text-4xl font-semibold tracking-tight text-white lg:text-6xl">
                   {product.name}
                 </h3>

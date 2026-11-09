@@ -29,6 +29,7 @@ export function ProductLine() {
     name: product.name,
     href: product.href,
     segment: product.segment,
+    segmentIcon: product.segmentIcon,
     description: product.focusDescription,
     specs: product.specs.slice(0, 3).map((spec) => ({
       label: messages.specs[spec.key],
