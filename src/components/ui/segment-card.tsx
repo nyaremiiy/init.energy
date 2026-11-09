@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Eyebrow } from "./eyebrow";
 import { Heading } from "./heading";
 
-type SegmentCardTone = "light" | "dark";
+type SegmentCardTone = "light" | "sky" | "dark";
 
 type SegmentCardProps = {
   index: string;
@@ -22,6 +22,13 @@ const toneClasses: Record<
 > = {
   light: {
     card: "bg-surface text-ink",
+    index: "text-ink",
+    text: "text-ink",
+    muted: "text-ink/70",
+    link: "border-line focus-visible:outline-ink",
+  },
+  sky: {
+    card: "bg-sky text-ink",
     index: "text-ink",
     text: "text-ink",
     muted: "text-ink/70",
@@ -58,7 +65,7 @@ export function SegmentCard({
         >
           {index}
         </span>
-        <Eyebrow tone={tone}>{segment}</Eyebrow>
+        <Eyebrow tone={tone === "dark" ? "dark" : "light"}>{segment}</Eyebrow>
       </div>
 
       <div className="flex flex-col gap-3">
