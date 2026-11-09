@@ -17,8 +17,8 @@ export type Project = {
   city?: string;
   region: string;
   powerKw: number;
-  /** Product from `products.ts`, used for the equipment cross-link. */
-  equipment: ProductId;
+  /** Battery from `products.ts` (equipment cross-link); omit for solar-only plants. */
+  equipment?: ProductId;
   year: number;
   /** `null` renders MediaPlaceholder until content supplies a real photo. */
   image: ProjectImage | null;
@@ -53,15 +53,19 @@ export const projectList: Project[] = [
     draft: true,
   },
   {
-    slug: "test-private-house-lviv",
-    segment: "house",
-    title: "Тестовий приватний будинок",
-    city: "Львів",
+    slug: "ses-brewery-roof-lviv-region",
+    segment: "business",
+    title: "СЕС на даху пивоварного заводу",
     region: "Львівська область",
-    powerKw: 15,
-    equipment: "svitHome",
+    // TODO(content): owner's estimate "about 200 kW" — confirm power and the year.
+    powerKw: 200,
     year: 2025,
-    image: null,
+    image: {
+      src: "/images/projects/02.avif",
+      alt: "Сонячні панелі на даху цеху пивоварного заводу у Львівській області",
+      width: 1024,
+      height: 576,
+    },
     featured: true,
     draft: true,
   },

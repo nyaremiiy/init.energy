@@ -25,7 +25,7 @@ type ProjectCardProps = {
  */
 export function ProjectCard({ project, variant }: ProjectCardProps) {
   const t = messages.projects;
-  const equipment = products[project.equipment];
+  const equipment = project.equipment ? products[project.equipment] : undefined;
   const isLarge = variant === "large";
   const hasPhoto = Boolean(project.image);
   const projectHref = toPath(slugs.projects, project.slug);
@@ -57,17 +57,22 @@ export function ProjectCard({ project, variant }: ProjectCardProps) {
       label: t.fields.power,
       value: formatQuantity({ value: project.powerKw, unit: "kW" }),
     },
-    {
-      label: t.fields.storage,
-      value: (
-        <Link
-          href={equipment.href}
-          className={`underline underline-offset-4 transition-colors duration-150 ease-tech focus-visible:outline-2 focus-visible:outline-offset-2 ${tone.link}`}
-        >
-          {equipment.name}
-        </Link>
-      ),
-    },
+    // Solar-only plants have no battery row.
+    ...(equipment
+      ? [
+          {
+            label: t.fields.storage,
+            value: (
+              <Link
+                href={equipment.href}
+                className={`underline underline-offset-4 transition-colors duration-150 ease-tech focus-visible:outline-2 focus-visible:outline-offset-2 ${tone.link}`}
+              >
+                {equipment.name}
+              </Link>
+            ),
+          },
+        ]
+      : []),
     ...(isLarge ? [{ label: t.fields.region, value: project.region }] : []),
     { label: t.fields.year, value: String(project.year) },
   ];
