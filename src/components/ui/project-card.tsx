@@ -119,7 +119,7 @@ export function ProjectCard({ project, variant }: ProjectCardProps) {
       )}
 
       <div
-        className={`relative flex flex-col p-6 sm:p-8 ${hasPhoto ? "mt-auto" : ""}`}
+        className={`relative flex flex-col p-card-sm lg:p-card ${hasPhoto ? "mt-auto" : ""}`}
       >
         <div className="flex items-end justify-between gap-4">
           <div className="flex min-w-0 flex-col gap-3">

@@ -19,9 +19,21 @@
   --color-sky: rgb(228 238 251);
 
   /* Vertical rhythm: space between home sections (mobile / lg) and header → content. */
-  --spacing-section-sm: 5.5rem;
+  /*
+   * Spacing scale — the only spacing for page structure (mobile / lg):
+   * section: gap between sections (white content or panel edge) ·
+   * panel-y: padding inside a rounded panel above/below its content ·
+   * section-head: section header → its content ·
+   * card: padding inside every card and form card.
+   */
+  --spacing-section-sm: 4rem;
   --spacing-section: 8rem;
+  --spacing-panel-y-sm: 3rem;
+  --spacing-panel-y: 6rem;
+  --spacing-section-head-sm: 2rem;
   --spacing-section-head: 3.5rem;
+  --spacing-card-sm: 1.25rem;
+  --spacing-card: 2rem;
 
   /* Panels (hero, trust block, footer): gap from screen edges and radius, mobile / sm+. */
   --spacing-panel-sm: 0.5rem;

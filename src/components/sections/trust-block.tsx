@@ -52,7 +52,7 @@ export function TrustBlock({
       <Reveal className="relative">
         <Container
           inPanel
-          className="flex flex-col gap-section-head py-section-sm lg:py-section"
+          className="flex flex-col gap-section-head-sm lg:gap-section-head py-panel-y-sm lg:py-panel-y"
         >
           <SectionHeader
             tone="dark"

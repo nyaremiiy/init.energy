@@ -46,7 +46,7 @@ export function ContactWidget() {
           id="contact-widget-panel"
           role="dialog"
           aria-label="Контакти"
-          className="absolute right-0 bottom-16 w-72 rounded-3xl bg-ink p-6 text-white shadow-card motion-safe:animate-enter"
+          className="absolute right-0 bottom-16 w-72 rounded-3xl bg-ink p-card-sm text-white shadow-card motion-safe:animate-enter"
         >
           <div className="flex items-start justify-between gap-4">
             <p className="font-heading text-base font-medium">

@@ -54,7 +54,7 @@ export function ProductLine() {
         <SectionWatermark text="STORAGE" side="right" tone="dark" />
         <Container
           inPanel
-          className="relative flex flex-col gap-section-head py-section-sm lg:py-section"
+          className="relative flex flex-col gap-section-head-sm lg:gap-section-head py-panel-y-sm lg:py-panel-y"
         >
           <Reveal>
             <SectionHeader

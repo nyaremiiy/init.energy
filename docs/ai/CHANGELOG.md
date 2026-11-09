@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-09 — Єдині відступи секцій, панелей і карток
+- **Агент:** Claude Code
+- **Гілка:** style/spacing-tokens (статус: змерджено в develop)
+- **Що зроблено:** токени `--spacing-section-sm` 4rem (було 5.5), нові `--spacing-panel-y-sm/panel-y` (3 / 6rem), `--spacing-section-head-sm` (2rem), `--spacing-card-sm/card` (1.25 / 2rem). Панелі (калькулятор, накопичувачі, «Про компанію», футер) — внутрішній відступ `panel-y` замість `section`, тож заголовок у панелі більше не на 200 px від попереднього вмісту; LeadSection — лише `pt` (раніше `py`, подвійний відступ знизу); шапка → вміст скрізь `gap-section-head-sm lg:gap-section-head`; картки рішень, смуга СЕС, картки проєктів, калькулятор, форма заявки, віджет контактів — `p-card-sm lg:p-card` (було 24/32/40 px).
+- **Файли:** src/app/globals.css, src/components/sections/{home/*,projects-showcase,LeadSection,trust-block}.tsx, src/components/ui/{segment-card,project-card,contact-widget}.tsx, src/components/{calculator/QuickCalculator,forms/LeadForm,layout/footer/footer}.tsx, docs/ai/*
+- **Нотатки / що далі:** заміряно 360 і 1440 px: між секціями 64 / 128 px, у панелях 48 / 96, у картках 20 / 32 (вимірювання до прокрутки показують +24 px — це початковий зсув `Reveal`). Mega-menu (лише десктоп) не змінювалось.
+
 ## 2026-11-09 — Мобільні лейбли, таби й відступи
 - **Агент:** Claude Code
 - **Гілка:** style/mobile-labels-tabs-gutter (статус: змерджено в develop)
