@@ -3,7 +3,7 @@ import { formatNumber, formatQuantity, type Quantity } from "@/lib/format";
 
 import { routes } from "./routes";
 
-// Source: product pages on https://init.energy (checked 2026-11-06).
+// Source: product pages on https://init.energy (checked 2026-11-06, specs and focus texts re-checked 2026-11-09).
 // Ukrainian only for now; EN arrives with i18n routing.
 export type ProductId =
   "svit600" | "svitHome" | "svitPlus5000" | "svitPlus16000" | "lithiumvalley";
@@ -69,12 +69,16 @@ export const productList: Product[] = [
     audience: "Квартира",
     description: "Портативна станція для квартири",
     focusDescription:
-      "Портативна станція на LiFePO₄: 865 Вт·год і 600 Вт для квартири — роутер, освітлення, ноутбук і телефони працюють під час відключень.",
+      "Портативна станція з чистою синусоїдою: 865 Вт·год і 600 Вт (пікова 1 200 Вт). Роутер і освітлення працюють до 70 годин, ноутбук — до 10. Заряджається від мережі, генератора або сонячної панелі приблизно за 4 години.",
     capacity: { value: 865, unit: "Wh" },
     specs: [
       { key: "capacity", value: { value: 865, unit: "Wh" } },
       { key: "power", value: { value: 600, unit: "W" } },
-      { key: "chemistry", value: "LiFePO₄" },
+      // Battery type is ambiguous on /svit-600/ (Li-ion in the table, LiFePO₄ in the text) — not shown.
+      {
+        key: "cycles",
+        value: { value: 2000, unit: "cycles", qualifier: "plus" },
+      },
     ],
     segment: "Квартира",
     segmentIcon: "apartment",
@@ -94,7 +98,7 @@ export const productList: Product[] = [
     audience: "Приватний будинок",
     description: "Резервне живлення для всього будинку",
     focusDescription:
-      "Комплекс резервного живлення для приватного будинку: гібридний інвертор 6 кВт і акумулятор 5,12 кВт·год із ресурсом понад 6 000 циклів.",
+      "Готовий комплект для будинку й малого бізнесу: гібридний інвертор 6 кВт і батарея SVIT PLUS 5000 на 5,12 кВт·год на мобільній стійці з колесами — без настінного монтажу. Під час відключення сам переходить на батарею, а з панелями працює як сонячна станція.",
     capacity: { value: 5.12, unit: "kWh" },
     specs: [
       { key: "capacity", value: { value: 5.12, unit: "kWh" } },
@@ -125,12 +129,15 @@ export const productList: Product[] = [
     segmentIcon: "homeBusiness",
     description: "Акумуляторна батарея LiFePO₄",
     focusDescription:
-      "Акумуляторна батарея LiFePO₄ на 5,12 кВт·год і 5 кВт для дому та бізнесу — для резервного живлення і сонячних станцій.",
+      "Батарея LiFePO₄ на 5,12 кВт·год і 5 кВт для дому, малого бізнесу й промислових об'єктів. Працює з інвертором у сонячній або гібридній станції, батареї з'єднуються паралельно — до 81 кВт·год. Гарантія 5 років.",
     capacity: { value: 5.12, unit: "kWh" },
     specs: [
       { key: "capacity", value: { value: 5.12, unit: "kWh" } },
       { key: "power", value: { value: 5, unit: "kW" } },
-      { key: "chemistry", value: "LiFePO₄" },
+      {
+        key: "cycles",
+        value: { value: 6000, unit: "cycles", qualifier: "plus" },
+      },
     ],
     image: {
       src: "/images/products/svit-plus-5000.avif",
@@ -151,12 +158,15 @@ export const productList: Product[] = [
     segmentIcon: "autonomous",
     description: "Акумуляторна батарея LiFePO₄ для автономних систем",
     focusDescription:
-      "Акумуляторна батарея LiFePO₄ на 16,07 кВт·год для сонячних станцій та автономних систем.",
+      "Батарея LiFePO₄ на 16,07 кВт·год з 16 комірок EVE для сонячних станцій, резервного живлення, автономних і гібридних систем. Вбудована BMS із CAN, RS485 і Bluetooth, сумісна з інверторами Deye, Growatt, Victron, Luxpower.",
     capacity: { value: 16.07, unit: "kWh" },
     specs: [
       { key: "capacity", value: { value: 16.07, unit: "kWh" } },
+      {
+        key: "cycles",
+        value: { value: 6000, unit: "cycles", qualifier: "plus" },
+      },
       { key: "chemistry", value: "LiFePO₄" },
-      // TODO(content): a third key spec (power or cycles) is not on init.energy yet.
     ],
     image: {
       src: "/images/products/svit-plus-16000.avif",
@@ -174,12 +184,15 @@ export const productList: Product[] = [
     audience: "Бізнес",
     description: "Промислові системи накопичення для підприємств",
     focusDescription:
-      "Промислові системи накопичення енергії (BESS) від 208 до 1 044 кВт·год для підприємств. INIT ENERGY — офіційний представник та інсталятор LITHIUMVALLEY.",
+      "Заводський модуль BESS для підприємств, агро, логістики, медицини й критичної інфраструктури: батареї LiFePO₄ від 208 до 1 044 кВт·год, гібридні інвертори SOLIS 50–125 кВт, рідинне охолодження. Гарантія виробника 10 років. INIT ENERGY — офіційний представник та інсталятор.",
     capacity: { value: 208, unit: "kWh", qualifier: "from" },
     specs: [
       { key: "minCapacity", value: { value: 208, unit: "kWh" } },
       { key: "maxCapacity", value: { value: 1044, unit: "kWh" } },
-      { key: "type", value: "BESS" },
+      {
+        key: "cycles",
+        value: { value: 8000, unit: "cycles", qualifier: "plus" },
+      },
     ],
     segment: "Бізнес",
     segmentIcon: "business",
@@ -199,7 +212,7 @@ export const products = Object.fromEntries(
 /** One-line factual summaries for menus (built from specs, not hardcoded numbers). */
 const q = formatQuantity;
 export const productSummaries: Record<ProductId, string> = {
-  svit600: `Станція ${q({ value: 600, unit: "W" })}, LiFePO₄ ${q(products.svit600.capacity)}`,
+  svit600: `Станція ${q({ value: 600, unit: "W" })}, чиста синусоїда, ${q(products.svit600.capacity)}`,
   svitHome: `Гібридний інвертор ${q({ value: 6, unit: "kW" })} і АКБ ${q(products.svitHome.capacity)}`,
   svitPlus5000: `LiFePO₄ ${q(products.svitPlus5000.capacity)}, потужність ${q({ value: 5, unit: "kW" })}`,
   svitPlus16000: `LiFePO₄ ${q(products.svitPlus16000.capacity)} для автономних систем`,
