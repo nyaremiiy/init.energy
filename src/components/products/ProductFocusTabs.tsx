@@ -207,7 +207,9 @@ export function ProductFocusTabs({
                     src={product.image.src}
                     alt={product.image.alt}
                     fill
-                    quality={90}
+                    // Product photos are already optimized AVIF: serve the file as is, without
+                    // Next re-encoding (which costs quality).
+                    unoptimized
                     loading={eager ? "eager" : "lazy"}
                     sizes="(min-width: 1440px) 640px, (min-width: 1024px) 45vw, 100vw"
                     className="object-cover"
