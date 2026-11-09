@@ -19,7 +19,7 @@ export function HeroContentSlider({ slide }: HeroContentSliderProps) {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <div className="absolute inset-0 z-10 flex items-center overflow-hidden pt-20 lg:pt-32">
+    <div className="absolute inset-0 z-10 flex items-center overflow-hidden pt-28 pb-24 lg:pt-32 lg:pb-0">
       <Container>
         <div className="relative" aria-live="polite">
           <AnimatePresence initial={false} mode="popLayout">
