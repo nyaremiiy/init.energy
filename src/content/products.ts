@@ -1,3 +1,4 @@
+import type { SegmentIconId } from "./segments";
 import { formatNumber, formatQuantity, type Quantity } from "@/lib/format";
 
 import { routes } from "./routes";
@@ -48,6 +49,7 @@ export type Product = {
   specs: ProductSpec[];
   /** Segment label shown on the product card. */
   segment: string;
+  segmentIcon: SegmentIconId;
   /** Shown as a card on the home page (others appear only in the table). */
   featured?: boolean;
   image?: ProductImage;
@@ -70,6 +72,7 @@ export const productList: Product[] = [
       { key: "chemistry", value: "LiFePO₄" },
     ],
     segment: "Квартира",
+    segmentIcon: "apartment",
     featured: true,
     image: {
       src: "/images/products/svit-600.avif",
@@ -96,6 +99,7 @@ export const productList: Product[] = [
       },
     ],
     segment: "Приватний будинок",
+    segmentIcon: "house",
     featured: true,
     image: {
       src: "/images/products/svit-home.avif",
@@ -113,6 +117,7 @@ export const productList: Product[] = [
     // Source: /svit-plus-5000/ — «Підходить як для дому, так і для бізнесу».
     audience: "Дім і бізнес",
     segment: "Дім і бізнес",
+    segmentIcon: "homeBusiness",
     description: "Акумуляторна батарея LiFePO₄",
     capacity: { value: 5.12, unit: "kWh" },
     specs: [
@@ -136,6 +141,7 @@ export const productList: Product[] = [
     // Source: /svit-plus-16000/ names use cases, not an audience.
     audience: "Сонячні станції та автономні системи",
     segment: "Автономні системи",
+    segmentIcon: "autonomous",
     description: "Акумуляторна батарея LiFePO₄ для автономних систем",
     capacity: { value: 16.07, unit: "kWh" },
     specs: [
@@ -164,6 +170,7 @@ export const productList: Product[] = [
       { key: "type", value: "BESS" },
     ],
     segment: "Бізнес",
+    segmentIcon: "business",
     featured: true,
     image: {
       src: "/images/products/lithiumvalley.avif",

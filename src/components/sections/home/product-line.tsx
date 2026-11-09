@@ -1,3 +1,4 @@
+import { segmentIcons } from "@/content/segments";
 import { Container } from "@/components/layout/container";
 import { Heading } from "@/components/ui/heading";
 import { ProductCard } from "@/components/ui/product-card";
@@ -49,6 +50,7 @@ export function ProductLine() {
                   name={product.name}
                   href={product.href}
                   segment={product.segment}
+                  segmentIcon={segmentIcons[product.segmentIcon]}
                   description={product.description}
                   specs={product.specs.map((spec) => ({
                     label: messages.specs[spec.key],

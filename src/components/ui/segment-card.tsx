@@ -1,3 +1,4 @@
+import type { LucideIcon } from "lucide-react";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 
@@ -9,6 +10,7 @@ type SegmentCardTone = "light" | "sky" | "dark";
 type SegmentCardProps = {
   index: string;
   segment: string;
+  segmentIcon: LucideIcon;
   title: string;
   description: string;
   links: Array<{ label: string; spec?: string; href: string }>;
@@ -46,6 +48,7 @@ const toneClasses: Record<
 export function SegmentCard({
   index,
   segment,
+  segmentIcon,
   title,
   description,
   links,
@@ -68,6 +71,7 @@ export function SegmentCard({
         <CardLabel
           tone={tone === "dark" ? "dark" : "light"}
           hoverInverse={tone !== "dark"}
+          icon={segmentIcon}
         >
           {segment}
         </CardLabel>

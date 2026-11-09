@@ -1,6 +1,7 @@
 import { formatQuantity } from "@/lib/format";
 
 import { products, type ProductId } from "./products";
+import type { SegmentIconId } from "./segments";
 import { services, type ServiceId } from "./services";
 
 export type SolutionLink = {
@@ -16,6 +17,7 @@ export type Solution = {
   id: "apartment" | "house" | "business";
   index: string;
   segment: string;
+  segmentIcon: SegmentIconId;
   title: string;
   description: string;
   links: LinkRef[];
@@ -28,6 +30,7 @@ export const solutions: Solution[] = [
     id: "apartment",
     index: "01",
     segment: "Квартира",
+    segmentIcon: "apartment",
     title: "Світло й зв'язок під час відключень",
     description:
       "Роутер, освітлення, ноутбук і телефони. Працює від розетки, без монтажу.",
@@ -38,6 +41,7 @@ export const solutions: Solution[] = [
     id: "house",
     index: "02",
     segment: "Приватний будинок",
+    segmentIcon: "house",
     title: "Весь будинок без перебоїв",
     description:
       "Котел, насос і холодильник під час відключень, а вдень — власна сонячна енергія.",
@@ -53,6 +57,7 @@ export const solutions: Solution[] = [
     id: "business",
     index: "03",
     segment: "Бізнес",
+    segmentIcon: "business",
     title: "Безперервна робота підприємства",
     description:
       "Виробництво, склад, готель чи критичний об'єкт: резерв і генерація під навантаження.",
