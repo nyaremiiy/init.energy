@@ -1,7 +1,10 @@
-import { ChevronDown } from "lucide-react";
-
-import { isNavGroup, navItems, type NavGroup, type NavLink as PageLink } from "./header-data";
-import { MegaMenuPanel } from "./mega-menu-panel";
+import {
+  isNavGroup,
+  navItems,
+  type NavGroup,
+  type NavLink as PageLink,
+} from "./header-data";
+import { MegaMenuItem } from "./mega-menu-item";
 import { NavLink } from "./nav-link";
 import { SectionNavLink } from "./section-nav-link";
 
@@ -12,7 +15,9 @@ import { SectionNavLink } from "./section-nav-link";
  */
 export function DesktopNav() {
   const groups = navItems.filter((item): item is NavGroup => isNavGroup(item));
-  const pageLinks = navItems.filter((item): item is PageLink => !isNavGroup(item));
+  const pageLinks = navItems.filter(
+    (item): item is PageLink => !isNavGroup(item),
+  );
 
   return (
     <nav
@@ -43,27 +48,9 @@ export function DesktopNav() {
 
       <ul className="flex h-full items-center gap-8 text-sm font-medium text-white/85">
         {groups.map((item) => (
-          <li
-            key={item.label}
-            data-mega-menu
-            className="group flex h-full items-center"
-          >
-            <button
-              type="button"
-              aria-haspopup="true"
-              className="inline-flex items-center gap-1 underline underline-offset-8 decoration-transparent transition-colors group-focus-within:text-white group-focus-within:decoration-white group-hover:text-white group-hover:decoration-white"
-            >
-              {item.label}
-              <ChevronDown
-                aria-hidden
-                className="size-4 transition-transform duration-200 group-focus-within:rotate-180 group-hover:rotate-180"
-              />
-            </button>
-            <MegaMenuPanel group={item} />
-          </li>
+          <MegaMenuItem key={item.label} group={item} />
         ))}
       </ul>
-
     </nav>
   );
 }

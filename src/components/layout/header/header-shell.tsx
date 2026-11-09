@@ -29,7 +29,7 @@ export function HeaderShell({ topBar, mainBar }: HeaderShellProps) {
     >
       <div
         aria-hidden
-        className={`absolute inset-0 -z-10 bg-slate-950/95 backdrop-blur-md transition-opacity duration-300 group-has-[[data-mega-menu]:hover]/header:opacity-100 group-has-[[data-mega-menu]:focus-within]/header:opacity-100 ${isScrolled ? "opacity-100" : "rounded-t-panel-sm opacity-0 sm:rounded-t-panel"}`}
+        className={`absolute inset-0 -z-10 bg-slate-950/95 backdrop-blur-md transition-opacity duration-300 group-has-[[data-mega-menu][data-open=true]]/header:opacity-100 ${isScrolled ? "opacity-100" : "rounded-t-panel-sm opacity-0 sm:rounded-t-panel"}`}
       />
       <div
         className={`transition-opacity duration-300 ${isScrolled ? "lg:opacity-0" : ""}`}
