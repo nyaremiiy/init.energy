@@ -14,7 +14,7 @@ export default function Home() {
 
   return (
     // Sections add top spacing only; the page adds the final bottom spacing once.
-    <main>
+    <main className="pb-section-sm lg:pb-section">
       <Hero />
       <SolutionsBySegment />
       <ProductLine />
