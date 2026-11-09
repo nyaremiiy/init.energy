@@ -4,6 +4,8 @@ type SectionWatermarkProps = {
   side?: "left" | "right";
   /** "light" on white/light sections, "dark" on dark panels. */
   tone?: "light" | "dark";
+  /** Vertical centre: "center" of the section, or "upper" quarter (sections with a photo at the bottom). */
+  align?: "center" | "upper";
 };
 
 /**
@@ -15,6 +17,7 @@ export function SectionWatermark({
   text,
   side = "left",
   tone = "light",
+  align = "center",
 }: SectionWatermarkProps) {
   // Reads bottom-to-top on the left edge, top-to-bottom on the right edge.
   const position = side === "left" ? "left-20" : "right-20";
@@ -24,7 +27,7 @@ export function SectionWatermark({
   return (
     <div
       aria-hidden
-      className={`pointer-events-none absolute top-1/2 hidden size-0 md:block ${position}`}
+      className={`pointer-events-none absolute hidden size-0 md:block ${align === "upper" ? "top-1/4" : "top-1/2"} ${position}`}
     >
       <span
         className={`absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 ${rotation} font-heading text-display font-semibold tracking-tight whitespace-nowrap uppercase ${color}`}
