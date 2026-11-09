@@ -56,7 +56,6 @@ export function TrustBlock({
         >
           <SectionHeader
             tone="dark"
-            layout="split"
             eyebrow={eyebrow}
             title={title}
             titleId={titleId}

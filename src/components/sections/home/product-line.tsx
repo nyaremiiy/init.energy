@@ -88,7 +88,7 @@ export function ProductLine() {
 
       <Container
         id={anchors.compare}
-        className="scroll-mt-24 pt-section-sm lg:pt-section"
+        className="scroll-mt-24 pt-section-head-sm lg:pt-section-head"
       >
         <Reveal className="flex min-w-0 flex-col gap-6">
           <Heading as="h3" id={compareTitleId} size="h3" className="text-ink">

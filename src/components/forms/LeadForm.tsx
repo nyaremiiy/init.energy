@@ -11,6 +11,7 @@ import {
 } from "react";
 
 import { submitLead } from "@/app/actions/lead";
+import { Button } from "@/components/ui/button";
 import { inputClasses } from "@/components/ui/input-styles";
 import { PillRadio } from "@/components/ui/pill-radio";
 import { routes } from "@/content/routes";
@@ -316,28 +317,23 @@ export function LeadForm({ defaultObjectType }: LeadFormProps) {
           </p>
         ) : null}
 
-        <button
+        <Button
           type="submit"
-          className={`group inline-flex h-14 w-full items-center justify-center gap-2 rounded-full bg-ink px-6 font-heading text-base font-semibold text-white transition duration-150 ease-tech focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-ink motion-safe:active:scale-98 motion-safe:active:duration-120 disabled:cursor-not-allowed ${submitting ? "pointer-events-none opacity-80" : ""}`}
-        >
-          {submitting ? (
-            <>
+          variant="dark"
+          className={`w-full ${submitting ? "pointer-events-none opacity-80" : ""}`}
+          icon={
+            submitting ? (
               <Loader2
                 aria-hidden
                 className="size-4 motion-safe:animate-spin"
               />
-              {t.submitting}
-            </>
-          ) : (
-            <>
-              {t.submit}
-              <ArrowUpRight
-                aria-hidden
-                className="size-4.5 transition-transform duration-150 ease-tech motion-safe:group-hover:translate-x-0.5"
-              />
-            </>
-          )}
-        </button>
+            ) : (
+              <ArrowUpRight aria-hidden className="size-4.5" />
+            )
+          }
+        >
+          {submitting ? t.submitting : t.submit}
+        </Button>
       </fieldset>
     </form>
   );

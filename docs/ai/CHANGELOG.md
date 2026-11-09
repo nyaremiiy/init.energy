@@ -15,6 +15,12 @@
 
 ---
 
+## 2026-11-09 — Єдиний стиль секцій (крім hero)
+- **Агент:** Claude Code
+- **Гілка:** style/unify-site (статус: змерджено в develop)
+- **Що зроблено:** «Про компанію» — та сама розкладка `SectionHeader`, що й в інших секціях (варіант `split` видалено); submit форми заявки — спільний `Button` з новим варіантом `dark` замість власної кнопки; таблиця «Порівняння лінійки» відділена від панелі накопичувачів відступом `section-head`, а не `section` (вона частина секції). Hero не змінювався.
+- **Файли:** src/components/ui/{section-header,button}.tsx, src/components/forms/LeadForm.tsx, src/components/sections/{trust-block,home/product-line}.tsx, docs/ai/*
+
 ## 2026-11-09 — Єдині відступи секцій, панелей і карток
 - **Агент:** Claude Code
 - **Гілка:** style/spacing-tokens (статус: змерджено в develop)
