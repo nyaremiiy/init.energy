@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-10 — Без умовної синьої смуги в картці ємності
+- **Агент:** Codex
+- **Гілка:** style/remove-capacity-fallback-bar (статус: змерджено в develop)
+- **Що зроблено:** з `CapacityCard` прибрано синю смугу-заглушку та її білу плашку. Графічний блок тепер рендериться лише коли в контенті є реальні `cellCount` або `modules`; підтверджені 16 комірок SVIT PLUS 16000 залишилися.
+- **Файли:** src/components/products/CapacityCard.tsx, docs/ai/CONTEXT.md, docs/ai/CHANGELOG.md
+- **Нотатки / що далі:** lint і build проходять.
+
 ## 2026-11-10 — Фото продукту як фон картки ємності
 - **Агент:** Codex
 - **Гілка:** style/product-image-card-background (статус: змерджено в develop)

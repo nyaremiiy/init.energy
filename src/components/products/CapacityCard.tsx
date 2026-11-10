@@ -111,36 +111,36 @@ export function CapacityCard({
         </span>
       </p>
 
-      <div
-        aria-hidden
-        className="relative z-10 rounded-2xl bg-white/90 p-3 transition-transform duration-300 ease-tech motion-safe:group-hover:-translate-y-1"
-      >
-        {cellCount ? (
-          <ul className="grid grid-cols-8 gap-1">
-            {Array.from({ length: cellCount }, (_, index) => (
-              <li
-                key={index}
-                className="flex aspect-3/4 min-w-0 items-end justify-center rounded-md bg-linear-to-b from-accent to-accent-strong pb-1 font-mono text-xs text-white transition-transform duration-200 ease-tech motion-safe:hover:-translate-y-1"
-              >
-                {pad(index)}
-              </li>
-            ))}
-          </ul>
-        ) : modules ? (
-          <ul className="flex gap-2">
-            {Array.from({ length: modules }, (_, index) => (
-              <li
-                key={index}
-                className="flex aspect-3/4 flex-1 items-end justify-center rounded-md bg-linear-to-b from-accent to-accent-strong pb-1 font-mono text-xs text-white transition-transform duration-200 ease-tech motion-safe:hover:-translate-y-1"
-              >
-                {pad(index)}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <div className="h-3 origin-left rounded-full bg-linear-to-r from-accent-strong to-accent transition-transform duration-300 ease-tech motion-safe:group-hover:scale-y-125" />
-        )}
-      </div>
+      {cellCount || modules ? (
+        <div
+          aria-hidden
+          className="relative z-10 rounded-2xl bg-white/90 p-3 transition-transform duration-300 ease-tech motion-safe:group-hover:-translate-y-1"
+        >
+          {cellCount ? (
+            <ul className="grid grid-cols-8 gap-1">
+              {Array.from({ length: cellCount }, (_, index) => (
+                <li
+                  key={index}
+                  className="flex aspect-3/4 min-w-0 items-end justify-center rounded-md bg-linear-to-b from-accent to-accent-strong pb-1 font-mono text-xs text-white transition-transform duration-200 ease-tech motion-safe:hover:-translate-y-1"
+                >
+                  {pad(index)}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <ul className="flex gap-2">
+              {Array.from({ length: modules ?? 0 }, (_, index) => (
+                <li
+                  key={index}
+                  className="flex aspect-3/4 flex-1 items-end justify-center rounded-md bg-linear-to-b from-accent to-accent-strong pb-1 font-mono text-xs text-white transition-transform duration-200 ease-tech motion-safe:hover:-translate-y-1"
+                >
+                  {pad(index)}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      ) : null}
 
       <div aria-hidden className="relative z-10 flex flex-col gap-2">
         <div
