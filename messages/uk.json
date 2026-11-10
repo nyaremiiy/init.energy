@@ -246,7 +246,6 @@
       "composition": "Склад",
       "inside": "Всередині",
       "configurations": "Конфігурації",
-      "modes": "Режими",
       "specs": "Характеристики",
       "scaling": "Масштабування",
       "applications": "Застосування"
@@ -283,7 +282,6 @@
       "composition": "Склад",
       "inside": "Всередині",
       "configurations": "Конфігурації",
-      "modes": "Режими",
       "specs": "Характеристики",
       "scaling": "Масштабування",
       "applications": "Застосування",
@@ -306,7 +304,6 @@
       "protectionsLabel": "Захисти BMS"
     },
     "configurations": { "eyebrow": "Конфігурації", "scaling": "Нарощування без зупинки системи, кВт·год" },
-    "modes": { "eyebrow": "Режими роботи" },
     "process": { "eyebrow": "Реалізація" },
     "specs": {
       "eyebrow": "Характеристики",

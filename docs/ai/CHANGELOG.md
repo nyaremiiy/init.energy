@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-10 — Видалення секції режимів LITHIUMVALLEY
+- **Агент:** Codex
+- **Гілка:** fix/remove-bess-modes (статус: готова до merge у develop)
+- **Що зроблено:** Повністю видалено секцію «Режими роботи» зі сторінки LITHIUMVALLEY BESS, її контентний тип і дані, компонент рендерингу, пункт sticky-навігації та відповідне посилання у футері. Режими роботи в секції складу SVIT HOME залишено без змін.
+- **Файли:** src/components/pages/product-page.tsx, src/components/product-page/product-bess-sections.tsx, src/content/{products,product-pages,navigation,routes}.ts, messages/{uk,en}.json, docs/ai/CHANGELOG.md
+- **Нотатки / що далі:** `npm run lint` і `npm run build` проходять.
+
 ## 2026-11-10 — Фото на сторінці LITHIUMVALLEY BESS
 - **Агент:** Codex
 - **Гілка:** fix/lithiumvalley-visual-details (статус: готова до merge у develop)

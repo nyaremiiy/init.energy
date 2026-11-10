@@ -864,17 +864,6 @@ export const productList: Product[] = [
           { label: { uk: "Конфігурація 02", en: "Configuration 02" }, baseKwh: 261, inverterKw: 125, capacities: [261, 522, 783, 1044] },
         ],
       },
-      modes: {
-        title: { uk: "П'ять сценаріїв в одній системі", en: "Five scenarios in one system" },
-        lead: { uk: "EMS перемикає режими автоматично — постійний оператор на об'єкті не потрібен.", en: "EMS switches modes automatically, with no permanent on-site operator required." },
-        items: [
-          { icon: "backup", title: { uk: "Резервне живлення", en: "Backup power" }, text: { uk: "Підхоплює навантаження при зникненні мережі.", en: "Takes over loads when the grid fails." } },
-          { icon: "solar", title: { uk: "Разом із СЕС", en: "With solar" }, text: { uk: "Зберігає денну генерацію для вечора й ночі.", en: "Stores daytime generation for evening and night." } },
-          { icon: "generator", title: { uk: "Із генератором", en: "With a generator" }, text: { uk: "Працює в парі з дизельним або газовим генератором.", en: "Works with a diesel or gas generator." } },
-          { icon: "peak", title: { uk: "Зрізання піків", en: "Peak shaving" }, text: { uk: "Покриває пікове навантаження з батарей.", en: "Covers peak demand from batteries." } },
-          { icon: "cost", title: { uk: "Оптимізація витрат", en: "Cost optimisation" }, text: { uk: "Переносить споживання на вигідніший час.", en: "Shifts consumption to lower-cost periods." } },
-        ],
-      },
       specs: [],
       specGroups: [
         { title: { uk: "Батарейна система", en: "Battery system" }, rows: [
