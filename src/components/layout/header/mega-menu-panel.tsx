@@ -14,9 +14,11 @@ import { NavLink } from "./nav-link";
 type MegaMenuPanelProps = {
   group: NavGroup;
   open: boolean;
+  /** Closes the menu when a link in it is followed. */
+  onNavigate: () => void;
 };
 
-export function MegaMenuPanel({ group, open }: MegaMenuPanelProps) {
+export function MegaMenuPanel({ group, open, onNavigate }: MegaMenuPanelProps) {
   const navCta = getNavCta(useLocale());
   return (
     <div
@@ -36,6 +38,7 @@ export function MegaMenuPanel({ group, open }: MegaMenuPanelProps) {
                       <NavLink
                         href={link.href}
                         className="group/link flex flex-col gap-1"
+                        onClick={onNavigate}
                       >
                         <span className="text-base font-semibold text-white/90 transition-colors duration-150 ease-tech group-hover/link:text-white">
                           {link.label}
@@ -57,6 +60,7 @@ export function MegaMenuPanel({ group, open }: MegaMenuPanelProps) {
             <Button
               href={navCta.href}
               className="mt-2"
+              onClick={onNavigate}
               icon={<ArrowUpRight aria-hidden className="size-4" />}
             >
               {navCta.label}

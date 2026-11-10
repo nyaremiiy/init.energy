@@ -27,6 +27,11 @@ export function MegaMenuItem({ group }: { group: NavGroup }) {
     timer.current = window.setTimeout(() => setOpen(false), CLOSE_DELAY_MS);
   }
 
+  function closeNow() {
+    cancelClose();
+    setOpen(false);
+  }
+
   useEffect(() => cancelClose, []);
 
   return (
@@ -59,7 +64,7 @@ export function MegaMenuItem({ group }: { group: NavGroup }) {
           className={`size-4 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
         />
       </button>
-      <MegaMenuPanel group={group} open={open} />
+      <MegaMenuPanel group={group} open={open} onNavigate={closeNow} />
     </li>
   );
 }
