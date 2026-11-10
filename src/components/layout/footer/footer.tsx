@@ -83,7 +83,7 @@ export function Footer() {
       panelClassName="bg-ink-glow"
       className="bg-white pb-panel-sm sm:pb-panel"
     >
-      <Container inPanel className="pt-panel-y-sm lg:pt-panel-y">
+      <Container inPanel className="py-panel-y-sm lg:py-panel-y">
         <FooterColumns
           brand={brand}
           sections={sections}
