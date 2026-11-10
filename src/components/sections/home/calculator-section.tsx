@@ -35,7 +35,9 @@ export function CalculatorSection() {
             lead={t.lead}
           />
         </Reveal>
-        <QuickCalculator />
+        <Reveal delay={0.08} distance={16}>
+          <QuickCalculator />
+        </Reveal>
       </Container>
     </Panel>
   );

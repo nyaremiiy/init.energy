@@ -149,7 +149,7 @@ CLAUDE.md       # точка входу для Claude Code (імпортує AGE
 - `Eyebrow` має `tone` (`light`/`dark`), `Description` — `onLight`/`onDark`.
 - Дані (продукти, slug-и, рішення) — у `src/content/`, URL будуються через `routes`/`toPath`, не хардкодяться в JSX. Тексти UI — у `messages/`.
 - Секції після hero білі й ідуть з однаковим відступом (див. «Візуальний стиль головної»).
-- Анімація появи при скролі — клієнтський `Reveal` (`src/components/ui/reveal.tsx`, Motion `whileInView`, один раз, вимикається при prefers-reduced-motion). Секції лишаються Server Components і обгортають блоки в `Reveal`; картки — зі stagger `delay`.
+- Анімація появи при скролі — клієнтський `Reveal` (`src/components/ui/reveal.tsx`, Motion `whileInView`, один раз, вимикається при prefers-reduced-motion). Секції лишаються Server Components; заголовки, картки, інтерактивні блоки, форми, списки даних і футер відкриваються окремими композиційними групами, а повторювані елементи — зі стриманим stagger `delay`. Дрібні текстові вузли не анімуємо окремо, щоб не перевантажувати сторінку й клієнтський JS.
 - Кожна секція головної сторінки є окремим модулем у `src/components/sections/home/`.
 - Контентні варіанти hero та їхні зображення зберігаються в `hero-slides.ts`; анімація розділена між `hero-content-slider.tsx`, `hero-media-slider.tsx` і `hero-slider.tsx`.
 - Hero-заголовки зберігаються двома лініями в даних слайда для послідовної дворядкової композиції.

@@ -57,45 +57,49 @@ export function ProjectsShowcase() {
         </Reveal>
 
         <div className="flex flex-col gap-6">
-          <nav aria-label={t.filterLabel} className="flex flex-wrap gap-2">
-            {filterSegments.map((segment) => {
-              const isActive = segment.id === "all";
-              const href = `${routes.projects}?segment=${segment.id}`;
+          <Reveal delay={0.06} distance={12}>
+            <nav aria-label={t.filterLabel} className="flex flex-wrap gap-2">
+              {filterSegments.map((segment) => {
+                const isActive = segment.id === "all";
+                const href = `${routes.projects}?segment=${segment.id}`;
 
-              const chip = (
-                // Only "all" is active while there are few projects; other filters stay greyed out.
-                <Link
-                  href={href}
-                  aria-current={isActive ? "page" : undefined}
-                  aria-disabled={!isActive}
-                  aria-describedby={
-                    isActive ? undefined : `projects-filter-soon-${segment.id}`
-                  }
-                  tabIndex={isActive ? undefined : -1}
-                  className={chipClasses({
-                    selected: isActive,
-                    disabled: !isActive,
-                  })}
-                >
-                  {t.filters[segment.labelKey]}
-                </Link>
-              );
+                const chip = (
+                  // Only "all" is active while there are few projects; other filters stay greyed out.
+                  <Link
+                    href={href}
+                    aria-current={isActive ? "page" : undefined}
+                    aria-disabled={!isActive}
+                    aria-describedby={
+                      isActive
+                        ? undefined
+                        : `projects-filter-soon-${segment.id}`
+                    }
+                    tabIndex={isActive ? undefined : -1}
+                    className={chipClasses({
+                      selected: isActive,
+                      disabled: !isActive,
+                    })}
+                  >
+                    {t.filters[segment.labelKey]}
+                  </Link>
+                );
 
-              return isActive ? (
-                <span key={segment.id} className="inline-flex">
-                  {chip}
-                </span>
-              ) : (
-                <Tooltip
-                  key={segment.id}
-                  id={`projects-filter-soon-${segment.id}`}
-                  text={t.filterSoon}
-                >
-                  {chip}
-                </Tooltip>
-              );
-            })}
-          </nav>
+                return isActive ? (
+                  <span key={segment.id} className="inline-flex">
+                    {chip}
+                  </span>
+                ) : (
+                  <Tooltip
+                    key={segment.id}
+                    id={`projects-filter-soon-${segment.id}`}
+                    text={t.filterSoon}
+                  >
+                    {chip}
+                  </Tooltip>
+                );
+              })}
+            </nav>
+          </Reveal>
 
           {/* Height comes from the large card's aspect ratio (16/10 on lg); the two
               small cards share its height (≈ 16/7 each). Mobile: 4/3 per card. */}

@@ -85,14 +85,16 @@ export function FaqSection({
         </div>
 
         <div className="min-w-0 lg:col-span-7">
-          <FaqAccordion
-            items={items}
-            // Only topics present on this page; with one topic the filter is hidden.
-            topics={(filter ? faqTopics : [])
-              .filter((topic) => items.some((item) => item.topic === topic))
-              .map((topic) => ({ id: topic, label: t.topics[topic] }))}
-            labels={{ filter: t.filterLabel, all: t.all }}
-          />
+          <Reveal delay={0.08} distance={16}>
+            <FaqAccordion
+              items={items}
+              // Only topics present on this page; with one topic the filter is hidden.
+              topics={(filter ? faqTopics : [])
+                .filter((topic) => items.some((item) => item.topic === topic))
+                .map((topic) => ({ id: topic, label: t.topics[topic] }))}
+              labels={{ filter: t.filterLabel, all: t.all }}
+            />
+          </Reveal>
         </div>
       </Container>
     </section>

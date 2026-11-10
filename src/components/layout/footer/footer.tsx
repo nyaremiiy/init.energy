@@ -5,6 +5,7 @@ import { LanguageSwitcher } from "@/components/layout/header/language-switcher";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { Logo } from "@/components/ui/logo";
 import { Panel } from "@/components/ui/panel";
+import { Reveal } from "@/components/ui/reveal";
 import { SocialLinks } from "@/components/ui/social-links";
 import { getSiteSections } from "@/content/navigation";
 import { routes } from "@/content/routes";
@@ -84,29 +85,33 @@ export function Footer() {
       className="bg-white pb-panel-sm sm:pb-panel"
     >
       <Container inPanel className="py-panel-y-sm lg:py-panel-y">
-        <FooterColumns
-          brand={brand}
-          sections={sections}
-          newsletter={newsletter}
-        />
+        <Reveal distance={16}>
+          <FooterColumns
+            brand={brand}
+            sections={sections}
+            newsletter={newsletter}
+          />
+        </Reveal>
 
-        <div className="mt-18 flex flex-col gap-4 border-t border-white/14 pt-6 text-sm text-white/75 lg:flex-row lg:items-center lg:justify-between">
-          <p>{format(t.copyright, { year: String(year) })}</p>
-          <nav aria-label={t.legalNavLabel}>
-            <ul className="flex flex-wrap gap-x-6 gap-y-2">
-              {legalLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className={`rounded-sm transition-colors duration-150 ease-tech hover:text-white ${focusClasses}`}
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </div>
+        <Reveal delay={0.08} distance={12}>
+          <div className="mt-18 flex flex-col gap-4 border-t border-white/14 pt-6 text-sm text-white/75 lg:flex-row lg:items-center lg:justify-between">
+            <p>{format(t.copyright, { year: String(year) })}</p>
+            <nav aria-label={t.legalNavLabel}>
+              <ul className="flex flex-wrap gap-x-6 gap-y-2">
+                {legalLinks.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className={`rounded-sm transition-colors duration-150 ease-tech hover:text-white ${focusClasses}`}
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </div>
+        </Reveal>
       </Container>
 
       <FooterMark />

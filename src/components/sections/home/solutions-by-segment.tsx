@@ -102,19 +102,21 @@ export function SolutionsBySegment() {
           </Reveal>
         </div>
 
-        <p className="hidden flex-wrap items-center justify-center sm:flex gap-x-3 gap-y-2 font-heading text-eyebrow font-medium tracking-eyebrow text-ink/80 uppercase">
-          {t.keywords.map((keyword, index) => (
-            <span key={keyword} className="inline-flex items-center gap-3">
-              {index > 0 ? (
-                <span
-                  aria-hidden
-                  className="size-1.5 shrink-0 rounded-full bg-current"
-                />
-              ) : null}
-              {keyword}
-            </span>
-          ))}
-        </p>
+        <Reveal delay={0.08} distance={12}>
+          <p className="hidden flex-wrap items-center justify-center sm:flex gap-x-3 gap-y-2 font-heading text-eyebrow font-medium tracking-eyebrow text-ink/80 uppercase">
+            {t.keywords.map((keyword, index) => (
+              <span key={keyword} className="inline-flex items-center gap-3">
+                {index > 0 ? (
+                  <span
+                    aria-hidden
+                    className="size-1.5 shrink-0 rounded-full bg-current"
+                  />
+                ) : null}
+                {keyword}
+              </span>
+            ))}
+          </p>
+        </Reveal>
       </Container>
     </section>
   );
