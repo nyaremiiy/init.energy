@@ -21,6 +21,9 @@
 # production
 /build
 
+# local lead storage (contains personal data)
+/storage/leads.jsonl
+
 # misc
 .DS_Store
 *.pem
