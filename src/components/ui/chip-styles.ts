@@ -6,7 +6,8 @@
  * Use `chipClasses` for buttons and links. Radio pills (`PillRadio`) add
  * `peer-checked:` states on top of `chipBase`.
  */
-export type ChipTone = "light" | "dark";
+/** "light" on white, "dark" on dark panels, "tint" on the light-blue (sky) panel. */
+export type ChipTone = "light" | "dark" | "tint";
 
 /** Geometry and type shared by every chip. */
 export const chipBase =
@@ -16,6 +17,11 @@ const tones: Record<ChipTone, { on: string; off: string; focus: string }> = {
   light: {
     on: "border-ink bg-ink text-white",
     off: "border-ink/20 text-ink hover:border-ink",
+    focus: "focus-visible:outline-ink",
+  },
+  tint: {
+    on: "border-ink bg-ink text-white",
+    off: "border-white bg-white text-ink hover:border-ink",
     focus: "focus-visible:outline-ink",
   },
   dark: {

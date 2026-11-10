@@ -11,8 +11,8 @@ import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
 import { SectionWatermark } from "@/components/ui/section-watermark";
 import { productList, type ProductId } from "@/content/products";
-import { anchors, routes, toAnchor } from "@/content/routes";
-import { formatQuantity } from "@/lib/format";
+import { anchors, routes, sectionHref } from "@/content/routes";
+import { formatNumber, formatQuantity, type Quantity } from "@/lib/format";
 import { getLocale, getMessages } from "@/i18n/server";
 import { format } from "@/lib/messages";
 
@@ -21,11 +21,38 @@ const compareTitleId = "product-line-compare-title";
 /** Product in focus on first render (SSR). */
 const defaultProduct: ProductId = "svitHome";
 
+/** Capacity in kWh, for the line-up scale. */
+const toKwh = (quantity: Quantity) =>
+  quantity.unit === "Wh" ? quantity.value / 1000 : quantity.value;
+
+/**
+ * Scale of the whole line-up (from products.ts): smallest capacity to the
+ * largest — including the top LITHIUMVALLEY configuration (maxCapacity).
+ */
+function lineupRange(): { min: number; max: number } {
+  const values = productList.flatMap((product) => [
+    toKwh(product.capacity),
+    ...product.specs
+      .filter(
+        (spec) => spec.key === "maxCapacity" && typeof spec.value !== "string",
+      )
+      .map((spec) => toKwh(spec.value as Quantity)),
+  ]);
+  return { min: Math.min(...values), max: Math.max(...values) };
+}
+
+/** Logarithmic position 0–1: 0,87 and 1 044 kWh differ by three orders of magnitude. */
+function logPosition(value: number, min: number, max: number) {
+  return (Math.log(value) - Math.log(min)) / (Math.log(max) - Math.log(min));
+}
+
 /** Server section: header, focused-product tabs (client) and the comparison table. */
 export function ProductLine() {
   const messages = getMessages();
   const locale = getLocale();
   const t = messages.productLine;
+  const range = lineupRange();
+  const kwh = (value: number) => formatQuantity({ value, unit: "kWh" }, locale);
 
   const focusProducts: FocusProduct[] = productList.map((product) => ({
     id: product.id,
@@ -34,19 +61,36 @@ export function ProductLine() {
     segment: product.segment[locale],
     segmentIcon: product.segmentIcon,
     description: product.focusDescription[locale],
-    specs: product.specs.slice(0, 3).map((spec) => ({
-      label: messages.specs[spec.key],
-      value:
-        typeof spec.value === "string"
-          ? spec.value
-          : formatQuantity(spec.value, locale),
-    })),
-    image: product.image
-      ? { ...product.image, alt: product.image.alt[locale] }
-      : undefined,
+    specs: product.focusSpecs.flatMap((key) => {
+      const spec = product.specs.find((item) => item.key === key);
+      if (!spec) return [];
+      return [
+        {
+          label: messages.specs[spec.key],
+          value:
+            typeof spec.value === "string"
+              ? spec.value
+              : formatQuantity(spec.value, locale),
+        },
+      ];
+    }),
+    capacityCard: {
+      chemistryLabel: product.chemistryLabel[locale],
+      value: formatNumber(product.capacity.value, locale),
+      unit: messages.units[product.capacity.unit],
+      prefix:
+        product.capacity.qualifier === "from" ? t.capacityFrom : undefined,
+      thumbnail: product.image
+        ? { src: product.image.src, alt: product.image.alt[locale] }
+        : undefined,
+      cellCount: product.cellCount,
+      modules: product.modules,
+      scalePosition: logPosition(toKwh(product.capacity), range.min, range.max),
+      scaleMin: kwh(range.min),
+      scaleMax: kwh(range.max),
+    },
     detailsLabel: format(t.details, { name: product.name }),
     specsLabel: format(t.specsLabel, { name: product.name }),
-    photoPending: `${product.name} — ${t.photoPending}`,
   }));
 
   return (
@@ -55,23 +99,20 @@ export function ProductLine() {
       aria-labelledby={titleId}
       className="scroll-mt-24 bg-white pt-section-sm lg:pt-section"
     >
-      <Panel variant="dark" panelClassName="bg-ink-glow">
-        <SectionWatermark text="STORAGE" side="right" tone="dark" />
+      <Panel variant="sky">
+        <SectionWatermark text="STORAGE" side="right" />
         <Container
           inPanel
           className="relative flex flex-col gap-section-head-sm lg:gap-section-head py-panel-y-sm lg:py-panel-y"
         >
           <Reveal>
             <SectionHeader
-              tone="dark"
               eyebrow={t.eyebrow}
               title={t.title}
               titleId={titleId}
               lead={t.lead}
               aside={
-                <ArrowLink href={routes.catalog} tone="dark">
-                  {t.catalogLink}
-                </ArrowLink>
+                <ArrowLink href={routes.catalog}>{t.catalogLink}</ArrowLink>
               }
             />
           </Reveal>
@@ -86,7 +127,7 @@ export function ProductLine() {
               tablist: t.tablist,
               compare: t.compareAll,
             }}
-            compareHref={toAnchor(anchors.compare)}
+            compareHref={sectionHref(anchors.compare, locale)}
           />
         </Container>
       </Panel>

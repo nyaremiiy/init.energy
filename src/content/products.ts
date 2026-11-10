@@ -52,6 +52,14 @@ export type Product = {
   focusDescription: Localized;
   /** Main capacity, shown in tables and solution cards. */
   capacity: Quantity;
+  /** Mono label on the capacity card: chemistry and build. */
+  chemistryLabel: Localized;
+  /** Number of cells, when stated on init.energy (drawn as a cell grid). */
+  cellCount?: number;
+  /** Number of cabinets/modules for industrial systems (drawn as a row). */
+  modules?: number;
+  /** The three specs shown next to the capacity card (keys of `specs`). */
+  focusSpecs: [SpecKey, SpecKey, SpecKey];
   /** Rows of the product card spec list. */
   specs: ProductSpec[];
   /** Segment label shown on the product card. */
@@ -78,6 +86,10 @@ export const productList: Product[] = [
       en: "A pure sine wave portable station: 865 Wh and 600 W (1,200 W peak). A router and lights run for up to 70 hours, a laptop for up to 10. It charges from the grid, a generator or a solar panel in about 4 hours.",
     },
     capacity: { value: 865, unit: "Wh" },
+    // Owner data; /svit-600/ itself shows both Li-ion (table) and LiFePO₄ (text).
+    chemistryLabel: { uk: "LiFePO₄", en: "LiFePO₄" },
+    // TODO(content): cell count is not stated on init.energy.
+    focusSpecs: ["capacity", "power", "cycles"],
     specs: [
       { key: "capacity", value: { value: 865, unit: "Wh" } },
       { key: "power", value: { value: 600, unit: "W" } },
@@ -115,6 +127,13 @@ export const productList: Product[] = [
       en: "A ready kit for a house or small business: a 6 kW hybrid inverter and a 5.12 kWh SVIT PLUS 5000 battery on a mobile rack with wheels — no wall mounting. It switches to the battery by itself during an outage and works as a solar plant with panels.",
     },
     capacity: { value: 5.12, unit: "kWh" },
+    // /svit-home/: battery SVIT Plus 5000, LiFePO₄.
+    chemistryLabel: {
+      uk: "LiFePO₄ · батарея SVIT PLUS 5000",
+      en: "LiFePO₄ · SVIT PLUS 5000 battery",
+    },
+    // TODO(content): cell count is not stated on init.energy.
+    focusSpecs: ["capacity", "inverter", "cycles"],
     specs: [
       { key: "capacity", value: { value: 5.12, unit: "kWh" } },
       { key: "inverter", value: { value: 6, unit: "kW" } },
@@ -154,6 +173,12 @@ export const productList: Product[] = [
       en: "A 5.12 kWh, 5 kW LiFePO₄ battery for homes, small businesses and industrial sites. It works with an inverter in a solar or hybrid plant, and batteries connect in parallel up to 81 kWh. 5-year warranty.",
     },
     capacity: { value: 5.12, unit: "kWh" },
+    chemistryLabel: {
+      uk: "LiFePO₄ · до 16 модулів",
+      en: "LiFePO₄ · up to 16 modules",
+    },
+    // TODO(content): cell count is not stated on init.energy.
+    focusSpecs: ["capacity", "power", "cycles"],
     specs: [
       { key: "capacity", value: { value: 5.12, unit: "kWh" } },
       { key: "power", value: { value: 5, unit: "kW" } },
@@ -194,6 +219,13 @@ export const productList: Product[] = [
       en: "A 16.07 kWh LiFePO₄ battery built from 16 EVE cells for solar plants, backup power, off-grid and hybrid systems. Built-in BMS with CAN, RS485 and Bluetooth, compatible with Deye, Growatt, Victron and Luxpower inverters.",
     },
     capacity: { value: 16.07, unit: "kWh" },
+    chemistryLabel: {
+      uk: "LiFePO₄ · 16 комірок EVE",
+      en: "LiFePO₄ · 16 EVE cells",
+    },
+    // /svit-plus-16000/: 16 prismatic EVE cells, 16S1P.
+    cellCount: 16,
+    focusSpecs: ["capacity", "cycles", "chemistry"],
     specs: [
       { key: "capacity", value: { value: 16.07, unit: "kWh" } },
       {
@@ -228,6 +260,9 @@ export const productList: Product[] = [
       en: "A factory-built BESS module for industry, agriculture, logistics, healthcare and critical infrastructure: 208 to 1,044 kWh of LiFePO₄ batteries, 50–125 kW SOLIS hybrid inverters and liquid cooling. 10-year manufacturer warranty. INIT ENERGY is the official representative and installer.",
     },
     capacity: { value: 208, unit: "kWh", qualifier: "from" },
+    chemistryLabel: { uk: "LiFePO₄ · BESS", en: "LiFePO₄ · BESS" },
+    // TODO(content): number of cabinets per configuration (208 / 261 kWh blocks) is not fixed yet.
+    focusSpecs: ["minCapacity", "maxCapacity", "cycles"],
     specs: [
       { key: "minCapacity", value: { value: 208, unit: "kWh" } },
       { key: "maxCapacity", value: { value: 1044, unit: "kWh" } },

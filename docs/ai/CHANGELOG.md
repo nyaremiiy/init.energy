@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-10 — Накопичувачі: світлий варіант з карткою ємності
+- **Агент:** Claude Code
+- **Гілка:** style/product-tabs-light (статус: змерджено в develop)
+- **Що зроблено:** секцію вкладок переведено на панель `sky`; нові токени `--color-accent` / `--color-accent-strong` (лише графіка), клас `.glow-accent`; варіант пігулок `tint`; новий компонент `CapacityCard` (комірки / шафи / смуга, логарифмічна шкала лінійки з `products.ts`); нові поля продуктів `chemistryLabel`, `cellCount?`, `modules?`, `focusSpecs`; ключ `productLine.capacityFrom`. Перевірено 1440/768/360, усі 5 вкладок: комірки лише в SVIT PLUS 16000 (16), решта — смуга; нічого не виходить за картку.
+- **Файли:** src/app/globals.css, src/components/products/{CapacityCard,ProductFocusTabs}.tsx, src/components/sections/home/product-line.tsx, src/components/ui/chip-styles.ts, src/content/products.ts, messages/{uk,en}.json, docs/ai/*
+- **Нотатки / що далі:** TODO(content): кількість комірок для SVIT 600, SVIT HOME, SVIT PLUS 5000; кількість шаф LITHIUMVALLEY за конфігурацією. SVIT 600 позначено LiFePO₄ за даними власника, хоча на /svit-600/ таблиця каже Li-ion. Розділу 9 у CLAUDE.md немає — примітка про accent у CONTEXT.md (кольори).
+
 ## 2026-11-10 — Англійська версія головної (/en/) і SEO
 - **Агент:** Claude Code
 - **Гілка:** feature/i18n-en-home (статус: змерджено в develop)
