@@ -147,7 +147,7 @@ export const productList: Product[] = [
     ],
     segment: { uk: "Приватний будинок", en: "Private house" },
     segmentIcon: "house",
-    // TODO(content): add approved page photos and a 1200×630 OG image.
+    // Hero photo is in place; kit, inverter and battery photos are still TODO(content).
     // TODO(content): add system voltage, dimensions, weight, interfaces,
     // inverter warranty and datasheet PDF when the owner confirms them.
     // Until then these rows and links are intentionally absent.
@@ -163,7 +163,7 @@ export const productList: Product[] = [
           en: "SVIT HOME is a ready backup power kit with a 6.2 kW VICTOR hybrid inverter, a 5.12 kWh LiFePO₄ battery and a rack on legs for apartments, houses, housing associations and businesses.",
         },
       },
-      mediaPlaceholder: true,
+      ogImage: "/images/og/svit-home.jpg",
       hero: {
         typeLabel: {
           uk: "Комплект резервного живлення",
