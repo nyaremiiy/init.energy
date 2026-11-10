@@ -144,3 +144,8 @@ export const languages: { code: Locale; label: string }[] = [
 ];
 
 export const officeRotationInterval = 5000;
+
+/** Home page URLs (Ukrainian at the root, English under /en/). */
+export function isHomePath(pathname: string | null): boolean {
+  return pathname !== null && /^\/(en\/)?$/.test(pathname);
+}

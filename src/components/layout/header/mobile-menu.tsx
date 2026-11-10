@@ -1,13 +1,20 @@
 "use client";
 
 import { ChevronDown, Mail, MapPin, Menu, Phone, X } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { formatPhone } from "@/lib/format";
 
 import { useLocale, useMessages } from "@/i18n/client";
 
-import { contactEmail, getNavItems, isNavGroup, offices } from "./header-data";
+import {
+  contactEmail,
+  getNavItems,
+  isHomePath,
+  isNavGroup,
+  offices,
+} from "./header-data";
 import { LanguageSwitcher } from "./language-switcher";
 import { NavLink } from "./nav-link";
 import { Eyebrow } from "@/components/ui/eyebrow";
@@ -17,6 +24,11 @@ export function MobileMenu() {
   const locale = useLocale();
   const t = useMessages().chrome.header;
   const navItems = getNavItems(locale);
+  // Links to sections of the home page are shown only on the home page.
+  const onHome = isHomePath(usePathname());
+  const visibleItems = onHome
+    ? navItems
+    : navItems.filter((item) => isNavGroup(item) || !item.sectionId);
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -65,7 +77,7 @@ export function MobileMenu() {
         >
           <nav aria-label={t.mobileMenu}>
             <ul className="flex flex-col gap-5 text-2xl font-semibold">
-              {navItems.map((item) =>
+              {visibleItems.map((item) =>
                 isNavGroup(item) ? (
                   <li key={item.label}>
                     <details className="group">

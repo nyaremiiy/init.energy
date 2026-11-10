@@ -6,6 +6,7 @@ import {
   type NavGroup,
   type NavLink as PageLink,
 } from "./header-data";
+import { HomeOnly } from "./home-only";
 import { MegaMenuItem } from "./mega-menu-item";
 import { NavLink } from "./nav-link";
 import { SectionNavLink } from "./section-nav-link";
@@ -27,27 +28,29 @@ export function DesktopNav() {
       aria-label={getMessages().chrome.header.mainMenu}
       className="hidden self-stretch lg:flex lg:items-center lg:gap-6"
     >
-      <ul className="flex h-full items-center gap-2 text-sm font-medium text-white/85">
-        {pageLinks.map((item) => (
-          <li key={item.href}>
-            {item.sectionId ? (
-              <SectionNavLink
-                href={item.href}
-                label={item.label}
-                sectionId={item.sectionId}
-              />
-            ) : (
-              <NavLink
-                href={item.href}
-                className="inline-flex items-center px-3 py-1.5 transition-colors hover:text-white"
-              >
-                {item.label}
-              </NavLink>
-            )}
-          </li>
-        ))}
-      </ul>
-      <span aria-hidden className="h-5 w-px bg-white/20" />
+      <HomeOnly>
+        <ul className="flex h-full items-center gap-2 text-sm font-medium text-white/85">
+          {pageLinks.map((item) => (
+            <li key={item.href}>
+              {item.sectionId ? (
+                <SectionNavLink
+                  href={item.href}
+                  label={item.label}
+                  sectionId={item.sectionId}
+                />
+              ) : (
+                <NavLink
+                  href={item.href}
+                  className="inline-flex items-center px-3 py-1.5 transition-colors hover:text-white"
+                >
+                  {item.label}
+                </NavLink>
+              )}
+            </li>
+          ))}
+        </ul>
+        <span aria-hidden className="h-5 w-px bg-white/20" />
+      </HomeOnly>
 
       <ul className="flex h-full items-center gap-8 text-sm font-medium text-white/85">
         {groups.map((item) => (
