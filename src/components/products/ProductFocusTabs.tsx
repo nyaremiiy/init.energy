@@ -52,7 +52,6 @@ export function ProductFocusTabs({
 }: ProductFocusTabsProps) {
   const baseId = useId();
   const rootRef = useRef<HTMLDivElement>(null);
-  const listRef = useRef<HTMLDivElement>(null);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const [active, setActive] = useState(defaultIndex);
   // null until the visitor picks a tab; reduced motion starts paused, others on auto.
@@ -89,23 +88,6 @@ export function ProductFocusTabs({
     return () => document.removeEventListener("visibilitychange", onChange);
   }, []);
 
-  // Mobile: tabs scroll sideways — keep the active one in view without moving the page.
-  useEffect(() => {
-    const list = listRef.current;
-    const tab = tabRefs.current[active];
-    if (!list || !tab || list.scrollWidth <= list.clientWidth) return;
-    const left = tab.offsetLeft - list.offsetLeft;
-    if (
-      left < list.scrollLeft ||
-      left + tab.offsetWidth > list.scrollLeft + list.clientWidth
-    ) {
-      list.scrollTo({
-        left,
-        behavior: prefersReducedMotion ? "auto" : "smooth",
-      });
-    }
-  }, [active, prefersReducedMotion]);
-
   function select(index: number, moveFocus: boolean) {
     setActive(index);
     setMode("stopped");
@@ -141,10 +123,9 @@ export function ProductFocusTabs({
     >
       <div>
         <div
-          ref={listRef}
           role="tablist"
           aria-label={labels.tablist}
-          className="scrollbar-none -mx-2.5 flex snap-x gap-2 overflow-x-auto px-2.5 py-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0"
+          className="flex flex-wrap gap-2 py-1"
         >
           {products.map((product, index) => {
             const selected = index === active;
@@ -163,7 +144,7 @@ export function ProductFocusTabs({
                 tabIndex={selected ? 0 : -1}
                 onClick={() => select(index, false)}
                 onKeyDown={onTabKeyDown}
-                className={`relative snap-start overflow-hidden ${chipClasses({ selected, tone: "tint" })}`}
+                className={`relative overflow-hidden ${chipClasses({ selected, tone: "tint" })}`}
               >
                 {product.name}
                 {/* Invisible timer: its animation end advances to the next tab. */}
