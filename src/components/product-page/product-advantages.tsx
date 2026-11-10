@@ -1,4 +1,12 @@
-import { Layers, RefreshCw, Scale, ShieldCheck } from "lucide-react";
+import {
+  Layers,
+  PackageCheck,
+  RefreshCw,
+  Scale,
+  ShieldCheck,
+  Sun,
+  Unplug,
+} from "lucide-react";
 
 import { Container } from "@/components/layout/container";
 import { CardLabel } from "@/components/ui/card-label";
@@ -17,6 +25,9 @@ const icons: Record<AdvantageIcon, typeof ShieldCheck> = {
   balance: Scale,
   cycles: RefreshCw,
   scale: Layers,
+  kit: PackageCheck,
+  mobility: Unplug,
+  solar: Sun,
 };
 
 /** Same palette steps as the solution cards: sky → surface → navy → ink. */

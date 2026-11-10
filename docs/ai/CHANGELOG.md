@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-10 — Сторінка продукту SVIT HOME
+- **Агент:** Codex
+- **Гілка:** feature/svit-home-page (статус: готова до merge у develop)
+- **Що зроблено:** Створено повну серверно-рендерену сторінку `/svit-home/` та англійську `/en/svit-home/` на спільному шаблоні сторінок продуктів. Контент SVIT HOME винесено в `products.ts`; додано hero, переваги, data-driven композицію комплекту, характеристики, застосування, FAQ, пов'язані продукти й форму консультації. Сторінки продуктів узагальнено в один reusable Server Component, додано локалізовані URL, навігацію, canonical/hreflang, sitemap та Product/BreadcrumbList/FAQPage JSON-LD. До затвердження фото всі медіаблоки SVIT HOME показують `MediaPlaceholder`.
+- **Файли:** src/app/{(uk),en}/[product]/page.tsx, src/components/pages/product-page.tsx, src/components/product-page/{product-composition,product-hero,product-advantages,product-applications,product-scaling,product-specs,related-products}.tsx, src/content/{products,product-pages,faq,navigation,routes}.ts, src/i18n/config.ts, src/lib/seo/schema.ts, messages/{uk,en}.json, docs/ai/{CONTEXT,CHANGELOG}.md
+- **Нотатки / що далі:** TODO(content): затверджені фото комплекту, інвертора й накопичувача; OG-зображення 1200×630; системна напруга, габарити, вага, інтерфейси, гарантія на інвертор і PDF datasheet. Непідтверджені характеристики не рендеряться. `npm run lint` і `npm run build` проходять.
+
 ## 2026-11-10 — Автоматичний push завершених задач у develop
 - **Агент:** Codex
 - **Гілка:** chore/auto-push-develop (статус: змерджено в develop)

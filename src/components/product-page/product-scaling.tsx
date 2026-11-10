@@ -23,6 +23,8 @@ export function ProductScaling({
 }) {
   const messages = getMessages();
   const t = messages.productPage.scaling;
+  const scaling = page.scaling;
+  if (!scaling) return null;
 
   return (
     <Panel
@@ -42,16 +44,16 @@ export function ProductScaling({
           <SectionHeader
             tone="dark"
             eyebrow={t.eyebrow}
-            title={page.scaling.title[locale]}
+            title={scaling.title[locale]}
             titleId={titleId}
-            lead={page.scaling.lead[locale]}
+            lead={scaling.lead[locale]}
           />
         </Reveal>
         <ScalingWidget
           name={name}
-          moduleCapacityKwh={page.scaling.moduleCapacityKwh}
-          options={page.scaling.options}
-          defaultModules={page.scaling.defaultModules}
+          moduleCapacityKwh={scaling.moduleCapacityKwh}
+          options={scaling.options}
+          defaultModules={scaling.defaultModules}
           labels={{
             legend: t.legend,
             option: t.option,

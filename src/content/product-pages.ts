@@ -1,6 +1,6 @@
 import type { Locale, Quantity } from "@/lib/format";
 
-import type { ProductId } from "./products";
+import { productList, type ProductId } from "./products";
 import { routes } from "./routes";
 
 /**
@@ -17,11 +17,19 @@ export type SpecValue = { quantity: Quantity } | { text: Text };
 
 export type SpecRow = { label: Text; value: SpecValue };
 
-export type AdvantageIcon = "safety" | "balance" | "cycles" | "scale";
-export type ApplicationIcon = "house" | "store" | "factory";
+export type AdvantageIcon =
+  | "safety"
+  | "balance"
+  | "cycles"
+  | "scale"
+  | "kit"
+  | "mobility"
+  | "solar";
+export type ApplicationIcon = "house" | "store" | "factory" | "lab";
+export type CompositionModeIcon = "backup" | "solar" | "grid";
 
 /** Slugs of products that have a full page (also FAQ page keys). */
-export type ProductPageSlug = "svit-plus-5000";
+export type ProductPageSlug = "svit-plus-5000" | "svit-home";
 
 export type ProductPage = {
   id: ProductId;
@@ -35,7 +43,10 @@ export type ProductPage = {
     keySpecs: { value: SpecValue; label: Text }[];
     warranty: { title: Text; value: Text; note: Text };
     tags: Text[];
+    secondaryCta?: { label: Text; anchor: "composition" | "specs" };
   };
+  /** Use placeholders on the full page even if the catalogue has an image. */
+  mediaPlaceholder?: boolean;
   advantages: {
     lead: Text;
     items: {
@@ -51,12 +62,30 @@ export type ProductPage = {
   specs: SpecRow[];
   /** TODO(content): datasheet PDF URL; the link renders only when set. */
   datasheetUrl?: string;
-  scaling: {
+  scaling?: {
     title: Text;
     lead: Text;
     moduleCapacityKwh: number;
     options: number[];
     defaultModules: number;
+  };
+  composition?: {
+    title: Text;
+    lead: Text;
+    items: {
+      title: Text;
+      text: Text;
+      specs: { label: Text; value: Text }[];
+      relatedProduct?: ProductId;
+      linkLabel?: Text;
+    }[];
+    modesTitle: Text;
+    modesEyebrow: Text;
+    modes: {
+      icon: CompositionModeIcon;
+      title: Text;
+      text: Text;
+    }[];
   };
   applications: {
     lead: Text;
@@ -70,10 +99,12 @@ export type ProductPage = {
     }[];
   };
   related: ProductId[];
-  consultation: { lead: Text };
+  consultation: { lead: Text; summary?: Text };
 };
 
-export const productPages: ProductPage[] = [
+export type ProductPageContent = Omit<ProductPage, "id">;
+
+const standaloneProductPages: ProductPage[] = [
   {
     id: "svitPlus5000",
     slug: "svit-plus-5000",
@@ -360,6 +391,14 @@ export const productPages: ProductPage[] = [
       },
     },
   },
+];
+
+/** Full pages declared on products plus legacy page data being migrated. */
+export const productPages: ProductPage[] = [
+  ...standaloneProductPages,
+  ...productList.flatMap((product) =>
+    product.page ? [{ id: product.id, ...product.page }] : [],
+  ),
 ];
 
 export function productPageBySlug(slug: string): ProductPage | undefined {

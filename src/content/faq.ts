@@ -226,6 +226,97 @@ export const faqList: Faq[] = [
       en: "Yes, from −10 °C: the operating range is −10 to +50 °C. In unheated rooms we recommend basic frost protection.",
     },
   },
+  {
+    id: "svit-home-no-wall-mounting",
+    topic: "products",
+    pages: ["svit-home"],
+    question: {
+      uk: "Чи можна встановити SVIT HOME без монтажу на стіну?",
+      en: "Can SVIT HOME be installed without wall mounting?",
+    },
+    answer: {
+      uk: "Так. Це вертикальна стійка на колесах — її можна поставити в будь-якому зручному місці й за потреби перемістити.",
+      en: "Yes. It is a vertical rack on wheels, so it can be placed wherever convenient and moved when needed.",
+    },
+  },
+  {
+    id: "svit-home-add-solar",
+    topic: "solar",
+    pages: ["svit-home"],
+    question: {
+      uk: "Чи можна підключити сонячні панелі пізніше?",
+      en: "Can solar panels be connected later?",
+    },
+    answer: {
+      uk: "Так. Гібридний інвертор готовий до інтеграції з фотоелектричними модулями — комплект стане сонячною станцією.",
+      en: "Yes. The hybrid inverter is ready to integrate with photovoltaic modules, turning the kit into a solar power plant.",
+    },
+  },
+  {
+    id: "svit-home-outage",
+    topic: "backup",
+    pages: ["svit-home"],
+    question: {
+      uk: "Чи працює комплект під час відключень?",
+      en: "Does the kit work during outages?",
+    },
+    answer: {
+      uk: "Так. Коли мережу вимикають, SVIT HOME автоматично переходить на живлення від батареї.",
+      en: "Yes. When the grid goes down, SVIT HOME automatically switches to battery power.",
+    },
+  },
+  {
+    id: "svit-home-warranty",
+    topic: "warranty",
+    pages: ["svit-home"],
+    question: {
+      uk: "Яка гарантія на батарею?",
+      en: "What is the battery warranty?",
+    },
+    answer: {
+      uk: "На батарею SVIT PLUS 5000 — 5 років офіційної гарантії з можливістю продовження.",
+      en: "The SVIT PLUS 5000 battery has a 5-year official warranty that can be extended.",
+    },
+  },
+  {
+    id: "svit-home-lifetime",
+    topic: "products",
+    pages: ["svit-home"],
+    question: {
+      uk: "Який термін служби батареї?",
+      en: "What is the battery service life?",
+    },
+    answer: {
+      uk: "Понад 6 000 циклів заряду й розряду — близько 15 років роботи.",
+      en: "Over 6,000 charge and discharge cycles provide about 15 years of service.",
+    },
+  },
+  {
+    id: "svit-home-maintenance",
+    topic: "warranty",
+    pages: ["svit-home"],
+    question: {
+      uk: "Чи потрібне обслуговування?",
+      en: "Does it need maintenance?",
+    },
+    answer: {
+      uk: "Спеціального обслуговування батарея не потребує — достатньо періодичної діагностики.",
+      en: "The battery needs no special maintenance; periodic diagnostics are sufficient.",
+    },
+  },
+  {
+    id: "svit-home-winter",
+    topic: "products",
+    pages: ["svit-home"],
+    question: {
+      uk: "Чи працює комплект узимку?",
+      en: "Does the kit work in winter?",
+    },
+    answer: {
+      uk: "Батарея розрахована на −10 … +50 °C. У неопалюваних приміщеннях рекомендуємо мінімальний захист від морозу.",
+      en: "The battery is rated for −10 … +50 °C. In unheated rooms we recommend basic frost protection.",
+    },
+  },
 ];
 
 export function faqForPage(page: FaqPage): Faq[] {

@@ -43,12 +43,11 @@ type ProductSchemaInput = {
   image?: string;
   /** Spec rows as label/value pairs, exactly as shown on the page. */
   properties: { name: string; value: string }[];
+  related?: { name: string; url: string }[];
+  parts?: { name: string; url: string }[];
 };
 
-/**
- * Product without `offers` (INIT ENERGY does not publish prices) and without
- * `manufacturer`: own production of SVIT is not confirmed (docs/ai/CONTEXT.md).
- */
+/** Product without `offers`: INIT ENERGY does not publish prices. */
 export function productSchema(input: ProductSchemaInput) {
   return {
     "@context": "https://schema.org",
@@ -57,12 +56,33 @@ export function productSchema(input: ProductSchemaInput) {
     description: input.description,
     url: input.url,
     ...(input.image ? { image: input.image } : {}),
-    brand: { "@type": "Brand", name: "SVIT" },
+    brand: [
+      { "@type": "Brand", name: "SVIT" },
+      { "@type": "Brand", name: "INIT ENERGY" },
+    ],
     additionalProperty: input.properties.map((property) => ({
       "@type": "PropertyValue",
       name: property.name,
       value: property.value,
     })),
+    ...(input.related?.length
+      ? {
+          isRelatedTo: input.related.map((product) => ({
+            "@type": "Product",
+            name: product.name,
+            url: product.url,
+          })),
+        }
+      : {}),
+    ...(input.parts?.length
+      ? {
+          hasPart: input.parts.map((product) => ({
+            "@type": "Product",
+            name: product.name,
+            url: product.url,
+          })),
+        }
+      : {}),
   };
 }
 

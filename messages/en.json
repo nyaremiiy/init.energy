@@ -242,6 +242,7 @@
       "calculator": "Calculator",
       "faq": "FAQ",
       "advantages": "Advantages",
+      "composition": "Composition",
       "specs": "Specifications",
       "scaling": "Scaling",
       "applications": "Applications"
@@ -275,6 +276,7 @@
     "navLabel": "Page sections",
     "nav": {
       "advantages": "Advantages",
+      "composition": "Composition",
       "specs": "Specifications",
       "scaling": "Scaling",
       "applications": "Applications",
@@ -286,6 +288,10 @@
     "advantages": {
       "eyebrow": "Advantages",
       "title": "Why {name}"
+    },
+    "composition": {
+      "eyebrow": "Kit composition",
+      "photoPending": "{component} photo coming soon"
     },
     "specs": {
       "eyebrow": "Specifications",
