@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-10 — Фото на сторінці LITHIUMVALLEY BESS
+- **Агент:** Codex
+- **Гілка:** fix/lithiumvalley-visual-details (статус: готова до merge у develop)
+- **Що зроблено:** Прибрано примусовий `MediaPlaceholder` для LITHIUMVALLEY: hero, технічні характеристики, metadata та Product schema тепер використовують наявне фото й alt з `content/products.ts`. Спільний hero враховує `mediaAspect` і застосовує квадратну композицію тільки до продуктів, які її явно задають.
+- **Файли:** src/content/products.ts, src/components/product-page/{product-hero,product-specs}.tsx, docs/ai/CHANGELOG.md
+- **Нотатки / що далі:** Окреме OG-зображення 1200×630 і непідтверджені технічні поля LITHIUMVALLEY залишаються TODO(content). `npm run lint` і `npm run build` проходять.
+
 ## 2026-11-10 — Сторінка LITHIUMVALLEY BESS
 - **Агент:** Codex
 - **Гілка:** feature/lithiumvalley-bess-page (статус: готова до merge у develop)

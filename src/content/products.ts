@@ -830,8 +830,6 @@ export const productList: Product[] = [
         title: { uk: "LITHIUMVALLEY BESS — накопичення 208–1 044 кВт·год", en: "LITHIUMVALLEY BESS — 208–1,044 kWh energy storage" },
         description: { uk: "Промислова BESS LITHIUMVALLEY на 208–1 044 кВт·год: LiFePO₄, інвертори SOLIS до 125 кВт, перемикання до 10 мс і гарантія 10 років для бізнесу та інфраструктури.", en: "LITHIUMVALLEY industrial BESS from 208 to 1,044 kWh: LiFePO₄, SOLIS inverters up to 125 kW, sub-10 ms transfer and a 10-year warranty for business." },
       },
-      mediaPlaceholder: true,
-      specsMediaAspect: "portrait",
       hero: {
         typeLabel: { uk: "Промислова система накопичення (BESS)", en: "Industrial battery energy storage system" },
         segmentLabel: { uk: "Бізнес та інфраструктура", en: "Business and infrastructure" },
