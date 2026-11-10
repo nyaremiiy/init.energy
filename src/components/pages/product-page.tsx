@@ -6,6 +6,7 @@ import { ProductAdvantages } from "@/components/product-page/product-advantages"
 import { ProductApplications } from "@/components/product-page/product-applications";
 import { ProductComposition } from "@/components/product-page/product-composition";
 import { ProductHero } from "@/components/product-page/product-hero";
+import { ProductInside } from "@/components/product-page/product-inside";
 import { ProductScaling } from "@/components/product-page/product-scaling";
 import { ProductSectionNav } from "@/components/product-page/product-section-nav";
 import { ProductSpecs } from "@/components/product-page/product-specs";
@@ -17,7 +18,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { MediaPlaceholder } from "@/components/ui/media-placeholder";
 import { productPageBySlug } from "@/content/product-pages";
 import { products } from "@/content/products";
-import { anchors, routes, toPath } from "@/content/routes";
+import { anchors, routes, sectionHref, toPath } from "@/content/routes";
 import { localizePath } from "@/i18n/config";
 import { getMessages } from "@/i18n/server";
 import { formatQuantity, type Locale } from "@/lib/format";
@@ -69,10 +70,12 @@ export function ProductPageView({
   const product = products[page.id];
   const path = localizePath(toPath(page.slug), locale);
   const heroId = "product-hero";
-  const variableSection = page.composition
+  const variableSection = page.inside
+    ? { id: anchors.inside, label: t.nav.inside }
+    : page.composition
     ? { id: anchors.composition, label: t.nav.composition }
     : { id: anchors.scaling, label: t.nav.scaling };
-  const navItems = page.composition
+  const navItems = page.composition || page.inside
     ? [
         { id: anchors.advantages, label: t.nav.advantages },
         variableSection,
@@ -116,9 +119,10 @@ export function ProductPageView({
       </p>
     </div>
   );
-  const relatedParts = page.composition?.items.flatMap((item) =>
+  const compositionParts = page.composition?.items.flatMap((item) =>
     item.relatedProduct ? [products[item.relatedProduct]] : [],
   );
+  const relatedProducts = page.related.map((id) => products[id]);
 
   return (
     <>
@@ -132,15 +136,15 @@ export function ProductPageView({
             product.image && !page.mediaPlaceholder
               ? absoluteUrl(product.image.src)
               : undefined,
-          properties: page.specs.map((row) => ({
+          properties: (page.specGroups?.flatMap((group) => group.rows) ?? page.specs).map((row) => ({
             name: row.label[locale],
             value: specValueText(row.value, locale),
           })),
-          related: relatedParts?.map((related) => ({
+          related: relatedProducts.map((related) => ({
             name: related.name,
             url: absoluteUrl(localizePath(related.href, locale)),
           })),
-          parts: relatedParts?.map((related) => ({
+          parts: compositionParts?.map((related) => ({
             name: related.name,
             url: absoluteUrl(localizePath(related.href, locale)),
           })),
@@ -152,7 +156,10 @@ export function ProductPageView({
             name: t.home,
             url: absoluteUrl(localizePath(routes.home, locale)),
           },
-          // The catalogue (/svit/) is not built yet: no crumb that leads to a 404.
+          {
+            name: t.catalog,
+            url: absoluteUrl(sectionHref(anchors.products, locale)),
+          },
           { name: product.name, url: absoluteUrl(path) },
         ])}
       />
@@ -173,6 +180,7 @@ export function ProductPageView({
         {page.composition ? (
           <ProductComposition page={page} locale={locale} />
         ) : null}
+        {page.inside ? <ProductInside page={page} locale={locale} /> : null}
         <ProductSpecs page={page} product={product} locale={locale} />
         {page.scaling ? (
           <ProductScaling page={page} name={product.name} locale={locale} />
@@ -192,6 +200,7 @@ export function ProductPageView({
           summary={summary}
           product={page.slug}
           submitLabel={t.consultation.submit}
+          commentPlaceholder={page.consultation.commentPlaceholder?.[locale]}
         />
       </main>
     </>

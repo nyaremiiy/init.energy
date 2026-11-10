@@ -369,6 +369,55 @@ export const faqList: Faq[] = [
       en: "The battery is rated for −10 … +50 °C. In unheated rooms we recommend basic frost protection.",
     },
   },
+  {
+    id: "svit-plus-16000-usable-energy",
+    topic: "products",
+    pages: ["svit-plus-16000"],
+    question: { uk: "Скільки енергії можна реально використати?", en: "How much energy is actually usable?" },
+    answer: { uk: "Номінальна енергія — 16,07 кВт·год, з них 14,5–15,3 кВт·год доступні для використання при глибині розряду 90–95%.", en: "Nominal energy is 16.07 kWh, of which 14.5–15.3 kWh is usable at 90–95% depth of discharge." },
+  },
+  {
+    id: "svit-plus-16000-inverters",
+    topic: "products",
+    pages: ["svit-plus-16000"],
+    question: { uk: "З якими інверторами сумісна SVIT PLUS 16000?", en: "Which inverters are compatible with SVIT PLUS 16000?" },
+    answer: { uk: "Батарея підтримує зв'язок CAN, RS485 і Bluetooth та сумісна з інверторами Deye, Growatt, Victron, Luxpower та іншими.", en: "The battery supports CAN, RS485 and Bluetooth communication and is compatible with Deye, Growatt, Victron, Luxpower and other inverters." },
+  },
+  {
+    id: "svit-plus-16000-lifetime",
+    topic: "warranty",
+    pages: ["svit-plus-16000"],
+    question: { uk: "Скільки прослужить батарея?", en: "How long will the battery last?" },
+    answer: { uk: "6 000–9 000+ циклів при глибині розряду 80–90% — це понад 10 років роботи. Стандартна гарантія — 5 років.", en: "6,000–9,000+ cycles at 80–90% depth of discharge provide over 10 years of service. The standard warranty is 5 years." },
+  },
+  {
+    id: "svit-plus-16000-comparison",
+    topic: "products",
+    pages: ["svit-plus-16000"],
+    question: { uk: "Чим SVIT PLUS 16000 відрізняється від SVIT PLUS 5000?", en: "How does SVIT PLUS 16000 differ from SVIT PLUS 5000?" },
+    answer: { uk: "SVIT PLUS 16000 — це 16,07 кВт·год в одному корпусі. SVIT PLUS 5000 — модуль на 5,12 кВт·год, який нарощують паралельно до 16 модулів.", en: "SVIT PLUS 16000 provides 16.07 kWh in one enclosure. SVIT PLUS 5000 is a 5.12 kWh module that can scale in parallel to 16 modules." },
+  },
+  {
+    id: "svit-plus-16000-cold",
+    topic: "products",
+    pages: ["svit-plus-16000"],
+    question: { uk: "Чи можна встановити батарею в неопалюваному приміщенні?", en: "Can the battery be installed in an unheated room?" },
+    answer: { uk: "Розряд можливий від −20 °C, а заряд — від 0 °C. Для холодних приміщень доступний підігрів як опція за доплату.", en: "Discharge is possible from −20 °C, while charging starts at 0 °C. Optional paid heating is available for cold rooms." },
+  },
+  {
+    id: "svit-plus-16000-protections",
+    topic: "products",
+    pages: ["svit-plus-16000"],
+    question: { uk: "Які захисти має BMS?", en: "Which protections does the BMS provide?" },
+    answer: { uk: "BMS 16S захищає від перезаряду, глибокого розряду, перевантаження, короткого замикання й перегріву та активно балансує комірки струмом 1–3 А.", en: "The 16S BMS protects against overcharge, deep discharge, overload, short circuit and overheating, while actively balancing cells at 1–3 A." },
+  },
+  {
+    id: "svit-plus-16000-size",
+    topic: "products",
+    pages: ["svit-plus-16000"],
+    question: { uk: "Скільки важить і який розмір?", en: "What are its weight and dimensions?" },
+    answer: { uk: "Вага — 135 кг, габарити — 635 × 630 × 220 мм; охолодження пасивне.", en: "It weighs 135 kg and measures 635 × 630 × 220 mm, with passive cooling." },
+  },
 ];
 
 export function faqForPage(page: FaqPage): Faq[] {

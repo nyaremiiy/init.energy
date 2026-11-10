@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-10 — Сторінка продукту SVIT PLUS 16000
+- **Агент:** Codex
+- **Гілка:** feature/svit-plus-16000-page (статус: готова до merge у develop)
+- **Що зроблено:** Додано серверно-рендерені `/svit-plus-16000/` і `/en/svit-plus-16000/` у спільний шаблон продуктів. Шаблон узагальнено новою data-driven секцією `ProductInside` для комірок/BMS/сумісності та згрупованими характеристиками. Додано hero, переваги, 29 видимих характеристик у п'яти групах, застосування, 7 FAQ, пов'язані продукти, локалізовану форму, навігацію, sitemap і Product/BreadcrumbList/FAQPage JSON-LD. Усі медіа повної сторінки поки є `MediaPlaceholder`.
+- **Файли:** src/content/{products,product-pages,faq,navigation,routes}.ts, src/components/pages/product-page.tsx, src/components/product-page/{product-inside,product-hero,product-specs,product-applications}.tsx, src/components/{forms/LeadForm,sections/LeadSection}.tsx, src/i18n/config.ts, src/lib/seo/schema.ts, messages/{uk,en}.json, docs/ai/{CONTEXT,CHANGELOG}.md
+- **Нотатки / що далі:** TODO(content): затверджені фото й OG 1200×630, уточнення `IP20 – IP44`, точного струму BMS у діапазоні 100–200 А; підтвердження паралельного підключення, монтажу та PDF datasheet. Останні три поля не рендеряться. lint/build і статичні SEO-перевірки проходять.
+
 ## 2026-11-10 — Менші цифри в картках переваг товару
 - **Агент:** Claude Code
 - **Гілка:** fix/advantage-figure-size (статус: змерджено в develop)

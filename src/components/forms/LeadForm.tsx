@@ -30,6 +30,7 @@ type LeadFormProps = {
   /** Product slug sent as a hidden field (product pages). */
   product?: string;
   submitLabel?: string;
+  commentPlaceholder?: string;
   /** Card background: "surface" on white sections, "white" on the light-blue panel. */
   cardTone?: "surface" | "white";
 };
@@ -79,6 +80,7 @@ export function LeadForm({
   defaultObjectType,
   product,
   submitLabel,
+  commentPlaceholder,
   cardTone = "surface",
 }: LeadFormProps) {
   const t = useMessages().leadSection.form;
@@ -261,7 +263,7 @@ export function LeadForm({
             name="comment"
             rows={3}
             autoComplete="off"
-            placeholder={t.commentPlaceholder}
+            placeholder={commentPlaceholder ?? t.commentPlaceholder}
             className={inputClasses({ multiline: true })}
           />
         </label>

@@ -69,6 +69,7 @@ export function ProductSpecs({
               ) : (
                 <MediaPlaceholder
                   caption={format(t.photoPending, { name: product.name })}
+                  className={`${page.specsMediaAspect === "portrait" ? "aspect-4/5" : "aspect-4/3"} w-full rounded-3xl`}
                 />
               )}
               {page.datasheetUrl ? (
@@ -89,24 +90,39 @@ export function ProductSpecs({
             </div>
           </div>
 
-          <dl
+          <div
             aria-label={format(t.specs.tableLabel, { name: product.name })}
-            className="divide-y divide-line border-y border-line lg:col-span-7"
+            className="lg:col-span-7"
           >
-            {page.specs.map((row) => (
-              <div
-                key={row.label[locale]}
-                className="grid grid-cols-1 gap-1 py-4 sm:grid-cols-2 sm:gap-6"
-              >
-                <dt className="text-sm text-ink/70 sm:text-base">
-                  {row.label[locale]}
-                </dt>
-                <dd className="text-base font-medium text-ink">
-                  {specValueText(row.value, locale)}
-                </dd>
+            {page.specGroups ? (
+              <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
+                {page.specGroups.map((group) => (
+                  <section key={group.title[locale]} aria-labelledby={`spec-${group.title.en.replaceAll(" ", "-").toLowerCase()}`}>
+                    <h3 id={`spec-${group.title.en.replaceAll(" ", "-").toLowerCase()}`} className="mb-4 font-heading text-h3-sm font-semibold text-ink sm:text-h3">
+                      {group.title[locale]}
+                    </h3>
+                    <dl className="divide-y divide-line border-y border-line">
+                      {group.rows.map((row) => (
+                        <div key={row.label[locale]} className="flex flex-col gap-1 py-4">
+                          <dt className="text-sm text-ink/70">{row.label[locale]}</dt>
+                          <dd className="text-base font-medium text-ink">{specValueText(row.value, locale)}</dd>
+                        </div>
+                      ))}
+                    </dl>
+                  </section>
+                ))}
               </div>
-            ))}
-          </dl>
+            ) : (
+              <dl className="divide-y divide-line border-y border-line">
+                {page.specs.map((row) => (
+                  <div key={row.label[locale]} className="grid grid-cols-1 gap-1 py-4 sm:grid-cols-2 sm:gap-6">
+                    <dt className="text-sm text-ink/70 sm:text-base">{row.label[locale]}</dt>
+                    <dd className="text-base font-medium text-ink">{specValueText(row.value, locale)}</dd>
+                  </div>
+                ))}
+              </dl>
+            )}
+          </div>
         </div>
       </Container>
     </Panel>

@@ -15,6 +15,7 @@ export type NavEntry = {
 type FooterLinkLabels = {
   advantages: string;
   composition: string;
+  inside: string;
   specs: string;
   scaling: string;
   applications: string;
@@ -64,11 +65,13 @@ for (const page of productPages) {
   const productNavigation = (locale: Locale): NavEntry[] => {
     const localizedPath = localizePath(path, locale);
     const anchor = (id: string) => `${localizedPath}#${id}`;
-    const variableSection: NavEntry = page.composition
+    const variableSection: NavEntry = page.inside
+      ? { href: anchor(anchors.inside), labelKey: "inside" }
+      : page.composition
       ? { href: anchor(anchors.composition), labelKey: "composition" }
       : { href: anchor(anchors.scaling), labelKey: "scaling" };
 
-    return page.composition
+    return page.composition || page.inside
       ? [
           { href: anchor(anchors.advantages), labelKey: "advantages" },
           variableSection,
