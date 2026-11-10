@@ -50,7 +50,8 @@
     "notStated": "—",
     "tablist": "Battery models",
     "details": "More about {name}",
-    "compareAll": "Compare all models"
+    "compareAll": "Compare all models",
+    "capacityFrom": "from"
   },
   "trust": {
     "eyebrow": "About us",

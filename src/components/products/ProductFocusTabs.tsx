@@ -2,15 +2,15 @@
 
 import { ArrowUpRight } from "lucide-react";
 import { useReducedMotion } from "motion/react";
-import Image from "next/image";
 import { type KeyboardEvent, useEffect, useId, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { chipClasses } from "@/components/ui/chip-styles";
 import { CardLabel } from "@/components/ui/card-label";
-import { MediaPlaceholder } from "@/components/ui/media-placeholder";
 import { segmentIcons, type SegmentIconId } from "@/content/segments";
 import { trackEvent } from "@/lib/analytics";
+
+import { CapacityCard, type CapacityCardProps } from "./CapacityCard";
 
 /** How long each product stays in focus before the next one, ms. */
 const AUTO_ADVANCE_MS = 6000;
@@ -23,10 +23,9 @@ export type FocusProduct = {
   segmentIcon: SegmentIconId;
   description: string;
   specs: { label: string; value: string }[];
-  image?: { src: string; alt: string; width: number; height: number };
+  capacityCard: CapacityCardProps;
   detailsLabel: string;
   specsLabel: string;
-  photoPending: string;
 };
 
 type ProductFocusTabsProps = {
@@ -53,6 +52,7 @@ export function ProductFocusTabs({
 }: ProductFocusTabsProps) {
   const baseId = useId();
   const rootRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const [active, setActive] = useState(defaultIndex);
   // null until the visitor picks a tab; reduced motion starts paused, others on auto.
@@ -89,6 +89,23 @@ export function ProductFocusTabs({
     return () => document.removeEventListener("visibilitychange", onChange);
   }, []);
 
+  // Mobile: tabs scroll sideways — keep the active one in view without moving the page.
+  useEffect(() => {
+    const list = listRef.current;
+    const tab = tabRefs.current[active];
+    if (!list || !tab || list.scrollWidth <= list.clientWidth) return;
+    const left = tab.offsetLeft - list.offsetLeft;
+    if (
+      left < list.scrollLeft ||
+      left + tab.offsetWidth > list.scrollLeft + list.clientWidth
+    ) {
+      list.scrollTo({
+        left,
+        behavior: prefersReducedMotion ? "auto" : "smooth",
+      });
+    }
+  }, [active, prefersReducedMotion]);
+
   function select(index: number, moveFocus: boolean) {
     setActive(index);
     setMode("stopped");
@@ -124,9 +141,10 @@ export function ProductFocusTabs({
     >
       <div>
         <div
+          ref={listRef}
           role="tablist"
           aria-label={labels.tablist}
-          className="flex flex-wrap gap-2"
+          className="scrollbar-none -mx-2.5 flex snap-x gap-2 overflow-x-auto px-2.5 py-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0"
         >
           {products.map((product, index) => {
             const selected = index === active;
@@ -145,7 +163,7 @@ export function ProductFocusTabs({
                 tabIndex={selected ? 0 : -1}
                 onClick={() => select(index, false)}
                 onKeyDown={onTabKeyDown}
-                className={`relative overflow-hidden ${chipClasses({ selected, tone: "dark" })}`}
+                className={`relative snap-start overflow-hidden ${chipClasses({ selected, tone: "tint" })}`}
               >
                 {product.name}
                 {/* Invisible timer: its animation end advances to the next tab. */}
@@ -172,7 +190,6 @@ export function ProductFocusTabs({
       <div className="grid grid-cols-1">
         {products.map((product, index) => {
           const selected = index === active;
-          const eager = selected || index === next;
 
           return (
             <div
@@ -182,58 +199,39 @@ export function ProductFocusTabs({
               aria-labelledby={`${baseId}-tab-${index}`}
               tabIndex={selected ? 0 : -1}
               inert={!selected}
-              className={`col-start-1 row-start-1 grid min-w-0 grid-cols-1 items-center gap-8 rounded-3xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white lg:grid-cols-2 lg:gap-16 ${
+              className={`col-start-1 row-start-1 grid min-w-0 grid-cols-1 items-center gap-8 rounded-3xl bg-white p-card-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink lg:grid-cols-12 lg:gap-12 lg:p-card ${
                 selected ? "motion-safe:animate-enter" : "invisible"
               }`}
             >
-              {product.image ? (
-                <div className="relative aspect-square overflow-hidden rounded-3xl bg-white/6">
-                  <Image
-                    src={product.image.src}
-                    alt={product.image.alt}
-                    fill
-                    // Product photos are already optimized AVIF: serve the file as is, without
-                    // Next re-encoding (which costs quality).
-                    unoptimized
-                    loading={eager ? "eager" : "lazy"}
-                    sizes="(min-width: 1440px) 640px, (min-width: 1024px) 45vw, 100vw"
-                    className="object-cover"
-                  />
-                </div>
-              ) : (
-                <MediaPlaceholder
-                  tone="dark"
-                  caption={product.photoPending}
-                  className="aspect-square w-full rounded-3xl"
-                />
-              )}
+              <div className="min-w-0 lg:col-span-5">
+                <CapacityCard {...product.capacityCard} />
+              </div>
 
-              <div className="flex flex-col items-start gap-6">
+              <div className="flex min-w-0 flex-col items-start gap-6 lg:col-span-7">
                 <CardLabel
-                  tone="dark"
+                  tone="light"
                   icon={segmentIcons[product.segmentIcon]}
-                  className="border-white text-white"
                 >
                   {product.segment}
                 </CardLabel>
-                <h3 className="font-heading text-hero-sm font-semibold tracking-tight text-white md:text-hero-md lg:text-hero">
+                <h3 className="font-heading text-h2-sm font-semibold tracking-tight text-heading lg:text-h2-md">
                   {product.name}
                 </h3>
-                <p className="text-base leading-relaxed text-white/75 sm:text-lg">
+                <p className="text-base leading-relaxed text-ink/70 sm:text-lg">
                   {product.description}
                 </p>
 
                 <dl
                   aria-label={product.specsLabel}
-                  className="grid w-full grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-1 2xl:grid-cols-3"
+                  className="grid w-full grid-cols-1 gap-4 md:grid-cols-3"
                 >
                   {product.specs.map((spec) => (
                     <div
                       key={spec.label}
-                      className="flex flex-col-reverse gap-1 border-t border-white/16 pt-4"
+                      className="flex min-w-0 flex-col-reverse gap-1 border-t border-line pt-4"
                     >
-                      <dt className="text-sm text-white/75">{spec.label}</dt>
-                      <dd className="font-heading text-stat-sm font-medium whitespace-nowrap text-white sm:text-stat">
+                      <dt className="text-sm text-ink/70">{spec.label}</dt>
+                      <dd className="font-heading text-stat-sm font-medium whitespace-nowrap text-ink">
                         {spec.value}
                       </dd>
                     </div>
@@ -243,11 +241,12 @@ export function ProductFocusTabs({
                 <div className="flex flex-wrap gap-3">
                   <Button
                     href={product.href}
+                    variant="dark"
                     icon={<ArrowUpRight aria-hidden className="size-4.5" />}
                   >
                     {product.detailsLabel}
                   </Button>
-                  <Button href={compareHref} variant="secondary">
+                  <Button href={compareHref} variant="outline-light">
                     {labels.compare}
                   </Button>
                 </div>

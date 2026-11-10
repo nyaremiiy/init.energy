@@ -50,7 +50,8 @@
     "notStated": "—",
     "tablist": "Моделі накопичувачів",
     "details": "Детальніше про {name}",
-    "compareAll": "Порівняти всі моделі"
+    "compareAll": "Порівняти всі моделі",
+    "capacityFrom": "від"
   },
   "trust": {
     "eyebrow": "Про компанію",

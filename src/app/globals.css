@@ -17,6 +17,12 @@
   --color-navy: rgb(8 18 54);
   /* Light blue panel background (calculator section). */
   --color-sky: rgb(228 238 251);
+  /*
+   * Accent: ONLY capacity indicators, scales and graphics — never text or buttons.
+   * accent-strong is the darker end of the cell gradient.
+   */
+  --color-accent: #2e6bff;
+  --color-accent-strong: #1a3fcc;
 
   /* Vertical rhythm: space between home sections (mobile / lg) and header → content. */
   /*
@@ -317,4 +323,13 @@ button:not(:disabled) {
   to {
     transform: scaleX(1);
   }
+}
+
+/* Soft accent glow in a card corner (decorative, aria-hidden). */
+.glow-accent {
+  background: radial-gradient(
+    circle at 100% 0%,
+    color-mix(in srgb, var(--color-accent) 22%, transparent) 0%,
+    transparent 60%
+  );
 }
