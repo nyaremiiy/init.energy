@@ -155,12 +155,12 @@ export const productList: Product[] = [
       slug: "svit-home",
       meta: {
         title: {
-          uk: "SVIT HOME — резервне живлення 6,2 кВт, 5,12 кВт·год",
+          uk: "SVIT HOME — комплект резервного живлення 6,2 кВт, 5,12 кВт·год",
           en: "SVIT HOME — 6.2 kW, 5.12 kWh backup power kit",
         },
         description: {
-          uk: "SVIT HOME — готовий комплект резервного живлення: гібридний інвертор VICTOR 6,2 кВт, батарея LiFePO₄ 5,12 кВт·год і стійка на ніжках для квартир, будинків, ОСББ та підприємств.",
-          en: "SVIT HOME is a ready backup power kit with a 6.2 kW VICTOR hybrid inverter, a 5.12 kWh LiFePO₄ battery and a rack on legs for apartments, houses, housing associations and businesses.",
+          uk: "Готовий комплект резервного живлення: гібридний інвертор VICTOR 6,2 кВт і батарея LiFePO₄ 5,12 кВт·год. Для квартири, будинку, ОСББ і бізнесу.",
+          en: "A ready backup power kit: a 6.2 kW VICTOR hybrid inverter and a 5.12 kWh LiFePO₄ battery. For apartments, houses, housing associations and businesses.",
         },
       },
       ogImage: "/images/og/svit-home.jpg",

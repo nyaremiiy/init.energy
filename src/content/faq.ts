@@ -34,14 +34,14 @@ export const faqList: Faq[] = [
   {
     id: "svit-home-runtime",
     topic: "backup",
-    pages: ["home", "backup", "products"],
+    pages: ["home", "backup", "products", "svit-home"],
     question: {
       uk: "Скільки працюватиме будинок від SVIT HOME під час відключення?",
       en: "How long will a house run on SVIT HOME during an outage?",
     },
     answer: {
-      uk: "Залежить від навантаження. SVIT HOME має ємність 5,12 кВт·год: якщо одночасно працюють котел, холодильник, світло й роутер — приблизно 0,5 кВт, — заряду вистачить на 9–10 годин. Точний час для вашого будинку покаже калькулятор вище.",
-      en: "It depends on the load. SVIT HOME stores 5.12 kWh: with a boiler, fridge, lights and router running together — about 0.5 kW — a full charge lasts 9–10 hours. The calculator above shows the exact time for your house.",
+      uk: "Залежить від навантаження. SVIT HOME має ємність 5,12 кВт·год: якщо одночасно працюють котел, холодильник, світло й роутер — приблизно 0,5 кВт, — заряду вистачить на 9–10 годин. Точний час під ваше навантаження розрахує інженер INIT ENERGY.",
+      en: "It depends on the load. SVIT HOME stores 5.12 kWh: with a boiler, fridge, lights and router running together — about 0.5 kW — a full charge lasts 9–10 hours. An INIT ENERGY engineer will calculate the exact time for your load.",
     },
   },
   {
@@ -250,6 +250,32 @@ export const faqList: Faq[] = [
     answer: {
       uk: "Залежить від навантаження: 5,12 кВт·год при 0,5 кВт (котел, холодильник, світло й роутер) — приблизно 9–10 годин. Для довшого резерву модулі з'єднують паралельно — до 16 штук, до 81 кВт·год.",
       en: "It depends on the load: 5.12 kWh at 0.5 kW (boiler, fridge, lights and router) lasts about 9–10 hours. For longer backup, connect modules in parallel — up to 16, up to 81 kWh.",
+    },
+  },
+  {
+    id: "svit-home-inverter",
+    topic: "products",
+    pages: ["svit-home"],
+    question: {
+      uk: "Який інвертор і яка батарея входять у SVIT HOME?",
+      en: "Which inverter and battery come with SVIT HOME?",
+    },
+    answer: {
+      uk: "Гібридний інвертор VICTOR NM-ECO-6.2 kW PLUS (6,2 кВт, 48 В, контролер заряду 120 А, режим UPS) і батарея SVIT PLUS 5000 LiFePO₄ (48 В, 100 Аг, 5,12 кВт·год, понад 10 000 циклів). Обидва змонтовані на металевій стійці на ніжках.",
+      en: "A VICTOR NM-ECO-6.2 kW PLUS hybrid inverter (6.2 kW, 48 V, 120 A charge controller, UPS mode) and an SVIT PLUS 5000 LiFePO₄ battery (48 V, 100 Ah, 5.12 kWh, over 10,000 cycles), both on a metal rack on legs.",
+    },
+  },
+  {
+    id: "svit-home-vs-svit-plus-5000",
+    topic: "products",
+    pages: ["svit-home"],
+    question: {
+      uk: "Чим SVIT HOME відрізняється від SVIT PLUS 5000?",
+      en: "How is SVIT HOME different from SVIT PLUS 5000?",
+    },
+    answer: {
+      uk: "SVIT PLUS 5000 — це лише батарея, до якої потрібен окремий інвертор. SVIT HOME — готовий комплект: та сама батарея SVIT PLUS 5000, гібридний інвертор VICTOR 6,2 кВт і стійка, зібрані й узгоджені на виробництві INIT ENERGY.",
+      en: "SVIT PLUS 5000 is the battery alone and needs a separate inverter. SVIT HOME is a ready kit: the same SVIT PLUS 5000 battery, a 6.2 kW VICTOR hybrid inverter and a rack, assembled and matched at INIT ENERGY.",
     },
   },
   {
