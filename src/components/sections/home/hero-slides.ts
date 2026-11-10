@@ -161,7 +161,7 @@ const slides: SlideSource[] = [
 const sesSlides: SlideSource[] = [
   {
     id: "ses-title",
-    image: generalHeroImage,
+    image: solarHeroImage,
     label: {
       uk: "INIT ENERGY — сонячні електростанції",
       en: "INIT ENERGY — solar power plants",

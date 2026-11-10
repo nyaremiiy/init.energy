@@ -99,6 +99,13 @@
 - **Файли:** src/i18n/config.ts, src/components/layout/header/header-data.ts, src/content/navigation.ts, src/components/product-page/product-applications.tsx, src/components/calculator/QuickCalculator.tsx, docs/ai/CHANGELOG.md
 - **Нотатки / що далі:** англійська є для головної, SVIT PLUS 5000, SVIT HOME і SVIT PLUS 16000. Сторінок /cec/, /svit/, /rishennya/…, /svit-600/, /bess/ немає в збірці: посилання на них ведуть на українські адреси (і 404). Потрібне рішення власника: прибрати їх з меню або створити сторінки.
 
+## 2026-11-10 — Фото першого слайда СЕС
+- **Агент:** Claude Code
+- **Гілка:** fix/ses-first-slide-photo (статус: змерджено в develop)
+- **Що зроблено:** на першому слайді сторінки СЕС (/cec/) стоїть фото з другого слайда (сонячні панелі, набір 02) замість загального фото 01.
+- **Файли:** src/components/sections/home/hero-slides.ts, docs/ai/CHANGELOG.md
+- **Нотатки / що далі:** другий слайд має те саме фото; коли прийдуть три фото з панелями, розвести їх по слайдах.
+
 ## 2026-11-10 — Коротше меню шапки на /cec/
 - **Агент:** Claude Code
 - **Гілка:** fix/cec-header-main-links (статус: змерджено в develop)
