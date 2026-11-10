@@ -100,7 +100,7 @@ export function ProductAdvantages({
                     </CardLabel>
                     <p
                       aria-hidden
-                      className="font-heading text-number-sm font-light whitespace-nowrap lg:text-number"
+                      className="font-heading text-hero-sm font-light whitespace-nowrap lg:text-number-sm"
                     >
                       {item.figure[locale]}
                     </p>
