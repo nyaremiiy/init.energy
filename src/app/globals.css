@@ -23,6 +23,8 @@
    */
   --color-accent: #2e6bff;
   --color-accent-strong: #1a3fcc;
+  /* Success state (toast icon only): a muted green, not for text or buttons. */
+  --color-success: #15803d;
 
   /* Vertical rhythm: space between home sections (mobile / lg) and header → content. */
   /*
