@@ -1,13 +1,12 @@
 "use client";
 
-import { useEffect, useMemo, useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import { useReducedMotion } from "motion/react";
 
 import { HeroContentSlider } from "./hero-content-slider";
 import { HeroMediaSlider } from "./hero-media-slider";
-import { useLocale } from "@/i18n/client";
 
-import { getHeroSlides, heroSlideCount } from "./hero-slides";
+import type { HeroSlide } from "./hero-slides";
 import {
   heroMediaTransitionDuration,
   heroSlideInterval,
@@ -18,7 +17,9 @@ type SliderState = {
   previousIndex: number | null;
 };
 
-type SliderAction = { type: "next" } | { type: "clearPrevious" };
+type SliderAction =
+  | { type: "next"; count: number }
+  | { type: "clearPrevious" };
 
 function sliderReducer(state: SliderState, action: SliderAction): SliderState {
   if (action.type === "clearPrevious") {
@@ -26,19 +27,18 @@ function sliderReducer(state: SliderState, action: SliderAction): SliderState {
   }
 
   return {
-    activeIndex: (state.activeIndex + 1) % heroSlideCount,
+    activeIndex: (state.activeIndex + 1) % action.count,
     previousIndex: state.activeIndex,
   };
 }
 
-export function HeroSlider() {
+export function HeroSlider({ slides }: { slides: HeroSlide[] }) {
   const [{ activeIndex, previousIndex }, dispatch] = useReducer(sliderReducer, {
     activeIndex: 0,
     previousIndex: null,
   });
   const prefersReducedMotion = useReducedMotion();
-  const locale = useLocale();
-  const heroSlides = useMemo(() => getHeroSlides(locale), [locale]);
+  const heroSlides = slides;
   const activeSlide = heroSlides[activeIndex];
   const previousSlide =
     previousIndex === null ? undefined : heroSlides[previousIndex];
@@ -53,12 +53,12 @@ export function HeroSlider() {
     }
 
     const intervalId = window.setInterval(
-      () => dispatch({ type: "next" }),
+      () => dispatch({ type: "next", count: slides.length }),
       heroSlideInterval,
     );
 
     return () => window.clearInterval(intervalId);
-  }, [prefersReducedMotion]);
+  }, [prefersReducedMotion, slides.length]);
 
   useEffect(() => {
     if (previousIndex === null) {

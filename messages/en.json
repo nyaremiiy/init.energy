@@ -307,10 +307,19 @@
       "cellsLabel": "Battery cells",
       "protectionsLabel": "BMS protections"
     },
-    "configurations": { "eyebrow": "Configurations", "scaling": "Scaling without stopping the system, kWh" },
-    "portable": { "eyebrow": "Power and charging" },
-    "runtime": { "eyebrow": "Runtime" },
-    "process": { "eyebrow": "Delivery process" },
+    "configurations": {
+      "eyebrow": "Configurations",
+      "scaling": "Scaling without stopping the system, kWh"
+    },
+    "portable": {
+      "eyebrow": "Power and charging"
+    },
+    "runtime": {
+      "eyebrow": "Runtime"
+    },
+    "process": {
+      "eyebrow": "Delivery process"
+    },
     "specs": {
       "eyebrow": "Specifications",
       "title": "{name} technical specifications",
@@ -393,6 +402,39 @@
     "scroll": {
       "label": "Scroll to the next section",
       "hint": "Scroll down"
+    }
+  },
+  "ses": {
+    "meta": {
+      "title": "Solar power plants turnkey for homes and businesses",
+      "description": "Turnkey solar power plants for homes and businesses: design, installation and service. Over 30 years in the energy sector, 20+ projects, 1 MW+ installed."
+    },
+    "home": "Home",
+    "segments": {
+      "eyebrow": "For whom",
+      "title": "Solar plants for homes and businesses",
+      "lead": "One technology at different scales: from a plant for a private house to a system for a business.",
+      "cta": "Learn more",
+      "checklist": "What is included",
+      "photoPending": "Photo to be added"
+    },
+    "types": {
+      "eyebrow": "Plant types",
+      "title": "Grid-tied, hybrid or off-grid",
+      "lead": "The difference is whether the plant works during outages and whether it needs a battery.",
+      "caption": "Comparison of solar power plant types",
+      "feature": "Feature",
+      "recommended": "Recommended"
+    },
+    "hybrid": {
+      "eyebrow": "How it works",
+      "title": "How a hybrid plant works",
+      "lead": "Panels, inverter and battery work together, and the house draws power from whichever source is available."
+    },
+    "steps": {
+      "eyebrow": "Stages",
+      "title": "How we build a solar plant",
+      "lead": "From consumption estimate to service — five stages."
     }
   }
 }

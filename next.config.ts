@@ -10,6 +10,9 @@ const nextConfig: NextConfig = {
     // 75 — default; 90 — large full-width photos where detail matters.
     qualities: [75, 90],
   },
+  async redirects() {
+    return [{ source: "/cec/", destination: "/ses/", permanent: true }];
+  },
   turbopack: {
     rules: {
       "*.css": {
