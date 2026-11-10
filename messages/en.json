@@ -250,7 +250,11 @@
       "runtime": "Runtime",
       "specs": "Specifications",
       "scaling": "Scaling",
-      "applications": "Applications"
+      "applications": "Applications",
+      "sesSegments": "Solar for homes and business",
+      "sesTypes": "Plant types",
+      "sesHybrid": "Hybrid plant",
+      "sesSteps": "Stages"
     },
     "newsletter": {
       "title": "Newsletter",
