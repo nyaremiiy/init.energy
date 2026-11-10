@@ -18,7 +18,8 @@ import { productPageBySlug, productPages } from "@/content/product-pages";
 import { products } from "@/content/products";
 import { anchors, routes, toPath } from "@/content/routes";
 import { formatQuantity, type Locale } from "@/lib/format";
-import { format, messages } from "@/lib/messages";
+import { getMessages, setRequestLocale } from "@/i18n/server";
+import { format } from "@/lib/messages";
 import { absoluteUrl, buildMetadata } from "@/lib/seo/metadata";
 import { breadcrumbSchema, productSchema } from "@/lib/seo/schema";
 
@@ -47,11 +48,12 @@ export async function generateMetadata(
 }
 
 export default async function ProductRoute(props: PageProps<"/[product]">) {
+  setRequestLocale("uk");
   const { product: slug } = await props.params;
   const page = productPageBySlug(slug);
   if (!page) notFound();
 
-  const t = messages.productPage;
+  const t = getMessages().productPage;
   const product = products[page.id];
   const path = toPath(page.slug);
   const heroId = "product-hero";

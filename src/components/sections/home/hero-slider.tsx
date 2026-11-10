@@ -1,11 +1,13 @@
 "use client";
 
-import { useEffect, useReducer } from "react";
+import { useEffect, useMemo, useReducer } from "react";
 import { useReducedMotion } from "motion/react";
 
 import { HeroContentSlider } from "./hero-content-slider";
 import { HeroMediaSlider } from "./hero-media-slider";
-import { heroSlides } from "./hero-slides";
+import { useLocale } from "@/i18n/client";
+
+import { getHeroSlides, heroSlideCount } from "./hero-slides";
 import {
   heroMediaTransitionDuration,
   heroSlideInterval,
@@ -24,7 +26,7 @@ function sliderReducer(state: SliderState, action: SliderAction): SliderState {
   }
 
   return {
-    activeIndex: (state.activeIndex + 1) % heroSlides.length,
+    activeIndex: (state.activeIndex + 1) % heroSlideCount,
     previousIndex: state.activeIndex,
   };
 }
@@ -35,6 +37,8 @@ export function HeroSlider() {
     previousIndex: null,
   });
   const prefersReducedMotion = useReducedMotion();
+  const locale = useLocale();
+  const heroSlides = useMemo(() => getHeroSlides(locale), [locale]);
   const activeSlide = heroSlides[activeIndex];
   const previousSlide =
     previousIndex === null ? undefined : heroSlides[previousIndex];

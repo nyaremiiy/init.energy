@@ -16,7 +16,8 @@ import type { ProductPage } from "@/content/product-pages";
 import type { Product } from "@/content/products";
 import { anchors, routes, toPath } from "@/content/routes";
 import type { Locale } from "@/lib/format";
-import { format, messages } from "@/lib/messages";
+import { getMessages } from "@/i18n/server";
+import { format } from "@/lib/messages";
 
 import { specValueText } from "./spec-value";
 
@@ -28,6 +29,7 @@ type ProductHeroProps = {
 
 /** Dark panel under the site header: breadcrumbs, H1, key specs, CTAs, photo. */
 export function ProductHero({ page, product, locale }: ProductHeroProps) {
+  const messages = getMessages();
   const t = messages.productPage;
   const path = toPath(page.slug);
 
@@ -107,7 +109,7 @@ export function ProductHero({ page, product, locale }: ProductHeroProps) {
             <div className="relative aspect-square overflow-hidden rounded-3xl bg-white/6">
               <Image
                 src={product.image.src}
-                alt={product.image.alt}
+                alt={product.image.alt[locale]}
                 fill
                 priority
                 unoptimized

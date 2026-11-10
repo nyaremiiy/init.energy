@@ -1,8 +1,11 @@
+"use client";
+
 import {
   socialLinks,
   type SocialNetwork,
 } from "@/components/layout/header/header-data";
-import { format, messages } from "@/lib/messages";
+import { useMessages } from "@/i18n/client";
+import { format } from "@/lib/messages";
 
 import {
   FacebookIcon,
@@ -39,7 +42,7 @@ export function SocialLinks({
   iconClassName,
   className,
 }: SocialLinksProps) {
-  const t = messages.footer;
+  const t = useMessages().footer;
 
   return (
     <ul

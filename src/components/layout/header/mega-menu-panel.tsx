@@ -1,10 +1,14 @@
+"use client";
+
 import { ArrowUpRight } from "lucide-react";
 
 import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
 import { Eyebrow } from "@/components/ui/eyebrow";
 
-import { navCta, type NavGroup } from "./header-data";
+import { useLocale } from "@/i18n/client";
+
+import { getNavCta, type NavGroup } from "./header-data";
 import { NavLink } from "./nav-link";
 
 type MegaMenuPanelProps = {
@@ -13,6 +17,7 @@ type MegaMenuPanelProps = {
 };
 
 export function MegaMenuPanel({ group, open }: MegaMenuPanelProps) {
+  const navCta = getNavCta(useLocale());
   return (
     <div
       className={`absolute inset-x-0 top-full transition duration-200 ${open ? "visible opacity-100" : "invisible opacity-0"}`}

@@ -9,14 +9,12 @@ import { SectionHeader } from "@/components/ui/section-header";
 import { SectionWatermark } from "@/components/ui/section-watermark";
 import { offices } from "@/content/company";
 import { faqForPage, faqTopics, type FaqPage } from "@/content/faq";
-import { anchors, routes } from "@/content/routes";
+import { anchors, sectionHref } from "@/content/routes";
 import { formatPhone } from "@/lib/format";
-import { messages } from "@/lib/messages";
+import { getLocale, getMessages } from "@/i18n/server";
 import { faqPageSchema } from "@/lib/seo/schema";
 
 const titleId = "faq-title";
-// Ukrainian only for now; pass the locale once i18n routing lands.
-const locale = "uk";
 
 type FaqSectionProps = {
   /** Which entries of content/faq.ts to show (home page or a product slug). */
@@ -37,6 +35,8 @@ export function FaqSection({
   lead,
   filter = true,
 }: FaqSectionProps) {
+  const messages = getMessages();
+  const locale = getLocale();
   const t = messages.faq;
   const faqs = faqForPage(page);
   const phone = offices[0].phone;
@@ -77,7 +77,7 @@ export function FaqSection({
                 <Phone aria-hidden className="size-4.5" />
                 {formatPhone(phone.display)}
               </a>
-              <ArrowLink href={routes.sections.contacts}>
+              <ArrowLink href={sectionHref(anchors.contacts, locale)}>
                 {t.help.link}
               </ArrowLink>
             </div>

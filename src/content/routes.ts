@@ -1,3 +1,5 @@
+import { localizePath, type Locale } from "@/i18n/config";
+
 // Single source of URL slugs. Build paths with `toPath`, never hardcode them in JSX.
 // Page structure mirrors https://init.energy (see docs/ai/CONTEXT.md).
 export const slugs = {
@@ -98,3 +100,11 @@ export const routes = {
     contacts: toAnchor(anchors.contacts),
   },
 } as const;
+
+/**
+ * A home-page anchor in a locale: "/#contacts" on Ukrainian pages,
+ * "/en/#contacts" on English ones.
+ */
+export function sectionHref(anchor: string, locale: Locale): string {
+  return localizePath(toAnchor(anchor), locale);
+}

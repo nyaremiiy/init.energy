@@ -8,7 +8,8 @@ import { SegmentCard } from "@/components/ui/segment-card";
 import type { ApplicationIcon, ProductPage } from "@/content/product-pages";
 import { anchors } from "@/content/routes";
 import type { Locale } from "@/lib/format";
-import { format, messages } from "@/lib/messages";
+import { getMessages } from "@/i18n/server";
+import { format } from "@/lib/messages";
 
 const icons: Record<ApplicationIcon, typeof House> = {
   house: House,
@@ -30,6 +31,7 @@ export function ProductApplications({
   name: string;
   locale: Locale;
 }) {
+  const messages = getMessages();
   const t = messages.productPage.applications;
 
   return (

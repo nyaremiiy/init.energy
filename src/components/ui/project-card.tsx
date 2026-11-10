@@ -6,7 +6,8 @@ import { products } from "@/content/products";
 import { slugs, toPath } from "@/content/routes";
 import { formatQuantity } from "@/lib/format";
 import { segmentIcons } from "@/content/segments";
-import { format, messages } from "@/lib/messages";
+import { getLocale, getMessages } from "@/i18n/server";
+import { format } from "@/lib/messages";
 
 import { CardLabel } from "./card-label";
 import { Heading } from "./heading";
@@ -24,13 +25,15 @@ type ProjectCardProps = {
  * no black card.
  */
 export function ProjectCard({ project, variant }: ProjectCardProps) {
+  const messages = getMessages();
+  const locale = getLocale();
   const t = messages.projects;
   const equipment = project.equipment ? products[project.equipment] : undefined;
   const isLarge = variant === "large";
   const hasPhoto = Boolean(project.image);
   const projectHref = toPath(slugs.projects, project.slug);
   // The place lives in the specs (Регіон), not in the heading.
-  const title = project.title;
+  const title = project.title[locale];
 
   const tone = hasPhoto
     ? {
@@ -58,7 +61,10 @@ export function ProjectCard({ project, variant }: ProjectCardProps) {
       ? [
           {
             label: t.fields.power,
-            value: formatQuantity({ value: project.powerKw, unit: "kW" }),
+            value: formatQuantity(
+              { value: project.powerKw, unit: "kW" },
+              locale,
+            ),
           },
         ]
       : []),
@@ -79,7 +85,7 @@ export function ProjectCard({ project, variant }: ProjectCardProps) {
         ]
       : []),
     ...(isLarge && project.region
-      ? [{ label: t.fields.region, value: project.region }]
+      ? [{ label: t.fields.region, value: project.region[locale] }]
       : []),
     ...(project.year !== undefined
       ? [{ label: t.fields.year, value: String(project.year) }]
@@ -94,7 +100,7 @@ export function ProjectCard({ project, variant }: ProjectCardProps) {
         <>
           <Image
             src={project.image.src}
-            alt={project.image.alt}
+            alt={project.image.alt[locale]}
             fill
             quality={90}
             sizes={

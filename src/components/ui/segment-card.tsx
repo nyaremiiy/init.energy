@@ -123,7 +123,9 @@ export function SegmentCard({
         </div>
 
         <div className="mt-auto pt-10">
-          <p className={`mb-3 font-heading text-eyebrow-sm font-medium tracking-eyebrow uppercase sm:text-eyebrow ${muted}`}>
+          <p
+            className={`mb-3 font-heading text-eyebrow-sm font-medium tracking-eyebrow uppercase sm:text-eyebrow ${muted}`}
+          >
             {showcase.recommendLabel}
           </p>
           <nav aria-label={navLabel}>
@@ -134,9 +136,13 @@ export function SegmentCard({
                     href={link.href}
                     className={`group flex min-w-0 items-center gap-2 py-3 text-base font-medium transition-colors duration-200 ease-tech focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 ${focus}`}
                   >
-                    <span className="min-w-0 flex-1 leading-tight">{link.label}</span>
+                    <span className="min-w-0 flex-1 leading-tight">
+                      {link.label}
+                    </span>
                     {link.spec ? (
-                      <span className={`shrink-0 text-small whitespace-nowrap tabular-nums ${muted}`}>
+                      <span
+                        className={`shrink-0 text-small whitespace-nowrap tabular-nums ${muted}`}
+                      >
                         {link.spec}
                       </span>
                     ) : null}

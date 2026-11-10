@@ -3,11 +3,14 @@
 import { ArrowUpRight } from "lucide-react";
 import { useEffect, useState } from "react";
 
+import { useMessages } from "@/i18n/client";
+
 /** Scroll distance (px) after which the button appears. */
 const SHOW_AFTER_PX = 600;
 
 /** Fixed round button at the bottom-right that scrolls back to the top. */
 export function BackToTop() {
+  const label = useMessages().chrome.backToTop;
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -29,7 +32,7 @@ export function BackToTop() {
   return (
     <button
       type="button"
-      aria-label="Нагору"
+      aria-label={label}
       onClick={scrollToTop}
       tabIndex={visible ? 0 : -1}
       className={`fixed right-5 bottom-20 z-40 inline-flex size-12 items-center justify-center rounded-full bg-ink text-white shadow-soft transition-all duration-200 ease-tech focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink sm:right-8 sm:bottom-24 ${visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-3 opacity-0"}`}

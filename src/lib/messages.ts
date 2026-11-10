@@ -1,8 +1,3 @@
-import uk from "../../messages/uk.json";
-
-// Temporary loader until next-intl is introduced.
-export const messages = uk;
-
-export function format(template: string, values: Record<string, string>) {
-  return template.replace(/\{(\w+)\}/g, (match, key: string) => values[key] ?? match);
-}
+// Messages are per locale: Server Components use getMessages() from
+// "@/i18n/server", Client Components useMessages() from "@/i18n/client".
+export { format } from "@/i18n/messages";

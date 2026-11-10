@@ -13,7 +13,8 @@ import { SectionWatermark } from "@/components/ui/section-watermark";
 import { productList, type ProductId } from "@/content/products";
 import { anchors, routes, toAnchor } from "@/content/routes";
 import { formatQuantity } from "@/lib/format";
-import { format, messages } from "@/lib/messages";
+import { getLocale, getMessages } from "@/i18n/server";
+import { format } from "@/lib/messages";
 
 const titleId = "product-line-title";
 const compareTitleId = "product-line-compare-title";
@@ -22,23 +23,27 @@ const defaultProduct: ProductId = "svitHome";
 
 /** Server section: header, focused-product tabs (client) and the comparison table. */
 export function ProductLine() {
+  const messages = getMessages();
+  const locale = getLocale();
   const t = messages.productLine;
 
   const focusProducts: FocusProduct[] = productList.map((product) => ({
     id: product.id,
     name: product.name,
     href: product.href,
-    segment: product.segment,
+    segment: product.segment[locale],
     segmentIcon: product.segmentIcon,
-    description: product.focusDescription,
+    description: product.focusDescription[locale],
     specs: product.specs.slice(0, 3).map((spec) => ({
       label: messages.specs[spec.key],
       value:
         typeof spec.value === "string"
           ? spec.value
-          : formatQuantity(spec.value),
+          : formatQuantity(spec.value, locale),
     })),
-    image: product.image,
+    image: product.image
+      ? { ...product.image, alt: product.image.alt[locale] }
+      : undefined,
     detailsLabel: format(t.details, { name: product.name }),
     specsLabel: format(t.specsLabel, { name: product.name }),
     photoPending: `${product.name} — ${t.photoPending}`,
@@ -102,9 +107,9 @@ export function ProductLine() {
               id: product.id,
               name: product.name,
               href: product.href,
-              type: product.type,
-              capacity: formatQuantity(product.capacity),
-              audience: product.audience ?? t.notStated,
+              type: product.type[locale],
+              capacity: formatQuantity(product.capacity, locale),
+              audience: product.audience?.[locale] ?? t.notStated,
               linkLabel: format(t.productLink, { name: product.name }),
             }))}
           />

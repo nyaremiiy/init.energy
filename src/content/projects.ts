@@ -1,10 +1,11 @@
+import type { Localized } from "@/i18n/config";
 import type { ProductId } from "./products";
 
 export type ProjectSegment = "apartment" | "house" | "business";
 
 export type ProjectImage = {
   src: string;
-  alt: string;
+  alt: Localized;
   width: number;
   height: number;
 };
@@ -12,11 +13,11 @@ export type ProjectImage = {
 export type Project = {
   slug: string;
   segment: ProjectSegment;
-  title: string;
+  title: Localized;
   /** Omit when only the oblast is known. */
-  city?: string;
+  city?: Localized;
   /** Unknown values are omitted and their rows are hidden on the card. */
-  region?: string;
+  region?: Localized;
   powerKw?: number;
   /** Battery from `products.ts` (equipment cross-link); omit for solar-only plants. */
   equipment?: ProductId;
@@ -41,8 +42,8 @@ export const projectList: Project[] = [
   {
     slug: "reserve-power-system-lviv-region",
     segment: "business",
-    title: "Система резервного живлення",
-    region: "Львівська область",
+    title: { uk: "Система резервного живлення", en: "Backup power system" },
+    region: { uk: "Львівська область", en: "Lviv Oblast" },
     // Owner: 3 racks × 13 SVIT PLUS 5000 modules = 39 × 5,12 ≈ 200 kWh of storage.
     // TODO(content): owner estimated "~180" — confirm whether that is inverter power (kW) or storage (kWh).
     powerKw: 180,
@@ -51,7 +52,10 @@ export const projectList: Project[] = [
     year: 2025,
     image: {
       src: "/images/projects/03.avif",
-      alt: "Технічне приміщення з трьома стійками акумуляторних модулів і гібридними інверторами та розподільчими шафами",
+      alt: {
+        uk: "Технічне приміщення з трьома стійками акумуляторних модулів і гібридними інверторами та розподільчими шафами",
+        en: "Plant room with three racks of battery modules, hybrid inverters and distribution cabinets",
+      },
       width: 1672,
       height: 941,
     },
@@ -61,15 +65,21 @@ export const projectList: Project[] = [
   {
     slug: "ses-brewery-roof-lviv-region",
     segment: "business",
-    title: "СЕС на даху пивоварного заводу",
-    region: "Львівська область",
+    title: {
+      uk: "СЕС на даху пивоварного заводу",
+      en: "Rooftop solar plant at a brewery",
+    },
+    region: { uk: "Львівська область", en: "Lviv Oblast" },
     // TODO(content): owner's estimate "about 200 kW" — confirm power.
     powerKw: 200,
     // PLACEHOLDER (invented at the owner's request): year not confirmed.
     year: 2024,
     image: {
       src: "/images/projects/02.avif",
-      alt: "Сонячні панелі на даху цеху пивоварного заводу у Львівській області",
+      alt: {
+        uk: "Сонячні панелі на даху цеху пивоварного заводу у Львівській області",
+        en: "Solar panels on the roof of a brewery building in Lviv Oblast",
+      },
       width: 1024,
       height: 576,
     },
@@ -79,15 +89,21 @@ export const projectList: Project[] = [
   {
     slug: "ses-outbuilding-roof",
     segment: "house",
-    title: "СЕС на даху господарської будівлі",
+    title: {
+      uk: "СЕС на даху господарської будівлі",
+      en: "Solar plant on an outbuilding roof",
+    },
     // PLACEHOLDER (invented at the owner's request): ~30 panels on the photo ≈ 15 kW;
     // region and year are not confirmed. Replace before removing `draft`.
-    region: "Львівська область",
+    region: { uk: "Львівська область", en: "Lviv Oblast" },
     powerKw: 15,
     year: 2025,
     image: {
       src: "/images/projects/01.jpg",
-      alt: "Монтаж сонячних панелей на даху господарської будівлі",
+      alt: {
+        uk: "Монтаж сонячних панелей на даху господарської будівлі",
+        en: "Installing solar panels on the roof of an outbuilding",
+      },
       width: 1280,
       height: 720,
     },

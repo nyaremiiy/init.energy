@@ -6,9 +6,10 @@ import { Eyebrow } from "@/components/ui/eyebrow";
 import { Logo } from "@/components/ui/logo";
 import { Panel } from "@/components/ui/panel";
 import { SocialLinks } from "@/components/ui/social-links";
-import { siteSections } from "@/content/navigation";
+import { getSiteSections } from "@/content/navigation";
 import { routes } from "@/content/routes";
-import { format, messages } from "@/lib/messages";
+import { getLocale, getMessages } from "@/i18n/server";
+import { format } from "@/lib/messages";
 
 import { FooterColumns } from "./footer-columns";
 import { FooterMark } from "./footer-mark";
@@ -19,6 +20,8 @@ import { NewsletterForm } from "./newsletter-form";
 const year = new Date().getFullYear();
 
 export function Footer() {
+  const messages = getMessages();
+  const locale = getLocale();
   const t = messages.footer;
 
   const brand = (
@@ -46,7 +49,7 @@ export function Footer() {
         {t.sectionsTitle}
       </Eyebrow>
       <ul className="flex flex-col gap-3">
-        {siteSections.map((item) => (
+        {getSiteSections(locale).map((item) => (
           <li key={item.href}>
             <Link href={item.href} className={footerLinkClasses}>
               {t.links[item.labelKey]}

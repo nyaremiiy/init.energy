@@ -6,7 +6,7 @@ import type { ReactNode } from "react";
 
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { pageNavigation } from "@/content/navigation";
-import { messages } from "@/lib/messages";
+import { useMessages } from "@/i18n/client";
 
 import { footerLinkClasses } from "./footer-styles";
 
@@ -27,7 +27,7 @@ export function FooterColumns({
   newsletter,
 }: FooterColumnsProps) {
   const pathname = usePathname();
-  const t = messages.footer;
+  const t = useMessages().footer;
   const pageNav = pageNavigation[pathname] ?? [];
   const hasPageNav = pageNav.length > 0;
 

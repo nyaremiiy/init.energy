@@ -24,6 +24,17 @@ init.energy — вебпроєкт. Призначення та функціон
 - Сторінки продуктів — шаблон `src/app/[product]/page.tsx` (кореневі slug-и, `dynamicParams = false`, лише продукти з `src/content/product-pages.ts`; зараз /svit-plus-5000/). Секції — `src/components/product-page/*` (hero з хлібними крихтами, sticky-навігація сторінкою, переваги, характеристики, масштабування з віджетом, застосування через `SegmentCard`, FAQ, інші накопичувачі, заявка на блакитній панелі з прихованим полем `product`). Метадані — `buildMetadata` (`src/lib/seo/metadata.ts`), JSON-LD Product/BreadcrumbList/FAQPage — `src/lib/seo/schema.ts`, `app/sitemap.ts`. Перевикористовувані: `FaqSection` (`page`, `title`, `lead`, `filter`), `LeadSection` (`panel`, `summary`, `product`, `submitLabel`), `SegmentCard` без `index`, `PillRadio tone="dark"`, `Breadcrumbs`.
 - `Panel` обрізає вміст через `overflow-clip` (не `overflow-hidden`) — так усередині панелей працює `sticky`.
 
+## Мови (i18n)
+
+Рішення власника 2026-11-10: українська — на корені домену без префікса (`init.energy/`), англійська — під `/en/`. Поки англійською є лише головна (`localizedPaths` у `src/i18n/config.ts`); сторінки без англійської версії лишаються українськими, перемикач EN на них неактивний (не посилання), автоматичних редиректів за IP/мовою немає.
+
+- Маршрути: `src/app/(uk)/` (головна, `[product]`) і `src/app/en/` (головна). Одна коренева розкладка (`<html lang="uk">`); англійський вміст обгорнутий у `<div lang="en" class="contents">`. Header/футер/віджети — `SiteChrome` у мовних розкладках.
+- Мова запиту на сервері: `setRequestLocale()` у кожній мовній розкладці й сторінці, далі `getLocale()` / `getMessages()` з `@/i18n/server`. Клієнтські компоненти: `useLocale()` / `useMessages()` з `@/i18n/client` (`LocaleProvider` у `SiteChrome`). Імпорту `messages` з `@/lib/messages` більше немає — там лише `format`.
+- Тексти UI — `messages/uk.json` і `messages/en.json` (тип `Messages = typeof uk`, відсутній ключ у en ламає збірку). Дані в `src/content/*` — поля `Localized` (`{ uk, en }`): продукти, рішення, послуги, офіси, блок довіри, проєкти, FAQ, калькулятор, слайди hero (`getHeroSlides(locale)`), меню (`getNavItems(locale)`).
+- Числа й одиниці: `formatNumber(value, locale)` / `formatQuantity(q, locale)` — мова обов'язкова (UA кома, EN крапка).
+- Посилання на секції головної — `sectionHref(anchor, locale)` (`/#contacts` або `/en/#contacts`); `localizePath(path, locale)` не веде на неіснуючі EN-сторінки.
+- SEO: `buildMetadata({ title, description, path, locale })` — canonical на себе, hreflang `uk` (корінь), `en` (/en/) лише для сторінок з англійською версією, `x-default` → українська; Open Graph `uk_UA` / `en_US`. JSON-LD на головній — Organization (адреси, телефони, соцмережі, areaServed UA) і WebSite. `app/sitemap.ts` (з alternates) і `app/robots.ts`. Серверні дії форм отримують приховане поле `locale` і повертають помилки мовою форми.
+
 ## Структура
 
 ```

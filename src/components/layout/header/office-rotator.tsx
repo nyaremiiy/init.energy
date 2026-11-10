@@ -4,11 +4,13 @@ import { MapPin, Phone } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useState } from "react";
 
+import { useLocale } from "@/i18n/client";
 import { formatPhone } from "@/lib/format";
 
 import { offices, officeRotationInterval } from "./header-data";
 
 export function OfficeRotator() {
+  const locale = useLocale();
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const prefersReducedMotion = useReducedMotion();
@@ -47,7 +49,7 @@ export function OfficeRotator() {
           <span className="inline-flex items-center gap-2">
             <MapPin aria-hidden className="size-3.5 shrink-0" />
             <span>
-              {office.city}, {office.address}
+              {office.city[locale]}, {office.address[locale]}
             </span>
           </span>
           <a

@@ -6,14 +6,15 @@ import { IconButton } from "@/components/ui/icon-button";
 
 import { subscribe } from "@/app/actions/newsletter";
 import { trackEvent } from "@/lib/analytics";
-import { messages } from "@/lib/messages";
+import { useLocale, useMessages } from "@/i18n/client";
 import { validateNewsletter } from "@/lib/newsletter";
 import { inputClasses } from "@/components/ui/input-styles";
 
 type Status = "idle" | "submitting" | "success" | "failure";
 
 export function NewsletterForm() {
-  const t = messages.footer.newsletter;
+  const t = useMessages().footer.newsletter;
+  const locale = useLocale();
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string>();
   const submitting = status === "submitting";
@@ -69,6 +70,7 @@ export function NewsletterForm() {
       onSubmit={handleSubmit}
       aria-busy={submitting}
     >
+      <input type="hidden" name="locale" value={locale} />
       <label htmlFor="footer-newsletter-email" className="sr-only">
         {t.emailLabel}
       </label>

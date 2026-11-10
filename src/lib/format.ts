@@ -1,6 +1,7 @@
-import { messages } from "./messages";
+import type { Locale } from "@/i18n/config";
+import { getMessagesFor } from "@/i18n/messages";
 
-export type Locale = "uk" | "en";
+export type { Locale };
 
 const intlLocales: Record<Locale, string> = {
   uk: "uk-UA",
@@ -16,7 +17,8 @@ export type Quantity = {
   qualifier?: "from" | "upTo" | "plus";
 };
 
-export function formatNumber(value: number, locale: Locale = "uk") {
+/** Locale is required: UA uses a decimal comma, EN a decimal point. */
+export function formatNumber(value: number, locale: Locale) {
   return new Intl.NumberFormat(intlLocales[locale], {
     maximumFractionDigits: 2,
   }).format(value);
@@ -32,9 +34,8 @@ export function formatPhone(value: string) {
   return `+${digits.slice(0, 2)} ${digits.slice(2, 5)} ${digits.slice(5, 8)} ${digits.slice(8, 10)} ${digits.slice(10, 12)}`;
 }
 
-// Ukrainian only for now; pass the locale's messages once i18n lands.
-export function formatQuantity(quantity: Quantity, locale: Locale = "uk") {
-  const { units, quantity: templates } = messages;
+export function formatQuantity(quantity: Quantity, locale: Locale) {
+  const { units, quantity: templates } = getMessagesFor(locale);
   const number = formatNumber(quantity.value, locale);
   const value =
     quantity.qualifier === "plus"
