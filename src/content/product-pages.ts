@@ -36,6 +36,8 @@ export type ProductPage = {
   /** Root-level slug, also used as the lead form's hidden product field. */
   slug: ProductPageSlug;
   meta: { title: Text; description: Text };
+  /** Share image, JPEG 1200×630 (social networks do not show AVIF). */
+  ogImage?: string;
   hero: {
     typeLabel: Text;
     segmentLabel: Text;
@@ -108,14 +110,15 @@ const standaloneProductPages: ProductPage[] = [
   {
     id: "svitPlus5000",
     slug: "svit-plus-5000",
+    ogImage: "/images/og/svit-plus-5000.jpg",
     meta: {
       title: {
         uk: "SVIT PLUS 5000 — батарея LiFePO₄ 5,12 кВт·год",
         en: "SVIT PLUS 5000 — 5.12 kWh LiFePO₄ battery",
       },
       description: {
-        uk: "Батарея LiFePO₄ SVIT PLUS 5000: 5,12 кВт·год (48 В, 100 Аг), 5 кВт, понад 10 000 циклів і до 16 модулів паралельно (81 кВт·год). Гарантія 5 років. Для дому та бізнесу.",
-        en: "SVIT PLUS 5000 LiFePO₄ battery: 5.12 kWh (48 V, 100 Ah), 5 kW, over 10,000 cycles and up to 16 modules in parallel (81 kWh). 5-year warranty. For homes and businesses.",
+        uk: "Батарея SVIT PLUS 5000 LiFePO₄ 48 В на 5,12 кВт·год: понад 10 000 циклів, до 16 модулів паралельно (81 кВт·год), гарантія 5 років. Для дому й бізнесу.",
+        en: "SVIT PLUS 5000 48 V LiFePO₄ battery, 5.12 kWh: over 10,000 cycles, up to 16 modules in parallel (81 kWh), 5-year warranty. For homes and businesses.",
       },
     },
     hero: {

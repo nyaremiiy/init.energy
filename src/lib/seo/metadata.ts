@@ -34,6 +34,8 @@ type BuildMetadataInput = {
   /** Ukrainian path with the trailing slash, e.g. "/svit-plus-5000/". */
   path: string;
   locale?: Locale;
+  /** Share image (site-relative URL). */
+  image?: { url: string; width: number; height: number; alt: string };
 };
 
 /**
@@ -47,6 +49,7 @@ export function buildMetadata({
   description,
   path,
   locale = defaultLocale,
+  image,
 }: BuildMetadataInput): Metadata {
   const url = absoluteUrl(localizePath(path, locale));
   const alternateLocale = hasEnglish(path)
@@ -68,7 +71,13 @@ export function buildMetadata({
       locale: ogLocale[locale],
       alternateLocale,
       siteName: "INIT ENERGY",
+      ...(image ? { images: [{ ...image, url: absoluteUrl(image.url) }] } : {}),
     },
-    twitter: { card: "summary_large_image", title, description },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      ...(image ? { images: [absoluteUrl(image.url)] } : {}),
+    },
   };
 }

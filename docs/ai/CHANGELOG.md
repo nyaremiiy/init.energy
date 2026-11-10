@@ -43,6 +43,13 @@
 - **Файли:** src/components/ui/toast.tsx, docs/ai/CHANGELOG.md
 - **Нотатки / що далі:** перевірити в браузері на десктопі й телефоні.
 
+## 2026-11-10 — SEO і GEO сторінки SVIT PLUS 5000
+- **Агент:** Claude Code
+- **Гілка:** feat/svit-plus-5000-seo (статус: змерджено в develop)
+- **Що зроблено:** крихта «Каталог» вела на неіснуючу /svit/ (404) — тепер видима крихта веде на секцію накопичувачів головної, а з JSON-LD BreadcrumbList цей рівень прибрано. Product: стабільний `@id`, один бренд SVIT, `manufacturer` → Organization (підтверджено власником лише для SVIT PLUS 5000 і SVIT HOME), `category`. На сторінки продуктів додано JSON-LD Organization. Опис скорочено до 150/148 символів (було 167). Додано прев'ю для соцмереж: JPEG 1200×630 `public/images/og/svit-plus-5000.jpg` (AVIF соцмережі не показують). FAQ: два нові питання з прямими відповідями — сумісність з інверторами (48 В, RS485/CAN, VICTOR у SVIT HOME) і скільки годин працює одна батарея.
+- **Файли:** src/lib/seo/{schema,metadata}.ts, src/components/pages/product-page.tsx, src/components/product-page/product-hero.tsx, src/content/{product-pages,faq}.ts, public/images/og/svit-plus-5000.jpg, docs/ai/{CONTEXT,CHANGELOG}.md
+- **Нотатки / що далі:** перевірено згенерований HTML обох мов: один H1, canonical, hreflang, og:image JPEG, Product/BreadcrumbList/Organization/FAQPage (9 питань). Після публікації — Rich Results Test і подати URL у Search Console. TODO(content): PDF паспорт, гарантія строку служби в роках, діапазон робочої напруги для 48 В.
+
 ## 2026-11-10 — Бічні відступи картки форми заявки
 - **Агент:** Claude Code
 - **Гілка:** fix/lead-form-side-padding (статус: змерджено в develop)
