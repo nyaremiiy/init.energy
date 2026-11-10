@@ -40,8 +40,11 @@ export function FooterColumns({
       </div>
 
       {hasPageNav ? (
-        <nav aria-label={t.pageNavTitle} className="lg:col-span-5">
-          <Eyebrow tone="dark" as="p" className="mb-5">
+        <nav
+          aria-label={t.pageNavTitle}
+          className="col-span-2 sm:col-span-1 lg:col-span-5"
+        >
+          <Eyebrow tone="dark" size="compact" as="p" className="mb-5">
             {t.pageNavTitle}
           </Eyebrow>
           <ul className="flex flex-col gap-3">
@@ -57,7 +60,11 @@ export function FooterColumns({
       ) : null}
 
       <div
-        className={hasPageNav ? "lg:col-span-5" : "col-span-2 lg:col-span-6"}
+        className={
+          hasPageNav
+            ? "col-span-2 sm:col-span-1 lg:col-span-5"
+            : "col-span-2 lg:col-span-6"
+        }
       >
         {sections}
       </div>

@@ -45,7 +45,7 @@ export function Footer() {
 
   const sections = (
     <nav aria-label={t.sectionsTitle}>
-      <Eyebrow tone="dark" as="p" className="mb-5">
+      <Eyebrow tone="dark" size="compact" as="p" className="mb-5">
         {t.sectionsTitle}
       </Eyebrow>
       <ul className="flex flex-col gap-3">
@@ -62,7 +62,7 @@ export function Footer() {
 
   const newsletter = (
     <div className="flex flex-col gap-5">
-      <Eyebrow tone="dark" as="p">
+      <Eyebrow tone="dark" size="compact" as="p">
         {t.newsletter.title}
       </Eyebrow>
       <p className="text-small text-white/75">{t.newsletter.text}</p>
