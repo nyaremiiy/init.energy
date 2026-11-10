@@ -51,6 +51,7 @@ export const anchors = {
   // Product pages.
   advantages: "advantages",
   composition: "composition",
+  inside: "inside",
   specs: "specs",
   scaling: "scaling",
   applications: "applications",

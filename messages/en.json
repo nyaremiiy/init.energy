@@ -243,6 +243,7 @@
       "faq": "FAQ",
       "advantages": "Advantages",
       "composition": "Composition",
+      "inside": "Inside",
       "specs": "Specifications",
       "scaling": "Scaling",
       "applications": "Applications"
@@ -277,6 +278,7 @@
     "nav": {
       "advantages": "Advantages",
       "composition": "Composition",
+      "inside": "Inside",
       "specs": "Specifications",
       "scaling": "Scaling",
       "applications": "Applications",
@@ -292,6 +294,11 @@
     "composition": {
       "eyebrow": "Kit composition",
       "photoPending": "{component} photo coming soon"
+    },
+    "inside": {
+      "eyebrow": "Battery internals",
+      "cellsLabel": "Battery cells",
+      "protectionsLabel": "BMS protections"
     },
     "specs": {
       "eyebrow": "Specifications",

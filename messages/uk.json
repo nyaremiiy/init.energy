@@ -243,6 +243,7 @@
       "faq": "Питання й відповіді",
       "advantages": "Переваги",
       "composition": "Склад",
+      "inside": "Всередині",
       "specs": "Характеристики",
       "scaling": "Масштабування",
       "applications": "Застосування"
@@ -277,6 +278,7 @@
     "nav": {
       "advantages": "Переваги",
       "composition": "Склад",
+      "inside": "Всередині",
       "specs": "Характеристики",
       "scaling": "Масштабування",
       "applications": "Застосування",
@@ -292,6 +294,11 @@
     "composition": {
       "eyebrow": "Склад комплекту",
       "photoPending": "Фото компонента «{component}» буде додано"
+    },
+    "inside": {
+      "eyebrow": "Будова батареї",
+      "cellsLabel": "Комірки батареї",
+      "protectionsLabel": "Захисти BMS"
     },
     "specs": {
       "eyebrow": "Характеристики",

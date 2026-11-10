@@ -60,10 +60,10 @@ export function productSchema(input: ProductSchemaInput) {
     url: input.url,
     ...(input.category ? { category: input.category } : {}),
     ...(input.image ? { image: input.image } : {}),
-    brand: { "@type": "Brand", name: "SVIT" },
-    // Owner, 2026-11-10: SVIT PLUS 5000 and SVIT HOME are made by INIT ENERGY.
-    // Confirm before adding a page for another product (not the whole SVIT line).
-    manufacturer: { "@id": `${siteUrl}/#organization` },
+    brand: [
+      { "@type": "Brand", name: "SVIT" },
+      { "@type": "Brand", name: "INIT ENERGY" },
+    ],
     additionalProperty: input.properties.map((property) => ({
       "@type": "PropertyValue",
       name: property.name,

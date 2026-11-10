@@ -631,6 +631,158 @@ export const productList: Product[] = [
       },
       { key: "chemistry", value: "LiFePO₄" },
     ],
+    // TODO(content): clarify whether IP20 or IP44 applies, and confirm the exact
+    // BMS current within the stated 100–200 A range.
+    // TODO(content): parallel connection, mounting and datasheet PDF are not
+    // stated by the source and are intentionally not rendered.
+    // TODO(content): replace all full-page placeholders and add 1200×630 OG art.
+    page: {
+      slug: "svit-plus-16000",
+      meta: {
+        title: {
+          uk: "SVIT PLUS 16000 — батарея LiFePO₄ 16,07 кВт·год",
+          en: "SVIT PLUS 16000 — 16.07 kWh LiFePO₄ battery",
+        },
+        description: {
+          uk: "SVIT PLUS 16000: LiFePO₄ батарея 16,07 кВт·год, 51,2 В, 16 комірок EVE 314 А·год, BMS 200 А та 6 000–9 000+ циклів. Гарантія 5 років. Для СЕС і резерву.",
+          en: "SVIT PLUS 16000: 16.07 kWh, 51.2 V LiFePO₄ battery with 16 EVE 314 Ah cells, 200 A BMS, 6,000–9,000+ cycles and a 5-year warranty.",
+        },
+      },
+      mediaPlaceholder: true,
+      specsMediaAspect: "portrait",
+      hero: {
+        typeLabel: { uk: "Акумуляторна батарея LiFePO₄", en: "LiFePO₄ battery" },
+        segmentLabel: { uk: "СЕС і автономні системи", en: "Solar and off-grid systems" },
+        segmentIcon: "sun",
+        mediaAspect: "square",
+        tagTone: "light",
+        lead: {
+          uk: "Батарея LiFePO₄ на 16,07 кВт·год з 16 призматичних комірок EVE для сонячних станцій, резервного живлення, автономних і гібридних систем. Вбудована BMS з активним балансуванням і зв'язком CAN, RS485 та Bluetooth.",
+          en: "A 16.07 kWh LiFePO₄ battery built from 16 prismatic EVE cells for solar plants, backup power, off-grid and hybrid systems. Its built-in BMS provides active balancing plus CAN, RS485 and Bluetooth communication.",
+        },
+        keySpecs: [
+          { value: { quantity: { value: 16.07, unit: "kWh" } }, label: { uk: "номінальна енергія", en: "nominal energy" } },
+          { value: { text: { uk: "до 15,3 кВт·год", en: "up to 15.3 kWh" } }, label: { uk: "корисна енергія", en: "usable energy" } },
+          { value: { quantity: { value: 51.2, unit: "V" } }, label: { uk: "номінальна напруга", en: "nominal voltage" } },
+          { value: { text: { uk: "6 000+", en: "6,000+" } }, label: { uk: "циклів", en: "cycles" } },
+        ],
+        warranty: {
+          title: { uk: "Гарантія", en: "Warranty" },
+          value: { uk: "5 років", en: "5 years" },
+          note: { uk: "строк служби — понад 10 років", en: "service life over 10 years" },
+        },
+        tags: [
+          { uk: "16 комірок EVE", en: "16 EVE cells" },
+          { uk: "CAN · RS485 · Bluetooth", en: "CAN · RS485 · Bluetooth" },
+        ],
+        secondaryCta: { label: { uk: "Усі характеристики", en: "All specifications" }, anchor: "specs" },
+      },
+      advantages: {
+        lead: {
+          uk: "Велика ємність в одному корпусі, комірки EVE і BMS, що працює з популярними інверторами.",
+          en: "High capacity in one enclosure, EVE cells and a BMS that works with popular inverters.",
+        },
+        items: [
+          { icon: "scale", figure: { uk: "16,07", en: "16.07" }, tag: { uk: "Ємність", en: "Capacity" }, title: { uk: "16 кВт·год в одному корпусі", en: "16 kWh in one enclosure" }, text: { uk: "Номінальна енергія 16,07 кВт·год, з них 14,5–15,3 кВт·год доступні для використання (90–95% DoD).", en: "Nominal energy is 16.07 kWh, with 14.5–15.3 kWh available for use at 90–95% DoD." }, tone: "sky" },
+          { icon: "balance", figure: { uk: "EVE", en: "EVE" }, tag: { uk: "Комірки", en: "Cells" }, title: { uk: "16 призматичних комірок", en: "16 prismatic cells" }, text: { uk: "Конфігурація 16S1P: комірки EVE по 314 А·год з активним балансуванням 1–3 А.", en: "A 16S1P configuration with 314 Ah EVE cells and 1–3 A active balancing." }, tone: "light" },
+          { icon: "safety", figure: { uk: "CAN", en: "CAN" }, tag: { uk: "Сумісність", en: "Compatibility" }, title: { uk: "Працює з вашим інвертором", en: "Works with your inverter" }, text: { uk: "Зв'язок CAN, RS485 і Bluetooth; сумісна з Deye, Growatt, Victron, Luxpower та іншими.", en: "CAN, RS485 and Bluetooth communication; compatible with Deye, Growatt, Victron, Luxpower and others." }, tone: "navy" },
+          { icon: "cycles", figure: { uk: "9 000+", en: "9,000+" }, tag: { uk: "Ресурс", en: "Lifetime" }, title: { uk: "Понад 10 років роботи", en: "Over 10 years of service" }, text: { uk: "6 000–9 000+ циклів при глибині розряду 80–90% і стандартна гарантія 5 років.", en: "6,000–9,000+ cycles at 80–90% depth of discharge and a standard 5-year warranty." }, tone: "dark" },
+        ],
+      },
+      inside: {
+        title: { uk: "Що всередині SVIT PLUS 16000", en: "Inside SVIT PLUS 16000" },
+        lead: { uk: "16 комірок EVE, BMS з активним балансуванням і зв'язок з інвертором — усе, від чого залежать безпека й ресурс.", en: "Sixteen EVE cells, a BMS with active balancing and inverter communication — everything that determines safety and service life." },
+        cellBrand: "EVE",
+        cellCount: 16,
+        cellCapacityAh: 314,
+        configuration: "16S1P",
+        voltage: { uk: "51,2 В", en: "51.2 V" },
+        stats: [
+          { value: { uk: "314 А·год", en: "314 Ah" }, label: { uk: "номінальна ємність", en: "nominal capacity" } },
+          { value: { uk: "40–58,4 В", en: "40–58.4 V" }, label: { uk: "робоча напруга", en: "operating voltage" } },
+          { value: { uk: "до 95%", en: "up to 95%" }, label: { uk: "глибина розряду", en: "depth of discharge" } },
+        ],
+        bms: {
+          title: { uk: "BMS 16S", en: "16S BMS" },
+          lead: { uk: "Активне балансування комірок 1–3 А і захист від:", en: "1–3 A active cell balancing and protection against:" },
+          protections: [
+            { uk: "Перезаряду", en: "Overcharge" }, { uk: "Глибокого розряду", en: "Deep discharge" }, { uk: "Перевантаження", en: "Overload" }, { uk: "Короткого замикання", en: "Short circuit" }, { uk: "Перегріву", en: "Overheating" },
+          ],
+        },
+        compatibility: {
+          title: { uk: "Сумісні інвертори", en: "Compatible inverters" },
+          lead: { uk: "Зв'язок через CAN, RS485 або Bluetooth", en: "Communication via CAN, RS485 or Bluetooth" },
+          brands: [
+            { uk: "Deye", en: "Deye" },
+            { uk: "Growatt", en: "Growatt" },
+            { uk: "Victron", en: "Victron" },
+            { uk: "Luxpower", en: "Luxpower" },
+            { uk: "та інші", en: "and others" },
+          ],
+        },
+      },
+      specs: [],
+      specGroups: [
+        { title: { uk: "Енергія й напруга", en: "Energy and voltage" }, rows: [
+          { label: { uk: "Номінальна напруга", en: "Nominal voltage" }, value: { text: { uk: "51,2 В", en: "51.2 V" } } },
+          { label: { uk: "Номінальна ємність", en: "Nominal capacity" }, value: { text: { uk: "314 А·год", en: "314 Ah" } } },
+          { label: { uk: "Номінальна енергія", en: "Nominal energy" }, value: { text: { uk: "16,07 кВт·год", en: "16.07 kWh" } } },
+          { label: { uk: "Корисна енергія", en: "Usable energy" }, value: { text: { uk: "14,5–15,3 кВт·год (90–95% DoD)", en: "14.5–15.3 kWh (90–95% DoD)" } } },
+          { label: { uk: "Конфігурація", en: "Configuration" }, value: { text: { uk: "16S1P, 16 призматичних комірок EVE 314 А·год", en: "16S1P, 16 prismatic EVE 314 Ah cells" } } },
+          { label: { uk: "Робоча напруга", en: "Operating voltage" }, value: { text: { uk: "40,0–58,4 В", en: "40.0–58.4 V" } } },
+          { label: { uk: "Рекомендована напруга заряду", en: "Recommended charge voltage" }, value: { text: { uk: "56,0–57,6 В", en: "56.0–57.6 V" } } },
+          { label: { uk: "Відсічення розряду", en: "Discharge cutoff" }, value: { text: { uk: "40,0–46,0 В", en: "40.0–46.0 V" } } },
+        ] },
+        { title: { uk: "Струми", en: "Currents" }, rows: [
+          { label: { uk: "Рекомендований заряд/розряд", en: "Recommended charge/discharge" }, value: { text: { uk: "100–157 А", en: "100–157 A" } } },
+          { label: { uk: "Максимальний постійний заряд", en: "Max continuous charge" }, value: { text: { uk: "160–200 А", en: "160–200 A" } } },
+          { label: { uk: "Максимальний постійний розряд", en: "Max continuous discharge" }, value: { text: { uk: "200 А", en: "200 A" } } },
+          { label: { uk: "Піковий розряд", en: "Peak discharge" }, value: { text: { uk: "220–250 А, короткочасно", en: "220–250 A, short-term" } } },
+        ] },
+        { title: { uk: "BMS і зв'язок", en: "BMS and communication" }, rows: [
+          { label: { uk: "BMS", en: "BMS" }, value: { text: { uk: "16S, 100–200 А", en: "16S, 100–200 A" } } },
+          { label: { uk: "Захисти", en: "Protections" }, value: { text: { uk: "Перезаряд, глибокий розряд, перевантаження, коротке замикання, перегрів", en: "Overcharge, deep discharge, overload, short circuit, overheating" } } },
+          { label: { uk: "Активне балансування", en: "Active balancing" }, value: { text: { uk: "1–3 А", en: "1–3 A" } } },
+          { label: { uk: "Інтерфейси", en: "Interfaces" }, value: { text: { uk: "CAN, RS485, Bluetooth", en: "CAN, RS485, Bluetooth" } } },
+          { label: { uk: "Сумісні інвертори", en: "Compatible inverters" }, value: { text: { uk: "Deye, Growatt, Victron, Luxpower та інші", en: "Deye, Growatt, Victron, Luxpower and others" } } },
+        ] },
+        { title: { uk: "Корпус і умови", en: "Enclosure and conditions" }, rows: [
+          { label: { uk: "Вага", en: "Weight" }, value: { text: { uk: "135 кг", en: "135 kg" } } },
+          { label: { uk: "Габарити", en: "Dimensions" }, value: { text: { uk: "635 × 630 × 220 мм", en: "635 × 630 × 220 mm" } } },
+          { label: { uk: "Ступінь захисту", en: "Ingress protection" }, value: { text: { uk: "IP20 – IP44", en: "IP20 – IP44" } } },
+          { label: { uk: "Температура заряду", en: "Charge temperature" }, value: { text: { uk: "0 … +55 °C", en: "0 … +55 °C" } } },
+          { label: { uk: "Температура розряду", en: "Discharge temperature" }, value: { text: { uk: "−20 … +55 °C; підігрів — платна опція", en: "−20 … +55 °C; heating is a paid option" } } },
+          { label: { uk: "Температура зберігання", en: "Storage temperature" }, value: { text: { uk: "−20 … +35 °C", en: "−20 … +35 °C" } } },
+          { label: { uk: "Охолодження", en: "Cooling" }, value: { text: { uk: "Пасивне", en: "Passive" } } },
+        ] },
+        { title: { uk: "Ресурс і гарантія", en: "Lifecycle and warranty" }, rows: [
+          { label: { uk: "Кількість циклів", en: "Cycle life" }, value: { text: { uk: "6 000–9 000+ при 80–90% DoD", en: "6,000–9,000+ at 80–90% DoD" } } },
+          { label: { uk: "Максимальна глибина розряду", en: "Maximum DoD" }, value: { text: { uk: "95%", en: "95%" } } },
+          { label: { uk: "Строк служби", en: "Service life" }, value: { text: { uk: "Понад 10 років", en: "Over 10 years" } } },
+          { label: { uk: "Гарантія", en: "Warranty" }, value: { text: { uk: "5 років", en: "5 years" } } },
+        ] },
+      ],
+      applications: {
+        lead: { uk: "Велика ємність закриває добу роботи будинку від сонця або кілька годин резерву для бізнесу.", en: "High capacity can cover a home's day from solar or provide several hours of backup for a business." },
+        items: [
+          { icon: "solar", tag: { uk: "СЕС", en: "Solar" }, title: { uk: "Сонячна станція", en: "Solar power plant" }, text: { uk: "Накопичує денну генерацію панелей, щоб використовувати її ввечері та вночі.", en: "Stores daytime solar generation for use in the evening and at night." }, tone: "sky", links: [
+            { label: { uk: "СЕС для дому", en: "Solar for homes" }, href: routes.services.solar }, { label: { uk: "СЕС для бізнесу", en: "Solar for business" }, href: routes.services.turnkeySes },
+          ] },
+          { icon: "backup", tag: { uk: "Резерв", en: "Backup" }, title: { uk: "Резервне живлення", en: "Backup power" }, text: { uk: "Тримає будинок або офіс під час відключень разом з гібридним інвертором.", en: "Keeps a house or office running during outages with a hybrid inverter." }, tone: "navy", links: [
+            { label: { uk: "Резерв для будинку", en: "Home backup" }, href: routes.backup.house }, { label: { uk: "Резерв для бізнесу", en: "Business backup" }, href: routes.backup.business },
+          ] },
+          { icon: "hybrid", tag: { uk: "Автономно", en: "Off-grid" }, title: { uk: "Автономні й гібридні системи", en: "Off-grid and hybrid systems" }, text: { uk: "Основа енергосистеми для об'єктів без стабільної мережі.", en: "The foundation of an energy system for sites without a stable grid." }, tone: "dark", links: [
+            { label: { uk: "Розрахувати систему", en: "Calculate a system" }, href: toAnchor(anchors.calculator) }, { label: { uk: "Порівняти накопичувачі", en: "Compare batteries" }, href: toAnchor(anchors.compare) },
+          ] },
+        ],
+      },
+      related: ["svitPlus5000", "svitHome", "lithiumvalley"],
+      consultation: {
+        lead: { uk: "Інженер INIT ENERGY перевірить сумісність з вашим інвертором, підбере кількість батарей і назве вартість під ключ.", en: "An INIT ENERGY engineer will check inverter compatibility, select the number of batteries and quote the turnkey cost." },
+        summary: { uk: "SVIT PLUS 16000 · 16,07 кВт·год", en: "SVIT PLUS 16000 · 16.07 kWh" },
+        commentPlaceholder: { uk: "Модель вашого інвертора, що потрібно живити", en: "Your inverter model and what needs power" },
+      },
+    },
     image: {
       src: "/images/products/svit-plus-16000.avif",
       alt: {

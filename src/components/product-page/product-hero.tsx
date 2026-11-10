@@ -3,6 +3,7 @@ import {
   BatteryCharging,
   House,
   ShieldCheck,
+  Sun,
 } from "lucide-react";
 import Image from "next/image";
 
@@ -36,7 +37,10 @@ export function ProductHero({ page, product, locale }: ProductHeroProps) {
   const secondaryAnchor =
     page.hero.secondaryCta?.anchor === "composition"
       ? anchors.composition
+      : page.hero.secondaryCta?.anchor === "inside"
+        ? anchors.inside
       : anchors.specs;
+  const SegmentIcon = page.hero.segmentIcon === "sun" ? Sun : House;
 
   return (
     <Panel
@@ -69,13 +73,13 @@ export function ProductHero({ page, product, locale }: ProductHeroProps) {
             >
               {page.hero.typeLabel[locale]}
             </CardLabel>
-            <CardLabel tone="dark" icon={House}>
+            <CardLabel tone="dark" icon={SegmentIcon}>
               {page.hero.segmentLabel[locale]}
             </CardLabel>
           </div>
           <h1
             id="product-title"
-            className="font-heading text-hero-sm font-semibold tracking-tight text-white md:text-hero-md lg:text-hero"
+            className="font-heading text-hero-sm font-semibold tracking-tight text-white md:text-hero-md lg:text-hero lg:whitespace-nowrap"
           >
             {product.name}
           </h1>
@@ -127,7 +131,7 @@ export function ProductHero({ page, product, locale }: ProductHeroProps) {
             <MediaPlaceholder
               tone="dark"
               caption={format(t.photoPending, { name: product.name })}
-              className="aspect-4/3 w-full rounded-3xl"
+              className={`${page.hero.mediaAspect === "square" ? "aspect-square" : "aspect-4/3"} w-full rounded-3xl`}
             />
           )}
 
@@ -149,7 +153,11 @@ export function ProductHero({ page, product, locale }: ProductHeroProps) {
           </div>
           <div className="absolute top-4 right-4 flex flex-col items-end gap-2">
             {page.hero.tags.map((tag) => (
-              <CardLabel key={tag[locale]} tone="dark" className="bg-ink/60">
+              <CardLabel
+                key={tag[locale]}
+                tone={page.hero.tagTone ?? "dark"}
+                className={page.hero.tagTone === "light" ? "bg-white" : "bg-ink/60"}
+              >
                 {tag[locale]}
               </CardLabel>
             ))}

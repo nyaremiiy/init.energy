@@ -25,11 +25,17 @@ export type AdvantageIcon =
   | "kit"
   | "mobility"
   | "solar";
-export type ApplicationIcon = "house" | "store" | "factory";
+export type ApplicationIcon =
+  | "house"
+  | "store"
+  | "factory"
+  | "solar"
+  | "backup"
+  | "hybrid";
 export type CompositionModeIcon = "backup" | "solar" | "grid";
 
 /** Slugs of products that have a full page (also FAQ page keys). */
-export type ProductPageSlug = "svit-plus-5000" | "svit-home";
+export type ProductPageSlug = "svit-plus-5000" | "svit-home" | "svit-plus-16000";
 
 export type ProductPage = {
   id: ProductId;
@@ -45,10 +51,14 @@ export type ProductPage = {
     keySpecs: { value: SpecValue; label: Text }[];
     warranty: { title: Text; value: Text; note: Text };
     tags: Text[];
-    secondaryCta?: { label: Text; anchor: "composition" | "specs" };
+    secondaryCta?: { label: Text; anchor: "composition" | "inside" | "specs" };
+    segmentIcon?: "house" | "sun";
+    mediaAspect?: "landscape" | "square";
+    tagTone?: "dark" | "light";
   };
   /** Use placeholders on the full page even if the catalogue has an image. */
   mediaPlaceholder?: boolean;
+  specsMediaAspect?: "landscape" | "portrait";
   advantages: {
     lead: Text;
     items: {
@@ -62,6 +72,7 @@ export type ProductPage = {
     }[];
   };
   specs: SpecRow[];
+  specGroups?: { title: Text; rows: SpecRow[] }[];
   /** TODO(content): datasheet PDF URL; the link renders only when set. */
   datasheetUrl?: string;
   scaling?: {
@@ -91,6 +102,18 @@ export type ProductPage = {
       text: Text;
     }[];
   };
+  inside?: {
+    title: Text;
+    lead: Text;
+    cellBrand: string;
+    cellCount: number;
+    cellCapacityAh: number;
+    configuration: string;
+    voltage: Text;
+    stats: { value: Text; label: Text }[];
+    bms: { title: Text; lead: Text; protections: Text[] };
+    compatibility: { title: Text; lead: Text; brands: Text[] };
+  };
   applications: {
     lead: Text;
     items: {
@@ -103,7 +126,7 @@ export type ProductPage = {
     }[];
   };
   related: ProductId[];
-  consultation: { lead: Text; summary?: Text };
+  consultation: { lead: Text; summary?: Text; commentPlaceholder?: Text };
 };
 
 export type ProductPageContent = Omit<ProductPage, "id">;

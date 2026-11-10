@@ -22,6 +22,7 @@ type LeadSectionProps = {
   /** Product slug sent with the lead as a hidden field. */
   product?: string;
   submitLabel?: string;
+  commentPlaceholder?: string;
   /** Light-blue panel (product pages) instead of the white section. */
   panel?: boolean;
 };
@@ -35,6 +36,7 @@ export function LeadSection({
   summary,
   product,
   submitLabel,
+  commentPlaceholder,
   panel = false,
 }: LeadSectionProps) {
   const messages = getMessages();
@@ -119,6 +121,7 @@ export function LeadSection({
               defaultObjectType={defaultObjectType}
               product={product}
               submitLabel={submitLabel}
+              commentPlaceholder={commentPlaceholder}
               cardTone={panel ? "white" : "surface"}
             />
           </Reveal>
