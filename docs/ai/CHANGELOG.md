@@ -99,6 +99,13 @@
 - **Файли:** src/i18n/config.ts, src/components/layout/header/header-data.ts, src/content/navigation.ts, src/components/product-page/product-applications.tsx, src/components/calculator/QuickCalculator.tsx, docs/ai/CHANGELOG.md
 - **Нотатки / що далі:** англійська є для головної, SVIT PLUS 5000, SVIT HOME і SVIT PLUS 16000. Сторінок /cec/, /svit/, /rishennya/…, /svit-600/, /bess/ немає в збірці: посилання на них ведуть на українські адреси (і 404). Потрібне рішення власника: прибрати їх з меню або створити сторінки.
 
+## 2026-11-10 — Сторінка СЕС лишається на /cec/
+- **Агент:** Claude Code
+- **Гілка:** fix/cec-link (статус: змерджено в develop)
+- **Що зроблено:** власник попросив, щоб посилання було /cec/. Сторінку перенесено з /ses/ на /cec/ (uk і en), пункт меню, футер, sitemap і англійська версія ведуть на /cec/. Редирект тепер /ses/ → /cec/ (308); /cec/ більше не перенаправляється, щоб не було петлі.
+- **Файли:** src/app/(uk)/cec/page.tsx, src/app/en/cec/page.tsx, src/content/{routes,ses}.ts, src/i18n/config.ts, next.config.ts, docs/ai/{CONTEXT,CHANGELOG}.md
+- **Нотатки / що далі:** перевірити редирект /ses/ → /cec/ на запущеному сервері; посилання на сторінки сегментів оновлено на /cec/dlya-domu/ і /cec/dlya-biznesu/ (їх ще немає).
+
 ## 2026-11-10 — Меню «На цій сторінці» на /ses/
 - **Агент:** Claude Code
 - **Гілка:** feat/ses-footer-nav (статус: змерджено в develop)

@@ -11,7 +11,7 @@ const nextConfig: NextConfig = {
     qualities: [75, 90],
   },
   async redirects() {
-    return [{ source: "/cec/", destination: "/ses/", permanent: true }];
+    return [{ source: "/ses/", destination: "/cec/", permanent: true }];
   },
   turbopack: {
     rules: {
