@@ -57,6 +57,13 @@
 - **Файли:** src/components/ui/toast.tsx, docs/ai/CHANGELOG.md
 - **Нотатки / що далі:** перевірити в браузері на десктопі й телефоні.
 
+## 2026-11-10 — SEO і GEO сторінки SVIT PLUS 16000
+- **Агент:** Claude Haiku 5.5
+- **Гілка:** feat/svit-plus-16000-seo (статус: змерджено в develop)
+- **Що зроблено:** перевірено згенерований HTML обох мов: один H1, canonical, опис 152/130 символів, Product (брендинг, категорія), BreadcrumbList, Organization, FAQ (7 питань). Додано OG-зображення: JPEG 1200×630 `public/images/og/svit-plus-16000.jpg` з фото батареї (раніше в соцмережах не було прев'ю).
+- **Файли:** src/content/products.ts, public/images/og/svit-plus-16000.jpg, docs/ai/CHANGELOG.md
+- **Нотатки / що далі:** після публікації — Rich Results Test і Search Console. Крихта «Продукти SVIT» веде на якір #products головної, бо сторінки /svit/ ще немає.
+
 ## 2026-11-10 — SEO і GEO сторінки SVIT HOME
 - **Агент:** Claude Code
 - **Гілка:** feat/svit-home-seo (статус: змерджено в develop)
