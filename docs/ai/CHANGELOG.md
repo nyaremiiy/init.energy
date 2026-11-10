@@ -99,6 +99,13 @@
 - **Файли:** src/i18n/config.ts, src/components/layout/header/header-data.ts, src/content/navigation.ts, src/components/product-page/product-applications.tsx, src/components/calculator/QuickCalculator.tsx, docs/ai/CHANGELOG.md
 - **Нотатки / що далі:** англійська є для головної, SVIT PLUS 5000, SVIT HOME і SVIT PLUS 16000. Сторінок /cec/, /svit/, /rishennya/…, /svit-600/, /bess/ немає в збірці: посилання на них ведуть на українські адреси (і 404). Потрібне рішення власника: прибрати їх з меню або створити сторінки.
 
+## 2026-11-10 — Коротше меню шапки на /cec/
+- **Агент:** Claude Code
+- **Гілка:** fix/cec-header-main-links (статус: змерджено в develop)
+- **Що зроблено:** у шапці сторінки СЕС лишилось 4 основні розділи: СЕС для дому й бізнесу, Накопичувачі SVIT, Калькулятор, Про компанію. Решта розділів — у колонці «На цій сторінці» футера. Список у шапці (десктоп і мобільне меню) тепер короткий.
+- **Файли:** src/components/layout/header/header-data.ts, docs/ai/CHANGELOG.md
+- **Нотатки / що далі:** на головній список розділів у шапці ще повний — скажіть, якщо його теж скоротити.
+
 ## 2026-11-10 — Меню шапки на сторінці СЕС (/cec/)
 - **Агент:** Claude Code
 - **Гілка:** feat/cec-header-menu (статус: змерджено в develop)
