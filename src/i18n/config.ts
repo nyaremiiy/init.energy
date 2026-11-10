@@ -18,7 +18,11 @@ export const ogLocale: Record<Locale, string> = { uk: "uk_UA", en: "en_US" };
 export const localePrefix: Record<Locale, string> = { uk: "", en: "/en" };
 
 /** Paths (with trailing slash) that exist in English. */
-export const localizedPaths = ["/"] as const;
+export const localizedPaths = [
+  "/",
+  "/svit-plus-5000/",
+  "/svit-home/",
+] as const;
 
 export function hasEnglish(path: string): boolean {
   return (localizedPaths as readonly string[]).includes(path);

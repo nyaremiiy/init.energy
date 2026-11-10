@@ -15,6 +15,7 @@ import { Panel } from "@/components/ui/panel";
 import type { ProductPage } from "@/content/product-pages";
 import type { Product } from "@/content/products";
 import { anchors, routes, toPath } from "@/content/routes";
+import { localizePath } from "@/i18n/config";
 import type { Locale } from "@/lib/format";
 import { getMessages } from "@/i18n/server";
 import { format } from "@/lib/messages";
@@ -31,7 +32,11 @@ type ProductHeroProps = {
 export function ProductHero({ page, product, locale }: ProductHeroProps) {
   const messages = getMessages();
   const t = messages.productPage;
-  const path = toPath(page.slug);
+  const path = localizePath(toPath(page.slug), locale);
+  const secondaryAnchor =
+    page.hero.secondaryCta?.anchor === "composition"
+      ? anchors.composition
+      : anchors.specs;
 
   return (
     <Panel
@@ -50,8 +55,8 @@ export function ProductHero({ page, product, locale }: ProductHeroProps) {
             tone="dark"
             label={t.breadcrumbsLabel}
             items={[
-              { name: t.home, href: routes.home },
-              { name: t.catalog, href: routes.catalog },
+              { name: t.home, href: localizePath(routes.home, locale) },
+              { name: t.catalog, href: localizePath(routes.catalog, locale) },
               { name: product.name, href: path },
             ]}
           />
@@ -98,14 +103,14 @@ export function ProductHero({ page, product, locale }: ProductHeroProps) {
             >
               {t.getOffer}
             </Button>
-            <Button href={`${path}#${anchors.specs}`} variant="secondary">
-              {t.allSpecs}
+            <Button href={`${path}#${secondaryAnchor}`} variant="secondary">
+              {page.hero.secondaryCta?.label[locale] ?? t.allSpecs}
             </Button>
           </div>
         </div>
 
         <div className="relative lg:col-span-5">
-          {product.image ? (
+          {product.image && !page.mediaPlaceholder ? (
             <div className="relative aspect-square overflow-hidden rounded-3xl bg-white/6">
               <Image
                 src={product.image.src}

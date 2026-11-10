@@ -7,6 +7,7 @@ import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
 import { products, productSummary, type ProductId } from "@/content/products";
 import { anchors, sectionHref } from "@/content/routes";
+import { localizePath } from "@/i18n/config";
 import { formatQuantity } from "@/lib/format";
 import { getLocale, getMessages } from "@/i18n/server";
 import { format } from "@/lib/messages";
@@ -42,7 +43,7 @@ export function RelatedProducts({ ids }: { ids: ProductId[] }) {
             return (
               <li key={id} className="border-t border-line">
                 <Link
-                  href={product.href}
+                  href={localizePath(product.href, locale)}
                   aria-label={format(t.link, { name: product.name })}
                   className="group flex items-center gap-4 py-5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
                 >

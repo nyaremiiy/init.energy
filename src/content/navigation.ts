@@ -14,6 +14,7 @@ export type NavEntry = {
 
 type FooterLinkLabels = {
   advantages: string;
+  composition: string;
   specs: string;
   scaling: string;
   applications: string;
@@ -60,14 +61,32 @@ export const pageNavigation: Record<string, NavEntry[]> = {
 /** Product pages: the same anchors as the sticky in-page nav. */
 for (const page of productPages) {
   const path = toPath(page.slug);
-  const anchor = (id: string) => `${path}#${id}`;
-  pageNavigation[path] = [
-    { href: anchor(anchors.advantages), labelKey: "advantages" },
-    { href: anchor(anchors.specs), labelKey: "specs" },
-    { href: anchor(anchors.scaling), labelKey: "scaling" },
-    { href: anchor(anchors.applications), labelKey: "applications" },
-    { href: anchor(anchors.faq), labelKey: "faq" },
-  ];
+  const productNavigation = (locale: Locale): NavEntry[] => {
+    const localizedPath = localizePath(path, locale);
+    const anchor = (id: string) => `${localizedPath}#${id}`;
+    const variableSection: NavEntry = page.composition
+      ? { href: anchor(anchors.composition), labelKey: "composition" }
+      : { href: anchor(anchors.scaling), labelKey: "scaling" };
+
+    return page.composition
+      ? [
+          { href: anchor(anchors.advantages), labelKey: "advantages" },
+          variableSection,
+          { href: anchor(anchors.specs), labelKey: "specs" },
+          { href: anchor(anchors.applications), labelKey: "applications" },
+          { href: anchor(anchors.faq), labelKey: "faq" },
+        ]
+      : [
+          { href: anchor(anchors.advantages), labelKey: "advantages" },
+          { href: anchor(anchors.specs), labelKey: "specs" },
+          variableSection,
+          { href: anchor(anchors.applications), labelKey: "applications" },
+          { href: anchor(anchors.faq), labelKey: "faq" },
+        ];
+  };
+
+  pageNavigation[path] = productNavigation("uk");
+  pageNavigation[localizePath(path, "en")] = productNavigation("en");
 }
 
 /**

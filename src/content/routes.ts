@@ -50,6 +50,7 @@ export const anchors = {
   contacts: "contacts",
   // Product pages.
   advantages: "advantages",
+  composition: "composition",
   specs: "specs",
   scaling: "scaling",
   applications: "applications",

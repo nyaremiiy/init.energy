@@ -1,7 +1,8 @@
 import type { Locale, Localized } from "@/i18n/config";
 import { formatNumber, formatQuantity, type Quantity } from "@/lib/format";
 
-import { routes } from "./routes";
+import { anchors, routes, toAnchor } from "./routes";
+import type { ProductPageContent } from "./product-pages";
 import type { SegmentIconId } from "./segments";
 
 // Source: product pages on https://init.energy (checked 2026-11-06, specs and focus texts re-checked 2026-11-09).
@@ -66,6 +67,8 @@ export type Product = {
   segment: Localized;
   segmentIcon: SegmentIconId;
   image?: ProductImage;
+  /** Full product page content; this product remains its single source. */
+  page?: ProductPageContent;
 };
 
 /** Ordered product line: cards and the comparison table read from this list. */
@@ -144,6 +147,362 @@ export const productList: Product[] = [
     ],
     segment: { uk: "Приватний будинок", en: "Private house" },
     segmentIcon: "house",
+    // TODO(content): add approved page photos and a 1200×630 OG image.
+    // TODO(content): add system voltage, dimensions, weight, interfaces,
+    // inverter warranty and datasheet PDF when the owner confirms them.
+    // Until then these rows and links are intentionally absent.
+    page: {
+      slug: "svit-home",
+      meta: {
+        title: {
+          uk: "SVIT HOME — резервне живлення 6 кВт, 5,12 кВт·год",
+          en: "SVIT HOME — 6 kW, 5.12 kWh backup power kit",
+        },
+        description: {
+          uk: "SVIT HOME — готовий комплект резервного живлення: гібридний інвертор 6 кВт, батарея LiFePO₄ 5,12 кВт·год і мобільна стійка для дому та бізнесу.",
+          en: "SVIT HOME is a ready backup power kit with a 6 kW hybrid inverter, 5.12 kWh LiFePO₄ battery and mobile rack for homes and small businesses.",
+        },
+      },
+      mediaPlaceholder: true,
+      hero: {
+        typeLabel: {
+          uk: "Комплект резервного живлення",
+          en: "Backup power kit",
+        },
+        segmentLabel: {
+          uk: "Дім і малий бізнес",
+          en: "Home and small business",
+        },
+        lead: {
+          uk: "Готовий комплект резервного живлення: гібридний інвертор 6 кВт і батарея SVIT PLUS 5000 на 5,12 кВт·год на мобільній стійці. Працює одразу після підключення — від мережі, батареї або сонячних панелей.",
+          en: "A ready backup power kit with a 6 kW hybrid inverter and a 5.12 kWh SVIT PLUS 5000 battery on a mobile rack. It works as soon as it is connected — from the grid, battery or solar panels.",
+        },
+        keySpecs: [
+          {
+            value: { quantity: { value: 6, unit: "kW" } },
+            label: { uk: "гібридний інвертор", en: "hybrid inverter" },
+          },
+          {
+            value: { quantity: { value: 5.12, unit: "kWh" } },
+            label: { uk: "батарея LiFePO₄", en: "LiFePO₄ battery" },
+          },
+          {
+            value: { text: { uk: "6 000+", en: "6,000+" } },
+            label: { uk: "циклів", en: "cycles" },
+          },
+          {
+            value: { text: { uk: "3 в 1", en: "3 in 1" } },
+            label: {
+              uk: "інвертор · батарея · стійка",
+              en: "inverter · battery · rack",
+            },
+          },
+        ],
+        warranty: {
+          title: {
+            uk: "Гарантія на батарею",
+            en: "Battery warranty",
+          },
+          value: { uk: "5 років", en: "5 years" },
+          note: {
+            uk: "з можливістю продовження",
+            en: "extendable",
+          },
+        },
+        tags: [
+          { uk: "Стійка на колесах", en: "Rack on wheels" },
+          {
+            uk: "Готовий до сонячних панелей",
+            en: "Solar-panel ready",
+          },
+        ],
+        secondaryCta: {
+          label: {
+            uk: "Що входить у комплект",
+            en: "What is included",
+          },
+          anchor: "composition",
+        },
+      },
+      advantages: {
+        lead: {
+          uk: "Усе для резервного живлення в одному комплекті: підключили — і будинок працює під час відключень.",
+          en: "Everything for backup power in one kit: connect it and your home keeps running during outages.",
+        },
+        items: [
+          {
+            icon: "kit",
+            figure: { uk: "3 в 1", en: "3 in 1" },
+            tag: { uk: "Комплект", en: "Kit" },
+            title: { uk: "Усе в одному", en: "Everything in one" },
+            text: {
+              uk: "Інвертор, батарея й стійка постачаються як готовий комплект, що працює одразу після підключення.",
+              en: "The inverter, battery and rack come as a ready kit that works as soon as it is connected.",
+            },
+            tone: "sky",
+          },
+          {
+            icon: "mobility",
+            figure: { uk: "Мобільна", en: "Mobile" },
+            tag: { uk: "Мобільність", en: "Mobility" },
+            title: {
+              uk: "Без монтажу на стіну",
+              en: "No wall mounting",
+            },
+            text: {
+              uk: "Вертикальна стійка на колесах — комплект легко переставити в інше приміщення.",
+              en: "The vertical rack is on wheels, so the kit is easy to move to another room.",
+            },
+            tone: "light",
+          },
+          {
+            icon: "solar",
+            figure: { uk: "Гібрид", en: "Hybrid" },
+            tag: { uk: "Сонце", en: "Solar" },
+            title: { uk: "Резерв або СЕС", en: "Backup or solar" },
+            text: {
+              uk: "Працює як резервне живлення, а з сонячними панелями — як повноцінна сонячна станція.",
+              en: "It works as backup power and becomes a complete solar power plant when panels are added.",
+            },
+            tone: "navy",
+          },
+          {
+            icon: "safety",
+            figure: { uk: "6 000+", en: "6,000+" },
+            tag: { uk: "Безпека", en: "Safety" },
+            title: {
+              uk: "Батарея LiFePO₄",
+              en: "LiFePO₄ battery",
+            },
+            text: {
+              uk: "Стабільна хімія із захистом від перегріву й ресурсом понад 6 000 циклів — близько 15 років.",
+              en: "Stable chemistry with overheating protection and over 6,000 cycles — about 15 years of service.",
+            },
+            tone: "dark",
+          },
+        ],
+      },
+      composition: {
+        title: {
+          uk: "Що входить у SVIT HOME",
+          en: "What SVIT HOME includes",
+        },
+        lead: {
+          uk: "Три компоненти, зібрані й узгоджені на заводі INIT ENERGY.",
+          en: "Three components assembled and matched at the INIT ENERGY factory.",
+        },
+        items: [
+          {
+            title: {
+              uk: "Гібридний інвертор 6 кВт",
+              en: "6 kW hybrid inverter",
+            },
+            text: {
+              uk: "Працює з мережею, батареєю та сонячними панелями.",
+              en: "Works with the grid, battery and solar panels.",
+            },
+            specs: [
+              {
+                label: { uk: "Потужність", en: "Power" },
+                value: { uk: "6 кВт", en: "6 kW" },
+              },
+              {
+                label: { uk: "Тип", en: "Type" },
+                value: { uk: "гібридний", en: "hybrid" },
+              },
+            ],
+          },
+          {
+            title: {
+              uk: "Батарея SVIT PLUS 5000",
+              en: "SVIT PLUS 5000 battery",
+            },
+            text: {
+              uk: "Літій-залізо-фосфатна батарея власного виробництва.",
+              en: "An in-house lithium iron phosphate battery.",
+            },
+            specs: [
+              {
+                label: { uk: "Ємність", en: "Capacity" },
+                value: { uk: "5,12 кВт·год", en: "5.12 kWh" },
+              },
+              {
+                label: { uk: "Ресурс", en: "Lifetime" },
+                value: { uk: "6 000+ циклів", en: "6,000+ cycles" },
+              },
+            ],
+            relatedProduct: "svitPlus5000",
+            linkLabel: {
+              uk: "Про батарею SVIT PLUS 5000",
+              en: "About the SVIT PLUS 5000 battery",
+            },
+          },
+          {
+            title: { uk: "Мобільна стійка", en: "Mobile rack" },
+            text: {
+              uk: "Вертикальна металева стійка на колесах з відсіком для щитка з автоматами.",
+              en: "A vertical metal rack on wheels with a compartment for a breaker panel.",
+            },
+            specs: [
+              {
+                label: { uk: "Монтаж", en: "Mounting" },
+                value: { uk: "не потрібен", en: "not required" },
+              },
+              {
+                label: { uk: "Переміщення", en: "Moving" },
+                value: { uk: "на колесах", en: "on wheels" },
+              },
+            ],
+          },
+        ],
+        modesEyebrow: {
+          uk: "Режими роботи",
+          en: "Operating modes",
+        },
+        modesTitle: {
+          uk: "Один комплекс — три сценарії",
+          en: "One kit — three scenarios",
+        },
+        modes: [
+          {
+            icon: "backup",
+            title: {
+              uk: "Резервне живлення",
+              en: "Backup power",
+            },
+            text: {
+              uk: "Коли мережу вимикають, комплект автоматично переходить на батарею.",
+              en: "When the grid goes down, the kit automatically switches to the battery.",
+            },
+          },
+          {
+            icon: "solar",
+            title: {
+              uk: "Сонячна станція",
+              en: "Solar power plant",
+            },
+            text: {
+              uk: "Додайте сонячні панелі — гібридний інвертор живитиме будинок від сонця.",
+              en: "Add solar panels and the hybrid inverter will power the house from the sun.",
+            },
+          },
+          {
+            icon: "grid",
+            title: {
+              uk: "Разом з мережею",
+              en: "Together with the grid",
+            },
+            text: {
+              uk: "Працює з наявною мережею або автономно — без складного монтажу.",
+              en: "Works with the existing grid or autonomously, without complex installation.",
+            },
+          },
+        ],
+      },
+      specs: [
+        {
+          label: { uk: "Інвертор", en: "Inverter" },
+          value: { text: { uk: "гібридний, 6 кВт", en: "hybrid, 6 kW" } },
+        },
+        {
+          label: { uk: "Батарея", en: "Battery" },
+          value: { text: { uk: "SVIT PLUS 5000, LiFePO₄", en: "SVIT PLUS 5000, LiFePO₄" } },
+        },
+        {
+          label: { uk: "Ємність батареї", en: "Battery capacity" },
+          value: { quantity: { value: 5.12, unit: "kWh" } },
+        },
+        {
+          label: { uk: "Ресурс батареї", en: "Battery lifetime" },
+          value: { text: { uk: "6 000+ циклів, ≈ 15 років", en: "6,000+ cycles, ≈ 15 years" } },
+        },
+        {
+          label: { uk: "Робоча температура батареї", en: "Battery operating temperature" },
+          value: { text: { uk: "−10 … +50 °C", en: "−10 … +50 °C" } },
+        },
+        {
+          label: { uk: "Конструкція", en: "Construction" },
+          value: { text: { uk: "вертикальна металева стійка на колесах", en: "vertical metal rack on wheels" } },
+        },
+        {
+          label: { uk: "Додатково", en: "Additional" },
+          value: { text: { uk: "відсік для щитка з автоматами та комутацією", en: "compartment for a breaker panel and switching" } },
+        },
+        {
+          label: { uk: "Монтаж", en: "Mounting" },
+          value: { text: { uk: "настінний монтаж не потрібен", en: "no wall mounting required" } },
+        },
+        {
+          label: { uk: "Режими", en: "Modes" },
+          value: { text: { uk: "резерв · СЕС · мережа або автономно", en: "backup · solar · grid or autonomous" } },
+        },
+        {
+          label: { uk: "Гарантія на батарею", en: "Battery warranty" },
+          value: { text: { uk: "5 років, з можливістю продовження", en: "5 years, extendable" } },
+        },
+      ],
+      applications: {
+        lead: {
+          uk: "Комплект тримає живлення там, де відключення коштують комфорту, грошей або даних.",
+          en: "The kit keeps power running where outages cost comfort, money or data.",
+        },
+        items: [
+          {
+            icon: "house",
+            tag: { uk: "Дім", en: "Home" },
+            title: { uk: "Приватний будинок", en: "Private house" },
+            text: {
+              uk: "Резервне живлення основних приладів і систем: котел, насос, холодильник, світло, інтернет.",
+              en: "Backup power for essential appliances and systems: boiler, pump, fridge, lighting and internet.",
+            },
+            tone: "sky",
+            links: [
+              { label: { uk: "Резервне живлення для будинку", en: "Backup power for a house" }, href: routes.backup.house },
+              { label: { uk: "СЕС для дому", en: "Solar for a house" }, href: routes.services.solar },
+            ],
+          },
+          {
+            icon: "store",
+            tag: { uk: "Малий бізнес", en: "Small business" },
+            title: { uk: "Офіс, кав'ярня, магазин", en: "Office, café, shop" },
+            text: {
+              uk: "Безперервна робота кас, освітлення, зв'язку й холодильного обладнання.",
+              en: "Uninterrupted operation of tills, lighting, communications and refrigeration.",
+            },
+            tone: "navy",
+            links: [
+              { label: { uk: "Резервне живлення для бізнесу", en: "Backup power for business" }, href: routes.backup.business },
+              { label: { uk: "СЕС для бізнесу", en: "Solar for business" }, href: routes.services.solar },
+            ],
+          },
+          {
+            icon: "lab",
+            tag: { uk: "Технічні приміщення", en: "Technical rooms" },
+            title: { uk: "Лабораторії й серверні", en: "Labs and server rooms" },
+            text: {
+              uk: "Живлення критичного обладнання під час відключень.",
+              en: "Power for critical equipment during outages.",
+            },
+            tone: "dark",
+            links: [
+              { label: { uk: "Резервне живлення для бізнесу", en: "Backup power for business" }, href: routes.backup.business },
+              { label: { uk: "Порівняти накопичувачі", en: "Compare batteries" }, href: toAnchor(anchors.compare) },
+            ],
+          },
+        ],
+      },
+      related: ["svitPlus5000", "svitPlus16000", "svit600"],
+      consultation: {
+        lead: {
+          uk: "Інженер INIT ENERGY уточнить, що потрібно живити, і назве вартість SVIT HOME з доставкою й підключенням.",
+          en: "An INIT ENERGY engineer will clarify what needs power and quote SVIT HOME with delivery and connection.",
+        },
+        summary: {
+          uk: "SVIT HOME · 6 кВт · 5,12 кВт·год",
+          en: "SVIT HOME · 6 kW · 5.12 kWh",
+        },
+      },
+    },
     image: {
       src: "/images/products/svit-home.avif",
       alt: {

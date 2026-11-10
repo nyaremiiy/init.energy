@@ -55,7 +55,7 @@ export function ProductSpecs({
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
             <div className="flex flex-col gap-4 lg:sticky lg:top-40">
-              {product.image ? (
+              {product.image && !page.mediaPlaceholder ? (
                 <div className="relative aspect-4/3 overflow-hidden rounded-3xl bg-white">
                   <Image
                     src={product.image.src}

@@ -1,4 +1,4 @@
-import { Factory, House, Store } from "lucide-react";
+import { Factory, FlaskConical, House, Store } from "lucide-react";
 
 import { Container } from "@/components/layout/container";
 import { Reveal } from "@/components/ui/reveal";
@@ -15,6 +15,7 @@ const icons: Record<ApplicationIcon, typeof House> = {
   house: House,
   store: Store,
   factory: Factory,
+  lab: FlaskConical,
 };
 
 /** Card tones match the solution cards on the home page. */

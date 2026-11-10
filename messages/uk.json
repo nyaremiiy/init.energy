@@ -242,6 +242,7 @@
       "calculator": "Калькулятор",
       "faq": "Питання й відповіді",
       "advantages": "Переваги",
+      "composition": "Склад",
       "specs": "Характеристики",
       "scaling": "Масштабування",
       "applications": "Застосування"
@@ -275,6 +276,7 @@
     "navLabel": "Розділи сторінки",
     "nav": {
       "advantages": "Переваги",
+      "composition": "Склад",
       "specs": "Характеристики",
       "scaling": "Масштабування",
       "applications": "Застосування",
@@ -286,6 +288,10 @@
     "advantages": {
       "eyebrow": "Переваги",
       "title": "Чому {name}"
+    },
+    "composition": {
+      "eyebrow": "Склад комплекту",
+      "photoPending": "Фото компонента «{component}» буде додано"
     },
     "specs": {
       "eyebrow": "Характеристики",
