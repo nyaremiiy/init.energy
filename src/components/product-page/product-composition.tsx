@@ -1,4 +1,5 @@
 import { BatteryCharging, Grid2X2, Sun } from "lucide-react";
+import Image from "next/image";
 
 import { Container } from "@/components/layout/container";
 import { ArrowLink } from "@/components/ui/arrow-link";
@@ -76,13 +77,26 @@ export function ProductComposition({
               <li key={item.title[locale]}>
                 <Reveal delay={index * 0.08} className="h-full">
                   <article className="flex h-full flex-col gap-6 rounded-3xl bg-white/8 p-card-sm lg:p-card">
-                    <MediaPlaceholder
-                      tone="dark"
-                      caption={format(t.photoPending, {
-                        component: item.title[locale],
-                      })}
-                      className="aspect-16/10 w-full rounded-2xl"
-                    />
+                    {item.image ? (
+                      <div className="relative aspect-16/10 w-full overflow-hidden rounded-2xl bg-white/6">
+                        <Image
+                          src={item.image.src}
+                          alt={item.image.alt[locale]}
+                          fill
+                          unoptimized
+                          sizes="(min-width: 1024px) 30vw, 100vw"
+                          className="object-cover"
+                        />
+                      </div>
+                    ) : (
+                      <MediaPlaceholder
+                        tone="dark"
+                        caption={format(t.photoPending, {
+                          component: item.title[locale],
+                        })}
+                        className="aspect-16/10 w-full rounded-2xl"
+                      />
+                    )}
                     <span className="font-mono text-sm text-white/75 tabular-nums">
                       {String(index + 1).padStart(2, "0")}
                     </span>

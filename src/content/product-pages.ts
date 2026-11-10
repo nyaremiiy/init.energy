@@ -78,6 +78,8 @@ export type ProductPage = {
       title: Text;
       text: Text;
       specs: { label: Text; value: Text }[];
+      /** Photo of the component; without it the card shows a placeholder. */
+      image?: { src: string; alt: Text };
       relatedProduct?: ProductId;
       linkLabel?: Text;
     }[];

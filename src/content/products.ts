@@ -147,7 +147,7 @@ export const productList: Product[] = [
     ],
     segment: { uk: "Приватний будинок", en: "Private house" },
     segmentIcon: "house",
-    // Hero photo is in place; kit, inverter and battery photos are still TODO(content).
+    // Hero and composition photos are in place; a photo of the whole kit is still TODO(content).
     // TODO(content): add system voltage, dimensions, weight, interfaces,
     // inverter warranty and datasheet PDF when the owner confirms them.
     // Until then these rows and links are intentionally absent.
@@ -297,6 +297,13 @@ export const productList: Product[] = [
               uk: "Гібридний інвертор VICTOR 6,2 кВт",
               en: "VICTOR 6.2 kW hybrid inverter",
             },
+            image: {
+              src: "/images/products/svit-home/invertor.avif",
+              alt: {
+                uk: "Гібридний інвертор VICTOR NM-ECO-6.2 kW PLUS на світлій стіні",
+                en: "VICTOR NM-ECO-6.2 kW PLUS hybrid inverter on a light wall",
+              },
+            },
             text: {
               uk: "Модель VICTOR NM-ECO-6.2 kW PLUS. Безперебійний режим (UPS) — автоматичний перехід на батарею під час відключень. Працює з мережею, батареєю та сонячними панелями.",
               en: "Model VICTOR NM-ECO-6.2 kW PLUS. Uninterruptible power (UPS) mode — switches to the battery automatically during outages. Works with the grid, battery and solar panels.",
@@ -325,6 +332,13 @@ export const productList: Product[] = [
               uk: "Батарея SVIT PLUS 5000",
               en: "SVIT PLUS 5000 battery",
             },
+            image: {
+              src: "/images/products/svit-plus-5000.avif",
+              alt: {
+                uk: "Батарея SVIT PLUS 5000 LiFePO₄ з клемами, автоматом і портами CAN та RS485",
+                en: "SVIT PLUS 5000 LiFePO₄ battery with terminals, a breaker and CAN and RS485 ports",
+              },
+            },
             text: {
               uk: "Акумуляторний блок LiFePO₄ власного виробництва.",
               en: "An in-house LiFePO₄ battery pack.",
@@ -347,6 +361,13 @@ export const productList: Product[] = [
           },
           {
             title: { uk: "Стійка на ніжках", en: "Rack on legs" },
+            image: {
+              src: "/images/products/svit-home/standalone.avif",
+              alt: {
+                uk: "Порожня металева стійка на ніжках для інвертора й батареї",
+                en: "Empty metal rack on legs for the inverter and battery",
+              },
+            },
             text: {
               uk: "Вертикальна металева стійка на ніжках з відсіком для щитка з автоматами.",
               en: "A vertical metal rack on legs with a compartment for a breaker panel.",
