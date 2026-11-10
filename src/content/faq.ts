@@ -66,8 +66,8 @@ export const faqList: Faq[] = [
       en: "Why are LiFePO₄ batteries better than others?",
     },
     answer: {
-      uk: "LiFePO₄ (літій-залізо-фосфат) стабільніші при нагріванні й витримують значно більше циклів заряду, ніж свинцево-кислотні батареї. Батарея SVIT HOME розрахована на 6 000+ циклів.",
-      en: "LiFePO₄ (lithium iron phosphate) cells stay stable when they heat up and last far more charge cycles than lead-acid batteries. The SVIT HOME battery is rated for 6,000+ cycles.",
+      uk: "LiFePO₄ (літій-залізо-фосфат) стабільніші при нагріванні й витримують значно більше циклів заряду, ніж свинцево-кислотні батареї. Батарея SVIT HOME розрахована понад на 10 000 циклів заряду й розряду.",
+      en: "LiFePO₄ (lithium iron phosphate) cells stay stable when they heat up and last far more charge cycles than lead-acid batteries. The SVIT HOME battery is rated for over 10,000 charge and discharge cycles.",
     },
   },
   {
@@ -270,12 +270,12 @@ export const faqList: Faq[] = [
     topic: "warranty",
     pages: ["svit-home"],
     question: {
-      uk: "Яка гарантія на батарею?",
-      en: "What is the battery warranty?",
+      uk: "Яка гарантія на SVIT HOME?",
+      en: "What warranty does SVIT HOME have?",
     },
     answer: {
-      uk: "На батарею SVIT PLUS 5000 — 5 років офіційної гарантії з можливістю продовження.",
-      en: "The SVIT PLUS 5000 battery has a 5-year official warranty that can be extended.",
+      uk: "Комплект має гарантію від виробника, післяпродажний сервіс і послуги з монтажу. На батарею SVIT PLUS 5000 — 5 років офіційної гарантії з можливістю продовження.",
+      en: "SVIT HOME comes with a manufacturer's warranty, after-sales service and installation services. The SVIT PLUS 5000 battery has a 5-year official warranty that can be extended.",
     },
   },
   {
@@ -287,8 +287,8 @@ export const faqList: Faq[] = [
       en: "What is the battery service life?",
     },
     answer: {
-      uk: "Понад 6 000 циклів заряду й розряду — близько 15 років роботи.",
-      en: "Over 6,000 charge and discharge cycles provide about 15 years of service.",
+      uk: "Понад 10 000 циклів заряду й розряду.",
+      en: "Over 10,000 charge and discharge cycles.",
     },
   },
   {

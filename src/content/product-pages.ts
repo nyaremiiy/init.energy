@@ -25,7 +25,7 @@ export type AdvantageIcon =
   | "kit"
   | "mobility"
   | "solar";
-export type ApplicationIcon = "house" | "store" | "factory" | "lab";
+export type ApplicationIcon = "house" | "store" | "factory";
 export type CompositionModeIcon = "backup" | "solar" | "grid";
 
 /** Slugs of products that have a full page (also FAQ page keys). */
