@@ -120,8 +120,8 @@ for (const page of productPages) {
  */
 export function getSiteSections(locale: Locale): NavEntry[] {
   return [
-    { href: routes.services.turnkeySes, labelKey: "turnkeySes" },
-    { href: routes.catalog, labelKey: "svitCatalog" },
+    { href: localizePath(routes.services.turnkeySes, locale), labelKey: "turnkeySes" },
+    { href: localizePath(routes.catalog, locale), labelKey: "svitCatalog" },
     ...(hasProjects
       ? [
           {

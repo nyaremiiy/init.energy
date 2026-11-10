@@ -13,6 +13,7 @@ import { anchors } from "@/content/routes";
 import type { Locale } from "@/lib/format";
 import { getMessages } from "@/i18n/server";
 import { format } from "@/lib/messages";
+import { localizePath } from "@/i18n/config";
 
 const icons: Record<ApplicationIcon, typeof House> = {
   house: House,
@@ -73,7 +74,7 @@ export function ProductApplications({
                   <ul className={`divide-y ${item.tone === "sky" ? "divide-line border-line" : "divide-white/16 border-white/16"} border-y`}>
                     {item.sectors?.map((sector) => <li key={sector.en} className="py-3 text-base">{sector[locale]}</li>)}
                   </ul>
-                  <div className="mt-auto flex flex-wrap gap-3">{item.links.map((link) => <ArrowLink key={link.label.en} href={link.href} tone={item.tone === "sky" ? "dark" : "light"}>{link.label[locale]}</ArrowLink>)}</div>
+                  <div className="mt-auto flex flex-wrap gap-3">{item.links.map((link) => <ArrowLink key={link.label.en} href={localizePath(link.href, locale)} tone={item.tone === "sky" ? "dark" : "light"}>{link.label[locale]}</ArrowLink>)}</div>
                 </article>
               ) : (
               <SegmentCard
@@ -83,7 +84,7 @@ export function ProductApplications({
                 description={item.text[locale]}
                 links={item.links.map((link) => ({
                   label: link.label[locale],
-                  href: link.href,
+                  href: localizePath(link.href, locale),
                 }))}
                 navLabel={format(t.navLabel, { segment: item.tag[locale] })}
                 tone={tones[item.tone]}
