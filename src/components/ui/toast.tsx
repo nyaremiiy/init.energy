@@ -50,7 +50,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
   return (
     <ToastContext.Provider value={value}>
       {children}
-      <div className="pointer-events-none fixed top-20 right-4 left-4 z-50 sm:left-auto sm:w-96">
+      <div className="pointer-events-none fixed top-32 right-4 left-4 z-50 sm:left-auto sm:w-96">
         <AnimatePresence>
           {toast ? (
             <motion.div
