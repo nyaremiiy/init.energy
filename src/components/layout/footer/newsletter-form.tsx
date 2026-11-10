@@ -11,7 +11,7 @@ import { useLocale, useMessages } from "@/i18n/client";
 import { validateNewsletter } from "@/lib/newsletter";
 import { inputClasses } from "@/components/ui/input-styles";
 
-type Status = "idle" | "submitting" | "success";
+type Status = "idle" | "submitting";
 
 export function NewsletterForm() {
   const t = useMessages().footer.newsletter;
@@ -47,7 +47,7 @@ export function NewsletterForm() {
       }
 
       form.reset();
-      setStatus("success");
+      setStatus("idle");
       toast.show("success", t.success);
       // Analytics only after cookie consent (see lib/analytics).
       trackEvent({ event: "newsletter_subscribe" });
@@ -55,17 +55,6 @@ export function NewsletterForm() {
       setStatus("idle");
       toast.show("error", t.failure);
     }
-  }
-
-  if (status === "success") {
-    return (
-      <p
-        role="status"
-        className="text-small text-white motion-safe:animate-enter"
-      >
-        {t.success}
-      </p>
-    );
   }
 
   return (

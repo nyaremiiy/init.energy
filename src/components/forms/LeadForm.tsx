@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight, Check, CircleCheck, Loader2 } from "lucide-react";
+import { ArrowUpRight, Check, Loader2 } from "lucide-react";
 import Link from "next/link";
 import {
   type FormEvent,
@@ -34,7 +34,7 @@ type LeadFormProps = {
   cardTone?: "surface" | "white";
 };
 
-type Status = "idle" | "submitting" | "success";
+type Status = "idle" | "submitting";
 
 const objectTypes: LeadObjectType[] = [
   "apartment",
@@ -162,30 +162,12 @@ export function LeadForm({
 
       form.reset();
       setCalculator(undefined);
-      setStatus("success");
+      setStatus("idle");
       toast.show("success", t.success);
     } catch {
       setStatus("idle");
       toast.show("error", t.failure);
     }
-  }
-
-  if (status === "success") {
-    return (
-      <div
-        role="status"
-        className={`flex flex-col items-start gap-4 rounded-3xl shadow-card ${cardBg} p-card-sm motion-safe:animate-enter lg:p-card`}
-      >
-        <CircleCheck
-          aria-hidden
-          className="size-8 text-ink"
-          strokeWidth={1.5}
-        />
-        <p className="font-heading text-xl leading-snug font-semibold tracking-tight text-ink">
-          {t.success}
-        </p>
-      </div>
-    );
   }
 
   return (
