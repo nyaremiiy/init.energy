@@ -45,6 +45,7 @@ import { useLocale, useMessages } from "@/i18n/client";
 import type { Locale } from "@/i18n/config";
 import type { Messages } from "@/i18n/messages";
 import { format } from "@/lib/messages";
+import { localizePath } from "@/i18n/config";
 
 type CalculatorMessages = Messages["calculator"];
 type Units = Messages["units"];
@@ -482,7 +483,7 @@ export function QuickCalculator() {
         <div className="flex flex-col">
           {rec.battery ? (
             <ResultLink
-              href={products[rec.battery.id as ProductId].href}
+              href={localizePath(products[rec.battery.id as ProductId].href, locale)}
               title={products[rec.battery.id as ProductId].name}
               text={productSummary(rec.battery.id as ProductId, locale)}
               kind={t.result.product}
@@ -490,7 +491,7 @@ export function QuickCalculator() {
           ) : null}
           {solution ? (
             <ResultLink
-              href={solution.href}
+              href={localizePath(solution.href, locale)}
               title={services[solution.serviceKey].name[locale]}
               text={services[solution.serviceKey].summary[locale]}
               kind={t.result.solution}

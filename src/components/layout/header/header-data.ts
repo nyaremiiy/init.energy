@@ -5,6 +5,7 @@ import { anchors, sectionHref } from "@/content/routes";
 import { services, type ServiceId } from "@/content/services";
 import type { Locale } from "@/i18n/config";
 import { getMessagesFor } from "@/i18n/messages";
+import { localizePath } from "@/i18n/config";
 
 export type { Office };
 
@@ -90,12 +91,12 @@ export const socialLinks: SocialLink[] = [
 export function getNavItems(locale: Locale): NavItem[] {
   const t = getMessagesFor(locale).chrome.header;
   const productLink = (id: ProductId): NavMenuLink => ({
-    href: products[id].href,
+    href: localizePath(products[id].href, locale),
     label: products[id].name,
     description: productSummary(id, locale),
   });
   const serviceLink = (id: ServiceId): NavMenuLink => ({
-    href: services[id].href,
+    href: localizePath(services[id].href, locale),
     label: services[id].name[locale],
     description: services[id].summary[locale],
   });

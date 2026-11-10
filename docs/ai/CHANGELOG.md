@@ -92,6 +92,13 @@
 - **Файли:** src/components/ui/toast.tsx, docs/ai/CHANGELOG.md
 - **Нотатки / що далі:** перевірити в браузері на десктопі й телефоні.
 
+## 2026-11-10 — Англійська мова зберігається при переходах
+- **Агент:** Claude Code
+- **Гілка:** fix/keep-english-navigation (статус: змерджено в develop)
+- **Що зроблено:** посилання в мега-меню і мобільному меню на продукти та рішення, у футері, на картках застосувань і в результаті калькулятора тепер ведуть на англійську версію, якщо вона є (через `localizePath`). Додано /svit-plus-16000/ до `localizedPaths`: англійська сторінка вже збиралась, але перемикач, hreflang і посилання її не бачили.
+- **Файли:** src/i18n/config.ts, src/components/layout/header/header-data.ts, src/content/navigation.ts, src/components/product-page/product-applications.tsx, src/components/calculator/QuickCalculator.tsx, docs/ai/CHANGELOG.md
+- **Нотатки / що далі:** англійська є для головної, SVIT PLUS 5000, SVIT HOME і SVIT PLUS 16000. Сторінок /cec/, /svit/, /rishennya/…, /svit-600/, /bess/ немає в збірці: посилання на них ведуть на українські адреси (і 404). Потрібне рішення власника: прибрати їх з меню або створити сторінки.
+
 ## 2026-11-10 — SEO і GEO сторінки SVIT PLUS 16000
 - **Агент:** Claude Haiku 5.5
 - **Гілка:** feat/svit-plus-16000-seo (статус: змерджено в develop)
