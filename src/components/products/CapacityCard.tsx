@@ -43,28 +43,31 @@ export function CapacityCard({
   const position = Math.min(1, Math.max(0, scalePosition));
 
   return (
-    <div className="relative isolate flex flex-col gap-6 overflow-hidden rounded-3xl bg-linear-to-br from-surface to-sky p-card-sm lg:p-card">
-      <div aria-hidden className="glow-accent absolute inset-0 -z-10" />
+    <div className="group relative isolate flex flex-col gap-6 overflow-hidden rounded-3xl bg-linear-to-br from-surface to-sky p-card-sm transition-shadow duration-300 ease-tech hover:shadow-card focus-within:shadow-card lg:p-card">
+      <div
+        aria-hidden
+        className="glow-accent absolute inset-0 -z-10 opacity-60 transition-opacity duration-300 ease-tech group-hover:opacity-100 group-focus-within:opacity-100"
+      />
 
       <div className="flex items-start justify-between gap-4">
-        <p className="font-mono text-xs tracking-wide text-ink/70">
+        <p className="font-mono text-xs tracking-wide text-ink/70 transition-colors duration-300 ease-tech group-hover:text-ink">
           {chemistryLabel}
         </p>
         {thumbnail ? (
-          <div className="relative size-14 shrink-0 overflow-hidden rounded-field bg-white">
+          <div className="relative size-20 shrink-0 overflow-hidden rounded-2xl bg-white/70 transition-transform duration-300 ease-tech motion-safe:group-hover:-translate-y-1 motion-safe:group-hover:scale-105 lg:size-24">
             <Image
               src={thumbnail.src}
               alt={thumbnail.alt}
               fill
               unoptimized
-              sizes="56px"
-              className="object-cover"
+              sizes="(min-width: 1024px) 96px, 80px"
+              className="object-contain p-1"
             />
           </div>
         ) : (
           <MediaPlaceholder
             caption=""
-            className="size-14 shrink-0 rounded-field"
+            className="size-20 shrink-0 rounded-2xl transition-transform duration-300 ease-tech motion-safe:group-hover:-translate-y-1 motion-safe:group-hover:scale-105 lg:size-24"
           />
         )}
       </div>
@@ -79,13 +82,16 @@ export function CapacityCard({
         <span className="text-base text-ink/70">{unit}</span>
       </p>
 
-      <div aria-hidden className="rounded-2xl bg-white p-3">
+      <div
+        aria-hidden
+        className="rounded-2xl bg-white p-3 transition-transform duration-300 ease-tech motion-safe:group-hover:-translate-y-1"
+      >
         {cellCount ? (
           <ul className="grid grid-cols-8 gap-1">
             {Array.from({ length: cellCount }, (_, index) => (
               <li
                 key={index}
-                className="flex aspect-3/4 min-w-0 items-end justify-center rounded-md bg-linear-to-b from-accent to-accent-strong pb-1 font-mono text-xs text-white"
+                className="flex aspect-3/4 min-w-0 items-end justify-center rounded-md bg-linear-to-b from-accent to-accent-strong pb-1 font-mono text-xs text-white transition-transform duration-200 ease-tech motion-safe:hover:-translate-y-1"
               >
                 {pad(index)}
               </li>
@@ -96,25 +102,25 @@ export function CapacityCard({
             {Array.from({ length: modules }, (_, index) => (
               <li
                 key={index}
-                className="flex aspect-3/4 flex-1 items-end justify-center rounded-md bg-linear-to-b from-accent to-accent-strong pb-1 font-mono text-xs text-white"
+                className="flex aspect-3/4 flex-1 items-end justify-center rounded-md bg-linear-to-b from-accent to-accent-strong pb-1 font-mono text-xs text-white transition-transform duration-200 ease-tech motion-safe:hover:-translate-y-1"
               >
                 {pad(index)}
               </li>
             ))}
           </ul>
         ) : (
-          <div className="h-3 rounded-full bg-linear-to-r from-accent-strong to-accent" />
+          <div className="h-3 origin-left rounded-full bg-linear-to-r from-accent-strong to-accent transition-transform duration-300 ease-tech motion-safe:group-hover:scale-y-125" />
         )}
       </div>
 
       <div aria-hidden className="flex flex-col gap-2">
         <div className="relative h-1 rounded-full bg-line">
           <div
-            className="absolute inset-y-0 left-0 rounded-full bg-ink"
+            className="absolute inset-y-0 left-0 rounded-full bg-ink transition-colors duration-300 ease-tech group-hover:bg-accent-strong"
             style={{ width: `${position * 100}%` }}
           />
           <div
-            className="absolute top-1/2 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-ink bg-white"
+            className="absolute top-1/2 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-ink bg-white transition-transform duration-300 ease-tech motion-safe:group-hover:scale-125"
             style={{ left: `${position * 100}%` }}
           />
         </div>

@@ -209,10 +209,12 @@ export function ProductFocusTabs({
                   {product.specs.map((spec) => (
                     <div
                       key={spec.label}
-                      className="flex min-w-0 flex-col-reverse gap-1 border-t border-line pt-4"
+                      className="group/spec flex min-w-0 flex-col-reverse gap-1 border-t border-line pt-4 transition-colors duration-200 ease-tech hover:border-ink/40"
                     >
-                      <dt className="text-sm text-ink/70">{spec.label}</dt>
-                      <dd className="font-heading text-stat-sm font-medium whitespace-nowrap text-ink">
+                      <dt className="text-sm text-ink/70 transition-colors duration-200 ease-tech group-hover/spec:text-ink">
+                        {spec.label}
+                      </dt>
+                      <dd className="font-heading text-stat-sm font-medium whitespace-nowrap text-ink transition-transform duration-200 ease-tech motion-safe:group-hover/spec:translate-x-1">
                         {spec.value}
                       </dd>
                     </div>
