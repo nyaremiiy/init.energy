@@ -560,7 +560,7 @@ export const productList: Product[] = [
       { key: "power", value: { value: 5, unit: "kW" } },
       {
         key: "cycles",
-        value: { value: 6000, unit: "cycles", qualifier: "plus" },
+        value: { value: 10000, unit: "cycles", qualifier: "plus" },
       },
     ],
     image: {
