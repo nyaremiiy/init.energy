@@ -83,8 +83,6 @@ export function ProductLine() {
       thumbnail: product.image
         ? { src: product.image.src, alt: product.image.alt[locale] }
         : undefined,
-      cellCount: product.cellCount,
-      modules: product.modules,
       scalePosition: logPosition(toKwh(product.capacity), range.min, range.max),
       scaleMin: kwh(range.min),
       scaleMax: kwh(range.max),
