@@ -17,6 +17,8 @@ type FooterLinkLabels = {
   composition: string;
   inside: string;
   configurations: string;
+  ports: string;
+  runtime: string;
   specs: string;
   scaling: string;
   applications: string;
@@ -66,6 +68,16 @@ for (const page of productPages) {
   const productNavigation = (locale: Locale): NavEntry[] => {
     const localizedPath = localizePath(path, locale);
     const anchor = (id: string) => `${localizedPath}#${id}`;
+    if (page.portable) {
+      return [
+        { href: anchor(anchors.advantages), labelKey: "advantages" },
+        { href: anchor(anchors.ports), labelKey: "ports" },
+        { href: anchor(anchors.runtime), labelKey: "runtime" },
+        { href: anchor(anchors.specs), labelKey: "specs" },
+        { href: anchor(anchors.applications), labelKey: "applications" },
+        { href: anchor(anchors.faq), labelKey: "faq" },
+      ];
+    }
     if (page.configurations) {
       return [
         { href: anchor(anchors.advantages), labelKey: "advantages" },

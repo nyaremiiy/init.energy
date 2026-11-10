@@ -1,4 +1,4 @@
-import { BatteryCharging, Factory, House, Store, Sun, Unplug } from "lucide-react";
+import { BatteryCharging, BriefcaseBusiness, Factory, House, Luggage, Store, Sun, TentTree, Unplug } from "lucide-react";
 
 import { Container } from "@/components/layout/container";
 import { ArrowLink } from "@/components/ui/arrow-link";
@@ -21,6 +21,9 @@ const icons: Record<ApplicationIcon, typeof House> = {
   solar: Sun,
   backup: BatteryCharging,
   hybrid: Unplug,
+  travel: Luggage,
+  work: BriefcaseBusiness,
+  camping: TentTree,
 };
 
 /** Card tones match the solution cards on the home page. */
@@ -56,7 +59,7 @@ export function ProductApplications({
             lead={page.applications.lead[locale]}
           />
         </Reveal>
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+        <div className={`grid grid-cols-1 gap-4 ${page.portable ? "sm:grid-cols-2 lg:grid-cols-4" : "lg:grid-cols-3"}`}>
           {page.applications.items.map((item, index) => (
             <Reveal
               key={item.title[locale]}
