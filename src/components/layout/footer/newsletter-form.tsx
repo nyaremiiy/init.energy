@@ -3,6 +3,7 @@
 import { type FormEvent, useState } from "react";
 
 import { IconButton } from "@/components/ui/icon-button";
+import { useToast } from "@/components/ui/toast";
 
 import { subscribe } from "@/app/actions/newsletter";
 import { trackEvent } from "@/lib/analytics";
@@ -10,12 +11,13 @@ import { useLocale, useMessages } from "@/i18n/client";
 import { validateNewsletter } from "@/lib/newsletter";
 import { inputClasses } from "@/components/ui/input-styles";
 
-type Status = "idle" | "submitting" | "success" | "failure";
+type Status = "idle" | "submitting" | "success";
 
 export function NewsletterForm() {
   const t = useMessages().footer.newsletter;
   const locale = useLocale();
   const [status, setStatus] = useState<Status>("idle");
+  const toast = useToast();
   const [error, setError] = useState<string>();
   const submitting = status === "submitting";
 
@@ -39,16 +41,19 @@ export function NewsletterForm() {
 
       if (!result.success) {
         setError(result.errors.email);
-        setStatus(result.errors.email ? "idle" : "failure");
+        setStatus("idle");
+        if (!result.errors.email) toast.show("error", t.failure);
         return;
       }
 
       form.reset();
       setStatus("success");
+      toast.show("success", t.success);
       // Analytics only after cookie consent (see lib/analytics).
       trackEvent({ event: "newsletter_subscribe" });
     } catch {
-      setStatus("failure");
+      setStatus("idle");
+      toast.show("error", t.failure);
     }
   }
 
@@ -120,10 +125,10 @@ export function NewsletterForm() {
 
       <p
         id="footer-newsletter-error"
-        className={`mt-2 min-h-4 text-caption leading-4 text-white transition-opacity duration-200 ease-tech ${error || status === "failure" ? "opacity-100" : "opacity-0"}`}
-        role={status === "failure" ? "alert" : undefined}
+        className={`mt-2 min-h-4 text-caption leading-4 text-white transition-opacity duration-200 ease-tech ${error ? "opacity-100" : "opacity-0"}`}
+        role={error ? "alert" : undefined}
       >
-        {error ?? (status === "failure" ? t.failure : "")}
+        {error ?? ""}
       </p>
       <p
         id="footer-newsletter-note"

@@ -14,6 +14,7 @@ import { submitLead } from "@/app/actions/lead";
 import { Button } from "@/components/ui/button";
 import { inputClasses } from "@/components/ui/input-styles";
 import { PillRadio } from "@/components/ui/pill-radio";
+import { useToast } from "@/components/ui/toast";
 import { routes } from "@/content/routes";
 import {
   CALCULATOR_APPLY_EVENT,
@@ -33,7 +34,7 @@ type LeadFormProps = {
   cardTone?: "surface" | "white";
 };
 
-type Status = "idle" | "submitting" | "success" | "serverError";
+type Status = "idle" | "submitting" | "success";
 
 const objectTypes: LeadObjectType[] = [
   "apartment",
@@ -85,6 +86,7 @@ export function LeadForm({
   const formRef = useRef<HTMLFormElement>(null);
   const [errors, setErrors] = useState<LeadFieldErrors>({});
   const [status, setStatus] = useState<Status>("idle");
+  const toast = useToast();
   const [objectType, setObjectType] = useState<LeadObjectType | undefined>(
     defaultObjectType,
   );
@@ -150,18 +152,21 @@ export function LeadForm({
 
       if (!result.success) {
         setErrors(result.errors);
-        setStatus(
-          Object.keys(result.errors).length > 0 ? "idle" : "serverError",
-        );
+        setStatus("idle");
         focusFirstError(result.errors);
+        if (Object.keys(result.errors).length === 0) {
+          toast.show("error", t.failure);
+        }
         return;
       }
 
       form.reset();
       setCalculator(undefined);
       setStatus("success");
+      toast.show("success", t.success);
     } catch {
-      setStatus("serverError");
+      setStatus("idle");
+      toast.show("error", t.failure);
     }
   }
 
@@ -321,15 +326,6 @@ export function LeadForm({
           </label>
           <FieldError id="lead-consent-error" message={errors.consent} />
         </div>
-
-        {status === "serverError" ? (
-          <p
-            role="alert"
-            className="rounded-field border border-ink bg-white px-4 py-3 text-sm text-ink motion-safe:animate-enter"
-          >
-            {t.failure}
-          </p>
-        ) : null}
 
         <Button
           type="submit"

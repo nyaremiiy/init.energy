@@ -4,6 +4,7 @@ import { Footer } from "@/components/layout/footer/footer";
 import { Header } from "@/components/layout/header/header";
 import { BackToTop } from "@/components/ui/back-to-top";
 import { ContactWidget } from "@/components/ui/contact-widget";
+import { ToastProvider } from "@/components/ui/toast";
 import type { Locale } from "@/i18n/config";
 import { LocaleProvider } from "@/i18n/client";
 
@@ -17,11 +18,13 @@ export function SiteChrome({
 }) {
   return (
     <LocaleProvider locale={locale}>
-      <Header />
-      {children}
-      <Footer />
-      <BackToTop />
-      <ContactWidget />
+      <ToastProvider>
+        <Header />
+        {children}
+        <Footer />
+        <BackToTop />
+        <ContactWidget />
+      </ToastProvider>
     </LocaleProvider>
   );
 }

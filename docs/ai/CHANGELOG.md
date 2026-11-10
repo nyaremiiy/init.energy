@@ -36,6 +36,13 @@
 - **Файли:** src/content/{products,product-pages,faq}.ts, docs/ai/{CONTEXT,CHANGELOG}.md
 - **Нотатки / що далі:** строк служби в роках не публікуємо, доки власник не підтвердить. Діапазон робочої напруги батареї 48 В — TODO(content). Перевірка: lint, test і build проходять.
 
+## 2026-11-10 — Сповіщення про результат відправки форм
+- **Агент:** Claude Code
+- **Гілка:** feat/form-toast (статус: змерджено в develop)
+- **Що зроблено:** додано спільне сповіщення `ToastProvider` / `useToast()` (`src/components/ui/toast.tsx`), підключене в `SiteChrome`. Сповіщення з’являється зліва вгорі, виїжджає з лівого краю, через 5 с зникає; при `prefers-reduced-motion` лише з’являється. Заявка: успіх і помилка відправки йдуть у сповіщення. Підписка в футері: так само. Вбудований блок помилки заявки прибрано, помилки полів (валідація) лишаються під полями.
+- **Файли:** src/components/ui/toast.tsx, src/components/layout/site-chrome.tsx, src/components/forms/LeadForm.tsx, src/components/layout/footer/newsletter-form.tsx, docs/ai/CHANGELOG.md
+- **Нотатки / що далі:** позиція `top-20` — під шапкою; якщо шапка вища або нижча, підігнати. Візуально ще не перевірено в браузері.
+
 ## 2026-11-10 — Мега-меню закривається після переходу
 - **Агент:** Claude Code
 - **Гілка:** fix/megamenu-close-on-navigate (статус: змерджено в develop)
