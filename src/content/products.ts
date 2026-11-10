@@ -638,6 +638,7 @@ export const productList: Product[] = [
     // TODO(content): add approved 1200×630 OG art.
     page: {
       slug: "svit-plus-16000",
+      ogImage: "/images/og/svit-plus-16000.jpg",
       meta: {
         title: {
           uk: "SVIT PLUS 16000 — батарея LiFePO₄ 16,07 кВт·год",
