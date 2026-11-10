@@ -11,22 +11,16 @@ export type CapacityCardProps = {
   /** Muted word before the number («від»), for capacities given as a minimum. */
   prefix?: string;
   thumbnail?: { src: string; alt: string };
-  /** Cells stated in content: drawn as a grid, 8 per row. */
-  cellCount?: number;
-  /** Cabinets of an industrial system: drawn as a row. */
-  modules?: number;
   /** Position on the line-up scale, 0–1 (logarithmic, computed by the caller). */
   scalePosition: number;
   scaleMin: string;
   scaleMax: string;
 };
 
-const pad = (index: number) => String(index + 1).padStart(2, "0");
-
 /**
- * Capacity at a glance: chemistry, the number, a battery drawing and where
- * the product sits in the line-up. The drawing and the scale are decorative
- * (aria-hidden) — every number on them is also plain text on the page.
+ * Capacity at a glance: chemistry, the number and where the product sits in
+ * the line-up. The scale is decorative (aria-hidden) — every number on it is
+ * also plain text on the page.
  */
 export function CapacityCard({
   chemistryLabel,
@@ -34,8 +28,6 @@ export function CapacityCard({
   unit,
   prefix,
   thumbnail,
-  cellCount,
-  modules,
   scalePosition,
   scaleMin,
   scaleMax,
@@ -46,7 +38,9 @@ export function CapacityCard({
   return (
     <div
       className={`group relative isolate flex flex-col gap-6 overflow-hidden rounded-3xl p-card-sm transition-shadow duration-300 ease-tech hover:shadow-card focus-within:shadow-card lg:p-card ${
-        hasImage ? "bg-ink" : "bg-linear-to-br from-surface to-sky"
+        hasImage
+          ? "min-h-80 justify-between bg-ink lg:min-h-96"
+          : "bg-linear-to-br from-surface to-sky"
       }`}
     >
       {thumbnail ? (
@@ -110,37 +104,6 @@ export function CapacityCard({
           {unit}
         </span>
       </p>
-
-      {cellCount || modules ? (
-        <div
-          aria-hidden
-          className="relative z-10 rounded-2xl bg-white/90 p-3 transition-transform duration-300 ease-tech motion-safe:group-hover:-translate-y-1"
-        >
-          {cellCount ? (
-            <ul className="grid grid-cols-8 gap-1">
-              {Array.from({ length: cellCount }, (_, index) => (
-                <li
-                  key={index}
-                  className="flex aspect-3/4 min-w-0 items-end justify-center rounded-md bg-linear-to-b from-accent to-accent-strong pb-1 font-mono text-xs text-white transition-transform duration-200 ease-tech motion-safe:hover:-translate-y-1"
-                >
-                  {pad(index)}
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <ul className="flex gap-2">
-              {Array.from({ length: modules ?? 0 }, (_, index) => (
-                <li
-                  key={index}
-                  className="flex aspect-3/4 flex-1 items-end justify-center rounded-md bg-linear-to-b from-accent to-accent-strong pb-1 font-mono text-xs text-white transition-transform duration-200 ease-tech motion-safe:hover:-translate-y-1"
-                >
-                  {pad(index)}
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-      ) : null}
 
       <div aria-hidden className="relative z-10 flex flex-col gap-2">
         <div
