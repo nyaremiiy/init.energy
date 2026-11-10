@@ -152,11 +152,14 @@ export function isHomePath(pathname: string | null): boolean {
   return pathname !== null && /^\/(en\/)?$/.test(pathname);
 }
 
-/** Sections of the solar plant page (/cec/), labelled like its footer column. */
+/** Main sections of the solar plant page in the header; the rest stay in the footer column. */
+const solarHeaderSectionKeys: string[] = ["sesSegments", "products", "calculator", "aboutUs"];
+
+/** Sections of the solar plant page (/cec/) for the header, labelled like the footer column. */
 export function pageSectionLinks(locale: Locale): NavLink[] {
   const labels = getMessagesFor(locale).footer.links;
   const entries = pageNavigation[localizePath(routes.services.turnkeySes, locale)] ?? [];
-  return entries.flatMap((entry) => {
+  return entries.filter((entry) => solarHeaderSectionKeys.includes(entry.labelKey)).flatMap((entry) => {
     const sectionId = entry.href.split("#")[1];
     return sectionId
       ? [{ href: entry.href, label: labels[entry.labelKey], sectionId }]
