@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-10 — Наявне фото на сторінці SVIT PLUS 16000
+- **Агент:** Codex
+- **Гілка:** fix/svit-plus-16000-media (статус: готова до merge у develop)
+- **Що зроблено:** За уточненням власника прибрано примусовий режим `MediaPlaceholder` для повної сторінки SVIT PLUS 16000. Hero та секція характеристик тепер беруть наявне фото й alt безпосередньо з об'єкта продукту в `content/products.ts`.
+- **Файли:** src/content/products.ts, docs/ai/{CONTEXT,CHANGELOG}.md
+- **Нотатки / що далі:** Окреме OG-зображення 1200×630 залишається TODO(content).
+
 ## 2026-11-10 — Сторінка продукту SVIT PLUS 16000
 - **Агент:** Codex
 - **Гілка:** feature/svit-plus-16000-page (статус: готова до merge у develop)

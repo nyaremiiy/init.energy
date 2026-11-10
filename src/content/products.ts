@@ -635,7 +635,7 @@ export const productList: Product[] = [
     // BMS current within the stated 100–200 A range.
     // TODO(content): parallel connection, mounting and datasheet PDF are not
     // stated by the source and are intentionally not rendered.
-    // TODO(content): replace all full-page placeholders and add 1200×630 OG art.
+    // TODO(content): add approved 1200×630 OG art.
     page: {
       slug: "svit-plus-16000",
       meta: {
@@ -648,13 +648,10 @@ export const productList: Product[] = [
           en: "SVIT PLUS 16000: 16.07 kWh, 51.2 V LiFePO₄ battery with 16 EVE 314 Ah cells, 200 A BMS, 6,000–9,000+ cycles and a 5-year warranty.",
         },
       },
-      mediaPlaceholder: true,
-      specsMediaAspect: "portrait",
       hero: {
         typeLabel: { uk: "Акумуляторна батарея LiFePO₄", en: "LiFePO₄ battery" },
         segmentLabel: { uk: "СЕС і автономні системи", en: "Solar and off-grid systems" },
         segmentIcon: "sun",
-        mediaAspect: "square",
         tagTone: "light",
         lead: {
           uk: "Батарея LiFePO₄ на 16,07 кВт·год з 16 призматичних комірок EVE для сонячних станцій, резервного живлення, автономних і гібридних систем. Вбудована BMS з активним балансуванням і зв'язком CAN, RS485 та Bluetooth.",
