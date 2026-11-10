@@ -115,18 +115,22 @@ export function ProductLine() {
             />
           </Reveal>
 
-          <ProductFocusTabs
-            products={focusProducts}
-            defaultIndex={Math.max(
-              0,
-              productList.findIndex((product) => product.id === defaultProduct),
-            )}
-            labels={{
-              tablist: t.tablist,
-              compare: t.compareAll,
-            }}
-            compareHref={sectionHref(anchors.compare, locale)}
-          />
+          <Reveal delay={0.08} distance={16}>
+            <ProductFocusTabs
+              products={focusProducts}
+              defaultIndex={Math.max(
+                0,
+                productList.findIndex(
+                  (product) => product.id === defaultProduct,
+                ),
+              )}
+              labels={{
+                tablist: t.tablist,
+                compare: t.compareAll,
+              }}
+              compareHref={sectionHref(anchors.compare, locale)}
+            />
+          </Reveal>
         </Container>
       </Panel>
 

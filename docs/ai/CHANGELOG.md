@@ -15,6 +15,15 @@
 
 ---
 
+## 2026-11-10 — Системні анімації сторінки
+- **Агент:** Codex
+- **Гілка:** feature/page-motion-system (статус: змерджено в develop)
+- **Що зроблено:** Наявний `Reveal` поширено на всі основні композиційні елементи головної: вкладки накопичувачів, калькулятор, FAQ, фільтр проєктів, ключові слова рішень, окремі блоки заявки та футер. У блоці довіри заголовок, статистика, аргументи й фото відкриваються поетапно зі stagger. Hero та інтерактивні стани зберегли власні анімації; `prefers-reduced-motion` надалі повністю вимикає reveal-рух.
+- **Файли:** src/components/sections/{LeadSection,projects-showcase,trust-block}.tsx, src/components/sections/home/{calculator-section,faq-section,product-line,solutions-by-segment}.tsx, src/components/layout/footer/footer.tsx, docs/ai/{CONTEXT,CHANGELOG}.md
+- **Нотатки / що далі:** Анімації застосовані до змістових груп, а не кожної літери чи іконки, щоб не збільшувати візуальний шум. lint і build проходять; видалений власником `public/images/products/svit600.png` не включено в коміт.
+
+---
+
 ## 2026-11-10 — Чистіші й вищі картки ємності
 - **Агент:** Codex
 - **Гілка:** style/simplify-capacity-cards (статус: змерджено в develop)
