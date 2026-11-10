@@ -1,7 +1,8 @@
 import { companyContacts, offices, type Office } from "@/content/company";
 import { products, productSummary, type ProductId } from "@/content/products";
 import { featuredProjects } from "@/content/projects";
-import { anchors, sectionHref } from "@/content/routes";
+import { pageNavigation } from "@/content/navigation";
+import { anchors, routes, sectionHref } from "@/content/routes";
 import { services, type ServiceId } from "@/content/services";
 import type { Locale } from "@/i18n/config";
 import { getMessagesFor } from "@/i18n/messages";
@@ -149,4 +150,16 @@ export const officeRotationInterval = 5000;
 /** Home page URLs (Ukrainian at the root, English under /en/). */
 export function isHomePath(pathname: string | null): boolean {
   return pathname !== null && /^\/(en\/)?$/.test(pathname);
+}
+
+/** Sections of the solar plant page (/cec/), labelled like its footer column. */
+export function pageSectionLinks(locale: Locale): NavLink[] {
+  const labels = getMessagesFor(locale).footer.links;
+  const entries = pageNavigation[localizePath(routes.services.turnkeySes, locale)] ?? [];
+  return entries.flatMap((entry) => {
+    const sectionId = entry.href.split("#")[1];
+    return sectionId
+      ? [{ href: entry.href, label: labels[entry.labelKey], sectionId }]
+      : [];
+  });
 }
