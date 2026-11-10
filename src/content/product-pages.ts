@@ -114,8 +114,8 @@ const standaloneProductPages: ProductPage[] = [
         en: "SVIT PLUS 5000 — 5.12 kWh LiFePO₄ battery",
       },
       description: {
-        uk: "Батарея LiFePO₄ SVIT PLUS 5000: 5,12 кВт·год, 5 кВт, понад 6 000 циклів і до 16 модулів паралельно (81 кВт·год). Гарантія 5 років. Для дому та бізнесу.",
-        en: "SVIT PLUS 5000 LiFePO₄ battery: 5.12 kWh, 5 kW, over 6,000 cycles and up to 16 modules in parallel (81 kWh). 5-year warranty. For homes and businesses.",
+        uk: "Батарея LiFePO₄ SVIT PLUS 5000: 5,12 кВт·год (48 В, 100 Аг), 5 кВт, понад 10 000 циклів і до 16 модулів паралельно (81 кВт·год). Гарантія 5 років. Для дому та бізнесу.",
+        en: "SVIT PLUS 5000 LiFePO₄ battery: 5.12 kWh (48 V, 100 Ah), 5 kW, over 10,000 cycles and up to 16 modules in parallel (81 kWh). 5-year warranty. For homes and businesses.",
       },
     },
     hero: {
@@ -138,12 +138,12 @@ const standaloneProductPages: ProductPage[] = [
           label: { uk: "потужність", en: "power" },
         },
         {
-          value: { quantity: { value: 51.2, unit: "V" } },
+          value: { quantity: { value: 48, unit: "V" } },
           label: { uk: "номінальна напруга", en: "nominal voltage" },
         },
         {
-          value: { text: { uk: "6 000+", en: "6,000+" } },
-          label: { uk: "циклів при 80% DOD", en: "cycles at 80% DOD" },
+          value: { text: { uk: "10 000+", en: "10,000+" } },
+          label: { uk: "циклів", en: "cycles" },
         },
       ],
       warranty: {
@@ -186,12 +186,12 @@ const standaloneProductPages: ProductPage[] = [
         },
         {
           icon: "cycles",
-          figure: { uk: "6 000+", en: "6,000+" },
+          figure: { uk: "10 000+", en: "10,000+" },
           tag: { uk: "Ресурс", en: "Lifetime" },
-          title: { uk: "До 15 років роботи", en: "Up to 15 years of service" },
+          title: { uk: "Понад 10 000 циклів", en: "Over 10,000 cycles" },
           text: {
-            uk: "Понад 6 000 циклів заряду й розряду при глибині 80% — приблизно 15 років експлуатації.",
-            en: "Over 6,000 charge and discharge cycles at 80% depth — about 15 years of operation.",
+            uk: "Батарея витримує понад 10 000 циклів заряду й розряду — ресурс на роки експлуатації.",
+            en: "The battery withstands over 10,000 charge and discharge cycles — a lifetime of years of use.",
           },
           tone: "navy",
         },
@@ -220,7 +220,7 @@ const standaloneProductPages: ProductPage[] = [
       },
       {
         label: { uk: "Номінальна ємність", en: "Nominal capacity" },
-        value: { quantity: { value: 5.12, unit: "kWh" } },
+        value: { text: { uk: "5,12 кВт·год (100 Аг)", en: "5.12 kWh (100 Ah)" } },
       },
       {
         label: { uk: "Номінальна потужність", en: "Nominal power" },
@@ -228,23 +228,11 @@ const standaloneProductPages: ProductPage[] = [
       },
       {
         label: { uk: "Номінальна напруга", en: "Nominal voltage" },
-        value: { quantity: { value: 51.2, unit: "V" } },
-      },
-      {
-        label: {
-          uk: "Діапазон робочої напруги",
-          en: "Operating voltage range",
-        },
-        value: { text: { uk: "45–57,6 В", en: "45–57.6 V" } },
+        value: { quantity: { value: 48, unit: "V" } },
       },
       {
         label: { uk: "Кількість циклів", en: "Cycle life" },
-        value: {
-          text: {
-            uk: "> 6 000 (при 80% DOD), ≈ 15 років",
-            en: "> 6,000 (at 80% DOD), ≈ 15 years",
-          },
-        },
+        value: { text: { uk: "понад 10 000", en: "over 10,000" } },
       },
       {
         label: { uk: "Паралельне підключення", en: "Parallel connection" },

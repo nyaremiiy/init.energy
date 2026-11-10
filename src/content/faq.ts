@@ -144,8 +144,8 @@ export const faqList: Faq[] = [
       en: "How long does SVIT PLUS 5000 last?",
     },
     answer: {
-      uk: "Близько 15 років: батарея витримує понад 6 000 циклів заряду й розряду при глибині 80%.",
-      en: "About 15 years: the battery withstands over 6,000 charge and discharge cycles at 80% depth.",
+      uk: "Батарея витримує понад 10 000 циклів заряду й розряду.",
+      en: "The battery withstands over 10,000 charge and discharge cycles.",
     },
   },
   {

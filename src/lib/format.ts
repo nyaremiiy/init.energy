@@ -13,7 +13,7 @@ export type Unit = "W" | "kW" | "Wh" | "kWh" | "cycles" | "V";
 export type Quantity = {
   value: number;
   unit: Unit;
-  /** "from" → «від 208 кВт·год», "upTo" → «до 1044 кВт·год», "plus" → «6000+ циклів». */
+  /** "from" → «від 208 кВт·год», "upTo" → «до 1044 кВт·год», "plus" → «10000+ циклів». */
   qualifier?: "from" | "upTo" | "plus";
 };
 
