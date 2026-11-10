@@ -43,6 +43,13 @@
 - **Файли:** src/components/ui/toast.tsx, docs/ai/CHANGELOG.md
 - **Нотатки / що далі:** перевірити в браузері на десктопі й телефоні.
 
+## 2026-11-10 — Якісніші фото складу SVIT HOME та батареї
+- **Агент:** Claude Code
+- **Гілка:** feat/svit-home-photo-quality (статус: змерджено в develop)
+- **Що зроблено:** фото стійки, інвертора та батареї SVIT PLUS 5000 перекодовано з оригіналів PNG з Downloads (1448×1086 / 1254×1254) в AVIF якістю 80. Раніше файли важили 12–18 КБ і були сильно стиснуті; тепер 64–111 КБ. Розміри й пропорції не змінено. Також додано до git папку `public/images/products/svit-home/`, яка раніше не була закомічена: без неї фото складу не потрапили б на сервер.
+- **Файли:** public/images/products/svit-home/{standalone,invertor}.avif, public/images/products/svit-plus-5000.avif, docs/ai/CHANGELOG.md
+- **Нотатки / що далі:** hero-фото SVIT HOME (svit-home.avif, 16 КБ) досі стиснуте; оригінал більшої роздільної здатності не знайдено. Якщо є, перекодувати так само.
+
 ## 2026-11-10 — Фото складу комплекту SVIT HOME
 - **Агент:** Claude Code
 - **Гілка:** feat/svit-home-composition-photos (статус: змерджено в develop)
