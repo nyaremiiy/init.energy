@@ -118,7 +118,7 @@ export function ProductHero({ page, product, locale }: ProductHeroProps) {
 
         <div className="relative lg:col-span-5">
           {product.image && !page.mediaPlaceholder ? (
-            <div className="relative aspect-4/3 overflow-hidden rounded-3xl bg-white/6">
+            <div className={`relative overflow-hidden rounded-3xl bg-white/6 ${page.hero.mediaAspect === "square" ? "aspect-square" : "aspect-4/3"}`}>
               <Image
                 src={product.image.src}
                 alt={product.image.alt[locale]}
@@ -126,7 +126,7 @@ export function ProductHero({ page, product, locale }: ProductHeroProps) {
                 priority
                 unoptimized
                 sizes="(min-width: 1024px) 40vw, 100vw"
-                className="object-cover"
+                className="object-cover object-center"
               />
             </div>
           ) : (

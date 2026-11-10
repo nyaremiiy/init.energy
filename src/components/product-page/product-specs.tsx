@@ -56,14 +56,14 @@ export function ProductSpecs({
           <div className="lg:col-span-5">
             <div className="flex flex-col gap-4 lg:sticky lg:top-40">
               {product.image && !page.mediaPlaceholder ? (
-                <div className="relative aspect-4/3 overflow-hidden rounded-3xl bg-white">
+                <div className={`relative overflow-hidden rounded-3xl bg-white ${page.specsMediaAspect === "portrait" ? "aspect-4/5" : "aspect-4/3"}`}>
                   <Image
                     src={product.image.src}
                     alt={product.image.alt[locale]}
                     fill
                     unoptimized
                     sizes="(min-width: 1024px) 40vw, 100vw"
-                    className="object-cover"
+                    className="object-cover object-center"
                   />
                 </div>
               ) : (
