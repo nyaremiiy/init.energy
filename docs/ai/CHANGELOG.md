@@ -99,6 +99,13 @@
 - **Файли:** src/i18n/config.ts, src/components/layout/header/header-data.ts, src/content/navigation.ts, src/components/product-page/product-applications.tsx, src/components/calculator/QuickCalculator.tsx, docs/ai/CHANGELOG.md
 - **Нотатки / що далі:** англійська є для головної, SVIT PLUS 5000, SVIT HOME і SVIT PLUS 16000. Сторінок /cec/, /svit/, /rishennya/…, /svit-600/, /bess/ немає в збірці: посилання на них ведуть на українські адреси (і 404). Потрібне рішення власника: прибрати їх з меню або створити сторінки.
 
+## 2026-11-10 — Меню шапки на сторінці СЕС (/cec/)
+- **Агент:** Claude Code
+- **Гілка:** feat/cec-header-menu (статус: змерджено в develop)
+- **Що зроблено:** на сторінці СЕС у шапці (десктоп і мобільне меню) з'явились пункти її розділів: СЕС для дому й бізнесу, Типи СЕС, Гібридна СЕС, Про компанію, Етапи робіт, Накопичувачі SVIT, Калькулятор, Питання й відповіді, Консультація. Підписи й якорі — ті самі, що в колонці футера. На інших сторінках, крім головної, пункти розділів не показуються. Компонент HomeOnly замінено на HeaderSectionLinks (вибір списку за адресою).
+- **Файли:** src/components/layout/header/{header-data,header-section-links,desktop-nav,mobile-menu}.tsx, src/components/layout/header/home-only.tsx (видалено), docs/ai/CHANGELOG.md
+- **Нотатки / що далі:** перевірити в браузері на десктопі й на телефоні; пункт «Реалізовані проєкти» з'явиться разом із секцією.
+
 ## 2026-11-10 — Сторінка СЕС лишається на /cec/
 - **Агент:** Claude Code
 - **Гілка:** fix/cec-link (статус: змерджено в develop)

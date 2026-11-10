@@ -1,56 +1,39 @@
+import { routes } from "@/content/routes";
+import { localizePath } from "@/i18n/config";
 import { getLocale, getMessages } from "@/i18n/server";
 
 import {
   getNavItems,
   isNavGroup,
+  pageSectionLinks,
   type NavGroup,
   type NavLink as PageLink,
 } from "./header-data";
-import { HomeOnly } from "./home-only";
+import { HeaderSectionLinks } from "./header-section-links";
 import { MegaMenuItem } from "./mega-menu-item";
-import { NavLink } from "./nav-link";
-import { SectionNavLink } from "./section-nav-link";
 
 /**
  * Desktop header menu in two clusters, split by a thin divider:
- * left — catalogue groups with mega menus;
- * right — links to sections of the current page.
+ * left — the section links of the current page (home or the solar plant page);
+ * right — catalogue groups with mega menus.
  */
 export function DesktopNav() {
-  const navItems = getNavItems(getLocale());
+  const locale = getLocale();
+  const navItems = getNavItems(locale);
   const groups = navItems.filter((item): item is NavGroup => isNavGroup(item));
-  const pageLinks = navItems.filter(
-    (item): item is PageLink => !isNavGroup(item),
-  );
+  const sectionsByPath = {
+    [localizePath(routes.home, locale)]: navItems.filter(
+      (item): item is PageLink => !isNavGroup(item),
+    ),
+    [localizePath(routes.services.turnkeySes, locale)]: pageSectionLinks(locale),
+  };
 
   return (
     <nav
       aria-label={getMessages().chrome.header.mainMenu}
       className="hidden self-stretch lg:flex lg:items-center lg:gap-6"
     >
-      <HomeOnly>
-        <ul className="flex h-full items-center gap-2 text-sm font-medium text-white/85">
-          {pageLinks.map((item) => (
-            <li key={item.href}>
-              {item.sectionId ? (
-                <SectionNavLink
-                  href={item.href}
-                  label={item.label}
-                  sectionId={item.sectionId}
-                />
-              ) : (
-                <NavLink
-                  href={item.href}
-                  className="inline-flex items-center px-3 py-1.5 transition-colors hover:text-white"
-                >
-                  {item.label}
-                </NavLink>
-              )}
-            </li>
-          ))}
-        </ul>
-        <span aria-hidden className="h-5 w-px bg-white/20" />
-      </HomeOnly>
+      <HeaderSectionLinks byPath={sectionsByPath} />
 
       <ul className="flex h-full items-center gap-8 text-sm font-medium text-white/85">
         {groups.map((item) => (
