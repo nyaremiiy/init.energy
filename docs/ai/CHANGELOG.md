@@ -99,6 +99,13 @@
 - **Файли:** src/i18n/config.ts, src/components/layout/header/header-data.ts, src/content/navigation.ts, src/components/product-page/product-applications.tsx, src/components/calculator/QuickCalculator.tsx, docs/ai/CHANGELOG.md
 - **Нотатки / що далі:** англійська є для головної, SVIT PLUS 5000, SVIT HOME і SVIT PLUS 16000. Сторінок /cec/, /svit/, /rishennya/…, /svit-600/, /bess/ немає в збірці: посилання на них ведуть на українські адреси (і 404). Потрібне рішення власника: прибрати їх з меню або створити сторінки.
 
+## 2026-11-10 — Меню «На цій сторінці» на /ses/
+- **Агент:** Claude Code
+- **Гілка:** feat/ses-footer-nav (статус: змерджено в develop)
+- **Що зроблено:** у футері на сторінці СЕС з'явилась колонка «На цій сторінці»: СЕС для дому й бізнесу, Типи СЕС, Гібридна СЕС, Про компанію, Етапи робіт, Накопичувачі SVIT, Калькулятор, Питання й відповіді, Консультація. Підписи взяті з уже наявних і чотирьох нових ключів `footer.links`. Порядок — як на сторінці; якір «Реалізовані проєкти» з'явиться разом із секцією.
+- **Файли:** src/content/navigation.ts, messages/{uk,en}.json, docs/ai/CHANGELOG.md
+- **Нотатки / що далі:** перевірено збіркою, лінтером і типами; посилання в HTML обох мов ведуть на /ses/#… і /en/ses/#….
+
 ## 2026-11-10 — Сторінка «Сонячні електростанції» /ses/
 - **Агент:** Claude Code
 - **Гілка:** feat/ses-page (статус: змерджено в develop)

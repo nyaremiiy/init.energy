@@ -250,7 +250,11 @@
       "runtime": "Скільки працює",
       "specs": "Характеристики",
       "scaling": "Масштабування",
-      "applications": "Застосування"
+      "applications": "Застосування",
+      "sesSegments": "СЕС для дому й бізнесу",
+      "sesTypes": "Типи СЕС",
+      "sesHybrid": "Гібридна СЕС",
+      "sesSteps": "Етапи робіт"
     },
     "newsletter": {
       "title": "Розсилка",

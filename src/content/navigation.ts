@@ -30,6 +30,10 @@ type FooterLinkLabels = {
   faq: string;
   consultation: string;
   turnkeySes: string;
+  sesSegments: string;
+  sesTypes: string;
+  sesHybrid: string;
+  sesSteps: string;
   svitCatalog: string;
   about: string;
   contacts: string;
@@ -57,9 +61,32 @@ function homeNavigation(locale: Locale): NavEntry[] {
   ];
 }
 
+/** Solar hub (/ses/): its sections in page order. */
+function sesNavigation(locale: Locale): NavEntry[] {
+  const section = (anchor: string, labelKey: NavEntry["labelKey"]) => ({
+    href: localizePath(`${routes.services.turnkeySes}#${anchor}`, locale),
+    labelKey,
+  });
+
+  return [
+    section(anchors.sesSegments, "sesSegments"),
+    section(anchors.sesTypes, "sesTypes"),
+    section(anchors.sesHybrid, "sesHybrid"),
+    section(anchors.aboutUs, "aboutUs"),
+    section(anchors.sesSteps, "sesSteps"),
+    section(anchors.products, "products"),
+    ...(hasProjects ? [section(anchors.projects, "projects")] : []),
+    section(anchors.calculator, "calculator"),
+    section(anchors.faq, "faq"),
+    section(anchors.contacts, "consultation"),
+  ];
+}
+
 export const pageNavigation: Record<string, NavEntry[]> = {
   [routes.home]: homeNavigation("uk"),
   [localizePath(routes.home, "en")]: homeNavigation("en"),
+  [routes.services.turnkeySes]: sesNavigation("uk"),
+  [localizePath(routes.services.turnkeySes, "en")]: sesNavigation("en"),
 };
 
 /** Product pages: the same anchors as the sticky in-page nav. */
