@@ -158,11 +158,104 @@ const slides: SlideSource[] = [
   },
 ];
 
+const sesSlides: SlideSource[] = [
+  {
+    id: "ses-title",
+    image: generalHeroImage,
+    label: {
+      uk: "INIT ENERGY — сонячні електростанції",
+      en: "INIT ENERGY — solar power plants",
+    },
+    heading: {
+      uk: ["Сонячні електростанції", "під ключ"],
+      en: ["Solar power plants", "turnkey"],
+    },
+    headingLevel: "h1",
+    description: {
+      uk: "Проєктуємо й встановлюємо СЕС для дому й бізнесу: від розрахунку споживання до запуску й сервісу. Накопичувачі SVIT — власного виробництва.",
+      en: "We design and install solar power plants for homes and businesses: from consumption estimate to commissioning and service. SVIT batteries are made in-house.",
+    },
+    actions: [
+      {
+        target: { href: "#calculator" },
+        label: { uk: "Розрахувати СЕС", en: "Calculate a plant" },
+        variant: "primary",
+      },
+      {
+        target: { href: "#projects" },
+        label: { uk: "Реалізовані проєкти", en: "Completed projects" },
+        variant: "secondary",
+      },
+    ],
+  },
+  {
+    id: "ses-storage",
+    image: solarHeroImage,
+    label: { uk: "Накопичувачі SVIT", en: "SVIT batteries" },
+    heading: {
+      uk: ["Вдень — сонце,", "вночі — батарея"],
+      en: ["Sun by day,", "battery by night"],
+    },
+    headingLevel: "h2",
+    description: {
+      uk: "Накопичувач SVIT запасає надлишки енергії з панелей і живить будинок, коли сонця немає або вимкнули світло.",
+      en: "The SVIT battery stores surplus energy from the panels and powers the house when there is no sun or the power is off.",
+    },
+    actions: [
+      {
+        target: { href: "#products" },
+        label: { uk: "Накопичувачі SVIT", en: "SVIT batteries" },
+        variant: "primary",
+      },
+      {
+        target: { href: "#contacts" },
+        label: { uk: "Залишити заявку", en: "Leave a request" },
+        variant: "secondary",
+      },
+    ],
+  },
+  {
+    id: "ses-hybrid",
+    image: backupPowerHeroImage,
+    label: { uk: "Гібридна СЕС", en: "Hybrid plant" },
+    heading: {
+      uk: ["Незалежність", "від відключень"],
+      en: ["Independence", "from outages"],
+    },
+    headingLevel: "h2",
+    description: {
+      uk: "Гібридна станція працює з мережею, панелями й батареєю одночасно. Під час відключень будинок не втрачає світла.",
+      en: "A hybrid plant works with the grid, panels and battery at the same time. During outages the house keeps its power.",
+    },
+    actions: [
+      {
+        target: { href: "#contacts" },
+        label: { uk: "Залишити заявку", en: "Leave a request" },
+        variant: "primary",
+      },
+      {
+        target: { href: "#ses-types" },
+        label: { uk: "Типи СЕС", en: "Plant types" },
+        variant: "secondary",
+      },
+    ],
+  },
+];
+
 export const heroSlideCount = slides.length;
+
+/** Hub page (/ses/) slides: their own texts, same images for now. */
+export function getSesHeroSlides(locale: Locale): HeroSlide[] {
+  return mapSlides(sesSlides, locale);
+}
 
 /** Slides with texts and links for one locale. */
 export function getHeroSlides(locale: Locale): HeroSlide[] {
-  return slides.map((slide) => ({
+  return mapSlides(slides, locale);
+}
+
+function mapSlides(list: SlideSource[], locale: Locale): HeroSlide[] {
+  return list.map((slide) => ({
     id: slide.id,
     image: slide.image,
     label: slide.label[locale],

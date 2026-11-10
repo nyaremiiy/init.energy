@@ -66,7 +66,7 @@ CLAUDE.md       # точка входу для Claude Code (імпортує AGE
 
 ```
 /                                 головна (лендинг із секціями-якорями)
-/cec/                             СЕС під ключ
+/ses/                             СЕС під ключ (був /cec/, 308 → /ses/, next.config.ts)
 /rishennya/ses-dlya-gotelyu/      СЕС для готелю та відпочинкового комплексу
 /svit-600/                        SVIT 600
 /svit-plus-5000/                  SVIT PLUS 5000

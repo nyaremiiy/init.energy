@@ -23,9 +23,14 @@ type FaqAccordionProps = {
  * Topic filter + accordion. Every answer is server-rendered; the filter and
  * closed items only hide rows, they never remove them from the DOM.
  */
-export function FaqAccordion({ items, topics, labels }: FaqAccordionProps) {
+export function FaqAccordion({
+  items,
+  topics,
+  labels,
+  initialTopic,
+}: FaqAccordionProps & { initialTopic?: FaqTopic }) {
   const baseId = useId();
-  const [topic, setTopic] = useState<FaqTopic | "all">("all");
+  const [topic, setTopic] = useState<FaqTopic | "all">(initialTopic ?? "all");
   // Several questions may be open; the first one is open by default.
   const [open, setOpen] = useState<Set<string>>(
     () => new Set(items[0] ? [items[0].id] : []),

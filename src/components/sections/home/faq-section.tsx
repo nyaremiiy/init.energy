@@ -8,7 +8,12 @@ import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
 import { SectionWatermark } from "@/components/ui/section-watermark";
 import { offices } from "@/content/company";
-import { faqForPage, faqTopics, type FaqPage } from "@/content/faq";
+import {
+  faqForPage,
+  faqTopics,
+  type FaqPage,
+  type FaqTopic,
+} from "@/content/faq";
 import { anchors, sectionHref } from "@/content/routes";
 import { formatPhone } from "@/lib/format";
 import { getLocale, getMessages } from "@/i18n/server";
@@ -23,6 +28,8 @@ type FaqSectionProps = {
   lead?: string;
   /** Topic filter above the accordion (home page); off on product pages. */
   filter?: boolean;
+  /** Topic opened first (solar hub page); «all» by default. */
+  initialTopic?: FaqTopic;
 };
 
 /**
@@ -34,6 +41,7 @@ export function FaqSection({
   title,
   lead,
   filter = true,
+  initialTopic,
 }: FaqSectionProps) {
   const messages = getMessages();
   const locale = getLocale();
@@ -87,6 +95,7 @@ export function FaqSection({
         <div className="min-w-0 lg:col-span-7">
           <Reveal delay={0.08} distance={16}>
             <FaqAccordion
+              initialTopic={initialTopic}
               items={items}
               // Only topics present on this page; with one topic the filter is hidden.
               topics={(filter ? faqTopics : [])

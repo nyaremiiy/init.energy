@@ -143,3 +143,24 @@ export function websiteSchema(locale: Locale) {
     publisher: { "@id": `${siteUrl}/#organization` },
   };
 }
+
+/** The plant service (hub page): provider is the organization, area is the country. */
+export function serviceSchema(
+  locale: Locale,
+  input: { name: string; description: string; url: string },
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${input.url}#service`,
+    name: input.name,
+    description: input.description,
+    url: input.url,
+    serviceType: input.name,
+    provider: { "@id": `${siteUrl}/#organization` },
+    areaServed: {
+      "@type": "Country",
+      name: locale === "uk" ? "Україна" : "Ukraine",
+    },
+  };
+}

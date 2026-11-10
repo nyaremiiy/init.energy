@@ -1,9 +1,12 @@
 import { Panel } from "@/components/ui/panel";
 import { ScrollIndicator } from "@/components/ui/scroll-indicator";
+import { getLocale } from "@/i18n/server";
 
+import { getHeroSlides, type HeroSlide } from "./hero-slides";
 import { HeroSlider } from "./hero-slider";
 
-export function Hero() {
+export function Hero({ slides }: { slides?: HeroSlide[] } = {}) {
+  const list = slides ?? getHeroSlides(getLocale());
   return (
     <Panel
       as="section"
@@ -12,7 +15,7 @@ export function Hero() {
       className="bg-white pt-panel-sm sm:pt-panel"
       panelClassName="hero shadow-soft"
     >
-      <HeroSlider />
+      <HeroSlider slides={list} />
       {/* Darken the top so the transparent header stays readable. */}
       <div
         aria-hidden

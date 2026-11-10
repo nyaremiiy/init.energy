@@ -99,6 +99,13 @@
 - **Файли:** src/i18n/config.ts, src/components/layout/header/header-data.ts, src/content/navigation.ts, src/components/product-page/product-applications.tsx, src/components/calculator/QuickCalculator.tsx, docs/ai/CHANGELOG.md
 - **Нотатки / що далі:** англійська є для головної, SVIT PLUS 5000, SVIT HOME і SVIT PLUS 16000. Сторінок /cec/, /svit/, /rishennya/…, /svit-600/, /bess/ немає в збірці: посилання на них ведуть на українські адреси (і 404). Потрібне рішення власника: прибрати їх з меню або створити сторінки.
 
+## 2026-11-10 — Сторінка «Сонячні електростанції» /ses/
+- **Агент:** Claude Code
+- **Гілка:** feat/ses-page (статус: змерджено в develop)
+- **Що зроблено:** нова сторінка /ses/ (uk) і /en/ses/ (en). Секції: hero зі своїми трьома слайдами (тексти написано, фото ті самі, що на головній, поки не прийдуть три фото з панелями), «СЕС для дому й для бізнесу» (два картки з плейсхолдером фото), таблиця «Мережева, гібридна чи автономна», «Як працює гібридна СЕС» (чотири вузли), спільний блок «Про компанію» (той самий компонент, що на головній), «Як ми будуємо СЕС» (5 етапів), спільні з головною: SVIT, проєкти, калькулятор, FAQ (відкрито тему «СЕС»), форма заявки. Старий /cec/ тепер 308 на /ses/. Пункт меню «Сонячні електростанції» веде на /ses/. Service, BreadcrumbList, FAQPage JSON-LD, sitemap з /en/ses/.
+- **Файли:** src/content/ses.ts, src/content/{routes}.ts, src/components/pages/{ses-page,home-page}.tsx, src/components/sections/{trust-section}.tsx, src/components/sections/ses/*, src/components/sections/home/{hero,hero-slider,hero-slides,faq-section}.tsx, src/components/faq/FaqAccordion.tsx, src/app/(uk)/ses/page.tsx, src/app/en/ses/page.tsx, src/app/sitemap.ts, next.config.ts, src/i18n/config.ts, src/lib/seo/schema.ts, messages/{uk,en}.json, docs/ai/{CONTEXT,CHANGELOG}.md
+- **Нотатки / що далі:** TODO(content): фото для двох карток сегментів і трьох фото з панелями для hero; тривалість етапів; перевірити таблицю типів СЕС і тексти вузлів власником; сторінки /ses/dlya-domu/ і /ses/dlya-biznesu/ ще не створені (посилання з карток ведуть на неіснуючі сторінки); блок статей не виведено (немає 3 статей); секція «Реалізовані проєкти» не показується, бо немає видимих проєктів (так само, як на головній); фото hero-слайдів — з головної. Перевірено збіркою, лінтером, типами; редирект /cec/ перевірено на запущеному сервері. У браузері не перевірено (360 px).
+
 ## 2026-11-10 — SEO і GEO сторінки SVIT PLUS 16000
 - **Агент:** Claude Haiku 5.5
 - **Гілка:** feat/svit-plus-16000-seo (статус: змерджено в develop)

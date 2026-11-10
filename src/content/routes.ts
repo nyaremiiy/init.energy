@@ -22,7 +22,7 @@ export const slugs = {
     lithiumvalley: "bess",
   },
   services: {
-    turnkeySes: "cec",
+    turnkeySes: "ses",
     solar: "ses",
   },
   backup: {
@@ -59,6 +59,10 @@ export const anchors = {
   scaling: "scaling",
   applications: "applications",
   process: "process",
+  sesSegments: "ses-segments",
+  sesTypes: "ses-types",
+  sesHybrid: "ses-hybrid",
+  sesSteps: "ses-steps",
 } as const;
 
 export function toPath(...segments: string[]): string {
