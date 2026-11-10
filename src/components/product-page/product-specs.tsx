@@ -11,7 +11,8 @@ import type { ProductPage } from "@/content/product-pages";
 import type { Product } from "@/content/products";
 import { anchors } from "@/content/routes";
 import type { Locale } from "@/lib/format";
-import { format, messages } from "@/lib/messages";
+import { getMessages } from "@/i18n/server";
+import { format } from "@/lib/messages";
 
 import { specValueText } from "./spec-value";
 
@@ -27,6 +28,7 @@ export function ProductSpecs({
   product: Product;
   locale: Locale;
 }) {
+  const messages = getMessages();
   const t = messages.productPage;
 
   return (
@@ -57,7 +59,7 @@ export function ProductSpecs({
                 <div className="relative aspect-4/3 overflow-hidden rounded-3xl bg-white">
                   <Image
                     src={product.image.src}
-                    alt={product.image.alt}
+                    alt={product.image.alt[locale]}
                     fill
                     unoptimized
                     sizes="(min-width: 1024px) 40vw, 100vw"

@@ -8,18 +8,21 @@ import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
 import { SectionWatermark } from "@/components/ui/section-watermark";
 import { SegmentCard } from "@/components/ui/segment-card";
-import { anchors, routes } from "@/content/routes";
+import { anchors, routes, sectionHref } from "@/content/routes";
 import { segmentIcons } from "@/content/segments";
 import {
   getSolutionCapacity,
   getSolutionLinks,
   solutions,
 } from "@/content/solutions";
-import { format, messages } from "@/lib/messages";
+import { getLocale, getMessages } from "@/i18n/server";
+import { format } from "@/lib/messages";
 
 const titleId = "solutions-by-segment-title";
 
 export function SolutionsBySegment() {
+  const messages = getMessages();
+  const locale = getLocale();
   const t = messages.solutionsBySegment;
 
   return (
@@ -37,7 +40,7 @@ export function SolutionsBySegment() {
             titleId={titleId}
             lead={t.lead}
             aside={
-              <ArrowLink href={routes.sections.contacts}>
+              <ArrowLink href={sectionHref(anchors.contacts, locale)}>
                 {t.calculatorLink}
               </ArrowLink>
             }
@@ -54,17 +57,17 @@ export function SolutionsBySegment() {
               >
                 <SegmentCard
                   index={solution.index}
-                  segment={solution.segment}
+                  segment={solution.segment[locale]}
                   segmentIcon={segmentIcons[solution.segmentIcon]}
-                  title={solution.title}
-                  description={solution.description}
-                  links={getSolutionLinks(solution)}
+                  title={solution.title[locale]}
+                  description={solution.description[locale]}
+                  links={getSolutionLinks(solution, locale)}
                   navLabel={format(t.cardNavLabel, {
-                    segment: solution.segment,
+                    segment: solution.segment[locale],
                   })}
                   tone={solution.tone}
                   showcase={{
-                    capacity: getSolutionCapacity(solution),
+                    capacity: getSolutionCapacity(solution, locale),
                     capacityLabel: t.capacityLabels[solution.id],
                     recommendLabel: t.recommend,
                     ctaLabel: t.cardCtas[solution.id],
@@ -87,7 +90,9 @@ export function SolutionsBySegment() {
                 <span className="font-heading text-h3-sm font-semibold tracking-tight sm:text-h3">
                   {t.hub.title}
                 </span>
-                <span className="text-small text-ink/70">{t.hub.description}</span>
+                <span className="text-small text-ink/70">
+                  {t.hub.description}
+                </span>
               </span>
               <span className="flex items-center gap-3 sm:col-span-3 sm:justify-end">
                 <span className="text-base font-medium">{t.hub.details}</span>

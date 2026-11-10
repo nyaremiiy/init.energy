@@ -11,7 +11,7 @@ import { chipClasses } from "@/components/ui/chip-styles";
 
 import { featuredProjects, type ProjectSegment } from "@/content/projects";
 import { anchors, routes } from "@/content/routes";
-import { messages } from "@/lib/messages";
+import { getMessages } from "@/i18n/server";
 
 const titleId = "projects-showcase-title";
 
@@ -26,6 +26,7 @@ const filterSegments: Array<{
 ];
 
 export function ProjectsShowcase() {
+  const messages = getMessages();
   const t = messages.projects;
 
   // Drafts (test records) are visible only in development; no projects → no section.

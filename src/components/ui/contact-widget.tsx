@@ -4,6 +4,7 @@ import { Phone, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 import { companyContacts, offices } from "@/content/company";
+import { useLocale, useMessages } from "@/i18n/client";
 import { formatPhone } from "@/lib/format";
 
 import { SocialLinks } from "./social-links";
@@ -14,6 +15,8 @@ import { SocialLinks } from "./social-links";
  * a click outside the panel.
  */
 export function ContactWidget() {
+  const locale = useLocale();
+  const t = useMessages().chrome.contactWidget;
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
 
@@ -45,16 +48,14 @@ export function ContactWidget() {
         <div
           id="contact-widget-panel"
           role="dialog"
-          aria-label="Контакти"
+          aria-label={t.title}
           className="absolute right-0 bottom-16 w-72 rounded-3xl bg-ink p-card-sm text-white shadow-card motion-safe:animate-enter"
         >
           <div className="flex items-start justify-between gap-4">
-            <p className="font-heading text-base font-medium">
-              Контакти
-            </p>
+            <p className="font-heading text-base font-medium">{t.title}</p>
             <button
               type="button"
-              aria-label="Закрити контакти"
+              aria-label={t.close}
               onClick={() => setOpen(false)}
               className="inline-flex size-8 items-center justify-center rounded-full text-white/75 transition-colors duration-150 ease-tech hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
@@ -71,7 +72,7 @@ export function ContactWidget() {
                   rel="noopener"
                   className="text-white/75 underline underline-offset-4 decoration-white/30 hover:text-white hover:decoration-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                 >
-                  {office.city}, {office.address}
+                  {office.city[locale]}, {office.address[locale]}
                 </a>
                 <a
                   href={office.phone.href}
@@ -99,7 +100,7 @@ export function ContactWidget() {
 
       <button
         type="button"
-        aria-label="Контакти"
+        aria-label={t.title}
         aria-expanded={open}
         aria-controls="contact-widget-panel"
         onClick={() => setOpen((value) => !value)}

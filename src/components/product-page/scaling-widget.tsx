@@ -3,6 +3,7 @@
 import { useState } from "react";
 
 import { PillRadio } from "@/components/ui/pill-radio";
+import { useLocale } from "@/i18n/client";
 import { formatNumber } from "@/lib/format";
 import { format } from "@/lib/messages";
 
@@ -30,14 +31,17 @@ export function ScalingWidget({
   defaultModules,
   labels,
 }: ScalingWidgetProps) {
+  const locale = useLocale();
   const [modules, setModules] = useState(defaultModules);
   const max = Math.max(...options);
   const total = modules * moduleCapacityKwh;
   // The largest option is shown rounded (16 × 5,12 = 81,92 → «≈ 81»).
   const totalText =
     modules === max
-      ? format(labels.approx, { value: formatNumber(Math.floor(total)) })
-      : formatNumber(total);
+      ? format(labels.approx, {
+          value: formatNumber(Math.floor(total), locale),
+        })
+      : formatNumber(total, locale);
 
   return (
     <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
@@ -73,7 +77,7 @@ export function ScalingWidget({
 
         <p className="text-sm text-white/75">
           {format(labels.note, {
-            capacity: `${formatNumber(moduleCapacityKwh)} ${labels.unit}`,
+            capacity: `${formatNumber(moduleCapacityKwh, locale)} ${labels.unit}`,
           })}
         </p>
       </div>

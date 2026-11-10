@@ -1,8 +1,10 @@
 import { companyContacts, offices, type Office } from "@/content/company";
-import { products, productSummaries, type ProductId } from "@/content/products";
+import { products, productSummary, type ProductId } from "@/content/products";
 import { featuredProjects } from "@/content/projects";
-import { routes } from "@/content/routes";
+import { anchors, sectionHref } from "@/content/routes";
 import { services, type ServiceId } from "@/content/services";
+import type { Locale } from "@/i18n/config";
+import { getMessagesFor } from "@/i18n/messages";
 
 export type { Office };
 
@@ -27,12 +29,15 @@ export type NavGroup = {
   columns: NavColumn[];
 };
 
-export const navCta = {
-  title: "Не знаєте, що обрати?",
-  text: "Інженер INIT ENERGY підбере систему під ваше споживання та бюджет.",
-  href: routes.sections.contacts,
-  label: "Отримати розрахунок",
-};
+export function getNavCta(locale: Locale) {
+  const t = getMessagesFor(locale).chrome.header.menuCta;
+  return {
+    title: t.title,
+    text: t.text,
+    href: sectionHref(anchors.contacts, locale),
+    label: t.label,
+  };
+}
 
 export type NavItem = NavLink | NavGroup;
 
@@ -81,80 +86,61 @@ export const socialLinks: SocialLink[] = [
   },
 ];
 
-const productLink = (id: ProductId): NavMenuLink => ({
-  href: products[id].href,
-  label: products[id].name,
-  description: productSummaries[id],
-});
+/** Header navigation for a locale (product and service pages are Ukrainian-only). */
+export function getNavItems(locale: Locale): NavItem[] {
+  const t = getMessagesFor(locale).chrome.header;
+  const productLink = (id: ProductId): NavMenuLink => ({
+    href: products[id].href,
+    label: products[id].name,
+    description: productSummary(id, locale),
+  });
+  const serviceLink = (id: ServiceId): NavMenuLink => ({
+    href: services[id].href,
+    label: services[id].name[locale],
+    description: services[id].summary[locale],
+  });
+  const section = (anchor: string, label: string): NavLink => ({
+    href: sectionHref(anchor, locale),
+    label,
+    sectionId: anchor,
+  });
 
-const serviceLink = (id: ServiceId): NavMenuLink => ({
-  href: services[id].href,
-  label: services[id].name,
-  description: services[id].summary,
-});
-
-export const navItems: NavItem[] = [
-  {
-    label: "Каталог",
-    columns: [
-      {
-        title: "Резервне живлення",
-        items: [productLink("svitHome"), productLink("svit600")],
-      },
-      {
-        title: "Акумулятори",
-        items: [productLink("svitPlus5000"), productLink("svitPlus16000")],
-      },
-      {
-        title: "Для бізнесу",
-        items: [productLink("lithiumvalley")],
-      },
-    ],
-  },
-  {
-    label: "Рішення",
-    columns: [
-      {
-        title: "Сонячні електростанції",
-        items: [serviceLink("turnkeySes")],
-      },
-      {
-        title: "Галузеві рішення",
-        items: [serviceLink("hotelSes")],
-      },
-    ],
-  },
-  {
-    href: routes.sections.solutions,
-    label: "Рішення",
-    sectionId: "solutions",
-  },
-  { href: routes.sections.products, label: "Продукти", sectionId: "products" },
-  {
-    href: routes.sections.aboutUs,
-    label: "Про компанію",
-    sectionId: "about-us",
-  },
-  // The projects section renders only when there are visible cases; hide the link otherwise.
-  ...(featuredProjects.length > 0
-    ? [
+  return [
+    {
+      label: t.nav.catalog,
+      columns: [
         {
-          href: routes.sections.projects,
-          label: "Проєкти",
-          sectionId: "projects",
+          title: t.columns.backup,
+          items: [productLink("svitHome"), productLink("svit600")],
         },
-      ]
-    : []),
-  { href: routes.sections.contacts, label: "Контакти", sectionId: "contacts" },
-  // Add links to home page sections (about, projects, contacts) as they are built.
-];
+        {
+          title: t.columns.batteries,
+          items: [productLink("svitPlus5000"), productLink("svitPlus16000")],
+        },
+        { title: t.columns.business, items: [productLink("lithiumvalley")] },
+      ],
+    },
+    {
+      label: t.nav.solutions,
+      columns: [
+        { title: t.columns.solar, items: [serviceLink("turnkeySes")] },
+        { title: t.columns.industry, items: [serviceLink("hotelSes")] },
+      ],
+    },
+    section(anchors.solutions, t.nav.solutionsSection),
+    section(anchors.products, t.nav.products),
+    section(anchors.aboutUs, t.nav.aboutUs),
+    // The projects section renders only when there are visible cases; hide the link otherwise.
+    ...(featuredProjects.length > 0
+      ? [section(anchors.projects, t.nav.projects)]
+      : []),
+    section(anchors.contacts, t.nav.contacts),
+  ];
+}
 
-// TODO: add `href` for other locales once i18n routing exists.
-export const languages: Language[] = [
-  { code: "uk", label: "UA", href: "/" },
+export const languages: { code: Locale; label: string }[] = [
+  { code: "uk", label: "UA" },
   { code: "en", label: "EN" },
 ];
-
-export const currentLanguage = "uk";
 
 export const officeRotationInterval = 5000;

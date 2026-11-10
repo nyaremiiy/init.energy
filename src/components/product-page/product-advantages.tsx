@@ -9,7 +9,8 @@ import { SectionWatermark } from "@/components/ui/section-watermark";
 import type { AdvantageIcon, ProductPage } from "@/content/product-pages";
 import { anchors } from "@/content/routes";
 import type { Locale } from "@/lib/format";
-import { format, messages } from "@/lib/messages";
+import { getMessages } from "@/i18n/server";
+import { format } from "@/lib/messages";
 
 const icons: Record<AdvantageIcon, typeof ShieldCheck> = {
   safety: ShieldCheck,
@@ -53,6 +54,7 @@ export function ProductAdvantages({
   name: string;
   locale: Locale;
 }) {
+  const messages = getMessages();
   const t = messages.productPage.advantages;
 
   return (

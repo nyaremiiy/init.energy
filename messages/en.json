@@ -2,44 +2,93 @@
   "solutionsBySegment": {
     "eyebrow": "Solutions",
     "title": "What do you need to power?",
-    "lead": "Choose your property type to explore backup power and solar generation options with SVIT and LITHIUMVALLEY storage.",
+    "lead": "Choose your property type: each has ready-made backup power and solar generation scenarios built on SVIT and LITHIUMVALLEY batteries.",
     "calculatorLink": "Size your system",
-    "cardNavLabel": "Solutions for {segment}",
+    "cardNavLabel": "Solution pages: {segment}",
     "recommend": "Recommended",
     "capacityLabels": {
       "apartment": "SVIT 600 capacity",
-      "house": "capacity per battery",
+      "house": "capacity of one battery",
       "business": "LITHIUMVALLEY capacity"
     },
     "cardCtas": {
-      "apartment": "Backup for apartments",
-      "house": "Backup and solar for homes",
+      "apartment": "Backup for an apartment",
+      "house": "Backup and solar for a house",
       "business": "Solutions for business"
     },
     "hub": {
       "title": "Turnkey solar power plants",
-      "description": "For businesses and private properties: design, equipment, installation and commissioning.",
+      "description": "For businesses and private sites: design, equipment, installation and commissioning.",
       "details": "Learn more"
     },
     "keywords": [
       "Solar power plants",
       "Backup power",
-      "SVIT storage",
+      "SVIT batteries",
       "Turnkey installation",
-      "Maintenance"
+      "Service and maintenance"
     ]
   },
   "productLine": {
     "eyebrow": "Battery line-up",
     "title": "SVIT and LITHIUMVALLEY energy storage",
+    "lead": "Energy storage for homes and businesses: the 865 Wh SVIT 600 portable station, 5.12 and 16.07 kWh SVIT home systems and LITHIUMVALLEY industrial systems from 208 kWh.",
+    "catalogLink": "All batteries",
+    "productLink": "More about {name}",
+    "specsLabel": "{name} specifications",
+    "photoPending": "photo coming soon",
+    "compareTitle": "Line-up comparison",
+    "compareCaption": "Comparison of SVIT and LITHIUMVALLEY batteries: type, capacity and purpose of each model",
+    "columns": {
+      "model": "Model",
+      "type": "Type",
+      "capacity": "Capacity",
+      "audience": "Best for",
+      "link": "Link"
+    },
+    "more": "Learn more",
+    "notStated": "—",
     "tablist": "Battery models",
     "details": "More about {name}",
-    "compareAll": "Compare all models",
-    "catalogLink": "All batteries"
+    "compareAll": "Compare all models"
+  },
+  "trust": {
+    "eyebrow": "About us",
+    "title": "We design, supply and install turnkey energy systems",
+    "lead": "INIT ENERGY is a division of Informatsiia i Tekhnolohii, a company with over 30 years in the energy sector delivering engineering solutions for Ukraine's critical infrastructure.",
+    "aboutLink": "More about the company",
+    "photoPending": "Photo coming soon"
+  },
+  "projects": {
+    "eyebrow": "Projects",
+    "title": "Completed projects",
+    "lead": "Solar plants and backup power systems INIT ENERGY has designed and installed across Ukraine, with power, equipment and commissioning year.",
+    "allProjects": "All projects",
+    "filterLabel": "Filter projects by segment",
+    "filters": {
+      "all": "All",
+      "apartment": "Apartment",
+      "house": "House",
+      "business": "Business"
+    },
+    "segments": {
+      "apartment": "Apartment",
+      "house": "House",
+      "business": "Business"
+    },
+    "fields": {
+      "power": "Power",
+      "storage": "Battery",
+      "region": "Region",
+      "year": "Year"
+    },
+    "details": "Learn more: {title}",
+    "imagePending": "Project photo coming soon",
+    "filterSoon": "This filter is coming soon"
   },
   "calculator": {
     "eyebrow": "Calculator",
-    "title": "Which system do you need",
+    "title": "Which system do you need?",
     "lead": "Enter the property type, consumption and region — the calculator suggests a solar plant size and an SVIT battery.",
     "formLabel": "Property parameters",
     "segment": "Property type",
@@ -102,20 +151,20 @@
   },
   "leadSection": {
     "eyebrow": "Consultation",
-    "title": "We will size a system for your property",
-    "lead": "Leave your phone number — a manager will call, clarify your energy needs and prepare a turnkey configuration with pricing.",
+    "title": "We will size a system for your site",
+    "lead": "Leave your phone number — a manager will call, clarify your consumption and prepare a configuration with a turnkey price.",
     "steps": [
       {
-        "title": "Manager consultation",
-        "description": "We clarify what needs backup power and how many hours it must operate off-grid."
+        "title": "Call from a manager",
+        "description": "We clarify what needs power and for how many hours without the grid."
       },
       {
-        "title": "System sizing and configuration",
-        "description": "We select a SVIT system, an inverter and, when needed, solar panels."
+        "title": "Sizing and configuration",
+        "description": "We choose SVIT, an inverter and solar panels if needed."
       },
       {
         "title": "Turnkey estimate",
-        "description": "Equipment, installation and commissioning in one total."
+        "description": "Equipment, installation and commissioning as one sum."
       }
     ],
     "form": {
@@ -127,31 +176,54 @@
         "other": "Other"
       },
       "name": "Name",
-      "namePlaceholder": "How should we address you?",
+      "namePlaceholder": "How should we address you",
       "phone": "Phone",
       "phonePlaceholder": "+380 __ ___ __ __",
       "comment": "Comment",
       "optional": "optional",
-      "commentPlaceholder": "What needs power, roof area, and other details",
+      "commentPlaceholder": "What needs power, roof area, etc.",
       "consentBefore": "I agree to the",
       "privacyPolicy": "privacy policy",
       "consentAfter": "and the processing of personal data",
-      "submit": "Get a system estimate",
+      "submit": "Get a quote",
       "submitting": "Sending…",
-      "success": "Thank you! Your request is with our manager — we will call you back during business hours.",
-      "failure": "We could not send your request. Please try again or call us.",
+      "success": "Thank you! Your request has been passed to a manager. We will call you during business hours.",
+      "failure": "Could not send the request. Please try again or call us.",
       "errors": {
         "name": "Please enter your name.",
         "phone": "Please enter a valid phone number.",
-        "consent": "You must agree to the privacy policy."
+        "consent": "Consent to the privacy policy is required."
       },
       "calculatorAttached": "Calculator parameters:"
     }
   },
+  "specs": {
+    "capacity": "Capacity",
+    "power": "Power",
+    "chemistry": "Chemistry",
+    "inverter": "Inverter",
+    "cycles": "Cycles",
+    "minCapacity": "Capacity (minimum)",
+    "maxCapacity": "Maximum",
+    "type": "Type"
+  },
+  "units": {
+    "W": "W",
+    "kW": "kW",
+    "Wh": "Wh",
+    "kWh": "kWh",
+    "cycles": "cycles",
+    "V": "V"
+  },
+  "quantity": {
+    "from": "from {value}",
+    "upTo": "up to {value}",
+    "plus": "{value}+"
+  },
   "footer": {
-    "description": "We design, supply and install solar power plants and backup power systems for businesses, homes and apartments.",
+    "description": "We design, supply and install solar power plants and backup power systems for businesses, houses and apartments.",
     "socialLabel": "INIT ENERGY on {network}",
-    "socialNavLabel": "Social media",
+    "socialNavLabel": "Social networks",
     "languageLabel": "Site language",
     "logoLabel": "INIT ENERGY — home",
     "pageNavTitle": "On this page",
@@ -159,7 +231,7 @@
     "links": {
       "solutions": "Solutions by property type",
       "products": "SVIT batteries",
-      "aboutUs": "About the company",
+      "aboutUs": "About us",
       "projects": "Completed projects",
       "consultation": "Consultation",
       "turnkeySes": "Solar power plants",
@@ -180,19 +252,19 @@
       "emailPlaceholder": "Your email",
       "submit": "Subscribe",
       "submitting": "Sending…",
-      "note": "By subscribing you agree to the privacy policy. You can unsubscribe at any time.",
+      "note": "By subscribing, you agree to the privacy policy. You can unsubscribe at any time.",
       "success": "Thank you! You are subscribed.",
       "failure": "Could not subscribe. Please try again later.",
       "errors": {
-        "email": "Enter a valid email address."
+        "email": "Please enter a valid email address."
       }
     },
     "copyright": "Copyright © {year} INIT ENERGY | All rights reserved",
     "legalNavLabel": "Legal information",
     "legal": {
-      "privacy": "Privacy Policy",
-      "cookies": "Cookie Policy",
-      "terms": "Terms of Service"
+      "privacy": "Privacy policy",
+      "cookies": "Cookie policy",
+      "terms": "Terms of use"
     }
   },
   "productPage": {
@@ -249,6 +321,53 @@
       "title": "Ready to discuss your project?",
       "submit": "Send request",
       "summaryTitle": "Already in your request"
+    }
+  },
+  "meta": {
+    "homeTitle": "Solar power plants and backup power — INIT ENERGY",
+    "homeDescription": "INIT ENERGY designs and installs turnkey solar power plants and backup power in Ukraine: SVIT and LITHIUMVALLEY batteries for homes and businesses.",
+    "siteName": "INIT ENERGY",
+    "organizationDescription": "Design, supply and installation of turnkey solar power plants and backup power systems in Ukraine."
+  },
+  "chrome": {
+    "header": {
+      "mainMenu": "Main menu",
+      "homeLabel": "INIT ENERGY — home",
+      "call": "Call {phone}",
+      "cta": "Leave a request",
+      "openMenu": "Open menu",
+      "closeMenu": "Close menu",
+      "mobileMenu": "Mobile menu",
+      "nav": {
+        "catalog": "Catalogue",
+        "solutions": "Solutions",
+        "solutionsSection": "Solutions",
+        "products": "Products",
+        "aboutUs": "About us",
+        "projects": "Projects",
+        "contacts": "Contacts"
+      },
+      "columns": {
+        "backup": "Backup power",
+        "batteries": "Batteries",
+        "business": "For business",
+        "solar": "Solar power plants",
+        "industry": "Industry solutions"
+      },
+      "menuCta": {
+        "title": "Not sure what to choose?",
+        "text": "An INIT ENERGY engineer will size a system for your consumption and budget.",
+        "label": "Get a quote"
+      }
+    },
+    "contactWidget": {
+      "title": "Contacts",
+      "close": "Close contacts"
+    },
+    "backToTop": "Back to top",
+    "scroll": {
+      "label": "Scroll to the next section",
+      "hint": "Scroll down"
     }
   }
 }

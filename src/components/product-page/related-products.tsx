@@ -5,15 +5,18 @@ import { ArrowLink } from "@/components/ui/arrow-link";
 import { IconButton } from "@/components/ui/icon-button";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
-import { products, productSummaries, type ProductId } from "@/content/products";
-import { anchors, toAnchor } from "@/content/routes";
+import { products, productSummary, type ProductId } from "@/content/products";
+import { anchors, sectionHref } from "@/content/routes";
 import { formatQuantity } from "@/lib/format";
-import { format, messages } from "@/lib/messages";
+import { getLocale, getMessages } from "@/i18n/server";
+import { format } from "@/lib/messages";
 
 const titleId = "related-products-title";
 
 /** Rows of other batteries: name, one-line summary, capacity and a round link. */
 export function RelatedProducts({ ids }: { ids: ProductId[] }) {
+  const messages = getMessages();
+  const locale = getLocale();
   const t = messages.productPage.related;
 
   return (
@@ -28,7 +31,9 @@ export function RelatedProducts({ ids }: { ids: ProductId[] }) {
             title={t.title}
             titleId={titleId}
           />
-          <ArrowLink href={toAnchor(anchors.compare)}>{t.compareAll}</ArrowLink>
+          <ArrowLink href={sectionHref(anchors.compare, locale)}>
+            {t.compareAll}
+          </ArrowLink>
         </Reveal>
         <ul className="border-b border-line lg:col-span-7">
           {ids.map((id) => {
@@ -46,11 +51,11 @@ export function RelatedProducts({ ids }: { ids: ProductId[] }) {
                       {product.name}
                     </span>
                     <span className="text-sm text-ink/70">
-                      {productSummaries[id]}
+                      {productSummary(id, locale)}
                     </span>
                   </span>
                   <span className="hidden text-base font-medium whitespace-nowrap text-ink sm:inline">
-                    {formatQuantity(product.capacity)}
+                    {formatQuantity(product.capacity, locale)}
                   </span>
                   <IconButton decorative variant="outline-light" size="sm" />
                 </Link>

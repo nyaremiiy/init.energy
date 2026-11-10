@@ -20,7 +20,7 @@ import {
   type CalculatorApplyDetail,
 } from "@/lib/calculator-bridge";
 import { validateLeadForm, type LeadFieldErrors } from "@/lib/lead-form-schema";
-import { messages } from "@/lib/messages";
+import { useLocale, useMessages } from "@/i18n/client";
 
 export type LeadObjectType = "apartment" | "house" | "business" | "other";
 
@@ -80,7 +80,8 @@ export function LeadForm({
   submitLabel,
   cardTone = "surface",
 }: LeadFormProps) {
-  const t = messages.leadSection.form;
+  const t = useMessages().leadSection.form;
+  const locale = useLocale();
   const formRef = useRef<HTMLFormElement>(null);
   const [errors, setErrors] = useState<LeadFieldErrors>({});
   const [status, setStatus] = useState<Status>("idle");
@@ -194,6 +195,7 @@ export function LeadForm({
       aria-busy={submitting}
       className={`rounded-3xl shadow-card ${cardBg} p-card-sm lg:p-card`}
     >
+      <input type="hidden" name="locale" value={locale} />
       {/* Disabling the fieldset disables every control while sending. */}
       <fieldset
         disabled={submitting}

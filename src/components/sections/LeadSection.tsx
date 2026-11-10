@@ -11,7 +11,7 @@ import { SectionWatermark } from "@/components/ui/section-watermark";
 import { companyContacts, offices } from "@/content/company";
 import { anchors } from "@/content/routes";
 import { formatPhone } from "@/lib/format";
-import { messages } from "@/lib/messages";
+import { getMessages } from "@/i18n/server";
 
 type LeadSectionProps = {
   title?: string;
@@ -37,6 +37,7 @@ export function LeadSection({
   submitLabel,
   panel = false,
 }: LeadSectionProps) {
+  const messages = getMessages();
   const t = messages.leadSection;
   const primaryPhone = offices[0].phone;
 

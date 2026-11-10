@@ -1,5 +1,13 @@
 import type { Metadata } from "next";
 
+import {
+  defaultLocale,
+  hasEnglish,
+  localizePath,
+  ogLocale,
+  type Locale,
+} from "@/i18n/config";
+
 /** Production origin: canonical URLs, sitemap and JSON-LD are absolute. */
 export const siteUrl = "https://init.energy";
 
@@ -7,42 +15,60 @@ export function absoluteUrl(path: string): string {
   return new URL(path, siteUrl).toString();
 }
 
+/**
+ * hreflang for a page: Ukrainian at the root, English under /en/ when the
+ * page has an English version. x-default points to Ukrainian, so anyone
+ * whose language is neither gets the main (Ukrainian) site; English-language
+ * searches get /en/.
+ */
+export function languageAlternates(path: string): Record<string, string> {
+  const uk = absoluteUrl(path);
+  return hasEnglish(path)
+    ? { uk, en: absoluteUrl(localizePath(path, "en")), "x-default": uk }
+    : { uk, "x-default": uk };
+}
+
 type BuildMetadataInput = {
   title: string;
   description: string;
-  /** Site path with the trailing slash, e.g. "/svit-plus-5000/". */
+  /** Ukrainian path with the trailing slash, e.g. "/svit-plus-5000/". */
   path: string;
+  locale?: Locale;
 };
 
 /**
- * Page metadata in one shape: title, description, canonical, hreflang and
- * Open Graph.
+ * Page metadata in one shape: title, description, canonical (self-referencing
+ * per locale), hreflang and Open Graph.
  *
- * TODO(i18n): add `en` to `languages` once /en/ routes exist — linking
- * hreflang to pages that 404 hurts indexing.
  * TODO(content): Open Graph image 1200×630 per page.
  */
 export function buildMetadata({
   title,
   description,
   path,
+  locale = defaultLocale,
 }: BuildMetadataInput): Metadata {
-  const url = absoluteUrl(path);
+  const url = absoluteUrl(localizePath(path, locale));
+  const alternateLocale = hasEnglish(path)
+    ? [ogLocale[locale === "uk" ? "en" : "uk"]]
+    : undefined;
 
   return {
     title,
     description,
     alternates: {
       canonical: url,
-      languages: { uk: url, "x-default": url },
+      languages: languageAlternates(path),
     },
     openGraph: {
       title,
       description,
       url,
       type: "website",
-      locale: "uk_UA",
+      locale: ogLocale[locale],
+      alternateLocale,
       siteName: "INIT ENERGY",
     },
+    twitter: { card: "summary_large_image", title, description },
   };
 }

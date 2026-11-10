@@ -30,7 +30,7 @@ import {
   type CalculatorGoal,
   type CalculatorSegment,
 } from "@/content/calculator";
-import { products, productSummaries, type ProductId } from "@/content/products";
+import { products, productSummary, type ProductId } from "@/content/products";
 import { anchors } from "@/content/routes";
 import { services } from "@/content/services";
 import { trackEvent } from "@/lib/analytics";
@@ -41,10 +41,13 @@ import {
 } from "@/lib/calculator";
 import { applyCalculatorToLeadForm } from "@/lib/calculator-bridge";
 import { formatNumber } from "@/lib/format";
-import { format, messages } from "@/lib/messages";
+import { useLocale, useMessages } from "@/i18n/client";
+import type { Locale } from "@/i18n/config";
+import type { Messages } from "@/i18n/messages";
+import { format } from "@/lib/messages";
 
-const t = messages.calculator;
-const units = messages.units;
+type CalculatorMessages = Messages["calculator"];
+type Units = Messages["units"];
 
 type RangeFieldProps = {
   label: string;
@@ -71,6 +74,7 @@ function RangeField({
   hint,
   onChange,
 }: RangeFieldProps) {
+  const locale = useLocale();
   const id = useId();
   const fill = ((value - min) / (max - min)) * 100;
 
@@ -81,7 +85,7 @@ function RangeField({
       </label>
       <p aria-hidden className="flex items-baseline gap-2 text-ink">
         <span className="font-heading text-number-sm font-medium tabular-nums">
-          {formatNumber(value)}
+          {formatNumber(value, locale)}
         </span>
         <span className="text-sm text-ink/70">{unit}</span>
       </p>
@@ -92,7 +96,7 @@ function RangeField({
         max={max}
         step={step}
         value={value}
-        aria-valuetext={`${formatNumber(value)} ${unit}`}
+        aria-valuetext={`${formatNumber(value, locale)} ${unit}`}
         aria-describedby={hint ? `${id}-hint` : undefined}
         onChange={(event) => onChange(Number(event.target.value))}
         className="range-input"
@@ -102,7 +106,7 @@ function RangeField({
         aria-hidden
         className="flex justify-between text-sm text-ink/70 tabular-nums"
       >
-        <span>{formatNumber(min)}</span>
+        <span>{formatNumber(min, locale)}</span>
         <span>{maxLabel}</span>
       </div>
       {hint ? (
@@ -114,7 +118,10 @@ function RangeField({
   );
 }
 
-function batteryName(rec: Recommendation): string | undefined {
+function batteryName(
+  rec: Recommendation,
+  t: CalculatorMessages,
+): string | undefined {
   if (!rec.battery) return undefined;
   const name = products[rec.battery.id as ProductId].name;
 
@@ -123,16 +130,21 @@ function batteryName(rec: Recommendation): string | undefined {
     : name;
 }
 
-function configuration(rec: Recommendation): string {
+function configuration(
+  rec: Recommendation,
+  t: CalculatorMessages,
+  units: Units,
+  locale: Locale,
+): string {
   const parts: string[] = [];
   if (rec.solarKw !== undefined) {
     parts.push(
       format(t.result.configSolar, {
-        power: `${formatNumber(rec.solarKw)} ${units.kW}`,
+        power: `${formatNumber(rec.solarKw, locale)} ${units.kW}`,
       }),
     );
   }
-  const battery = batteryName(rec);
+  const battery = batteryName(rec, t);
   if (battery) parts.push(format(t.result.configBattery, { battery }));
 
   const text = parts.join(t.result.configJoin);
@@ -204,6 +216,10 @@ function Group({
 }
 
 export function QuickCalculator() {
+  const messages = useMessages();
+  const locale = useLocale();
+  const t = messages.calculator;
+  const units = messages.units;
   const [segment, setSegment] = useState<CalculatorSegment>(
     calculatorDefaults.segment,
   );
@@ -231,7 +247,7 @@ export function QuickCalculator() {
     needSolar,
     needBattery,
   });
-  const config = configuration(rec);
+  const config = configuration(rec, t, units, locale);
   const isCustom = rec.solarFits === false || rec.battery?.fits === false;
   const solution = needSolar ? solutionLinks[segment] : undefined;
 
@@ -302,12 +318,12 @@ export function QuickCalculator() {
   if (rec.solarKw !== undefined && rec.annualGenerationKwh !== undefined) {
     stats.push(
       {
-        value: `${formatNumber(rec.solarKw)} ${units.kW}`,
+        value: `${formatNumber(rec.solarKw, locale)} ${units.kW}`,
         label: t.result.solarPower,
       },
       {
         value: format(t.result.approx, {
-          value: formatNumber(roundToHundreds(rec.annualGenerationKwh)),
+          value: formatNumber(roundToHundreds(rec.annualGenerationKwh), locale),
         }),
         label: t.result.generation,
       },
@@ -316,13 +332,13 @@ export function QuickCalculator() {
   if (rec.battery && rec.backupHours !== undefined) {
     stats.push(
       {
-        value: `${formatNumber(rec.battery.capacityKwh)} ${units.kWh}`,
+        value: `${formatNumber(rec.battery.capacityKwh, locale)} ${units.kWh}`,
         label: t.result.capacity,
       },
       {
         value: format(t.result.approx, {
           value: format(t.result.hoursValue, {
-            value: formatNumber(Math.round(rec.backupHours)),
+            value: formatNumber(Math.round(rec.backupHours), locale),
           }),
         }),
         label: t.result.backup,
@@ -379,7 +395,9 @@ export function QuickCalculator() {
           max={range.max}
           step={range.step}
           unit={units.kWh}
-          maxLabel={format(t.maxPlus, { value: formatNumber(range.max) })}
+          maxLabel={format(t.maxPlus, {
+            value: formatNumber(range.max, locale),
+          })}
           hint={t.consumptionHint}
           onChange={(value) => {
             touched({});
@@ -405,7 +423,7 @@ export function QuickCalculator() {
               >
                 {regions.map((item) => (
                   <option key={item.slug} value={item.slug}>
-                    {item.name.uk}
+                    {item.name[locale]}
                   </option>
                 ))}
               </select>
@@ -428,7 +446,7 @@ export function QuickCalculator() {
             max={backupHoursRange.max}
             step={backupHoursRange.step}
             unit={t.hoursUnit}
-            maxLabel={formatNumber(backupHoursRange.max)}
+            maxLabel={formatNumber(backupHoursRange.max, locale)}
             onChange={(value) => {
               touched({});
               setHours(value);
@@ -466,15 +484,15 @@ export function QuickCalculator() {
             <ResultLink
               href={products[rec.battery.id as ProductId].href}
               title={products[rec.battery.id as ProductId].name}
-              text={productSummaries[rec.battery.id as ProductId]}
+              text={productSummary(rec.battery.id as ProductId, locale)}
               kind={t.result.product}
             />
           ) : null}
           {solution ? (
             <ResultLink
               href={solution.href}
-              title={services[solution.serviceKey].name}
-              text={services[solution.serviceKey].summary}
+              title={services[solution.serviceKey].name[locale]}
+              text={services[solution.serviceKey].summary[locale]}
               kind={t.result.solution}
             />
           ) : null}

@@ -1,15 +1,26 @@
 "use server";
 
 import { validateLeadForm, type LeadFieldErrors } from "@/lib/lead-form-schema";
-import { messages } from "@/lib/messages";
+import { defaultLocale, locales, type Locale } from "@/i18n/config";
+import { getMessagesFor } from "@/i18n/messages";
+
+function formLocale(formData: FormData): Locale {
+  const value = formData.get("locale");
+  return locales.includes(value as Locale) ? (value as Locale) : defaultLocale;
+}
 
 export type LeadActionResult = {
   success: boolean;
   errors: LeadFieldErrors;
 };
 
-export async function submitLead(formData: FormData): Promise<LeadActionResult> {
-  const result = validateLeadForm(formData, messages.leadSection.form);
+export async function submitLead(
+  formData: FormData,
+): Promise<LeadActionResult> {
+  const result = validateLeadForm(
+    formData,
+    getMessagesFor(formLocale(formData)).leadSection.form,
+  );
 
   if (result.isSpam) {
     return { success: true, errors: {} };

@@ -5,13 +5,18 @@ import { useEffect, useState } from "react";
 
 import { formatPhone } from "@/lib/format";
 
-import { contactEmail, isNavGroup, navItems, offices } from "./header-data";
+import { useLocale, useMessages } from "@/i18n/client";
+
+import { contactEmail, getNavItems, isNavGroup, offices } from "./header-data";
 import { LanguageSwitcher } from "./language-switcher";
 import { NavLink } from "./nav-link";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { SocialLinks } from "@/components/ui/social-links";
 
 export function MobileMenu() {
+  const locale = useLocale();
+  const t = useMessages().chrome.header;
+  const navItems = getNavItems(locale);
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -42,7 +47,7 @@ export function MobileMenu() {
         type="button"
         aria-expanded={isOpen}
         aria-controls="mobile-menu"
-        aria-label={isOpen ? "Закрити меню" : "Відкрити меню"}
+        aria-label={isOpen ? t.closeMenu : t.openMenu}
         onClick={() => setIsOpen((value) => !value)}
         className="relative z-50 inline-flex size-11 items-center justify-center rounded-full border border-white/40 text-white transition-colors hover:bg-white/10"
       >
@@ -58,7 +63,7 @@ export function MobileMenu() {
           id="mobile-menu"
           className="fixed inset-0 z-40 flex flex-col gap-10 overflow-y-auto bg-ink-glow px-4.5 pt-28 pb-10 text-white sm:px-8"
         >
-          <nav aria-label="Мобільне меню">
+          <nav aria-label={t.mobileMenu}>
             <ul className="flex flex-col gap-5 text-2xl font-semibold">
               {navItems.map((item) =>
                 isNavGroup(item) ? (
@@ -122,7 +127,7 @@ export function MobileMenu() {
               >
                 <span className="inline-flex items-center gap-2">
                   <MapPin aria-hidden className="size-4 shrink-0" />
-                  {office.city}, {office.address}
+                  {office.city[locale]}, {office.address[locale]}
                 </span>
                 <a
                   href={office.phone.href}

@@ -5,12 +5,13 @@ import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
 import { SectionWatermark } from "@/components/ui/section-watermark";
 import { anchors } from "@/content/routes";
-import { messages } from "@/lib/messages";
+import { getMessages } from "@/i18n/server";
 
 const titleId = "calculator-title";
 
 /** Server section; the calculator itself is one client component. */
 export function CalculatorSection() {
+  const messages = getMessages();
   const t = messages.calculator;
 
   return (

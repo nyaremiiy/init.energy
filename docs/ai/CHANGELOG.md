@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-10 — Англійська версія головної (/en/) і SEO
+- **Агент:** Claude Code
+- **Гілка:** feature/i18n-en-home (статус: змерджено в develop)
+- **Що зроблено:** i18n без нових залежностей (`src/i18n/`: config, messages, server, client). Маршрути розділено на `(uk)` і `en`; header/футер — у `SiteChrome`. Повний `en.json` (усі ключі uk + нові групи `meta`, `chrome`), переклад даних у `content/` (продукти, рішення, послуги, офіси, довіра, проєкти, hero, меню). Перемикач мов — посилання з `hreflang` на ту саму сторінку іншою мовою (EN неактивний, де перекладу немає). Метадані головної uk/en з canonical і hreflang (x-default → uk), OG-локалі, JSON-LD Organization + WebSite, `robots.ts`, sitemap з alternates і /en/. Серверні дії форм відповідають мовою форми. Виправлено: два рядки H1 hero склеювались у тексті («станціїі») — додано пробіл.
+- **Файли:** src/i18n/*, src/app/{layout.tsx,robots.ts,sitemap.ts,(uk)/*,en/*}, src/components/{pages/home-page,layout/site-chrome}.tsx, src/components/** (тексти з контексту мови), src/content/*, src/lib/{format,messages,seo/*}.ts, src/app/actions/*, messages/{uk,en}.json, docs/ai/*
+- **Нотатки / що далі:** англійською зараз лише головна; сторінки продуктів і послуг — українські (посилання з /en/ ведуть на них). `<html lang>` лишається `uk` (одна коренева розкладка без експериментального `globalNotFound`), англійський вміст позначено `lang="en"` на обгортці. TODO(content): OG-зображення 1200×630; перевірити англійські формулювання носієм мови; Google Search Console — подати sitemap після публікації.
+
 ## 2026-11-09 — Збереження локальних змін і синхронізація develop
 - **Агент:** Codex
 - **Гілка:** chore/save-local-assets (статус: змерджено в develop)

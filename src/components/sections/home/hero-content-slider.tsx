@@ -48,8 +48,10 @@ export function HeroContentSlider({ slide }: HeroContentSliderProps) {
                 lineHeight="compact"
                 className="max-w-3xl text-hero-sm text-white md:text-hero-md lg:text-hero"
               >
-                {slide.heading.map((line) => (
+                {/* Lines are blocks visually; the space keeps the words apart in the text (SEO, screen readers). */}
+                {slide.heading.map((line, index) => (
                   <span key={line} className="block">
+                    {index > 0 ? " " : null}
                     {line}
                   </span>
                 ))}

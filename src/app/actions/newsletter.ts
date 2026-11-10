@@ -1,6 +1,12 @@
 "use server";
 
-import { messages } from "@/lib/messages";
+import { defaultLocale, locales, type Locale } from "@/i18n/config";
+import { getMessagesFor } from "@/i18n/messages";
+
+function formLocale(formData: FormData): Locale {
+  const value = formData.get("locale");
+  return locales.includes(value as Locale) ? (value as Locale) : defaultLocale;
+}
 import {
   subscribeToNewsletter,
   validateNewsletter,
@@ -13,7 +19,10 @@ export type NewsletterResult = {
 };
 
 export async function subscribe(formData: FormData): Promise<NewsletterResult> {
-  const result = validateNewsletter(formData, messages.footer.newsletter);
+  const result = validateNewsletter(
+    formData,
+    getMessagesFor(formLocale(formData)).footer.newsletter,
+  );
 
   // Honeypot filled: pretend success, store nothing.
   if (result.isSpam) return { success: true, errors: {} };
