@@ -52,9 +52,12 @@ export const anchors = {
   advantages: "advantages",
   composition: "composition",
   inside: "inside",
+  configurations: "configurations",
+  modes: "modes",
   specs: "specs",
   scaling: "scaling",
   applications: "applications",
+  process: "process",
 } as const;
 
 export function toPath(...segments: string[]): string {

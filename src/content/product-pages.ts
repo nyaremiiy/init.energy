@@ -35,7 +35,7 @@ export type ApplicationIcon =
 export type CompositionModeIcon = "backup" | "solar" | "grid";
 
 /** Slugs of products that have a full page (also FAQ page keys). */
-export type ProductPageSlug = "svit-plus-5000" | "svit-home" | "svit-plus-16000";
+export type ProductPageSlug = "svit-plus-5000" | "svit-home" | "svit-plus-16000" | "bess";
 
 export type ProductPage = {
   id: ProductId;
@@ -51,10 +51,11 @@ export type ProductPage = {
     keySpecs: { value: SpecValue; label: Text }[];
     warranty: { title: Text; value: Text; note: Text };
     tags: Text[];
-    secondaryCta?: { label: Text; anchor: "composition" | "inside" | "specs" };
+    secondaryCta?: { label: Text; anchor: "composition" | "inside" | "configurations" | "specs" };
     segmentIcon?: "house" | "sun";
     mediaAspect?: "landscape" | "square";
     tagTone?: "dark" | "light";
+    primaryCta?: Text;
   };
   /** Use placeholders on the full page even if the catalogue has an image. */
   mediaPlaceholder?: boolean;
@@ -73,6 +74,7 @@ export type ProductPage = {
   };
   specs: SpecRow[];
   specGroups?: { title: Text; rows: SpecRow[] }[];
+  specsDevelopmentNotice?: Text;
   /** TODO(content): datasheet PDF URL; the link renders only when set. */
   datasheetUrl?: string;
   scaling?: {
@@ -114,8 +116,22 @@ export type ProductPage = {
     bms: { title: Text; lead: Text; protections: Text[] };
     compatibility: { title: Text; lead: Text; brands: Text[] };
   };
+  configurations?: {
+    title: Text; lead: Text; delivery: Text;
+    items: { label: Text; baseKwh: number; inverterKw: number; capacities: number[] }[];
+  };
+  modes?: {
+    title: Text; lead: Text;
+    items: { icon: "backup" | "solar" | "generator" | "peak" | "cost"; title: Text; text: Text }[];
+  };
+  process?: {
+    title: Text; lead: Text;
+    steps: { title: Text; text: Text }[];
+  };
   applications: {
+    title?: Text;
     lead: Text;
+    variant?: "cards" | "sectors";
     items: {
       icon: ApplicationIcon;
       tag: Text;
@@ -123,10 +139,13 @@ export type ProductPage = {
       text: Text;
       tone: "sky" | "navy" | "dark";
       links: { label: Text; href: string }[];
+      sectors?: Text[];
     }[];
   };
   related: ProductId[];
-  consultation: { lead: Text; summary?: Text; commentPlaceholder?: Text };
+  relatedTitle?: Text;
+  relatedLinks?: { title: Text; summary: Text; href: string }[];
+  consultation: { title?: Text; lead: Text; summary?: Text; commentPlaceholder?: Text; submit?: Text };
 };
 
 export type ProductPageContent = Omit<ProductPage, "id">;

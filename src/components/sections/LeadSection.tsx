@@ -25,6 +25,7 @@ type LeadSectionProps = {
   commentPlaceholder?: string;
   /** Light-blue panel (product pages) instead of the white section. */
   panel?: boolean;
+  objectTypes?: LeadObjectType[];
 };
 
 const titleId = "lead-section-title";
@@ -38,6 +39,7 @@ export function LeadSection({
   submitLabel,
   commentPlaceholder,
   panel = false,
+  objectTypes,
 }: LeadSectionProps) {
   const messages = getMessages();
   const t = messages.leadSection;
@@ -123,6 +125,7 @@ export function LeadSection({
               submitLabel={submitLabel}
               commentPlaceholder={commentPlaceholder}
               cardTone={panel ? "white" : "surface"}
+              objectTypes={objectTypes}
             />
           </Reveal>
         </div>

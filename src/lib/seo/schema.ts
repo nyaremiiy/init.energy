@@ -36,6 +36,10 @@ export function breadcrumbSchema(items: BreadcrumbItem[]) {
   };
 }
 
+export function howToSchema(name: string, description: string, steps: { name: string; text: string }[]) {
+  return { "@context": "https://schema.org", "@type": "HowTo", name, description, step: steps.map((step, index) => ({ "@type": "HowToStep", position: index + 1, name: step.name, text: step.text })) };
+}
+
 type ProductSchemaInput = {
   name: string;
   description: string;
@@ -47,6 +51,8 @@ type ProductSchemaInput = {
   properties: { name: string; value: string }[];
   related?: { name: string; url: string }[];
   parts?: { name: string; url: string }[];
+  brand?: string;
+  provider?: boolean;
 };
 
 /** Product without `offers`: INIT ENERGY does not publish prices. */
@@ -60,10 +66,8 @@ export function productSchema(input: ProductSchemaInput) {
     url: input.url,
     ...(input.category ? { category: input.category } : {}),
     ...(input.image ? { image: input.image } : {}),
-    brand: [
-      { "@type": "Brand", name: "SVIT" },
-      { "@type": "Brand", name: "INIT ENERGY" },
-    ],
+    brand: { "@type": "Brand", name: input.brand ?? "SVIT" },
+    ...(input.provider ? { seller: { "@id": `${siteUrl}/#organization` }, provider: { "@id": `${siteUrl}/#organization` } } : {}),
     additionalProperty: input.properties.map((property) => ({
       "@type": "PropertyValue",
       name: property.name,

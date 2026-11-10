@@ -37,6 +37,8 @@ export function ProductHero({ page, product, locale }: ProductHeroProps) {
   const secondaryAnchor =
     page.hero.secondaryCta?.anchor === "composition"
       ? anchors.composition
+      : page.hero.secondaryCta?.anchor === "configurations"
+        ? anchors.configurations
       : page.hero.secondaryCta?.anchor === "inside"
         ? anchors.inside
       : anchors.specs;
@@ -106,7 +108,7 @@ export function ProductHero({ page, product, locale }: ProductHeroProps) {
               href={`${path}#${anchors.contacts}`}
               icon={<ArrowUpRight aria-hidden className="size-4.5" />}
             >
-              {t.getOffer}
+              {page.hero.primaryCta?.[locale] ?? t.getOffer}
             </Button>
             <Button href={`${path}#${secondaryAnchor}`} variant="secondary">
               {page.hero.secondaryCta?.label[locale] ?? t.allSpecs}

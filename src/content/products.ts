@@ -820,6 +820,107 @@ export const productList: Product[] = [
     ],
     segment: { uk: "Бізнес", en: "Business" },
     segmentIcon: "business",
+    // TODO(content): nominal voltage, DoD, round-trip efficiency, dimensions,
+    // weight, EMS/PCS models, fire agent, certificates and datasheet are absent.
+    // TODO(content): clarify the 100 kW PCS option and whether IP54/IP55 applies
+    // to the inverter or the full system. Add approved photos and OG artwork.
+    page: {
+      slug: "bess",
+      meta: {
+        title: { uk: "LITHIUMVALLEY BESS — накопичення 208–1 044 кВт·год", en: "LITHIUMVALLEY BESS — 208–1,044 kWh energy storage" },
+        description: { uk: "Промислова BESS LITHIUMVALLEY на 208–1 044 кВт·год: LiFePO₄, інвертори SOLIS до 125 кВт, перемикання до 10 мс і гарантія 10 років для бізнесу та інфраструктури.", en: "LITHIUMVALLEY industrial BESS from 208 to 1,044 kWh: LiFePO₄, SOLIS inverters up to 125 kW, sub-10 ms transfer and a 10-year warranty for business." },
+      },
+      mediaPlaceholder: true,
+      specsMediaAspect: "portrait",
+      hero: {
+        typeLabel: { uk: "Промислова система накопичення (BESS)", en: "Industrial battery energy storage system" },
+        segmentLabel: { uk: "Бізнес та інфраструктура", en: "Business and infrastructure" },
+        lead: { uk: "Промислова система накопичення та резервного живлення на 208–1 044 кВт·год: батареї LiFePO₄, гібридні інвертори SOLIS, керування енергією, рідинне охолодження й пожежогасіння в одному заводському модулі — для приміщення або просто неба.", en: "An industrial 208–1,044 kWh energy storage and backup system combining LiFePO₄ batteries, SOLIS hybrid inverters, energy management, liquid cooling and fire suppression in one factory module for indoor or outdoor installation." },
+        keySpecs: [
+          { value: { text: { uk: "208–1 044", en: "208–1,044" } }, label: { uk: "кВт·год ємності", en: "kWh capacity" } },
+          { value: { text: { uk: "до 125 кВт", en: "up to 125 kW" } }, label: { uk: "гібридний інвертор", en: "hybrid inverter" } },
+          { value: { text: { uk: "< 10 мс", en: "< 10 ms" } }, label: { uk: "перемикання", en: "transfer" } },
+          { value: { text: { uk: "≥ 8 000", en: "≥ 8,000" } }, label: { uk: "циклів", en: "cycles" } },
+        ],
+        warranty: { title: { uk: "Гарантія виробника", en: "Manufacturer warranty" }, value: { uk: "10 років", en: "10 years" }, note: { uk: "ресурс конструкції — до 15 років", en: "structure service life up to 15 years" } },
+        tags: [{ uk: "Рідинне охолодження", en: "Liquid cooling" }, { uk: "Поставка до 2 тижнів", en: "Delivery within 2 weeks" }],
+        secondaryCta: { label: { uk: "Конфігурації", en: "Configurations" }, anchor: "configurations" },
+        primaryCta: { uk: "Отримати конфігурацію BESS", en: "Get a BESS configuration" },
+        mediaAspect: "square", tagTone: "light",
+      },
+      advantages: {
+        lead: { uk: "Не генератор і не звичайний UPS: система, що накопичує енергію й сама керує її потоками між мережею, СЕС, батареями та навантаженням.", en: "Not a generator or a conventional UPS: a system that stores energy and automatically manages flows between the grid, solar, batteries and loads." },
+        items: [
+          { icon: "balance", figure: { uk: "< 10 мс", en: "< 10 ms" }, tag: { uk: "Перемикання", en: "Transfer" }, title: { uk: "Миттєве перемикання", en: "Instant transfer" }, text: { uk: "Навантаження переходить на батареї менш ніж за 10 мс — обладнання не помічає відключення.", en: "Loads transfer to batteries in under 10 ms, so equipment does not notice the outage." }, tone: "sky" },
+          { icon: "cycles", figure: { uk: "Рідинне", en: "Liquid" }, tag: { uk: "Охолодження", en: "Cooling" }, title: { uk: "Стабільна температура комірок", en: "Stable cell temperature" }, text: { uk: "Рідинне охолодження тримає батареї в робочому режимі й подовжує їхній ресурс.", en: "Liquid cooling keeps batteries at operating temperature and extends service life." }, tone: "light" },
+          { icon: "safety", figure: { uk: "2 рівні", en: "2 levels" }, tag: { uk: "Безпека", en: "Safety" }, title: { uk: "Багаторівневе пожежогасіння", en: "Multi-level fire suppression" }, text: { uk: "Окреме пожежогасіння для кожного батарейного блоку і загальне — для всього модуля.", en: "Dedicated suppression for each battery block plus system-wide suppression for the full module." }, tone: "navy" },
+          { icon: "scale", figure: { uk: "EMS", en: "EMS" }, tag: { uk: "Керування", en: "Control" }, title: { uk: "Розумне керування й моніторинг", en: "Smart control and monitoring" }, text: { uk: "EMS автоматично розподіляє енергію, а батареї, інвертор і навантаження видно віддалено.", en: "EMS automatically distributes energy while batteries, inverter and load remain visible remotely." }, tone: "dark" },
+        ],
+      },
+      configurations: {
+        title: { uk: "Дві базові конфігурації — до 1 044 кВт·год", en: "Two base configurations — up to 1,044 kWh" },
+        lead: { uk: "Оберіть базовий модуль під потужність об'єкта й нарощуйте ємність модульно, коли зростає споживання.", en: "Choose a base module for the site's power demand and scale capacity modularly as consumption grows." },
+        delivery: { uk: "поставка до 2 тижнів", en: "delivery within 2 weeks" },
+        items: [
+          { label: { uk: "Конфігурація 01", en: "Configuration 01" }, baseKwh: 208, inverterKw: 50, capacities: [208, 416, 624, 832] },
+          { label: { uk: "Конфігурація 02", en: "Configuration 02" }, baseKwh: 261, inverterKw: 125, capacities: [261, 522, 783, 1044] },
+        ],
+      },
+      modes: {
+        title: { uk: "П'ять сценаріїв в одній системі", en: "Five scenarios in one system" },
+        lead: { uk: "EMS перемикає режими автоматично — постійний оператор на об'єкті не потрібен.", en: "EMS switches modes automatically, with no permanent on-site operator required." },
+        items: [
+          { icon: "backup", title: { uk: "Резервне живлення", en: "Backup power" }, text: { uk: "Підхоплює навантаження при зникненні мережі.", en: "Takes over loads when the grid fails." } },
+          { icon: "solar", title: { uk: "Разом із СЕС", en: "With solar" }, text: { uk: "Зберігає денну генерацію для вечора й ночі.", en: "Stores daytime generation for evening and night." } },
+          { icon: "generator", title: { uk: "Із генератором", en: "With a generator" }, text: { uk: "Працює в парі з дизельним або газовим генератором.", en: "Works with a diesel or gas generator." } },
+          { icon: "peak", title: { uk: "Зрізання піків", en: "Peak shaving" }, text: { uk: "Покриває пікове навантаження з батарей.", en: "Covers peak demand from batteries." } },
+          { icon: "cost", title: { uk: "Оптимізація витрат", en: "Cost optimisation" }, text: { uk: "Переносить споживання на вигідніший час.", en: "Shifts consumption to lower-cost periods." } },
+        ],
+      },
+      specs: [],
+      specGroups: [
+        { title: { uk: "Батарейна система", en: "Battery system" }, rows: [
+          { label: { uk: "Хімія", en: "Chemistry" }, value: { text: { uk: "LiFePO₄", en: "LiFePO₄" } } }, { label: { uk: "Модуль", en: "Module" }, value: { text: { uk: "208 / 261 кВт·год", en: "208 / 261 kWh" } } }, { label: { uk: "Масштабування", en: "Scaling" }, value: { text: { uk: "до 1 044 кВт·год", en: "up to 1,044 kWh" } } }, { label: { uk: "Ресурс", en: "Cycle life" }, value: { text: { uk: "≥ 8 000 циклів", en: "≥ 8,000 cycles" } } }, { label: { uk: "Охолодження", en: "Cooling" }, value: { text: { uk: "Рідинне", en: "Liquid" } } }, { label: { uk: "Строк служби конструкції", en: "Structure service life" }, value: { text: { uk: "до 15 років", en: "up to 15 years" } } },
+        ] },
+        { title: { uk: "Інвертор (PCS)", en: "Inverter (PCS)" }, rows: [
+          { label: { uk: "Тип і бренд", en: "Type and brand" }, value: { text: { uk: "Гібридний SOLIS", en: "SOLIS hybrid" } } }, { label: { uk: "Потужність", en: "Power" }, value: { text: { uk: "50 / 100 / 125 кВт", en: "50 / 100 / 125 kW" } } }, { label: { uk: "ККД", en: "Efficiency" }, value: { text: { uk: "до 98–99%", en: "up to 98–99%" } } }, { label: { uk: "Перемикання", en: "Transfer time" }, value: { text: { uk: "< 10 мс", en: "< 10 ms" } } }, { label: { uk: "Джерела", en: "Sources" }, value: { text: { uk: "СЕС і генератор", en: "Solar and generator" } } }, { label: { uk: "Захист", en: "Ingress protection" }, value: { text: { uk: "IP54 / IP55", en: "IP54 / IP55" } } }, { label: { uk: "Температура", en: "Temperature" }, value: { text: { uk: "−20 … +55 °C", en: "−20 … +55 °C" } } }, { label: { uk: "Інтерфейси", en: "Interfaces" }, value: { text: { uk: "CAN, RS485", en: "CAN, RS485" } } },
+        ] },
+        { title: { uk: "Безпека й керування", en: "Safety and control" }, rows: [
+          { label: { uk: "Пожежогасіння", en: "Fire suppression" }, value: { text: { uk: "Модуль + кожен батарейний блок", en: "Module + each battery block" } } }, { label: { uk: "EMS", en: "EMS" }, value: { text: { uk: "Автоматичний розподіл потоків", en: "Automatic energy flow distribution" } } }, { label: { uk: "Моніторинг", en: "Monitoring" }, value: { text: { uk: "Батареї, інвертор і навантаження віддалено", en: "Remote battery, inverter and load monitoring" } } },
+        ] },
+        { title: { uk: "Гарантія й сервіс", en: "Warranty and service" }, rows: [
+          { label: { uk: "Гарантія", en: "Warranty" }, value: { text: { uk: "10 років", en: "10 years" } } }, { label: { uk: "Огляд", en: "Inspection" }, value: { text: { uk: "1–2 рази на рік", en: "1–2 times a year" } } }, { label: { uk: "Діагностика", en: "Diagnostics" }, value: { text: { uk: "Дистанційна", en: "Remote" } } }, { label: { uk: "Монтаж і запуск", en: "Installation and commissioning" }, value: { text: { uk: "від кількох днів до 1–2 тижнів", en: "from a few days to 1–2 weeks" } } },
+        ] },
+      ],
+      specsDevelopmentNotice: { uk: "TODO(content): номінальна напруга, DoD, круговий ККД, габарити, вага, моделі EMS/PCS, тип вогнегасної речовини, сертифікати й datasheet; уточнити 100 кВт та IP54/IP55.", en: "TODO(content): nominal voltage, DoD, round-trip efficiency, dimensions, weight, EMS/PCS models, fire agent, certificates and datasheet; clarify 100 kW and IP54/IP55." },
+      applications: {
+        variant: "sectors",
+        title: { uk: "Для кого LITHIUMVALLEY", en: "Who LITHIUMVALLEY is for" },
+        lead: { uk: "Для об'єктів, де відключення зупиняють виробництво, псують продукцію або ставлять під загрозу людей.", en: "For sites where outages stop production, spoil products or put people at risk." },
+        items: [
+          { icon: "factory", tag: { uk: "Виробництво", en: "Production" }, title: { uk: "Промисловість і агро", en: "Industry and agriculture" }, text: { uk: "", en: "" }, tone: "sky", sectors: [{ uk: "Виробництво", en: "Manufacturing" }, { uk: "Елеватори, ферми, переробка, зрошення", en: "Elevators, farms, processing and irrigation" }, { uk: "Логістика, склади, холодильні комплекси", en: "Logistics, warehouses and cold storage" }, { uk: "Підприємства з піковими навантаженнями", en: "Sites with peak loads" }], links: [{ label: { uk: "Резерв для бізнесу", en: "Business backup" }, href: routes.backup.business }] },
+          { icon: "store", tag: { uk: "Комерція", en: "Commercial" }, title: { uk: "Комерція й офіси", en: "Commercial and offices" }, text: { uk: "", en: "" }, tone: "navy", sectors: [{ uk: "Бізнес-центри й офіси", en: "Business centres and offices" }, { uk: "ТРЦ і комерційна нерухомість", en: "Shopping centres and commercial property" }, { uk: "Дата-центри й серверні", en: "Data centres and server rooms" }, { uk: "Об'єкти із СЕС", en: "Sites with solar" }], links: [{ label: { uk: "СЕС для бізнесу", en: "Solar for business" }, href: routes.services.turnkeySes }] },
+          { icon: "hybrid", tag: { uk: "Критичні об'єкти", en: "Critical sites" }, title: { uk: "Критична інфраструктура", en: "Critical infrastructure" }, text: { uk: "", en: "" }, tone: "dark", sectors: [{ uk: "Медичні заклади й лабораторії", en: "Medical facilities and laboratories" }, { uk: "Водоканали, насосні й очисні споруди", en: "Water utilities, pumping and treatment plants" }, { uk: "Комунальні об'єкти", en: "Municipal facilities" }, { uk: "Віддалені й автономні об'єкти", en: "Remote and off-grid sites" }], links: [{ label: { uk: "Проєкти для бізнесу", en: "Business projects" }, href: routes.projects }] },
+        ],
+      },
+      process: {
+        title: { uk: "Від підбору до запуску — одна команда", en: "One team from selection to commissioning" },
+        lead: { uk: "Офіційний представник LITHIUMVALLEY в Україні — INIT ENERGY: проєктуємо, монтуємо й обслуговуємо систему самі.", en: "INIT ENERGY is the official LITHIUMVALLEY representative in Ukraine, designing, installing and servicing the system in-house." },
+        steps: [
+          { title: { uk: "Підбір рішення", en: "Solution selection" }, text: { uk: "Безкоштовно підбираємо конфігурацію під об'єкт.", en: "We select the site-specific configuration free of charge." } }, { title: { uk: "Проєкт і поставка", en: "Design and delivery" }, text: { uk: "Проєктуємо й постачаємо до 2 тижнів.", en: "We design and deliver within 2 weeks." } }, { title: { uk: "Монтаж і запуск", en: "Installation and commissioning" }, text: { uk: "Від кількох днів до 1–2 тижнів.", en: "From a few days to 1–2 weeks." } }, { title: { uk: "Сервіс", en: "Service" }, text: { uk: "Огляд 1–2 рази на рік і дистанційна діагностика.", en: "Inspection 1–2 times a year and remote diagnostics." } },
+        ],
+      },
+      related: ["svitPlus16000", "svitPlus5000"],
+      relatedTitle: { uk: "Менші системи й рішення", en: "Smaller systems and solutions" },
+      relatedLinks: [{ title: { uk: "СЕС для бізнесу", en: "Solar for business" }, summary: { uk: "Сонячна електростанція під ключ", en: "Turnkey solar power plant" }, href: routes.services.turnkeySes }],
+      consultation: {
+        title: { uk: "Отримати конфігурацію BESS", en: "Get a BESS configuration" },
+        lead: { uk: "Підбір рішення під конкретний об'єкт — безкоштовно. Інженери INIT ENERGY врахують мережу, СЕС, генератори й реальні режими споживання.", en: "Site-specific solution selection is free. INIT ENERGY engineers account for the grid, solar, generators and real consumption profiles." },
+        summary: { uk: "LITHIUMVALLEY BESS · 208–1 044 кВт·год", en: "LITHIUMVALLEY BESS · 208–1,044 kWh" },
+        commentPlaceholder: { uk: "Тип об'єкта, пікова потужність, чи є СЕС або генератор", en: "Site type, peak power, existing solar or generator" },
+        submit: { uk: "Отримати конфігурацію", en: "Get configuration" },
+      },
+    },
     image: {
       src: "/images/products/lithiumvalley.avif",
       alt: {
