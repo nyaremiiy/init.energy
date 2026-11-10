@@ -53,6 +53,8 @@ export const anchors = {
   composition: "composition",
   inside: "inside",
   configurations: "configurations",
+  ports: "ports",
+  runtime: "runtime",
   specs: "specs",
   scaling: "scaling",
   applications: "applications",

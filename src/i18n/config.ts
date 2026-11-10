@@ -20,6 +20,7 @@ export const localePrefix: Record<Locale, string> = { uk: "", en: "/en" };
 /** Paths (with trailing slash) that exist in English. */
 export const localizedPaths = [
   "/",
+  "/svit-600/",
   "/svit-plus-5000/",
   "/svit-home/",
   "/svit-plus-16000/",

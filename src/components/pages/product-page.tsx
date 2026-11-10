@@ -8,6 +8,7 @@ import { ProductApplications } from "@/components/product-page/product-applicati
 import { ProductComposition } from "@/components/product-page/product-composition";
 import { ProductHero } from "@/components/product-page/product-hero";
 import { ProductInside } from "@/components/product-page/product-inside";
+import { ProductPorts, ProductRuntime } from "@/components/product-page/product-portable";
 import { ProductScaling } from "@/components/product-page/product-scaling";
 import { ProductSectionNav } from "@/components/product-page/product-section-nav";
 import { ProductSpecs } from "@/components/product-page/product-specs";
@@ -79,7 +80,16 @@ export function ProductPageView({
     : page.composition
     ? { id: anchors.composition, label: t.nav.composition }
     : { id: anchors.scaling, label: t.nav.scaling };
-  const navItems = page.configurations
+  const navItems = page.portable
+    ? [
+        { id: anchors.advantages, label: t.nav.advantages },
+        { id: anchors.ports, label: t.nav.ports },
+        { id: anchors.runtime, label: t.nav.runtime },
+        { id: anchors.specs, label: t.nav.specs },
+        { id: anchors.applications, label: t.nav.applications },
+        { id: anchors.faq, label: t.nav.faq },
+      ]
+    : page.configurations
     ? [
         { id: anchors.advantages, label: t.nav.advantages },
         { id: anchors.configurations, label: t.nav.configurations },
@@ -197,6 +207,8 @@ export function ProductPageView({
         ) : null}
         {page.inside ? <ProductInside page={page} locale={locale} /> : null}
         {page.configurations ? <ProductConfigurations page={page} locale={locale} /> : null}
+        {page.portable ? <ProductPorts page={page} product={product} locale={locale} /> : null}
+        {page.runtime ? <ProductRuntime page={page} locale={locale} /> : null}
         <ProductSpecs page={page} product={product} locale={locale} />
         {page.scaling ? (
           <ProductScaling page={page} name={product.name} locale={locale} />
@@ -218,7 +230,7 @@ export function ProductPageView({
           product={page.slug}
           submitLabel={page.consultation.submit?.[locale] ?? t.consultation.submit}
           commentPlaceholder={page.consultation.commentPlaceholder?.[locale]}
-          defaultObjectType={page.slug === "bess" ? "business" : undefined}
+          defaultObjectType={page.slug === "bess" ? "business" : page.slug === "svit-600" ? "apartment" : undefined}
           objectTypes={page.slug === "bess" ? ["house", "business", "infrastructure", "other"] : undefined}
         />
       </main>

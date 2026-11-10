@@ -32,6 +32,55 @@ export const faqTopics: FaqTopic[] = [
  */
 export const faqList: Faq[] = [
   {
+    id: "svit-600-runtime",
+    topic: "products",
+    pages: ["svit-600"],
+    question: { uk: "Скільки працює SVIT 600 від одного заряду?", en: "How long does SVIT 600 run on one charge?" },
+    answer: { uk: "Час роботи залежить від навантаження. Орієнтовно ноутбук працює до 10 годин, роутер з освітленням — до 70 годин, а холодильник — 2–3 години.", en: "Runtime depends on the load. As a guide, a laptop can run for up to 10 hours, a router with lighting for up to 70 hours, and a fridge for 2–3 hours." },
+  },
+  {
+    id: "svit-600-solar",
+    topic: "solar",
+    pages: ["svit-600"],
+    question: { uk: "Чи можна заряджати SVIT 600 від сонячної панелі?", en: "Can SVIT 600 charge from a solar panel?" },
+    answer: { uk: "Так. Станція підтримує заряджання від сонячної панелі через вхід 24 В / 20 А.", en: "Yes. The station supports solar charging through its 24 V / 20 A input." },
+  },
+  {
+    id: "svit-600-charge-time",
+    topic: "products",
+    pages: ["svit-600"],
+    question: { uk: "Скільки часу заряджається SVIT 600?", en: "How long does SVIT 600 take to charge?" },
+    answer: { uk: "Повне заряджання триває приблизно 4 години. Станцію можна заряджати від мережі 220 В, сонячної панелі або генератора.", en: "A full charge takes about four hours. You can recharge it from the 220 V grid, a solar panel or a generator." },
+  },
+  {
+    id: "svit-600-sensitive-electronics",
+    topic: "products",
+    pages: ["svit-600"],
+    question: { uk: "Чи безпечна SVIT 600 для чутливої електроніки?", en: "Is SVIT 600 safe for sensitive electronics?" },
+    answer: { uk: "Так. Інвертор формує чисту синусоїду, тому станція підходить для ноутбуків, роутерів та іншої чутливої техніки в межах допустимої потужності.", en: "Yes. Its inverter produces a pure sine wave, making it suitable for laptops, routers and other sensitive devices within the rated output." },
+  },
+  {
+    id: "svit-600-noise",
+    topic: "products",
+    pages: ["svit-600"],
+    question: { uk: "Наскільки гучно працює SVIT 600?", en: "How loud is SVIT 600?" },
+    answer: { uk: "Рівень шуму становить менше 40 дБ. Станція не використовує пальне й не створює вихлопів.", en: "The noise level is below 40 dB. The station uses no fuel and produces no exhaust fumes." },
+  },
+  {
+    id: "svit-600-total-load",
+    topic: "products",
+    pages: ["svit-600"],
+    question: { uk: "Які пристрої можна підключити одночасно?", en: "Which devices can run at the same time?" },
+    answer: { uk: "Можна одночасно використовувати кілька виходів, якщо сумарне постійне навантаження не перевищує 600 Вт, а короткочасний пік — 1 200 Вт.", en: "You can use several outputs at once as long as the continuous total stays within 600 W and short peaks remain within 1,200 W." },
+  },
+  {
+    id: "svit-600-cycles",
+    topic: "products",
+    pages: ["svit-600"],
+    question: { uk: "Який ресурс батареї SVIT 600?", en: "What is the SVIT 600 battery cycle life?" },
+    answer: { uk: "Батарея розрахована більш ніж на 2 000 циклів заряджання й розряджання.", en: "The battery is rated for more than 2,000 charge and discharge cycles." },
+  },
+  {
     id: "svit-home-runtime",
     topic: "backup",
     pages: ["home", "backup", "products", "svit-home"],

@@ -39,6 +39,8 @@ export function ProductHero({ page, product, locale }: ProductHeroProps) {
       ? anchors.composition
       : page.hero.secondaryCta?.anchor === "configurations"
         ? anchors.configurations
+      : page.hero.secondaryCta?.anchor === "ports"
+        ? anchors.ports
       : page.hero.secondaryCta?.anchor === "inside"
         ? anchors.inside
       : anchors.specs;

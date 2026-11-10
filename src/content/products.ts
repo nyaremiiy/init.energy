@@ -104,6 +104,119 @@ export const productList: Product[] = [
     ],
     segment: { uk: "Квартира", en: "Apartment" },
     segmentIcon: "apartment",
+    // TODO(content): confirm whether the nominal capacity is 865 or 864 Wh and whether the battery chemistry is LiFePO₄ or Li-ion.
+    // TODO(content): add confirmed weight, dimensions, operating temperature, warranty, grid charging power, IP rating, certificates and a dedicated 1200×630 OG image.
+    // TODO(content): confirm the typical load in watts for every runtime example.
+    page: {
+      slug: "svit-600",
+      meta: {
+        title: { uk: "SVIT 600 — портативна зарядна станція 865 Вт·год", en: "SVIT 600 — 865 Wh portable power station" },
+        description: { uk: "Портативна станція SVIT 600: 865 Вт·год, 600 Вт номінально й 1 200 Вт піково, 9 виходів, тиха робота та заряджання від мережі або сонця.", en: "SVIT 600 portable power station with 865 Wh, 600 W rated and 1,200 W peak output, nine ports, quiet operation and solar charging." },
+      },
+      hero: {
+        typeLabel: { uk: "Портативна зарядна станція", en: "Portable power station" },
+        segmentLabel: { uk: "Квартира й подорожі", en: "Apartment and travel" },
+        lead: { uk: "Енергія, яку можна взяти із собою: 865 Вт·год і 600 Вт чистої синусоїди для техніки вдома, у дорозі та під час відключень.", en: "Portable power for home, travel and outages: 865 Wh of stored energy and a 600 W pure sine wave output for everyday electronics." },
+        keySpecs: [
+          { value: { quantity: { value: 865, unit: "Wh" } }, label: { uk: "ємність", en: "capacity" } },
+          { value: { quantity: { value: 600, unit: "W" } }, label: { uk: "номінальна потужність", en: "rated power" } },
+          { value: { quantity: { value: 1200, unit: "W" } }, label: { uk: "пікова потужність", en: "peak power" } },
+          { value: { text: { uk: "< 40 дБ", en: "< 40 dB" } }, label: { uk: "рівень шуму", en: "noise level" } },
+        ],
+        warranty: { title: { uk: "Ресурс батареї", en: "Battery life" }, value: { uk: "2 000+ циклів", en: "2,000+ cycles" }, note: { uk: "повний заряд ≈ 4 години", en: "full charge in about 4 hours" } },
+        tags: [{ uk: "Чиста синусоїда", en: "Pure sine wave" }, { uk: "Заряд від сонця", en: "Solar charging" }],
+        primaryCta: { uk: "Придбати", en: "Buy SVIT 600" },
+        secondaryCta: { label: { uk: "Порти й заряджання", en: "Ports and charging" }, anchor: "ports" },
+        mediaAspect: "square",
+        tagTone: "light",
+      },
+      advantages: {
+        lead: { uk: "Компактне резервне живлення для чутливої техніки: без вихлопів, із тихою роботою та трьома способами заряджання.", en: "Compact backup power for sensitive electronics, with no fumes, quiet operation and three ways to recharge." },
+        items: [
+          { icon: "safety", figure: { uk: "~", en: "~" }, tag: { uk: "Живлення", en: "Power" }, title: { uk: "Чиста синусоїда", en: "Pure sine wave" }, text: { uk: "Безпечне живлення для ноутбуків, роутерів та іншої чутливої електроніки.", en: "Safe power for laptops, routers and other sensitive electronics." }, tone: "sky" },
+          { icon: "balance", figure: { uk: "1 200 Вт", en: "1,200 W" }, tag: { uk: "Потужність", en: "Output" }, title: { uk: "Запас для запуску", en: "Startup headroom" }, text: { uk: "600 Вт номінальної та 1 200 Вт пікової потужності.", en: "600 W rated output with 1,200 W peak power." }, tone: "light" },
+          { icon: "mobility", figure: { uk: "< 40 дБ", en: "< 40 dB" }, tag: { uk: "Комфорт", en: "Comfort" }, title: { uk: "Тиха робота", en: "Quiet operation" }, text: { uk: "Працює без пального, вихлопів і шкідливих викидів.", en: "Runs without fuel, exhaust fumes or harmful emissions." }, tone: "navy" },
+          { icon: "solar", figure: { uk: "≈ 4 год", en: "≈ 4 h" }, tag: { uk: "Заряджання", en: "Charging" }, title: { uk: "Три джерела", en: "Three sources" }, text: { uk: "Заряджання від мережі, сонячної панелі або генератора.", en: "Recharge from the grid, a solar panel or a generator." }, tone: "dark" },
+        ],
+      },
+      portable: {
+        title: { uk: "9 виходів і 3 способи заряджання", en: "Nine outputs and three ways to recharge" },
+        lead: { uk: "Підключайте побутову техніку й мобільні пристрої одночасно, не перевищуючи сумарні 600 Вт.", en: "Power household electronics and mobile devices together within the 600 W total rated output." },
+        outputs: [
+          { count: "2×", icon: "socket", label: { uk: "Розетки AC 220 В", en: "220 V AC sockets" }, note: { uk: "чиста синусоїда", en: "pure sine wave" } },
+          { count: "5×", icon: "usb", label: { uk: "USB-A", en: "USB-A" }, note: { uk: "QC 3.0", en: "QC 3.0" } },
+          { count: "1×", icon: "typeC", label: { uk: "USB-C", en: "USB-C" }, note: { uk: "Power Delivery 60 Вт", en: "60 W Power Delivery" } },
+          { count: "1×", icon: "dc", label: { uk: "Вихід DC 12 В", en: "12 V DC output" }, note: { uk: "для сумісної техніки", en: "for compatible devices" } },
+        ],
+        charging: [
+          { icon: "grid", label: { uk: "Мережа 220 В", en: "220 V grid" }, note: { uk: "звичайна розетка", en: "standard wall socket" } },
+          { icon: "solar", label: { uk: "Сонячна панель", en: "Solar panel" }, note: { uk: "вхід 24 В / 20 А", en: "24 V / 20 A input" } },
+          { icon: "generator", label: { uk: "Генератор", en: "Generator" }, note: { uk: "заряджання поза мережею", en: "off-grid charging" } },
+        ],
+        chargeTime: { uk: "≈ 4 години", en: "≈ 4 hours" },
+        chargeTimeLabel: { uk: "до повного заряду", en: "to a full charge" },
+      },
+      runtime: {
+        title: { uk: "Скільки пропрацює ваша техніка", en: "How long your devices can run" },
+        lead: { uk: "Орієнтовний час роботи від повністю зарядженої станції SVIT 600.", en: "Estimated runtime from a fully charged SVIT 600." },
+        note: { uk: "Фактичний час залежить від потужності, режиму роботи й стану підключеного пристрою.", en: "Actual runtime depends on device power, operating mode and condition." },
+        items: [
+          // TODO(content): confirm the representative laptop load in watts.
+          { icon: "laptop", device: { uk: "Ноутбук", en: "Laptop" }, value: { uk: "до 10", en: "up to 10" }, unit: { uk: "год", en: "hours" }, loadW: undefined },
+          // TODO(content): confirm the combined router and lighting load in watts.
+          { icon: "router", device: { uk: "Роутер і освітлення", en: "Router and lighting" }, value: { uk: "до 70", en: "up to 70" }, unit: { uk: "год", en: "hours" }, loadW: undefined },
+          // TODO(content): confirm the representative refrigerator load in watts.
+          { icon: "fridge", device: { uk: "Холодильник", en: "Fridge" }, value: { uk: "2–3", en: "2–3" }, unit: { uk: "год", en: "hours" }, loadW: undefined },
+        ],
+      },
+      specs: [],
+      updatedAt: { uk: "Оновлено 10 листопада 2026", en: "Updated 10 November 2026" },
+      specGroups: [
+        { title: { uk: "Батарея й потужність", en: "Battery and power" }, rows: [
+          { label: { uk: "Ємність", en: "Capacity" }, value: { quantity: { value: 865, unit: "Wh" } } },
+          { label: { uk: "Номінальна потужність", en: "Rated output" }, value: { quantity: { value: 600, unit: "W" } } },
+          { label: { uk: "Пікова потужність", en: "Peak output" }, value: { quantity: { value: 1200, unit: "W" } } },
+          { label: { uk: "Ресурс", en: "Cycle life" }, value: { text: { uk: "2 000+ циклів", en: "2,000+ cycles" } } },
+          { label: { uk: "Рівень шуму", en: "Noise" }, value: { text: { uk: "< 40 дБ", en: "< 40 dB" } } },
+        ] },
+        { title: { uk: "Виходи", en: "Outputs" }, rows: [
+          { label: { uk: "AC 220 В", en: "220 V AC" }, value: { text: { uk: "2 розетки, чиста синусоїда", en: "2 sockets, pure sine wave" } } },
+          { label: { uk: "USB-A", en: "USB-A" }, value: { text: { uk: "5 × QC 3.0", en: "5 × QC 3.0" } } },
+          { label: { uk: "USB-C", en: "USB-C" }, value: { text: { uk: "1 × PD 60 Вт", en: "1 × PD 60 W" } } },
+          { label: { uk: "DC", en: "DC" }, value: { text: { uk: "1 × 12 В", en: "1 × 12 V" } } },
+        ] },
+        { title: { uk: "Заряджання", en: "Charging" }, rows: [
+          { label: { uk: "Джерела", en: "Sources" }, value: { text: { uk: "мережа 220 В, сонячна панель, генератор", en: "220 V grid, solar panel, generator" } } },
+          { label: { uk: "Сонячний вхід", en: "Solar input" }, value: { text: { uk: "24 В / 20 А", en: "24 V / 20 A" } } },
+          { label: { uk: "Повний заряд", en: "Full charge" }, value: { text: { uk: "≈ 4 години", en: "≈ 4 hours" } } },
+        ] },
+        { title: { uk: "Захист і керування", en: "Protection and controls" }, rows: [
+          { label: { uk: "Захист", en: "Protection" }, value: { text: { uk: "перевантаження, перегрів, коротке замикання", en: "overload, overheating, short circuit" } } },
+          { label: { uk: "Запобіжники", en: "Fuses" }, value: { text: { uk: "8 А та 15 А", en: "8 A and 15 A" } } },
+          { label: { uk: "Керування", en: "Controls" }, value: { text: { uk: "дисплей, окремі кнопки AC, 12 В та USB", en: "display and separate AC, 12 V and USB controls" } } },
+        ] },
+      ],
+      specsDevelopmentNotice: { uk: "TODO(content): підтвердити 865/864 Вт·год і LiFePO₄/Li-ion; додати вагу, габарити, температуру, гарантію, потужність заряджання від мережі, IP та сертифікати.", en: "TODO(content): confirm 865/864 Wh and LiFePO₄/Li-ion; add weight, dimensions, temperature, warranty, grid charging power, IP rating and certificates." },
+      applications: {
+        title: { uk: "Де стане у пригоді SVIT 600", en: "Where SVIT 600 fits" },
+        lead: { uk: "Одна портативна станція для резерву вдома та живлення техніки поза розеткою.", en: "One portable station for backup at home and power away from a wall socket." },
+        items: [
+          { icon: "house", tag: { uk: "Дім", en: "Home" }, title: { uk: "Квартира під час відключень", en: "Apartment outages" }, text: { uk: "Роутер, освітлення, ноутбук і заряджання телефонів.", en: "Keep the router, lights, laptop and phones powered." }, tone: "sky", links: [{ label: { uk: "Резерв для квартири", en: "Apartment backup" }, href: routes.backup.apartment }] },
+          { icon: "travel", tag: { uk: "Мобільність", en: "Mobility" }, title: { uk: "Подорожі", en: "Travel" }, text: { uk: "Живлення техніки в дорозі без стаціонарного монтажу.", en: "Portable power on the road with no fixed installation." }, tone: "navy", links: [{ label: { uk: "Лінійка SVIT", en: "SVIT range" }, href: routes.catalog }] },
+          { icon: "work", tag: { uk: "Робота", en: "Work" }, title: { uk: "Робота на виїзді", en: "Field work" }, text: { uk: "Ноутбук, зв'язок та інструменти в межах потужності станції.", en: "Run a laptop, communications and tools within the station output." }, tone: "sky", links: [{ label: { uk: "Лінійка SVIT", en: "SVIT range" }, href: routes.catalog }] },
+          { icon: "camping", tag: { uk: "Відпочинок", en: "Outdoors" }, title: { uk: "Кемпінг і риболовля", en: "Camping and fishing" }, text: { uk: "Світло, зв'язок і невелика техніка далеко від мережі.", en: "Lighting, communications and small devices away from the grid." }, tone: "dark", links: [{ label: { uk: "Лінійка SVIT", en: "SVIT range" }, href: routes.catalog }] },
+        ],
+      },
+      related: ["svitHome", "svitPlus5000", "svitPlus16000"],
+      relatedLinks: [{ title: { uk: "Порівняти всю лінійку", en: "Compare the full range" }, summary: { uk: "Портативні, домашні та модульні накопичувачі SVIT", en: "Portable, home and modular SVIT storage" }, href: routes.catalog }],
+      consultation: {
+        title: { uk: "Замовити SVIT 600", en: "Order SVIT 600" },
+        lead: { uk: "Залиште телефон — менеджер уточнить ваші потреби, наявність і умови придбання SVIT 600.", en: "Leave your phone number and a manager will confirm your needs, availability and purchase details for SVIT 600." },
+        summary: { uk: "SVIT 600 · 865 Вт·год · 600 Вт", en: "SVIT 600 · 865 Wh · 600 W" },
+        commentPlaceholder: { uk: "Яку техніку плануєте підключати", en: "Which devices do you plan to power?" },
+        submit: { uk: "Придбати SVIT 600", en: "Buy SVIT 600" },
+      },
+    },
     image: {
       src: "/images/products/svit-600.avif",
       alt: {

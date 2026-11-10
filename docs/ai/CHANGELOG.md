@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-10 — Сторінка продукту SVIT 600
+- **Агент:** Codex
+- **Гілка:** feature/svit-600-product-page (статус: готова до merge у develop)
+- **Що зроблено:** Додано серверно-рендерені `/svit-600/` і `/en/svit-600/` у спільний product-page pipeline: локалізовані metadata, hero, sticky-навігація, переваги, модуль 9 виходів/3 способів заряджання, картки автономності, згруповані характеристики, 4 сценарії застосування, 7 FAQ з FAQPage JSON-LD, пов'язані продукти та заявка з попередньо вибраною квартирою. Сторінки включено в sitemap/hreflang; факти зберігаються у `content/`.
+- **Файли:** src/content/{products,product-pages,faq,navigation,routes}.ts, src/components/pages/product-page.tsx, src/components/product-page/{product-portable,product-hero,product-specs,product-applications}.tsx, src/i18n/config.ts, messages/{uk,en}.json, docs/ai/{CONTEXT,CHANGELOG}.md
+- **Нотатки / що далі:** TODO(content): підтвердити 865/864 Вт·год і LiFePO₄/Li-ion; додати вагу, габарити, робочу температуру, гарантію, потужність заряджання від мережі, IP, сертифікати, типові навантаження runtime-карток та окреме OG 1200×630.
+
 ## 2026-11-10 — Видалення секції режимів LITHIUMVALLEY
 - **Агент:** Codex
 - **Гілка:** fix/remove-bess-modes (статус: готова до merge у develop)

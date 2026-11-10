@@ -51,6 +51,7 @@ export function ProductSpecs({
             titleId={titleId}
           />
         </Reveal>
+        {page.updatedAt ? <p className="font-mono text-sm text-ink/70">{page.updatedAt[locale]}</p> : null}
 
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">

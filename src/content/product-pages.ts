@@ -31,11 +31,14 @@ export type ApplicationIcon =
   | "factory"
   | "solar"
   | "backup"
-  | "hybrid";
+  | "hybrid"
+  | "travel"
+  | "work"
+  | "camping";
 export type CompositionModeIcon = "backup" | "solar" | "grid";
 
 /** Slugs of products that have a full page (also FAQ page keys). */
-export type ProductPageSlug = "svit-plus-5000" | "svit-home" | "svit-plus-16000" | "bess";
+export type ProductPageSlug = "svit-600" | "svit-plus-5000" | "svit-home" | "svit-plus-16000" | "bess";
 
 export type ProductPage = {
   id: ProductId;
@@ -51,7 +54,7 @@ export type ProductPage = {
     keySpecs: { value: SpecValue; label: Text }[];
     warranty: { title: Text; value: Text; note: Text };
     tags: Text[];
-    secondaryCta?: { label: Text; anchor: "composition" | "inside" | "configurations" | "specs" };
+    secondaryCta?: { label: Text; anchor: "composition" | "inside" | "configurations" | "ports" | "specs" };
     segmentIcon?: "house" | "sun";
     mediaAspect?: "landscape" | "square";
     tagTone?: "dark" | "light";
@@ -73,6 +76,7 @@ export type ProductPage = {
     }[];
   };
   specs: SpecRow[];
+  updatedAt?: Text;
   specGroups?: { title: Text; rows: SpecRow[] }[];
   specsDevelopmentNotice?: Text;
   /** TODO(content): datasheet PDF URL; the link renders only when set. */
@@ -119,6 +123,20 @@ export type ProductPage = {
   configurations?: {
     title: Text; lead: Text; delivery: Text;
     items: { label: Text; baseKwh: number; inverterKw: number; capacities: number[] }[];
+  };
+  portable?: {
+    title: Text;
+    lead: Text;
+    outputs: { count: string; icon: "socket" | "usb" | "typeC" | "dc"; label: Text; note: Text }[];
+    charging: { icon: "grid" | "solar" | "generator"; label: Text; note: Text }[];
+    chargeTime: Text;
+    chargeTimeLabel: Text;
+  };
+  runtime?: {
+    title: Text;
+    lead: Text;
+    note: Text;
+    items: { icon: "laptop" | "router" | "fridge"; device: Text; value: Text; unit: Text; loadW?: number }[];
   };
   process?: {
     title: Text; lead: Text;
