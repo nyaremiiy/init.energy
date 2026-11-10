@@ -111,7 +111,7 @@ export function ProductHero({ page, product, locale }: ProductHeroProps) {
 
         <div className="relative lg:col-span-5">
           {product.image && !page.mediaPlaceholder ? (
-            <div className="relative aspect-square overflow-hidden rounded-3xl bg-white/6">
+            <div className="relative aspect-4/3 overflow-hidden rounded-3xl bg-white/6">
               <Image
                 src={product.image.src}
                 alt={product.image.alt[locale]}
@@ -126,7 +126,7 @@ export function ProductHero({ page, product, locale }: ProductHeroProps) {
             <MediaPlaceholder
               tone="dark"
               caption={format(t.photoPending, { name: product.name })}
-              className="aspect-square w-full rounded-3xl"
+              className="aspect-4/3 w-full rounded-3xl"
             />
           )}
 

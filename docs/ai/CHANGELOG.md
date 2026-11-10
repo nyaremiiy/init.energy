@@ -36,6 +36,13 @@
 - **Файли:** src/content/{products,product-pages,faq}.ts, docs/ai/{CONTEXT,CHANGELOG}.md
 - **Нотатки / що далі:** строк служби в роках не публікуємо, доки власник не підтвердить. Діапазон робочої напруги батареї 48 В — TODO(content). Перевірка: lint, test і build проходять.
 
+## 2026-11-10 — Фото в hero сторінки продукту 4:3
+- **Агент:** Claude Code
+- **Гілка:** fix/product-hero-ratio (статус: змерджено в develop)
+- **Що зроблено:** фото й заглушку в hero сторінок продуктів переведено з квадрата (1:1) на 4:3, як у фото продуктів (1448×1086) і в правилах проєкту. Змінено лише `product-hero.tsx`.
+- **Файли:** src/components/product-page/product-hero.tsx, docs/ai/CHANGELOG.md
+- **Нотатки / що далі:** перевірено збіркою й лінтером; візуально — на /svit-home/ і /svit-plus-5000/.
+
 ## 2026-11-10 — Оновлення характеристик і складу SVIT HOME
 - **Агент:** Claude Code
 - **Гілка:** fix/svit-home-kit-specs (статус: змерджено в develop)
