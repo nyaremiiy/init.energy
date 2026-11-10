@@ -155,8 +155,8 @@ export const buildSteps: { title: Localized; text: Localized }[] = [
 
 // TODO(content): the segment pages do not exist yet; create them or change the links.
 export const segmentPages = {
-  house: "/ses/dlya-domu/",
-  business: "/ses/dlya-biznesu/",
+  house: "/cec/dlya-domu/",
+  business: "/cec/dlya-biznesu/",
 } as const;
 
 // TODO(content): articles «Корисне перед покупкою СЕС» — topics: how to choose SES power

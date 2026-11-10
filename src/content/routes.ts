@@ -22,7 +22,7 @@ export const slugs = {
     lithiumvalley: "bess",
   },
   services: {
-    turnkeySes: "ses",
+    turnkeySes: "cec",
     solar: "ses",
   },
   backup: {

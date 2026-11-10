@@ -10,7 +10,7 @@ export function generateMetadata(): Metadata {
   return buildMetadata({
     title: t.title,
     description: t.description,
-    path: "/ses/",
+    path: "/cec/",
     locale: "uk",
   });
 }
