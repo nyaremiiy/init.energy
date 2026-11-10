@@ -10,7 +10,6 @@ import { getLocale, getMessages } from "@/i18n/server";
 import { format } from "@/lib/messages";
 
 import { CardLabel } from "./card-label";
-import { Heading } from "./heading";
 import { IconButton } from "./icon-button";
 import { MediaPlaceholder } from "./media-placeholder";
 
@@ -85,7 +84,14 @@ export function ProjectCard({ project, variant }: ProjectCardProps) {
         ]
       : []),
     ...(isLarge && project.region
-      ? [{ label: t.fields.region, value: project.region[locale] }]
+      ? [
+          {
+            label: t.fields.region,
+            value: project.region[locale],
+            // Hidden on phones: three specs fit one row of a 4/3 card.
+            wideOnly: true,
+          },
+        ]
       : []),
     ...(project.year !== undefined
       ? [{ label: t.fields.year, value: String(project.year) }]
@@ -109,6 +115,8 @@ export function ProjectCard({ project, variant }: ProjectCardProps) {
                 : "(min-width: 1024px) 42vw, 100vw"
             }
             className="object-cover transition-transform duration-500 ease-tech motion-safe:group-hover:scale-103"
+            // Focal point per photo (content/projects.ts), so the equipment stays in frame.
+            style={{ objectPosition: project.image.position ?? "center" }}
           />
           <div
             aria-hidden
@@ -125,19 +133,24 @@ export function ProjectCard({ project, variant }: ProjectCardProps) {
       )}
 
       <div
-        className={`relative flex flex-col p-card-sm lg:p-card ${hasPhoto ? "mt-auto" : ""}`}
+        className={`relative flex flex-col p-card-sm ${hasPhoto ? "mt-auto" : ""}`}
       >
         <div className="flex items-end justify-between gap-4">
-          <div className="flex min-w-0 flex-col gap-3">
+          <div className="flex min-w-0 flex-col gap-2">
             <CardLabel
               tone={tone.eyebrow === "dark" ? "dark" : "light"}
               icon={segmentIcons[project.segment]}
             >
               {t.segments[project.segment]}
             </CardLabel>
-            <Heading as="h3" size="h3" className={tone.title}>
+            {/* One step below the card H3 on the large card, two on the small ones. */}
+            <h3
+              className={`font-heading font-medium tracking-tight ${tone.title} ${
+                isLarge ? "text-h3-sm" : "text-base"
+              }`}
+            >
               {title}
-            </Heading>
+            </h3>
           </div>
           <IconButton
             href={projectHref}
@@ -148,12 +161,16 @@ export function ProjectCard({ project, variant }: ProjectCardProps) {
 
         {specs.length > 0 ? (
           <dl
-            className={`mt-6 grid border-t pt-4 text-base ${tone.divider} ${
-              isLarge ? "grid-cols-2 sm:grid-cols-4" : "grid-cols-3"
+            // Phones: values sit in a row by their own width; from sm — equal columns.
+            className={`mt-4 flex flex-wrap gap-x-4 gap-y-2 border-t pt-3 sm:grid sm:gap-x-0 ${isLarge ? "text-sm sm:text-base" : "text-sm"} ${tone.divider} ${
+              isLarge ? "sm:grid-cols-4" : "sm:grid-cols-3"
             }`}
           >
             {specs.map((spec) => (
-              <div key={spec.label} className="min-w-0 pr-3 last:pr-0">
+              <div
+                key={spec.label}
+                className={`min-w-0 sm:pr-3 sm:last:pr-0 ${"wideOnly" in spec && spec.wideOnly ? "hidden sm:block" : ""}`}
+              >
                 <dt className={`text-sm ${tone.muted}`}>{spec.label}</dt>
                 <dd className="mt-1 truncate font-medium">{spec.value}</dd>
               </div>

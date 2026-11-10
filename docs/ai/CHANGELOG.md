@@ -15,6 +15,12 @@
 
 ---
 
+## 2026-11-10 — Компактніші картки проєктів
+- **Агент:** Claude Code
+- **Гілка:** style/projects-smaller (статус: змерджено в develop)
+- **Що зроблено:** висоту блоку задає aspect-ratio замість фіксованих `lg:h-180` / `h-105`: велика картка `lg:aspect-16/10`, дві малі ділять її висоту (≈ 16/7), планшет `md:aspect-video`, телефон `aspect-4/3`. На 1440 px блок 486 px (було 720). Назва — `text-h3-sm` на великій і `text-base` на малих; padding `p-card-sm` на всіх екранах; рядок даних `mt-4 pt-3`, на телефоні — у ряд за шириною вмісту (`flex-wrap`), `text-sm`, «Регіон» прихований до `sm`. Поле `image.position` у `projects.ts` (object-position, за замовчуванням center).
+- **Файли:** src/components/ui/project-card.tsx, src/components/sections/projects-showcase.tsx, src/content/projects.ts, docs/ai/CHANGELOG.md
+
 ## 2026-11-10 — Накопичувачі: світлий варіант з карткою ємності
 - **Агент:** Claude Code
 - **Гілка:** style/product-tabs-light (статус: змерджено в develop)

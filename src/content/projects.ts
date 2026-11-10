@@ -6,6 +6,8 @@ export type ProjectSegment = "apartment" | "house" | "business";
 export type ProjectImage = {
   src: string;
   alt: Localized;
+  /** CSS object-position focal point, e.g. "center 60%" (default center). */
+  position?: string;
   width: number;
   height: number;
 };
