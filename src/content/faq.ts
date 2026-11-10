@@ -235,8 +235,8 @@ export const faqList: Faq[] = [
       en: "Can SVIT HOME be installed without wall mounting?",
     },
     answer: {
-      uk: "Так. Це вертикальна стійка на колесах — її можна поставити в будь-якому зручному місці й за потреби перемістити.",
-      en: "Yes. It is a vertical rack on wheels, so it can be placed wherever convenient and moved when needed.",
+      uk: "Так. Це вертикальна стійка на ніжках — її можна поставити в будь-якому зручному місці.",
+      en: "Yes. It is a vertical rack on legs that can be placed in any convenient spot.",
     },
   },
   {
