@@ -43,6 +43,13 @@
 - **Файли:** src/components/ui/toast.tsx, docs/ai/CHANGELOG.md
 - **Нотатки / що далі:** перевірити в браузері на десктопі й телефоні.
 
+## 2026-11-10 — Фото складу комплекту SVIT HOME
+- **Агент:** Claude Code
+- **Гілка:** feat/svit-home-composition-photos (статус: змерджено в develop)
+- **Що зроблено:** у блок «Що входить у SVIT HOME» додано фото: інвертор (invertor.avif), стійка на ніжках (standalone.avif) і батарея — фото SVIT PLUS 5000, бо окремого фото батареї в комплекті немає. Блок вміє показувати фото (поле `image` у складі), без фото лишається заглушка.
+- **Файли:** src/components/product-page/product-composition.tsx, src/content/{products,product-pages}.ts, docs/ai/CHANGELOG.md
+- **Нотатки / що далі:** на фото інвертора він змонтований на стіні — переконайтесь, що це ок, бо комплект у цілому без настінного монтажу. Фото батареї SVIT PLUS 5000 можна замінити, якщо з'явиться окреме фото комплектної батареї.
+
 ## 2026-11-10 — Фото на сторінці SVIT HOME
 - **Агент:** Claude Code
 - **Гілка:** feat/svit-home-photo (статус: змерджено в develop)
