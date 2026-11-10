@@ -126,8 +126,8 @@ export const productList: Product[] = [
       en: "Backup power for the whole house",
     },
     focusDescription: {
-      uk: "Готовий комплект для будинку й малого бізнесу: гібридний інвертор 6,2 кВт і батарея SVIT PLUS 5000 на 5,12 кВт·год на мобільній стійці з колесами — без настінного монтажу. Під час відключення сам переходить на батарею, а з панелями працює як сонячна станція.",
-      en: "A ready kit for a house or small business: a 6.2 kW hybrid inverter and a 5.12 kWh SVIT PLUS 5000 battery on a mobile rack with wheels — no wall mounting. It switches to the battery by itself during an outage and works as a solar plant with panels.",
+      uk: "Готовий комплект для будинку й малого бізнесу: гібридний інвертор 6,2 кВт і батарея SVIT PLUS 5000 на 5,12 кВт·год на стійці на ніжках — без настінного монтажу. Під час відключення сам переходить на батарею, а з панелями працює як сонячна станція.",
+      en: "A ready kit for a house or small business: a 6.2 kW hybrid inverter and a 5.12 kWh SVIT PLUS 5000 battery on a rack on legs — no wall mounting. It switches to the battery by itself during an outage and works as a solar plant with panels.",
     },
     capacity: { value: 5.12, unit: "kWh" },
     // /svit-home/: battery SVIT Plus 5000, LiFePO₄.
@@ -159,8 +159,8 @@ export const productList: Product[] = [
           en: "SVIT HOME — 6.2 kW, 5.12 kWh backup power kit",
         },
         description: {
-          uk: "SVIT HOME — готовий комплект резервного живлення: гібридний інвертор VICTOR 6,2 кВт, батарея LiFePO₄ 5,12 кВт·год і мобільна стійка для квартир, будинків, ОСББ та підприємств.",
-          en: "SVIT HOME is a ready backup power kit with a 6.2 kW VICTOR hybrid inverter, a 5.12 kWh LiFePO₄ battery and a mobile rack for apartments, houses, housing associations and businesses.",
+          uk: "SVIT HOME — готовий комплект резервного живлення: гібридний інвертор VICTOR 6,2 кВт, батарея LiFePO₄ 5,12 кВт·год і стійка на ніжках для квартир, будинків, ОСББ та підприємств.",
+          en: "SVIT HOME is a ready backup power kit with a 6.2 kW VICTOR hybrid inverter, a 5.12 kWh LiFePO₄ battery and a rack on legs for apartments, houses, housing associations and businesses.",
         },
       },
       mediaPlaceholder: true,
@@ -174,8 +174,8 @@ export const productList: Product[] = [
           en: "Home and small business",
         },
         lead: {
-          uk: "Готовий комплект резервного живлення: гібридний інвертор VICTOR 6,2 кВт і батарея SVIT PLUS 5000 на 5,12 кВт·год на мобільній стійці. Працює одразу після підключення — від мережі, батареї або сонячних панелей.",
-          en: "A ready backup power kit with a 6.2 kW VICTOR hybrid inverter and a 5.12 kWh SVIT PLUS 5000 battery on a mobile rack. It works as soon as it is connected — from the grid, battery or solar panels.",
+          uk: "Готовий комплект резервного живлення: гібридний інвертор VICTOR 6,2 кВт і батарея SVIT PLUS 5000 на 5,12 кВт·год на стійці на ніжках. Працює одразу після підключення — від мережі, батареї або сонячних панелей.",
+          en: "A ready backup power kit with a 6.2 kW VICTOR hybrid inverter and a 5.12 kWh SVIT PLUS 5000 battery on a rack on legs. It works as soon as it is connected — from the grid, battery or solar panels.",
         },
         keySpecs: [
           {
@@ -210,7 +210,7 @@ export const productList: Product[] = [
           },
         },
         tags: [
-          { uk: "Стійка на колесах", en: "Rack on wheels" },
+          { uk: "Стійка на ніжках", en: "Rack on legs" },
           {
             uk: "Готовий до сонячних панелей",
             en: "Solar-panel ready",
@@ -243,15 +243,15 @@ export const productList: Product[] = [
           },
           {
             icon: "mobility",
-            figure: { uk: "Мобільна", en: "Mobile" },
-            tag: { uk: "Мобільність", en: "Mobility" },
+            figure: { uk: "Ніжки", en: "Legs" },
+            tag: { uk: "Установка", en: "Installation" },
             title: {
               uk: "Без монтажу на стіну",
               en: "No wall mounting",
             },
             text: {
-              uk: "Вертикальна стійка на колесах — комплект легко переставити в інше приміщення.",
-              en: "The vertical rack is on wheels, so the kit is easy to move to another room.",
+              uk: "Комплект стоїть на ніжках — настінний монтаж не потрібен.",
+              en: "The kit stands on legs, so no wall mounting is needed.",
             },
             tone: "light",
           },
@@ -346,10 +346,10 @@ export const productList: Product[] = [
             },
           },
           {
-            title: { uk: "Мобільна стійка", en: "Mobile rack" },
+            title: { uk: "Стійка на ніжках", en: "Rack on legs" },
             text: {
-              uk: "Вертикальна металева стійка на колесах з відсіком для щитка з автоматами.",
-              en: "A vertical metal rack on wheels with a compartment for a breaker panel.",
+              uk: "Вертикальна металева стійка на ніжках з відсіком для щитка з автоматами.",
+              en: "A vertical metal rack on legs with a compartment for a breaker panel.",
             },
             specs: [
               {
@@ -357,8 +357,8 @@ export const productList: Product[] = [
                 value: { uk: "не потрібен", en: "not required" },
               },
               {
-                label: { uk: "Переміщення", en: "Moving" },
-                value: { uk: "на колесах", en: "on wheels" },
+                label: { uk: "Опора", en: "Support" },
+                value: { uk: "ніжки", en: "legs" },
               },
             ],
           },
@@ -439,7 +439,7 @@ export const productList: Product[] = [
         },
         {
           label: { uk: "Конструкція", en: "Construction" },
-          value: { text: { uk: "вертикальна металева стійка на колесах", en: "vertical metal rack on wheels" } },
+          value: { text: { uk: "вертикальна металева стійка на ніжках", en: "vertical metal rack on legs" } },
         },
         {
           label: { uk: "Додатково", en: "Additional" },
