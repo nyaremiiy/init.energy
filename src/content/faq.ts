@@ -227,6 +227,32 @@ export const faqList: Faq[] = [
     },
   },
   {
+    id: "svit-plus-5000-inverters",
+    topic: "products",
+    pages: ["svit-plus-5000"],
+    question: {
+      uk: "З якими інверторами працює SVIT PLUS 5000?",
+      en: "Which inverters does SVIT PLUS 5000 work with?",
+    },
+    answer: {
+      uk: "З гібридними й сонячними інверторами на 48 В: батарея обмінюється даними з інвертором через RS485 або CAN. У комплекті SVIT HOME її поєднують з гібридним інвертором VICTOR NM-ECO-6.2 kW PLUS. Сумісність саме з вашим інвертором підтвердить інженер.",
+      en: "With 48 V hybrid and solar inverters: the battery talks to the inverter over RS485 or CAN. In the SVIT HOME kit it is paired with the VICTOR NM-ECO-6.2 kW PLUS hybrid inverter. An engineer will confirm compatibility with your inverter.",
+    },
+  },
+  {
+    id: "svit-plus-5000-runtime",
+    topic: "backup",
+    pages: ["svit-plus-5000"],
+    question: {
+      uk: "На скільки годин вистачить однієї батареї SVIT PLUS 5000?",
+      en: "How many hours does one SVIT PLUS 5000 battery last?",
+    },
+    answer: {
+      uk: "Залежить від навантаження: 5,12 кВт·год при 0,5 кВт (котел, холодильник, світло й роутер) — приблизно 9–10 годин. Для довшого резерву модулі з'єднують паралельно — до 16 штук, до 81 кВт·год.",
+      en: "It depends on the load: 5.12 kWh at 0.5 kW (boiler, fridge, lights and router) lasts about 9–10 hours. For longer backup, connect modules in parallel — up to 16, up to 81 kWh.",
+    },
+  },
+  {
     id: "svit-home-no-wall-mounting",
     topic: "products",
     pages: ["svit-home"],

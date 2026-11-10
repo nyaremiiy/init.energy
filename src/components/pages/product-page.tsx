@@ -23,7 +23,11 @@ import { getMessages } from "@/i18n/server";
 import { formatQuantity, type Locale } from "@/lib/format";
 import { format } from "@/lib/messages";
 import { absoluteUrl, buildMetadata } from "@/lib/seo/metadata";
-import { breadcrumbSchema, productSchema } from "@/lib/seo/schema";
+import {
+  breadcrumbSchema,
+  organizationSchema,
+  productSchema,
+} from "@/lib/seo/schema";
 
 export function buildProductPageMetadata(
   slug: string,
@@ -31,12 +35,22 @@ export function buildProductPageMetadata(
 ): Metadata {
   const page = productPageBySlug(slug);
   if (!page) return {};
+  const product = products[page.id];
 
   return buildMetadata({
     title: page.meta.title[locale],
     description: page.meta.description[locale],
     path: toPath(page.slug),
     locale,
+    image:
+      page.ogImage && product?.image
+        ? {
+            url: page.ogImage,
+            width: 1200,
+            height: 630,
+            alt: product.image.alt[locale],
+          }
+        : undefined,
   });
 }
 
@@ -112,6 +126,7 @@ export function ProductPageView({
         data={productSchema({
           name: product.name,
           description: page.hero.lead[locale],
+          category: page.hero.typeLabel[locale],
           url: absoluteUrl(path),
           image:
             product.image && !page.mediaPlaceholder
@@ -137,13 +152,11 @@ export function ProductPageView({
             name: t.home,
             url: absoluteUrl(localizePath(routes.home, locale)),
           },
-          {
-            name: t.catalog,
-            url: absoluteUrl(localizePath(routes.catalog, locale)),
-          },
+          // The catalogue (/svit/) is not built yet: no crumb that leads to a 404.
           { name: product.name, url: absoluteUrl(path) },
         ])}
       />
+      <JsonLd data={organizationSchema(locale)} />
 
       <main className="pb-section-sm lg:pb-section">
         <div id={heroId}>

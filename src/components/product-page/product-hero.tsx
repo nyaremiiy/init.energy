@@ -14,7 +14,7 @@ import { MediaPlaceholder } from "@/components/ui/media-placeholder";
 import { Panel } from "@/components/ui/panel";
 import type { ProductPage } from "@/content/product-pages";
 import type { Product } from "@/content/products";
-import { anchors, routes, toPath } from "@/content/routes";
+import { anchors, routes, sectionHref, toPath } from "@/content/routes";
 import { localizePath } from "@/i18n/config";
 import type { Locale } from "@/lib/format";
 import { getMessages } from "@/i18n/server";
@@ -56,7 +56,8 @@ export function ProductHero({ page, product, locale }: ProductHeroProps) {
             label={t.breadcrumbsLabel}
             items={[
               { name: t.home, href: localizePath(routes.home, locale) },
-              { name: t.catalog, href: localizePath(routes.catalog, locale) },
+              // TODO(content): switch to routes.catalog once /svit/ exists.
+              { name: t.catalog, href: sectionHref(anchors.products, locale) },
               { name: product.name, href: path },
             ]}
           />
