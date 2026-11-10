@@ -246,7 +246,6 @@
       "composition": "Composition",
       "inside": "Inside",
       "configurations": "Configurations",
-      "modes": "Modes",
       "specs": "Specifications",
       "scaling": "Scaling",
       "applications": "Applications"
@@ -283,7 +282,6 @@
       "composition": "Composition",
       "inside": "Inside",
       "configurations": "Configurations",
-      "modes": "Modes",
       "specs": "Specifications",
       "scaling": "Scaling",
       "applications": "Applications",
@@ -306,7 +304,6 @@
       "protectionsLabel": "BMS protections"
     },
     "configurations": { "eyebrow": "Configurations", "scaling": "Scaling without stopping the system, kWh" },
-    "modes": { "eyebrow": "Operating modes" },
     "process": { "eyebrow": "Delivery process" },
     "specs": {
       "eyebrow": "Specifications",

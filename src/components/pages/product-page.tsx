@@ -3,7 +3,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 
 import { ProductAdvantages } from "@/components/product-page/product-advantages";
-import { HowToSteps, ProductConfigurations, ProductModes } from "@/components/product-page/product-bess-sections";
+import { HowToSteps, ProductConfigurations } from "@/components/product-page/product-bess-sections";
 import { ProductApplications } from "@/components/product-page/product-applications";
 import { ProductComposition } from "@/components/product-page/product-composition";
 import { ProductHero } from "@/components/product-page/product-hero";
@@ -83,7 +83,6 @@ export function ProductPageView({
     ? [
         { id: anchors.advantages, label: t.nav.advantages },
         { id: anchors.configurations, label: t.nav.configurations },
-        { id: anchors.modes, label: t.nav.modes },
         { id: anchors.specs, label: t.nav.specs },
         { id: anchors.applications, label: t.nav.applications },
         { id: anchors.faq, label: t.nav.faq },
@@ -198,7 +197,6 @@ export function ProductPageView({
         ) : null}
         {page.inside ? <ProductInside page={page} locale={locale} /> : null}
         {page.configurations ? <ProductConfigurations page={page} locale={locale} /> : null}
-        {page.modes ? <ProductModes page={page} locale={locale} /> : null}
         <ProductSpecs page={page} product={product} locale={locale} />
         {page.scaling ? (
           <ProductScaling page={page} name={product.name} locale={locale} />

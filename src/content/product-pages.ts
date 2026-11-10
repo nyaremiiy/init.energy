@@ -120,10 +120,6 @@ export type ProductPage = {
     title: Text; lead: Text; delivery: Text;
     items: { label: Text; baseKwh: number; inverterKw: number; capacities: number[] }[];
   };
-  modes?: {
-    title: Text; lead: Text;
-    items: { icon: "backup" | "solar" | "generator" | "peak" | "cost"; title: Text; text: Text }[];
-  };
   process?: {
     title: Text; lead: Text;
     steps: { title: Text; text: Text }[];

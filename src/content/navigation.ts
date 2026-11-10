@@ -17,7 +17,6 @@ type FooterLinkLabels = {
   composition: string;
   inside: string;
   configurations: string;
-  modes: string;
   specs: string;
   scaling: string;
   applications: string;
@@ -71,7 +70,6 @@ for (const page of productPages) {
       return [
         { href: anchor(anchors.advantages), labelKey: "advantages" },
         { href: anchor(anchors.configurations), labelKey: "configurations" },
-        { href: anchor(anchors.modes), labelKey: "modes" },
         { href: anchor(anchors.specs), labelKey: "specs" },
         { href: anchor(anchors.applications), labelKey: "applications" },
         { href: anchor(anchors.faq), labelKey: "faq" },

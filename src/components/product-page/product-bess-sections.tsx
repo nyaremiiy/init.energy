@@ -1,5 +1,3 @@
-import { BatteryCharging, ChartNoAxesCombined, CircleDollarSign, Fuel, Sun } from "lucide-react";
-
 import { Container } from "@/components/layout/container";
 import { CardLabel } from "@/components/ui/card-label";
 import { Heading } from "@/components/ui/heading";
@@ -44,14 +42,6 @@ export function ProductConfigurations({ page, locale }: { page: ProductPage; loc
       </Container>
     </Panel>
   );
-}
-
-const modeIcons = { backup: BatteryCharging, solar: Sun, generator: Fuel, peak: ChartNoAxesCombined, cost: CircleDollarSign };
-export function ProductModes({ page, locale }: { page: ProductPage; locale: Locale }) {
-  const data = page.modes;
-  if (!data) return null;
-  const t = getMessages().productPage.modes;
-  return <section id={anchors.modes} aria-labelledby="modes-title" className="scroll-mt-40 bg-white pt-section-sm lg:pt-section"><Container className="flex flex-col gap-section-head-sm lg:gap-section-head"><SectionHeader eyebrow={t.eyebrow} title={data.title[locale]} titleId="modes-title" lead={data.lead[locale]} /><div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">{data.items.map((item, index) => { const Icon = modeIcons[item.icon]; return <Reveal key={item.title.en} delay={index * 0.06}><article className="flex h-full flex-col gap-5 rounded-3xl bg-surface p-card-sm lg:p-card"><Icon aria-hidden className="size-6" /><Heading as="h3" size="h3">{item.title[locale]}</Heading><p className="mt-auto text-base text-ink/70">{item.text[locale]}</p></article></Reveal>; })}</div></Container></section>;
 }
 
 export function HowToSteps({ page, locale }: { page: ProductPage; locale: Locale }) {
