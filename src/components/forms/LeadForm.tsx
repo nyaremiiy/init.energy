@@ -23,7 +23,7 @@ import {
 import { validateLeadForm, type LeadFieldErrors } from "@/lib/lead-form-schema";
 import { useLocale, useMessages } from "@/i18n/client";
 
-export type LeadObjectType = "apartment" | "house" | "business" | "other";
+export type LeadObjectType = "apartment" | "house" | "business" | "infrastructure" | "other";
 
 type LeadFormProps = {
   defaultObjectType?: LeadObjectType;
@@ -33,11 +33,12 @@ type LeadFormProps = {
   commentPlaceholder?: string;
   /** Card background: "surface" on white sections, "white" on the light-blue panel. */
   cardTone?: "surface" | "white";
+  objectTypes?: LeadObjectType[];
 };
 
 type Status = "idle" | "submitting";
 
-const objectTypes: LeadObjectType[] = [
+const defaultObjectTypes: LeadObjectType[] = [
   "apartment",
   "house",
   "business",
@@ -82,6 +83,7 @@ export function LeadForm({
   submitLabel,
   commentPlaceholder,
   cardTone = "surface",
+  objectTypes = defaultObjectTypes,
 }: LeadFormProps) {
   const t = useMessages().leadSection.form;
   const locale = useLocale();

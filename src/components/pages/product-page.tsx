@@ -3,6 +3,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 
 import { ProductAdvantages } from "@/components/product-page/product-advantages";
+import { HowToSteps, ProductConfigurations, ProductModes } from "@/components/product-page/product-bess-sections";
 import { ProductApplications } from "@/components/product-page/product-applications";
 import { ProductComposition } from "@/components/product-page/product-composition";
 import { ProductHero } from "@/components/product-page/product-hero";
@@ -26,6 +27,7 @@ import { format } from "@/lib/messages";
 import { absoluteUrl, buildMetadata } from "@/lib/seo/metadata";
 import {
   breadcrumbSchema,
+  howToSchema,
   organizationSchema,
   productSchema,
 } from "@/lib/seo/schema";
@@ -70,12 +72,23 @@ export function ProductPageView({
   const product = products[page.id];
   const path = localizePath(toPath(page.slug), locale);
   const heroId = "product-hero";
-  const variableSection = page.inside
+  const variableSection = page.configurations
+    ? { id: anchors.configurations, label: t.nav.configurations }
+    : page.inside
     ? { id: anchors.inside, label: t.nav.inside }
     : page.composition
     ? { id: anchors.composition, label: t.nav.composition }
     : { id: anchors.scaling, label: t.nav.scaling };
-  const navItems = page.composition || page.inside
+  const navItems = page.configurations
+    ? [
+        { id: anchors.advantages, label: t.nav.advantages },
+        { id: anchors.configurations, label: t.nav.configurations },
+        { id: anchors.modes, label: t.nav.modes },
+        { id: anchors.specs, label: t.nav.specs },
+        { id: anchors.applications, label: t.nav.applications },
+        { id: anchors.faq, label: t.nav.faq },
+      ]
+    : page.composition || page.inside
     ? [
         { id: anchors.advantages, label: t.nav.advantages },
         variableSection,
@@ -131,6 +144,8 @@ export function ProductPageView({
           name: product.name,
           description: page.hero.lead[locale],
           category: page.hero.typeLabel[locale],
+          brand: product.brand,
+          provider: product.brand === "LITHIUMVALLEY",
           url: absoluteUrl(path),
           image:
             product.image && !page.mediaPlaceholder
@@ -164,6 +179,7 @@ export function ProductPageView({
         ])}
       />
       <JsonLd data={organizationSchema(locale)} />
+      {page.process ? <JsonLd data={howToSchema(page.process.title[locale], page.process.lead[locale], page.process.steps.map((step) => ({ name: step.title[locale], text: step.text[locale] })))} /> : null}
 
       <main className="pb-section-sm lg:pb-section">
         <div id={heroId}>
@@ -181,26 +197,31 @@ export function ProductPageView({
           <ProductComposition page={page} locale={locale} />
         ) : null}
         {page.inside ? <ProductInside page={page} locale={locale} /> : null}
+        {page.configurations ? <ProductConfigurations page={page} locale={locale} /> : null}
+        {page.modes ? <ProductModes page={page} locale={locale} /> : null}
         <ProductSpecs page={page} product={product} locale={locale} />
         {page.scaling ? (
           <ProductScaling page={page} name={product.name} locale={locale} />
         ) : null}
         <ProductApplications page={page} name={product.name} locale={locale} />
+        {page.process ? <HowToSteps page={page} locale={locale} /> : null}
         <FaqSection
           page={page.slug}
           title={format(t.faq.title, { name: product.name })}
           lead={t.faq.lead}
           filter={false}
         />
-        <RelatedProducts ids={page.related} />
+        <RelatedProducts ids={page.related} title={page.relatedTitle?.[locale]} links={page.relatedLinks?.map((item) => ({ title: item.title[locale], summary: item.summary[locale], href: item.href }))} />
         <LeadSection
           panel
-          title={t.consultation.title}
+          title={page.consultation.title?.[locale] ?? t.consultation.title}
           lead={page.consultation.lead[locale]}
           summary={summary}
           product={page.slug}
-          submitLabel={t.consultation.submit}
+          submitLabel={page.consultation.submit?.[locale] ?? t.consultation.submit}
           commentPlaceholder={page.consultation.commentPlaceholder?.[locale]}
+          defaultObjectType={page.slug === "bess" ? "business" : undefined}
+          objectTypes={page.slug === "bess" ? ["house", "business", "infrastructure", "other"] : undefined}
         />
       </main>
     </>

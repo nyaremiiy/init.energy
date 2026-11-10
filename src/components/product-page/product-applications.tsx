@@ -1,6 +1,9 @@
 import { BatteryCharging, Factory, House, Store, Sun, Unplug } from "lucide-react";
 
 import { Container } from "@/components/layout/container";
+import { ArrowLink } from "@/components/ui/arrow-link";
+import { CardLabel } from "@/components/ui/card-label";
+import { Heading } from "@/components/ui/heading";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
 import { SectionWatermark } from "@/components/ui/section-watermark";
@@ -48,7 +51,7 @@ export function ProductApplications({
         <Reveal>
           <SectionHeader
             eyebrow={t.eyebrow}
-            title={format(t.title, { name })}
+            title={page.applications.title?.[locale] ?? format(t.title, { name })}
             titleId={titleId}
             lead={page.applications.lead[locale]}
           />
@@ -60,6 +63,16 @@ export function ProductApplications({
               delay={index * 0.12}
               className="h-full"
             >
+              {page.applications.variant === "sectors" ? (
+                <article className={`flex h-full flex-col gap-6 rounded-3xl p-card-sm lg:p-card ${item.tone === "sky" ? "bg-sky text-ink" : item.tone === "navy" ? "bg-navy text-white" : "bg-ink text-white"}`}>
+                  <CardLabel tone={item.tone === "sky" ? "light" : "dark"} icon={icons[item.icon]}>{item.tag[locale]}</CardLabel>
+                  <Heading as="h3" size="h3">{item.title[locale]}</Heading>
+                  <ul className={`divide-y ${item.tone === "sky" ? "divide-line border-line" : "divide-white/16 border-white/16"} border-y`}>
+                    {item.sectors?.map((sector) => <li key={sector.en} className="py-3 text-base">{sector[locale]}</li>)}
+                  </ul>
+                  <div className="mt-auto flex flex-wrap gap-3">{item.links.map((link) => <ArrowLink key={link.label.en} href={link.href} tone={item.tone === "sky" ? "dark" : "light"}>{link.label[locale]}</ArrowLink>)}</div>
+                </article>
+              ) : (
               <SegmentCard
                 segment={item.tag[locale]}
                 segmentIcon={icons[item.icon]}
@@ -72,6 +85,7 @@ export function ProductApplications({
                 navLabel={format(t.navLabel, { segment: item.tag[locale] })}
                 tone={tones[item.tone]}
               />
+              )}
             </Reveal>
           ))}
         </div>

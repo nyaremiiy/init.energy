@@ -94,6 +94,9 @@ export function ProductSpecs({
             aria-label={format(t.specs.tableLabel, { name: product.name })}
             className="lg:col-span-7"
           >
+            {process.env.NODE_ENV !== "production" && page.specsDevelopmentNotice ? (
+              <p className="mb-6 rounded-2xl bg-surface p-card-sm text-sm text-ink/70">{page.specsDevelopmentNotice[locale]}</p>
+            ) : null}
             {page.specGroups ? (
               <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
                 {page.specGroups.map((group) => (

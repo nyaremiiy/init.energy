@@ -15,7 +15,7 @@ import { format } from "@/lib/messages";
 const titleId = "related-products-title";
 
 /** Rows of other batteries: name, one-line summary, capacity and a round link. */
-export function RelatedProducts({ ids }: { ids: ProductId[] }) {
+export function RelatedProducts({ ids, title, links = [] }: { ids: ProductId[]; title?: string; links?: { title: string; summary: string; href: string }[] }) {
   const messages = getMessages();
   const locale = getLocale();
   const t = messages.productPage.related;
@@ -29,7 +29,7 @@ export function RelatedProducts({ ids }: { ids: ProductId[] }) {
         <Reveal className="flex flex-col items-start gap-6 lg:col-span-5">
           <SectionHeader
             eyebrow={t.eyebrow}
-            title={t.title}
+            title={title ?? t.title}
             titleId={titleId}
           />
           <ArrowLink href={sectionHref(anchors.compare, locale)}>
@@ -63,6 +63,14 @@ export function RelatedProducts({ ids }: { ids: ProductId[] }) {
               </li>
             );
           })}
+          {links.map((item) => (
+            <li key={item.href} className="border-t border-line">
+              <Link href={localizePath(item.href, locale)} className="group flex items-center gap-4 py-5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
+                <span className="flex min-w-0 flex-1 flex-col gap-1"><span className="font-heading text-base font-semibold text-ink">{item.title}</span><span className="text-sm text-ink/70">{item.summary}</span></span>
+                <IconButton decorative variant="outline-light" size="sm" />
+              </Link>
+            </li>
+          ))}
         </ul>
       </Container>
     </section>

@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-10 — Сторінка LITHIUMVALLEY BESS
+- **Агент:** Codex
+- **Гілка:** feature/lithiumvalley-bess-page (статус: готова до merge у develop)
+- **Що зроблено:** Додано `/bess/` і `/en/bess/` у спільний product-page pipeline. Шаблон узагальнено data-driven секціями конфігурацій, п'яти режимів EMS, секторними списками застосувань і reusable `HowToSteps`; додано grouped specs, 8 FAQ, спеціальну BESS-форму, пов'язані рішення та Product/BreadcrumbList/FAQPage/HowTo JSON-LD. Усі медіа повної сторінки — `MediaPlaceholder`.
+- **Файли:** src/content/{products,product-pages,faq,navigation,routes}.ts, src/components/pages/product-page.tsx, src/components/product-page/{product-bess-sections,product-applications,product-hero,product-specs,related-products}.tsx, src/components/{forms/LeadForm,sections/LeadSection}.tsx, src/i18n/config.ts, src/lib/seo/schema.ts, messages/{uk,en}.json, docs/ai/{CONTEXT,CHANGELOG}.md
+- **Нотатки / що далі:** TODO(content): уточнити 100 кВт у PCS-конфігураціях і належність IP54/IP55; додати номінальну напругу, DoD, round-trip efficiency, габарити, вагу, моделі EMS/PCS, тип вогнегасної речовини, сертифікати, datasheet, фото й OG. Непідтверджені поля не рендеряться; dev-only notice відсутній у production.
+
 ## 2026-11-10 — Наявне фото на сторінці SVIT PLUS 16000
 - **Агент:** Codex
 - **Гілка:** fix/svit-plus-16000-media (статус: готова до merge у develop)
