@@ -1,6 +1,7 @@
 "use server";
 
 import { validateLeadForm, type LeadFieldErrors } from "@/lib/lead-form-schema";
+import { saveLead } from "@/lib/lead-storage";
 import { defaultLocale, locales, type Locale } from "@/i18n/config";
 import { getMessagesFor } from "@/i18n/messages";
 
@@ -17,9 +18,10 @@ export type LeadActionResult = {
 export async function submitLead(
   formData: FormData,
 ): Promise<LeadActionResult> {
+  const locale = formLocale(formData);
   const result = validateLeadForm(
     formData,
-    getMessagesFor(formLocale(formData)).leadSection.form,
+    getMessagesFor(locale).leadSection.form,
   );
 
   if (result.isSpam) {
@@ -30,7 +32,7 @@ export async function submitLead(
     return { success: false, errors: result.errors };
   }
 
-  console.info("lead_submission", result.data);
+  await saveLead(result.data, locale);
   // TODO(integration): send the validated lead to the CRM.
 
   return { success: true, errors: {} };
