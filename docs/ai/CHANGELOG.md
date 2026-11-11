@@ -17,7 +17,7 @@
 
 ## 2026-11-11 — Серверний перемикач технічних робіт
 - **Агент:** Codex
-- **Гілка:** chore/maintenance-toggle (статус: в роботі)
+- **Гілка:** chore/maintenance-toggle (статус: змерджено в develop)
 - **Що зроблено:** додано `maintenance.sh`: один запуск у корені репозиторію на сервері перемикає режим технічних робіт, збирає production-бандл і перезапускає systemd-юнит `init.energy`; наступний запуск повертає сайт у звичайний режим.
 - **Файли:** `maintenance.sh`, `src/config/site-status.ts`, `docs/ai/{CONTEXT,CHANGELOG}.md`
 - **Нотатки / що далі:** скрипт використовує `sudo systemctl`, як і `deploy.sh`; за потреби назву юніта можна передати через `SERVICE_NAME`.
