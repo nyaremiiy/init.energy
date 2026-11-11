@@ -11,7 +11,7 @@ init.energy — вебпроєкт. Призначення та функціон
 - `next.config.ts` дозволяє доступ до dev-сервера з `192.168.0.24` через `allowedDevOrigins`.
 - Каркас на Next.js 16.4.5, React 19.3, TypeScript, Tailwind CSS v4, Lucide React для іконок і Motion для анімацій.
 - Production-деплой запускається на сервері з кореня репозиторію через `./deploy.sh`: скрипт безпечно оновлює `main` лише fast-forward, запускає `npm ci` і `npm run build`, а потім перезапускає systemd-юнит `init.energy`. Назву юніта й гілку можна перевизначити змінними `SERVICE_NAME` та `BRANCH`.
-- Глобальний режим технічних робіт вмикається єдиним перемикачем `maintenance.enabled` у `src/config/site-status.ts`. `src/proxy.ts` переписує всі публічні HTML-маршрути на `/maintenance/`, зберігає англійську локаль, повертає HTTP 503 із `Retry-After: 3600`; екран не індексується. Після зміни перемикача потрібні `npm run build` і деплой.
+- Глобальний режим технічних робіт перемикає `./maintenance.sh` у корені репозиторію на сервері: кожен запуск інвертує `maintenance.enabled` у `src/config/site-status.ts`, виконує `npm run build` і перезапускає systemd-юнит `init.energy` (`SERVICE_NAME` можна перевизначити). `src/proxy.ts` переписує всі публічні HTML-маршрути на `/maintenance/`, зберігає англійську локаль, повертає HTTP 503 із `Retry-After: 3600`; екран не індексується.
 - Header поверх hero з двох смуг: контакти/мови зверху (lg+), логотип/меню/CTA знизу; на мобільних — бургер-меню.
 - Реалізовано responsive hero-секцію з локальними AVIF/WebP-зображеннями.
 - На головній після блоку довіри є секція «Реалізовані проєкти»: дані з `src/content/projects.ts`, повторно використовувана `ProjectCard`, фільтри-посилання на запланований `/proekty/` та перелінковка на обладнання зі `products.ts`.
