@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-11 — Фото для бізнес-картки СЕС
+- **Агент:** Codex
+- **Гілка:** feature/business-solution-photo (статус: готово до merge у develop)
+- **Що зроблено:** `public/images/cec/factory.avif` додано як фонове фото картки бізнесу у секції «СЕС для дому й для бізнесу» сторінок `/cec/` та `/en/cec/`.
+- **Файли:** `public/images/cec/factory.avif`, `src/content/solutions.ts`, `docs/ai/CHANGELOG.md`
+- **Нотатки / що далі:** підписи й alt задані в локалізованих даних рішення.
+
 ## 2026-11-11 — Виправлено розташування фото рішення для будинку
 - **Агент:** Codex
 - **Гілка:** fix/house-photo-cec-section (статус: готово до merge у develop)
