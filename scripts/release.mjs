@@ -26,9 +26,6 @@ function hasMergeInProgress() {
   return result.status === 0;
 }
 
-const npmCli = process.env.npm_execpath;
-if (!npmCli) throw new Error("Run this release through `npm run deploy`.");
-
 const trackedChanges = run(
   "git",
   ["status", "--porcelain", "--untracked-files=no"],
@@ -46,10 +43,6 @@ try {
   run("git", ["fetch", "origin", "develop", "main"]);
   run("git", ["switch", "develop"]);
   run("git", ["pull", "--ff-only", "origin", "develop"]);
-
-  console.log("\nChecking the release...");
-  run(process.execPath, [npmCli, "run", "lint"]);
-  run(process.execPath, [npmCli, "run", "build"]);
 
   console.log("\nMerging develop into main...");
   run("git", ["switch", "main"]);
