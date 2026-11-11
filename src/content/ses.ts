@@ -17,57 +17,46 @@ export const plantTypes: { id: PlantTypeId; label: Localized }[] = [
 // TODO(content): owner to confirm the comparison rows (general facts, not from init.energy).
 export const plantRows: {
   label: Localized;
-  values: Record<PlantTypeId, Localized>;
+  /** `true` / `false` render as check / cross icons. */
+  values: Record<PlantTypeId, boolean | Localized>;
 }[] = [
   {
-    label: { uk: "Працює під час відключень", en: "Works during outages" },
-    values: {
-      grid: { uk: "Ні", en: "No" },
-      hybrid: { uk: "Так", en: "Yes" },
-      off: { uk: "Так", en: "Yes" },
-    },
+    label: { uk: "Працює під час відключення", en: "Works during outages" },
+    values: { grid: false, hybrid: true, off: true },
   },
   {
     label: { uk: "Потрібен накопичувач", en: "Needs a battery" },
-    values: {
-      grid: { uk: "Ні", en: "No" },
-      hybrid: { uk: "Так", en: "Yes" },
-      off: { uk: "Так", en: "Yes" },
-    },
+    values: { grid: false, hybrid: true, off: true },
   },
   {
     label: {
-      uk: "Віддає надлишок у мережу",
+      uk: "Віддає надлишки в мережу",
       en: "Feeds surplus into the grid",
     },
-    values: {
-      grid: { uk: "Так", en: "Yes" },
-      hybrid: { uk: "Так", en: "Yes" },
-      off: { uk: "Ні", en: "No" },
-    },
+    values: { grid: true, hybrid: true, off: false },
   },
   {
     label: { uk: "Залежність від мережі", en: "Dependence on the grid" },
     values: {
-      grid: { uk: "Повна", en: "Full" },
-      hybrid: { uk: "Часткова", en: "Partial" },
-      off: { uk: "Немає", en: "None" },
+      grid: { uk: "повна", en: "full" },
+      hybrid: { uk: "часткова", en: "partial" },
+      off: { uk: "немає", en: "none" },
     },
   },
   {
-    label: { uk: "Найкраще для", en: "Best for" },
+    label: { uk: "Кому підходить", en: "Best for" },
     values: {
       grid: {
-        uk: "Будинків із надійною мережею, яким не потрібен резерв",
-        en: "Homes with a reliable grid that need no backup",
+        uk: "економія там, де світло стабільне",
+        en: "savings where the grid is stable",
       },
       hybrid: {
-        uk: "Будинків і бізнесу, яким потрібні і економія, і резерв",
-        en: "Homes and businesses that want both savings and backup",
+        uk: "будинки й бізнес з відключеннями",
+        en: "homes and businesses facing outages",
       },
       off: {
-        uk: "Об'єктів без мережі",
-        en: "Sites without a grid connection",
+        uk: "об'єкти без підключення до мережі",
+        en: "sites with no grid connection",
       },
     },
   },
