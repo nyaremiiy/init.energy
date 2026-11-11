@@ -24,9 +24,6 @@ import { format } from "@/lib/messages";
 import { absoluteUrl, buildMetadata } from "@/lib/seo/metadata";
 import { breadcrumbSchema } from "@/lib/seo/schema";
 
-/** Share image: JPEG (social networks do not show SVG or AVIF previews). */
-const ogImage = { url: "/images/og/ses-calculator.jpg", width: 1200, height: 630 };
-
 export function sesPaybackMetadata(locale: Locale): Metadata {
   const t = getMessagesFor(locale).sesPayback;
   return buildMetadata({
@@ -34,7 +31,6 @@ export function sesPaybackMetadata(locale: Locale): Metadata {
     description: t.meta.description,
     path: routes.calculators.sesPayback,
     locale,
-    image: { ...ogImage, alt: t.title },
   });
 }
 

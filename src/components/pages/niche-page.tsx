@@ -22,19 +22,12 @@ export function nichePath(page: SolutionPage): string {
   return toPath(slugs.solutions.hub, page.slug);
 }
 
-/** Static JPEG share images (social networks show neither SVG nor AVIF). */
-const ogImages: Record<string, string> = {
-  "ses-dlya-gotelyu": "/images/og/ses-dlya-gotelyu",
-};
-
 export function nicheMetadata(page: SolutionPage, locale: Locale): Metadata {
-  const og = ogImages[page.slug];
   return buildMetadata({
     title: page.meta.title[locale],
     description: page.meta.description[locale],
     path: nichePath(page),
     locale,
-    image: og ? { url: `${og}${locale === "en" ? "-en" : ""}.jpg`, width: 1200, height: 630, alt: page.meta.title[locale] } : undefined,
   });
 }
 

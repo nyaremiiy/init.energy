@@ -15,6 +15,19 @@
 
 ---
 
+## 2026-11-11 — Одне прев’ю для соцмереж на весь сайт
+- **Агент:** Claude Code
+- **Гілка:** chore/single-og-image (статус: змерджено в develop)
+- **Що зроблено:**
+  - Прев’ю для соцмереж — один файл власника `public/og-image.png` (1200×630). Власник поклав його в `public/images/og/`, перенесено в корінь `public/`, щоб адреса була `/og-image.png`.
+  - `buildMetadata` завжди віддає `og:image` і `twitter:image` = `https://init.energy/og-image.png`, `twitter:card` = `summary_large_image`, alt залежить від мови. og:title і og:description лишились свої в кожної сторінки.
+  - Прибрано параметр `image` у `buildMetadata`, поля `ogImage` у `products.ts` / `product-pages.ts`, окремі прев’ю в головної, `/cec/`, калькулятора, сторінки готелю й політики cookie, а також 10 JPEG у `public/images/og/` (більше не використовуються).
+- **Файли:** public/og-image.png, public/images/og/*.jpg (видалено), src/lib/seo/metadata.ts, src/app/{(uk),en}/{page,cec/page}.tsx, src/components/pages/{product-page,niche-page,ses-payback-page,cookie-policy-page}.tsx, src/content/{products,product-pages}.ts, README.md, docs/ai/{CONTEXT,CHANGELOG}.md
+- **Нотатки / що далі:**
+  - lint і build проходять. Перевірено `curl` на /, /ses/ (308 → /cec/), /en/, /cec/, /svit-home/, сторінці готелю, /en/kalkulyator/okupnist-ses/ і /polityka-cookie/: усюди `og:image` = `https://init.energy/og-image.png`; сам файл віддається з кодом 200 (`image/png`).
+  - `metadataBase` = `https://init.energy` уже був у кореневій розкладці. Файлів `opengraph-image.tsx` у проєкті не було.
+  - Розділу §7 у `CLAUDE.md` немає, правило записано в `docs/ai/CONTEXT.md`.
+
 ## 2026-11-11 — Підсвічування пунктів мега-меню і бургер на lg
 - **Агент:** Claude Code
 - **Гілка:** fix/mega-menu-hover (статус: змерджено в develop)

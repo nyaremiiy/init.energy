@@ -12,7 +12,6 @@ export function generateMetadata(): Metadata {
     description: t.homeDescription,
     path: "/",
     locale: "en",
-    image: { url: "/images/og/home.jpg", width: 1200, height: 630, alt: t.homeTitle },
   });
 }
 

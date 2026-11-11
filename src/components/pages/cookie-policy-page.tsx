@@ -25,7 +25,6 @@ export function cookiePolicyMetadata(locale: Locale): Metadata {
     description: t.metaDescription,
     path: routes.cookies,
     locale,
-    image: { url: "/images/og/home.jpg", width: 1200, height: 630, alt: t.metaTitle },
   });
 }
 
