@@ -17,8 +17,6 @@ import {
   offices,
   pageSectionLinks,
 } from "./header-data";
-import { routes } from "@/content/routes";
-import { localizePath } from "@/i18n/config";
 import { LanguageSwitcher } from "./language-switcher";
 import { NavLink } from "./nav-link";
 import { Eyebrow } from "@/components/ui/eyebrow";
@@ -31,12 +29,11 @@ export function MobileMenu() {
   // Links to sections of the home page are shown only on the home page.
   const pathname = usePathname();
   const onHome = isHomePath(pathname);
-  const onSolarPlants = pathname === localizePath(routes.services.turnkeySes, locale);
   const visibleItems: NavItem[] = onHome
     ? navItems
     : [
         ...navItems.filter((item) => isNavGroup(item) || !item.sectionId),
-        ...(onSolarPlants ? pageSectionLinks(locale) : []),
+        ...pageSectionLinks(pathname, locale),
       ];
   const [isOpen, setIsOpen] = useState(false);
 

@@ -1,5 +1,6 @@
 import type { Locale, Localized } from "@/i18n/config";
 import { anchors, routes, sectionHref } from "@/content/routes";
+import type { HeroImage } from "@/components/sections/hero/hero-picture";
 
 export type HeroSlide = {
   id: string;
@@ -15,15 +16,6 @@ export type HeroSlide = {
   }>;
 };
 
-type HeroImage = {
-  desktop: string;
-  fallback: string;
-  laptop?: string;
-  mobile?: string;
-  position?: "center" | "top";
-  tablet?: string;
-  type?: "image/avif";
-};
 
 const generalHeroImage: HeroImage = {
   desktop: "/images/home/hero/01-2560.avif",

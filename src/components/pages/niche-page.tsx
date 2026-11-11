@@ -65,8 +65,15 @@ export function NichePage({ page, locale }: { page: SolutionPage; locale: Locale
           // The calculator reads only `type` to preselect the segment; the canonical URL has no parameters.
           primaryCta={{ label: page.hero.primaryCta[locale], href: `${calculator}?type=business` }}
           secondaryCta={{ label: page.hero.secondaryCta[locale], href: `#${anchors.contacts}` }}
-          // TODO(content): rooftop photo of a hotel plant; until then a placeholder.
-          media={{ type: "placeholder", label: page.hero.mediaLabel[locale] }}
+          media={
+            page.hero.image
+              ? {
+                  type: "picture",
+                  image: { ...page.hero.image, fallback: page.hero.image.desktop, type: "image/avif" },
+                  alt: page.hero.image.alt[locale],
+                }
+              : { type: "placeholder", label: page.hero.mediaLabel[locale] }
+          }
           breadcrumbs={[
             { label: t.crumbs.home, href: localizePath(routes.home, locale) },
             { label: t.crumbs.ses, href: localizePath(routes.services.turnkeySes, locale) },

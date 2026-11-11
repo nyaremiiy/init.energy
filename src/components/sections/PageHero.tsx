@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Container } from "@/components/layout/container";
 import { HeroCopy, type HeroAction } from "@/components/sections/hero/hero-copy";
 import { HeroParallax } from "@/components/sections/hero/hero-parallax";
+import { HeroPicture, type HeroImage } from "@/components/sections/hero/hero-picture";
 import { HeroVideo } from "@/components/sections/hero/hero-video";
 import { HeroSlider } from "@/components/sections/home/hero-slider";
 import type { HeroSlide } from "@/components/sections/home/hero-slides";
@@ -15,6 +16,8 @@ import { absoluteUrl } from "@/lib/seo/metadata";
 
 export type PageHeroMedia =
   | { type: "image"; src: string; alt: string }
+  /** Pre-sized responsive set (AVIF 750–2560), as on the home hero. */
+  | { type: "picture"; image: HeroImage; alt: string }
   | { type: "video"; src: string; poster: string }
   | { type: "placeholder"; label: string };
 
@@ -40,6 +43,7 @@ function HeroMedia({ media }: { media: PageHeroMedia }) {
     // LCP image: preloaded, full width of the viewport.
     return <Image src={media.src} alt={media.alt} fill priority sizes="100vw" className="hero__image" />;
   }
+  if (media.type === "picture") return <HeroPicture image={media.image} alt={media.alt} priority />;
   if (media.type === "video") return <HeroVideo src={media.src} poster={media.poster} />;
   return <MediaPlaceholder caption={media.label} tone="dark" fill align="end" className="rounded-none border-0" captionClassName="hidden md:mr-20 md:block" />;
 }

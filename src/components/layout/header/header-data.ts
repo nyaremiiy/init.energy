@@ -160,14 +160,23 @@ export function isHomePath(pathname: string | null): boolean {
   return pathname !== null && /^\/(en\/)?$/.test(pathname);
 }
 
-/** Main sections of the solar plant page in the header; the rest stay in the footer column. */
-const solarHeaderSectionKeys: string[] = ["sesSegments", "products", "calculator", "aboutUs"];
+/**
+ * Pages with their own section links in the header (Ukrainian path → main
+ * sections). Only the main ones: the full list stays in the footer column.
+ */
+const headerSectionKeys: Record<string, string[]> = {
+  [routes.services.turnkeySes]: ["sesSegments", "products", "calculator", "aboutUs"],
+  [routes.solutions.hotel]: ["nicheFacts", "nicheSizing", "nicheBackup", "faq"],
+};
 
-/** Sections of the solar plant page (/cec/) for the header, labelled like the footer column. */
-export function pageSectionLinks(locale: Locale): NavLink[] {
+/** Section links of the page at `pathname` for the header, labelled like the footer column. */
+export function pageSectionLinks(pathname: string | null, locale: Locale): NavLink[] {
+  const ukPath = pathname?.replace(/^\/en(?=\/)/, "") ?? "";
+  const keys = headerSectionKeys[ukPath];
+  if (!keys || pathname !== localizePath(ukPath, locale)) return [];
   const labels = getMessagesFor(locale).footer.links;
-  const entries = pageNavigation[localizePath(routes.services.turnkeySes, locale)] ?? [];
-  return entries.filter((entry) => solarHeaderSectionKeys.includes(entry.labelKey)).flatMap((entry) => {
+  const entries = pageNavigation[pathname] ?? [];
+  return entries.filter((entry) => keys.includes(entry.labelKey)).flatMap((entry) => {
     const sectionId = entry.href.split("#")[1];
     return sectionId
       ? [{ href: entry.href, label: labels[entry.labelKey], sectionId }]

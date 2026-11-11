@@ -14,7 +14,7 @@ import { MegaMenuItem } from "./mega-menu-item";
 
 /**
  * Desktop header menu in two clusters, split by a thin divider:
- * left — the section links of the current page (home or the solar plant page);
+ * left — the section links of the current page (home, the solar plant page, niche pages);
  * right — catalogue groups with mega menus.
  */
 export function DesktopNav() {
@@ -25,7 +25,12 @@ export function DesktopNav() {
     [localizePath(routes.home, locale)]: navItems.filter(
       (item): item is PageLink => !isNavGroup(item),
     ),
-    [localizePath(routes.services.turnkeySes, locale)]: pageSectionLinks(locale),
+    ...Object.fromEntries(
+      [routes.services.turnkeySes, routes.solutions.hotel].map((path) => {
+        const localized = localizePath(path, locale);
+        return [localized, pageSectionLinks(localized, locale)];
+      }),
+    ),
   };
 
   return (
