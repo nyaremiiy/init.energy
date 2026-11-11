@@ -37,7 +37,10 @@ export function SectionNavLink({
     <Link
       href={href}
       aria-current={isActive ? "location" : undefined}
-      className={`inline-flex items-center rounded-full px-3 py-1.5 transition-colors duration-200 ease-tech ${isActive ? "bg-white text-ink" : "text-white/85 underline underline-offset-8 decoration-transparent hover:text-white hover:decoration-white"}`}
+      // The underline is always present and transparent (except on hover): if it
+      // appeared or vanished with the state, its colour would fade from the dark
+      // text colour of the active pill and flash a black line.
+      className={`inline-flex items-center rounded-full px-3 py-1.5 whitespace-nowrap underline decoration-transparent underline-offset-8 transition-colors duration-200 ease-tech ${isActive ? "bg-white text-ink" : "text-white/85 hover:text-white hover:decoration-white"}`}
     >
       {label}
     </Link>

@@ -4,6 +4,7 @@ import { getLocale, getMessages } from "@/i18n/server";
 
 import {
   getNavItems,
+  headerLinkPaths,
   isNavGroup,
   pageSectionLinks,
   type NavGroup,
@@ -26,7 +27,7 @@ export function DesktopNav() {
       (item): item is PageLink => !isNavGroup(item),
     ),
     ...Object.fromEntries(
-      [routes.services.turnkeySes, routes.solutions.hotel].map((path) => {
+      headerLinkPaths.map((path) => {
         const localized = localizePath(path, locale);
         return [localized, pageSectionLinks(localized, locale)];
       }),
@@ -36,7 +37,7 @@ export function DesktopNav() {
   return (
     <nav
       aria-label={getMessages().chrome.header.mainMenu}
-      className="hidden self-stretch lg:flex lg:items-center lg:gap-6"
+      className="hidden min-w-0 self-stretch lg:flex lg:items-center lg:gap-6"
     >
       <HeaderSectionLinks byPath={sectionsByPath} />
 
