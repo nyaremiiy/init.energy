@@ -147,7 +147,7 @@ export function websiteSchema(locale: Locale) {
 /** The plant service (hub page): provider is the organization, area is the country. */
 export function serviceSchema(
   locale: Locale,
-  input: { name: string; description: string; url: string },
+  input: { name: string; description: string; url: string; serviceType?: string },
 ) {
   return {
     "@context": "https://schema.org",
@@ -156,11 +156,11 @@ export function serviceSchema(
     name: input.name,
     description: input.description,
     url: input.url,
-    serviceType: input.name,
+    serviceType: input.serviceType ?? input.name,
     provider: { "@id": `${siteUrl}/#organization` },
     areaServed: {
       "@type": "Country",
-      name: locale === "uk" ? "Україна" : "Ukraine",
+      name: serviceArea[locale],
     },
   };
 }

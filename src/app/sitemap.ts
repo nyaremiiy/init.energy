@@ -21,6 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     routes.home,
     routes.services.turnkeySes,
     routes.calculators.sesPayback,
+    routes.sesNiche.hotel,
     ...productPages.map((page) => toPath(page.slug)),
   ];
 

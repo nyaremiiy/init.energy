@@ -15,6 +15,38 @@
 
 ---
 
+## 2026-11-11 — Сторінка «СЕС для готелю» і спільний PageHero
+- **Агент:** Claude Code
+- **Гілка:** feature/ses-hotel-page (статус: змерджено в develop)
+- **Що зроблено:**
+  - Спільний `PageHero` (стиль головної) з варіантами `slides` і одна сторінка (media `image` / `video` / `placeholder`, крихти + BreadcrumbList). Головна й `/cec/` переведені на нього без зміни вигляду. `Hero` видалено. Текст hero — спільний `HeroCopy`, паралакс — `HeroParallax`.
+  - Нова сторінка `/ses/dlya-gotelyu/` і `/en/ses/dlya-gotelyu/` за макетом власника, маршрут `ses/[segment]`, дані в `solutionPages` (`content/solutions.ts`, parent `dlya-biznesu`). Секції:
+    - hero із заглушкою фото;
+    - «СЕС для готелю в цифрах» (пряма відповідь, 7 параметрів, 4 картки, дата оновлення);
+    - «Куди йде енергія в готелі» (6 карток з іконками);
+    - «Яка СЕС потрібна вашому готелю» (`<table>` зі скролом на мобільному і фактори ефективності);
+    - «Готель працює й під час відключень» (пріоритети, 3 режими, гібридний виділено, SVIT PLUS 16000 і LITHIUMVALLEY);
+    - «Що входить у СЕС і як ми її будуємо» (компоненти, заглушка фото 3:4, 4 етапи);
+    - проєкти бізнес-сегмента, FAQ (7 питань), заявка з типом «Готель».
+  - Стара адреса `/rishennya/ses-dlya-gotelyu/` → 308 на нову; посилання в меню, на сторінці BESS і в `services.ts` оновлено.
+  - З `/cec/` у картці «Бізнес» з’явилось посилання «СЕС для готелю».
+  - SEO: title 45 символів, description 141, canonical, hreflang uk/en/x-default; JSON-LD Service (`serviceType`, `areaServed` з `company.serviceArea`), FAQPage, BreadcrumbList; JPEG-прев’ю uk/en; sitemap.
+  - `MediaPlaceholder`: пунктирна рамка, `fill`, `aspect`, `align`, `captionClassName`; світлий тон тепер surface.
+  - `ProjectsShowcase` отримав фільтр `segment`, `FaqSection` — `links`, `serviceSchema` — `serviceType`.
+  - Калькулятор читає `?type=` для вибору сегмента.
+- **Файли:** src/components/sections/{PageHero.tsx,hero/*,niche/*,projects-showcase.tsx,home/{hero-content-slider,hero-media-slider,faq-section}.tsx,ses/ses-segments.tsx}, src/components/sections/home/hero.tsx (видалено), src/components/pages/{niche-page,home-page,ses-page}.tsx, src/app/{(uk),en}/ses/[segment]/page.tsx, src/components/ui/media-placeholder.tsx, src/components/forms/LeadForm.tsx, src/components/calculator/ses-payback-state.tsx, src/content/{solutions,faq,routes,navigation,services,product-pages}.ts, src/lib/seo/schema.ts, src/i18n/config.ts, src/app/sitemap.ts, next.config.ts, messages/{uk,en}.json, public/images/og/ses-dlya-gotelyu{,-en}.jpg, docs/ai/{CONTEXT,CHANGELOG}.md
+- **Нотатки / що далі:**
+  - lint, test (20) і build проходять; усі сторінки статичні. Перевірено в headless Edge на 1440 і 360 px: горизонтального скролу сторінки немає, таблиця прокручується у своєму блоці. Головна виглядає як раніше.
+  - TODO(content):
+    - площа даху на 100 кВт: 450–550 чи 500–550 м²;
+    - окупність 3–5 років;
+    - фото даху готелю (hero, блок обладнання);
+    - кейс готелю і сегмент «hotel» у проєктах;
+    - стаття «Мережева чи гібридна СЕС» і статті для бізнесу/готелів (посилання в FAQ);
+    - сторінка `/cec/dlya-biznesu/` і зворотне посилання з неї на нішу.
+  - Адреса `/ses/dlya-gotelyu/` — як у завданні, хоча хаб СЕС на `/cec/`. Змінюється одним slug у `routes.ts`.
+  - `docs/SEO-GEO.md` і розділів §2/§9 у CLAUDE.md немає; правила додано в CONTEXT.md.
+
 ## 2026-11-11 — Сторінка калькулятора окупності СЕС за макетом
 - **Агент:** Claude Code
 - **Гілка:** feature/ses-payback-polish (статус: змерджено в develop)

@@ -37,6 +37,11 @@ type FooterLinkLabels = {
   sesSteps: string;
   sesYield: string;
   sesMethod: string;
+  nicheFacts: string;
+  nicheConsumers: string;
+  nicheSizing: string;
+  nicheBackup: string;
+  nicheBuild: string;
   svitCatalog: string;
   about: string;
   contacts: string;
@@ -96,7 +101,23 @@ function sesCalculatorNavigation(locale: Locale): NavEntry[] {
   ];
 }
 
+/** Niche solar pages (/ses/{slug}/): the same sections for every niche. */
+function nicheNavigation(path: string, locale: Locale): NavEntry[] {
+  const href = (anchor: string) => `${localizePath(path, locale)}#${anchor}`;
+  return [
+    { href: href(anchors.nicheFacts), labelKey: "nicheFacts" },
+    { href: href(anchors.nicheConsumers), labelKey: "nicheConsumers" },
+    { href: href(anchors.nicheSizing), labelKey: "nicheSizing" },
+    { href: href(anchors.nicheBackup), labelKey: "nicheBackup" },
+    { href: href(anchors.nicheBuild), labelKey: "nicheBuild" },
+    { href: href(anchors.faq), labelKey: "faq" },
+    { href: href(anchors.contacts), labelKey: "consultation" },
+  ];
+}
+
 export const pageNavigation: Record<string, NavEntry[]> = {
+  [routes.sesNiche.hotel]: nicheNavigation(routes.sesNiche.hotel, "uk"),
+  [localizePath(routes.sesNiche.hotel, "en")]: nicheNavigation(routes.sesNiche.hotel, "en"),
   [routes.home]: homeNavigation("uk"),
   [localizePath(routes.home, "en")]: homeNavigation("en"),
   [routes.services.turnkeySes]: sesNavigation("uk"),

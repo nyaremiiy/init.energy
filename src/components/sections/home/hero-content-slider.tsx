@@ -1,13 +1,9 @@
 "use client";
 
-import { ArrowUpRight } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 
 import { Container } from "@/components/layout/container";
-import { Button } from "@/components/ui/button";
-import { Description } from "@/components/ui/description";
-import { Heading } from "@/components/ui/heading";
-import { Eyebrow } from "@/components/ui/eyebrow";
+import { HeroCopy } from "@/components/sections/hero/hero-copy";
 
 import type { HeroSlide } from "./hero-slides";
 
@@ -38,40 +34,15 @@ export function HeroContentSlider({ slide }: HeroContentSliderProps) {
                 duration: prefersReducedMotion ? 0 : 0.35,
                 ease: "easeOut",
               }}
-              className="flex flex-col items-start gap-5"
             >
-              <Eyebrow tone="dark">{slide.label}</Eyebrow>
-              <Heading
-                as={slide.headingLevel}
+              <HeroCopy
                 id={slide.id}
-                letterSpacing="normal"
-                lineHeight="compact"
-                className="max-w-3xl text-hero-sm text-white md:text-hero-md lg:text-hero"
-              >
-                {/* Lines are blocks visually; the space keeps the words apart in the text (SEO, screen readers). */}
-                {slide.heading.map((line, index) => (
-                  <span key={line} className="block">
-                    {index > 0 ? " " : null}
-                    {line}
-                  </span>
-                ))}
-              </Heading>
-              <Description size="compactMobile" className="mt-2 max-w-2xl">
-                {slide.description}
-              </Description>
-              <div className="flex flex-wrap gap-3 pt-4">
-                {slide.actions.map((action) => (
-                  <Button
-                    key={action.label}
-                    href={action.href}
-                    variant={action.variant}
-                    icon={<ArrowUpRight aria-hidden className="size-4" />}
-                    size="wide"
-                  >
-                    {action.label}
-                  </Button>
-                ))}
-              </div>
+                eyebrow={slide.label}
+                lines={slide.heading}
+                headingLevel={slide.headingLevel}
+                description={slide.description}
+                actions={slide.actions}
+              />
             </motion.div>
           </AnimatePresence>
         </div>

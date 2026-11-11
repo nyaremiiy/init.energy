@@ -1,7 +1,7 @@
 import { JsonLd } from "@/components/seo/JsonLd";
 import { CalculatorSection } from "@/components/sections/home/calculator-section";
 import { FaqSection } from "@/components/sections/home/faq-section";
-import { Hero } from "@/components/sections/home/hero";
+import { PageHero } from "@/components/sections/PageHero";
 import { getSesHeroSlides } from "@/components/sections/home/hero-slides";
 import { ProductLine } from "@/components/sections/home/product-line";
 import { LeadSection } from "@/components/sections/LeadSection";
@@ -45,7 +45,7 @@ export function SesPage() {
         ])}
       />
       <main className="pb-section-sm lg:pb-section">
-        <Hero slides={getSesHeroSlides(locale)} />
+        <PageHero slides={getSesHeroSlides(locale)} />
         <SesSegments />
         <SesPlantTypes />
         <SesHybrid />

@@ -24,7 +24,7 @@ import { validateLeadForm, type LeadFieldErrors } from "@/lib/lead-form-schema";
 import { trackEvent } from "@/lib/analytics";
 import { useLocale, useMessages } from "@/i18n/client";
 
-export type LeadObjectType = "apartment" | "house" | "business" | "infrastructure" | "other";
+export type LeadObjectType = "apartment" | "house" | "business" | "hotel" | "infrastructure" | "other";
 
 type LeadFormProps = {
   defaultObjectType?: LeadObjectType;

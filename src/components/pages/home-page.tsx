@@ -1,6 +1,7 @@
 import { CalculatorSection } from "@/components/sections/home/calculator-section";
 import { FaqSection } from "@/components/sections/home/faq-section";
-import { Hero } from "@/components/sections/home/hero";
+import { PageHero } from "@/components/sections/PageHero";
+import { getHeroSlides } from "@/components/sections/home/hero-slides";
 import { ProductLine } from "@/components/sections/home/product-line";
 import { SolutionsBySegment } from "@/components/sections/home/solutions-by-segment";
 import { LeadSection } from "@/components/sections/LeadSection";
@@ -20,7 +21,7 @@ export function HomePage() {
       <JsonLd data={websiteSchema(locale)} />
       {/* Sections add top spacing only; the page adds the final bottom spacing once. */}
       <main className="pb-section-sm lg:pb-section">
-        <Hero />
+        <PageHero slides={getHeroSlides(locale)} />
         <SolutionsBySegment />
         <ProductLine />
         <TrustSection />

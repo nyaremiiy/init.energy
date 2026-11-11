@@ -1,4 +1,5 @@
 import { Container } from "@/components/layout/container";
+import { ArrowLink } from "@/components/ui/arrow-link";
 import { Button } from "@/components/ui/button";
 import { CardLabel } from "@/components/ui/card-label";
 import { Heading } from "@/components/ui/heading";
@@ -20,8 +21,13 @@ export function SesSegments() {
   const locale = getLocale();
   const t = getMessages().ses;
   const cards = [
-    { solution: solutions.find((item) => item.id === "house"), href: routes.services.house },
-    { solution: solutions.find((item) => item.id === "business"), href: routes.services.business },
+    { solution: solutions.find((item) => item.id === "house"), href: routes.services.house, niches: [] },
+    // Industry pages under the business segment (SILO: hub → niche).
+    {
+      solution: solutions.find((item) => item.id === "business"),
+      href: routes.services.business,
+      niches: [{ label: t.segments.hotel, href: routes.sesNiche.hotel }],
+    },
   ];
 
   return (
@@ -41,7 +47,7 @@ export function SesSegments() {
         </Reveal>
 
         <ul className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-          {cards.map(({ solution, href }, index) =>
+          {cards.map(({ solution, href, niches }, index) =>
             solution ? (
               <li key={solution.id}>
                 <Reveal delay={index * 0.08} className="h-full">
@@ -91,13 +97,19 @@ export function SesSegments() {
                         </ul>
                       </div>
 
-                      <Button
-                        href={localizePath(href, locale)}
-                        variant="primary"
-                        className="self-start"
-                      >
-                        {t.segments.cta}
-                      </Button>
+                      <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+                        <Button
+                          href={localizePath(href, locale)}
+                          variant="primary"
+                        >
+                          {t.segments.cta}
+                        </Button>
+                        {niches.map((niche) => (
+                          <ArrowLink key={niche.href} href={localizePath(niche.href, locale)} tone="dark">
+                            {niche.label}
+                          </ArrowLink>
+                        ))}
+                      </div>
                     </div>
                   </article>
                 </Reveal>
