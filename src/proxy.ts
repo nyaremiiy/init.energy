@@ -35,5 +35,7 @@ export function proxy(request: NextRequest) {
 
 export const config = {
   // Pages only: no Next.js internals, API routes or files with an extension.
-  matcher: ["/((?!_next/|api/|.*\.[\w]+$).*)"],
+  // Double backslashes: in a plain string "\." would become "." and files
+  // (images, favicon) would go through the proxy — and get the maintenance page.
+  matcher: ["/((?!_next/|api/|.*\\.[\\w]+$).*)"],
 };

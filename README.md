@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# init.energy
 
-## Getting Started
+Сайт INIT ENERGY: сонячні електростанції, накопичувачі SVIT і LITHIUMVALLEY, калькулятор окупності СЕС. Українська версія — на корені домену, англійська — під `/en/`.
 
-First, run the development server:
+**Стек:** Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS v4, Motion, lucide-react.
+
+## Вимоги
+
+- Node.js **22.18+** (рекомендовано 24 LTS): тести запускають `.ts` напряму.
+- npm.
+
+## Команди
+
+| Команда | Що робить |
+|---|---|
+| `npm ci` | Встановити залежності точно за `package-lock.json` |
+| `npm run dev` | Dev-сервер на http://localhost:3000 |
+| `npm run lint` | ESLint |
+| `npm test` | Тести формул калькуляторів і форми заявки (`node --test`) |
+| `npm run build` | Продакшн-збірка (має проходити перед кожним мерджем) |
+| `npm start` | Запуск зібраного сайту (порт 3000, інший — `npm start -- -p 3100`) |
+
+## Змінні середовища
+
+Задаються на сервері у `.env.local` або в systemd-сервісі. У Git їх немає.
+
+| Змінна | Для чого |
+|---|---|
+| `LEAD_STORAGE_FILE` | Шлях до файлу заявок (за замовчуванням `storage/leads.jsonl`). Каталог має бути доступний для запису й не очищатися під час деплою. |
+| `GOOGLE_SITE_VERIFICATION` | Код підтвердження Google Search Console (мета-тег `google-site-verification`). |
+| `BING_SITE_VERIFICATION` | Код підтвердження Bing Webmaster Tools (`msvalidate.01`). |
+
+## Деплой
+
+Сайт працює як Node.js-сервіс (systemd, назва за замовчуванням `init.energy`).
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+./deploy.sh        # git pull гілки main, npm ci, npm run build, перезапуск сервісу
+./maintenance.sh   # увімкнути / вимкнути екран «технічні роботи» (503) і перезапустити
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Перед першим запуском:
+1. Задати змінні середовища (див. вище).
+2. Переконатися, що `storage/` (або `LEAD_STORAGE_FILE`) доступний для запису. Заявки поки зберігаються у файл, CRM ще не підключена.
+3. Після публікації: додати сайт у Google Search Console і Bing Webmaster, надіслати `https://init.energy/sitemap.xml`, перевірити сторінки в Rich Results Test.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## SEO і GEO
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Метадані кожної сторінки — `buildMetadata()` (`src/lib/seo/metadata.ts`): title, description, canonical, hreflang uk/en/x-default, Open Graph (JPEG 1200×630 у `public/images/og/`).
+- Структуровані дані (JSON-LD) — `src/lib/seo/schema.ts`: Organization, WebSite, Service, Product, FAQPage, BreadcrumbList, HowTo, WebApplication.
+- `/sitemap.xml`, `/robots.txt`, `/manifest.webmanifest` — `src/app/`.
+- `/llms.txt` — коротка довідка для AI-пошуку (ChatGPT, Perplexity, Gemini), будується з `src/content/` під час збірки.
+- Сторінки, на які вже є посилання, але які ще не створені, показують екран «в розробці» (404 + noindex). Список — `plannedPaths` у `src/content/routes.ts`. Коли сторінку створено, її шлях звідти прибирають.
 
-## Learn More
+## Де що лежить
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/app/              маршрути: (uk)/ — українські, en/ — англійські
+src/components/       секції, UI-компоненти, layout (шапка, футер)
+src/content/          усі факти й дані: продукти, рішення, FAQ, контакти, маршрути
+messages/uk.json      тексти інтерфейсу українською
+messages/en.json      тексти інтерфейсу англійською (ті самі ключі)
+public/images/        фото (AVIF), прев'ю для соцмереж (og/)
+docs/ai/              CONTEXT.md — правила й рішення, CHANGELOG.md — журнал змін
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Змінити текст чи факт** — у `src/content/*` або `messages/*.json`, обома мовами. Нова інформація оновлюється в усіх місцях сайту.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Нова сторінка** виходить одразу двома мовами: маршрути в `(uk)/` і `en/`, шлях у `localizedPaths` (`src/i18n/config.ts`), запис у `src/app/sitemap.ts`.
 
-## Deploy on Vercel
+## Правила роботи
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Git-процес, стиль і правила для AI-агентів — у [`AGENTS.md`](AGENTS.md) і [`docs/ai/CONTEXT.md`](docs/ai/CONTEXT.md). Коротко: задача → гілка від `develop` → `npm run lint` і `npm run build` → merge `--no-ff` у `develop`. У `main` мерджить лише власник.

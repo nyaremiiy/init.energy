@@ -15,6 +15,21 @@
 
 ---
 
+## 2026-11-11 — Підготовка до деплою: аудит, SEO/GEO, README, прибирання
+- **Агент:** Claude Code
+- **Гілка:** chore/pre-deploy (статус: змерджено в develop)
+- **Що зроблено:**
+  - Виправлено `matcher` у `src/proxy.ts`: після додавання режиму обслуговування `"\."` у звичайному рядку став `"."`, і проксі ловив картинки й favicon. У режимі технічних робіт вони отримали б HTML-сторінку замість файлу. Відновлено подвійне екранування.
+  - Прев’ю для соцмереж (JPEG 1200×630) тепер є в усіх сторінок з sitemap. Нові: головна, `/cec/`, SVIT 600, LITHIUMVALLEY (uk і en).
+  - Додано `/llms.txt` (GEO, з контенту), `/manifest.webmanifest`, підтвердження Search Console / Bing через змінні середовища, `Disallow` службових екранів у robots.txt, базові заголовки безпеки.
+  - `README.md` замість шаблонного: команди, змінні середовища, деплой (`deploy.sh`, `maintenance.sh`), SEO/GEO, структура. У `package.json` — `engines.node >= 22.18`.
+  - Видалено застарілий `design-qa.md` (звіт перевірки однієї секції з посиланнями на файли поза проєктом).
+- **Файли:** src/proxy.ts, src/app/{layout.tsx,robots.ts,manifest.ts,llms.txt/route.ts,(uk)/page.tsx,en/page.tsx,(uk)/cec/page.tsx,en/cec/page.tsx}, src/content/products.ts, public/images/og/{home,cec,svit-600,bess}.jpg, next.config.ts, package.json, README.md, design-qa.md (видалено), docs/ai/{CONTEXT,CHANGELOG}.md
+- **Нотатки / що далі:**
+  - Перевірка: lint, test (20), build. Аудит усіх 18 URL із sitemap без зауважень (статус 200, title ≤ 65, description 129–160, canonical, hreflang, прев’ю, один H1, alt у картинок, JSON-LD). Обхід посилань: битих немає, 404 лише в 12 запланованих сторінок (екран «в розробці»). На 360 px у жодній сторінці немає горизонтального скролу. Усі сторінки статичні, динамічна лише `/maintenance/`.
+  - Перед запуском: сторінка «Політика конфіденційності» — форма збирає персональні дані з посиланням на неї. Також `icon.png` 512 і `apple-icon.png` 180, GA4/GTM — лише разом із банером згоди на cookie.
+  - Локальні непотрібні папки поза Git (`output/` зі знімками Playwright, порожня `.worktrees/`, `tsconfig.tsbuildinfo`) не видалено: потрібен дозвіл власника.
+
 ## 2026-11-11 — Серверний перемикач технічних робіт
 - **Агент:** Codex
 - **Гілка:** chore/maintenance-toggle (статус: змерджено в develop)
