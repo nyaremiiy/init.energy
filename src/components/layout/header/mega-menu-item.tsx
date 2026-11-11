@@ -56,7 +56,7 @@ export function MegaMenuItem({ group }: { group: NavGroup }) {
         type="button"
         aria-haspopup="true"
         aria-expanded={open}
-        className={`inline-flex items-center gap-1 underline underline-offset-8 transition-colors hover:text-white hover:decoration-white focus-visible:text-white ${open ? "text-white decoration-white" : "decoration-transparent"}`}
+        className={`inline-flex items-center gap-1 whitespace-nowrap underline underline-offset-8 transition-colors hover:text-white hover:decoration-white focus-visible:text-white ${open ? "text-white decoration-white" : "decoration-transparent"}`}
       >
         {group.label}
         <ChevronDown

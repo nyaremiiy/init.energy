@@ -41,8 +41,9 @@ export function HeaderMainBar() {
         >
           <Phone aria-hidden className="size-5" />
         </a>
-        <div className="hidden lg:block">
+        <div className="hidden shrink-0 lg:block">
           <Button
+            className="whitespace-nowrap"
             href={localizePath(routes.calculators.sesPayback, locale)}
             icon={<ArrowUpRight aria-hidden className="size-4" />}
           >

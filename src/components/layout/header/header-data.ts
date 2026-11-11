@@ -2,7 +2,8 @@ import { companyContacts, offices, type Office } from "@/content/company";
 import { products, productSummary, type ProductId } from "@/content/products";
 import { featuredProjects } from "@/content/projects";
 import { pageNavigation } from "@/content/navigation";
-import { anchors, routes, sectionHref } from "@/content/routes";
+import { productPages } from "@/content/product-pages";
+import { anchors, routes, sectionHref, toPath } from "@/content/routes";
 import { services, type ServiceId } from "@/content/services";
 import type { Locale } from "@/i18n/config";
 import { getMessagesFor } from "@/i18n/messages";
@@ -167,14 +168,34 @@ export function isHomePath(pathname: string | null): boolean {
 const headerSectionKeys: Record<string, string[]> = {
   [routes.services.turnkeySes]: ["sesSegments", "products", "calculator", "aboutUs"],
   [routes.solutions.hotel]: ["nicheFacts", "nicheSizing", "nicheBackup", "faq"],
+  [routes.calculators.sesPayback]: ["calculator", "sesYield", "sesMethod", "faq"],
 };
 
-/** Section links of the page at `pathname` for the header, labelled like the footer column. */
+/** Product pages: no section links, but the solar hub and the calculator (cross-sell). */
+const productPaths = new Set(productPages.map((page) => toPath(page.slug)));
+
+/** Ukrainian paths that have links in the left cluster of the header (desktop). */
+export const headerLinkPaths: string[] = [...Object.keys(headerSectionKeys), ...productPaths];
+
+/**
+ * Links of the page at `pathname` for the left cluster of the header: its
+ * main sections (labelled like the footer column), or on product pages the
+ * solar hub and the payback calculator. Empty for other pages.
+ */
 export function pageSectionLinks(pathname: string | null, locale: Locale): NavLink[] {
   const ukPath = pathname?.replace(/^\/en(?=\/)/, "") ?? "";
-  const keys = headerSectionKeys[ukPath];
-  if (!keys || pathname !== localizePath(ukPath, locale)) return [];
+  if (pathname !== localizePath(ukPath, locale)) return [];
   const labels = getMessagesFor(locale).footer.links;
+
+  if (productPaths.has(ukPath)) {
+    return [
+      { href: localizePath(routes.services.turnkeySes, locale), label: labels.turnkeySes },
+      { href: localizePath(routes.calculators.sesPayback, locale), label: labels.calculatorPage },
+    ];
+  }
+
+  const keys = headerSectionKeys[ukPath];
+  if (!keys) return [];
   const entries = pageNavigation[pathname] ?? [];
   return entries.filter((entry) => keys.includes(entry.labelKey)).flatMap((entry) => {
     const sectionId = entry.href.split("#")[1];
