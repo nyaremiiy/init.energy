@@ -80,7 +80,7 @@ export function MobileMenu() {
       {isOpen ? (
         <div
           id="mobile-menu"
-          className="fixed inset-0 z-40 flex flex-col gap-10 overflow-y-auto bg-ink-glow px-4.5 pt-28 pb-10 text-white sm:px-8 lg:px-10 lg:pt-40"
+          className="fixed inset-0 z-40 flex flex-col gap-10 overflow-y-auto bg-ink-glow px-6 pt-28 pb-10 text-white sm:px-8 lg:px-10 lg:pt-40"
         >
           <nav aria-label={t.mobileMenu}>
             <ul className="flex flex-col gap-5 text-h3 font-semibold">
