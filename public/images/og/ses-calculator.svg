@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#000217"/>
+  <circle cx="94" cy="92" r="8" fill="#fff"/>
+  <text x="124" y="104" fill="#fff" font-family="Arial, sans-serif" font-size="24" letter-spacing="4">INIT ENERGY</text>
+  <text x="94" y="292" fill="#fff" font-family="Arial, sans-serif" font-size="64" font-weight="700">Solar power calculator</text>
+  <text x="94" y="378" fill="#fff" font-family="Arial, sans-serif" font-size="38">System size · savings · SVIT storage</text>
+  <path d="M94 468H1106" stroke="#fff" stroke-opacity=".25" stroke-width="2"/>
+  <text x="94" y="530" fill="#fff" fill-opacity=".72" font-family="Arial, sans-serif" font-size="24">PVGIS regional yield · Ukraine</text>
+</svg>
