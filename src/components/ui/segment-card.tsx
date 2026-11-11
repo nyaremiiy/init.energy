@@ -1,6 +1,5 @@
 import type { LucideIcon } from "lucide-react";
 import { ArrowUpRight } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 
 import { Button } from "./button";
@@ -25,10 +24,6 @@ type SegmentCardProps = {
     recommendLabel: string;
     ctaLabel: string;
     ctaHref: string;
-    image?: {
-      src: string;
-      alt: string;
-    };
   };
 };
 
@@ -97,25 +92,9 @@ export function SegmentCard({
 
     return (
       <article
-        className={`relative flex h-full min-w-0 flex-col overflow-hidden rounded-3xl p-card-sm lg:p-card ${showcase.image ? "text-white" : isLight ? "bg-sky text-ink" : tone === "navy" ? "bg-navy text-white" : "bg-ink text-white"}`}
+        className={`flex h-full min-w-0 flex-col rounded-3xl p-card-sm lg:p-card ${isLight ? "bg-sky text-ink" : tone === "navy" ? "bg-navy text-white" : "bg-ink text-white"}`}
       >
-        {showcase.image ? (
-          <>
-            <Image
-              src={showcase.image.src}
-              alt={showcase.image.alt}
-              fill
-              sizes="(min-width: 1024px) 33vw, 100vw"
-              className="object-cover"
-            />
-            <div
-              aria-hidden
-              className="absolute inset-0 bg-gradient-to-b from-ink/25 via-ink/70 to-ink"
-            />
-          </>
-        ) : null}
-
-        <div className="relative z-1 flex items-start justify-between gap-4">
+        <div className="flex items-start justify-between gap-4">
           <CardLabel tone={isLight ? "light" : "dark"} icon={segmentIcon}>
             {segment}
           </CardLabel>
@@ -129,21 +108,21 @@ export function SegmentCard({
           ) : null}
         </div>
 
-        <div className="relative z-1 mt-8 min-w-0">
+        <div className="mt-8 min-w-0">
           <p className="font-heading text-number-sm font-light tracking-tight whitespace-nowrap 2xl:text-number">
             {showcase.capacity}
           </p>
           <p className={`mt-2 text-small ${muted}`}>{showcase.capacityLabel}</p>
         </div>
 
-        <div className="relative z-1 mt-8 flex flex-col gap-3">
+        <div className="mt-8 flex flex-col gap-3">
           <Heading as="h3" size="h3" weight="semibold">
             {title}
           </Heading>
           <p className={`text-base leading-relaxed ${muted}`}>{description}</p>
         </div>
 
-        <div className="relative z-1 mt-auto pt-10">
+        <div className="mt-auto pt-10">
           <p
             className={`mb-3 font-heading text-eyebrow-sm font-medium tracking-eyebrow uppercase sm:text-eyebrow ${muted}`}
           >

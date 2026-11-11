@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-11 — Виправлено розташування фото рішення для будинку
+- **Агент:** Codex
+- **Гілка:** fix/house-photo-cec-section (статус: готово до merge у develop)
+- **Що зроблено:** фото `public/images/cec/home.avif` прибрано з картки головної сторінки та додано у картку «Весь будинок без перебоїв» секції «СЕС для дому й для бізнесу» на `/cec/` і `/en/cec/`.
+- **Файли:** `src/components/sections/home/solutions-by-segment.tsx`, `src/components/ui/segment-card.tsx`, `src/components/sections/ses/ses-segments.tsx`, `docs/ai/CHANGELOG.md`
+- **Нотатки / що далі:** інші картки СЕС лишаються із `MediaPlaceholder`, доки для них не буде надано фото.
+
 ## 2026-11-11 — Фото для рішення приватного будинку
 - **Агент:** Codex
 - **Гілка:** feature/house-solution-photo (статус: готово до merge у develop)
