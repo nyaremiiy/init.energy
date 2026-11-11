@@ -72,6 +72,12 @@ export function SolutionsBySegment() {
                     recommendLabel: t.recommend,
                     ctaLabel: t.cardCtas[solution.id],
                     ctaHref: solution.ctaHref,
+                    image: solution.image
+                      ? {
+                          src: solution.image.src,
+                          alt: solution.image.alt[locale],
+                        }
+                      : undefined,
                   }}
                 />
               </Reveal>

@@ -24,6 +24,10 @@ export type Solution = {
   description: Localized;
   products: ProductRef[];
   capacityProducts: ProductId[];
+  image?: {
+    src: string;
+    alt: Localized;
+  };
   /** Backup power pages exist in Ukrainian only. */
   ctaHref: string;
   tone: "light" | "navy" | "dark";
@@ -67,6 +71,13 @@ export const solutions: Solution[] = [
       { product: "svitPlus16000" },
     ],
     capacityProducts: ["svitHome", "svitPlus5000", "svitPlus16000"],
+    image: {
+      src: "/images/cec/home.avif",
+      alt: {
+        uk: "Сонячні панелі для приватного будинку",
+        en: "Solar panels for a private house",
+      },
+    },
     ctaHref: routes.backup.house,
     tone: "navy",
   },
