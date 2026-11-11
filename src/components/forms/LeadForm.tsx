@@ -178,7 +178,7 @@ export function LeadForm({
       onInput={clearFieldError}
       onChange={clearFieldError}
       aria-busy={submitting}
-      className={`rounded-3xl shadow-card ${cardBg} px-4.5 py-card-sm sm:px-card-sm lg:p-card`}
+      className={`rounded-3xl shadow-card ${cardBg} px-card-sm py-card-sm lg:p-card`}
     >
       <input type="hidden" name="locale" value={locale} />
       {/* Disabling the fieldset disables every control while sending. */}
