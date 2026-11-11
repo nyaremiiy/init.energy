@@ -425,10 +425,12 @@
     "types": {
       "eyebrow": "Plant types",
       "title": "Grid-tied, hybrid or off-grid",
-      "lead": "The difference is whether the plant works during outages and whether it needs a battery.",
+      "lead": "The plant type decides whether you have power during outages. For most homes and businesses in Ukraine, a hybrid plant with a battery is the best fit.",
       "caption": "Comparison of solar power plant types",
       "feature": "Feature",
-      "recommended": "Recommended"
+      "recommended": "recommended",
+      "yes": "Yes",
+      "no": "No"
     },
     "hybrid": {
       "eyebrow": "How it works",
