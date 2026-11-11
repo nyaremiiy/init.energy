@@ -241,6 +241,7 @@
       "about": "About us",
       "contacts": "Contacts",
       "calculator": "Calculator",
+      "calculatorPage": "Solar payback calculator",
       "faq": "FAQ",
       "advantages": "Advantages",
       "composition": "Composition",
@@ -390,7 +391,9 @@
         "batteries": "Batteries",
         "business": "For business",
         "solar": "Solar power plants",
-        "industry": "Industry solutions"
+        "industry": "Industry solutions",
+        "calculatorLink": "Solar payback calculator",
+        "calculatorDescription": "Estimate system size, bill savings and payback for your property."
       },
       "menuCta": {
         "title": "Not sure what to choose?",
