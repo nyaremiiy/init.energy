@@ -24,7 +24,7 @@ export function MegaMenuPanel({ group, open, onNavigate }: MegaMenuPanelProps) {
     <div
       className={`absolute inset-x-0 top-full transition duration-200 ${open ? "visible opacity-100" : "invisible opacity-0"}`}
     >
-      <div className="rounded-b-3xl border-t border-white/10 bg-ink-glow shadow-soft">
+      <div className="rounded-b-3xl border-y border-white/15 bg-ink-glow shadow-soft">
         <Container className="flex gap-10 py-10">
           <div className="grid flex-1 auto-cols-fr grid-flow-col gap-10">
             {group.columns.map((column) => (
