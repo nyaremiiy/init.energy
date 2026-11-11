@@ -87,6 +87,8 @@ export function toAnchor(anchor: string): string {
 
 export const routes = {
   home: toPath(),
+  /** Internal screen used by proxy while maintenance mode is enabled. */
+  maintenance: toPath("maintenance"),
   catalog: toPath(slugs.catalog),
   about: toPath(slugs.about),
   projects: toPath(slugs.projects),

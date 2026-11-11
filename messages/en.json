@@ -370,6 +370,13 @@
       "summaryTitle": "Already in your request"
     }
   },
+  "maintenance": {
+    "metaTitle": "Maintenance in progress — INIT ENERGY",
+    "eyebrow": "Maintenance in progress",
+    "title": "We are updating the website",
+    "lead": "We are making the website faster and easier to use. Please check back a little later.",
+    "note": "Thank you for your patience."
+  },
   "meta": {
     "homeTitle": "Solar power plants and backup power — INIT ENERGY",
     "homeDescription": "INIT ENERGY designs and installs turnkey solar power plants and backup power in Ukraine: SVIT and LITHIUMVALLEY batteries for homes and businesses.",
