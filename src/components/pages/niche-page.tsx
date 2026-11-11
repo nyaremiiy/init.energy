@@ -10,21 +10,21 @@ import { NicheSizing } from "@/components/sections/niche/niche-sizing";
 import { PageHero } from "@/components/sections/PageHero";
 import { ProjectsShowcase } from "@/components/sections/projects-showcase";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { anchors, routes, toPath } from "@/content/routes";
+import { anchors, routes, slugs, toPath } from "@/content/routes";
 import type { SolutionPage } from "@/content/solutions";
 import { localizePath, type Locale } from "@/i18n/config";
 import { getMessages } from "@/i18n/server";
 import { absoluteUrl, buildMetadata } from "@/lib/seo/metadata";
 import { serviceSchema } from "@/lib/seo/schema";
 
-/** Ukrainian path of a niche page, e.g. "/ses/dlya-gotelyu/". */
+/** Ukrainian path of a niche page, e.g. "/rishennya/ses-dlya-gotelyu/" (URL kept from init.energy). */
 export function nichePath(page: SolutionPage): string {
-  return toPath("ses", page.slug);
+  return toPath(slugs.solutions.hub, page.slug);
 }
 
 /** Static JPEG share images (social networks show neither SVG nor AVIF). */
 const ogImages: Record<string, string> = {
-  "dlya-gotelyu": "/images/og/ses-dlya-gotelyu",
+  "ses-dlya-gotelyu": "/images/og/ses-dlya-gotelyu",
 };
 
 export function nicheMetadata(page: SolutionPage, locale: Locale): Metadata {
@@ -39,7 +39,7 @@ export function nicheMetadata(page: SolutionPage, locale: Locale): Metadata {
 }
 
 /**
- * Niche solar page (/ses/{slug}/), e.g. hotels: the shared hero, five
+ * Niche solar page (/rishennya/{slug}/), e.g. hotels: the shared hero, five
  * page-specific sections, then the shared projects, FAQ and lead form.
  */
 export function NichePage({ page, locale }: { page: SolutionPage; locale: Locale }) {

@@ -26,7 +26,7 @@ export function SesSegments() {
     {
       solution: solutions.find((item) => item.id === "business"),
       href: routes.services.business,
-      niches: [{ label: t.segments.hotel, href: routes.sesNiche.hotel }],
+      niches: [{ label: t.segments.hotel, href: routes.solutions.hotel }],
     },
   ];
 

@@ -13,8 +13,6 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       { source: "/ses/", destination: "/cec/", permanent: true },
-      // Old init.energy URL of the hotel page.
-      { source: "/rishennya/ses-dlya-gotelyu/", destination: "/ses/dlya-gotelyu/", permanent: true },
     ];
   },
   turbopack: {

@@ -160,8 +160,8 @@ export function getSolutionCapacity(
 }
 
 /* ------------------------------------------------------------------ */
-/* Niche solar pages /ses/{slug}/ (e.g. hotels). Rendered by           */
-/* app/(uk)/ses/[segment] and app/en/ses/[segment].                     */
+/* Niche solar pages /rishennya/{slug}/ (e.g. hotels). Rendered by     */
+/* app/(uk)/rishennya/[segment] and app/en/rishennya/[segment].         */
 /* ------------------------------------------------------------------ */
 
 export type NicheIcon =
@@ -234,7 +234,7 @@ export type SolutionPage = {
  */
 export const solutionPages: SolutionPage[] = [
   {
-    slug: "dlya-gotelyu",
+    slug: "ses-dlya-gotelyu",
     parent: "dlya-biznesu",
     updatedAt: "2026-11-11",
     faqPage: "ses-hotel",
