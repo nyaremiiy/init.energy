@@ -12,6 +12,7 @@ import { segmentIcons } from "@/content/segments";
 import { solutions } from "@/content/solutions";
 import { localizePath } from "@/i18n/config";
 import { getLocale, getMessages } from "@/i18n/server";
+import Image from "next/image";
 
 const titleId = "ses-segments-title";
 
@@ -46,13 +47,23 @@ export function SesSegments() {
               <li key={solution.id}>
                 <Reveal delay={index * 0.08} className="h-full">
                   <article className="relative isolate flex h-full min-h-120 flex-col justify-end overflow-hidden rounded-3xl text-white lg:min-h-150">
-                    <div aria-hidden className="absolute inset-0 -z-10">
+                    <div className="absolute inset-0 -z-10">
                       {/* TODO(content): segment photos (background) — placeholder until they arrive. */}
-                      <MediaPlaceholder
-                        tone="dark"
-                        caption={t.segments.photoPending}
-                        className="size-full rounded-none"
-                      />
+                      {solution.image ? (
+                        <Image
+                          src={solution.image.src}
+                          alt={solution.image.alt[locale]}
+                          fill
+                          sizes="(min-width: 1024px) 50vw, 100vw"
+                          className="object-cover"
+                        />
+                      ) : (
+                        <MediaPlaceholder
+                          tone="dark"
+                          caption={t.segments.photoPending}
+                          className="size-full rounded-none"
+                        />
+                      )}
                     </div>
                     <div
                       aria-hidden
