@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useMemo, useState, type ReactNode } from "react";
+import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 
 import { defaultApplianceIds } from "@/content/appliances";
 import { sesCalculatorConfig } from "@/content/ses-calculator";
@@ -72,6 +72,19 @@ const SesPaybackContext = createContext<ContextValue | null>(null);
  */
 export function SesPaybackProvider({ children }: { children: ReactNode }) {
   const [state, setState] = useState(sesPaybackDefaults);
+
+  // Links from niche pages preselect the object type: ?type=business. Read once,
+  // never written back — the page keeps one parameter-free URL.
+  useEffect(() => {
+    const type = new URLSearchParams(window.location.search).get("type");
+    if (type !== "apartment" && type !== "house" && type !== "business") return;
+    // After hydration (the server renders the defaults). Business has no
+    // regulated tariff: the user enters their own price.
+    const id = window.setTimeout(() =>
+      setState((current) => ({ ...current, objectType: type, tariff: type === "business" ? 0 : current.tariff })),
+    );
+    return () => window.clearTimeout(id);
+  }, []);
   const value = useMemo<ContextValue>(() => {
     const input = toCalculationInput(state);
     return {

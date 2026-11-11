@@ -7,7 +7,7 @@ export type FaqTopic = "backup" | "solar" | "products" | "warranty";
 /** Pages where an entry is shown; the home page shows all of them. */
 /** Product pages use their slug. */
 export type FaqPage =
-  "home" | "solar" | "backup" | "products" | "calculator" | ProductPageSlug;
+  "home" | "solar" | "backup" | "products" | "calculator" | "ses-hotel" | ProductPageSlug;
 
 export type Faq = {
   id: string;
@@ -565,6 +565,56 @@ export const faqList: Faq[] = [
   { id: "bess-service", topic: "warranty", pages: ["bess"], question: { uk: "Як часто потрібне обслуговування?", en: "How often is service required?" }, answer: { uk: "Плановий огляд проводять 1–2 рази на рік; також доступна дистанційна діагностика.", en: "A scheduled inspection is performed 1–2 times a year, with remote diagnostics also available." } },
   { id: "bess-installation", topic: "products", pages: ["bess"], question: { uk: "Скільки триває монтаж і запуск?", en: "How long do installation and commissioning take?" }, answer: { uk: "Від кількох днів до 1–2 тижнів залежно від об'єкта. Поставка базового модуля — до 2 тижнів.", en: "From a few days to 1–2 weeks depending on the site. Base-module delivery is within 2 weeks." } },
   { id: "bess-warranty", topic: "warranty", pages: ["bess"], question: { uk: "Яка гарантія на LITHIUMVALLEY?", en: "What is the LITHIUMVALLEY warranty?" }, answer: { uk: "Гарантія на батарейну систему — 10 років, а ресурс конструкції — до 15 років.", en: "The battery system warranty is 10 years, while the structure service life is up to 15 years." } },
+  {
+    id: "hotel-full-supply",
+    topic: "solar",
+    pages: ["ses-hotel"],
+    question: { uk: "Чи може СЕС повністю забезпечити готель?", en: "Can a solar plant fully power a hotel?" },
+    answer: { uk: "Зазвичай СЕС покриває більшу частину денного навантаження готелю. Повна автономія потребує гібридної системи з накопичувачами.", en: "Usually a solar plant covers most of a hotel’s daytime load. Full independence needs a hybrid system with battery storage." },
+  },
+  {
+    id: "hotel-roof-100kw",
+    topic: "solar",
+    pages: ["ses-hotel"],
+    question: { uk: "Скільки місця на даху потрібно для 100 кВт?", en: "How much roof space does 100 kW need?" },
+    answer: { uk: "Приблизно 450–550 м², це близько 180 панелей.", en: "About 450–550 m², which is roughly 180 panels." },
+  },
+  {
+    id: "hotel-outages",
+    topic: "backup",
+    pages: ["ses-hotel"],
+    question: { uk: "Чи працює СЕС під час відключень?", en: "Does the plant work during outages?" },
+    answer: { uk: "Так, якщо станція гібридна — з гібридним інвертором і накопичувачем. Мережева СЕС під час відключення вимикається.", en: "Yes, if the plant is hybrid, with a hybrid inverter and battery storage. A grid-tied plant switches off during an outage." },
+  },
+  {
+    id: "hotel-open-install",
+    topic: "solar",
+    pages: ["ses-hotel"],
+    question: { uk: "Чи можна встановити СЕС на готель, який працює?", en: "Can a plant be installed while the hotel is open?" },
+    answer: { uk: "Так. Монтаж іде без зупинки роботи готелю і триває 2–4 тижні.", en: "Yes. Installation takes 2–4 weeks and the hotel keeps operating." },
+  },
+  {
+    id: "hotel-40-60-rooms",
+    topic: "solar",
+    pages: ["ses-hotel"],
+    question: { uk: "Яка потужність СЕС потрібна готелю на 40–60 номерів?", en: "What size plant does a 40–60-room hotel need?" },
+    answer: { uk: "Орієнтовно 50–100 кВт при споживанні 150–300 кВт·год на добу. Точну потужність визначаємо за річним споживанням і площею даху.", en: "Roughly 50–100 kW for 150–300 kWh a day. We set the exact size from annual consumption and roof area." },
+  },
+  {
+    id: "hotel-payback",
+    topic: "warranty",
+    pages: ["ses-hotel"],
+    // TODO(content): verify 3–5 years; depends on the tariff and system price.
+    question: { uk: "За скільки окупається СЕС для готелю?", en: "How fast does a hotel solar plant pay back?" },
+    answer: { uk: "У середньому за 3–5 років. Термін залежить від споживання вдень, тарифу й вартості системи.", en: "On average in 3–5 years. It depends on daytime consumption, the tariff and the system price." },
+  },
+  {
+    id: "hotel-panel-life",
+    topic: "warranty",
+    pages: ["ses-hotel"],
+    question: { uk: "Скільки служать сонячні панелі?", en: "How long do solar panels last?" },
+    answer: { uk: "Понад 25 років.", en: "More than 25 years." },
+  },
 ];
 
 export function faqForPage(page: FaqPage): Faq[] {

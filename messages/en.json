@@ -175,7 +175,8 @@
         "house": "House",
         "business": "Business",
         "infrastructure": "Infrastructure",
-        "other": "Other"
+        "other": "Other",
+        "hotel": "Hotel"
       },
       "name": "Name",
       "namePlaceholder": "How should we address you",
@@ -257,7 +258,12 @@
       "sesHybrid": "Hybrid plant",
       "sesSteps": "Stages",
       "sesYield": "Monthly generation",
-      "sesMethod": "How we calculate"
+      "sesMethod": "How we calculate",
+      "nicheFacts": "In numbers",
+      "nicheConsumers": "Where energy goes",
+      "nicheSizing": "System size",
+      "nicheBackup": "Running through outages",
+      "nicheBuild": "Equipment and steps"
     },
     "newsletter": {
       "title": "Newsletter",
@@ -425,7 +431,8 @@
       "lead": "One technology at different scales: from a plant for a private house to a system for a business.",
       "cta": "Learn more",
       "checklist": "What is included",
-      "photoPending": "Photo to be added"
+      "photoPending": "Photo to be added",
+      "hotel": "Solar for hotels"
     },
     "types": {
       "eyebrow": "Plant types",
@@ -654,6 +661,46 @@
       "ses": "Solar power plants",
       "products": "SVIT batteries",
       "calculator": "Calculator"
+    }
+  },
+  "nichePage": {
+    "eyebrows": {
+      "facts": "In brief",
+      "consumers": "Consumption",
+      "sizing": "System size",
+      "backup": "Backup power",
+      "build": "Equipment and steps"
+    },
+    "updated": "Updated: {date}",
+    "factsTableLabel": "Key parameters",
+    "factsCardsLabel": "Key figures",
+    "table": {
+      "caption": "Typical solar plant size by property type",
+      "type": "Property type",
+      "rooms": "Rooms",
+      "kwhDay": "Consumption, kWh/day",
+      "kw": "Recommended plant, kW",
+      "panels": "Panels",
+      "roof": "Roof area, m²"
+    },
+    "calcLink": "Use the calculator",
+    "factorsTitle": "What affects output",
+    "prioritiesTitle": "What stays on first",
+    "modesTitle": "Operating modes",
+    "recommended": "recommended",
+    "productsTitle": "Recommended batteries",
+    "productKind": "Battery",
+    "componentsTitle": "Components",
+    "stepsTitle": "Steps",
+    "faqLinksTitle": "Useful links",
+    "faqLinks": {
+      "business": "Solar for business",
+      "calculator": "Solar payback calculator"
+    },
+    "crumbs": {
+      "home": "Home",
+      "ses": "Solar power plants",
+      "business": "For business"
     }
   }
 }

@@ -33,9 +33,10 @@ export const slugs = {
     house: "dlya-budynku",
     business: "dlya-biznesu",
   },
-  solutions: {
-    hub: "rishennya",
-    hotelSes: "ses-dlya-gotelyu",
+  /** Niche solar pages: /ses/{slug}/ (data: `solutionPages` in content/solutions.ts). */
+  sesNiche: {
+    hub: "ses",
+    hotel: "dlya-gotelyu",
   },
   calculators: { hub: "kalkulyator", sesPayback: "okupnist-ses" },
 } as const;
@@ -66,6 +67,12 @@ export const anchors = {
   sesTypes: "ses-types",
   sesHybrid: "ses-hybrid",
   sesSteps: "ses-steps",
+  // Niche solar pages (/ses/{slug}/).
+  nicheFacts: "facts",
+  nicheConsumers: "consumers",
+  nicheSizing: "sizing",
+  nicheBackup: "backup",
+  nicheBuild: "build",
   sesYield: "ses-yield",
   sesMethod: "ses-method",
 } as const;
@@ -105,8 +112,8 @@ export const routes = {
     house: toPath(slugs.backup.hub, slugs.backup.house),
     business: toPath(slugs.backup.hub, slugs.backup.business),
   },
-  solutions: {
-    hotelSes: toPath(slugs.solutions.hub, slugs.solutions.hotelSes),
+  sesNiche: {
+    hotel: toPath(slugs.sesNiche.hub, slugs.sesNiche.hotel),
   },
   calculators: {
     sesPayback: toPath(slugs.calculators.hub, slugs.calculators.sesPayback),
@@ -137,7 +144,6 @@ export const plannedPaths: readonly string[] = [
   routes.backup.apartment,
   routes.backup.house,
   routes.backup.business,
-  routes.solutions.hotelSes,
   routes.services.house,
   routes.services.business,
 ];

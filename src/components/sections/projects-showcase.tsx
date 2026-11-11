@@ -25,16 +25,20 @@ const filterSegments: Array<{
   { id: "business", labelKey: "business" },
 ];
 
-export function ProjectsShowcase() {
+/** `segment` limits the cards to one segment (niche pages show their own cases). */
+export function ProjectsShowcase({ segment }: { segment?: ProjectSegment } = {}) {
   const messages = getMessages();
   const t = messages.projects;
+  const projects = segment
+    ? featuredProjects.filter((project) => project.segment === segment)
+    : featuredProjects;
 
   // Drafts (test records) are visible only in development; no projects → no section.
-  if (featuredProjects.length === 0) {
+  if (projects.length === 0) {
     return null;
   }
 
-  const [featuredProject, ...secondaryProjects] = featuredProjects;
+  const [featuredProject, ...secondaryProjects] = projects;
 
   return (
     <section

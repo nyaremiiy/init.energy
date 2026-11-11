@@ -1,4 +1,5 @@
-import { Phone } from "lucide-react";
+import { ArrowUpRight, Phone } from "lucide-react";
+import Link from "next/link";
 
 import { FaqAccordion } from "@/components/faq/FaqAccordion";
 import { Container } from "@/components/layout/container";
@@ -30,6 +31,8 @@ type FaqSectionProps = {
   filter?: boolean;
   /** Topic opened first (solar hub page); «all» by default. */
   initialTopic?: FaqTopic;
+  /** Related pages under the header (niche pages: parent page, calculator, articles). */
+  links?: { title: string; items: { label: string; href: string }[] };
 };
 
 /**
@@ -42,6 +45,7 @@ export function FaqSection({
   lead,
   filter = true,
   initialTopic,
+  links,
 }: FaqSectionProps) {
   const messages = getMessages();
   const locale = getLocale();
@@ -73,6 +77,26 @@ export function FaqSection({
               titleId={titleId}
               lead={lead ?? t.lead}
             />
+            {links?.items.length ? (
+              <nav aria-label={links.title}>
+                <ul className="flex flex-col gap-2">
+                  {links.items.map((link) => (
+                    <li key={link.href}>
+                      <Link
+                        href={link.href}
+                        className="group flex items-center justify-between gap-3 rounded-full border border-line px-5 py-3 text-sm font-medium text-ink transition-colors duration-200 ease-tech hover:border-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink sm:text-base"
+                      >
+                        {link.label}
+                        <ArrowUpRight
+                          aria-hidden
+                          className="size-4.5 shrink-0 transition-transform duration-200 motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5"
+                        />
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            ) : null}
             <div className="flex flex-col items-start gap-3 rounded-3xl bg-surface p-card-sm lg:p-card">
               <p className="font-heading text-h3-sm font-medium text-ink sm:text-h3">
                 {t.help.title}
