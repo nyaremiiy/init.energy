@@ -17,7 +17,7 @@
 
 ## 2026-11-11 — Калькулятор окупності СЕС
 - **Агент:** Codex
-- **Гілка:** feature/ses-payback-calculator (статус: у роботі)
+- **Гілка:** feature/ses-payback-calculator (статус: змерджено в develop)
 - **Що зроблено:** додано адаптивну сторінку-калькулятор українською й англійською з оцінкою потужності, генерації, економії, резерву, накопичувача та окупності; параметри синхронізуються з URL і передаються у спільну форму заявки. Додано методику, помісячний графік, FAQ, metadata/JSON-LD та навігаційні CTA.
 - **Файли:** `src/app/(uk)/kalkulyator/okupnist-ses/page.tsx`, `src/app/en/kalkulyator/okupnist-ses/page.tsx`, `src/components/{calculator/ses-payback-calculator.tsx,calculator/ses-payback-details.tsx,pages/ses-payback-page.tsx}`, `src/content/{appliances,insolation,ses-calculator,tariffs}.ts`, `src/lib/calc/{ses-core.ts,ses.ts,ses.test.mjs}`, `messages/{uk,en}.json`, маршрути, FAQ, sitemap, CTA, SEO schema, `public/images/og/ses-calculator.svg`
 - **Нотатки / що далі:** розрахунок є орієнтовним; бізнес-тариф вводить користувач. `npm test` (20 тестів), `npm run lint` і `npm run build` проходять.
