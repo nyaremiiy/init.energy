@@ -17,7 +17,7 @@
 
 ## 2026-11-11 — Команда релізу develop у main
 - **Агент:** Codex
-- **Гілка:** chore/release-command (статус: в роботі)
+- **Гілка:** chore/release-command (статус: змерджено в develop)
 - **Що зроблено:** додано `npm run deploy` для власника: команда перевіряє чистоту tracked-файлів, оновлює `develop`, запускає lint/build, оновлює `main`, мерджить `develop` через `--no-ff`, пушить `origin/main` і повертається на `develop`. При конфлікті merge не приховує стан і зупиняється для ручного вирішення.
 - **Файли:** `scripts/release.mjs`, `package.json`, `README.md`, `docs/ai/{CONTEXT,CHANGELOG}.md`
 - **Нотатки / що далі:** команда лише додана й перевірена статично; агент її не запускав, тому `main` не змінено.
