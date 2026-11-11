@@ -1,4 +1,5 @@
 import { ChartColumn, PencilRuler, PlugZap, Wrench } from "lucide-react";
+import Image from "next/image";
 
 import { Container } from "@/components/layout/container";
 import { MediaPlaceholder } from "@/components/ui/media-placeholder";
@@ -51,9 +52,23 @@ export function NicheBuild({ page, locale }: { page: SolutionPage; locale: Local
             </ul>
           </Reveal>
 
-          <Reveal delay={0.08} className="hidden md:block">
-            {/* TODO(content): photo of a hotel rooftop plant (3:4). */}
-            <MediaPlaceholder caption={page.build.mediaLabel[locale]} aspect="3/4" className="aspect-3/4 w-full rounded-3xl" />
+          <Reveal delay={0.08}>
+            {page.build.image ? (
+              <div className="relative aspect-4/3 w-full overflow-hidden rounded-3xl md:aspect-3/4">
+                {/* Nearly square source: the 3:4 crop keeps the solar array on the right. */}
+                <Image
+                  src={page.build.image.src}
+                  alt={page.build.image.alt[locale]}
+                  fill
+                  sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                  className="object-cover object-right"
+                />
+              </div>
+            ) : (
+              <div className="hidden md:block">
+                <MediaPlaceholder caption={page.build.mediaLabel[locale]} className="aspect-3/4 w-full rounded-3xl" />
+              </div>
+            )}
           </Reveal>
 
           <Reveal delay={0.16} className="flex flex-col gap-4 md:col-span-2 lg:col-span-1">
