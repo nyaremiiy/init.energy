@@ -45,7 +45,7 @@ export function SesPlantTypes() {
           {/* TODO(content): link «Детальніше: мережева чи гібридна СЕС» to the knowledge-base article once it exists. */}
           <div role="table" aria-label={t.caption} className="text-sm">
             <div role="row" className="grid grid-cols-3 items-end md:grid-cols-4">
-              <span role="columnheader" className="sr-only md:not-sr-only">
+              <span role="columnheader" className="hidden md:block">
                 <span className="sr-only">{t.feature}</span>
               </span>
               {plantTypes.map((type) => (
