@@ -34,22 +34,25 @@ type BuildMetadataInput = {
   /** Ukrainian path with the trailing slash, e.g. "/svit-plus-5000/". */
   path: string;
   locale?: Locale;
-  /** Share image (site-relative URL). */
-  image?: { url: string; width: number; height: number; alt: string };
+};
+
+/** The one share image of the whole site (1200×630, public/og-image.png). */
+const ogImage = { url: "/og-image.png", width: 1200, height: 630 } as const;
+const ogImageAlt: Record<Locale, string> = {
+  uk: "INIT ENERGY — сонячні станції і резервне живлення",
+  en: "INIT ENERGY — solar power plants and backup power",
 };
 
 /**
  * Page metadata in one shape: title, description, canonical (self-referencing
- * per locale), hreflang and Open Graph.
- *
- * TODO(content): Open Graph image 1200×630 per page.
+ * per locale), hreflang and Open Graph. Every page shares one image
+ * (/og-image.png); og:title and og:description are per page.
  */
 export function buildMetadata({
   title,
   description,
   path,
   locale = defaultLocale,
-  image,
 }: BuildMetadataInput): Metadata {
   const url = absoluteUrl(localizePath(path, locale));
   const alternateLocale = hasEnglish(path)
@@ -71,13 +74,13 @@ export function buildMetadata({
       locale: ogLocale[locale],
       alternateLocale,
       siteName: "INIT ENERGY",
-      ...(image ? { images: [{ ...image, url: absoluteUrl(image.url) }] } : {}),
+      images: [{ ...ogImage, url: absoluteUrl(ogImage.url), alt: ogImageAlt[locale] }],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      ...(image ? { images: [absoluteUrl(image.url)] } : {}),
+      images: [absoluteUrl(ogImage.url)],
     },
   };
 }

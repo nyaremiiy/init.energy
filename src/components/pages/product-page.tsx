@@ -39,22 +39,12 @@ export function buildProductPageMetadata(
 ): Metadata {
   const page = productPageBySlug(slug);
   if (!page) return {};
-  const product = products[page.id];
 
   return buildMetadata({
     title: page.meta.title[locale],
     description: page.meta.description[locale],
     path: toPath(page.slug),
     locale,
-    image:
-      page.ogImage && product?.image
-        ? {
-            url: page.ogImage,
-            width: 1200,
-            height: 630,
-            alt: product.image.alt[locale],
-          }
-        : undefined,
   });
 }
 

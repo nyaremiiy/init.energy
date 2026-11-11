@@ -109,7 +109,6 @@ export const productList: Product[] = [
     // TODO(content): confirm the typical load in watts for every runtime example.
     page: {
       slug: "svit-600",
-      ogImage: "/images/og/svit-600.jpg",
       meta: {
         title: { uk: "SVIT 600 — портативна зарядна станція 865 Вт·год", en: "SVIT 600 — 865 Wh portable power station" },
         description: { uk: "Портативна станція SVIT 600: 865 Вт·год, 600 Вт номінально й 1 200 Вт піково, 9 виходів, тиха робота та заряджання від мережі або сонця.", en: "SVIT 600 portable power station with 865 Wh, 600 W rated and 1,200 W peak output, nine ports, quiet operation and solar charging." },
@@ -277,7 +276,6 @@ export const productList: Product[] = [
           en: "A ready backup power kit: a 6.2 kW VICTOR hybrid inverter and a 5.12 kWh LiFePO₄ battery. For apartments, houses, housing associations and businesses.",
         },
       },
-      ogImage: "/images/og/svit-home.jpg",
       hero: {
         typeLabel: {
           uk: "Комплект резервного живлення",
@@ -752,7 +750,6 @@ export const productList: Product[] = [
     // TODO(content): add approved 1200×630 OG art.
     page: {
       slug: "svit-plus-16000",
-      ogImage: "/images/og/svit-plus-16000.jpg",
       meta: {
         title: {
           uk: "SVIT PLUS 16000 — батарея LiFePO₄ 16,07 кВт·год",
@@ -940,7 +937,6 @@ export const productList: Product[] = [
     // to the inverter or the full system. Add approved photos and OG artwork.
     page: {
       slug: "bess",
-      ogImage: "/images/og/bess.jpg",
       meta: {
         title: { uk: "LITHIUMVALLEY BESS — накопичення 208–1 044 кВт·год", en: "LITHIUMVALLEY BESS — 208–1,044 kWh energy storage" },
         description: { uk: "Промислова BESS LITHIUMVALLEY на 208–1 044 кВт·год: LiFePO₄, інвертори SOLIS до 125 кВт, перемикання до 10 мс і гарантія 10 років для бізнесу та інфраструктури.", en: "LITHIUMVALLEY industrial BESS from 208 to 1,044 kWh: LiFePO₄, SOLIS inverters up to 125 kW, sub-10 ms transfer and a 10-year warranty for business." },

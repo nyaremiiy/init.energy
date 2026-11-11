@@ -45,8 +45,6 @@ export type ProductPage = {
   /** Root-level slug, also used as the lead form's hidden product field. */
   slug: ProductPageSlug;
   meta: { title: Text; description: Text };
-  /** Share image, JPEG 1200×630 (social networks do not show AVIF). */
-  ogImage?: string;
   hero: {
     typeLabel: Text;
     segmentLabel: Text;
@@ -168,7 +166,6 @@ const standaloneProductPages: ProductPage[] = [
   {
     id: "svitPlus5000",
     slug: "svit-plus-5000",
-    ogImage: "/images/og/svit-plus-5000.jpg",
     meta: {
       title: {
         uk: "SVIT PLUS 5000 — батарея LiFePO₄ 5,12 кВт·год",

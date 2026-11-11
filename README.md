@@ -63,7 +63,7 @@
 
 ## SEO і GEO
 
-- Метадані кожної сторінки — `buildMetadata()` (`src/lib/seo/metadata.ts`): title, description, canonical, hreflang uk/en/x-default, Open Graph (JPEG 1200×630 у `public/images/og/`).
+- Метадані кожної сторінки — `buildMetadata()` (`src/lib/seo/metadata.ts`): title, description, canonical, hreflang uk/en/x-default, Open Graph — один файл `public/og-image.png` (1200×630) для всіх сторінок, заголовок і опис — свої в кожної.
 - Структуровані дані (JSON-LD) — `src/lib/seo/schema.ts`: Organization, WebSite, Service, Product, FAQPage, BreadcrumbList, HowTo, WebApplication.
 - `/sitemap.xml`, `/robots.txt`, `/manifest.webmanifest` — `src/app/`.
 - `/llms.txt` — коротка довідка для AI-пошуку (ChatGPT, Perplexity, Gemini), будується з `src/content/` під час збірки.
