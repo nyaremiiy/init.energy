@@ -221,6 +221,8 @@ export type SolutionPage = {
     lead: Localized;
     components: Array<{ icon: NicheIcon; label: Localized }>;
     steps: Array<{ title: Localized; text: Localized }>;
+    /** Photo next to the components (3:4 slot); without it a placeholder is shown. */
+    image?: { src: string; width: number; height: number; alt: Localized };
     mediaLabel: Localized;
   };
   /** Projects shown on the page. TODO(content): add a hotel case and a "hotel" project segment. */
@@ -371,6 +373,15 @@ export const solutionPages: SolutionPage[] = [
         { title: { uk: "Монтаж", en: "Installation" }, text: { uk: "Без зупинки роботи готелю.", en: "While the hotel stays open." } },
         { title: { uk: "Запуск і підключення", en: "Commissioning" }, text: { uk: "Запуск станції й підключення до мережі.", en: "Start-up and grid connection." } },
       ],
+      image: {
+        src: "/images/cec/rishennya/hotel/hotel.avif",
+        width: 2674,
+        height: 2730,
+        alt: {
+          uk: "Дерев’яний гірський готель із сонячними панелями на схилі поруч",
+          en: "Wooden mountain hotel with a solar array on the slope beside it",
+        },
+      },
       mediaLabel: { uk: "Фото СЕС на даху готелю — буде додано", en: "Photo of a hotel rooftop plant — coming soon" },
     },
     projectSegment: "business",
