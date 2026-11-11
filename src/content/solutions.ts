@@ -99,6 +99,13 @@ export const solutions: Solution[] = [
       { product: "svitPlus5000", count: 16 },
     ],
     capacityProducts: ["lithiumvalley"],
+    image: {
+      src: "/images/cec/factory.avif",
+      alt: {
+        uk: "Сонячна електростанція для підприємства",
+        en: "Solar power plant for a business",
+      },
+    },
     ctaHref: routes.backup.business,
     tone: "dark",
   },
