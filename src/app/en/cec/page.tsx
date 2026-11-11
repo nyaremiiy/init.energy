@@ -12,6 +12,7 @@ export function generateMetadata(): Metadata {
     description: t.description,
     path: "/cec/",
     locale: "en",
+    image: { url: "/images/og/cec.jpg", width: 1200, height: 630, alt: t.title },
   });
 }
 

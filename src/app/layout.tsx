@@ -26,6 +26,11 @@ export const metadata: Metadata = {
   applicationName: "INIT ENERGY",
   formatDetection: { telephone: false, email: false, address: false },
   robots: { index: true, follow: true },
+  // Search Console / Bing Webmaster: set the tokens on the server (.env), no code change.
+  verification: {
+    ...(process.env.GOOGLE_SITE_VERIFICATION ? { google: process.env.GOOGLE_SITE_VERIFICATION } : {}),
+    ...(process.env.BING_SITE_VERIFICATION ? { other: { "msvalidate.01": process.env.BING_SITE_VERIFICATION } } : {}),
+  },
 };
 
 export const viewport: Viewport = {
