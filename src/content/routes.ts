@@ -23,7 +23,9 @@ export const slugs = {
   },
   services: {
     turnkeySes: "cec",
-    solar: "ses",
+    // TODO(content): solar plant pages per segment are planned, not built yet.
+    house: "dlya-domu",
+    business: "dlya-biznesu",
   },
   backup: {
     hub: "rezervne-zhyvlennya",
@@ -90,7 +92,8 @@ export const routes = {
   },
   services: {
     turnkeySes: toPath(slugs.services.turnkeySes),
-    solar: toPath(slugs.services.solar),
+    house: toPath(slugs.services.turnkeySes, slugs.services.house),
+    business: toPath(slugs.services.turnkeySes, slugs.services.business),
   },
   backup: {
     apartment: toPath(slugs.backup.hub, slugs.backup.apartment),
@@ -110,6 +113,26 @@ export const routes = {
     contacts: toAnchor(anchors.contacts),
   },
 } as const;
+
+/**
+ * Pages that are linked from the site but not built yet. They render the
+ * «page in progress» screen (still a 404 with noindex) instead of a bare 404.
+ * Remove a path from here when its page is created.
+ */
+export const plannedPaths: readonly string[] = [
+  routes.catalog,
+  routes.about,
+  routes.projects,
+  routes.privacy,
+  routes.cookies,
+  routes.terms,
+  routes.backup.apartment,
+  routes.backup.house,
+  routes.backup.business,
+  routes.solutions.hotelSes,
+  routes.services.house,
+  routes.services.business,
+];
 
 /**
  * A home-page anchor in a locale: "/#contacts" on Ukrainian pages,

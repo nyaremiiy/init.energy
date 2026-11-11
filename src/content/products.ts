@@ -609,7 +609,7 @@ export const productList: Product[] = [
             tone: "sky",
             links: [
               { label: { uk: "Резервне живлення для будинку", en: "Backup power for a house" }, href: routes.backup.house },
-              { label: { uk: "СЕС для дому", en: "Solar for a house" }, href: routes.services.solar },
+              { label: { uk: "СЕС для дому", en: "Solar for a house" }, href: routes.services.turnkeySes },
             ],
           },
           {
@@ -623,7 +623,7 @@ export const productList: Product[] = [
             tone: "navy",
             links: [
               { label: { uk: "Резервне живлення для бізнесу", en: "Backup power for business" }, href: routes.backup.business },
-              { label: { uk: "СЕС для бізнесу", en: "Solar for business" }, href: routes.services.solar },
+              { label: { uk: "СЕС для бізнесу", en: "Solar for business" }, href: routes.services.turnkeySes },
             ],
           },
           {
@@ -877,7 +877,7 @@ export const productList: Product[] = [
         lead: { uk: "Велика ємність закриває добу роботи будинку від сонця або кілька годин резерву для бізнесу.", en: "High capacity can cover a home's day from solar or provide several hours of backup for a business." },
         items: [
           { icon: "solar", tag: { uk: "СЕС", en: "Solar" }, title: { uk: "Сонячна станція", en: "Solar power plant" }, text: { uk: "Накопичує денну генерацію панелей, щоб використовувати її ввечері та вночі.", en: "Stores daytime solar generation for use in the evening and at night." }, tone: "sky", links: [
-            { label: { uk: "СЕС для дому", en: "Solar for homes" }, href: routes.services.solar }, { label: { uk: "СЕС для бізнесу", en: "Solar for business" }, href: routes.services.turnkeySes },
+            { label: { uk: "СЕС для дому", en: "Solar for homes" }, href: routes.services.turnkeySes }, { label: { uk: "СЕС для бізнесу", en: "Solar for business" }, href: routes.services.turnkeySes },
           ] },
           { icon: "backup", tag: { uk: "Резерв", en: "Backup" }, title: { uk: "Резервне живлення", en: "Backup power" }, text: { uk: "Тримає будинок або офіс під час відключень разом з гібридним інвертором.", en: "Keeps a house or office running during outages with a hybrid inverter." }, tone: "navy", links: [
             { label: { uk: "Резерв для будинку", en: "Home backup" }, href: routes.backup.house }, { label: { uk: "Резерв для бізнесу", en: "Business backup" }, href: routes.backup.business },

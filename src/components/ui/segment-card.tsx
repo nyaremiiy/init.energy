@@ -199,35 +199,56 @@ export function SegmentCard({
         </p>
       </div>
 
-      <nav aria-label={navLabel} className="mt-auto">
-        <ul className="flex flex-col gap-2">
-          {links.map((link, linkIndex) => {
-            const featured = linkIndex === 0;
-
-            return (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className={`group flex items-center gap-3 rounded-full border px-4 py-3 text-sm font-medium sm:px-5 sm:text-base transition-colors duration-200 ease-tech focus-visible:outline-2 focus-visible:outline-offset-2 ${featured ? classes.featuredLink : classes.link}`}
-                >
-                  <span className="flex-1">{link.label}</span>
-                  {link.spec ? (
-                    <span
-                      className={`text-right whitespace-nowrap tabular-nums ${featured ? classes.featuredMuted : classes.muted}`}
-                    >
-                      {link.spec}
-                    </span>
-                  ) : null}
-                  <ArrowUpRight
-                    aria-hidden
-                    className="size-5 shrink-0 transition-transform duration-200 motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5"
-                  />
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </nav>
+      <SegmentLinks links={links} navLabel={navLabel} tone={tone} />
     </article>
+  );
+}
+
+/**
+ * Pill links at the bottom of a segment card: the first one is a filled
+ * light pill, the rest are outlined. Also used by cards that are not
+ * SegmentCards (sector cards on product pages) so the links look the same.
+ */
+export function SegmentLinks({
+  links,
+  navLabel,
+  tone = "light",
+}: {
+  links: SegmentCardProps["links"];
+  navLabel: string;
+  tone?: SegmentCardTone;
+}) {
+  const classes = toneClasses[tone];
+
+  return (
+    <nav aria-label={navLabel} className="mt-auto">
+      <ul className="flex flex-col gap-2">
+        {links.map((link, linkIndex) => {
+          const featured = linkIndex === 0;
+
+          return (
+            <li key={link.href}>
+              <Link
+                href={link.href}
+                className={`group flex items-center gap-3 rounded-full border px-4 py-3 text-sm font-medium sm:px-5 sm:text-base transition-colors duration-200 ease-tech focus-visible:outline-2 focus-visible:outline-offset-2 ${featured ? classes.featuredLink : classes.link}`}
+              >
+                <span className="flex-1">{link.label}</span>
+                {link.spec ? (
+                  <span
+                    className={`text-right whitespace-nowrap tabular-nums ${featured ? classes.featuredMuted : classes.muted}`}
+                  >
+                    {link.spec}
+                  </span>
+                ) : null}
+                <ArrowUpRight
+                  aria-hidden
+                  className="size-5 shrink-0 transition-transform duration-200 motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5"
+                />
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
   );
 }

@@ -15,6 +15,26 @@
 
 ---
 
+## 2026-11-11 — Аудит сайту: посилання, сторінка «в розробці», іконки, стиль
+- **Агент:** Claude Code
+- **Гілка:** feature/site-audit (статус: змерджено в develop)
+- **Що зроблено:**
+  - Обійдено всі внутрішні посилання на продакшн-збірці (uk і en).
+  - 12 запланованих сторінок (/svit/, /pro-nas/, /proekty/, три правові, три /rezervne-zhyvlennya/…, /rishennya/ses-dlya-gotelyu/, /cec/dlya-domu/, /cec/dlya-biznesu/) тепер відкривають екран «Ця сторінка ще в розробці» з шапкою, футером, кнопками «На головну» / «Залишити заявку» і швидкими посиланнями (СЕС, накопичувачі, калькулятор). Інші невідомі адреси показують «Сторінку не знайдено». Статус 404 і noindex збережено. Для `/en/…` екран англійською.
+  - Посилання «СЕС для дому/бізнесу» вели на /ses/ через редирект 308, тепер ведуть прямо на /cec/ (маршрут `services.solar` видалено). На /cec/ кнопка hero «Реалізовані проєкти» вела на якір, якого немає на сторінці, тепер це «Етапи робіт».
+  - Додано іконки lucide до нумерованих кроків через новий `StepMarker`: етапи СЕС, вузли гібридної СЕС, аргументи «Про компанію» (головна й /cec/), процес LITHIUMVALLEY.
+  - Під стиль сайту підігнано:
+    - посилання в секторних картках LITHIUMVALLEY стали пігулками, як на інших продуктах (`SegmentLinks`);
+    - номери кроків тепер одним шрифтом замість mono;
+    - `text-2xl` у мобільному меню замінено на токен `text-h3`;
+    - на мобільному вирівняно першу колонку таблиці типів СЕС.
+  - Прибрано дубль `/svit-plus-16000/` у `localizedPaths`.
+- **Файли:** src/proxy.ts, src/lib/request-path.ts, src/app/not-found.tsx, src/components/pages/not-found-view.tsx, src/components/ui/{step-marker,segment-card}.tsx, src/components/sections/{trust-block,ses/*,home/hero-slides.ts,home/solutions-by-segment}.tsx, src/components/product-page/{product-applications,product-bess-sections}.tsx, src/components/layout/header/mobile-menu.tsx, src/content/{routes,ses,products}.ts, src/i18n/config.ts, messages/{uk,en}.json, docs/ai/{CONTEXT,CHANGELOG}.md
+- **Нотатки / що далі:**
+  - lint, test і build проходять. Перевірено в headless Edge на 1440 і 390 px: усі сторінки без горизонтального скролу.
+  - Однорівневі адреси (/svit/ тощо) потрапляють у `[product]` з `dynamicParams=false`, тому текст екрана «в розробці» на них дорендерюється на клієнті (у сирому HTML його немає). Для 404 з noindex це не критично.
+  - `shadow-card` — токен у globals.css, у CONTEXT він ще не описаний.
+
 ## 2026-11-11 — Зсув шапки таблиці типів СЕС
 - **Агент:** Claude Code
 - **Гілка:** fix/ses-plant-types-header (статус: змерджено в develop)

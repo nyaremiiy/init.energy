@@ -14,6 +14,13 @@ const titleId = "ses-types-title";
 const isHybrid = (id: PlantTypeId) => id === "hybrid";
 
 /**
+ * Horizontal padding of a value column. On mobile the first column starts
+ * flush with the row labels above it; from md the label column sits before it.
+ */
+const cellPadding = (index: number) =>
+  index === 0 ? "pr-3 sm:pr-5 md:pl-5" : "px-3 sm:px-5";
+
+/**
  * Grid-tied, hybrid and off-grid plants compared side by side, without
  * horizontal scroll: on mobile each row is the feature name above three
  * value cells; from md it is a regular four-column table. Explicit ARIA
@@ -48,11 +55,11 @@ export function SesPlantTypes() {
               <span role="columnheader" className="hidden md:block">
                 <span className="sr-only">{t.feature}</span>
               </span>
-              {plantTypes.map((type) => (
+              {plantTypes.map((type, typeIndex) => (
                 <span
                   key={type.id}
                   role="columnheader"
-                  className={`px-3 font-heading text-base font-semibold sm:px-5 ${isHybrid(type.id) ? "rounded-t-2xl bg-ink py-5 text-white" : "py-4 text-ink"}`}
+                  className={`font-heading text-base font-semibold ${cellPadding(typeIndex)} ${isHybrid(type.id) ? "rounded-t-2xl bg-ink py-5 text-white" : "py-4 text-ink"}`}
                 >
                   <span className="block">{type.label[locale]}</span>
                   {isHybrid(type.id) ? (
@@ -76,14 +83,14 @@ export function SesPlantTypes() {
                 >
                   {row.label[locale]}
                 </span>
-                {plantTypes.map((type) => {
+                {plantTypes.map((type, typeIndex) => {
                   const value = row.values[type.id];
 
                   return (
                     <span
                       key={type.id}
                       role="cell"
-                      className={`flex items-center px-3 py-4 text-ink sm:px-5 md:py-5 ${isHybrid(type.id) ? `bg-white ${rowIndex === plantRows.length - 1 ? "md:rounded-b-2xl" : ""}` : ""}`}
+                      className={`flex items-center py-4 text-ink md:py-5 ${cellPadding(typeIndex)} ${isHybrid(type.id) ? `bg-white ${rowIndex === plantRows.length - 1 ? "md:rounded-b-2xl" : ""}` : ""}`}
                     >
                       {typeof value === "boolean" ? (
                         value ? (

@@ -210,8 +210,9 @@ const sesSlides: SlideSource[] = [
         variant: "primary",
       },
       {
-        target: { href: "#projects" },
-        label: { uk: "Реалізовані проєкти", en: "Completed projects" },
+        // No visible projects yet, so the projects section is not rendered.
+        target: { href: "#ses-steps" },
+        label: { uk: "Етапи робіт", en: "How we build" },
         variant: "secondary",
       },
     ],

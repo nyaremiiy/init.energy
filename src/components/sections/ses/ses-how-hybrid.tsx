@@ -1,4 +1,4 @@
-import { ArrowDown, ArrowRight } from "lucide-react";
+import { ArrowDown, ArrowRight, BatteryCharging, House, Sun, Zap } from "lucide-react";
 
 import { Container } from "@/components/layout/container";
 import { Heading } from "@/components/ui/heading";
@@ -6,11 +6,14 @@ import { Panel } from "@/components/ui/panel";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
 import { SectionWatermark } from "@/components/ui/section-watermark";
+import { StepMarker } from "@/components/ui/step-marker";
 import { anchors } from "@/content/routes";
 import { hybridFlow } from "@/content/ses";
 import { getLocale, getMessages } from "@/i18n/server";
 
 const titleId = "ses-hybrid-title";
+
+const nodeIcons = { panels: Sun, inverter: Zap, battery: BatteryCharging, house: House } as const;
 
 /** How a hybrid plant works: four nodes, horizontal on desktop, vertical on phones. */
 export function SesHybrid() {
@@ -51,11 +54,11 @@ export function SesHybrid() {
                 <div
                   className={`flex flex-1 flex-col gap-3 rounded-3xl p-card-sm lg:p-card ${node.highlight ? "bg-white text-ink" : "bg-white/8 text-white"}`}
                 >
-                  <span
-                    className={`font-mono text-sm tabular-nums ${node.highlight ? "text-ink/70" : "text-white/75"}`}
-                  >
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
+                  <StepMarker
+                    index={index}
+                    icon={nodeIcons[node.id]}
+                    tone={node.highlight ? "light" : "dark"}
+                  />
                   <Heading
                     as="h3"
                     size="h3"

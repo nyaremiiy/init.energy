@@ -1,12 +1,18 @@
+import { Calculator, PencilRuler, ReceiptText, ShieldCheck, Wrench } from "lucide-react";
+
 import { Container } from "@/components/layout/container";
 import { Heading } from "@/components/ui/heading";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
+import { StepMarker } from "@/components/ui/step-marker";
 import { anchors } from "@/content/routes";
 import { buildSteps } from "@/content/ses";
 import { getLocale, getMessages } from "@/i18n/server";
 
 const titleId = "ses-steps-title";
+
+/** One icon per stage, in the order of `buildSteps`. */
+const stepIcons = [Calculator, PencilRuler, ReceiptText, Wrench, ShieldCheck];
 
 /** How we build a plant: five ordered stages. Durations are TODO(content). */
 export function SesSteps() {
@@ -34,9 +40,7 @@ export function SesSteps() {
             <li key={step.title.en}>
               <Reveal delay={index * 0.08} className="h-full">
                 <div className="flex h-full flex-col gap-4 rounded-3xl bg-surface p-card-sm lg:p-card">
-                  <span className="font-heading text-number-sm font-light text-ink/70 tabular-nums">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
+                  <StepMarker index={index} icon={stepIcons[index] ?? Wrench} />
                   <Heading as="h3" size="h3">
                     {step.title[locale]}
                   </Heading>

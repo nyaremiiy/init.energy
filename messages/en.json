@@ -442,5 +442,27 @@
       "title": "How we build a solar plant",
       "lead": "From consumption estimate to service — five stages."
     }
+  },
+  "notFound": {
+    "metaTitle": "Page in progress — INIT ENERGY",
+    "metaTitleMissing": "Page not found — INIT ENERGY",
+    "planned": {
+      "eyebrow": "Page in progress",
+      "title": "This page is still in progress",
+      "lead": "We are preparing its content. For now, go back to the home page or leave a request: an INIT ENERGY engineer will answer your questions about solar and backup power."
+    },
+    "missing": {
+      "eyebrow": "Error 404",
+      "title": "Page not found",
+      "lead": "The link may be outdated or the address may contain a typo. Go back to the home page or leave a request: an INIT ENERGY engineer will help."
+    },
+    "home": "Home page",
+    "request": "Leave a request",
+    "available": "Already available",
+    "links": {
+      "ses": "Solar power plants",
+      "products": "SVIT batteries",
+      "calculator": "Calculator"
+    }
   }
 }

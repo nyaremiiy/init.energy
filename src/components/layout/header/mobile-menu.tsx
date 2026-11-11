@@ -85,7 +85,7 @@ export function MobileMenu() {
           className="fixed inset-0 z-40 flex flex-col gap-10 overflow-y-auto bg-ink-glow px-4.5 pt-28 pb-10 text-white sm:px-8"
         >
           <nav aria-label={t.mobileMenu}>
-            <ul className="flex flex-col gap-5 text-2xl font-semibold">
+            <ul className="flex flex-col gap-5 text-h3 font-semibold">
               {visibleItems.map((item) =>
                 isNavGroup(item) ? (
                   <li key={item.label}>
