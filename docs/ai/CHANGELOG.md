@@ -17,7 +17,7 @@
 
 ## 2026-11-11 — Більші мобільні відступи на всіх сторінках
 - **Агент:** Codex
-- **Гілка:** fix/mobile-section-gutters (статус: в роботі)
+- **Гілка:** fix/mobile-section-gutters (статус: змерджено в develop)
 - **Що зроблено:** глобальний мобільний відступ контенту від краю екрана збільшено з 18 до 24 px через спільний `Container`; для секцій усередині панелей враховано зовнішні 8 px панелі. Узгоджено мобільне меню, екран технічних робіт і внутрішній padding форми заявки. Відступи `sm`/`lg` не змінено.
 - **Файли:** `src/components/layout/container.tsx`, `src/components/layout/header/mobile-menu.tsx`, `src/components/pages/maintenance-page.tsx`, `src/components/forms/LeadForm.tsx`, `docs/ai/{CONTEXT,CHANGELOG}.md`
 - **Нотатки / що далі:** зміна охоплює всі 59 використань `Container` на українських і англійських сторінках.
