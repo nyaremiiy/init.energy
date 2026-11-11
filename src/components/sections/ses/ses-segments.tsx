@@ -55,7 +55,7 @@ export function SesSegments() {
                           alt={solution.image.alt[locale]}
                           fill
                           sizes="(min-width: 1024px) 50vw, 100vw"
-                          className="object-cover"
+                          className={`object-cover ${solution.id === "house" ? "object-top" : "object-center"}`}
                         />
                       ) : (
                         <MediaPlaceholder
@@ -67,7 +67,7 @@ export function SesSegments() {
                     </div>
                     <div
                       aria-hidden
-                      className="absolute inset-0 -z-10 bg-linear-to-t from-ink/95 via-ink/60 to-ink/10"
+                      className="absolute inset-0 -z-10 bg-linear-to-t from-ink via-ink/80 to-ink/35"
                     />
 
                     <div className="flex flex-col gap-6 p-card-sm lg:p-card">
