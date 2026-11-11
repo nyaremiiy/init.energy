@@ -9,7 +9,7 @@ import { ArrowLink } from "@/components/ui/arrow-link";
 import { Tooltip } from "@/components/ui/tooltip";
 import { chipClasses } from "@/components/ui/chip-styles";
 
-import { featuredProjects, type ProjectSegment } from "@/content/projects";
+import { featuredProjects, visibleProjects, type ProjectSegment } from "@/content/projects";
 import { anchors, routes } from "@/content/routes";
 import { getMessages } from "@/i18n/server";
 
@@ -25,12 +25,20 @@ const filterSegments: Array<{
   { id: "business", labelKey: "business" },
 ];
 
-/** `segment` limits the cards to one segment (niche pages show their own cases). */
+/** The layout holds three cards: one large and two small. */
+const showcaseSize = 3;
+
+/**
+ * `segment` puts that segment's cases first (niche pages); the remaining
+ * places are filled with other projects so the layout never has a gap.
+ */
 export function ProjectsShowcase({ segment }: { segment?: ProjectSegment } = {}) {
   const messages = getMessages();
   const t = messages.projects;
   const projects = segment
-    ? featuredProjects.filter((project) => project.segment === segment)
+    ? [...visibleProjects]
+        .sort((a, b) => Number(b.segment === segment) - Number(a.segment === segment))
+        .slice(0, showcaseSize)
     : featuredProjects;
 
   // Drafts (test records) are visible only in development; no projects → no section.
