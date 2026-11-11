@@ -27,6 +27,7 @@ type FooterLinkLabels = {
   aboutUs: string;
   projects: string;
   calculator: string;
+  calculatorPage: string;
   faq: string;
   consultation: string;
   turnkeySes: string;
@@ -159,6 +160,10 @@ for (const page of productPages) {
 export function getSiteSections(locale: Locale): NavEntry[] {
   return [
     { href: localizePath(routes.services.turnkeySes, locale), labelKey: "turnkeySes" },
+    {
+      href: localizePath(routes.calculators.sesPayback, locale),
+      labelKey: "calculatorPage",
+    },
     { href: localizePath(routes.catalog, locale), labelKey: "svitCatalog" },
     ...(hasProjects
       ? [
@@ -170,6 +175,6 @@ export function getSiteSections(locale: Locale): NavEntry[] {
       : []),
     { href: routes.about, labelKey: "about" },
     { href: sectionHref(anchors.contacts, locale), labelKey: "contacts" },
-    // TODO(content): «Резервне живлення», «Калькулятори», «База знань» — add when these pages enter the site structure.
+    // TODO(content): «Резервне живлення» and «База знань» — add when these pages enter the site structure.
   ];
 }

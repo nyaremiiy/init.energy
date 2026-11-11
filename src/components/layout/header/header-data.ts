@@ -101,6 +101,11 @@ export function getNavItems(locale: Locale): NavItem[] {
     label: services[id].name[locale],
     description: services[id].summary[locale],
   });
+  const paybackCalculatorLink: NavMenuLink = {
+    href: localizePath(routes.calculators.sesPayback, locale),
+    label: t.columns.calculatorLink,
+    description: t.columns.calculatorDescription,
+  };
   const section = (anchor: string, label: string): NavLink => ({
     href: sectionHref(anchor, locale),
     label,
@@ -125,7 +130,10 @@ export function getNavItems(locale: Locale): NavItem[] {
     {
       label: t.nav.solutions,
       columns: [
-        { title: t.columns.solar, items: [serviceLink("turnkeySes")] },
+        {
+          title: t.columns.solar,
+          items: [serviceLink("turnkeySes"), paybackCalculatorLink],
+        },
         { title: t.columns.industry, items: [serviceLink("hotelSes")] },
       ],
     },

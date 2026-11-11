@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-11 — Посилання на калькулятор у меню й футері
+- **Агент:** Codex
+- **Гілка:** feature/calculator-navigation (статус: у роботі)
+- **Що зроблено:** додано локалізоване посилання на калькулятор окупності у випадаюче меню «Рішення» та до розділів сайту у футері.
+- **Файли:** `src/components/layout/header/header-data.ts`, `src/content/navigation.ts`, `messages/{uk,en}.json`, `docs/ai/{CONTEXT,CHANGELOG}.md`
+- **Нотатки / що далі:** посилання використовують локалізований маршрут `/kalkulyator/okupnist-ses/` та `/en/kalkulyator/okupnist-ses/`.
+
 ## 2026-11-11 — Калькулятор окупності СЕС
 - **Агент:** Codex
 - **Гілка:** feature/ses-payback-calculator (статус: змерджено в develop)
