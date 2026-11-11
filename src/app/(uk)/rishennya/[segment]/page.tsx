@@ -12,12 +12,12 @@ export function generateStaticParams() {
   return solutionPages.map((page) => ({ segment: page.slug }));
 }
 
-export async function generateMetadata({ params }: PageProps<"/ses/[segment]">): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps<"/rishennya/[segment]">): Promise<Metadata> {
   const page = solutionPageBySlug((await params).segment);
   return page ? nicheMetadata(page, "uk") : {};
 }
 
-export default async function NicheRoute({ params }: PageProps<"/ses/[segment]">) {
+export default async function NicheRoute({ params }: PageProps<"/rishennya/[segment]">) {
   setRequestLocale("uk");
   const page = solutionPageBySlug((await params).segment);
   if (!page) notFound();

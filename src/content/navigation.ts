@@ -101,7 +101,7 @@ function sesCalculatorNavigation(locale: Locale): NavEntry[] {
   ];
 }
 
-/** Niche solar pages (/ses/{slug}/): the same sections for every niche. */
+/** Niche solar pages (/rishennya/{slug}/): the same sections for every niche. */
 function nicheNavigation(path: string, locale: Locale): NavEntry[] {
   const href = (anchor: string) => `${localizePath(path, locale)}#${anchor}`;
   return [
@@ -116,8 +116,8 @@ function nicheNavigation(path: string, locale: Locale): NavEntry[] {
 }
 
 export const pageNavigation: Record<string, NavEntry[]> = {
-  [routes.sesNiche.hotel]: nicheNavigation(routes.sesNiche.hotel, "uk"),
-  [localizePath(routes.sesNiche.hotel, "en")]: nicheNavigation(routes.sesNiche.hotel, "en"),
+  [routes.solutions.hotel]: nicheNavigation(routes.solutions.hotel, "uk"),
+  [localizePath(routes.solutions.hotel, "en")]: nicheNavigation(routes.solutions.hotel, "en"),
   [routes.home]: homeNavigation("uk"),
   [localizePath(routes.home, "en")]: homeNavigation("en"),
   [routes.services.turnkeySes]: sesNavigation("uk"),

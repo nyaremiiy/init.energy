@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-11 — Сторінка готелю на старій адресі /rishennya/ses-dlya-gotelyu/
+- **Агент:** Claude Code
+- **Гілка:** fix/hotel-page-url (статус: змерджено в develop)
+- **Що зроблено:** за рішенням власника сторінка «СЕС для готелю» лишається на адресі з init.energy: `/rishennya/ses-dlya-gotelyu/` і `/en/rishennya/ses-dlya-gotelyu/`. Маршрут `ses/[segment]` перейменовано на `rishennya/[segment]`, slug — `ses-dlya-gotelyu`, ключ `routes.sesNiche` → `routes.solutions`. Редирект на `/ses/dlya-gotelyu/` прибрано (адреса не виходила в production). Canonical, hreflang, sitemap, крихти, посилання з `/cec/`, меню й BESS ведуть на нову адресу.
+- **Файли:** src/app/{(uk),en}/rishennya/[segment]/page.tsx (перенесено з ses/[segment]), src/components/pages/niche-page.tsx, src/components/sections/ses/ses-segments.tsx, src/content/{routes,solutions,navigation,services,product-pages}.ts, src/i18n/config.ts, src/app/sitemap.ts, next.config.ts, docs/ai/{CONTEXT,CHANGELOG}.md
+- **Нотатки / що далі:** lint і build проходять, сторінка статична. Перевірено на сервері: 200 для обох мов, canonical і sitemap з новою адресою.
+
 ## 2026-11-11 — Сторінка «СЕС для готелю» і спільний PageHero
 - **Агент:** Claude Code
 - **Гілка:** feature/ses-hotel-page (статус: змерджено в develop)

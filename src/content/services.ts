@@ -28,7 +28,7 @@ export const services: Record<ServiceId, Service> = {
       uk: "СЕС для готелю та відпочинкового комплексу",
       en: "Solar for hotels and resorts",
     },
-    href: routes.sesNiche.hotel,
+    href: routes.solutions.hotel,
     summary: {
       uk: "Енергонезалежність для готелів і баз відпочинку",
       en: "Energy independence for hotels and holiday resorts",

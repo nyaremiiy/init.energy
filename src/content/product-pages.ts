@@ -404,7 +404,7 @@ const standaloneProductPages: ProductPage[] = [
             },
             {
               label: { uk: "СЕС для готелю", en: "Solar for hotels" },
-              href: routes.sesNiche.hotel,
+              href: routes.solutions.hotel,
             },
           ],
         },
