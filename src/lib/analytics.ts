@@ -3,15 +3,12 @@ type DataLayerEvent = { event: string } & Record<string, unknown>;
 declare global {
   interface Window {
     dataLayer?: DataLayerEvent[];
-    /** Set by the cookie consent banner once the visitor accepts analytics. */
-    initConsent?: { analytics?: boolean };
+    /** Set by the consent head script and ConsentProvider (lib/consent). */
+    initConsent?: { analytics?: boolean; marketing?: boolean };
   }
 }
 
-/**
- * TODO(integration): there is no cookie consent banner yet, so this returns
- * false and no events are sent. Wire it to the consent manager when it exists.
- */
+/** True once the visitor allowed analytics cookies (cookie banner / settings). */
 export function hasAnalyticsConsent(): boolean {
   return (
     typeof window !== "undefined" && window.initConsent?.analytics === true

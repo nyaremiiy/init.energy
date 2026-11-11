@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Montserrat } from "next/font/google";
 
+import { consentHeadScript } from "@/lib/consent/consent";
 import { siteUrl } from "@/lib/seo/metadata";
 
 import "./globals.css";
@@ -47,6 +48,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="uk"
       className={`${inter.variable} ${montserrat.variable} h-full font-sans`}
     >
+      <head>
+        {/* Consent Mode v2 defaults (all denied) before any tag; see lib/consent. */}
+        <script id="consent-default" dangerouslySetInnerHTML={{ __html: consentHeadScript }} />
+      </head>
       <body className="relative flex min-h-full flex-col">{children}</body>
     </html>
   );

@@ -15,6 +15,26 @@
 
 ---
 
+## 2026-11-11 — Банер згоди на cookie, теги лише після згоди, політика cookie
+- **Агент:** Claude Code
+- **Гілка:** feature/cookie-consent (статус: змерджено в develop)
+- **Що зроблено:**
+  - Банер згоди за макетом власника. Десктоп: скляна плаваюча картка внизу; телефон: картка на всю ширину з безпечною зоною знизу. Налаштування: на десктопі вікно над затемненням, на телефоні нижня шторка. Три категорії з перемикачами `role="switch"`: «Необхідні» (завжди активні), «Аналітичні», «Маркетингові». «Відхилити» і «Прийняти всі» однакові, хрестика на банері немає. Банер з’являється через ~0,8 с після гідратації (не LCP, без CLS) і не перехоплює фокус. Вікно утримує фокус, Esc або клік по фону закривають його, фокус повертається.
+  - `lib/consent/`: cookie `init_consent` (версія, 12 міс., резервна копія в localStorage), `ConsentProvider`, Consent Mode v2: за замовчуванням denied (інлайн-скрипт у `<head>`), потім update. Події `consent_default` / `consent_update`, `consent:change`. При відкликанні видаляються `_ga*`, `_gid`, `_gcl_*`, `_fbp`, `_ttp`.
+  - `ConsentScripts`: GTM, GA4, Google Ads, Meta Pixel, TikTok Pixel — лише для дозволених категорій і лише якщо задано `NEXT_PUBLIC_*` ID. Досі тегів у коді не було.
+  - UTM і click ID для заявки тепер не губляться між сторінками: sessionStorage, а cookie лише з маркетинговою згодою (`lib/consent/tracking.ts`).
+  - Нова сторінка «Політика cookie» `/polityka-cookie/` і `/en/polityka-cookie/` (таблиця cookie з `content/cookies.ts`, як змінити згоду, контакт). Додано в sitemap і hreflang, прибрано з «в розробці». Посилання «Налаштування cookie» у футері.
+  - Токени `--shadow-glass` і утиліта `bg-glass` (лише для плаваючих скляних елементів), утиліта `pb-safe`.
+- **Файли:** src/lib/consent/{consent.ts,tracking.ts,ConsentProvider.tsx}, src/components/consent/{CookieBanner,ConsentScripts,CookieSettingsLink}.tsx, src/components/pages/cookie-policy-page.tsx, src/app/{(uk),en}/polityka-cookie/page.tsx, src/app/layout.tsx, src/app/globals.css, src/app/sitemap.ts, src/components/layout/{site-chrome.tsx,footer/footer.tsx}, src/components/forms/LeadForm.tsx, src/lib/analytics.ts, src/content/{cookies,routes}.ts, src/i18n/config.ts, messages/{uk,en}.json, README.md, docs/ai/{CONTEXT,CHANGELOG}.md
+- **Нотатки / що далі:**
+  - Перевірено на продакшн-збірці з тестовими ID усіх п’яти тегів (через DevTools Protocol). До вибору й після «Відхилити» немає жодного запиту до googletagmanager / google-analytics / facebook.net / tiktok, Consent Mode = denied. Після «Прийняти всі» теги завантажились, Consent Mode = granted, подія `consent_update:accept_all`. Посилання у футері відкриває збережений стан; фокус утримується (12×Tab), Esc закриває й повертає фокус. Знімки 1440 / 820 / 360 px, горизонтального скролу немає.
+  - Відхилення від брифу:
+    - EN-адреса політики — `/en/polityka-cookie/`, бо всі EN-сторінки повторюють український slug;
+    - вікно налаштувань 704 px замість 640, бо інакше кнопки не вміщаються в рядок;
+    - розкладка «в один рядок» з `lg`, на планшеті кнопки під текстом;
+    - шрифт Montserrat замість Onest, бо Onest на сайті немає.
+  - TODO(content): юридична перевірка тексту політики (зокрема про UTM/click ID). Сторінки «Політика конфіденційності» досі немає, а форма заявки на неї посилається. Lighthouse не запускався: банер `fixed` і з’являється після гідратації, тому CLS і LCP не змінюються за конструкцією.
+
 ## 2026-11-11 — Лічильник відвідувачів зі щоденним звітом о 03:00
 - **Агент:** Claude Code
 - **Гілка:** feature/visit-counter (статус: змерджено в develop)

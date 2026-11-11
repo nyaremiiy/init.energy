@@ -53,6 +53,8 @@
   --shadow-soft: 0 14px 36px -14px rgb(0 2 23 / 26%);
   /* Lighter shadow for cards only (hero and mega menu keep shadow-soft). */
   --shadow-card: 0 8px 22px -14px rgb(0 2 23 / 18%);
+  /* Floating glass cards only (cookie banner and dialog), with bg-glass. */
+  --shadow-glass: 0 24px 64px -24px rgb(0 2 23 / 32%), 0 2px 10px rgb(0 2 23 / 6%);
 
   /* Form controls. */
   --radius-field: 14px;
@@ -344,4 +346,17 @@ button:not(:disabled) {
     color-mix(in srgb, var(--color-accent) 22%, transparent) 0%,
     transparent 60%
   );
+}
+
+/* Floating glass card (cookie banner): white 92% + blur, thin light border. Use with shadow-glass. */
+@utility bg-glass {
+  background-color: rgb(255 255 255 / 92%);
+  border: 1px solid rgb(255 255 255 / 70%);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+}
+
+/* Bottom padding for the home-indicator area of phones (fixed bottom UI). */
+@utility pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
 }
