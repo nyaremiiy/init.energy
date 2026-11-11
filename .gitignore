@@ -23,6 +23,8 @@
 
 # local lead storage (contains personal data)
 /storage/leads.jsonl
+# visit counter: raw events and daily reports
+/storage/visits/
 
 # misc
 .DS_Store
