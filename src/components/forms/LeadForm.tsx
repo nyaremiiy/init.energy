@@ -22,6 +22,7 @@ import {
 } from "@/lib/calculator-bridge";
 import { validateLeadForm, type LeadFieldErrors } from "@/lib/lead-form-schema";
 import { trackEvent } from "@/lib/analytics";
+import { storedTracking, trackingKeys } from "@/lib/consent/tracking";
 import { useLocale, useMessages } from "@/i18n/client";
 
 export type LeadObjectType = "apartment" | "house" | "business" | "hotel" | "infrastructure" | "other";
@@ -45,17 +46,6 @@ const defaultObjectTypes: LeadObjectType[] = [
   "business",
   "other",
 ];
-
-const trackingKeys = [
-  "utm_source",
-  "utm_medium",
-  "utm_campaign",
-  "utm_term",
-  "utm_content",
-  "gclid",
-  "fbclid",
-  "ttclid",
-] as const;
 
 /** Order used to move focus to the first invalid field. */
 const fieldOrder = ["name", "phone", "consent"] as const;
@@ -138,8 +128,10 @@ export function LeadForm({
     const url = new URL(window.location.href);
 
     formData.set("pageUrl", url.href);
+    // UTM / click IDs: this URL, the landing page of the session, or the consented cookie.
+    const tracking = storedTracking();
     trackingKeys.forEach((key) => {
-      formData.set(key, url.searchParams.get(key) ?? "");
+      formData.set(key, tracking[key] ?? "");
     });
 
     const clientResult = validateLeadForm(formData, t);

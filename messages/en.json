@@ -709,5 +709,62 @@
       "ses": "Solar power plants",
       "business": "For business"
     }
+  },
+  "cookies": {
+    "regionLabel": "Cookie settings",
+    "skipLink": "Go to cookie settings",
+    "banner": {
+      "title": "We value your privacy",
+      "text": "We use necessary cookies to make the site work. Analytics and marketing cookies are used only with your consent — they help us improve the site and show relevant ads.",
+      "textShort": "Necessary cookies keep the site working. Analytics and ads only with your consent.",
+      "more": "Learn more",
+      "settings": "Settings",
+      "reject": "Reject",
+      "acceptAll": "Accept all"
+    },
+    "settings": {
+      "title": "Cookie settings",
+      "subtitle": "Choose what we may turn on. You can change this any time in the footer.",
+      "close": "Close",
+      "rejectAll": "Reject all",
+      "save": "Save choices",
+      "acceptAll": "Accept all",
+      "alwaysActive": "Always active"
+    },
+    "categories": {
+      "necessary": {
+        "title": "Necessary",
+        "text": "Site operation, language, form security and remembering your cookie choice."
+      },
+      "analytics": {
+        "title": "Analytics",
+        "text": "Anonymous visit statistics (Google Analytics) to understand which pages are useful."
+      },
+      "marketing": {
+        "title": "Marketing",
+        "text": "Ad pixels (Google Ads, Meta, TikTok) to show relevant ads and measure requests."
+      }
+    },
+    "policyLink": "Cookie policy",
+    "footerLink": "Cookie settings",
+    "policy": {
+      "metaTitle": "Cookie policy — INIT ENERGY",
+      "metaDescription": "Which cookies the INIT ENERGY website uses — necessary, analytics and marketing — what they are for, how long they last and how to change your consent.",
+      "eyebrow": "Legal",
+      "home": "Home",
+      "table": {
+        "caption": "Cookies used on this site",
+        "name": "Name",
+        "provider": "Provider",
+        "category": "Category",
+        "purpose": "Purpose",
+        "lifetime": "Lifetime"
+      },
+      "changeTitle": "How to change your consent",
+      "changeText": "Open the settings and turn categories on or off. The «Cookie settings» link is also at the bottom of every page.",
+      "contactTitle": "Contact",
+      "contactText": "Send questions about cookies and personal data to",
+      "updated": "Updated: {date}"
+    }
   }
 }

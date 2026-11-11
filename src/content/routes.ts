@@ -11,8 +11,8 @@ export const slugs = {
   projects: "proekty",
   // TODO(content): privacy policy page is planned, not built yet.
   privacy: "polityka-konfidentsiinosti",
-  // TODO(content): cookie policy and terms pages are planned, not built yet.
   cookies: "polityka-cookie",
+  // TODO(content): terms page is planned, not built yet.
   terms: "umovy-vykorystannya",
   products: {
     svit600: "svit-600",
@@ -141,7 +141,6 @@ export const plannedPaths: readonly string[] = [
   routes.about,
   routes.projects,
   routes.privacy,
-  routes.cookies,
   routes.terms,
   routes.backup.apartment,
   routes.backup.house,

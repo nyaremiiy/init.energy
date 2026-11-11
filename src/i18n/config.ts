@@ -28,6 +28,7 @@ export const localizedPaths = [
   "/bess/",
   "/kalkulyator/okupnist-ses/",
   "/rishennya/ses-dlya-gotelyu/",
+  "/polityka-cookie/",
 ] as const;
 
 export function hasEnglish(path: string): boolean {

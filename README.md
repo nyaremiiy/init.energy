@@ -29,6 +29,7 @@
 | `LEAD_STORAGE_FILE` | Шлях до файлу заявок (за замовчуванням `storage/leads.jsonl`). Каталог має бути доступний для запису й не очищатися під час деплою. |
 | `GOOGLE_SITE_VERIFICATION` | Код підтвердження Google Search Console (мета-тег `google-site-verification`). |
 | `BING_SITE_VERIFICATION` | Код підтвердження Bing Webmaster Tools (`msvalidate.01`). |
+| `NEXT_PUBLIC_GTM_ID`, `NEXT_PUBLIC_GA4_ID`, `NEXT_PUBLIC_GADS_ID`, `NEXT_PUBLIC_META_PIXEL_ID`, `NEXT_PUBLIC_TIKTOK_PIXEL_ID` | ID тегів аналітики й реклами. Завантажуються лише після згоди на cookie (аналітика → GA4, маркетинг → Google Ads, Meta, TikTok; GTM — після будь-якої згоди). Порожня змінна — тег не підключається. Вбудовуються під час `npm run build`, тож після зміни потрібна перезбірка. |
 | `VISITS_DIR` | Папка лічильника відвідувачів (за замовчуванням `storage/visits`). Має бути доступна для запису й не очищатися під час деплою. |
 
 ## Деплой
@@ -44,6 +45,10 @@
 1. Задати змінні середовища (див. вище).
 2. Переконатися, що `storage/` (або `LEAD_STORAGE_FILE`) доступний для запису. Заявки поки зберігаються у файл, CRM ще не підключена.
 3. Після публікації: додати сайт у Google Search Console і Bing Webmaster, надіслати `https://init.energy/sitemap.xml`, перевірити сторінки в Rich Results Test.
+
+## Згода на cookie
+
+Банер згоди й налаштування — `src/components/consent/`, логіка — `src/lib/consent/`. До рішення відвідувача сайт не робить жодного запиту до Google, Meta чи TikTok (Google Consent Mode v2 стоїть у «denied»). Змінити вибір можна будь-коли через «Налаштування cookie» у футері. Список cookie на сторінці «Політика cookie» — `src/content/cookies.ts`. Якщо додаєте новий тег або категорію, оновіть цей список і збільште `CONSENT_VERSION`, щоб банер з’явився знову.
 
 ## Лічильник відвідувачів
 

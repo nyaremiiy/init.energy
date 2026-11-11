@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { CookieSettingsLink } from "@/components/consent/CookieSettingsLink";
 import { Container } from "@/components/layout/container";
 import { LanguageSwitcher } from "@/components/layout/header/language-switcher";
 import { Eyebrow } from "@/components/ui/eyebrow";
@@ -9,6 +10,7 @@ import { Reveal } from "@/components/ui/reveal";
 import { SocialLinks } from "@/components/ui/social-links";
 import { getSiteSections } from "@/content/navigation";
 import { routes } from "@/content/routes";
+import { localizePath } from "@/i18n/config";
 import { getLocale, getMessages } from "@/i18n/server";
 import { format } from "@/lib/messages";
 
@@ -72,9 +74,9 @@ export function Footer() {
   );
 
   const legalLinks = [
-    { href: routes.privacy, label: t.legal.privacy },
-    { href: routes.cookies, label: t.legal.cookies },
-    { href: routes.terms, label: t.legal.terms },
+    { href: localizePath(routes.privacy, locale), label: t.legal.privacy },
+    { href: localizePath(routes.cookies, locale), label: t.legal.cookies },
+    { href: localizePath(routes.terms, locale), label: t.legal.terms },
   ];
 
   return (
@@ -108,6 +110,9 @@ export function Footer() {
                     </Link>
                   </li>
                 ))}
+                <li>
+                  <CookieSettingsLink />
+                </li>
               </ul>
             </nav>
           </div>
