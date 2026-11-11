@@ -15,6 +15,16 @@
 
 ---
 
+## 2026-11-11 — Фото hero і меню в шапці на сторінці готелю
+- **Агент:** Claude Code
+- **Гілка:** feature/hotel-hero-photo (статус: змерджено в develop)
+- **Що зроблено:**
+  - У hero `/rishennya/ses-dlya-gotelyu/` замість заглушки — фото власника (`public/images/cec/rishennya/hotel/01-{750,1280,1920,2560}.avif`, alt uk/en). Розмітку фото hero винесено в спільний `HeroPicture`; його використовують і слайдер головної, і нова медіа `picture` у `PageHero` (`fetchPriority=high` для LCP).
+  - Прев’ю для соцмереж uk/en перероблено на це фото.
+  - У шапці сторінки готелю (десктоп і мобільне меню) з’явились пункти розділів: «СЕС у цифрах», «Яка СЕС потрібна», «Робота під час відключень», «Питання й відповіді». Механізм узагальнено: `headerSectionKeys` у `header-data.ts` (шлях → розділи), `/cec/` працює як раніше.
+- **Файли:** src/components/sections/hero/hero-picture.tsx (нове), src/components/sections/{PageHero.tsx,home/hero-media-slider.tsx,home/hero-slides.ts}, src/components/pages/niche-page.tsx, src/components/layout/header/{header-data.ts,desktop-nav.tsx,mobile-menu.tsx}, src/content/solutions.ts, public/images/cec/rishennya/hotel/*, public/images/og/ses-dlya-gotelyu{,-en}.jpg, docs/ai/{CONTEXT,CHANGELOG}.md
+- **Нотатки / що далі:** перевірено на dev-сервері (1440 і 390 px), головна без змін. Фото в блоці «Що входить у СЕС» — досі заглушка (TODO(content)).
+
 ## 2026-11-11 — Проєкти на сторінці готелю без порожнього місця
 - **Агент:** Claude Code
 - **Гілка:** fix/niche-projects-fill (статус: змерджено в develop)

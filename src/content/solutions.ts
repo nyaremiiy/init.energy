@@ -188,6 +188,8 @@ export type SolutionPage = {
     lead: Localized;
     primaryCta: Localized;
     secondaryCta: Localized;
+    /** Responsive hero photo (AVIF 750 / 1280 / 1920 / 2560); without it a placeholder is shown. */
+    image?: { mobile: string; tablet: string; laptop: string; desktop: string; alt: Localized };
     mediaLabel: Localized;
   };
   facts: {
@@ -256,6 +258,16 @@ export const solutionPages: SolutionPage[] = [
       },
       primaryCta: { uk: "Розрахувати СЕС для готелю", en: "Size a plant for your hotel" },
       secondaryCta: { uk: "Залишити заявку", en: "Send a request" },
+      image: {
+        mobile: "/images/cec/rishennya/hotel/01-750.avif",
+        tablet: "/images/cec/rishennya/hotel/01-1280.avif",
+        laptop: "/images/cec/rishennya/hotel/01-1920.avif",
+        desktop: "/images/cec/rishennya/hotel/01-2560.avif",
+        alt: {
+          uk: "Гірський готель із сонячними панелями на даху",
+          en: "Mountain hotel with solar panels on the roof",
+        },
+      },
       mediaLabel: { uk: "Фото СЕС на даху готелю — буде додано", en: "Photo of a hotel rooftop plant — coming soon" },
     },
     facts: {
