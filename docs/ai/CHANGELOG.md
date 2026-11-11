@@ -17,7 +17,7 @@
 
 ## 2026-11-11 — Режим технічних робіт
 - **Агент:** Codex
-- **Гілка:** feature/maintenance-mode (статус: в роботі)
+- **Гілка:** feature/maintenance-mode (статус: змерджено в develop)
 - **Що зроблено:** додано глобальний перемикач доступності сайту й окремий локалізований екран технічних робіт з ілюстрацією. Увімкнений режим переписує всі публічні сторінки на екран робіт, віддає HTTP 503 і `Retry-After: 3600`, тому пошукові системи не вважають сторінки зниклими.
 - **Файли:** `src/config/site-status.ts`, `src/proxy.ts`, `src/app/maintenance/page.tsx`, `src/components/pages/maintenance-page.tsx`, `messages/{uk,en}.json`, `src/content/routes.ts`, `docs/ai/{CONTEXT,CHANGELOG}.md`
 - **Нотатки / що далі:** щоб увімкнути сайт на технічні роботи, змінити `maintenance.enabled` на `true` у `src/config/site-status.ts`, після чого зібрати й задеплоїти застосунок; для повернення сайту — `false` і повторний деплой.
