@@ -53,6 +53,34 @@ const backupPowerHeroImage: HeroImage = {
   type: "image/avif",
 };
 
+/** Dedicated responsive media for the solar plant hub (/cec/). */
+const sesOverviewHeroImage: HeroImage = {
+  desktop: "/images/cec/hero/01-2560.avif",
+  fallback: "/images/cec/hero/01-2560.avif",
+  laptop: "/images/cec/hero/01-1920.avif",
+  mobile: "/images/cec/hero/01-750.avif",
+  tablet: "/images/cec/hero/01-1280.avif",
+  type: "image/avif",
+};
+
+const sesStorageHeroImage: HeroImage = {
+  desktop: "/images/cec/hero/02-2560.avif",
+  fallback: "/images/cec/hero/02-2560.webp",
+  laptop: "/images/cec/hero/02-1920.avif",
+  mobile: "/images/cec/hero/02-750.avif",
+  tablet: "/images/cec/hero/02-1280.avif",
+  type: "image/avif",
+};
+
+const sesHybridHeroImage: HeroImage = {
+  desktop: "/images/cec/hero/03-2560.avif",
+  fallback: "/images/cec/hero/03-2560.avif",
+  laptop: "/images/cec/hero/03-1920.avif",
+  mobile: "/images/cec/hero/03-750.avif",
+  tablet: "/images/cec/hero/03-1280.avif",
+  type: "image/avif",
+};
+
 type SlideSource = {
   id: string;
   image: HeroImage;
@@ -161,7 +189,7 @@ const slides: SlideSource[] = [
 const sesSlides: SlideSource[] = [
   {
     id: "ses-title",
-    image: solarHeroImage,
+    image: sesOverviewHeroImage,
     label: {
       uk: "INIT ENERGY — сонячні електростанції",
       en: "INIT ENERGY — solar power plants",
@@ -190,7 +218,7 @@ const sesSlides: SlideSource[] = [
   },
   {
     id: "ses-storage",
-    image: solarHeroImage,
+    image: sesStorageHeroImage,
     label: { uk: "Накопичувачі SVIT", en: "SVIT batteries" },
     heading: {
       uk: ["Вдень — сонце,", "вночі — батарея"],
@@ -216,7 +244,7 @@ const sesSlides: SlideSource[] = [
   },
   {
     id: "ses-hybrid",
-    image: backupPowerHeroImage,
+    image: sesHybridHeroImage,
     label: { uk: "Гібридна СЕС", en: "Hybrid plant" },
     heading: {
       uk: ["Незалежність", "від відключень"],
