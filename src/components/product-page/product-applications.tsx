@@ -74,7 +74,7 @@ export function ProductApplications({
                   <ul className={`divide-y ${item.tone === "sky" ? "divide-line border-line" : "divide-white/16 border-white/16"} border-y`}>
                     {item.sectors?.map((sector) => <li key={sector.en} className="py-3 text-base">{sector[locale]}</li>)}
                   </ul>
-                  <div className="mt-auto flex flex-wrap gap-3">{item.links.map((link) => <ArrowLink key={link.label.en} href={localizePath(link.href, locale)} tone={item.tone === "sky" ? "dark" : "light"}>{link.label[locale]}</ArrowLink>)}</div>
+                  <div className="mt-auto flex flex-wrap gap-3">{item.links.map((link) => <ArrowLink key={link.label.en} href={localizePath(link.href, locale)} tone={item.tone === "sky" ? "light" : "dark"}>{link.label[locale]}</ArrowLink>)}</div>
                 </article>
               ) : (
               <SegmentCard
