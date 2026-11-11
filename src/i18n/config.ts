@@ -25,7 +25,6 @@ export const localizedPaths = [
   "/svit-home/",
   "/svit-plus-16000/",
   "/cec/",
-  "/svit-plus-16000/",
   "/bess/",
 ] as const;
 

@@ -1,13 +1,12 @@
 import { BatteryCharging, BriefcaseBusiness, Factory, House, Luggage, Store, Sun, TentTree, Unplug } from "lucide-react";
 
 import { Container } from "@/components/layout/container";
-import { ArrowLink } from "@/components/ui/arrow-link";
 import { CardLabel } from "@/components/ui/card-label";
 import { Heading } from "@/components/ui/heading";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
 import { SectionWatermark } from "@/components/ui/section-watermark";
-import { SegmentCard } from "@/components/ui/segment-card";
+import { SegmentCard, SegmentLinks } from "@/components/ui/segment-card";
 import type { ApplicationIcon, ProductPage } from "@/content/product-pages";
 import { anchors } from "@/content/routes";
 import type { Locale } from "@/lib/format";
@@ -74,7 +73,14 @@ export function ProductApplications({
                   <ul className={`divide-y ${item.tone === "sky" ? "divide-line border-line" : "divide-white/16 border-white/16"} border-y`}>
                     {item.sectors?.map((sector) => <li key={sector.en} className="py-3 text-base">{sector[locale]}</li>)}
                   </ul>
-                  <div className="mt-auto flex flex-wrap gap-3">{item.links.map((link) => <ArrowLink key={link.label.en} href={localizePath(link.href, locale)} tone={item.tone === "sky" ? "light" : "dark"}>{link.label[locale]}</ArrowLink>)}</div>
+                  <SegmentLinks
+                    links={item.links.map((link) => ({
+                      label: link.label[locale],
+                      href: localizePath(link.href, locale),
+                    }))}
+                    navLabel={format(t.navLabel, { segment: item.tag[locale] })}
+                    tone={tones[item.tone]}
+                  />
                 </article>
               ) : (
               <SegmentCard

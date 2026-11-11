@@ -1,3 +1,4 @@
+import { HardHat, KeyRound, ShieldCheck, type LucideIcon } from "lucide-react";
 import Image from "next/image";
 
 import { Container } from "@/components/layout/container";
@@ -8,6 +9,14 @@ import { Panel } from "@/components/ui/panel";
 import { SectionWatermark } from "@/components/ui/section-watermark";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
+import { StepMarker } from "@/components/ui/step-marker";
+
+/** Icons for the argument ids in content/company.ts (trust.arguments). */
+const argumentIcons: Record<string, LucideIcon> = {
+  team: HardHat,
+  turnkey: KeyRound,
+  warranty: ShieldCheck,
+};
 
 type TrustBlockProps = {
   /** Optional anchor id for the section (e.g. "about-us" on the home page). */
@@ -95,12 +104,11 @@ export function TrustBlock({
                   distance={16}
                   className="flex h-full flex-col gap-3"
                 >
-                  <span
-                    aria-hidden
-                    className="text-sm text-white/75 tabular-nums"
-                  >
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
+                  <StepMarker
+                    index={index}
+                    icon={argumentIcons[item.id] ?? ShieldCheck}
+                    tone="dark"
+                  />
                   <Heading as="h3" size="h3" className="text-white">
                     {item.title}
                   </Heading>

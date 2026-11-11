@@ -6,8 +6,7 @@ import { MediaPlaceholder } from "@/components/ui/media-placeholder";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
 import { products } from "@/content/products";
-import { anchors } from "@/content/routes";
-import { segmentPages } from "@/content/ses";
+import { anchors, routes } from "@/content/routes";
 import { segmentIcons } from "@/content/segments";
 import { solutions } from "@/content/solutions";
 import { localizePath } from "@/i18n/config";
@@ -21,8 +20,8 @@ export function SesSegments() {
   const locale = getLocale();
   const t = getMessages().ses;
   const cards = [
-    { solution: solutions.find((item) => item.id === "house"), href: segmentPages.house },
-    { solution: solutions.find((item) => item.id === "business"), href: segmentPages.business },
+    { solution: solutions.find((item) => item.id === "house"), href: routes.services.house },
+    { solution: solutions.find((item) => item.id === "business"), href: routes.services.business },
   ];
 
   return (

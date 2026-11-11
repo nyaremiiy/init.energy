@@ -80,7 +80,7 @@ export function SolutionsBySegment() {
 
           <Reveal>
             <Link
-              href={routes.services.solar}
+              href={routes.services.turnkeySes}
               className="group grid grid-cols-1 items-center gap-4 rounded-3xl bg-surface p-card-sm text-ink transition duration-200 ease-tech focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink motion-safe:hover:-translate-y-0.5 sm:grid-cols-12 lg:p-card"
             >
               <span className="flex size-12 items-center justify-center rounded-full bg-white sm:col-span-1">
