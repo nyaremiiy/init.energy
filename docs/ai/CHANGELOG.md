@@ -15,6 +15,40 @@
 
 ---
 
+## 2026-11-11 — Сторінка калькулятора окупності СЕС за макетом
+- **Агент:** Claude Code
+- **Гілка:** feature/ses-payback-polish (статус: змерджено в develop)
+- **Що зроблено:**
+  - Сторінку `/kalkulyator/okupnist-ses/` (uk, en) переверстано за макетом власника:
+    - hero з крихтами, H1, вкладками «Сонячна станція й окупність» / «Автономність під час відключень» і 4 плитками фактів;
+    - калькулятор заходить у низ hero;
+    - секції «Скільки енергії дасть станція по місяцях» (графік, надлишок і дефіцит), «Як ми рахуємо» (темна панель із формулами, джерелами й прикладом розрахунку) і нова «Типові СЕС за потужністю»;
+    - FAQ і стандартна `LeadSection`.
+  - Параметри в URL (`?object=…&kwh=…&loads=…`) прибрано:
+    - вони дублювали значення за замовчуванням;
+    - кожна зміна повзунка робила запит до сервера;
+    - сторінка була динамічною і мала безліч варіантів адреси.
+    Тепер сторінка статична, стан калькулятора живе в клієнтському контексті.
+  - Стиль сайту:
+    - поля винесено в спільні `RangeField`, `Group`, `SelectField`, `NumberField`, а частини результату — у `Stat`, `ResultLink`, `ProductLink`; їх використовують обидва калькулятори;
+    - замість власних класів — `PillRadio`, `chipClasses`, `inputClasses`, `.range-input`, `Panel`, `SectionHeader`, токени відступів;
+    - числа форматуються через `formatNumber`;
+    - прибрано фіксовану мобільну плашку, яка перекривала кнопку дзвінка, і дублі «Дані оновлено» та підпису графіка.
+  - SEO і GEO:
+    - один H1 і логічні H2, `<main>`;
+    - крихти JSON-LD у 2 рівні замість 3 з дублем URL;
+    - WebApplication із `featureList` і `dateModified`;
+    - прев’ю JPEG 1200×630 замість SVG, якого не показують соцмережі;
+    - у HTML є самодостатній приклад розрахунку з числами.
+  - Виправлено регресію з аудиту сайту: `not-found.tsx` читав `headers()`, і через це всі сторінки сайту стали динамічними. Тепер `src/proxy.ts` переписує заплановані адреси на статичну `/v-rozrobtsi/` (404, noindex), а `not-found.tsx` знову статичний. Усі сторінки знову ○/●.
+- **Файли:** src/app/(uk)/kalkulyator/okupnist-ses/page.tsx, src/app/en/kalkulyator/okupnist-ses/page.tsx, src/app/{(uk),en}/v-rozrobtsi/page.tsx, src/app/not-found.tsx, src/proxy.ts, src/components/calculator/{calculator-fields,calculator-result-parts,ses-payback-state,ses-payback-calculator,QuickCalculator}.tsx, src/components/calculator/ses-payback-details.tsx (видалено), src/components/sections/ses-payback/*, src/components/pages/ses-payback-page.tsx, src/content/{routes,navigation,ses-calculator}.ts, src/lib/request-path.ts (видалено), messages/{uk,en}.json, public/images/og/ses-calculator.jpg (нове), public/images/og/ses-calculator.svg (видалено), docs/ai/{CONTEXT,CHANGELOG}.md
+- **Нотатки / що далі:**
+  - lint, test (20) і build проходять. Перевірено в headless Edge на 1440 і 390 px, горизонтального скролу немає. Калькулятор на головній після рефакторингу виглядає як раніше.
+  - TODO(content): власнику підтвердити рівні споживання й накопичувачі в «Типових СЕС» (потужність рахує калькулятор).
+  - «Усі проєкти» веде на /proekty/ (сторінка «в розробці»). Статті з лівої колонки FAQ на макеті ще не створено, тому їх не додано.
+  - Невідомі `/en/…` адреси показують український 404: статичний not-found не знає мови.
+  - Калькулятори дають різний резерв для SVIT HOME: головна ≈ 15 год (частка критичного навантаження), ця сторінка ≈ 16 год (вибрані прилади).
+
 ## 2026-11-11 — Посилання на калькулятор у меню й футері
 - **Агент:** Codex
 - **Гілка:** feature/calculator-navigation (статус: у роботі)

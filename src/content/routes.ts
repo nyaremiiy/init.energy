@@ -68,7 +68,6 @@ export const anchors = {
   sesSteps: "ses-steps",
   sesYield: "ses-yield",
   sesMethod: "ses-method",
-  sesLead: "ses-calculator-lead",
 } as const;
 
 export function toPath(...segments: string[]): string {
@@ -87,6 +86,8 @@ export const routes = {
   privacy: toPath(slugs.privacy),
   cookies: toPath(slugs.cookies),
   terms: toPath(slugs.terms),
+  /** Rewrite target for planned pages (src/proxy.ts); not linked, never indexed. */
+  inProgress: toPath("v-rozrobtsi"),
   products: {
     svit600: toPath(slugs.products.svit600),
     svitPlus5000: toPath(slugs.products.svitPlus5000),

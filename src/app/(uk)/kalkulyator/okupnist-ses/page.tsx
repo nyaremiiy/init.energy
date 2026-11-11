@@ -7,7 +7,8 @@ export function generateMetadata(): Metadata {
   return sesPaybackMetadata("uk");
 }
 
-export default async function SesPaybackRoute({ searchParams }: PageProps<"/kalkulyator/okupnist-ses">) {
+/** Static page: the calculator keeps its state on the client, not in the URL. */
+export default function SesPaybackRoute() {
   setRequestLocale("uk");
-  return <SesPaybackPage locale="uk" query={await searchParams} />;
+  return <SesPaybackPage locale="uk" />;
 }

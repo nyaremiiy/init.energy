@@ -1,19 +1,12 @@
 "use client";
 
-import { ArrowUpRight, ChevronDown } from "lucide-react";
-import Link from "next/link";
-import {
-  type CSSProperties,
-  type ReactNode,
-  useId,
-  useRef,
-  useState,
-} from "react";
+import { ArrowUpRight } from "lucide-react";
+import { useRef, useState } from "react";
 
+import { Group, RangeField, SelectField } from "@/components/calculator/calculator-fields";
+import { ResultLink, Stat } from "@/components/calculator/calculator-result-parts";
 import { Button } from "@/components/ui/button";
 import { CardLabel } from "@/components/ui/card-label";
-import { IconButton } from "@/components/ui/icon-button";
-import { inputClasses } from "@/components/ui/input-styles";
 import { PillRadio } from "@/components/ui/pill-radio";
 import {
   allowedGoals,
@@ -50,75 +43,6 @@ import { localizePath } from "@/i18n/config";
 type CalculatorMessages = Messages["calculator"];
 type Units = Messages["units"];
 
-type RangeFieldProps = {
-  label: string;
-  value: number;
-  min: number;
-  max: number;
-  step: number;
-  unit: string;
-  /** Right end label, e.g. «1 200+». */
-  maxLabel: string;
-  hint?: string;
-  onChange: (value: number) => void;
-};
-
-/** Native range input: arrow keys, Home/End and PageUp/PageDown work out of the box. */
-function RangeField({
-  label,
-  value,
-  min,
-  max,
-  step,
-  unit,
-  maxLabel,
-  hint,
-  onChange,
-}: RangeFieldProps) {
-  const locale = useLocale();
-  const id = useId();
-  const fill = ((value - min) / (max - min)) * 100;
-
-  return (
-    <div className="flex flex-col gap-3">
-      <label htmlFor={id} className="text-sm font-medium text-ink">
-        {label}
-      </label>
-      <p aria-hidden className="flex items-baseline gap-2 text-ink">
-        <span className="font-heading text-number-sm font-medium tabular-nums">
-          {formatNumber(value, locale)}
-        </span>
-        <span className="text-sm text-ink/70">{unit}</span>
-      </p>
-      <input
-        id={id}
-        type="range"
-        min={min}
-        max={max}
-        step={step}
-        value={value}
-        aria-valuetext={`${formatNumber(value, locale)} ${unit}`}
-        aria-describedby={hint ? `${id}-hint` : undefined}
-        onChange={(event) => onChange(Number(event.target.value))}
-        className="range-input"
-        style={{ "--fill": `${fill}%` } as CSSProperties}
-      />
-      <div
-        aria-hidden
-        className="flex justify-between text-sm text-ink/70 tabular-nums"
-      >
-        <span>{formatNumber(min, locale)}</span>
-        <span>{maxLabel}</span>
-      </div>
-      {hint ? (
-        <p id={`${id}-hint`} className="text-sm text-ink/70">
-          {hint}
-        </p>
-      ) : null}
-    </div>
-  );
-}
-
 function batteryName(
   rec: Recommendation,
   t: CalculatorMessages,
@@ -152,70 +76,6 @@ function configuration(
   return text.charAt(0).toUpperCase() + text.slice(1);
 }
 
-function ResultLink({
-  href,
-  title,
-  text,
-  kind,
-}: {
-  href: string;
-  title: string;
-  text: string;
-  kind: string;
-}) {
-  return (
-    <Link
-      href={href}
-      className="group flex items-center gap-4 border-t border-white/16 py-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-    >
-      <span className="flex min-w-0 flex-1 flex-col gap-1">
-        <span className="text-base font-medium text-white">{title}</span>
-        <span className="text-sm text-white/75">{text}</span>
-      </span>
-      <span className="text-sm text-white/75">{kind}</span>
-      <IconButton decorative variant="outline-dark" size="sm" />
-    </Link>
-  );
-}
-
-function Stat({ value, label }: { value: string; label: string }) {
-  return (
-    <div className="flex flex-col-reverse gap-1 border-t border-white/16 pt-4">
-      <dt className="text-sm text-white/75">{label}</dt>
-      <dd className="font-heading text-stat-sm font-medium whitespace-nowrap tabular-nums sm:text-stat">
-        {value}
-      </dd>
-    </div>
-  );
-}
-
-function Group({
-  legend,
-  children,
-  hint,
-}: {
-  legend: string;
-  children: ReactNode;
-  hint?: string;
-}) {
-  const hintId = useId();
-
-  return (
-    <fieldset
-      className="m-0 flex min-w-0 flex-col gap-3 border-0 p-0"
-      aria-describedby={hint ? hintId : undefined}
-    >
-      <legend className="mb-3 text-sm font-medium text-ink">{legend}</legend>
-      <div className="flex flex-wrap gap-2">{children}</div>
-      {hint ? (
-        <p id={hintId} className="text-sm text-ink/70">
-          {hint}
-        </p>
-      ) : null}
-    </fieldset>
-  );
-}
-
 export function QuickCalculator() {
   const messages = useMessages();
   const locale = useLocale();
@@ -231,7 +91,6 @@ export function QuickCalculator() {
   const [regionSlug, setRegionSlug] = useState(calculatorDefaults.region);
   const [hours, setHours] = useState(calculatorDefaults.hours);
   const interacted = useRef(false);
-  const regionId = useId();
 
   const range = consumptionRange[segment];
   const region = regions.find((item) => item.slug === regionSlug) ?? regions[0];
@@ -407,36 +266,19 @@ export function QuickCalculator() {
         />
 
         {needSolar ? (
-          <div className="flex flex-col gap-3">
-            <label htmlFor={regionId} className="text-sm font-medium text-ink">
-              {t.region}
-            </label>
-            <div className="relative">
-              <select
-                id={regionId}
-                value={region.slug}
-                aria-describedby={`${regionId}-hint`}
-                onChange={(event) => {
-                  touched({});
-                  setRegionSlug(event.target.value);
-                }}
-                className={`${inputClasses({})} cursor-pointer appearance-none pr-12`}
-              >
-                {regions.map((item) => (
-                  <option key={item.slug} value={item.slug}>
-                    {item.name[locale]}
-                  </option>
-                ))}
-              </select>
-              <ChevronDown
-                aria-hidden
-                className="pointer-events-none absolute top-1/2 right-4 size-5 -translate-y-1/2 text-ink/70"
-              />
-            </div>
-            <p id={`${regionId}-hint`} className="text-sm text-ink/70">
-              {t.regionHint}
-            </p>
-          </div>
+          <SelectField
+            label={t.region}
+            value={region.slug}
+            hint={t.regionHint}
+            options={regions.map((item) => ({
+              value: item.slug,
+              label: item.name[locale],
+            }))}
+            onChange={(value) => {
+              touched({});
+              setRegionSlug(value);
+            }}
+          />
         ) : null}
 
         {needBattery ? (
