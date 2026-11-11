@@ -8,7 +8,8 @@ import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
 import { SectionWatermark } from "@/components/ui/section-watermark";
 import { SegmentCard } from "@/components/ui/segment-card";
-import { anchors, routes, sectionHref } from "@/content/routes";
+import { anchors, routes } from "@/content/routes";
+import { localizePath } from "@/i18n/config";
 import { segmentIcons } from "@/content/segments";
 import {
   getSolutionCapacity,
@@ -40,7 +41,7 @@ export function SolutionsBySegment() {
             titleId={titleId}
             lead={t.lead}
             aside={
-              <ArrowLink href={sectionHref(anchors.contacts, locale)}>
+              <ArrowLink href={localizePath(routes.calculators.sesPayback, locale)}>
                 {t.calculatorLink}
               </ArrowLink>
             }

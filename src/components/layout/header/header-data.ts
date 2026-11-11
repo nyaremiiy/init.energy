@@ -36,7 +36,7 @@ export function getNavCta(locale: Locale) {
   return {
     title: t.title,
     text: t.text,
-    href: sectionHref(anchors.contacts, locale),
+    href: localizePath(routes.calculators.sesPayback, locale),
     label: t.label,
   };
 }

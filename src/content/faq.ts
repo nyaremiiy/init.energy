@@ -7,7 +7,7 @@ export type FaqTopic = "backup" | "solar" | "products" | "warranty";
 /** Pages where an entry is shown; the home page shows all of them. */
 /** Product pages use their slug. */
 export type FaqPage =
-  "home" | "solar" | "backup" | "products" | ProductPageSlug;
+  "home" | "solar" | "backup" | "products" | "calculator" | ProductPageSlug;
 
 export type Faq = {
   id: string;
@@ -31,6 +31,31 @@ export const faqTopics: FaqTopic[] = [
  * (Li-ion in the table, LiFePO₄ in the text).
  */
 export const faqList: Faq[] = [
+  {
+    id: "calculator-accuracy", topic: "solar", pages: ["calculator"],
+    question: { uk: "Наскільки точний розрахунок?", en: "How accurate is this estimate?" },
+    answer: { uk: "Калькулятор дає орієнтир за вашим споживанням, виробітком 1 кВт у вашій області за даними PVGIS і характеристиками SVIT. Точну конфігурацію й кошторис підтверджує фахівець після огляду об’єкта.", en: "The calculator provides an estimate based on your consumption, PVGIS yield for your region and SVIT specifications. A specialist confirms the exact configuration and quote after inspecting the site." },
+  },
+  {
+    id: "calculator-consumption", topic: "solar", pages: ["calculator"],
+    question: { uk: "Що робити, якщо я не знаю свого споживання?", en: "What if I do not know my electricity use?" },
+    answer: { uk: "Подивіться місячне споживання у рахунку за електроенергію або вкажіть суму рахунку — калькулятор перерахує її за тарифом.", en: "Check the monthly usage on your electricity bill or enter the bill amount — the calculator will estimate consumption using your tariff." },
+  },
+  {
+    id: "calculator-winter", topic: "solar", pages: ["calculator"],
+    question: { uk: "Чому взимку станція генерує менше?", en: "Why does a solar plant generate less in winter?" },
+    answer: { uk: "Взимку коротший день і нижче сонце: у грудні станція виробляє приблизно в п’ять разів менше, ніж у червні. Тому потужність підбирають за річним виробітком, а взимку частину енергії дає мережа.", en: "Winter days are shorter and the sun is lower: in December, a plant generates roughly five times less than in June. Capacity is sized by annual yield, while the grid supplies part of the energy in winter." },
+  },
+  {
+    id: "calculator-battery", topic: "solar", pages: ["calculator"],
+    question: { uk: "Чи можна поставити СЕС без накопичувача?", en: "Can I install solar without a battery?" },
+    answer: { uk: "Так. Мережева СЕС працює без батареї, але під час відключень вона вимикається. Щоб мати світло без мережі, потрібна гібридна СЕС з накопичувачем SVIT.", en: "Yes. A grid-tied solar plant can work without a battery, but it shuts down during outages. To keep power when the grid is off, choose a hybrid system with SVIT storage." },
+  },
+  {
+    id: "calculator-data", topic: "solar", pages: ["calculator"],
+    question: { uk: "Що відбувається з даними після розрахунку?", en: "What happens to my data after the calculation?" },
+    answer: { uk: "Розрахунок виконується у вашому браузері. Параметри передаються нам лише разом із заявкою, щоб фахівець не перепитував їх повторно.", en: "The calculation runs in your browser. Your settings are sent to us only with a request, so a specialist does not need to ask for them again." },
+  },
   {
     id: "svit-600-runtime",
     topic: "products",

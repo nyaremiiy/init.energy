@@ -21,6 +21,7 @@ import {
   type CalculatorApplyDetail,
 } from "@/lib/calculator-bridge";
 import { validateLeadForm, type LeadFieldErrors } from "@/lib/lead-form-schema";
+import { trackEvent } from "@/lib/analytics";
 import { useLocale, useMessages } from "@/i18n/client";
 
 export type LeadObjectType = "apartment" | "house" | "business" | "infrastructure" | "other";
@@ -167,6 +168,7 @@ export function LeadForm({
       form.reset();
       setCalculator(undefined);
       setStatus("idle");
+      trackEvent({ event: "generate_lead", calculator: calculator?.data ?? "" });
       toast.show("success", t.success);
     } catch {
       setStatus("idle");

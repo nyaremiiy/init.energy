@@ -37,6 +37,7 @@ export const slugs = {
     hub: "rishennya",
     hotelSes: "ses-dlya-gotelyu",
   },
+  calculators: { hub: "kalkulyator", sesPayback: "okupnist-ses" },
 } as const;
 
 /** Home page section anchors. */
@@ -65,6 +66,9 @@ export const anchors = {
   sesTypes: "ses-types",
   sesHybrid: "ses-hybrid",
   sesSteps: "ses-steps",
+  sesYield: "ses-yield",
+  sesMethod: "ses-method",
+  sesLead: "ses-calculator-lead",
 } as const;
 
 export function toPath(...segments: string[]): string {
@@ -102,6 +106,9 @@ export const routes = {
   },
   solutions: {
     hotelSes: toPath(slugs.solutions.hub, slugs.solutions.hotelSes),
+  },
+  calculators: {
+    sesPayback: toPath(slugs.calculators.hub, slugs.calculators.sesPayback),
   },
   sections: {
     solutions: toAnchor(anchors.solutions),
