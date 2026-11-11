@@ -1,6 +1,6 @@
 /**
- * Global availability switch. Set `enabled` to true, build and deploy to
- * temporarily show the maintenance screen instead of the public website.
+ * Global availability switch. The server's `./maintenance.sh` toggles it,
+ * rebuilds the application and restarts the service.
  */
 export const maintenance = {
   enabled: false,
