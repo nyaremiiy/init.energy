@@ -20,6 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const ukPaths = [
     routes.home,
     routes.services.turnkeySes,
+    routes.calculators.sesPayback,
     ...productPages.map((page) => toPath(page.slug)),
   ];
 

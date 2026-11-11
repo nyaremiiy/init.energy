@@ -82,11 +82,22 @@ function sesNavigation(locale: Locale): NavEntry[] {
   ];
 }
 
+function sesCalculatorNavigation(locale: Locale): NavEntry[] {
+  const path = localizePath(routes.calculators.sesPayback, locale);
+  return [
+    { href: `${path}#${anchors.sesYield}`, labelKey: "calculator" },
+    { href: `${path}#${anchors.sesMethod}`, labelKey: "calculator" },
+    { href: `${path}#${anchors.sesLead}`, labelKey: "consultation" },
+  ];
+}
+
 export const pageNavigation: Record<string, NavEntry[]> = {
   [routes.home]: homeNavigation("uk"),
   [localizePath(routes.home, "en")]: homeNavigation("en"),
   [routes.services.turnkeySes]: sesNavigation("uk"),
   [localizePath(routes.services.turnkeySes, "en")]: sesNavigation("en"),
+  [routes.calculators.sesPayback]: sesCalculatorNavigation("uk"),
+  [localizePath(routes.calculators.sesPayback, "en")]: sesCalculatorNavigation("en"),
 };
 
 /** Product pages: the same anchors as the sticky in-page nav. */

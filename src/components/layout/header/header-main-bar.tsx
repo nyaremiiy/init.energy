@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/ui/logo";
-import { anchors, sectionHref } from "@/content/routes";
+import { routes } from "@/content/routes";
 import { localizePath } from "@/i18n/config";
 import { getLocale, getMessages } from "@/i18n/server";
 import { format } from "@/lib/messages";
@@ -43,7 +43,7 @@ export function HeaderMainBar() {
         </a>
         <div className="hidden lg:block">
           <Button
-            href={sectionHref(anchors.contacts, locale)}
+            href={localizePath(routes.calculators.sesPayback, locale)}
             icon={<ArrowUpRight aria-hidden className="size-4" />}
           >
             {t.cta}

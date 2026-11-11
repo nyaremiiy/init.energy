@@ -1,5 +1,5 @@
 import { socialLinks } from "@/components/layout/header/header-data";
-import { companyContacts, offices } from "@/content/company";
+import { companyContacts, offices, serviceArea } from "@/content/company";
 import { localizePath, type Locale } from "@/i18n/config";
 import { getMessagesFor } from "@/i18n/messages";
 
@@ -113,7 +113,7 @@ export function organizationSchema(locale: Locale) {
     telephone: offices[0].phone.display,
     areaServed: {
       "@type": "Country",
-      name: locale === "uk" ? "Україна" : "Ukraine",
+      name: serviceArea[locale],
     },
     address: offices.map((office) => ({
       "@type": "PostalAddress",

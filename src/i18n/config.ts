@@ -26,6 +26,7 @@ export const localizedPaths = [
   "/svit-plus-16000/",
   "/cec/",
   "/bess/",
+  "/kalkulyator/okupnist-ses/",
 ] as const;
 
 export function hasEnglish(path: string): boolean {

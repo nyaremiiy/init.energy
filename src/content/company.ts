@@ -42,6 +42,8 @@ export const companyContacts = {
   },
 } as const;
 
+export const serviceArea: Localized = { uk: "Україна", en: "Ukraine" };
+
 export type TrustStat = {
   id: "years" | "projects" | "installedPower" | "svitModels";
   value: Localized;
