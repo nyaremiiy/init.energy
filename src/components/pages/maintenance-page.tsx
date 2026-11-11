@@ -9,7 +9,7 @@ export function MaintenancePage({ locale }: { locale: Locale }) {
   const t = getMessagesFor(locale).maintenance;
 
   return (
-    <main className="relative grid min-h-svh overflow-hidden bg-ink px-4.5 py-8 text-white sm:px-8 lg:px-10">
+    <main className="relative grid min-h-svh overflow-hidden bg-ink px-6 py-8 text-white sm:px-8 lg:px-10">
       <div aria-hidden className="absolute inset-0 bg-ink-glow" />
       <div className="relative mx-auto flex w-full max-w-360 flex-col justify-between gap-16">
         <Logo className="w-28 text-white sm:w-36" />
