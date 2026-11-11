@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-11 — Фото для рішення приватного будинку
+- **Агент:** Codex
+- **Гілка:** feature/house-solution-photo (статус: готово до merge у develop)
+- **Що зроблено:** картка «Весь будинок без перебоїв» у секції рішень отримала фото СЕС для приватного будинку з контрастним затемненням; зображення та альтернативний текст зберігаються в `content/solutions.ts`. Оновлено набори hero сторінки СЕС за іменами `01`, `02`, `03` і fallback відповідно до наявних файлів.
+- **Файли:** `src/content/solutions.ts`, `src/components/sections/home/solutions-by-segment.tsx`, `src/components/ui/segment-card.tsx`, `src/components/sections/home/hero-slides.ts`, `public/images/cec/*`, `docs/ai/CHANGELOG.md`
+- **Нотатки / що далі:** формат імен hero: `01-*` — перший слайд, `02-*` — другий, `03-*` — третій.
+
 ## 2026-11-11 — Фото для hero сторінки СЕС
 - **Агент:** Codex
 - **Гілка:** fix/locale-aware-navigation (статус: готово до merge у develop)

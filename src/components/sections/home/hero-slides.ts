@@ -56,7 +56,7 @@ const backupPowerHeroImage: HeroImage = {
 /** Dedicated responsive media for the solar plant hub (/cec/). */
 const sesOverviewHeroImage: HeroImage = {
   desktop: "/images/cec/hero/01-2560.avif",
-  fallback: "/images/cec/hero/01-2560.avif",
+  fallback: "/images/cec/hero/01-2560.webp",
   laptop: "/images/cec/hero/01-1920.avif",
   mobile: "/images/cec/hero/01-750.avif",
   tablet: "/images/cec/hero/01-1280.avif",
@@ -65,7 +65,7 @@ const sesOverviewHeroImage: HeroImage = {
 
 const sesStorageHeroImage: HeroImage = {
   desktop: "/images/cec/hero/02-2560.avif",
-  fallback: "/images/cec/hero/02-2560.webp",
+  fallback: "/images/cec/hero/02-2560.avif",
   laptop: "/images/cec/hero/02-1920.avif",
   mobile: "/images/cec/hero/02-750.avif",
   tablet: "/images/cec/hero/02-1280.avif",
