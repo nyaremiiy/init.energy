@@ -5,6 +5,7 @@ import { Header } from "@/components/layout/header/header";
 import { BackToTop } from "@/components/ui/back-to-top";
 import { ContactWidget } from "@/components/ui/contact-widget";
 import { ToastProvider } from "@/components/ui/toast";
+import { VisitBeacon } from "@/components/layout/visit-beacon";
 import type { Locale } from "@/i18n/config";
 import { LocaleProvider } from "@/i18n/client";
 
@@ -24,6 +25,7 @@ export function SiteChrome({
         <Footer />
         <BackToTop />
         <ContactWidget />
+        <VisitBeacon />
       </ToastProvider>
     </LocaleProvider>
   );

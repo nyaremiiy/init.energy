@@ -15,6 +15,19 @@
 
 ---
 
+## 2026-11-11 — Лічильник відвідувачів зі щоденним звітом о 03:00
+- **Агент:** Claude Code
+- **Гілка:** feature/visit-counter (статус: змерджено в develop)
+- **Що зроблено:**
+  - Власний лічильник без cookie і сторонніх сервісів. `VisitBeacon` у `SiteChrome` після кожної сторінки (і при клієнтських переходах) шле шлях і зовнішнє джерело першої сторінки на `POST /api/visit/`. Сервер записує подію з хешем IP+браузера на денній солі; IP не зберігається. Боти, DNT/GPC і режим розробки не рахуються.
+  - `instrumentation.ts` запускає планувальник: щодня о 03:00 за Києвом, а також одразу після старту сервера, пишуться звіти за завершені дні: `storage/visits/reports/YYYY-MM-DD.json` (відвідувачі, перегляди, сторінки, джерела) і рядок у `reports.jsonl`. Сирі події й сіль після цього видаляються.
+  - `allowImportingTsExtensions` у tsconfig, щоб тести (`node --test`) завантажували модулі з імпортами. `storage/visits/` у `.gitignore`.
+- **Файли:** src/lib/visits/{visits-core,visits-store,visits-scheduler}.ts, src/lib/visits/visits.test.mjs, src/app/api/visit/route.ts, src/instrumentation.ts, src/components/layout/{visit-beacon,site-chrome}.tsx, tsconfig.json, .gitignore, README.md, docs/ai/{CONTEXT,CHANGELOG}.md
+- **Нотатки / що далі:**
+  - lint, test (24, з них 4 нові) і build проходять. Перевірено на продакшн-збірці: візити пишуться (бот і сміттєвий запит відкинуто, IP у файлі немає); після перезапуску звіт за «вчора» з’явився одразу; маячок у браузері записав першу сторінку й клієнтський перехід.
+  - Далі: Telegram-бот читатиме `reports.jsonl` або `reports/*.json`.
+  - Якщо сайт за nginx, він має передавати `X-Forwarded-For` або `X-Real-IP`, інакше всі відвідувачі матимуть один IP.
+
 ## 2026-11-11 — Підготовка до деплою: аудит, SEO/GEO, README, прибирання
 - **Агент:** Claude Code
 - **Гілка:** chore/pre-deploy (статус: змерджено в develop)
