@@ -185,6 +185,71 @@ export const faqList: Faq[] = [
     },
   },
   {
+    id: "ses-grid-vs-hybrid",
+    topic: "solar",
+    pages: ["solar"],
+    question: {
+      uk: "Чим мережева СЕС відрізняється від гібридної?",
+      en: "How is a grid-tied solar plant different from a hybrid one?",
+    },
+    answer: {
+      uk: "Мережева СЕС віддає енергію в мережу й не працює під час відключень, бо без мережі вона відключається. Гібридна має накопичувач SVIT: вона запасає надлишок сонячної енергії на вечір і живить будинок під час відключень.",
+      en: "A grid-tied plant feeds energy into the grid and stops working during outages. A hybrid plant has a SVIT battery: it stores surplus solar energy for the evening and keeps the house powered during outages.",
+    },
+  },
+  {
+    id: "ses-off-grid",
+    topic: "solar",
+    pages: ["solar"],
+    question: {
+      uk: "Чи можна мати СЕС без підключення до мережі?",
+      en: "Can I have a solar plant without a grid connection?",
+    },
+    answer: {
+      uk: "Так. Автономна станція працює без мережі: панелі заряджають накопичувач, а від нього живиться будинок або об'єкт. Такий варіант підходить для ділянок, куди електрику ще не провели.",
+      en: "Yes. An off-grid plant runs without the grid: the panels charge the battery, and the battery powers the house or site. This suits plots where electricity has not been connected.",
+    },
+  },
+  {
+    id: "ses-hybrid-how",
+    topic: "solar",
+    pages: ["solar"],
+    question: {
+      uk: "Як працює гібридна СЕС?",
+      en: "How does a hybrid solar plant work?",
+    },
+    answer: {
+      uk: "Сонячні панелі виробляють струм, поки є сонце. Інвертор розподіляє його між будинком, накопичувачем і мережею, а надлишок запасається в батареї на вечір і на час відключень.",
+      en: "Solar panels generate power while the sun shines. The inverter distributes it between the house, the battery and the grid, and surplus is stored in the battery for the evening and for outages.",
+    },
+  },
+  {
+    id: "ses-steps",
+    topic: "solar",
+    pages: ["solar"],
+    question: {
+      uk: "Які етапи створення СЕС під ключ?",
+      en: "What are the stages of building a turnkey solar plant?",
+    },
+    answer: {
+      uk: "Спочатку рахуємо споживання, далі розробляємо проєкт і конфігурацію, називаємо кошторис під ключ, потім монтуємо й запускаємо станцію. Після запуску супроводжуємо її сервісом. Тривалість кожного етапу інженер уточнює для вашого об'єкта.",
+      en: "First we estimate consumption, then design the project and configuration, quote the turnkey price, then install and commission the plant. After commissioning we support it with service. An engineer confirms the duration of each stage for your site.",
+    },
+  },
+  {
+    id: "ses-service",
+    topic: "warranty",
+    pages: ["solar"],
+    question: {
+      uk: "Чи потрібне обслуговування СЕС після запуску?",
+      en: "Does a solar plant need servicing after commissioning?",
+    },
+    answer: {
+      uk: "Так, станцію варто регулярно перевіряти. INIT ENERGY супроводжує її після запуску, а умови гарантії визначаються для кожного обладнання окремо. Їх уточнить інженер ще до укладення договору.",
+      en: "Yes, the plant should be checked regularly. INIT ENERGY supports it after commissioning, and warranty terms are set for each piece of equipment separately. An engineer will clarify them before the contract is signed.",
+    },
+  },
+  {
     id: "svit-plus-5000-lifetime",
     topic: "products",
     pages: ["svit-plus-5000"],
