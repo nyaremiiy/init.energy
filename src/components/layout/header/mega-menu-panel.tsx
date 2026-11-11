@@ -28,24 +28,31 @@ export function MegaMenuPanel({ group, open, onNavigate }: MegaMenuPanelProps) {
         <Container className="flex gap-10 py-10">
           <div className="grid flex-1 auto-cols-fr grid-flow-col gap-10">
             {group.columns.map((column) => (
-              <div key={column.title} className="flex flex-col gap-5">
+              <div key={column.title} className="flex flex-col gap-3">
                 <Eyebrow tone="dark" as="p">
                   {column.title}
                 </Eyebrow>
-                <ul className="flex flex-col gap-5">
+                {/* Items are tiles: hover / keyboard focus light up the background (white/8). */}
+                <ul className="-mx-3 flex flex-col gap-1">
                   {column.items.map((link) => (
                     <li key={link.href}>
                       <NavLink
                         href={link.href}
-                        className="group/link flex flex-col gap-1"
+                        className="group/link flex items-start gap-3 rounded-2xl px-3 py-2.5 transition-colors duration-150 ease-tech hover:bg-white/8 focus-visible:bg-white/8 focus-visible:outline-2 focus-visible:outline-white/60"
                         onClick={onNavigate}
                       >
-                        <span className="text-base font-semibold text-white/90 transition-colors duration-150 ease-tech group-hover/link:text-white">
-                          {link.label}
+                        <span className="flex min-w-0 flex-1 flex-col gap-1">
+                          <span className="text-base font-semibold text-white/90 transition-colors duration-150 ease-tech group-hover/link:text-white group-focus-visible/link:text-white">
+                            {link.label}
+                          </span>
+                          <span className="text-sm text-white/70 transition-colors duration-150 ease-tech group-hover/link:text-white/85 group-focus-visible/link:text-white/85">
+                            {link.description}
+                          </span>
                         </span>
-                        <span className="text-sm text-white/70">
-                          {link.description}
-                        </span>
+                        <ArrowUpRight
+                          aria-hidden
+                          className="mt-0.5 size-4 shrink-0 text-white opacity-0 transition duration-150 ease-tech group-hover/link:opacity-100 group-focus-visible/link:opacity-100 motion-safe:group-hover/link:translate-x-0.5 motion-safe:group-hover/link:-translate-y-0.5"
+                        />
                       </NavLink>
                     </li>
                   ))}

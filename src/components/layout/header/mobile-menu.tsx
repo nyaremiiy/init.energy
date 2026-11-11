@@ -29,12 +29,13 @@ export function MobileMenu() {
   // Links to sections of the home page are shown only on the home page.
   const pathname = usePathname();
   const onHome = isHomePath(pathname);
+  const pageLinks = pageSectionLinks(pathname, locale);
   const visibleItems: NavItem[] = onHome
     ? navItems
-    : [
-        ...navItems.filter((item) => isNavGroup(item) || !item.sectionId),
-        ...pageSectionLinks(pathname, locale),
-      ];
+    : [...navItems.filter((item) => isNavGroup(item) || !item.sectionId), ...pageLinks];
+  // Page sections appear in the desktop header only from xl; between lg and xl
+  // the burger stays (after the CTA) so they remain reachable.
+  const hasPageLinks = onHome || pageLinks.length > 0;
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -60,7 +61,7 @@ export function MobileMenu() {
   const close = () => setIsOpen(false);
 
   return (
-    <div className="lg:hidden">
+    <div className={hasPageLinks ? "xl:hidden" : "lg:hidden"}>
       <button
         type="button"
         aria-expanded={isOpen}
@@ -79,7 +80,7 @@ export function MobileMenu() {
       {isOpen ? (
         <div
           id="mobile-menu"
-          className="fixed inset-0 z-40 flex flex-col gap-10 overflow-y-auto bg-ink-glow px-4.5 pt-28 pb-10 text-white sm:px-8"
+          className="fixed inset-0 z-40 flex flex-col gap-10 overflow-y-auto bg-ink-glow px-4.5 pt-28 pb-10 text-white sm:px-8 lg:px-10 lg:pt-40"
         >
           <nav aria-label={t.mobileMenu}>
             <ul className="flex flex-col gap-5 text-h3 font-semibold">
@@ -103,13 +104,13 @@ export function MobileMenu() {
                             <Eyebrow tone="dark" as="p">
                               {column.title}
                             </Eyebrow>
-                            <ul className="flex flex-col gap-4">
+                            <ul className="-mx-3 flex flex-col gap-1">
                               {column.items.map((link) => (
                                 <li key={link.href}>
                                   <NavLink
                                     href={link.href}
                                     onClick={close}
-                                    className="flex flex-col gap-1"
+                                    className="flex flex-col gap-1 rounded-2xl px-3 py-2 transition-colors duration-150 ease-tech active:bg-white/8 focus-visible:bg-white/8 focus-visible:outline-2 focus-visible:outline-white/60"
                                   >
                                     <span className="text-base font-semibold">
                                       {link.label}
