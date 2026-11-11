@@ -35,6 +35,8 @@ type FooterLinkLabels = {
   sesTypes: string;
   sesHybrid: string;
   sesSteps: string;
+  sesYield: string;
+  sesMethod: string;
   svitCatalog: string;
   about: string;
   contacts: string;
@@ -86,9 +88,11 @@ function sesNavigation(locale: Locale): NavEntry[] {
 function sesCalculatorNavigation(locale: Locale): NavEntry[] {
   const path = localizePath(routes.calculators.sesPayback, locale);
   return [
-    { href: `${path}#${anchors.sesYield}`, labelKey: "calculator" },
-    { href: `${path}#${anchors.sesMethod}`, labelKey: "calculator" },
-    { href: `${path}#${anchors.sesLead}`, labelKey: "consultation" },
+    { href: `${path}#${anchors.calculator}`, labelKey: "calculator" },
+    { href: `${path}#${anchors.sesYield}`, labelKey: "sesYield" },
+    { href: `${path}#${anchors.sesMethod}`, labelKey: "sesMethod" },
+    { href: `${path}#${anchors.faq}`, labelKey: "faq" },
+    { href: `${path}#${anchors.contacts}`, labelKey: "consultation" },
   ];
 }
 
