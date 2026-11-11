@@ -39,6 +39,7 @@
 ```bash
 ./deploy.sh        # git pull гілки main, npm ci, npm run build, перезапуск сервісу
 ./maintenance.sh   # увімкнути / вимкнути екран «технічні роботи» (503) і перезапустити
+npm run deploy     # перевірити develop, змерджити його в main і запушити origin/main
 ```
 
 Перед першим запуском:

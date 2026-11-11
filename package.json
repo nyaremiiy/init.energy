@@ -9,6 +9,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "deploy": "node scripts/release.mjs",
     "lint": "eslint",
     "test": "node --test \"src/**/*.test.mjs\""
   },
