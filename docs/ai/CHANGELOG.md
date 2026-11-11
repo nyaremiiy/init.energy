@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-11 — Скрипт production-деплою
+- **Агент:** Codex
+- **Гілка:** chore/deploy-script (статус: у роботі)
+- **Що зроблено:** додано виконуваний `deploy.sh`: перевіряє інструменти й чистоту робочого дерева, оновлює `main` через fast-forward, встановлює залежності, збирає Next.js і перезапускає systemd-юнит `init.energy`.
+- **Файли:** `deploy.sh`, `docs/ai/{CONTEXT,CHANGELOG}.md`
+- **Нотатки / що далі:** на сервері потрібні git, Node.js/npm, systemd і право `sudo` на `systemctl`.
+
 ## 2026-11-11 — Favicon сайту
 - **Агент:** Claude Code
 - **Гілка:** chore/favicon (статус: змерджено в develop)
