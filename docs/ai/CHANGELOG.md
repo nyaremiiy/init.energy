@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-11 — Favicon сайту
+- **Агент:** Claude Code
+- **Гілка:** chore/favicon (статус: змерджено в develop)
+- **Що зроблено:** стандартну іконку Next.js у `src/app/favicon.ico` замінено іконкою власника (літера «Е» з логотипу). Власник додав `favicon_32x32.jpg`, але Next підхоплює лише `favicon.ico` / `icon.*` / `apple-icon.*`, тому файл перетворено на ICO (32×32, PNG усередині, RGBA — RGB Next не декодує й падає з 500), а `.jpg` видалено.
+- **Файли:** src/app/favicon.ico, docs/ai/CHANGELOG.md
+- **Нотатки / що далі:** TODO(content): для Google у пошуку (≥ 48×48) і для iPhone потрібні більші файли — `src/app/icon.svg` або `icon.png` 512×512 і `src/app/apple-icon.png` 180×180.
+
 ## 2026-11-11 — Фото в блоці «Обладнання й етапи» на сторінці готелю
 - **Агент:** Claude Code
 - **Гілка:** feature/hotel-build-photo (статус: змерджено в develop)
