@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-11 — Спрощена команда релізу
+- **Агент:** Codex
+- **Гілка:** chore/simplify-release-command (статус: змерджено в develop)
+- **Що зроблено:** з `npm run deploy` прибрано запуск `npm run lint` і `npm run build`; команда тепер лише оновлює гілки, мерджить `develop` у `main`, пушить `origin/main` і повертається на `develop`.
+- **Файли:** `scripts/release.mjs`, `README.md`, `docs/ai/{CONTEXT,CHANGELOG}.md`
+- **Нотатки / що далі:** production-збірка й перезапуск сервісу залишаються відповідальністю серверного `deploy.sh`.
+
 ## 2026-11-11 — Команда релізу develop у main
 - **Агент:** Codex
 - **Гілка:** chore/release-command (статус: змерджено в develop)
