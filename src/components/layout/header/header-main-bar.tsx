@@ -1,16 +1,15 @@
-import { ArrowUpRight, Phone } from "lucide-react";
+import { Phone } from "lucide-react";
 import Link from "next/link";
 
 import { Container } from "@/components/layout/container";
-import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/ui/logo";
-import { routes } from "@/content/routes";
 import { localizePath } from "@/i18n/config";
 import { getLocale, getMessages } from "@/i18n/server";
 import { format } from "@/lib/messages";
 import { formatPhone } from "@/lib/format";
 
 import { DesktopNav } from "./desktop-nav";
+import { HeaderLeadCta } from "./header-lead-cta";
 import { offices } from "./header-data";
 import { MobileMenu } from "./mobile-menu";
 
@@ -42,13 +41,7 @@ export function HeaderMainBar() {
           <Phone aria-hidden className="size-5" />
         </a>
         <div className="hidden shrink-0 lg:block">
-          <Button
-            className="whitespace-nowrap"
-            href={localizePath(routes.calculators.sesPayback, locale)}
-            icon={<ArrowUpRight aria-hidden className="size-4" />}
-          >
-            {t.cta}
-          </Button>
+          <HeaderLeadCta />
         </div>
         <MobileMenu />
       </div>
