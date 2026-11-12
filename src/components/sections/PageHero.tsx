@@ -29,6 +29,8 @@ type PageHeroContent = {
   primaryCta: { label: string; href: string };
   secondaryCta?: { label: string; href: string };
   media: PageHeroMedia;
+  /** Let long mobile copy define a taller hero instead of squeezing it into one viewport. */
+  spaciousMobile?: boolean;
   /** Subtle breadcrumbs above the eyebrow + BreadcrumbList JSON-LD; the last item is the current page. */
   breadcrumbs?: { label: string; href?: string }[];
 };
@@ -64,6 +66,9 @@ export function PageHero(props: PageHeroProps) {
       ]
     : [];
   const crumbs = content?.breadcrumbs;
+  const contentLayout = content?.spaciousMobile
+    ? "relative z-10 flex min-h-svh items-center overflow-hidden py-32 md:absolute md:inset-0 md:min-h-0 md:pt-28 md:pb-24 lg:pt-32 lg:pb-0"
+    : "absolute inset-0 z-10 flex items-center overflow-hidden pt-28 pb-24 lg:pt-32 lg:pb-0";
 
   return (
     <Panel
@@ -92,7 +97,7 @@ export function PageHero(props: PageHeroProps) {
           <HeroParallax>
             <HeroMedia media={content.media} />
           </HeroParallax>
-          <div className="absolute inset-0 z-10 flex items-center overflow-hidden pt-28 pb-24 lg:pt-32 lg:pb-0">
+          <div className={contentLayout}>
             <Container inPanel>
               <HeroCopy
                 id={titleId}

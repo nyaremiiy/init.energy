@@ -52,6 +52,7 @@ export function NichePage({ page, locale }: { page: SolutionPage; locale: Locale
       />
       <main className="pb-section-sm lg:pb-section">
         <PageHero
+          spaciousMobile
           eyebrow={page.hero.eyebrow[locale]}
           title={page.hero.title[locale]}
           lead={page.hero.lead[locale]}
