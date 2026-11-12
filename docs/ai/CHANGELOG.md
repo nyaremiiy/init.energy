@@ -17,7 +17,7 @@
 
 ## 2026-11-12 — Вищий мобільний hero сторінки готелю
 - **Агент:** Codex
-- **Гілка:** fix/hotel-mobile-hero-height (статус: в роботі)
+- **Гілка:** fix/hotel-mobile-hero-height (статус: змерджено в develop)
 - **Що зроблено:** у спільний `PageHero` додано модульний режим `spaciousMobile`; на нішевій сторінці готелю мобільний контент hero тепер перебуває в потоці з більшими вертикальними відступами, тому довгі крихти, опис і дві кнопки збільшують секцію замість стискання в один viewport. З `md` layout не змінено.
 - **Файли:** `src/components/sections/PageHero.tsx`, `src/components/pages/niche-page.tsx`, `docs/ai/{CONTEXT,CHANGELOG}.md`
 - **Нотатки / що далі:** використано стандартні Tailwind utility-класи без довільних значень і нових CSS-токенів.
