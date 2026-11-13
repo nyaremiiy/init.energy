@@ -156,18 +156,22 @@
     "lead": "Leave your phone number — a manager will call, clarify your consumption and prepare a configuration with a turnkey price.",
     "steps": [
       {
-        "title": "Call from a manager",
+        "title": "Manager call",
         "description": "We clarify what needs power and for how many hours without the grid."
       },
       {
-        "title": "Sizing and configuration",
-        "description": "We choose SVIT, an inverter and solar panels if needed."
+        "title": "Calculation and configuration",
+        "description": "We select SVIT, an inverter and, if needed, solar panels."
       },
       {
         "title": "Turnkey estimate",
-        "description": "Equipment, installation and commissioning as one sum."
+        "description": "Equipment, installation and commissioning in one price."
       }
     ],
+    "contactCard": {
+      "prompt": "Don't want to wait? Give us a call",
+      "callLabel": "Call {phone}"
+    },
     "form": {
       "objectType": "Property type",
       "objectTypes": {
@@ -280,6 +284,7 @@
       }
     },
     "copyright": "Copyright © {year} INIT ENERGY | All rights reserved",
+    "developedBy": "Developed by",
     "legalNavLabel": "Legal information",
     "legal": {
       "privacy": "Privacy policy",

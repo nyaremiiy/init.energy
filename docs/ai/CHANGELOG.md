@@ -15,6 +15,62 @@
 
 ---
 
+## 2026-11-13 — Англійська сторінка 404
+- **Агент:** Claude Code
+- **Гілка:** fix/english-404 (статус: змерджено в develop)
+- **Що зроблено:**
+  - Сторінка 404 вже була (`src/app/not-found.tsx`: статус 404, noindex, кнопки на головну й до заявки, швидкі посилання), але для `/en/…` показувалась українською.
+  - `src/proxy.ts` тепер переписує `/en/…` адреси без англійської версії (`hasEnglish`) на нову статичну `/en/ne-znaideno/` зі статусом 404: англійські title, H1, текст, шапка й футер з посиланнями `/en/`. Адреса в рядку браузера лишається введеною.
+  - `routes.notFoundEn`, `Disallow: /en/ne-znaideno/` у robots.txt. Пряме відкриття `/en/ne-znaideno/` теж віддає 404.
+- **Файли:** src/proxy.ts, src/app/en/ne-znaideno/page.tsx, src/content/routes.ts, src/app/robots.ts, docs/ai/{CONTEXT,CHANGELOG}.md
+- **Нотатки / що далі:**
+  - Перевірено на production-збірці: `/en/a/b/c/`, `/en/svit-xyz/`, `/en/rishennya/xyz/` → 404 «Page not found»; `/en/pro-nas/` → 404 «Page in progress»; українські 404 без змін; усі 10 англійських сторінок → 200 з `index, follow`; помилок у консолі браузера немає. Новий маршрут статичний (○).
+  - Спроба з вкладеним `en/not-found.tsx` + catch-all `[...missing]` працювала лише в dev: на production Next віддає кореневий 404.
+  - У dev-режимі на вкладеному not-found React попереджав про `<script>` згоди в `<head>`; у production цієї проблеми немає, а з proxy-підходом вкладений not-found не використовується.
+
+## 2026-11-13 — Світліший фон іконки авторства
+- **Агент:** Claude Code
+- **Гілка:** fix/footer-credit-icon-bg (статус: змерджено в develop)
+- **Що зроблено:** кружок з іконкою `CodeXml` у кредиті футера отримав постійну заливку `white/8`, при hover — `white/14`.
+- **Файли:** src/components/layout/footer/footer.tsx, docs/ai/CHANGELOG.md
+- **Нотатки / що далі:** lint проходить; перевірено знімком 1440 px.
+
+## 2026-11-13 — Акуратний блок авторства у футері
+- **Агент:** Claude Code
+- **Гілка:** fix/footer-credit-polish (статус: змерджено в develop)
+- **Що зроблено:** кредит «Розроблено / Nazar Yaremiiy» — одне посилання на https://nyaremiiy.com: іконка lucide `CodeXml` у круглій рамці 36 px (стиль кнопок соцмереж футера: рамка `white/22` → `white/60`, фон `white/8` при hover), праворуч підпис `text-caption white/75` і ім'я `font-medium` зі стрілкою `ArrowUpRight`, що зсувається при hover (`motion-safe`). Ряд правових посилань вирівняно по центру (`items-center`). `ArrowLink` у футері більше не використовується.
+- **Файли:** src/components/layout/footer/footer.tsx, docs/ai/CHANGELOG.md
+- **Нотатки / що далі:** lint і типи проходять; перевірено знімками 1440 і 360 px.
+
+## 2026-11-13 — Стиль авторства у футері
+- **Агент:** Claude Code
+- **Гілка:** fix/footer-credit-style (статус: змерджено в develop)
+- **Що зроблено:** блок «Розроблено / Nazar Yaremiiy ↗» перенесено в ряд правових посилань футера, одразу після «Налаштувати cookie». Підпис «Розроблено» (uk) / «Developed by» (en) — звичайний текст у нижньому регістрі, без верхнього регістру; ім'я — `ArrowLink` (`tone="dark"`) з посиланням на https://nyaremiiy.com у новій вкладці.
+- **Файли:** src/components/layout/footer/footer.tsx, messages/{uk,en}.json, docs/ai/CHANGELOG.md
+- **Нотатки / що далі:** lint і типи проходять; знімок футера на 1440 px перевірено на dev-сервері (порт 3000). `ArrowLink` має підкреслення й жирний шрифт — на знімку користувача їх немає; за потреби пригасимо спільний компонент.
+
+## 2026-11-13 — Авторство в футері
+- **Агент:** Claude Code
+- **Гілка:** feature/footer-developer-credit (статус: змерджено в develop)
+- **Що зроблено:** у нижню смугу футера під копірайтом додано рядок «Розробка сайту: Nazar Yaremiiy» (uk) / «Website by: Nazar Yaremiiy» (en) з посиланням на https://nyaremiiy.com (`target="_blank"`, `rel="noopener noreferrer"`, стиль `footerLinkClasses`). Ключ `footer.developedBy` додано в обидві мови.
+- **Файли:** src/components/layout/footer/footer.tsx, messages/{uk,en}.json, docs/ai/CHANGELOG.md
+- **Нотатки / що далі:** lint, типи й build проходять. Рядок показується на всіх сторінках з футером (uk і en).
+
+## 2026-11-13 — Нова ліва колонка секції заявки
+- **Агент:** Claude Code
+- **Гілка:** feature/lead-section-left-column (статус: змерджено в develop)
+- **Що зроблено:**
+  - Ліву колонку спільної `LeadSection` переверстано за макетом (варіант A): шапка без змін → таймлайн із трьох кроків `LeadSteps` (кружки 48 px з іконками Phone / Calculator / FileText, перший — ink, лінія `line` між центрами) → темна картка `LeadContactCard` (телефон великим кеглем + біле коло 52 px, під лінією `white/14` — email і адреса Львівського офісу з посиланням на карту). Відступ між блоками 40 px. Стару нумеровану таблицю кроків і рядок телефон/email прибрано. Форму праворуч не змінено.
+  - Таймлайн вертикальний нижче `lg`, рядок із трьох — з `lg` (на 768–1023 px ліва колонка ~290 px, три колонки там не вміщаються). Розмір номера телефону — container queries за шириною картки: 20 px на 360 px → 48 px на 1440 px, завжди в один рядок.
+  - Аналітика: `ContactLink` (`components/ui/contact-link.tsx`, клієнтський) шле `contact_click` `{ method: phone|email, location: lead_section }` через `trackEvent` (лише з аналітичною згодою).
+  - Тексти: `leadSection.steps` (EN оновлено за брифом) і новий `leadSection.contactCard` в uk/en. Контакти — з `offices[0]` і `companyContacts` у `company.ts`.
+- **Файли:** src/components/sections/{LeadSection,LeadSteps,LeadContactCard}.tsx, src/components/ui/contact-link.tsx, src/content/company.ts, messages/{uk,en}.json, docs/ai/{CONTEXT,CHANGELOG}.md
+- **Нотатки / що далі:**
+  - lint і build проходять. Перевірено в headless Edge: 1440 (uk, en), 820, 360 (en) — без горизонтального скролу. Форму тестово не надсилали (код форми не змінювався).
+  - Відхилення від брифу: тексти лежать у наявному `leadSection.*`, а не `lead.*`; адреса — наявне поле `offices[].address` (нового `address` не додано); компонента `Card` у проєкті немає — картка `rounded-3xl bg-ink p-card-sm lg:p-card`; «ink-muted» → `white/75`.
+  - TODO(content): офіційне англійське написання адреси (`317b Shevchenka St., Lviv`).
+  - На сторінках продуктів `summary` і далі замінює кроки; контактна картка показується скрізь.
+
 ## 2026-11-12 — Вищий мобільний hero сторінки готелю
 - **Агент:** Codex
 - **Гілка:** fix/hotel-mobile-hero-height (статус: змерджено в develop)

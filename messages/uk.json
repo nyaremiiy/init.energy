@@ -168,6 +168,10 @@
         "description": "Обладнання, монтаж і запуск однією сумою."
       }
     ],
+    "contactCard": {
+      "prompt": "Не хочете чекати? Зателефонуйте",
+      "callLabel": "Зателефонувати {phone}"
+    },
     "form": {
       "objectType": "Тип об'єкта",
       "objectTypes": {
@@ -280,6 +284,7 @@
       }
     },
     "copyright": "Copyright © {year} INIT ENERGY | Всі права захищені",
+    "developedBy": "Розроблено",
     "legalNavLabel": "Правова інформація",
     "legal": {
       "privacy": "Політика конфіденційності",
