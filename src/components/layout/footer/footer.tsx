@@ -3,6 +3,7 @@ import Link from "next/link";
 import { CookieSettingsLink } from "@/components/consent/CookieSettingsLink";
 import { Container } from "@/components/layout/container";
 import { LanguageSwitcher } from "@/components/layout/header/language-switcher";
+import { ArrowLink } from "@/components/ui/arrow-link";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { Logo } from "@/components/ui/logo";
 import { Panel } from "@/components/ui/panel";
@@ -99,17 +100,6 @@ export function Footer() {
           <div className="mt-18 flex flex-col gap-4 border-t border-white/14 pt-6 text-sm text-white/75 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex flex-col gap-1">
               <p>{format(t.copyright, { year: String(year) })}</p>
-              <p>
-                {t.developedBy}{" "}
-                <a
-                  href="https://nyaremiiy.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={footerLinkClasses}
-                >
-                  Nazar Yaremiiy
-                </a>
-              </p>
             </div>
             <nav aria-label={t.legalNavLabel}>
               <ul className="flex flex-wrap gap-x-6 gap-y-2">
@@ -125,6 +115,20 @@ export function Footer() {
                 ))}
                 <li>
                   <CookieSettingsLink />
+                </li>
+                <li>
+                  <div className="flex flex-col items-start gap-2">
+                  <span className="text-small text-white/75">{t.developedBy}</span>
+                  <ArrowLink
+                    href="https://nyaremiiy.com"
+                    tone="dark"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="decoration-transparent hover:decoration-white"
+                  >
+                    Nazar Yaremiiy
+                  </ArrowLink>
+                </div>
                 </li>
               </ul>
             </nav>
