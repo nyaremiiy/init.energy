@@ -15,6 +15,19 @@
 
 ---
 
+## 2026-11-13 — Англійська сторінка 404
+- **Агент:** Claude Code
+- **Гілка:** fix/english-404 (статус: змерджено в develop)
+- **Що зроблено:**
+  - Сторінка 404 вже була (`src/app/not-found.tsx`: статус 404, noindex, кнопки на головну й до заявки, швидкі посилання), але для `/en/…` показувалась українською.
+  - `src/proxy.ts` тепер переписує `/en/…` адреси без англійської версії (`hasEnglish`) на нову статичну `/en/ne-znaideno/` зі статусом 404: англійські title, H1, текст, шапка й футер з посиланнями `/en/`. Адреса в рядку браузера лишається введеною.
+  - `routes.notFoundEn`, `Disallow: /en/ne-znaideno/` у robots.txt. Пряме відкриття `/en/ne-znaideno/` теж віддає 404.
+- **Файли:** src/proxy.ts, src/app/en/ne-znaideno/page.tsx, src/content/routes.ts, src/app/robots.ts, docs/ai/{CONTEXT,CHANGELOG}.md
+- **Нотатки / що далі:**
+  - Перевірено на production-збірці: `/en/a/b/c/`, `/en/svit-xyz/`, `/en/rishennya/xyz/` → 404 «Page not found»; `/en/pro-nas/` → 404 «Page in progress»; українські 404 без змін; усі 10 англійських сторінок → 200 з `index, follow`; помилок у консолі браузера немає. Новий маршрут статичний (○).
+  - Спроба з вкладеним `en/not-found.tsx` + catch-all `[...missing]` працювала лише в dev: на production Next віддає кореневий 404.
+  - У dev-режимі на вкладеному not-found React попереджав про `<script>` згоди в `<head>`; у production цієї проблеми немає, а з proxy-підходом вкладений not-found не використовується.
+
 ## 2026-11-13 — Світліший фон іконки авторства
 - **Агент:** Claude Code
 - **Гілка:** fix/footer-credit-icon-bg (статус: змерджено в develop)
