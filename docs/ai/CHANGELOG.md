@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-13 — Авторство в футері
+- **Агент:** Claude Code
+- **Гілка:** feature/footer-developer-credit (статус: змерджено в develop)
+- **Що зроблено:** у нижню смугу футера під копірайтом додано рядок «Розробка сайту: Nazar Yaremiiy» (uk) / «Website by: Nazar Yaremiiy» (en) з посиланням на https://nyaremiiy.com (`target="_blank"`, `rel="noopener noreferrer"`, стиль `footerLinkClasses`). Ключ `footer.developedBy` додано в обидві мови.
+- **Файли:** src/components/layout/footer/footer.tsx, messages/{uk,en}.json, docs/ai/CHANGELOG.md
+- **Нотатки / що далі:** lint, типи й build проходять. Рядок показується на всіх сторінках з футером (uk і en).
+
 ## 2026-11-13 — Нова ліва колонка секції заявки
 - **Агент:** Claude Code
 - **Гілка:** feature/lead-section-left-column (статус: змерджено в develop)

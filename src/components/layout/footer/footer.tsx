@@ -97,7 +97,20 @@ export function Footer() {
 
         <Reveal delay={0.08} distance={12}>
           <div className="mt-18 flex flex-col gap-4 border-t border-white/14 pt-6 text-sm text-white/75 lg:flex-row lg:items-center lg:justify-between">
-            <p>{format(t.copyright, { year: String(year) })}</p>
+            <div className="flex flex-col gap-1">
+              <p>{format(t.copyright, { year: String(year) })}</p>
+              <p>
+                {t.developedBy}{" "}
+                <a
+                  href="https://nyaremiiy.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={footerLinkClasses}
+                >
+                  Nazar Yaremiiy
+                </a>
+              </p>
+            </div>
             <nav aria-label={t.legalNavLabel}>
               <ul className="flex flex-wrap gap-x-6 gap-y-2">
                 {legalLinks.map((link) => (
