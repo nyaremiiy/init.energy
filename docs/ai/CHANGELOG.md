@@ -15,6 +15,21 @@
 
 ---
 
+## 2026-11-13 — Нова ліва колонка секції заявки
+- **Агент:** Claude Code
+- **Гілка:** feature/lead-section-left-column (статус: змерджено в develop)
+- **Що зроблено:**
+  - Ліву колонку спільної `LeadSection` переверстано за макетом (варіант A): шапка без змін → таймлайн із трьох кроків `LeadSteps` (кружки 48 px з іконками Phone / Calculator / FileText, перший — ink, лінія `line` між центрами) → темна картка `LeadContactCard` (телефон великим кеглем + біле коло 52 px, під лінією `white/14` — email і адреса Львівського офісу з посиланням на карту). Відступ між блоками 40 px. Стару нумеровану таблицю кроків і рядок телефон/email прибрано. Форму праворуч не змінено.
+  - Таймлайн вертикальний нижче `lg`, рядок із трьох — з `lg` (на 768–1023 px ліва колонка ~290 px, три колонки там не вміщаються). Розмір номера телефону — container queries за шириною картки: 20 px на 360 px → 48 px на 1440 px, завжди в один рядок.
+  - Аналітика: `ContactLink` (`components/ui/contact-link.tsx`, клієнтський) шле `contact_click` `{ method: phone|email, location: lead_section }` через `trackEvent` (лише з аналітичною згодою).
+  - Тексти: `leadSection.steps` (EN оновлено за брифом) і новий `leadSection.contactCard` в uk/en. Контакти — з `offices[0]` і `companyContacts` у `company.ts`.
+- **Файли:** src/components/sections/{LeadSection,LeadSteps,LeadContactCard}.tsx, src/components/ui/contact-link.tsx, src/content/company.ts, messages/{uk,en}.json, docs/ai/{CONTEXT,CHANGELOG}.md
+- **Нотатки / що далі:**
+  - lint і build проходять. Перевірено в headless Edge: 1440 (uk, en), 820, 360 (en) — без горизонтального скролу. Форму тестово не надсилали (код форми не змінювався).
+  - Відхилення від брифу: тексти лежать у наявному `leadSection.*`, а не `lead.*`; адреса — наявне поле `offices[].address` (нового `address` не додано); компонента `Card` у проєкті немає — картка `rounded-3xl bg-ink p-card-sm lg:p-card`; «ink-muted» → `white/75`.
+  - TODO(content): офіційне англійське написання адреси (`317b Shevchenka St., Lviv`).
+  - На сторінках продуктів `summary` і далі замінює кроки; контактна картка показується скрізь.
+
 ## 2026-11-12 — Вищий мобільний hero сторінки готелю
 - **Агент:** Codex
 - **Гілка:** fix/hotel-mobile-hero-height (статус: змерджено в develop)

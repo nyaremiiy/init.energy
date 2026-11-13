@@ -20,6 +20,7 @@ export const offices: Office[] = [
   {
     id: "lviv",
     city: { uk: "Львів", en: "Lviv" },
+    // TODO(content): verify the official English spelling of the address.
     address: { uk: "вул. Шевченка, 317б", en: "317b Shevchenka St." },
     phone: { display: "+380671985550", href: "tel:+380671985550" },
     mapHref:
