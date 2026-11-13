@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-13 — Світліший фон іконки авторства
+- **Агент:** Claude Code
+- **Гілка:** fix/footer-credit-icon-bg (статус: змерджено в develop)
+- **Що зроблено:** кружок з іконкою `CodeXml` у кредиті футера отримав постійну заливку `white/8`, при hover — `white/14`.
+- **Файли:** src/components/layout/footer/footer.tsx, docs/ai/CHANGELOG.md
+- **Нотатки / що далі:** lint проходить; перевірено знімком 1440 px.
+
 ## 2026-11-13 — Акуратний блок авторства у футері
 - **Агент:** Claude Code
 - **Гілка:** fix/footer-credit-polish (статус: змерджено в develop)
