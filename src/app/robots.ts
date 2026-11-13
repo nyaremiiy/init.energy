@@ -9,7 +9,12 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
       // Service screens: shown under other URLs (proxy rewrites), never indexed.
-      disallow: [routes.inProgress, `/en${routes.inProgress}`, routes.maintenance],
+      disallow: [
+        routes.inProgress,
+        `/en${routes.inProgress}`,
+        `/en${routes.notFoundEn}`,
+        routes.maintenance,
+      ],
     },
     sitemap: absoluteUrl("/sitemap.xml"),
     host: absoluteUrl("/"),

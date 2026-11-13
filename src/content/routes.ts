@@ -97,6 +97,8 @@ export const routes = {
   terms: toPath(slugs.terms),
   /** Rewrite target for planned pages (src/proxy.ts); not linked, never indexed. */
   inProgress: toPath("v-rozrobtsi"),
+  /** Rewrite target for unknown /en/… URLs (src/proxy.ts); not linked, never indexed. */
+  notFoundEn: toPath("ne-znaideno"),
   products: {
     svit600: toPath(slugs.products.svit600),
     svitPlus5000: toPath(slugs.products.svitPlus5000),
