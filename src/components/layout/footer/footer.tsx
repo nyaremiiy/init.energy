@@ -1,9 +1,9 @@
+import { ArrowUpRight, CodeXml } from "lucide-react";
 import Link from "next/link";
 
 import { CookieSettingsLink } from "@/components/consent/CookieSettingsLink";
 import { Container } from "@/components/layout/container";
 import { LanguageSwitcher } from "@/components/layout/header/language-switcher";
-import { ArrowLink } from "@/components/ui/arrow-link";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { Logo } from "@/components/ui/logo";
 import { Panel } from "@/components/ui/panel";
@@ -102,7 +102,7 @@ export function Footer() {
               <p>{format(t.copyright, { year: String(year) })}</p>
             </div>
             <nav aria-label={t.legalNavLabel}>
-              <ul className="flex flex-wrap gap-x-6 gap-y-2">
+              <ul className="flex flex-wrap items-center gap-x-6 gap-y-3">
                 {legalLinks.map((link) => (
                   <li key={link.href}>
                     <Link
@@ -117,18 +117,31 @@ export function Footer() {
                   <CookieSettingsLink />
                 </li>
                 <li>
-                  <div className="flex flex-col items-start gap-2">
-                  <span className="text-small text-white/75">{t.developedBy}</span>
-                  <ArrowLink
+                  <a
                     href="https://nyaremiiy.com"
-                    tone="dark"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="decoration-transparent hover:decoration-white"
+                    className={`group inline-flex items-center gap-3 rounded-full ${focusClasses}`}
                   >
-                    Nazar Yaremiiy
-                  </ArrowLink>
-                </div>
+                    <span
+                      aria-hidden
+                      className="flex size-9 shrink-0 items-center justify-center rounded-full border border-white/22 text-white/80 transition-colors duration-150 ease-tech group-hover:border-white/60 group-hover:bg-white/8 group-hover:text-white"
+                    >
+                      <CodeXml size={16} strokeWidth={1.7} />
+                    </span>
+                    <span className="flex flex-col">
+                      <span className="text-caption text-white/75">
+                        {t.developedBy}
+                      </span>
+                      <span className="inline-flex items-center gap-1 font-medium text-white">
+                        Nazar Yaremiiy
+                        <ArrowUpRight
+                          aria-hidden
+                          className="size-3.5 shrink-0 text-white/75 transition duration-150 ease-tech group-hover:text-white motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5"
+                        />
+                      </span>
+                    </span>
+                  </a>
                 </li>
               </ul>
             </nav>

@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-13 — Акуратний блок авторства у футері
+- **Агент:** Claude Code
+- **Гілка:** fix/footer-credit-polish (статус: змерджено в develop)
+- **Що зроблено:** кредит «Розроблено / Nazar Yaremiiy» — одне посилання на https://nyaremiiy.com: іконка lucide `CodeXml` у круглій рамці 36 px (стиль кнопок соцмереж футера: рамка `white/22` → `white/60`, фон `white/8` при hover), праворуч підпис `text-caption white/75` і ім'я `font-medium` зі стрілкою `ArrowUpRight`, що зсувається при hover (`motion-safe`). Ряд правових посилань вирівняно по центру (`items-center`). `ArrowLink` у футері більше не використовується.
+- **Файли:** src/components/layout/footer/footer.tsx, docs/ai/CHANGELOG.md
+- **Нотатки / що далі:** lint і типи проходять; перевірено знімками 1440 і 360 px.
+
 ## 2026-11-13 — Стиль авторства у футері
 - **Агент:** Claude Code
 - **Гілка:** fix/footer-credit-style (статус: змерджено в develop)
