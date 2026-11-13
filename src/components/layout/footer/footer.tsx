@@ -125,7 +125,7 @@ export function Footer() {
                   >
                     <span
                       aria-hidden
-                      className="flex size-9 shrink-0 items-center justify-center rounded-full border border-white/22 text-white/80 transition-colors duration-150 ease-tech group-hover:border-white/60 group-hover:bg-white/8 group-hover:text-white"
+                      className="flex size-9 shrink-0 items-center justify-center rounded-full border border-white/22 bg-white/8 text-white/80 transition-colors duration-150 ease-tech group-hover:border-white/60 group-hover:bg-white/14 group-hover:text-white"
                     >
                       <CodeXml size={16} strokeWidth={1.7} />
                     </span>
