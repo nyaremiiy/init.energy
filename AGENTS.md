@@ -61,7 +61,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - На світлому: `muted` (ink 70%) — другорядний текст · `faint` (ink 40%) — плейсхолдери, disabled, пунктир · `line` (ink 12%) — лінії й рамки · `hover` (ink 6%) — hover-заливка, водяні знаки.
 - На темному: `muted-dark` (white 75%) — другорядний текст · `faint-dark` (white 45%) — плейсхолдери, пунктир · `line-dark` (white 16%) — лінії й рамки · `fill-dark` (white 8%) — картки й hover-заливка.
 - `accent` / `accent-strong` — лише індикатори ємності, шкали й графіка; ніколи текст чи кнопки. `success` — лише іконка успіху в сповіщенні.
-- Градієнти фото (`scrim-*`) і фони `bg-ink-glow`, `fade-from-ink` — у `globals.css`; прозорість у них дозволена.
+- Градієнти фото (`scrim-*`), маски `mask-promo-curve` / `mask-promo-curve-bottom` і фони `bg-ink-glow` (світіння з верхніх кутів: футер, шапка, меню), `bg-ink-glow-start` (те саме світіння з лівого верхнього кута, за текстом: `PromoBanner`), `fade-from-ink` — у `globals.css`; прозорість у них дозволена.
 
 ### Типографіка
 
