@@ -1,10 +1,8 @@
 "use client";
 
-import { ArrowUpRight, Check, Loader2 } from "lucide-react";
-import { InlineLink } from "@/components/ui/inline-link";
+import { ArrowUpRight } from "lucide-react";
 import {
   type FormEvent,
-  type ReactNode,
   useEffect,
   useRef,
   useState,
@@ -12,8 +10,13 @@ import {
 
 import { submitLead } from "@/app/actions/lead";
 import { Button } from "@/components/ui/button";
-import { inputClasses } from "@/components/ui/input-styles";
-import { PillRadio } from "@/components/ui/pill-radio";
+import { Checkbox } from "@/components/ui/form/checkbox";
+import { Field } from "@/components/ui/form/field";
+import { FormCard } from "@/components/ui/form/form-card";
+import { focusFirstInvalid } from "@/components/ui/form/focus";
+import { RadioPills } from "@/components/ui/form/radio-pills";
+import { Textarea, TextInput } from "@/components/ui/form/controls";
+import { InlineLink } from "@/components/ui/inline-link";
 import { useToast } from "@/components/ui/toast";
 import { routes } from "@/content/routes";
 import {
@@ -38,8 +41,6 @@ type LeadFormProps = {
   objectTypes?: LeadObjectType[];
 };
 
-type Status = "idle" | "submitting";
-
 const defaultObjectTypes: LeadObjectType[] = [
   "apartment",
   "house",
@@ -49,24 +50,6 @@ const defaultObjectTypes: LeadObjectType[] = [
 
 /** Order used to move focus to the first invalid field. */
 const fieldOrder = ["name", "phone", "consent"] as const;
-
-const borderFor = (error?: string) => (error ? "border-ink" : "border-line");
-
-/** Space for the error is always reserved, so the layout never jumps. */
-function FieldError({ id, message }: { id: string; message?: string }) {
-  return (
-    <p
-      id={id}
-      className={`-mt-0.5 min-h-5 text-small text-ink transition-opacity duration-200 ease-tech ${message ? "opacity-100" : "opacity-0"}`}
-    >
-      {message}
-    </p>
-  );
-}
-
-function FieldLabel({ children }: { children: ReactNode }) {
-  return <span className="text-small font-medium text-ink">{children}</span>;
-}
 
 export function LeadForm({
   defaultObjectType,
@@ -80,15 +63,13 @@ export function LeadForm({
   const locale = useLocale();
   const formRef = useRef<HTMLFormElement>(null);
   const [errors, setErrors] = useState<LeadFieldErrors>({});
-  const [status, setStatus] = useState<Status>("idle");
+  const [submitting, setSubmitting] = useState(false);
   const toast = useToast();
   const [objectType, setObjectType] = useState<LeadObjectType | undefined>(
     defaultObjectType,
   );
   // Parameters handed over by the quick calculator (hidden field → CRM).
   const [calculator, setCalculator] = useState<CalculatorApplyDetail>();
-  const submitting = status === "submitting";
-  const cardBg = cardTone === "white" ? "bg-white" : "bg-surface";
 
   useEffect(() => {
     function onApply(event: Event) {
@@ -103,9 +84,7 @@ export function LeadForm({
 
   const focusFirstError = (fieldErrors: LeadFieldErrors) => {
     const first = fieldOrder.find((key) => fieldErrors[key]);
-    const element = first ? formRef.current?.elements.namedItem(first) : null;
-
-    if (element instanceof HTMLElement) element.focus();
+    if (first) focusFirstInvalid(formRef.current);
   };
 
   /** A field's error disappears as soon as the user edits that field. */
@@ -137,19 +116,18 @@ export function LeadForm({
     const clientResult = validateLeadForm(formData, t);
     if (!clientResult.data && !clientResult.isSpam) {
       setErrors(clientResult.errors);
-      setStatus("idle");
       focusFirstError(clientResult.errors);
       return;
     }
 
     setErrors({});
-    setStatus("submitting");
+    setSubmitting(true);
     try {
       const result = await submitLead(formData);
 
       if (!result.success) {
         setErrors(result.errors);
-        setStatus("idle");
+        setSubmitting(false);
         focusFirstError(result.errors);
         if (Object.keys(result.errors).length === 0) {
           toast.show("error", t.failure);
@@ -159,169 +137,82 @@ export function LeadForm({
 
       form.reset();
       setCalculator(undefined);
-      setStatus("idle");
+      setSubmitting(false);
       trackEvent({ event: "generate_lead", calculator: calculator?.data ?? "" });
       toast.show("success", t.success);
     } catch {
-      setStatus("idle");
+      setSubmitting(false);
       toast.show("error", t.failure);
     }
   }
 
   return (
-    <form
+    <FormCard
       ref={formRef}
       noValidate
-      // No browser form history: earlier entries must not appear as suggestions.
-      autoComplete="off"
+      tone={cardTone === "white" ? "white" : "surface"}
+      busy={submitting}
       onSubmit={handleSubmit}
       onInput={clearFieldError}
       onChange={clearFieldError}
-      aria-busy={submitting}
-      className={`rounded-card shadow-card ${cardBg} px-card-sm py-card-sm lg:p-card`}
     >
       <input type="hidden" name="locale" value={locale} />
-      {/* Disabling the fieldset disables every control while sending. */}
-      <fieldset
-        disabled={submitting}
-        className="m-0 flex min-w-0 flex-col gap-3 border-0 p-0"
+
+      <RadioPills
+        legend={t.objectType}
+        name="objectType"
+        options={objectTypes.map((type) => ({ value: type, label: t.objectTypes[type] }))}
+        value={objectType}
+        onChange={(value) => setObjectType(value as LeadObjectType)}
+      />
+
+      {calculator ? (
+        <p className="rounded-field border border-line bg-white px-4 py-3 text-small text-muted motion-safe:animate-enter">
+          {t.calculatorAttached}{" "}
+          <span className="font-medium text-ink">{calculator.summary}</span>
+        </p>
+      ) : null}
+      <input type="hidden" name="product" value={product ?? ""} />
+      <input type="hidden" name="calculatorData" value={calculator?.data ?? ""} />
+
+      <Field label={t.name} error={errors.name} reserveMessage>
+        <TextInput name="name" type="text" required autoComplete="name" placeholder={t.namePlaceholder} />
+      </Field>
+
+      <Field label={t.phone} error={errors.phone} reserveMessage>
+        <TextInput name="phone" type="tel" required inputMode="tel" autoComplete="tel" placeholder={t.phonePlaceholder} />
+      </Field>
+
+      <Field label={t.comment} optional optionalLabel={t.optional}>
+        <Textarea name="comment" rows={3} autoComplete="off" placeholder={commentPlaceholder ?? t.commentPlaceholder} />
+      </Field>
+
+      {/* Honeypot: hidden from people, filled only by bots. */}
+      <div className="sr-only" aria-hidden="true">
+        <label htmlFor="lead-website">Website</label>
+        <input id="lead-website" name="website" type="text" tabIndex={-1} autoComplete="off" data-honeypot />
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <Checkbox name="consent" required invalid={Boolean(errors.consent)} aria-describedby={errors.consent ? "lead-consent-error" : undefined}>
+          {t.consentBefore}{" "}
+          <InlineLink href={routes.privacy}>{t.privacyPolicy}</InlineLink>{" "}
+          {t.consentAfter}
+        </Checkbox>
+        <p id="lead-consent-error" className={`min-h-5 text-small text-ink ${errors.consent ? "opacity-100" : "opacity-0"}`}>
+          {errors.consent ?? ""}
+        </p>
+      </div>
+
+      <Button
+        type="submit"
+        variant="dark"
+        fullWidth
+        loading={submitting}
+        icon={<ArrowUpRight aria-hidden className="size-4.5" />}
       >
-        <fieldset className="m-0 border-0 p-0 pb-2">
-          <legend className="mb-3 text-small font-medium text-ink">
-            {t.objectType}
-          </legend>
-          {/* Native radios: arrow keys move the selection inside the group. */}
-          <div className="flex flex-wrap gap-2">
-            {objectTypes.map((type) => (
-              <PillRadio
-                key={type}
-                name="objectType"
-                value={type}
-                checked={objectType === type}
-                onChange={() => setObjectType(type)}
-              >
-                {t.objectTypes[type]}
-              </PillRadio>
-            ))}
-          </div>
-        </fieldset>
-
-        {calculator ? (
-          <p className="rounded-field border border-line bg-white px-4 py-3 text-small text-muted motion-safe:animate-enter">
-            {t.calculatorAttached}{" "}
-            <span className="font-medium text-ink">{calculator.summary}</span>
-          </p>
-        ) : null}
-        <input type="hidden" name="product" value={product ?? ""} />
-        <input
-          type="hidden"
-          name="calculatorData"
-          value={calculator?.data ?? ""}
-        />
-
-        <label className="flex flex-col gap-2">
-          <FieldLabel>{t.name}</FieldLabel>
-          <input
-            name="name"
-            type="text"
-            required
-            autoComplete="off"
-            placeholder={t.namePlaceholder}
-            aria-invalid={errors.name ? true : undefined}
-            aria-describedby="lead-name-error"
-            className={inputClasses({ invalid: Boolean(errors.name) })}
-          />
-          <FieldError id="lead-name-error" message={errors.name} />
-        </label>
-
-        <label className="flex flex-col gap-2">
-          <FieldLabel>{t.phone}</FieldLabel>
-          <input
-            name="phone"
-            type="tel"
-            required
-            inputMode="tel"
-            autoComplete="off"
-            placeholder={t.phonePlaceholder}
-            aria-invalid={errors.phone ? true : undefined}
-            aria-describedby="lead-phone-error"
-            className={inputClasses({ invalid: Boolean(errors.phone) })}
-          />
-          <FieldError id="lead-phone-error" message={errors.phone} />
-        </label>
-
-        <label className="flex flex-col gap-2 pb-2">
-          <FieldLabel>
-            {t.comment}{" "}
-            <span className="font-normal text-muted">({t.optional})</span>
-          </FieldLabel>
-          <textarea
-            name="comment"
-            rows={3}
-            autoComplete="off"
-            placeholder={commentPlaceholder ?? t.commentPlaceholder}
-            className={inputClasses({ multiline: true })}
-          />
-        </label>
-
-        <div className="sr-only" aria-hidden="true">
-          <label htmlFor="lead-website">Website</label>
-          <input
-            id="lead-website"
-            name="website"
-            type="text"
-            tabIndex={-1}
-            autoComplete="off"
-          />
-        </div>
-
-        <div className="flex flex-col gap-2">
-          <label className="flex cursor-pointer items-start gap-3 text-small leading-relaxed text-muted has-disabled:cursor-not-allowed">
-            {/* Custom box (no accent-color) so it looks the same in every browser. */}
-            <span className="relative mt-0.5 inline-flex size-5 shrink-0">
-              <input
-                name="consent"
-                type="checkbox"
-                required
-                aria-invalid={errors.consent ? true : undefined}
-                aria-describedby="lead-consent-error"
-                className={`peer size-5 cursor-pointer appearance-none rounded-tile border bg-white transition-colors duration-200 ease-tech hover:border-faint checked:border-ink checked:bg-ink focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-line disabled:cursor-not-allowed disabled:not-checked:bg-surface ${borderFor(errors.consent)}`}
-              />
-              <Check
-                aria-hidden
-                strokeWidth={3}
-                className="pointer-events-none absolute inset-0 m-auto size-3.5 text-white opacity-0 transition-opacity duration-150 ease-tech peer-checked:opacity-100"
-              />
-            </span>
-            <span>
-              {t.consentBefore}{" "}
-              <InlineLink href={routes.privacy}>
-                {t.privacyPolicy}
-              </InlineLink>{" "}
-              {t.consentAfter}
-            </span>
-          </label>
-          <FieldError id="lead-consent-error" message={errors.consent} />
-        </div>
-
-        <Button
-          type="submit"
-          variant="dark"
-          className={`w-full ${submitting ? "pointer-events-none opacity-80" : ""}`}
-          icon={
-            submitting ? (
-              <Loader2
-                aria-hidden
-                className="size-4 motion-safe:animate-spin"
-              />
-            ) : (
-              <ArrowUpRight aria-hidden className="size-4.5" />
-            )
-          }
-        >
-          {submitting ? t.submitting : (submitLabel ?? t.submit)}
-        </Button>
-      </fieldset>
-    </form>
+        {submitting ? t.submitting : (submitLabel ?? t.submit)}
+      </Button>
+    </FormCard>
   );
 }

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import { PillRadio } from "@/components/ui/pill-radio";
+import { RadioPills } from "@/components/ui/form/radio-pills";
 import { useLocale } from "@/i18n/client";
 import { formatNumber } from "@/lib/format";
 import { format } from "@/lib/messages";
@@ -46,25 +46,14 @@ export function ScalingWidget({
   return (
     <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
       <div className="flex flex-col gap-8 lg:col-span-5">
-        <fieldset className="m-0 flex min-w-0 flex-col gap-3 border-0 p-0">
-          <legend className="mb-3 text-small font-medium text-muted-dark">
-            {labels.legend}
-          </legend>
-          <div className="flex flex-wrap gap-2">
-            {options.map((option) => (
-              <PillRadio
-                key={option}
-                tone="dark"
-                name="scaling-modules"
-                value={option}
-                checked={modules === option}
-                onChange={() => setModules(option)}
-              >
-                {format(labels.option, { count: String(option) })}
-              </PillRadio>
-            ))}
-          </div>
-        </fieldset>
+        <RadioPills
+          legend={labels.legend}
+          name="scaling-modules"
+          tone="dark"
+          value={String(modules)}
+          options={options.map((option) => ({ value: String(option), label: format(labels.option, { count: String(option) }) }))}
+          onChange={(value) => setModules(Number(value))}
+        />
 
         <p className="flex flex-col gap-2" aria-live="polite">
           <span className="font-heading text-hero-sm font-light text-white tabular-nums md:text-hero-md">

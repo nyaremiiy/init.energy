@@ -36,6 +36,18 @@
   - `Montserrat` без ваги 400: текст з `font-heading` без явної ваги рендериться як 500 (найближча доступна).
   - Скриншоти до/після в `.tmp/ds-before` і `.tmp/ds-after` (папка в .gitignore). Попіксельне порівняння можливе лише там, де висота не змінилась; на всіх 19 знімках висота змінилась, тому перевірка візуальна (головна, SVIT 600, картки, теги, шапка).
 
+## 2026-11-17 — Форми й поля: спільні компоненти
+- **Агент:** Claude Code
+- **Гілка:** feature/forms-system (статус: у роботі; стоїть на feature/buttons-links-system)
+- **Що зроблено:**
+  - Новий каталог `src/components/ui/form/`: `Field` і `FieldGroup` (підпис, контрол, рядок повідомлення; id, `aria-describedby`, `aria-invalid` через контекст), `TextInput` / `NumberInput` / `Textarea` / `Select` (стилі лише з `inputClasses`, іконка `AlertCircle` при помилці), `Checkbox` (20 px, радіус 6 px), `Switch` (винесено з cookie-баннера без змін), `RadioPills`, `PillRadio` (перенесено), `CheckChip`, `RangeField` (перенесено), `InputAction`, `FormCard`, `focusFirstInvalid`.
+  - LeadForm: `FormCard`, `Field`, `RadioPills`, `Checkbox`, `Button loading`; прибрано `autoComplete="off"` у формі, ім'я — `name`, телефон — `tel` (автозаповнення на мобільному). Власний спінер прибрано.
+  - Калькулятори: `Group`, `SelectField`, `NumberField` у `calculator-fields.tsx` тепер обгортки над `FieldGroup` / `Field` + `Select` / `NumberInput`; чіпи приладів — `CheckChip`. Віджет масштабування — `RadioPills`. Розсилка — `InputAction` з `autoComplete="email"`. Налаштування cookie — `Switch`.
+  - `lint:tokens`: правило `control` (голі `<input>`, `<select>`, `<textarea>` поза `ui/form/`); виняток `radius` для `checkbox.tsx` (6 px за макетом).
+- **Нотатки / що далі:**
+  - Порівняння (1440 і 390): налаштування cookie — 0 px; головна — висота −4 / −2 px; калькулятор — −29 / −38 px (у полів калькулятора відступ підпис → поле 8 px замість 12 px за специфікацією).
+  - Не зроблено: `FormStatus` (вбудоване повідомлення без JS), клавіатурний прохід і перевірка автозаповнення на телефоні.
+
 ## 2026-11-17 — Кнопки й посилання: єдині компоненти
 - **Агент:** Claude Code
 - **Гілка:** feature/buttons-links-system (статус: у роботі)

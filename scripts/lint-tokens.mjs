@@ -42,6 +42,8 @@ const arbitraryRe = /(?<![\w-])([a-z][\w-]*)-\[/g;
 const exceptions = {
   // Decorative wordmark in the footer: a faint white watermark, not a line.
   "components/layout/footer/footer-mark.tsx": ["opacity"],
+  // The checkbox box is 20 px with a 6 px radius (rounded-md) by the design board; rounded-tile would make it a circle.
+  "components/ui/form/checkbox.tsx": ["radius"],
 };
 
 function walk(dir, out = []) {
@@ -99,6 +101,21 @@ for (const file of walk(ROOT)) {
 if (linkExceptionsHit.length > 0) {
   console.log("lint:tokens — documented link exceptions:");
   for (const e of linkExceptionsHit) console.log(`  ${e}`);
+}
+
+// Form controls: every <input>, <select> and <textarea> goes through src/components/ui/form/.
+// Allowed outside it: type="hidden" and honeypot fields (marked data-honeypot).
+const controlRe = /<(input|select|textarea)\b([^>]*)>/gs;
+for (const file of walk(ROOT)) {
+  const rel = relative(ROOT, file).replace(/\\/g, "/");
+  if (rel.startsWith("components/ui/form/") || !/^(components|app)\//.test(rel)) continue;
+  const text = readFileSync(file, "utf8");
+  for (const m of text.matchAll(controlRe)) {
+    const attrs = m[2];
+    if (/type="hidden"/.test(attrs) || /data-honeypot/.test(attrs)) continue;
+    const line = text.slice(0, m.index).split("\n").length;
+    problems.push({ file: rel, line, id: "control", message: `bare <${m[1]}>: use Field and the components in src/components/ui/form/` });
+  }
 }
 
 if (problems.length > 0) {

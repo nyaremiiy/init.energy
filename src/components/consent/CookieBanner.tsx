@@ -3,6 +3,7 @@
 import { Cookie, Lock } from "lucide-react";
 import { InlineLink } from "@/components/ui/inline-link";
 import { IconButton } from "@/components/ui/icon-button";
+import { Switch } from "@/components/ui/form/switch";
 import { useEffect, useId, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -29,32 +30,6 @@ function CookieMark({ size }: { size: "sm" | "md" }) {
 }
 
 /** Real switch: role="switch", labelled by the row title, Space/Enter toggle natively. */
-function Switch({ checked, disabled, labelledBy, describedBy, onChange }: {
-  checked: boolean;
-  disabled?: boolean;
-  labelledBy: string;
-  describedBy: string;
-  onChange?: (value: boolean) => void;
-}) {
-  return (
-    <button
-      type="button"
-      role="switch"
-      aria-checked={checked}
-      aria-labelledby={labelledBy}
-      aria-describedby={describedBy}
-      disabled={disabled}
-      onClick={() => onChange?.(!checked)}
-      className={`relative inline-flex h-7 w-12 shrink-0 cursor-pointer items-center rounded-full transition-colors duration-200 ease-tech focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-line disabled:cursor-not-allowed disabled:opacity-60 ${checked ? "bg-ink" : "bg-line"}`}
-    >
-      <span
-        aria-hidden
-        className={`size-5.5 rounded-full bg-white transition-transform duration-200 ease-tech ${checked ? "translate-x-5.75" : "translate-x-0.75"}`}
-      />
-    </button>
-  );
-}
-
 /** Settings: centred dialog on desktop, bottom sheet on phones; focus trapped, Esc / backdrop close. */
 function CookieSettings() {
   const locale = useLocale();
