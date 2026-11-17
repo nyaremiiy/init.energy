@@ -202,7 +202,9 @@
         "phone": "Please enter a valid phone number.",
         "consent": "Consent to the privacy policy is required."
       },
-      "calculatorAttached": "Calculator parameters:"
+      "calculatorAttached": "Calculator parameters:",
+      "cardTitle": "Request a quote",
+      "cardNote": "We'll call you back during working hours"
     }
   },
   "specs": {
