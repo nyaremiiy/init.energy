@@ -1,4 +1,5 @@
 import type { LucideIcon } from "lucide-react";
+import { PillLink } from "./pill-link";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 
@@ -218,7 +219,6 @@ export function SegmentLinks({
   navLabel: string;
   tone?: SegmentCardTone;
 }) {
-  const classes = toneClasses[tone];
 
   return (
     <nav aria-label={navLabel} className="mt-auto">
@@ -228,23 +228,14 @@ export function SegmentLinks({
 
           return (
             <li key={link.href}>
-              <Link
+              <PillLink
                 href={link.href}
-                className={`group flex items-center gap-3 rounded-full border px-4 py-3 text-small font-medium sm:px-5 sm:text-body transition-colors duration-200 ease-tech focus-visible:outline-2 focus-visible:outline-offset-2 ${featured ? classes.featuredLink : classes.link}`}
+                tone={tone === "light" ? "light" : "dark"}
+                featured={featured}
+                meta={link.spec}
               >
-                <span className="flex-1">{link.label}</span>
-                {link.spec ? (
-                  <span
-                    className={`text-right whitespace-nowrap tabular-nums ${featured ? classes.featuredMuted : classes.muted}`}
-                  >
-                    {link.spec}
-                  </span>
-                ) : null}
-                <ArrowUpRight
-                  aria-hidden
-                  className="size-5 shrink-0 transition-transform duration-200 motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5"
-                />
-              </Link>
+                {link.label}
+              </PillLink>
             </li>
           );
         })}

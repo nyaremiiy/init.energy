@@ -81,6 +81,18 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - `shadow-card` — світлі картки, калькулятор, форма заявки, тултіп.
 - `shadow-glass` — лише плаваючі скляні елементи: банер і вікно cookie (разом з `bg-glass`).
 
+## Кнопки й посилання (обов'язково)
+
+Кожна кнопка і посилання на сайті — один із компонентів у `src/components/ui/`: `Button`, `IconButton`, `ArrowLink`, `InlineLink`, `NavLink`, `PillLink`, `RowLink`, `chipClasses` (фільтри, вкладки, радіо-пігулки). Власні класи для `rounded-full` або `underline` на `<a>`, `<Link>` чи `<button>` поза `ui/` заборонені; `npm run lint:tokens` падає на порушеннях і друкує задокументовані винятки.
+
+- Навігація → `<a>` / `Link`; дія → `<button>`. Вигляд однаковий, тег різний (`Button` сам обирає тег через `href`).
+- Не більше одного `dark` або `primary` на екран; поруч — лише `outline-light` / `secondary` або `ArrowLink`.
+- Стрілка — тільки `ArrowUpRight`: 18 px у кнопках, 16 px у текстових посиланнях; зсувається на 2 px при hover лише з `motion-safe`.
+- Шрифти: `Button` — Montserrat 600, 14 px; `ArrowLink` — Inter 600, 16 px; `chipClasses` і `PillLink` — Inter 500, 14 px; `NavLink` — Inter 400, 14 px.
+- Фокус завжди видно: `Button` — 4 px, зсув 2 px; `IconButton`, `chipClasses`, `PillLink` — 2 px, зсув 2 px; текстові посилання — 2 px, зсув 4 px.
+- Ціль натискання на мобільному ≥ 44×44. `Button size="sm"` (40 px) — лише на десктопних банерах і діалогах.
+- `Button` з `loading` показує спінер і блокує кнопку; для submit форм використовуємо його, а не власний спінер.
+
 ## Git workflow (обов'язково)
 
 - `main` — стабільна гілка. **Мерджить у `main` тільки власник.** Агентам заборонено комітити чи мерджити в `main`.

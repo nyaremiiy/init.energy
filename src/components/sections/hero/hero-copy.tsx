@@ -60,7 +60,7 @@ export function HeroCopy({ id, eyebrow, lines, headingLevel, description, action
             href={action.href}
             variant={action.variant}
             icon={<ArrowUpRight aria-hidden className="size-4" />}
-            size="wide"
+
           >
             {action.label}
           </Button>

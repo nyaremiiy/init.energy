@@ -36,6 +36,22 @@
   - `Montserrat` без ваги 400: текст з `font-heading` без явної ваги рендериться як 500 (найближча доступна).
   - Скриншоти до/після в `.tmp/ds-before` і `.tmp/ds-after` (папка в .gitignore). Попіксельне порівняння можливе лише там, де висота не змінилась; на всіх 19 знімках висота змінилась, тому перевірка візуальна (головна, SVIT 600, картки, теги, шапка).
 
+## 2026-11-17 — Кнопки й посилання: єдині компоненти
+- **Агент:** Claude Code
+- **Гілка:** feature/buttons-links-system (статус: у роботі)
+- **Що зроблено:**
+  - Нові компоненти: `PillLink` (пігулка-посилання з `meta` і стрілкою), `RowLink` (рядок списку: назва, опис, значення, декоративна кругла стрілка), `NavLink` (текстова навігація з `active` / `aria-current`), `InlineLink` (посилання в тексті: зовнішні відкриваються у новій вкладці, `mailto:` і `tel:` — звичайний `<a>`).
+  - `Button`: розмір `wide` замінено на `sm` (40 px, лише для десктопних банерів) і `md` (за замовчуванням); `fullWidth` — булевий прапорець; `loading` — спінер і `disabled` з `aria-busy`.
+  - `IconButton`: prop `icon` (`arrow`, `close`, `menu`, `phone`); зсув при hover лише у стрілки.
+  - Замінено вручну стилізовані елементи: рядки сегментів (`SegmentLinks` → `PillLink`), ліва колонка FAQ (→ `PillLink`), бургер шапки і кнопка закриття cookie-діалогу (→ `IconButton`), кругла кнопка телефону в `LeadContactCard` і в шапці (→ `IconButton`), ряди пов'язаних продуктів (→ `RowLink`), посилання в тексті форми, баннера cookie, сторінки cookie й методології СЕС (→ `InlineLink`), телефон у FAQ (→ `InlineLink`).
+  - `scripts/lint-tokens.mjs`: правило `link` падає на `<a|Link|button>` з `rounded-full` або `underline` поза `components/ui/`; задокументовані винятки друкуються при кожному запуску.
+  - Винятки (з TODO): кредит-ссылка в футері (кругла іконка бренду), триґер мега-меню (кнопка з `aria-expanded`), активна секційна пігулка в шапці (потрібен `NavLink variant="pill"`), кнопка «Налаштування» в баннері cookie (дія, що виглядає як текстове посилання).
+- **Файли:** src/components/ui/{pill-link,row-link,nav-link,inline-link,button,icon-button,segment-card}.tsx, src/components/consent/CookieBanner.tsx, src/components/forms/LeadForm.tsx, src/components/pages/cookie-policy-page.tsx, src/components/layout/header/{mobile-menu,header-main-bar}.tsx, src/components/product-page/related-products.tsx, src/components/sections/{LeadContactCard.tsx,home/faq-section.tsx,hero/hero-copy.tsx}, src/components/pages/ses-payback-page.tsx, scripts/lint-tokens.mjs, AGENTS.md, docs/ai/{CONTEXT,CHANGELOG}.md
+- **Нотатки / що далі:**
+  - Попиксельне порівняння (1440 і 390, 5 сторінок): відмінності до 0,02% на головній, /cec/, /kalkulyator/, /rishennya/; на `/svit-plus-5000/` на 1440 висота на 26 px менша (`PillLink` 14 px замість 16 px у сегментних посиланнях на `sm+` — за специфікацією). Мобільна версія цієї сторінки — 0,2%.
+  - Hero: `size="wide"` замінено на стандартний `md`, бо `fullWidth` розтягнув би кнопки; відступи трохи менші.
+  - Клавіатурний прохід по `/` і `/cec/` ще не виконано. Футер, `section-nav-link`, `mega-menu-item` поки не переведені на `NavLink` (див. винятки).
+
 ## 2026-11-13 — Англійська сторінка 404
 - **Агент:** Claude Code
 - **Гілка:** fix/english-404 (статус: змерджено в develop)

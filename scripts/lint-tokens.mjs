@@ -70,6 +70,37 @@ for (const file of walk(ROOT)) {
   });
 }
 
+// Links and buttons: no hand-written pill or underline styles outside src/components/ui/.
+// Use Button, IconButton, PillLink, RowLink, NavLink, InlineLink or ArrowLink (see AGENTS.md).
+const linkRe = /<(a|Link|button)\b([^>]*?)className=(?:"([^"]*)"|\{`([^`]*)`\})/gs;
+const linkExceptions = {
+  // Action that looks like a text link (opens the settings dialog); not navigation.
+  "components/consent/CookieBanner.tsx": "settings dialog trigger styled as an inline link (action, not navigation)",
+  "components/layout/footer/footer.tsx": "developer credit: round brand icon plus text link (TODO: decide on a credit component)",
+  "components/layout/header/mega-menu-item.tsx": "mega-menu trigger is a disclosure button (aria-expanded), not a link (TODO: NavLink for the button)",
+  "components/layout/header/section-nav-link.tsx": "active section pill in the header (TODO: NavLink variant=\"pill\")",
+};
+const linkExceptionsHit = [];
+for (const file of walk(ROOT)) {
+  const rel = relative(ROOT, file).replace(/\\/g, "/");
+  if (rel.startsWith("components/ui/") || !/^(components|app)\//.test(rel)) continue;
+  const text = readFileSync(file, "utf8");
+  for (const m of text.matchAll(linkRe)) {
+    const cls = m[3] ?? m[4] ?? "";
+    if (!/rounded-full|underline/.test(cls)) continue;
+    const line = text.slice(0, m.index).split("\n").length;
+    if (linkExceptions[rel]) {
+      linkExceptionsHit.push(`src/${rel}:${line}  ${linkExceptions[rel]}`);
+      continue;
+    }
+    problems.push({ file: rel, line, id: "link", message: `hand-made ${m[1]} with rounded-full/underline: use a ui link or button component` });
+  }
+}
+if (linkExceptionsHit.length > 0) {
+  console.log("lint:tokens — documented link exceptions:");
+  for (const e of linkExceptionsHit) console.log(`  ${e}`);
+}
+
 if (problems.length > 0) {
   for (const p of problems) console.error(`src/${p.file}:${p.line}  [${p.id}] ${p.message}`);
   console.error(`\nlint:tokens — ${problems.length} problem(s)`);

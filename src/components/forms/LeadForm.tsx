@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowUpRight, Check, Loader2 } from "lucide-react";
-import Link from "next/link";
+import { InlineLink } from "@/components/ui/inline-link";
 import {
   type FormEvent,
   type ReactNode,
@@ -295,12 +295,9 @@ export function LeadForm({
             </span>
             <span>
               {t.consentBefore}{" "}
-              <Link
-                href={routes.privacy}
-                className="rounded-sm text-ink underline decoration-faint underline-offset-2 transition-colors duration-200 ease-tech hover:decoration-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
-              >
+              <InlineLink href={routes.privacy}>
                 {t.privacyPolicy}
-              </Link>{" "}
+              </InlineLink>{" "}
               {t.consentAfter}
             </span>
           </label>

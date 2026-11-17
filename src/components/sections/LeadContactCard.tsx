@@ -1,4 +1,5 @@
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
+import { IconButton } from "@/components/ui/icon-button";
 
 import { ContactLink } from "@/components/ui/contact-link";
 import { companyContacts, offices } from "@/content/company";
@@ -34,12 +35,13 @@ export function LeadContactCard() {
         <span className="font-sans text-h3-sm font-medium whitespace-nowrap tabular-nums @xs:text-h3 @sm:text-h2-sm @md:text-h2-md @lg:text-h2 @lg:tracking-tight">
           {phone}
         </span>
-        <span
-          aria-hidden
-          className="flex size-13 shrink-0 items-center justify-center rounded-full bg-white text-ink transition-transform duration-200 ease-tech motion-safe:group-hover:scale-105"
-        >
-          <Phone size={20} strokeWidth={1.7} />
-        </span>
+        <IconButton
+          decorative
+          variant="solid-light"
+          size="md"
+          icon="phone"
+          className="transition-transform duration-200 ease-tech motion-safe:group-hover:scale-105"
+        />
       </ContactLink>
 
       <div className="flex flex-col gap-3 border-t border-line-dark pt-4 sm:flex-row sm:flex-wrap sm:gap-x-6">
