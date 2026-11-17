@@ -8,6 +8,8 @@ type FormCardProps = {
   tone?: FormCardTone;
   /** While sending: the whole form is disabled and marked busy. */
   busy?: boolean;
+  /** Gap between the groups of the form (default 20 px). */
+  stackClassName?: string;
   children: ReactNode;
 } & Omit<ComponentProps<"form">, "children">;
 
@@ -18,10 +20,10 @@ const tones: Record<FormCardTone, string> = {
 };
 
 /** Form wrapper: card padding, background tone and busy state. Controls are disabled via fieldset. */
-export function FormCard({ tone = "surface", busy = false, className, children, ...props }: FormCardProps) {
+export function FormCard({ tone = "surface", busy = false, stackClassName = "gap-5", className, children, ...props }: FormCardProps) {
   return (
     <form aria-busy={busy || undefined} className={`rounded-card px-card-sm py-card-sm lg:p-card ${tones[tone]} ${className ?? ""}`} {...props}>
-      <fieldset disabled={busy} className="m-0 flex min-w-0 flex-col gap-5 border-0 p-0">
+      <fieldset disabled={busy} className={`m-0 flex min-w-0 flex-col border-0 p-0 ${stackClassName}`}>
         {children}
       </fieldset>
     </form>

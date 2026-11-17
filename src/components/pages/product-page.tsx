@@ -106,9 +106,9 @@ export function ProductPageView({
     page.consultation.summary?.[locale] ??
     `${product.name} · ${formatQuantity(product.capacity, locale)}`;
   const summary = (
-    <div className="mt-6 flex w-full items-center gap-4 rounded-card bg-white p-card-sm lg:p-card">
+    <div className="flex w-full items-center gap-4 rounded-tile bg-fill-dark p-4 ring-1 ring-line-dark">
       {product.image && !page.mediaPlaceholder ? (
-        <div className="relative size-16 shrink-0 overflow-hidden rounded-tile bg-surface">
+        <div className="relative size-16 shrink-0 overflow-hidden rounded-tile bg-white">
           <Image
             src={product.image.src}
             alt=""
@@ -119,13 +119,13 @@ export function ProductPageView({
           />
         </div>
       ) : (
-        <MediaPlaceholder caption="" className="size-16 shrink-0 rounded-tile" />
+        <MediaPlaceholder caption="" tone="dark" className="size-16 shrink-0 rounded-tile" />
       )}
       <p className="flex flex-col gap-1">
-        <span className="text-small text-muted">
+        <span className="text-small text-muted-dark">
           {t.consultation.summaryTitle}
         </span>
-        <span className="font-heading text-body font-semibold text-ink">
+        <span className="font-heading text-body font-semibold text-white">
           {summaryText}
         </span>
       </p>
@@ -213,7 +213,6 @@ export function ProductPageView({
         />
         <RelatedProducts ids={page.related} title={page.relatedTitle?.[locale]} links={page.relatedLinks?.map((item) => ({ title: item.title[locale], summary: item.summary[locale], href: item.href }))} />
         <LeadSection
-          panel
           title={page.consultation.title?.[locale] ?? t.consultation.title}
           lead={page.consultation.lead[locale]}
           summary={summary}

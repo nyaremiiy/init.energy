@@ -61,7 +61,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - На світлому: `muted` (ink 70%) — другорядний текст · `faint` (ink 40%) — плейсхолдери, disabled, пунктир · `line` (ink 12%) — лінії й рамки · `hover` (ink 6%) — hover-заливка, водяні знаки.
 - На темному: `muted-dark` (white 75%) — другорядний текст · `faint-dark` (white 45%) — плейсхолдери, пунктир · `line-dark` (white 16%) — лінії й рамки · `fill-dark` (white 8%) — картки й hover-заливка.
 - `accent` / `accent-strong` — лише індикатори ємності, шкали й графіка; ніколи текст чи кнопки. `success` — лише іконка успіху в сповіщенні.
-- Градієнти фото (`scrim-*`), маски `mask-promo-curve` / `mask-promo-curve-bottom` і фони `bg-ink-glow` (світіння з верхніх кутів: футер, шапка, меню), `bg-ink-glow-start` (те саме світіння з лівого верхнього кута, за текстом: `PromoBanner`), `fade-from-ink` — у `globals.css`; прозорість у них дозволена.
+- Градієнти фото (`scrim-*`, зокрема `scrim-lead` для фото в секції заявки), маски `mask-promo-curve` / `mask-promo-curve-bottom` і фони `bg-ink-glow` (світіння з верхніх кутів: футер, шапка, меню), `bg-ink-glow-start` (те саме світіння з лівого верхнього кута, за текстом: `PromoBanner`), `fade-from-ink` — у `globals.css`; прозорість у них дозволена.
 
 ### Типографіка
 
@@ -95,7 +95,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 ## Форми
 
-Кожен контрол — через компоненти `src/components/ui/form/`: `Field` / `FieldGroup` (підпис, контрол, рядок повідомлення), `TextInput`, `NumberInput` (з `unit`), `Textarea`, `Select`, `RadioPills` / `PillRadio`, `CheckChip`, `Checkbox`, `Switch`, `RangeField`, `FormCard`. Стилі полів — лише `inputClasses`. `npm run lint:tokens` падає на `<input>`, `<select>`, `<textarea>` поза `ui/form/` (крім `type="hidden"` і honeypot з `data-honeypot`).
+Кожен контрол — через компоненти `src/components/ui/form/`: `Field` / `FieldGroup` (підпис, контрол, рядок повідомлення), `TextInput`, `NumberInput` (з `unit`), `Textarea`, `Select`, `RadioPills` (`variant="pills"` або `"tiles"` — плитки з іконками, тип об'єкта в заявці) / `PillRadio`, `CheckChip`, `Checkbox`, `Switch`, `RangeField`, `FormCard`. Стилі полів — лише `inputClasses`. `npm run lint:tokens` падає на `<input>`, `<select>`, `<textarea>` поза `ui/form/` (крім `type="hidden"` і honeypot з `data-honeypot`).
 
 - Підпис видно завжди; placeholder — лише приклад («Наприклад, 40»). Позначаємо необов'язкові поля, не обов'язкові.
 - Помилка: рамка ink / white + іконка `AlertCircle` + текст, без червоного; фокус на першому полі з помилкою (`focusFirstInvalid`); у формах заявки місце під повідомлення зарезервоване (`reserveMessage`).

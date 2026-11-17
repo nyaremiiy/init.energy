@@ -17,9 +17,11 @@ import { focusFirstInvalid } from "@/components/ui/form/focus";
 import { FormStatus } from "@/components/ui/form/form-status";
 import { RadioPills } from "@/components/ui/form/radio-pills";
 import { Textarea, TextInput } from "@/components/ui/form/controls";
+import { Heading } from "@/components/ui/heading";
 import { InlineLink } from "@/components/ui/inline-link";
 import { useToast } from "@/components/ui/toast";
 import { offices } from "@/content/company";
+import { objectTypeIcons } from "@/content/segments";
 import { routes } from "@/content/routes";
 import { formatPhone } from "@/lib/format";
 import {
@@ -39,8 +41,6 @@ type LeadFormProps = {
   product?: string;
   submitLabel?: string;
   commentPlaceholder?: string;
-  /** Card background: "surface" on white sections, "white" on the light-blue panel. */
-  cardTone?: "surface" | "white";
   objectTypes?: LeadObjectType[];
 };
 
@@ -59,7 +59,6 @@ export function LeadForm({
   product,
   submitLabel,
   commentPlaceholder,
-  cardTone = "surface",
   objectTypes = defaultObjectTypes,
 }: LeadFormProps) {
   const t = useMessages().leadSection.form;
@@ -160,13 +159,23 @@ export function LeadForm({
     <FormCard
       ref={formRef}
       noValidate
-      tone={cardTone === "white" ? "white" : "surface"}
+      tone="surface"
       busy={submitting}
+      stackClassName="gap-6"
+      className="lg:rounded-panel"
       onSubmit={handleSubmit}
       onInput={clearFieldError}
       onChange={clearFieldError}
     >
       <input type="hidden" name="locale" value={locale} />
+
+      {/* Card header: H3 under the section H2. */}
+      <div className="flex flex-col gap-1 border-b border-line pb-6">
+        <Heading as="h3" size="h3" weight="semibold" className="text-ink">
+          {t.cardTitle}
+        </Heading>
+        <p className="text-small text-muted">{t.cardNote}</p>
+      </div>
 
       {result ? (
         <FormStatus
@@ -179,7 +188,8 @@ export function LeadForm({
       <RadioPills
         legend={t.objectType}
         name="objectType"
-        options={objectTypes.map((type) => ({ value: type, label: t.objectTypes[type] }))}
+        variant="tiles"
+        options={objectTypes.map((type) => ({ value: type, label: t.objectTypes[type], icon: objectTypeIcons[type] }))}
         value={objectType}
         onChange={(value) => setObjectType(value as LeadObjectType)}
       />
@@ -193,13 +203,16 @@ export function LeadForm({
       <input type="hidden" name="product" value={product ?? ""} />
       <input type="hidden" name="calculatorData" value={calculator?.data ?? ""} />
 
-      <Field label={t.name} error={errors.name} reserveMessage>
-        <TextInput name="name" type="text" required autoComplete="name" placeholder={t.namePlaceholder} />
-      </Field>
+      {/* Name and phone side by side from sm. */}
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <Field label={t.name} error={errors.name} reserveMessage>
+          <TextInput name="name" type="text" required autoComplete="name" placeholder={t.namePlaceholder} />
+        </Field>
 
-      <Field label={t.phone} error={errors.phone} reserveMessage>
-        <TextInput name="phone" type="tel" required inputMode="tel" autoComplete="tel" placeholder={t.phonePlaceholder} />
-      </Field>
+        <Field label={t.phone} error={errors.phone} reserveMessage>
+          <TextInput name="phone" type="tel" required inputMode="tel" autoComplete="tel" placeholder={t.phonePlaceholder} />
+        </Field>
+      </div>
 
       <Field label={t.comment} optional optionalLabel={t.optional}>
         <Textarea name="comment" rows={3} autoComplete="off" placeholder={commentPlaceholder ?? t.commentPlaceholder} />

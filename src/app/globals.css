@@ -294,6 +294,16 @@ button:not(:disabled) {
   );
 }
 
+/* Lead section photo: dark top-to-bottom scrim behind the white text (no glow layer). */
+.scrim-lead {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--color-ink) 72%, transparent) 0%,
+    color-mix(in srgb, var(--color-ink) 84%, transparent) 50%,
+    color-mix(in srgb, var(--color-ink) 94%, transparent) 100%
+  );
+}
+
 /* Hide the scrollbar of swipeable carousels (arrows and swipe stay available). */
 .scrollbar-none {
   scrollbar-width: none;
