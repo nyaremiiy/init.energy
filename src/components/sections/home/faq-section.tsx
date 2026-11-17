@@ -1,5 +1,6 @@
-import { ArrowUpRight, Phone } from "lucide-react";
-import Link from "next/link";
+import { Phone } from "lucide-react";
+import { InlineLink } from "@/components/ui/inline-link";
+import { PillLink } from "@/components/ui/pill-link";
 
 import { FaqAccordion } from "@/components/faq/FaqAccordion";
 import { Container } from "@/components/layout/container";
@@ -82,16 +83,7 @@ export function FaqSection({
                 <ul className="flex flex-col gap-2">
                   {links.items.map((link) => (
                     <li key={link.href}>
-                      <Link
-                        href={link.href}
-                        className="group flex items-center justify-between gap-3 rounded-full border border-line px-5 py-3 text-small font-medium text-ink transition-colors duration-200 ease-tech hover:border-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink sm:text-body"
-                      >
-                        {link.label}
-                        <ArrowUpRight
-                          aria-hidden
-                          className="size-4.5 shrink-0 transition-transform duration-200 motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5"
-                        />
-                      </Link>
+                      <PillLink href={link.href}>{link.label}</PillLink>
                     </li>
                   ))}
                 </ul>
@@ -102,13 +94,10 @@ export function FaqSection({
                 {t.help.title}
               </p>
               <p className="text-body text-muted">{t.help.text}</p>
-              <a
-                href={phone.href}
-                className="inline-flex items-center gap-2 text-body font-medium text-ink underline decoration-faint underline-offset-4 transition-colors duration-150 ease-tech hover:decoration-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
-              >
+              <InlineLink href={phone.href} className="inline-flex items-center gap-2 text-body">
                 <Phone aria-hidden className="size-4.5" />
                 {formatPhone(phone.display)}
-              </a>
+              </InlineLink>
               <ArrowLink href={sectionHref(anchors.contacts, locale)}>
                 {t.help.link}
               </ArrowLink>

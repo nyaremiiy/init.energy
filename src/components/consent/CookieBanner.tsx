@@ -1,7 +1,8 @@
 "use client";
 
-import { Cookie, Lock, X } from "lucide-react";
-import Link from "next/link";
+import { Cookie, Lock } from "lucide-react";
+import { InlineLink } from "@/components/ui/inline-link";
+import { IconButton } from "@/components/ui/icon-button";
 import { useEffect, useId, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -10,9 +11,6 @@ import { useLocale, useMessages } from "@/i18n/client";
 import { localizePath } from "@/i18n/config";
 import { useConsent } from "@/lib/consent/ConsentProvider";
 
-const iconProps = { "aria-hidden": true, className: "size-5", strokeWidth: 1.7 } as const;
-const textLink =
-  "cursor-pointer rounded-sm font-medium text-ink underline decoration-faint underline-offset-4 transition-colors duration-150 ease-tech hover:decoration-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink";
 /** «Відхилити» and «Прийняти всі» have the same size and weight (GDPR). */
 const decisionButton = "min-h-11 whitespace-nowrap px-3 sm:px-4";
 
@@ -122,15 +120,14 @@ function CookieSettings() {
               <h2 id={`${id}-title`} className="font-heading text-h3-sm font-medium text-ink">{t.settings.title}</h2>
               <p id={`${id}-subtitle`} className="text-small text-muted">{t.settings.subtitle}</p>
             </div>
-            <button
-              type="button"
+            <IconButton
               data-autofocus
+              variant="outline-light"
+              size="sm"
+              icon="close"
               onClick={closeSettings}
               aria-label={t.settings.close}
-              className="flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-full border border-line text-ink transition-colors duration-150 ease-tech hover:border-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
-            >
-              <X {...iconProps} />
-            </button>
+            />
           </div>
 
           <ul className="mt-4 border-b border-line">
@@ -165,9 +162,9 @@ function CookieSettings() {
 
         <div className="pb-safe">
         <div className="flex flex-col gap-3 border-t border-line px-card-sm pt-4 pb-card-sm md:flex-row md:items-center md:justify-between md:gap-4 md:border-0 md:px-8 md:pt-0 md:pb-8">
-          <Link href={localizePath(routes.cookies, locale)} className={`hidden shrink-0 whitespace-nowrap text-small md:inline ${textLink}`}>
+          <InlineLink href={localizePath(routes.cookies, locale)} className="hidden shrink-0 whitespace-nowrap text-small md:inline">
             {t.policyLink}
-          </Link>
+          </InlineLink>
           <div className="grid grid-cols-2 gap-2 md:flex md:justify-end">
             <Button type="button" variant="dark" onClick={accept} className={`col-span-2 md:order-3 ${decisionButton}`}>
               {t.settings.acceptAll}
@@ -236,13 +233,13 @@ export function CookieBanner() {
                   <h2 id={titleId} className="font-heading text-body font-medium text-ink">{t.banner.title}</h2>
                   <p className="hidden text-small text-muted md:block">
                     {t.banner.text}{" "}
-                    <Link href={policyHref} className={textLink}>{t.policyLink}</Link>
+                    <InlineLink href={policyHref}>{t.policyLink}</InlineLink>
                   </p>
                 </div>
               </div>
               <p className="text-small text-muted md:hidden">
                 {t.banner.textShort}{" "}
-                <Link href={policyHref} className={textLink}>{t.banner.more}</Link>
+                <InlineLink href={policyHref}>{t.banner.more}</InlineLink>
               </p>
 
               <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-end md:gap-4 lg:shrink-0">
@@ -258,7 +255,7 @@ export function CookieBanner() {
                 <button
                   type="button"
                   onClick={(event) => openSettings(event.currentTarget)}
-                  className={`self-center text-small md:order-1 ${textLink}`}
+                  className="cursor-pointer self-center rounded-sm text-small font-medium text-ink underline decoration-faint underline-offset-4 transition-colors duration-150 ease-tech hover:decoration-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink md:order-1"
                 >
                   {t.banner.settings}
                 </button>

@@ -1,6 +1,7 @@
 "use client";
 
-import { ChevronDown, Mail, MapPin, Menu, Phone, X } from "lucide-react";
+import { ChevronDown, Mail, MapPin, Phone } from "lucide-react";
+import { IconButton } from "@/components/ui/icon-button";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -62,20 +63,16 @@ export function MobileMenu() {
 
   return (
     <div className={hasPageLinks ? "xl:hidden" : "lg:hidden"}>
-      <button
-        type="button"
+      <IconButton
+        variant="outline-dark"
+        size="sm"
+        icon={isOpen ? "close" : "menu"}
         aria-expanded={isOpen}
         aria-controls="mobile-menu"
         aria-label={isOpen ? t.closeMenu : t.openMenu}
         onClick={() => setIsOpen((value) => !value)}
-        className="relative z-50 inline-flex size-11 items-center justify-center rounded-full border border-faint-dark text-white transition-colors hover:bg-fill-dark"
-      >
-        {isOpen ? (
-          <X aria-hidden className="size-5" />
-        ) : (
-          <Menu aria-hidden className="size-5" />
-        )}
-      </button>
+        className="relative z-50"
+      />
 
       {isOpen ? (
         <div

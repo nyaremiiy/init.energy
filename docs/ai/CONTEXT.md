@@ -131,6 +131,7 @@ CLAUDE.md       # точка входу для Claude Code (імпортує AGE
 - **Логотип:** `Logo` задаємо лише шириною + `h-auto shrink-0` (header `w-14 lg:w-18`, футер `w-18`); висоту не задаємо — інакше SVG сплющується.
 - **Лейбли в картках:** пігулка `CardLabel` (`src/components/ui/card-label.tsx`) з іконкою сегмента з `segmentIcons` (`src/content/segments.ts`, одна іконка на сегмент скрізь) — рамка, звичайний регістр, `text-sm font-medium`, як фільтри на сайті; `Eyebrow` лишається для заголовків секцій і футера. Розмір лейблів: `CardLabel` 12 → 14 px, `Eyebrow` 12 → 14 px (`text-eyebrow-sm sm:text-eyebrow`).
 - **Пігулки-кнопки** (фільтри проєктів, вкладки накопичувачів, радіо форми заявки й калькулятора): один стиль — `src/components/ui/chip-styles.ts` (`chipBase` / `chipClasses`): висота 40 px / `px-4` на мобільному, 44 px / `px-5` з `sm`, `text-sm font-medium`, рамка; `tone` light на світлому, dark на темному. Не пишемо свої класи для пігулок. Неактивний стан — `disabled: true` (сірий, не клікається): фільтри проєктів, поки проєктів мало.
+- **Кнопки й посилання:** один набір компонентів у `src/components/ui/` — `Button` (`dark`, `primary`, `outline-light`, `secondary`; `sm`/`md`; `fullWidth`, `loading`), `IconButton` (`icon`), `ArrowLink`, `InlineLink`, `NavLink`, `PillLink`, `RowLink`, `chipClasses`. Правила й винятки — в `AGENTS.md` («Кнопки й посилання»); `npm run lint:tokens` перевіряє ручні посилання з `rounded-full` або `underline`.
 - **Контраст:** текст ≥ 4.5:1 на всіх фонах.
 
 

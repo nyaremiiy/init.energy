@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { InlineLink } from "@/components/ui/inline-link";
 
 import { SesPaybackCalculator } from "@/components/calculator/ses-payback-calculator";
 import { SesPaybackProvider } from "@/components/calculator/ses-payback-state";
@@ -104,12 +105,9 @@ export function SesPaybackPage({ locale }: { locale: Locale }) {
               <SesPaybackCalculator />
               <p className="text-small text-muted">
                 {format(t.updatedLine, { count: String(insolationRegions.length) })} ·{" "}
-                <a
-                  href={`#${anchors.sesMethod}`}
-                  className="underline underline-offset-4 hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
-                >
+                <InlineLink href={`#${anchors.sesMethod}`}>
                   {t.methodLink}
-                </a>
+                </InlineLink>
               </p>
             </Container>
           </section>

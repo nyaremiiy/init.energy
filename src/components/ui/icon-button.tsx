@@ -1,15 +1,17 @@
-import { ArrowUpRight, Loader2 } from "lucide-react";
+import { ArrowUpRight, Loader2, Menu, Phone, X } from "lucide-react";
 import Link from "next/link";
 import type { ComponentPropsWithoutRef } from "react";
 
-type IconButtonVariant =
-  "outline-light" | "outline-dark" | "solid-light" | "solid-dark";
+type IconButtonVariant = "outline-light" | "outline-dark" | "solid-light" | "solid-dark";
 type IconButtonSize = "md" | "sm";
+type IconButtonIcon = "arrow" | "close" | "menu" | "phone";
 
 type SharedProps = {
   variant?: IconButtonVariant;
   size?: IconButtonSize;
-  /** Shows a spinner instead of the arrow (e.g. while a form is sending). */
+  /** Glyph inside the circle. Only the arrow moves on hover. */
+  icon?: IconButtonIcon;
+  /** Shows a spinner instead of the glyph (e.g. while a form is sending). */
   loading?: boolean;
   className?: string;
 };
@@ -22,7 +24,7 @@ type ButtonProps = SharedProps & { href?: never; "aria-label": string } & Omit<
     ComponentPropsWithoutRef<"button">,
     "children" | "className"
   >;
-/** Decorative arrow inside a larger link (the parent is the interactive element). */
+/** Decorative glyph inside a larger link (the parent is the interactive element). */
 type DecorativeProps = SharedProps & { decorative: true };
 
 type IconButtonProps = LinkProps | ButtonProps | DecorativeProps;
@@ -34,9 +36,8 @@ const variantClasses: Record<IconButtonVariant, string> = {
   /** On dark backgrounds or photos — lightens on hover. */
   "outline-dark":
     "border border-faint-dark text-white hover:border-white hover:bg-line-dark group-hover:border-white group-hover:bg-line-dark focus-visible:outline-white",
-  /** Filled white (e.g. the newsletter submit). */
-  "solid-light":
-    "bg-white text-ink hover:bg-surface focus-visible:outline-white",
+  /** Filled white (e.g. the newsletter submit, contact phone). */
+  "solid-light": "bg-white text-ink hover:bg-surface focus-visible:outline-white",
   "solid-dark": "bg-ink text-white hover:bg-navy focus-visible:outline-ink",
 };
 
@@ -45,28 +46,37 @@ const sizeClasses: Record<IconButtonSize, string> = {
   sm: "size-11",
 };
 
-/** Round button/link with the site's only arrow, ArrowUpRight (18px). */
+/** Round button or link with one 18px glyph (arrow by default). */
 export function IconButton(props: IconButtonProps) {
   const {
     variant = "outline-light",
     size = "md",
+    icon = "arrow",
     loading = false,
     className,
   } = props;
+
   const classes = `group/icon inline-flex shrink-0 items-center justify-center rounded-full transition-colors duration-150 ease-tech focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed ${sizeClasses[size]} ${variantClasses[variant]} ${className ?? ""}`;
-  const icon = loading ? (
-    <Loader2 aria-hidden className="size-4.5 motion-safe:animate-spin" />
+
+  const glyphProps = { "aria-hidden": true as const, size: 18, strokeWidth: 1.7 };
+  const arrowMove =
+    "transition-transform duration-150 ease-tech motion-safe:group-hover/icon:translate-x-0.5 motion-safe:group-hover/icon:-translate-y-0.5 motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5";
+  const glyph = loading ? (
+    <Loader2 {...glyphProps} className="motion-safe:animate-spin" />
+  ) : icon === "close" ? (
+    <X {...glyphProps} />
+  ) : icon === "menu" ? (
+    <Menu {...glyphProps} />
+  ) : icon === "phone" ? (
+    <Phone {...glyphProps} />
   ) : (
-    <ArrowUpRight
-      aria-hidden
-      className="size-4.5 transition-transform duration-150 ease-tech motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5 motion-safe:group-hover/icon:translate-x-0.5 motion-safe:group-hover/icon:-translate-y-0.5"
-    />
+    <ArrowUpRight {...glyphProps} className={arrowMove} />
   );
 
   if ("decorative" in props) {
     return (
       <span aria-hidden className={classes}>
-        {icon}
+        {glyph}
       </span>
     );
   }
@@ -76,18 +86,20 @@ export function IconButton(props: IconButtonProps) {
       href,
       variant: _v,
       size: _s,
+      icon: _i,
       loading: _l,
       className: _c,
       ...linkProps
     } = props;
     void _v;
     void _s;
+    void _i;
     void _l;
     void _c;
 
     return (
-      <Link href={href} className={classes} {...linkProps}>
-        {icon}
+      <Link href={href} className={classes} aria-busy={loading || undefined} {...linkProps}>
+        {glyph}
       </Link>
     );
   }
@@ -95,6 +107,7 @@ export function IconButton(props: IconButtonProps) {
   const {
     variant: _v,
     size: _s,
+    icon: _i,
     loading: _l,
     className: _c,
     type = "button",
@@ -102,12 +115,19 @@ export function IconButton(props: IconButtonProps) {
   } = props as ButtonProps;
   void _v;
   void _s;
+  void _i;
   void _l;
   void _c;
 
   return (
-    <button type={type} className={classes} {...buttonProps}>
-      {icon}
+    <button
+      type={type}
+      className={classes}
+      aria-busy={loading || undefined}
+      {...buttonProps}
+      disabled={loading || buttonProps.disabled}
+    >
+      {glyph}
     </button>
   );
 }

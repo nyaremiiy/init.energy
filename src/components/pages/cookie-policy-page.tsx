@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { InlineLink } from "@/components/ui/inline-link";
 
 import { CookieSettingsLink } from "@/components/consent/CookieSettingsLink";
 import { Container } from "@/components/layout/container";
@@ -147,9 +148,9 @@ export function CookiePolicyPage({ locale }: { locale: Locale }) {
             <h2 id="cookies-contact" className={sectionTitle}>{t.policy.contactTitle}</h2>
             <p className={paragraph}>
               {t.policy.contactText}{" "}
-              <a href={companyContacts.email.href} className="font-medium text-ink underline decoration-faint underline-offset-4 hover:decoration-ink">
+              <InlineLink href={companyContacts.email.href}>
                 {companyContacts.email.display}
-              </a>
+              </InlineLink>
               .
             </p>
           </section>
