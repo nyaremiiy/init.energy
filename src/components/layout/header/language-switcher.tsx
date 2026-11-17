@@ -47,7 +47,7 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
         return (
           <span key={language.code} className="inline-flex items-center gap-1">
             {index > 0 ? (
-              <span aria-hidden className="text-white/25">
+              <span aria-hidden className="text-faint-dark">
                 /
               </span>
             ) : null}
@@ -56,7 +56,7 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
                 lang={language.code}
                 aria-current={isCurrent ? "true" : undefined}
                 aria-disabled={!isCurrent && !href ? true : undefined}
-                className={isCurrent ? "text-white/90" : "text-white/25"}
+                className={isCurrent ? "text-white" : "text-faint-dark"}
               >
                 {language.label}
               </span>
@@ -65,7 +65,7 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
                 href={href}
                 hrefLang={language.code}
                 lang={language.code}
-                className="rounded-sm text-white/40 transition-colors duration-200 ease-tech hover:text-white/75 focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-white"
+                className="rounded-sm text-faint-dark transition-colors duration-200 ease-tech hover:text-muted-dark focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-white"
               >
                 {language.label}
               </Link>

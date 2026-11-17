@@ -29,7 +29,7 @@ export function cookiePolicyMetadata(locale: Locale): Metadata {
 }
 
 const sectionTitle = "font-heading text-h3-sm font-medium tracking-tight text-ink sm:text-h3";
-const paragraph = "max-w-3xl text-base leading-relaxed text-ink/80";
+const paragraph = "max-w-3xl text-body leading-relaxed text-muted";
 
 /**
  * Cookie policy. Legal pages get a compact dark header (no hero photo):
@@ -70,7 +70,7 @@ export function CookiePolicyPage({ locale }: { locale: Locale }) {
               {text.title[locale]}
             </Heading>
             <Description className="max-w-2xl">{text.lead[locale]}</Description>
-            <p className="text-sm text-white/75">
+            <p className="text-small text-muted-dark">
               <time dateTime={cookiePolicyUpdatedAt}>{format(t.policy.updated, { date: updated })}</time>
             </p>
           </Container>
@@ -87,9 +87,9 @@ export function CookiePolicyPage({ locale }: { locale: Locale }) {
             <p className={paragraph}>{text.categoriesText[locale]}</p>
             <ul className="grid grid-cols-1 gap-4 md:grid-cols-3">
               {(["necessary", "analytics", "marketing"] as const).map((category) => (
-                <li key={category} className="flex flex-col gap-2 rounded-3xl bg-surface p-card-sm lg:p-card">
-                  <p className="font-heading text-base font-semibold text-ink">{t.categories[category].title}</p>
-                  <p className="text-sm text-ink/70">{t.categories[category].text}</p>
+                <li key={category} className="flex flex-col gap-2 rounded-card bg-surface p-card-sm lg:p-card">
+                  <p className="font-heading text-body font-semibold text-ink">{t.categories[category].title}</p>
+                  <p className="text-small text-muted">{t.categories[category].text}</p>
                 </li>
               ))}
             </ul>
@@ -98,10 +98,10 @@ export function CookiePolicyPage({ locale }: { locale: Locale }) {
           <section aria-labelledby="cookies-table" className="flex flex-col gap-4">
             <h2 id="cookies-table" className={sectionTitle}>{text.tableTitle[locale]}</h2>
             {/* md+: a regular table; phones: one card per cookie (no horizontal scroll). */}
-            <table className="hidden w-full border-collapse text-left text-sm md:table">
+            <table className="hidden w-full border-collapse text-left text-small md:table">
               <caption className="sr-only">{t.policy.table.caption}</caption>
               <thead>
-                <tr className="border-b border-line text-ink/70">
+                <tr className="border-b border-line text-muted">
                   <th scope="col" className="py-3 pr-6 font-medium">{t.policy.table.name}</th>
                   <th scope="col" className="py-3 pr-6 font-medium">{t.policy.table.provider}</th>
                   <th scope="col" className="py-3 pr-6 font-medium">{t.policy.table.category}</th>
@@ -115,7 +115,7 @@ export function CookiePolicyPage({ locale }: { locale: Locale }) {
                     <th scope="row" className="py-4 pr-6 font-mono font-medium">{cookie.name}</th>
                     <td className="py-4 pr-6">{cookie.provider}</td>
                     <td className="py-4 pr-6">{categoryTitle(cookie.category)}</td>
-                    <td className="py-4 pr-6 text-ink/80">{cookie.purpose[locale]}</td>
+                    <td className="py-4 pr-6 text-muted">{cookie.purpose[locale]}</td>
                     <td className="py-4 whitespace-nowrap">{cookie.lifetime[locale]}</td>
                   </tr>
                 ))}
@@ -123,9 +123,9 @@ export function CookiePolicyPage({ locale }: { locale: Locale }) {
             </table>
             <ul className="flex flex-col border-b border-line md:hidden">
               {cookieList.map((cookie) => (
-                <li key={cookie.name} className="flex flex-col gap-1 border-t border-line py-4 text-sm text-ink">
+                <li key={cookie.name} className="flex flex-col gap-1 border-t border-line py-4 text-small text-ink">
                   <p className="font-mono font-medium">{cookie.name}</p>
-                  <p className="text-ink/70">{cookie.provider} · {categoryTitle(cookie.category)} · {cookie.lifetime[locale]}</p>
+                  <p className="text-muted">{cookie.provider} · {categoryTitle(cookie.category)} · {cookie.lifetime[locale]}</p>
                   <p>{cookie.purpose[locale]}</p>
                 </li>
               ))}
@@ -140,14 +140,14 @@ export function CookiePolicyPage({ locale }: { locale: Locale }) {
           <section aria-labelledby="cookies-change" className="flex flex-col items-start gap-4">
             <h2 id="cookies-change" className={sectionTitle}>{t.policy.changeTitle}</h2>
             <p className={paragraph}>{t.policy.changeText}</p>
-            <CookieSettingsLink tone="light" className="text-base font-medium" />
+            <CookieSettingsLink tone="light" className="text-body font-medium" />
           </section>
 
           <section aria-labelledby="cookies-contact" className="flex flex-col gap-4">
             <h2 id="cookies-contact" className={sectionTitle}>{t.policy.contactTitle}</h2>
             <p className={paragraph}>
               {t.policy.contactText}{" "}
-              <a href={companyContacts.email.href} className="font-medium text-ink underline decoration-ink/40 underline-offset-4 hover:decoration-ink">
+              <a href={companyContacts.email.href} className="font-medium text-ink underline decoration-faint underline-offset-4 hover:decoration-ink">
                 {companyContacts.email.display}
               </a>
               .

@@ -36,7 +36,7 @@ export function HeaderMainBar() {
           aria-label={format(t.call, {
             phone: formatPhone(primaryPhone.display),
           })}
-          className="relative z-50 inline-flex size-11 items-center justify-center rounded-full border border-white/40 text-white transition-colors hover:bg-white/10 lg:hidden"
+          className="relative z-50 inline-flex size-11 items-center justify-center rounded-full border border-faint-dark text-white transition-colors hover:bg-fill-dark lg:hidden"
         >
           <Phone aria-hidden className="size-5" />
         </a>

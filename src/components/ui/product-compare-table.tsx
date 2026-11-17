@@ -28,7 +28,7 @@ function MobileLabel({ children }: { children: string }) {
   return (
     <span
       aria-hidden
-      className="shrink-0 whitespace-nowrap text-ink/70 md:hidden"
+      className="shrink-0 whitespace-nowrap text-muted md:hidden"
     >
       {children}
     </span>
@@ -54,13 +54,13 @@ export function ProductCompareTable({
     <div className="relative">
       <table
         role="table"
-        className="block w-full border-collapse text-left text-sm md:table"
+        className="block w-full border-collapse text-left text-small md:table"
       >
         <caption className="sr-only">{caption}</caption>
         <thead role="rowgroup" className="max-md:sr-only">
           <tr
             role="row"
-            className="border-b border-line font-heading text-eyebrow tracking-eyebrow text-ink/70 uppercase"
+            className="border-b border-line font-heading text-eyebrow tracking-eyebrow text-muted uppercase"
           >
             <th
               role="columnheader"
@@ -108,13 +108,13 @@ export function ProductCompareTable({
               <th
                 role="rowheader"
                 scope="row"
-                className="block pb-2 text-base font-semibold whitespace-nowrap md:table-cell md:py-5 md:pr-6 md:text-sm"
+                className="block pb-2 text-body font-semibold whitespace-nowrap md:table-cell md:py-5 md:pr-6 md:text-small"
               >
                 {row.name}
               </th>
               <td role="cell" className={cellClasses}>
                 <MobileLabel>{columns.type}</MobileLabel>
-                <span className="text-right text-ink/70 md:text-left">
+                <span className="text-right text-muted md:text-left">
                   {row.type}
                 </span>
               </td>
@@ -126,7 +126,7 @@ export function ProductCompareTable({
               </td>
               <td role="cell" className={cellClasses}>
                 <MobileLabel>{columns.audience}</MobileLabel>
-                <span className="text-right text-ink/70 md:text-left">
+                <span className="text-right text-muted md:text-left">
                   {row.audience}
                 </span>
               </td>

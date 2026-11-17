@@ -67,11 +67,11 @@ export function ProductApplications({
               className="h-full"
             >
               {page.applications.variant === "sectors" ? (
-                <article className={`flex h-full flex-col gap-6 rounded-3xl p-card-sm lg:p-card ${item.tone === "sky" ? "bg-sky text-ink" : item.tone === "navy" ? "bg-navy text-white" : "bg-ink text-white"}`}>
+                <article className={`flex h-full flex-col gap-6 rounded-card p-card-sm lg:p-card ${item.tone === "sky" ? "bg-sky text-ink" : item.tone === "navy" ? "bg-navy text-white" : "bg-ink text-white"}`}>
                   <CardLabel tone={item.tone === "sky" ? "light" : "dark"} icon={icons[item.icon]}>{item.tag[locale]}</CardLabel>
                   <Heading as="h3" size="h3">{item.title[locale]}</Heading>
-                  <ul className={`divide-y ${item.tone === "sky" ? "divide-line border-line" : "divide-white/16 border-white/16"} border-y`}>
-                    {item.sectors?.map((sector) => <li key={sector.en} className="py-3 text-base">{sector[locale]}</li>)}
+                  <ul className={`divide-y ${item.tone === "sky" ? "divide-line border-line" : "divide-line-dark border-line-dark"} border-y`}>
+                    {item.sectors?.map((sector) => <li key={sector.en} className="py-3 text-body">{sector[locale]}</li>)}
                   </ul>
                   <SegmentLinks
                     links={item.links.map((link) => ({

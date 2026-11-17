@@ -51,7 +51,7 @@ export function SesSegments() {
             solution ? (
               <li key={solution.id}>
                 <Reveal delay={index * 0.08} className="h-full">
-                  <article className="relative isolate flex h-full min-h-120 flex-col justify-end overflow-hidden rounded-3xl text-white lg:min-h-150">
+                  <article className="relative isolate flex h-full min-h-120 flex-col justify-end overflow-hidden rounded-card text-white lg:min-h-150">
                     <div className="absolute inset-0 -z-10">
                       {/* TODO(content): segment photos (background) — placeholder until they arrive. */}
                       {solution.image ? (
@@ -72,7 +72,7 @@ export function SesSegments() {
                     </div>
                     <div
                       aria-hidden
-                      className="absolute inset-0 -z-10 bg-linear-to-t from-ink via-ink/80 to-ink/35"
+                      className="absolute inset-0 -z-10 scrim-segment"
                     />
 
                     <div className="flex flex-col gap-6 p-card-sm lg:p-card">
@@ -83,14 +83,14 @@ export function SesSegments() {
                         <Heading as="h3" size="h3" className="text-white">
                           {solution.title[locale]}
                         </Heading>
-                        <p className="text-base leading-relaxed text-white/75">
+                        <p className="text-body leading-relaxed text-muted-dark">
                           {solution.description[locale]}
                         </p>
                       </div>
 
                       <div className="flex flex-col gap-3">
-                        <p className="text-sm text-white/75">{t.segments.checklist}</p>
-                        <ul className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm text-white">
+                        <p className="text-small text-muted-dark">{t.segments.checklist}</p>
+                        <ul className="grid grid-cols-2 gap-x-4 gap-y-2 text-small text-white">
                           {solution.products.map((item) => (
                             <li key={item.product}>{products[item.product].name}</li>
                           ))}

@@ -84,7 +84,7 @@ export function FaqSection({
                     <li key={link.href}>
                       <Link
                         href={link.href}
-                        className="group flex items-center justify-between gap-3 rounded-full border border-line px-5 py-3 text-sm font-medium text-ink transition-colors duration-200 ease-tech hover:border-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink sm:text-base"
+                        className="group flex items-center justify-between gap-3 rounded-full border border-line px-5 py-3 text-small font-medium text-ink transition-colors duration-200 ease-tech hover:border-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink sm:text-body"
                       >
                         {link.label}
                         <ArrowUpRight
@@ -97,14 +97,14 @@ export function FaqSection({
                 </ul>
               </nav>
             ) : null}
-            <div className="flex flex-col items-start gap-3 rounded-3xl bg-surface p-card-sm lg:p-card">
+            <div className="flex flex-col items-start gap-3 rounded-card bg-surface p-card-sm lg:p-card">
               <p className="font-heading text-h3-sm font-medium text-ink sm:text-h3">
                 {t.help.title}
               </p>
-              <p className="text-base text-ink/70">{t.help.text}</p>
+              <p className="text-body text-muted">{t.help.text}</p>
               <a
                 href={phone.href}
-                className="inline-flex items-center gap-2 text-base font-medium text-ink underline decoration-ink/30 underline-offset-4 transition-colors duration-150 ease-tech hover:decoration-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+                className="inline-flex items-center gap-2 text-body font-medium text-ink underline decoration-faint underline-offset-4 transition-colors duration-150 ease-tech hover:decoration-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
               >
                 <Phone aria-hidden className="size-4.5" />
                 {formatPhone(phone.display)}

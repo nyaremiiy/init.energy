@@ -13,8 +13,8 @@ export default function manifest(): MetadataRoute.Manifest {
     start_url: "/",
     display: "browser",
     lang: "uk",
-    background_color: "#ffffff",
-    theme_color: "#000217",
+    background_color: "rgb(255, 255, 255)",
+    theme_color: "rgb(0, 2, 23)",
     // TODO(content): add icon.png 512×512 and apple-icon.png 180×180 to src/app/.
     icons: [{ src: "/favicon.ico", sizes: "32x32", type: "image/x-icon" }],
   };

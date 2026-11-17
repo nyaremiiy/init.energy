@@ -65,38 +65,38 @@ export function SesPaybackMethod({ example }: { example: SesCalculation }) {
 
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
           <Reveal className="lg:col-span-7">
-            <ol className="border-b border-white/16">
+            <ol className="border-b border-line-dark">
               {t.formulaRows.map((formula, index) => (
                 <li
                   key={formula}
-                  className="grid grid-cols-1 gap-2 border-t border-white/16 py-5 sm:grid-cols-12 sm:gap-6"
+                  className="grid grid-cols-1 gap-2 border-t border-line-dark py-5 sm:grid-cols-12 sm:gap-6"
                 >
-                  <h3 className="flex items-baseline gap-4 font-heading text-base font-semibold text-white sm:col-span-5">
-                    <span className="text-sm font-medium text-white/75 tabular-nums">
+                  <h3 className="flex items-baseline gap-4 font-heading text-body font-semibold text-white sm:col-span-5">
+                    <span className="text-small font-medium text-muted-dark tabular-nums">
                       {String(index + 1).padStart(2, "0")}
                     </span>
                     {t.formulaTitles[index]}
                   </h3>
-                  <p className="font-mono text-sm text-white/75 sm:col-span-7">{formula}</p>
+                  <p className="font-mono text-small text-muted-dark sm:col-span-7">{formula}</p>
                 </li>
               ))}
             </ol>
-            <p className="mt-8 text-base leading-relaxed text-white">{exampleText}</p>
+            <p className="mt-8 text-body leading-relaxed text-white">{exampleText}</p>
           </Reveal>
 
           <Reveal delay={0.08} className="lg:col-span-5">
-            <aside className="flex flex-col gap-6 rounded-3xl bg-white/8 p-card-sm lg:p-card">
+            <aside className="flex flex-col gap-6 rounded-card bg-fill-dark p-card-sm lg:p-card">
               <h3 className="font-heading text-h3-sm font-medium text-white sm:text-h3">{t.inputData}</h3>
-              <dl className="border-b border-white/16 text-sm">
+              <dl className="border-b border-line-dark text-small">
                 {sources.map((row) => (
-                  <div key={row.label} className="flex justify-between gap-6 border-t border-white/16 py-3">
-                    <dt className="text-white/75">{row.label}</dt>
+                  <div key={row.label} className="flex justify-between gap-6 border-t border-line-dark py-3">
+                    <dt className="text-muted-dark">{row.label}</dt>
                     <dd className="text-right text-white">{row.value}</dd>
                   </div>
                 ))}
               </dl>
-              <p className="text-sm leading-relaxed text-white/75">{t.notIncluded}</p>
-              <p className="text-sm text-white/75">{format(t.updatedLine, { count: String(insolationRegions.length) })}</p>
+              <p className="text-small leading-relaxed text-muted-dark">{t.notIncluded}</p>
+              <p className="text-small text-muted-dark">{format(t.updatedLine, { count: String(insolationRegions.length) })}</p>
             </aside>
           </Reveal>
         </div>

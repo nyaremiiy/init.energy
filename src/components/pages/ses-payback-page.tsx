@@ -102,7 +102,7 @@ export function SesPaybackPage({ locale }: { locale: Locale }) {
             </h2>
             <Container className="flex flex-col gap-4">
               <SesPaybackCalculator />
-              <p className="text-sm text-ink/70">
+              <p className="text-small text-muted">
                 {format(t.updatedLine, { count: String(insolationRegions.length) })} ·{" "}
                 <a
                   href={`#${anchors.sesMethod}`}

@@ -41,10 +41,10 @@ export function LeadSteps({ steps }: { steps: LeadStep[] }) {
               <Icon size={20} strokeWidth={1.7} />
             </span>
             <span className="flex flex-col gap-1.5 pt-3 lg:pt-0 lg:pr-4">
-              <h3 className="font-sans text-base font-medium text-ink">
+              <h3 className="font-sans text-body font-medium text-ink">
                 {step.title}
               </h3>
-              <span className="text-small text-ink/70">
+              <span className="text-small text-muted">
                 {step.description}
               </span>
             </span>

@@ -8,12 +8,16 @@ import "./globals.css";
 
 const inter = Inter({
   subsets: ["cyrillic", "latin"],
+  // 400 text · 500 buttons, menu, emphasis · 600 buttons only.
+  weight: ["400", "500", "600"],
   display: "swap",
   variable: "--font-inter",
 });
 
 const montserrat = Montserrat({
   subsets: ["cyrillic", "latin"],
+  // 300 big numbers · 500 labels and values · 600 headings.
+  weight: ["300", "500", "600"],
   display: "swap",
   variable: "--font-montserrat",
 });
@@ -35,7 +39,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#000217",
+  themeColor: "rgb(0, 2, 23)",
 };
 
 /**

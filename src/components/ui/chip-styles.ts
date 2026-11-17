@@ -11,12 +11,12 @@ export type ChipTone = "light" | "dark" | "tint";
 
 /** Geometry and type shared by every chip. */
 export const chipBase =
-  "inline-flex h-10 shrink-0 items-center rounded-full border px-4 text-sm font-medium sm:h-11 sm:px-5 whitespace-nowrap transition-colors duration-200 ease-tech focus-visible:outline-2 focus-visible:outline-offset-2";
+  "inline-flex h-10 shrink-0 items-center rounded-full border px-4 text-small font-medium sm:h-11 sm:px-5 whitespace-nowrap transition-colors duration-200 ease-tech focus-visible:outline-2 focus-visible:outline-offset-2";
 
 const tones: Record<ChipTone, { on: string; off: string; focus: string }> = {
   light: {
     on: "border-ink bg-ink text-white",
-    off: "border-ink/20 text-ink hover:border-ink",
+    off: "border-line text-ink hover:border-ink",
     focus: "focus-visible:outline-ink",
   },
   tint: {
@@ -26,13 +26,13 @@ const tones: Record<ChipTone, { on: string; off: string; focus: string }> = {
   },
   dark: {
     on: "border-white bg-white text-ink",
-    off: "border-white/20 text-white hover:border-white",
+    off: "border-line-dark text-white hover:border-white",
     focus: "focus-visible:outline-white",
   },
 };
 
 /** Greyed-out chip: not clickable, muted text and border (e.g. filters with too few items). */
-const disabledClasses = "pointer-events-none border-ink/10 text-ink/35";
+const disabledClasses = "pointer-events-none border-line text-faint";
 
 export function chipClasses({
   selected,

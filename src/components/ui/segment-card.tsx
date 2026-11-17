@@ -44,28 +44,28 @@ const toneClasses: Record<
     card: "bg-sky text-ink hover:bg-navy hover:text-white",
     index: "text-ink group-hover:text-white",
     text: "text-ink group-hover:text-white",
-    muted: "text-ink/70 group-hover:text-white/75",
-    link: "border-ink/20 group-hover:border-white/25 focus-visible:outline-ink",
-    featuredLink: "border-ink/20 bg-white text-ink hover:border-ink",
-    featuredMuted: "text-ink/70",
+    muted: "text-muted group-hover:text-muted-dark",
+    link: "border-line group-hover:border-line-dark focus-visible:outline-ink",
+    featuredLink: "border-line bg-white text-ink hover:border-ink",
+    featuredMuted: "text-muted",
   },
   navy: {
     card: "bg-navy text-white hover:bg-ink",
     index: "text-white",
     text: "text-white",
-    muted: "text-white/75",
-    link: "border-white/25 focus-visible:outline-white",
-    featuredLink: "border-white bg-white text-ink hover:bg-white/90",
-    featuredMuted: "text-ink/70",
+    muted: "text-muted-dark",
+    link: "border-line-dark focus-visible:outline-white",
+    featuredLink: "border-white bg-white text-ink hover:bg-surface",
+    featuredMuted: "text-muted",
   },
   dark: {
     card: "bg-ink text-white",
     index: "text-white",
     text: "text-white",
-    muted: "text-white/75",
-    link: "border-white/25 focus-visible:outline-white",
-    featuredLink: "border-white bg-white text-ink hover:bg-white/90",
-    featuredMuted: "text-ink/70",
+    muted: "text-muted-dark",
+    link: "border-line-dark focus-visible:outline-white",
+    featuredLink: "border-white bg-white text-ink hover:bg-surface",
+    featuredMuted: "text-muted",
   },
 };
 
@@ -84,15 +84,15 @@ export function SegmentCard({
 
   if (showcase) {
     const isLight = tone === "light";
-    const muted = isLight ? "text-ink/70" : "text-white/75";
-    const divider = isLight ? "border-line" : "border-white/25";
+    const muted = isLight ? "text-muted" : "text-muted-dark";
+    const divider = isLight ? "border-line" : "border-line-dark";
     const focus = isLight
       ? "focus-visible:outline-ink"
       : "focus-visible:outline-white";
 
     return (
       <article
-        className={`flex h-full min-w-0 flex-col rounded-3xl p-card-sm lg:p-card ${isLight ? "bg-sky text-ink" : tone === "navy" ? "bg-navy text-white" : "bg-ink text-white"}`}
+        className={`flex h-full min-w-0 flex-col rounded-card p-card-sm lg:p-card ${isLight ? "bg-sky text-ink" : tone === "navy" ? "bg-navy text-white" : "bg-ink text-white"}`}
       >
         <div className="flex items-start justify-between gap-4">
           <CardLabel tone={isLight ? "light" : "dark"} icon={segmentIcon}>
@@ -119,7 +119,7 @@ export function SegmentCard({
           <Heading as="h3" size="h3" weight="semibold">
             {title}
           </Heading>
-          <p className={`text-base leading-relaxed ${muted}`}>{description}</p>
+          <p className={`text-body leading-relaxed ${muted}`}>{description}</p>
         </div>
 
         <div className="mt-auto pt-10">
@@ -134,7 +134,7 @@ export function SegmentCard({
                 <li key={link.href} className={`border-t ${divider}`}>
                   <Link
                     href={link.href}
-                    className={`group flex min-w-0 items-center gap-2 py-3 text-base font-medium transition-colors duration-200 ease-tech focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 ${focus}`}
+                    className={`group flex min-w-0 items-center gap-2 py-3 text-body font-medium transition-colors duration-200 ease-tech focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 ${focus}`}
                   >
                     <span className="min-w-0 flex-1 leading-tight">
                       {link.label}
@@ -170,7 +170,7 @@ export function SegmentCard({
 
   return (
     <article
-      className={`group flex h-full flex-col gap-6 rounded-3xl p-card-sm transition duration-300 motion-safe:hover:-translate-y-0.5 lg:p-card ${classes.card}`}
+      className={`group flex h-full flex-col gap-6 rounded-card p-card-sm transition duration-300 motion-safe:hover:-translate-y-0.5 lg:p-card ${classes.card}`}
     >
       <div className="flex items-start justify-between gap-4">
         {index ? (
@@ -194,7 +194,7 @@ export function SegmentCard({
         <Heading as="h3" size="h3" className={classes.text}>
           {title}
         </Heading>
-        <p className={`text-base leading-relaxed ${classes.muted}`}>
+        <p className={`text-body leading-relaxed ${classes.muted}`}>
           {description}
         </p>
       </div>
@@ -230,7 +230,7 @@ export function SegmentLinks({
             <li key={link.href}>
               <Link
                 href={link.href}
-                className={`group flex items-center gap-3 rounded-full border px-4 py-3 text-sm font-medium sm:px-5 sm:text-base transition-colors duration-200 ease-tech focus-visible:outline-2 focus-visible:outline-offset-2 ${featured ? classes.featuredLink : classes.link}`}
+                className={`group flex items-center gap-3 rounded-full border px-4 py-3 text-small font-medium sm:px-5 sm:text-body transition-colors duration-200 ease-tech focus-visible:outline-2 focus-visible:outline-offset-2 ${featured ? classes.featuredLink : classes.link}`}
               >
                 <span className="flex-1">{link.label}</span>
                 {link.spec ? (

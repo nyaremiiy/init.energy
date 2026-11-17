@@ -9,13 +9,13 @@ type DescriptionProps = ComponentPropsWithoutRef<"p"> & {
 };
 
 const sizeClasses: Record<DescriptionSize, string> = {
-  default: "text-base sm:text-lg",
-  compactMobile: "text-sm sm:text-lg",
+  default: "text-body sm:text-lead",
+  compactMobile: "text-small sm:text-lead",
 };
 
 const toneClasses: Record<DescriptionTone, string> = {
-  onDark: "text-white/85",
-  onLight: "text-ink/70",
+  onDark: "text-muted-dark",
+  onLight: "text-muted",
 };
 
 export function Description({

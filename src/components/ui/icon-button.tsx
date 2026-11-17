@@ -30,14 +30,14 @@ type IconButtonProps = LinkProps | ButtonProps | DecorativeProps;
 const variantClasses: Record<IconButtonVariant, string> = {
   /** On light backgrounds. */
   "outline-light":
-    "border border-ink/20 text-ink hover:border-ink hover:bg-ink hover:text-white group-hover:border-ink group-hover:bg-ink group-hover:text-white focus-visible:outline-ink",
+    "border border-line text-ink hover:border-ink hover:bg-ink hover:text-white group-hover:border-ink group-hover:bg-ink group-hover:text-white focus-visible:outline-ink",
   /** On dark backgrounds or photos — lightens on hover. */
   "outline-dark":
-    "border border-white/45 text-white hover:border-white hover:bg-white/15 group-hover:border-white group-hover:bg-white/15 focus-visible:outline-white",
+    "border border-faint-dark text-white hover:border-white hover:bg-line-dark group-hover:border-white group-hover:bg-line-dark focus-visible:outline-white",
   /** Filled white (e.g. the newsletter submit). */
   "solid-light":
-    "bg-white text-ink hover:bg-white/90 focus-visible:outline-white",
-  "solid-dark": "bg-ink text-white hover:bg-ink/85 focus-visible:outline-ink",
+    "bg-white text-ink hover:bg-surface focus-visible:outline-white",
+  "solid-dark": "bg-ink text-white hover:bg-navy focus-visible:outline-ink",
 };
 
 const sizeClasses: Record<IconButtonSize, string> = {

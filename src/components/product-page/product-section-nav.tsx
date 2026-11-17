@@ -84,7 +84,7 @@ export function ProductSectionNav({
           </ul>
         </nav>
         <div className="flex min-w-0 flex-1 items-center justify-between gap-4 lg:flex-none">
-          <span className="truncate font-heading text-base font-semibold text-ink lg:hidden xl:inline">
+          <span className="truncate font-heading text-body font-semibold text-ink lg:hidden xl:inline">
             {productName}
           </span>
           <Button

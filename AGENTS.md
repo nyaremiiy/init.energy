@@ -49,6 +49,38 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 - Іконки інтерфейсу — лише `lucide-react`. Виняток: логотипи соцмереж (Facebook, Instagram, LinkedIn, TikTok) — власні SVG у `src/components/ui/social-icons.tsx`, бо в lucide-react v1 бренд-іконок немає.
 
+## Дизайн-токени (обов'язково)
+
+Кольори, типографіка, радіуси й тіні задаються лише токенами `@theme` у `src/app/globals.css`. Власних hex-кольорів, довільних значень (`-[…]`) і розмірів поза шкалою не пишемо. Прозорість — лише через токени `muted`, `faint`, `line`, `hover`, `fill-dark`, `line-dark`, `faint-dark`, `muted-dark`; класи на кшталт `ink/60` або `white/25` заборонені (виняток — декоративний `FooterMark`). `npm run lint` запускає `scripts/lint-tokens.mjs` і падає на порушеннях.
+
+### Кольори
+
+- `ink` rgb(0 2 23) — основний текст на світлому фоні, темні панелі, кнопки `dark`.
+- `white` — текст і поверхні на темному фоні (стандартний Tailwind, без прозорості).
+- `surface` — світлий фон картки й секції; `sky` — блакитна панель калькулятора; `navy` — друга темна картка й hover світлої картки.
+- На світлому: `muted` (ink 70%) — другорядний текст · `faint` (ink 40%) — плейсхолдери, disabled, пунктир · `line` (ink 12%) — лінії й рамки · `hover` (ink 6%) — hover-заливка, водяні знаки.
+- На темному: `muted-dark` (white 75%) — другорядний текст · `faint-dark` (white 45%) — плейсхолдери, пунктир · `line-dark` (white 16%) — лінії й рамки · `fill-dark` (white 8%) — картки й hover-заливка.
+- `accent` / `accent-strong` — лише індикатори ємності, шкали й графіка; ніколи текст чи кнопки. `success` — лише іконка успіху в сповіщенні.
+- Градієнти фото (`scrim-*`) і фони `bg-ink-glow`, `fade-from-ink` — у `globals.css`; прозорість у них дозволена.
+
+### Типографіка
+
+- `font-heading` — Montserrat: 300 для великих цифр, 500 для лейблів і значень, 600 для заголовків.
+- `font-sans` — Inter: 400 для тексту, 500 для кнопок, меню й акцентів, 600 лише для кнопок. Ваги 700+ не використовуємо (`font-bold` і `font-extrabold` заборонені, замість них `font-semibold`).
+- Розміри: `text-hero-*`, `text-h2-*`, `text-h3-*`, `text-stat-*`, `text-number-*`, `text-eyebrow-*`, `text-display` (водяний знак), `text-lead` (18 px, лід), `text-body` (16 px), `text-small` (14 px, UI і вторинний текст), `text-caption` (13 px, лише дрібний шрифт). Класи Tailwind `text-xs`, `text-sm`, `text-base`, `text-lg` заборонені.
+
+### Радіуси
+
+- `rounded-panel` / `rounded-panel-sm` — великі панелі; `rounded-card` (24 px) — картки; `rounded-tile` (16 px) — дрібні блоки, пігулки-квадрати, мініатюри; `rounded-field` (14 px) — поля вводу.
+- `rounded-full` — кола й пігулки; `rounded-sm` — лише фокус-обводка посилань.
+- `rounded-md`, `rounded-lg`, `rounded-xl`, `rounded-2xl`, `rounded-3xl` заборонені.
+
+### Тіні (три токени, більше не додаємо)
+
+- `shadow-soft` — hero, випадаюче мега-меню, плаваючі кнопки (повернення вгору, віджет контактів) і сповіщення.
+- `shadow-card` — світлі картки, калькулятор, форма заявки, тултіп.
+- `shadow-glass` — лише плаваючі скляні елементи: банер і вікно cookie (разом з `bg-glass`).
+
 ## Git workflow (обов'язково)
 
 - `main` — стабільна гілка. **Мерджить у `main` тільки власник.** Агентам заборонено комітити чи мерджити в `main`.

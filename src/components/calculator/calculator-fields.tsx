@@ -47,14 +47,14 @@ export function RangeField({
 
   return (
     <div className="flex flex-col gap-3">
-      <label htmlFor={id} className="text-sm font-medium text-ink">
+      <label htmlFor={id} className="text-small font-medium text-ink">
         {label}
       </label>
       <p aria-hidden className="flex items-baseline gap-2 text-ink">
         <span className="font-heading text-number-sm font-medium tabular-nums">
           {formatNumber(value, locale)}
         </span>
-        <span className="text-sm text-ink/70">{unit}</span>
+        <span className="text-small text-muted">{unit}</span>
       </p>
       <input
         id={id}
@@ -72,13 +72,13 @@ export function RangeField({
       />
       <div
         aria-hidden
-        className="flex justify-between text-sm text-ink/70 tabular-nums"
+        className="flex justify-between text-small text-muted tabular-nums"
       >
         <span>{formatNumber(min, locale)}</span>
         <span>{maxLabel}</span>
       </div>
       {hint ? (
-        <p id={`${id}-hint`} className="text-sm text-ink/70">
+        <p id={`${id}-hint`} className="text-small text-muted">
           {hint}
         </p>
       ) : null}
@@ -103,10 +103,10 @@ export function Group({
       className="m-0 flex min-w-0 flex-col gap-3 border-0 p-0"
       aria-describedby={hint ? hintId : undefined}
     >
-      <legend className="mb-3 text-sm font-medium text-ink">{legend}</legend>
+      <legend className="mb-3 text-small font-medium text-ink">{legend}</legend>
       <div className="flex flex-wrap gap-2">{children}</div>
       {hint ? (
-        <p id={hintId} className="text-sm text-ink/70">
+        <p id={hintId} className="text-small text-muted">
           {hint}
         </p>
       ) : null}
@@ -134,7 +134,7 @@ export function SelectField({
 
   return (
     <div className="flex min-w-0 flex-col gap-3">
-      <label htmlFor={id} className="text-sm font-medium text-ink">
+      <label htmlFor={id} className="text-small font-medium text-ink">
         {label}
       </label>
       <div className="relative">
@@ -154,11 +154,11 @@ export function SelectField({
         </select>
         <ChevronDown
           aria-hidden
-          className="pointer-events-none absolute top-1/2 right-4 size-5 -translate-y-1/2 text-ink/70"
+          className="pointer-events-none absolute top-1/2 right-4 size-5 -translate-y-1/2 text-muted"
         />
       </div>
       {hint ? (
-        <p id={`${id}-hint`} className="text-sm text-ink/70">
+        <p id={`${id}-hint`} className="text-small text-muted">
           {hint}
         </p>
       ) : null}
@@ -194,7 +194,7 @@ export function NumberField({
 
   return (
     <div className="flex min-w-0 flex-col gap-3">
-      <label htmlFor={id} className="text-sm font-medium text-ink">
+      <label htmlFor={id} className="text-small font-medium text-ink">
         {label}
       </label>
       <div className="relative">
@@ -215,14 +215,14 @@ export function NumberField({
         {unit ? (
           <span
             aria-hidden
-            className="pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 text-sm text-ink/70"
+            className="pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 text-small text-muted"
           >
             {unit}
           </span>
         ) : null}
       </div>
       {hint ? (
-        <p id={`${id}-hint`} className="text-sm text-ink/70">
+        <p id={`${id}-hint`} className="text-small text-muted">
           {hint}
         </p>
       ) : null}
