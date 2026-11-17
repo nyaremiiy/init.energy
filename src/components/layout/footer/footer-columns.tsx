@@ -10,6 +10,8 @@ import { useLocale, useMessages } from "@/i18n/client";
 
 type FooterColumnsProps = {
   brand: ReactNode;
+  /** «Contacts» column (Server Component rendered in footer.tsx). */
+  contacts: ReactNode;
 };
 
 function LinkColumn({ title, items, current }: { title: string; items: NavEntry[]; current?: string }) {
@@ -33,11 +35,12 @@ function LinkColumn({ title, items, current }: { title: string; items: NavEntry[
 }
 
 /**
- * Footer columns: brand · «On this page» · «Site sections» (6 : 3 : 3 on lg).
- * Without page anchors for this pathname the «On this page» column is not
- * rendered and the brand takes 9 : 3. Mobile: one column; sm: the two navs side by side.
+ * Footer columns: brand · Contacts · «On this page» · «Site sections»
+ * (4 : 3 : 3 : 3 on lg, 13 tracks). Without page anchors for this pathname the
+ * «On this page» column is not rendered: brand · Contacts · Sections = 6 : 3 : 3.
+ * Mobile: one column (brand → contacts → navs); sm: two columns below the brand.
  */
-export function FooterColumns({ brand }: FooterColumnsProps) {
+export function FooterColumns({ brand, contacts }: FooterColumnsProps) {
   const pathname = usePathname();
   const locale = useLocale();
   const t = useMessages().footer;
@@ -45,8 +48,9 @@ export function FooterColumns({ brand }: FooterColumnsProps) {
   const hasPageNav = pageNav.length > 0;
 
   return (
-    <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-12 lg:gap-16">
-      <div className={`sm:col-span-2 ${hasPageNav ? "lg:col-span-6" : "lg:col-span-9"}`}>{brand}</div>
+    <div className={`grid grid-cols-1 gap-12 sm:grid-cols-2 lg:gap-14 ${hasPageNav ? "lg:grid-cols-13" : "lg:grid-cols-12"}`}>
+      <div className={`sm:col-span-2 ${hasPageNav ? "lg:col-span-4" : "lg:col-span-6"}`}>{brand}</div>
+      {contacts}
       {hasPageNav ? <LinkColumn title={t.pageNavTitle} items={pageNav} /> : null}
       <LinkColumn title={t.sectionsTitle} items={getSiteSections(locale)} current={pathname} />
     </div>

@@ -3,7 +3,7 @@ import Link from "next/link";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 
 type ButtonVariant = "primary" | "secondary" | "dark" | "outline-light";
-type ButtonSize = "md" | "sm";
+type ButtonSize = "lg" | "md" | "sm";
 
 type SharedButtonProps = {
   icon?: ReactNode;
@@ -37,8 +37,9 @@ const variantClasses: Record<ButtonVariant, string> = {
     "border border-faint text-ink hover:border-ink hover:bg-ink hover:text-white focus-visible:outline-faint",
 };
 
-/** md: main size (48 px). sm: 40 px, desktop banners and dialogs only. */
+/** lg: 56 px, prominent CTAs (footer). md: main size (48 px). sm: 40 px, desktop banners and dialogs only. */
 const sizeClasses: Record<ButtonSize, string> = {
+  lg: "min-h-14 px-7 sm:px-8",
   md: "min-h-12 px-6 sm:px-7",
   sm: "min-h-10 px-5 text-caption",
 };

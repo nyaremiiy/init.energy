@@ -282,7 +282,14 @@
       "privacy": "Privacy",
       "cookies": "Cookies",
       "terms": "Terms"
-    }
+    },
+    "cta": {
+      "eyebrow": "Let's start with a calculation",
+      "title": "We'll match a solar plant or backup power system to your site",
+      "callCaption": "or call us",
+      "button": "Calculate a system"
+    },
+    "contactsTitle": "Contacts"
   },
   "productPage": {
     "breadcrumbsLabel": "Breadcrumbs",
