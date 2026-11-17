@@ -40,8 +40,6 @@ const arbitraryRe = /(?<![\w-])([a-z][\w-]*)-\[/g;
 
 // Exceptions by file, with a reason (keep this list short).
 const exceptions = {
-  // Decorative wordmark in the footer: a faint white watermark, not a line.
-  "components/layout/footer/footer-mark.tsx": ["opacity"],
   // The checkbox box is 20 px with a 6 px radius (rounded-md) by the design board; rounded-tile would make it a circle.
   "components/ui/form/checkbox.tsx": ["radius"],
 };

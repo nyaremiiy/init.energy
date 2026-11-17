@@ -8,6 +8,8 @@ import { productList } from "./products";
 export type Office = {
   id: string;
   city: Localized;
+  /** «у Львові» / «in Lviv»: used in phone labels («Зателефонувати в офіс у Львові»). */
+  cityIn: Localized;
   address: Localized;
   phone: {
     display: string;
@@ -20,6 +22,7 @@ export const offices: Office[] = [
   {
     id: "lviv",
     city: { uk: "Львів", en: "Lviv" },
+    cityIn: { uk: "у Львові", en: "in Lviv" },
     // TODO(content): verify the official English spelling of the address.
     address: { uk: "вул. Шевченка, 317б", en: "317b Shevchenka St." },
     phone: { display: "+380671985550", href: "tel:+380671985550" },
@@ -29,6 +32,7 @@ export const offices: Office[] = [
   {
     id: "kyiv",
     city: { uk: "Київ", en: "Kyiv" },
+    cityIn: { uk: "у Києві", en: "in Kyiv" },
     address: { uk: "вул. Є.Сверстюка, 19", en: "19 Ye. Sverstiuka St." },
     phone: { display: "+380675551250", href: "tel:+380675551250" },
     mapHref:

@@ -36,6 +36,22 @@
   - `Montserrat` без ваги 400: текст з `font-heading` без явної ваги рендериться як 500 (найближча доступна).
   - Скриншоти до/після в `.tmp/ds-before` і `.tmp/ds-after` (папка в .gitignore). Попіксельне порівняння можливе лише там, де висота не змінилась; на всіх 19 знімках висота змінилась, тому перевірка візуальна (головна, SVIT 600, картки, теги, шапка).
 
+## 2026-11-17 — Футер «З закликом» і видимість Reveal при reduced motion
+- **Агент:** Claude Code
+- **Гілка:** feature/footer-cta (статус: у роботі; стоїть на feature/forms-system → feature/buttons-links-system)
+- **Що зроблено:**
+  - Футер переверстано за варіантом 2 «З закликом»: рядок заклику (Eyebrow «Консультація», `<p>` «Розрахуємо систему під ваш об'єкт» — `text-hero` на lg як найближчий токен до 64 px, кнопка `HeaderLeadCta`); офіси Львів і Київ із `company.ts` — кожна клітинка є `ContactLink` (`tel:`, `contact_click`, `location: footer`) з декоративним `IconButton` телефону, що заповнюється при hover; навігація (сітка 11 колонок 5/3/3, `NavLink size="body"`, поточна сторінка в «Розділах сайту» біла); розсилка 5/6; нижній рядок з короткими правовими посиланнями, `CookieSettingsLink`, новим `LanguageSwitcher variant="pill"` і авторством.
+  - Мобільний: усе стовпчиком, офіси через горизонтальну лінію, нижній рядок — копірайт → правові → мова й автор; цілі натискання ≥ 44 px. md: заклик стовпчиком, офіси 2 колонки, навігація 2 колонки з брендом угорі.
+  - Нові тексти uk/en: `footer.label`, `footer.cta`, `footer.officesLabel`, `footer.callOffice`, `footer.legalShort`; оновлено `footer.newsletter.text` і `footer.copyright`. `company.ts`: `cityIn` («у Львові», «in Lviv»).
+  - Видалено `footer-mark.tsx` (великий напис), `footerLinkClasses` і старий макет у 24 колонки.
+  - **Вада, знайдена під час перевірки (була й раніше):** при `prefers-reduced-motion: reduce` уміст у `Reveal` лишався невидимим на всьому сайті — сервер віддавав `opacity: 0`, а клієнт підміняв `motion.div` на такий самий `div`, і React не виправляв атрибут `style`. Тепер `Reveal` має один шлях рендеру з `data-reveal`, а CSS у globals.css при reduced motion примусово показує кінцевий стан.
+- **Файли:** src/components/layout/footer/{footer,footer-columns,footer-styles}.tsx, src/components/layout/footer/footer-mark.tsx (видалено), src/components/layout/header/language-switcher.tsx, src/components/ui/{nav-link,reveal}.tsx, src/app/globals.css, src/content/company.ts, messages/{uk,en}.json, scripts/lint-tokens.mjs, docs/ai/{CONTEXT,CHANGELOG}.md
+- **Нотатки / що далі:**
+  - Перевірено на production-збірці: знімки футера `/`, `/cec/`, `/svit-plus-5000/` на 1440, 768 і 390 (`.tmp/footer-after`); 27 зупинок Tab по футеру з видимим фокусом; `contact_click` для телефонів — 0 до згоди, 1 після «Прийняти всі»; з reduced motion усі блоки футера видимі.
+  - Знімки «до» (`.tmp/footer-before`) не показують уміст у `Reveal` через ту саму ваду, тому попіксельне порівняння тут не має сенсу (футер переверстано повністю).
+  - Розмір офісного телефону — `text-h3` → `text-h2-sm` (24 → 30 px), найближче до ≈32 px; розміру `IconButton` 56 px немає, використано `md` (48 px).
+  - 404 у консолі — prefetch запланованих сторінок (/pro-nas/, /svit/, правові) — очікувано.
+
 ## 2026-11-17 — Форми й поля: спільні компоненти
 - **Агент:** Claude Code
 - **Гілка:** feature/forms-system (статус: готово, не змерджено; стоїть на feature/buttons-links-system)

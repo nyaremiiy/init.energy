@@ -271,7 +271,7 @@
     },
     "newsletter": {
       "title": "Розсилка",
-      "text": "Нові проєкти, статті бази знань і оновлення лінійки SVIT.",
+      "text": "Нові проєкти, статті бази знань і оновлення лінійки SVIT — раз на місяць.",
       "emailLabel": "Електронна пошта",
       "emailPlaceholder": "Ваш email",
       "submit": "Підписатися",
@@ -283,13 +283,25 @@
         "email": "Вкажіть коректну електронну пошту."
       }
     },
-    "copyright": "Copyright © {year} INIT ENERGY | Всі права захищені",
+    "copyright": "© {year} INIT ENERGY · Всі права захищені",
     "developedBy": "Розроблено",
     "legalNavLabel": "Правова інформація",
     "legal": {
       "privacy": "Політика конфіденційності",
       "cookies": "Політика cookie",
       "terms": "Умови використання"
+    },
+    "label": "Підвал сайту",
+    "cta": {
+      "eyebrow": "Консультація",
+      "title": "Розрахуємо систему під ваш об'єкт"
+    },
+    "officesLabel": "Офіси й телефони",
+    "callOffice": "Зателефонувати в офіс {city}: {phone}",
+    "legalShort": {
+      "privacy": "Конфіденційність",
+      "cookies": "Cookie",
+      "terms": "Умови"
     }
   },
   "productPage": {
