@@ -7,7 +7,7 @@ import { Group, RangeField, SelectField } from "@/components/calculator/calculat
 import { ResultLink, Stat } from "@/components/calculator/calculator-result-parts";
 import { Button } from "@/components/ui/button";
 import { CardLabel } from "@/components/ui/card-label";
-import { PillRadio } from "@/components/ui/pill-radio";
+import { PillRadio } from "@/components/ui/form/pill-radio";
 import {
   allowedGoals,
   backupHoursRange,

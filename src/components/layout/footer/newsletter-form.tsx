@@ -1,15 +1,14 @@
 "use client";
 
 import { type FormEvent, useState } from "react";
+import { InputAction } from "@/components/ui/form/input-action";
 
-import { IconButton } from "@/components/ui/icon-button";
 import { useToast } from "@/components/ui/toast";
 
 import { subscribe } from "@/app/actions/newsletter";
 import { trackEvent } from "@/lib/analytics";
 import { useLocale, useMessages } from "@/i18n/client";
 import { validateNewsletter } from "@/lib/newsletter";
-import { inputClasses } from "@/components/ui/input-styles";
 
 type Status = "idle" | "submitting";
 
@@ -68,37 +67,25 @@ export function NewsletterForm() {
       <label htmlFor="footer-newsletter-email" className="sr-only">
         {t.emailLabel}
       </label>
-      <div className="relative">
-        <input
-          id="footer-newsletter-email"
-          name="email"
-          type="email"
-          inputMode="email"
-          required
-          disabled={submitting}
-          placeholder={t.emailPlaceholder}
-          aria-invalid={error ? true : undefined}
-          aria-describedby="footer-newsletter-error footer-newsletter-note"
-          onInput={() => setError(undefined)}
-          className={inputClasses({
-            tone: "dark",
-            invalid: Boolean(error),
-            className: "pr-16",
-          })}
-        />
-        <IconButton
-          type="submit"
-          aria-label={t.submit}
-          disabled={submitting}
-          loading={submitting}
-          variant="solid-light"
-          size="sm"
-          className="absolute top-1.5 right-1.5"
-        />
+      <InputAction
+        id="footer-newsletter-email"
+        name="email"
+        type="email"
+        inputMode="email"
+        autoComplete="email"
+        required
+        tone="dark"
+        invalid={Boolean(error)}
+        disabled={submitting}
+        placeholder={t.emailPlaceholder}
+        aria-describedby="footer-newsletter-error footer-newsletter-note"
+        onInput={() => setError(undefined)}
+        actionLabel={t.submit}
+        loading={submitting}
+      />
         <span className="sr-only" aria-live="polite">
           {submitting ? t.submitting : ""}
         </span>
-      </div>
 
       {/* Honeypot: hidden from people, filled only by bots. */}
       <div className="sr-only" aria-hidden="true">
@@ -109,6 +96,7 @@ export function NewsletterForm() {
           type="text"
           tabIndex={-1}
           autoComplete="off"
+          data-honeypot
         />
       </div>
 

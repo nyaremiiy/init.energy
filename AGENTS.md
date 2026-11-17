@@ -93,6 +93,16 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Ціль натискання на мобільному ≥ 44×44. `Button size="sm"` (40 px) — лише на десктопних банерах і діалогах.
 - `Button` з `loading` показує спінер і блокує кнопку; для submit форм використовуємо його, а не власний спінер.
 
+## Форми
+
+Кожен контрол — через компоненти `src/components/ui/form/`: `Field` / `FieldGroup` (підпис, контрол, рядок повідомлення), `TextInput`, `NumberInput` (з `unit`), `Textarea`, `Select`, `RadioPills` / `PillRadio`, `CheckChip`, `Checkbox`, `Switch`, `RangeField`, `InputAction`, `FormCard`. Стилі полів — лише `inputClasses`. `npm run lint:tokens` падає на `<input>`, `<select>`, `<textarea>` поза `ui/form/` (крім `type="hidden"` і honeypot з `data-honeypot`).
+
+- Підпис видно завжди; placeholder — лише приклад («Наприклад, 40»). Позначаємо необов'язкові поля, не обов'язкові.
+- Помилка: рамка ink / white + іконка `AlertCircle` + текст, без червоного; фокус на першому полі з помилкою (`focusFirstInvalid`); у формах заявки місце під повідомлення зарезервоване (`reserveMessage`).
+- Текст поля 16 px, висота 56 px — і на мобільному (без zoom в iOS).
+- Правильні `type`, `inputMode`, `autoComplete` для кожного поля (ім'я — `name`, телефон — `tel`, email — `email`).
+- Вибір — нативні контроли (radio, checkbox, select, range), лише стилізовані; перемикач — `button role="switch"`.
+
 ## Git workflow (обов'язково)
 
 - `main` — стабільна гілка. **Мерджить у `main` тільки власник.** Агентам заборонено комітити чи мерджити в `main`.

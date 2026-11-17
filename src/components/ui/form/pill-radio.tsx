@@ -1,6 +1,6 @@
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 
-import { chipBase } from "./chip-styles";
+import { chipBase } from "@/components/ui/chip-styles";
 
 type PillRadioProps = {
   children: ReactNode;

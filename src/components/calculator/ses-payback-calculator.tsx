@@ -1,6 +1,7 @@
 "use client";
 
-import { ArrowUpRight, Check } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+import { CheckChip } from "@/components/ui/form/check-chip";
 import { useEffect, type ReactNode } from "react";
 
 import { Group, NumberField, RangeField, SelectField } from "@/components/calculator/calculator-fields";
@@ -8,8 +9,7 @@ import { ProductLink, Stat } from "@/components/calculator/calculator-result-par
 import { useSesPayback } from "@/components/calculator/ses-payback-state";
 import { Button } from "@/components/ui/button";
 import { CardLabel } from "@/components/ui/card-label";
-import { chipClasses } from "@/components/ui/chip-styles";
-import { PillRadio } from "@/components/ui/pill-radio";
+import { PillRadio } from "@/components/ui/form/pill-radio";
 import { appliances } from "@/content/appliances";
 import { insolationRegions, regionsByLocale } from "@/content/insolation";
 import { products } from "@/content/products";
@@ -241,27 +241,22 @@ export function SesPaybackCalculator() {
               {appliances.map((item) => {
                 const checked = state.backupLoads.includes(item.id);
                 return (
-                  <label key={item.id} className="cursor-pointer">
-                    <input
-                      type="checkbox"
-                      name="backupLoads"
-                      value={item.id}
-                      className="peer sr-only"
-                      checked={checked}
-                      onChange={() => {
+                  <CheckChip
+                    key={item.id}
+                    name="backupLoads"
+                    value={item.id}
+                    checked={checked}
+                    onChange={() => {
                         trackChange("backupLoads");
                         update({
                           backupLoads: checked
                             ? state.backupLoads.filter((id) => id !== item.id)
                             : [...state.backupLoads, item.id],
                         });
-                      }}
-                    />
-                    <span className={`gap-2 peer-focus-visible:ring-3 peer-focus-visible:ring-line ${chipClasses({ selected: checked })}`}>
-                      {checked ? <Check aria-hidden className="size-4" /> : null}
-                      {item.name[locale]}
-                    </span>
-                  </label>
+                    }}
+                  >
+                    {item.name[locale]}
+                  </CheckChip>
                 );
               })}
             </Group>
