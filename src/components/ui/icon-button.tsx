@@ -36,7 +36,7 @@ const variantClasses: Record<IconButtonVariant, string> = {
   /** On dark backgrounds or photos — lightens on hover. */
   "outline-dark":
     "border border-faint-dark text-white hover:border-white hover:bg-line-dark group-hover:border-white group-hover:bg-line-dark focus-visible:outline-white",
-  /** Filled white (e.g. the newsletter submit, contact phone). */
+  /** Filled white (e.g. the contact phone). */
   "solid-light": "bg-white text-ink hover:bg-surface focus-visible:outline-white",
   "solid-dark": "bg-ink text-white hover:bg-navy focus-visible:outline-ink",
 };

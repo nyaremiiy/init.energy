@@ -36,6 +36,21 @@
   - `Montserrat` без ваги 400: текст з `font-heading` без явної ваги рендериться як 500 (найближча доступна).
   - Скриншоти до/після в `.tmp/ds-before` і `.tmp/ds-after` (папка в .gitignore). Попіксельне порівняння можливе лише там, де висота не змінилась; на всіх 19 знімках висота змінилась, тому перевірка візуальна (головна, SVIT 600, картки, теги, шапка).
 
+## 2026-11-17 — Футер за handoff власника; правило папки `design/`
+- **Агент:** Claude Code
+- **Гілка:** feature/footer-handoff (статус: готово, не змерджено; стоїть на feature/footer-cta → feature/forms-system → feature/buttons-links-system)
+- **Що зроблено:**
+  - Футер переверстано за `design/footer-handoff` (замінює варіант «З закликом» з feature/footer-cta): колонки бренд · «На цій сторінці» · «Розділи сайту» 6 : 3 : 3 (без якорів 9 : 3), логотип 88 px, опис, кружки соцмереж з рамкою `faint-dark`; поточний розділ білий; нижній рядок — «© {рік} INIT ENERGY», «Конфіденційність · Cookie · Умови» (повна назва в `aria-label`/`title`), «Налаштування cookie» з іконкою 14 px, «UA | EN», авторство; великий напис `FooterMark` повернуто й підтягнуто (viewBox 0 0 1408 170, y 200, `text-line-dark`, `-mt-2`), літери обрізані нижніми кутами.
+  - Перемикач мов: спільний хук `useLanguageLinks` (`src/i18n/use-language-links.ts`) і текстовий `LanguageSwitcher` «UA | EN» з тонами `dark` / `light` — у шапці, мобільному меню й футері; варіант `pill` прибрано.
+  - Видалено розсилку (`newsletter-form.tsx`, `app/actions/newsletter.ts`, `lib/newsletter.ts`, тексти `footer.newsletter`), `InputAction` (використовувався лише нею), заклик і офіси з попереднього варіанта (`footer.cta`, `officesLabel`, `callOffice`, `cityIn` у `company.ts`).
+  - `SocialLinks variant="circle"`: рамка `faint-dark`, hover — біла рамка й іконка (так само у віджеті контактів).
+  - Нове правило в AGENTS.md «Дизайн-handoff»: власник кладе задачі в `design/`, агент виконує й очищає папку; `design/` у `.gitignore`.
+- **Нотатки / що далі:**
+  - Перевірено на production-збірці: 360 px без горизонтального скролу на `/`, `/cec/`, `/svit-plus-5000/`, `/en/`, `/polityka-cookie/`; перемикач веде на ту саму сторінку іншою мовою (шапка й футер); на сторінці без якорів колонки «На цій сторінці» немає; знімки 1440 / 768 / 390 — `.tmp/footer-handoff`.
+  - Розміри: в еталоні посилання й опис 15 px, у нас `text-small` = 14 px (токена 15 px немає після рефакторингу типографіки); `white/12` для напису → `text-line-dark` (16 %) як найближчий токен — як і просить handoff.
+  - Посилання колонок — `NavLink` (спільний компонент навігації), а не `footerLinkClasses`: так вимагає розділ «Кнопки й посилання».
+  - У «Розділах сайту» на макеті є «Резервне живлення» — такої сторінки ще немає, тому пункт не додано (дані — `getSiteSections`, як у handoff).
+
 ## 2026-11-17 — Футер «З закликом» і видимість Reveal при reduced motion
 - **Агент:** Claude Code
 - **Гілка:** feature/footer-cta (статус: у роботі; стоїть на feature/forms-system → feature/buttons-links-system)

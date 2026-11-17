@@ -95,13 +95,22 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 ## Форми
 
-Кожен контрол — через компоненти `src/components/ui/form/`: `Field` / `FieldGroup` (підпис, контрол, рядок повідомлення), `TextInput`, `NumberInput` (з `unit`), `Textarea`, `Select`, `RadioPills` / `PillRadio`, `CheckChip`, `Checkbox`, `Switch`, `RangeField`, `InputAction`, `FormCard`. Стилі полів — лише `inputClasses`. `npm run lint:tokens` падає на `<input>`, `<select>`, `<textarea>` поза `ui/form/` (крім `type="hidden"` і honeypot з `data-honeypot`).
+Кожен контрол — через компоненти `src/components/ui/form/`: `Field` / `FieldGroup` (підпис, контрол, рядок повідомлення), `TextInput`, `NumberInput` (з `unit`), `Textarea`, `Select`, `RadioPills` / `PillRadio`, `CheckChip`, `Checkbox`, `Switch`, `RangeField`, `FormCard`. Стилі полів — лише `inputClasses`. `npm run lint:tokens` падає на `<input>`, `<select>`, `<textarea>` поза `ui/form/` (крім `type="hidden"` і honeypot з `data-honeypot`).
 
 - Підпис видно завжди; placeholder — лише приклад («Наприклад, 40»). Позначаємо необов'язкові поля, не обов'язкові.
 - Помилка: рамка ink / white + іконка `AlertCircle` + текст, без червоного; фокус на першому полі з помилкою (`focusFirstInvalid`); у формах заявки місце під повідомлення зарезервоване (`reserveMessage`).
 - Текст поля 16 px, висота 56 px — і на мобільному (без zoom в iOS).
 - Правильні `type`, `inputMode`, `autoComplete` для кожного поля (ім'я — `name`, телефон — `tel`, email — `email`).
 - Вибір — нативні контроли (radio, checkbox, select, range), лише стилізовані; перемикач — `button role="switch"`.
+
+## Дизайн-handoff (папка `design/`)
+
+Власник кладе дизайн-задачі в `design/` у корені репозиторію: окрема підпапка на задачу з `PROMPT.md`, скриншотами й еталонним HTML.
+
+- На початку роботи перевір `design/`. Якщо там є задача — прочитай `PROMPT.md` і еталони та виконай її за правилами цього файлу.
+- Еталонний HTML — лише візуальний орієнтир: верстаємо нашими токенами й компонентами, inline-стилі не копіюємо.
+- Після виконаної й перевіреної задачі видаляємо весь вміст `design/` (саму папку лишаємо).
+- `design/` у `.gitignore`: його не комітимо й не пушимо.
 
 ## Git workflow (обов'язково)
 
