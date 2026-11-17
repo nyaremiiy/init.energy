@@ -33,7 +33,7 @@ const linkClasses = {
   inline:
     "inline-flex rounded-sm text-muted-dark transition-colors duration-150 ease-tech hover:text-white",
   circle:
-    "inline-flex size-11 items-center justify-center rounded-full border border-line-dark text-muted-dark transition-colors duration-150 ease-tech hover:border-white hover:bg-fill-dark hover:text-white",
+    "inline-flex size-11 items-center justify-center rounded-full border border-faint-dark text-muted-dark transition-colors duration-150 ease-tech hover:border-white hover:text-white",
 };
 
 /** One set of line-style social icons for the header and the footer. */
