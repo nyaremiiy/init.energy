@@ -336,6 +336,46 @@ button:not(:disabled) {
 }
 
 /*
+ * Dark panel glow from the top-left (PromoBanner): the same navy as .bg-ink-glow,
+ * mirrored so it sits behind the text while the photo covers the right side.
+ */
+.bg-ink-glow-start {
+  background:
+    radial-gradient(
+      ellipse 70% 90% at 0% 0%,
+      var(--color-navy) 0%,
+      color-mix(in srgb, var(--color-navy) 55%, transparent) 40%,
+      transparent 75%
+    ),
+    radial-gradient(
+      ellipse 45% 70% at 35% 100%,
+      color-mix(in srgb, var(--color-navy) 70%, transparent) 0%,
+      transparent 70%
+    ),
+    var(--color-ink);
+}
+
+/*
+ * PromoBanner photo edge. Desktop: the left ellipse is transparent (panel and glow show
+ * through) and the half-transparent band is the rim. Mobile: a curved bottom edge on the
+ * 200 px photo. @utility so `lg:` variants work.
+ */
+@utility mask-promo-curve {
+  -webkit-mask-image: radial-gradient(ellipse 30% 82% at 19% 50%, transparent 97%, rgb(0 0 0 / 55%) 97.5%, rgb(0 0 0 / 55%) 109%, black 109.5%);
+  mask-image: radial-gradient(ellipse 30% 82% at 19% 50%, transparent 97%, rgb(0 0 0 / 55%) 97.5%, rgb(0 0 0 / 55%) 109%, black 109.5%);
+}
+
+@utility mask-promo-curve-bottom {
+  -webkit-mask-image: radial-gradient(ellipse 72% 100px at 50% 250px, transparent 98%, black 100%);
+  mask-image: radial-gradient(ellipse 72% 100px at 50% 250px, transparent 98%, black 100%);
+}
+
+/* PromoBanner photo crop: shifted down so more roof and sky stay visible. */
+@utility object-promo {
+  object-position: 60% 22%;
+}
+
+/*
  * Range slider (calculator): 4px `line` track, `ink` fill up to the value
  * (`--fill`, set inline), 24px white thumb with an `ink` ring.
  */

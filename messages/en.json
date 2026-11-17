@@ -19,7 +19,8 @@
     "hub": {
       "title": "Turnkey solar power plants",
       "description": "For businesses and private sites: design, equipment, installation and commissioning.",
-      "details": "Learn more"
+      "cta": "Learn more about solar",
+      "imageAlt": "Solar panels on the roof of a private house at sunset"
     },
     "keywords": [
       "Solar power plants",
