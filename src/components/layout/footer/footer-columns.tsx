@@ -1,79 +1,53 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 
 import { Eyebrow } from "@/components/ui/eyebrow";
-import { pageNavigation } from "@/content/navigation";
-import { useMessages } from "@/i18n/client";
-
-import { footerLinkClasses } from "./footer-styles";
+import { NavLink } from "@/components/ui/nav-link";
+import { getSiteSections, pageNavigation, type NavEntry } from "@/content/navigation";
+import { useLocale, useMessages } from "@/i18n/client";
 
 type FooterColumnsProps = {
   brand: ReactNode;
-  sections: ReactNode;
-  newsletter: ReactNode;
 };
 
+function LinkColumn({ title, items, current }: { title: string; items: NavEntry[]; current?: string }) {
+  const t = useMessages().footer;
+  return (
+    <nav aria-label={title} className="lg:col-span-3">
+      <Eyebrow tone="dark" size="compact" as="p" className="mb-7">
+        {title}
+      </Eyebrow>
+      <ul className="flex flex-col gap-4">
+        {items.map((item) => (
+          <li key={item.href}>
+            <NavLink href={item.href} tone="dark" size="body" active={item.href === current}>
+              {t.links[item.labelKey]}
+            </NavLink>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+}
+
 /**
- * Lays out the footer columns. Reads "on this page" anchors for the current
- * pathname (known at build time with SSG); without them the column is not
- * rendered and the remaining columns widen, so the grid has no gap.
+ * Navigation row of the footer: brand · «On this page» · «Site sections».
+ * Grid of 11 tracks on lg (5 / 3 / 3). Without page anchors the «On this page»
+ * column is not rendered and «Site sections» takes its place (the last track stays empty).
  */
-export function FooterColumns({
-  brand,
-  sections,
-  newsletter,
-}: FooterColumnsProps) {
+export function FooterColumns({ brand }: FooterColumnsProps) {
   const pathname = usePathname();
+  const locale = useLocale();
   const t = useMessages().footer;
   const pageNav = pageNavigation[pathname] ?? [];
-  const hasPageNav = pageNav.length > 0;
 
   return (
-    <div className="grid grid-cols-2 gap-12 lg:grid-cols-24">
-      <div
-        className={`col-span-2 ${hasPageNav ? "lg:col-span-8" : "lg:col-span-10"}`}
-      >
-        {brand}
-      </div>
-
-      {hasPageNav ? (
-        <nav
-          aria-label={t.pageNavTitle}
-          className="col-span-2 sm:col-span-1 lg:col-span-5"
-        >
-          <Eyebrow tone="dark" size="compact" as="p" className="mb-5">
-            {t.pageNavTitle}
-          </Eyebrow>
-          <ul className="flex flex-col gap-3">
-            {pageNav.map((item) => (
-              <li key={item.href}>
-                <Link href={item.href} className={footerLinkClasses}>
-                  {t.links[item.labelKey]}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      ) : null}
-
-      <div
-        className={
-          hasPageNav
-            ? "col-span-2 sm:col-span-1 lg:col-span-5"
-            : "col-span-2 lg:col-span-6"
-        }
-      >
-        {sections}
-      </div>
-
-      <div
-        className={`col-span-2 ${hasPageNav ? "lg:col-span-6" : "lg:col-span-8"}`}
-      >
-        {newsletter}
-      </div>
+    <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-11 lg:gap-20">
+      <div className="md:col-span-2 lg:col-span-5">{brand}</div>
+      {pageNav.length > 0 ? <LinkColumn title={t.pageNavTitle} items={pageNav} /> : null}
+      <LinkColumn title={t.sectionsTitle} items={getSiteSections(locale)} current={pathname} />
     </div>
   );
 }

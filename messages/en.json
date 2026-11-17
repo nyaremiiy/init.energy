@@ -271,7 +271,7 @@
     },
     "newsletter": {
       "title": "Newsletter",
-      "text": "New projects, knowledge base articles and SVIT line-up updates.",
+      "text": "New projects, knowledge base articles and SVIT line-up updates — once a month.",
       "emailLabel": "Email",
       "emailPlaceholder": "Your email",
       "submit": "Subscribe",
@@ -283,13 +283,25 @@
         "email": "Please enter a valid email address."
       }
     },
-    "copyright": "Copyright © {year} INIT ENERGY | All rights reserved",
+    "copyright": "© {year} INIT ENERGY · All rights reserved",
     "developedBy": "Developed by",
     "legalNavLabel": "Legal information",
     "legal": {
       "privacy": "Privacy policy",
       "cookies": "Cookie policy",
       "terms": "Terms of use"
+    },
+    "label": "Site footer",
+    "cta": {
+      "eyebrow": "Consultation",
+      "title": "We will size the system for your site"
+    },
+    "officesLabel": "Offices and phones",
+    "callOffice": "Call the office {city}: {phone}",
+    "legalShort": {
+      "privacy": "Privacy",
+      "cookies": "Cookies",
+      "terms": "Terms"
     }
   },
   "productPage": {

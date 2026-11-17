@@ -152,6 +152,17 @@ html {
   }
 }
 
+/*
+ * Reveal (components/ui/reveal.tsx) with reduced motion: show the final state at once.
+ * !important beats the inline opacity/transform that Motion renders on the server.
+ */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
 button:not(:disabled) {
   cursor: pointer;
 }
