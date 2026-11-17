@@ -15,27 +15,6 @@
 
 ---
 
-## 2026-11-17 — Дизайн-токени: один набір кольорів, розмірів і радіусів
-- **Агент:** Claude Code
-- **Гілка:** feature/design-tokens-refactor (статус: змерджено в develop)
-- **Що зроблено:**
-  - Прозорість `ink`/`white` замінено на токени: `muted`, `faint`, `line`, `hover`, `muted-dark`, `faint-dark`, `line-dark`, `fill-dark`. Прибрано `--color-heading` (два місця → `ink`).
-  - Типографіка: `text-lead` 18 px, `text-body` 16 px, `text-small` 14 px (було 15), `text-caption` 13 px. `text-xs/sm/base/lg` замінено на них; `Eyebrow` compact — на `text-eyebrow-sm`.
-  - Радіуси: `rounded-card` 24 px (було `rounded-3xl`), `rounded-tile` 16 px (`rounded-2xl/xl/lg/md`). `rounded-sm` лишився лише для фокус-обводки посилань.
-  - Шрифти: Montserrat — 300/500/600, Inter — 400/500/600 (менше файлів у завантаженні).
-  - Градієнти фото винесено в `globals.css` (`scrim-capacity-x`, `scrim-capacity-y`, `scrim-segment`, `scrim-project`), hex у `layout.tsx` і `manifest.ts` замінено на `rgb(...)`.
-  - `scripts/lint-tokens.mjs` (вбудований у `npm run lint`) падає на `/NN` для ink/white, `text-xs/sm/base/lg`, `rounded-md…3xl`, `font-bold/extrabold`, hex у `.ts/.tsx` і довільні значення `-[…]` (крім `grid-rows`, `transition`, `group-has`).
-  - AGENTS.md: новий розділ «Дизайн-токени» (кольори, шрифти, розміри, радіуси, три тіні). CONTEXT.md: оновлено посилання на токени.
-- **Файли:** src/app/globals.css, src/app/layout.tsx, src/app/manifest.ts, scripts/lint-tokens.mjs, package.json, .gitignore, AGENTS.md, docs/ai/{CONTEXT,CHANGELOG}.md, ~80 файлів у src/components, src/app, src/content (автозаміна).
-- **Нотатки / що далі:**
-  - Лічильники в `src/` до → після: `ink/NN` і `white/NN` — 373 → 1 (лишився `FooterMark` за списком винятків); `text-xs/sm/base/lg/heading` — 212 → 0; `rounded-md…3xl` — 73 → 0; hex у `.ts/.tsx` — 3 → 0; `font-bold/extrabold` — 0 → 0; тіней — 3 токени (`soft`, `card`, `glass`), інших немає.
-  - Значення нових токенів (з таблиці не було): `muted` ink 70%, `faint` ink 40%, `hover` ink 6%, `muted-dark` white 75%, `faint-dark` white 45%, `line-dark` white 16%, `fill-dark` white 8%. `line` лишився ink 12%, як був.
-  - Відступи від таблиці: `hover:bg-ink/90` → `hover:bg-navy` (hover темних кнопок); `hover:bg-white/90` → `hover:bg-surface` (hover білих кнопок); тег на фото `bg-ink/60` → `bg-ink`; фон модального затемнення `bg-ink/35` → `bg-faint`; `bg-white/30` (шкала ємності) → `bg-faint-dark`; `hover:border-white/60|40|45` → `hover:border-white`.
-  - Видимі зміни через розміри й ваги: висота всіх сторінок змінилась на кілька десятків–сотень px (`text-xs` 12→13 px у верхній смузі й дрібних мітках; `text-small` 15→14 px; `line-height` 1.6→1.5 для `small`). Це значення з токенів власника, я їх не коригував.
-  - `font-mono` (системний моноширинний) лишився поза токенами: він не входить у набір шрифтів; вирішити окремо, якщо потрібен токен.
-  - `Montserrat` без ваги 400: текст з `font-heading` без явної ваги рендериться як 500 (найближча доступна).
-  - Скриншоти до/після в `.tmp/ds-before` і `.tmp/ds-after` (папка в .gitignore). Попіксельне порівняння можливе лише там, де висота не змінилась; на всіх 19 знімках висота змінилась, тому перевірка візуальна (головна, SVIT 600, картки, теги, шапка).
-
 ## 2026-11-17 — Промо-банер «Сонячні електростанції під ключ» на головній
 - **Агент:** Claude Code
 - **Гілка:** feature/promo-banner (статус: змерджено в develop)
@@ -127,6 +106,27 @@
   - Попиксельне порівняння (1440 і 390, 5 сторінок): відмінності до 0,02% на головній, /cec/, /kalkulyator/, /rishennya/; на `/svit-plus-5000/` на 1440 висота на 26 px менша (`PillLink` 14 px замість 16 px у сегментних посиланнях на `sm+` — за специфікацією). Мобільна версія цієї сторінки — 0,2%.
   - Hero: `size="wide"` замінено на стандартний `md`, бо `fullWidth` розтягнув би кнопки; відступи трохи менші.
   - Клавіатурний прохід по `/` і `/cec/` ще не виконано. Футер, `section-nav-link`, `mega-menu-item` поки не переведені на `NavLink` (див. винятки).
+
+## 2026-11-17 — Дизайн-токени: один набір кольорів, розмірів і радіусів
+- **Агент:** Claude Code
+- **Гілка:** feature/design-tokens-refactor (статус: змерджено в develop)
+- **Що зроблено:**
+  - Прозорість `ink`/`white` замінено на токени: `muted`, `faint`, `line`, `hover`, `muted-dark`, `faint-dark`, `line-dark`, `fill-dark`. Прибрано `--color-heading` (два місця → `ink`).
+  - Типографіка: `text-lead` 18 px, `text-body` 16 px, `text-small` 14 px (було 15), `text-caption` 13 px. `text-xs/sm/base/lg` замінено на них; `Eyebrow` compact — на `text-eyebrow-sm`.
+  - Радіуси: `rounded-card` 24 px (було `rounded-3xl`), `rounded-tile` 16 px (`rounded-2xl/xl/lg/md`). `rounded-sm` лишився лише для фокус-обводки посилань.
+  - Шрифти: Montserrat — 300/500/600, Inter — 400/500/600 (менше файлів у завантаженні).
+  - Градієнти фото винесено в `globals.css` (`scrim-capacity-x`, `scrim-capacity-y`, `scrim-segment`, `scrim-project`), hex у `layout.tsx` і `manifest.ts` замінено на `rgb(...)`.
+  - `scripts/lint-tokens.mjs` (вбудований у `npm run lint`) падає на `/NN` для ink/white, `text-xs/sm/base/lg`, `rounded-md…3xl`, `font-bold/extrabold`, hex у `.ts/.tsx` і довільні значення `-[…]` (крім `grid-rows`, `transition`, `group-has`).
+  - AGENTS.md: новий розділ «Дизайн-токени» (кольори, шрифти, розміри, радіуси, три тіні). CONTEXT.md: оновлено посилання на токени.
+- **Файли:** src/app/globals.css, src/app/layout.tsx, src/app/manifest.ts, scripts/lint-tokens.mjs, package.json, .gitignore, AGENTS.md, docs/ai/{CONTEXT,CHANGELOG}.md, ~80 файлів у src/components, src/app, src/content (автозаміна).
+- **Нотатки / що далі:**
+  - Лічильники в `src/` до → після: `ink/NN` і `white/NN` — 373 → 1 (лишився `FooterMark` за списком винятків); `text-xs/sm/base/lg/heading` — 212 → 0; `rounded-md…3xl` — 73 → 0; hex у `.ts/.tsx` — 3 → 0; `font-bold/extrabold` — 0 → 0; тіней — 3 токени (`soft`, `card`, `glass`), інших немає.
+  - Значення нових токенів (з таблиці не було): `muted` ink 70%, `faint` ink 40%, `hover` ink 6%, `muted-dark` white 75%, `faint-dark` white 45%, `line-dark` white 16%, `fill-dark` white 8%. `line` лишився ink 12%, як був.
+  - Відступи від таблиці: `hover:bg-ink/90` → `hover:bg-navy` (hover темних кнопок); `hover:bg-white/90` → `hover:bg-surface` (hover білих кнопок); тег на фото `bg-ink/60` → `bg-ink`; фон модального затемнення `bg-ink/35` → `bg-faint`; `bg-white/30` (шкала ємності) → `bg-faint-dark`; `hover:border-white/60|40|45` → `hover:border-white`.
+  - Видимі зміни через розміри й ваги: висота всіх сторінок змінилась на кілька десятків–сотень px (`text-xs` 12→13 px у верхній смузі й дрібних мітках; `text-small` 15→14 px; `line-height` 1.6→1.5 для `small`). Це значення з токенів власника, я їх не коригував.
+  - `font-mono` (системний моноширинний) лишився поза токенами: він не входить у набір шрифтів; вирішити окремо, якщо потрібен токен.
+  - `Montserrat` без ваги 400: текст з `font-heading` без явної ваги рендериться як 500 (найближча доступна).
+  - Скриншоти до/після в `.tmp/ds-before` і `.tmp/ds-after` (папка в .gitignore). Попіксельне порівняння можливе лише там, де висота не змінилась; на всіх 19 знімках висота змінилась, тому перевірка візуальна (головна, SVIT 600, картки, теги, шапка).
 
 ## 2026-11-13 — Англійська сторінка 404
 - **Агент:** Claude Code
