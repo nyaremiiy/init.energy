@@ -57,7 +57,8 @@ export function TextInput({ tone: _t, invalid: _i, className, unit, ...props }: 
 
 /** Number field with an optional unit suffix (muted, right). */
 export function NumberInput(props: TextInputProps) {
-  return <TextInput {...props} type="number" inputMode="numeric" />;
+  // Decimal keyboard by default (tariffs like 4,32); callers may pass "numeric".
+  return <TextInput {...props} type="number" inputMode={props.inputMode ?? "decimal"} />;
 }
 
 export type TextareaProps = ControlBase & ComponentPropsWithoutRef<"textarea">;

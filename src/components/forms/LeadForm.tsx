@@ -14,11 +14,14 @@ import { Checkbox } from "@/components/ui/form/checkbox";
 import { Field } from "@/components/ui/form/field";
 import { FormCard } from "@/components/ui/form/form-card";
 import { focusFirstInvalid } from "@/components/ui/form/focus";
+import { FormStatus } from "@/components/ui/form/form-status";
 import { RadioPills } from "@/components/ui/form/radio-pills";
 import { Textarea, TextInput } from "@/components/ui/form/controls";
 import { InlineLink } from "@/components/ui/inline-link";
 import { useToast } from "@/components/ui/toast";
+import { offices } from "@/content/company";
 import { routes } from "@/content/routes";
+import { formatPhone } from "@/lib/format";
 import {
   CALCULATOR_APPLY_EVENT,
   type CalculatorApplyDetail,
@@ -64,6 +67,9 @@ export function LeadForm({
   const formRef = useRef<HTMLFormElement>(null);
   const [errors, setErrors] = useState<LeadFieldErrors>({});
   const [submitting, setSubmitting] = useState(false);
+  // Inline copy of the last result (the toast may be missed).
+  const [result, setResult] = useState<"success" | "failure" | null>(null);
+  const mainPhone = offices[0].phone;
   const toast = useToast();
   const [objectType, setObjectType] = useState<LeadObjectType | undefined>(
     defaultObjectType,
@@ -121,6 +127,7 @@ export function LeadForm({
     }
 
     setErrors({});
+    setResult(null);
     setSubmitting(true);
     try {
       const result = await submitLead(formData);
@@ -130,6 +137,7 @@ export function LeadForm({
         setSubmitting(false);
         focusFirstError(result.errors);
         if (Object.keys(result.errors).length === 0) {
+          setResult("failure");
           toast.show("error", t.failure);
         }
         return;
@@ -139,9 +147,11 @@ export function LeadForm({
       setCalculator(undefined);
       setSubmitting(false);
       trackEvent({ event: "generate_lead", calculator: calculator?.data ?? "" });
+      setResult("success");
       toast.show("success", t.success);
     } catch {
       setSubmitting(false);
+      setResult("failure");
       toast.show("error", t.failure);
     }
   }
@@ -157,6 +167,14 @@ export function LeadForm({
       onChange={clearFieldError}
     >
       <input type="hidden" name="locale" value={locale} />
+
+      {result ? (
+        <FormStatus
+          status={result}
+          message={result === "success" ? t.success : t.failure}
+          phone={{ display: formatPhone(mainPhone.display), href: mainPhone.href }}
+        />
+      ) : null}
 
       <RadioPills
         legend={t.objectType}
