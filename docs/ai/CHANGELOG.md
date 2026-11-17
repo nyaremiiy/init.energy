@@ -38,7 +38,7 @@
 
 ## 2026-11-17 — Промо-банер «Сонячні електростанції під ключ» на головній
 - **Агент:** Claude Code
-- **Гілка:** feature/promo-banner (статус: готово, не змерджено; стоїть на feature/footer-v2)
+- **Гілка:** feature/promo-banner (статус: змерджено в develop)
 - **Що зроблено:**
   - Новий `PromoBanner` (`src/components/ui/promo-banner.tsx`) за `design/promo-handoff`: текст ліворуч (11/24 ширини), фото праворуч (7/12) з вигнутим краєм і напівпрозорим обідком через CSS-маску; тони `light` / `dark`; на мобільному фото 200 px угорі з вигнутим низом, кнопка на всю ширину; без фото — `MediaPlaceholder`. Заголовок — `<p>`, посилання лише кнопка.
   - globals.css: `.bg-ink-glow-start` (світіння з лівого верхнього кута), утиліти `mask-promo-curve`, `mask-promo-curve-bottom`, `object-promo` (позиція фото 60 % 22 %) через `@utility`, щоб працював варіант `lg:`.
@@ -51,7 +51,7 @@
 
 ## 2026-11-17 — Футер v2: рядок заклику й колонка «Контакти»
 - **Агент:** Claude Code
-- **Гілка:** feature/footer-v2 (статус: готово, не змерджено; стоїть на feature/footer-handoff)
+- **Гілка:** feature/footer-v2 (статус: змерджено в develop)
 - **Що зроблено:**
   - За `design/footer-v2` до футера додано два блоки, решта без змін:
     - `FooterCta` угорі панелі: «Почнемо з розрахунку», `<p>` «Підберемо СЕС або резервне живлення під ваш об'єкт» (`text-h2-sm` → `text-h2-md`), «або зателефонуйте» + телефон `offices[0]` (`contact_click`, `location: footer_cta`), кнопка «Розрахувати систему» на калькулятор окупності; на мобільному кнопка на всю ширину, телефон під нею.
@@ -68,7 +68,7 @@
 
 ## 2026-11-17 — Футер за handoff власника; правило папки `design/`
 - **Агент:** Claude Code
-- **Гілка:** feature/footer-handoff (статус: готово, не змерджено; стоїть на feature/footer-cta → feature/forms-system → feature/buttons-links-system)
+- **Гілка:** feature/footer-handoff (статус: змерджено в develop)
 - **Що зроблено:**
   - Футер переверстано за `design/footer-handoff` (замінює варіант «З закликом» з feature/footer-cta): колонки бренд · «На цій сторінці» · «Розділи сайту» 6 : 3 : 3 (без якорів 9 : 3), логотип 88 px, опис, кружки соцмереж з рамкою `faint-dark`; поточний розділ білий; нижній рядок — «© {рік} INIT ENERGY», «Конфіденційність · Cookie · Умови» (повна назва в `aria-label`/`title`), «Налаштування cookie» з іконкою 14 px, «UA | EN», авторство; великий напис `FooterMark` повернуто й підтягнуто (viewBox 0 0 1408 170, y 200, `text-line-dark`, `-mt-2`), літери обрізані нижніми кутами.
   - Перемикач мов: спільний хук `useLanguageLinks` (`src/i18n/use-language-links.ts`) і текстовий `LanguageSwitcher` «UA | EN» з тонами `dark` / `light` — у шапці, мобільному меню й футері; варіант `pill` прибрано.
@@ -83,7 +83,7 @@
 
 ## 2026-11-17 — Футер «З закликом» і видимість Reveal при reduced motion
 - **Агент:** Claude Code
-- **Гілка:** feature/footer-cta (статус: у роботі; стоїть на feature/forms-system → feature/buttons-links-system)
+- **Гілка:** feature/footer-cta (статус: змерджено в develop)
 - **Що зроблено:**
   - Футер переверстано за варіантом 2 «З закликом»: рядок заклику (Eyebrow «Консультація», `<p>` «Розрахуємо систему під ваш об'єкт» — `text-hero` на lg як найближчий токен до 64 px, кнопка `HeaderLeadCta`); офіси Львів і Київ із `company.ts` — кожна клітинка є `ContactLink` (`tel:`, `contact_click`, `location: footer`) з декоративним `IconButton` телефону, що заповнюється при hover; навігація (сітка 11 колонок 5/3/3, `NavLink size="body"`, поточна сторінка в «Розділах сайту» біла); розсилка 5/6; нижній рядок з короткими правовими посиланнями, `CookieSettingsLink`, новим `LanguageSwitcher variant="pill"` і авторством.
   - Мобільний: усе стовпчиком, офіси через горизонтальну лінію, нижній рядок — копірайт → правові → мова й автор; цілі натискання ≥ 44 px. md: заклик стовпчиком, офіси 2 колонки, навігація 2 колонки з брендом угорі.
@@ -99,7 +99,7 @@
 
 ## 2026-11-17 — Форми й поля: спільні компоненти
 - **Агент:** Claude Code
-- **Гілка:** feature/forms-system (статус: готово, не змерджено; стоїть на feature/buttons-links-system)
+- **Гілка:** feature/forms-system (статус: змерджено в develop)
 - **Що зроблено:**
   - Новий каталог `src/components/ui/form/`: `Field` і `FieldGroup` (підпис, контрол, рядок повідомлення; id, `aria-describedby`, `aria-invalid` через контекст), `TextInput` / `NumberInput` / `Textarea` / `Select` (стилі лише з `inputClasses`, іконка `AlertCircle` при помилці), `Checkbox` (20 px, радіус 6 px), `Switch` (винесено з cookie-баннера без змін), `RadioPills`, `PillRadio` (перенесено), `CheckChip`, `RangeField` (перенесено), `InputAction`, `FormCard`, `focusFirstInvalid`.
   - LeadForm: `FormCard`, `Field`, `RadioPills`, `Checkbox`, `Button loading`; прибрано `autoComplete="off"` у формі, ім'я — `name`, телефон — `tel` (автозаповнення на мобільному). Власний спінер прибрано.
@@ -114,7 +114,7 @@
 
 ## 2026-11-17 — Кнопки й посилання: єдині компоненти
 - **Агент:** Claude Code
-- **Гілка:** feature/buttons-links-system (статус: у роботі)
+- **Гілка:** feature/buttons-links-system (статус: змерджено в develop)
 - **Що зроблено:**
   - Нові компоненти: `PillLink` (пігулка-посилання з `meta` і стрілкою), `RowLink` (рядок списку: назва, опис, значення, декоративна кругла стрілка), `NavLink` (текстова навігація з `active` / `aria-current`), `InlineLink` (посилання в тексті: зовнішні відкриваються у новій вкладці, `mailto:` і `tel:` — звичайний `<a>`).
   - `Button`: розмір `wide` замінено на `sm` (40 px, лише для десктопних банерів) і `md` (за замовчуванням); `fullWidth` — булевий прапорець; `loading` — спінер і `disabled` з `aria-busy`.
