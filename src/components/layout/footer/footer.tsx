@@ -15,6 +15,8 @@ import { getLocale, getMessages } from "@/i18n/server";
 import { format } from "@/lib/messages";
 
 import { FooterColumns } from "./footer-columns";
+import { FooterContacts } from "./footer-contacts";
+import { FooterCta } from "./footer-cta";
 import { FooterMark } from "./footer-mark";
 import { focusClasses } from "./footer-styles";
 
@@ -22,7 +24,8 @@ import { focusClasses } from "./footer-styles";
 const year = new Date().getFullYear();
 
 /**
- * Site footer: brand · page anchors · site sections, then the legal row and
+ * Site footer: CTA row, then brand · contacts · page anchors · site sections,
+ * then the legal row and
  * the INIT ENERGY wordmark cropped by the panel's bottom corners.
  * No heading tags; contacts and texts come from content/ and messages/.
  */
@@ -53,7 +56,11 @@ export function Footer() {
     <Panel as="footer" aria-label={t.label} variant="dark" panelClassName="bg-ink-glow" className="bg-white pb-panel-sm sm:pb-panel">
       <Container inPanel className="pt-18 lg:pt-28">
         <Reveal distance={16}>
-          <FooterColumns brand={brand} />
+          <FooterCta />
+        </Reveal>
+
+        <Reveal delay={0.06} distance={12} className="mt-18">
+          <FooterColumns brand={brand} contacts={<FooterContacts />} />
         </Reveal>
 
         <div className="mt-22 flex flex-col items-start gap-4 border-t border-line-dark py-7 text-caption text-muted-dark lg:flex-row lg:items-center lg:justify-between lg:gap-6">

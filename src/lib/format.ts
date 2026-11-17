@@ -31,7 +31,8 @@ export function formatPhone(value: string) {
     return value;
   }
 
-  return `+${digits.slice(0, 2)} ${digits.slice(2, 5)} ${digits.slice(5, 8)} ${digits.slice(8, 10)} ${digits.slice(10, 12)}`;
+  // +380 67 198 55 50: country code, operator code, then 3-2-2.
+  return `+${digits.slice(0, 3)} ${digits.slice(3, 5)} ${digits.slice(5, 8)} ${digits.slice(8, 10)} ${digits.slice(10, 12)}`;
 }
 
 export function formatQuantity(quantity: Quantity, locale: Locale) {
