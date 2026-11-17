@@ -48,14 +48,14 @@ export function RelatedProducts({ ids, title, links = [] }: { ids: ProductId[]; 
                   className="group flex items-center gap-4 py-5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
                 >
                   <span className="flex min-w-0 flex-1 flex-col gap-1">
-                    <span className="font-heading text-base font-semibold text-ink">
+                    <span className="font-heading text-body font-semibold text-ink">
                       {product.name}
                     </span>
-                    <span className="text-sm text-ink/70">
+                    <span className="text-small text-muted">
                       {productSummary(id, locale)}
                     </span>
                   </span>
-                  <span className="hidden text-base font-medium whitespace-nowrap text-ink sm:inline">
+                  <span className="hidden text-body font-medium whitespace-nowrap text-ink sm:inline">
                     {formatQuantity(product.capacity, locale)}
                   </span>
                   <IconButton decorative variant="outline-light" size="sm" />
@@ -66,7 +66,7 @@ export function RelatedProducts({ ids, title, links = [] }: { ids: ProductId[]; 
           {links.map((item) => (
             <li key={item.href} className="border-t border-line">
               <Link href={localizePath(item.href, locale)} className="group flex items-center gap-4 py-5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
-                <span className="flex min-w-0 flex-1 flex-col gap-1"><span className="font-heading text-base font-semibold text-ink">{item.title}</span><span className="text-sm text-ink/70">{item.summary}</span></span>
+                <span className="flex min-w-0 flex-1 flex-col gap-1"><span className="font-heading text-body font-semibold text-ink">{item.title}</span><span className="text-small text-muted">{item.summary}</span></span>
                 <IconButton decorative variant="outline-light" size="sm" />
               </Link>
             </li>

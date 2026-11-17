@@ -41,7 +41,7 @@ export function NicheBuild({ page, locale }: { page: SolutionPage; locale: Local
               {page.build.components.map((item) => {
                 const Icon = nicheIcons[item.icon];
                 return (
-                  <li key={item.label.en} className="flex items-center gap-3 border-t border-line py-3 text-base text-ink">
+                  <li key={item.label.en} className="flex items-center gap-3 border-t border-line py-3 text-body text-ink">
                     <span aria-hidden className="flex size-10 shrink-0 items-center justify-center rounded-full bg-surface">
                       <Icon className="size-4.5" strokeWidth={1.7} />
                     </span>
@@ -54,7 +54,7 @@ export function NicheBuild({ page, locale }: { page: SolutionPage; locale: Local
 
           <Reveal delay={0.08}>
             {page.build.image ? (
-              <div className="relative aspect-4/3 w-full overflow-hidden rounded-3xl md:aspect-3/4">
+              <div className="relative aspect-4/3 w-full overflow-hidden rounded-card md:aspect-3/4">
                 {/* Nearly square source: the 3:4 crop keeps the solar array on the right. */}
                 <Image
                   src={page.build.image.src}
@@ -66,7 +66,7 @@ export function NicheBuild({ page, locale }: { page: SolutionPage; locale: Local
               </div>
             ) : (
               <div className="hidden md:block">
-                <MediaPlaceholder caption={page.build.mediaLabel[locale]} className="aspect-3/4 w-full rounded-3xl" />
+                <MediaPlaceholder caption={page.build.mediaLabel[locale]} className="aspect-3/4 w-full rounded-card" />
               </div>
             )}
           </Reveal>
@@ -75,10 +75,10 @@ export function NicheBuild({ page, locale }: { page: SolutionPage; locale: Local
             <h3 className="font-heading text-h3-sm font-medium text-ink sm:text-h3">{t.stepsTitle}</h3>
             <ol className="flex flex-col gap-3">
               {page.build.steps.map((step, index) => (
-                <li key={step.title.en} className="flex flex-col gap-3 rounded-3xl bg-surface p-card-sm">
+                <li key={step.title.en} className="flex flex-col gap-3 rounded-card bg-surface p-card-sm">
                   <StepMarker index={index} icon={stepIcons[index] ?? Wrench} />
-                  <p className="font-heading text-base font-semibold text-ink">{step.title[locale]}</p>
-                  <p className="text-sm text-ink/70">{step.text[locale]}</p>
+                  <p className="font-heading text-body font-semibold text-ink">{step.title[locale]}</p>
+                  <p className="text-small text-muted">{step.text[locale]}</p>
                 </li>
               ))}
             </ol>

@@ -11,13 +11,13 @@ type EyebrowProps = {
 } & ComponentPropsWithoutRef<"span">;
 
 const toneClasses: Record<EyebrowTone, { text: string; dot: string }> = {
-  light: { text: "text-ink/70", dot: "bg-current" },
-  dark: { text: "text-white/75", dot: "bg-current" },
+  light: { text: "text-muted", dot: "bg-current" },
+  dark: { text: "text-muted-dark", dot: "bg-current" },
 };
 
 const sizeClasses: Record<EyebrowSize, string> = {
   default: "text-eyebrow-sm sm:text-eyebrow tracking-eyebrow",
-  compact: "text-xs leading-4 tracking-wide",
+  compact: "text-eyebrow-sm tracking-wide",
 };
 
 /** Dotted uppercase label — one size and tracking across the whole site. */

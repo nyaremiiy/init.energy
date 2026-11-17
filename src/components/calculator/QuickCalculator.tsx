@@ -211,7 +211,7 @@ export function QuickCalculator() {
       <form
         aria-label={t.formLabel}
         onSubmit={(event) => event.preventDefault()}
-        className="flex flex-col gap-8 rounded-3xl bg-white p-card-sm lg:col-span-7 lg:p-card"
+        className="flex flex-col gap-8 rounded-card bg-white p-card-sm lg:col-span-7 lg:p-card"
       >
         <Group legend={t.segment}>
           {calculatorSegments.map((item) => (
@@ -298,11 +298,11 @@ export function QuickCalculator() {
         ) : null}
       </form>
 
-      <div className="flex flex-col gap-8 rounded-3xl bg-ink p-card-sm text-white lg:col-span-5 lg:p-card">
+      <div className="flex flex-col gap-8 rounded-card bg-ink p-card-sm text-white lg:col-span-5 lg:p-card">
         <div aria-live="polite" className="flex flex-col gap-6">
           <div className="flex items-center justify-between gap-4">
             <CardLabel tone="dark">{t.result.eyebrow}</CardLabel>
-            <span className="text-sm text-white/75">
+            <span className="text-small text-muted-dark">
               {t.result.approximate}
             </span>
           </div>
@@ -318,7 +318,7 @@ export function QuickCalculator() {
           </dl>
 
           {isCustom ? (
-            <p className="text-sm text-white/75">{t.result.custom}</p>
+            <p className="text-small text-muted-dark">{t.result.custom}</p>
           ) : null}
         </div>
 
@@ -350,7 +350,7 @@ export function QuickCalculator() {
           >
             {t.result.cta}
           </Button>
-          <p className="text-sm text-white/75">{t.result.note}</p>
+          <p className="text-small text-muted-dark">{t.result.note}</p>
         </div>
       </div>
     </div>

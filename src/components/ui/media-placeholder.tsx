@@ -17,8 +17,8 @@ type MediaPlaceholderProps = {
 };
 
 const toneClasses: Record<MediaPlaceholderTone, string> = {
-  light: "border-line bg-surface text-ink/70",
-  dark: "border-white/25 bg-white/6 text-white/75",
+  light: "border-line bg-surface text-muted",
+  dark: "border-line-dark bg-fill-dark text-muted-dark",
 };
 
 const aspectClasses = {
@@ -44,13 +44,13 @@ export function MediaPlaceholder({
 }: MediaPlaceholderProps) {
   const size = fill
     ? "absolute inset-0"
-    : (className ?? `${aspectClasses[aspect]} w-full rounded-2xl`);
+    : (className ?? `${aspectClasses[aspect]} w-full rounded-tile`);
   const placement = align === "end" ? "items-end justify-end p-6 sm:p-8" : "items-center justify-center px-6";
 
   return (
     <div
       aria-hidden="true"
-      className={`flex border border-dashed text-center text-sm ${placement} ${toneClasses[tone]} ${size} ${fill && className ? className : ""}`}
+      className={`flex border border-dashed text-center text-small ${placement} ${toneClasses[tone]} ${size} ${fill && className ? className : ""}`}
     >
       <span className={captionClassName}>{caption}</span>
     </div>

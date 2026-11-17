@@ -15,7 +15,7 @@ export function CookieSettingsLink({ tone = "dark", className = "" }: { tone?: "
   const colours =
     tone === "dark"
       ? "hover:text-white focus-visible:outline-white"
-      : "text-ink underline decoration-ink/40 underline-offset-4 hover:decoration-ink focus-visible:outline-ink";
+      : "text-ink underline decoration-faint underline-offset-4 hover:decoration-ink focus-visible:outline-ink";
 
   return (
     <button

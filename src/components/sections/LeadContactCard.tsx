@@ -21,15 +21,15 @@ export function LeadContactCard() {
       : `${office.city.uk}, ${office.address.uk}`;
 
   return (
-    <address className="flex w-full flex-col gap-4 rounded-3xl bg-ink p-card-sm not-italic text-white @container lg:p-card">
-      <p className="text-small text-white/75">{t.prompt}</p>
+    <address className="flex w-full flex-col gap-4 rounded-card bg-ink p-card-sm not-italic text-white @container lg:p-card">
+      <p className="text-small text-muted-dark">{t.prompt}</p>
 
       <ContactLink
         href={office.phone.href}
         method="phone"
         location={trackingLocation}
         aria-label={format(t.callLabel, { phone })}
-        className="group flex items-center justify-between gap-4 rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+        className="group flex items-center justify-between gap-4 rounded-tile focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
       >
         <span className="font-sans text-h3-sm font-medium whitespace-nowrap tabular-nums @xs:text-h3 @sm:text-h2-sm @md:text-h2-md @lg:text-h2 @lg:tracking-tight">
           {phone}
@@ -42,7 +42,7 @@ export function LeadContactCard() {
         </span>
       </ContactLink>
 
-      <div className="flex flex-col gap-3 border-t border-white/14 pt-4 sm:flex-row sm:flex-wrap sm:gap-x-6">
+      <div className="flex flex-col gap-3 border-t border-line-dark pt-4 sm:flex-row sm:flex-wrap sm:gap-x-6">
         <ContactLink
           href={companyContacts.email.href}
           method="email"
@@ -56,7 +56,7 @@ export function LeadContactCard() {
           href={office.mapHref}
           target="_blank"
           rel="noopener"
-          className="inline-flex items-center gap-2.5 text-small text-white/75 transition-colors duration-150 ease-tech hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+          className="inline-flex items-center gap-2.5 text-small text-muted-dark transition-colors duration-150 ease-tech hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
         >
           <MapPin
             aria-hidden

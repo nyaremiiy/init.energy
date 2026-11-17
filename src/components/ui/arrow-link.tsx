@@ -12,8 +12,8 @@ type ArrowLinkProps = {
 
 const toneClasses: Record<ArrowLinkTone, string> = {
   light:
-    "text-ink decoration-ink/30 hover:decoration-ink focus-visible:outline-ink",
-  dark: "text-white decoration-white/40 hover:decoration-white focus-visible:outline-white",
+    "text-ink decoration-faint hover:decoration-ink focus-visible:outline-ink",
+  dark: "text-white decoration-faint-dark hover:decoration-white focus-visible:outline-white",
 };
 
 /** Underlined text link with a 16px ArrowUpRight («Розрахувати систему», «Детальніше» …). */

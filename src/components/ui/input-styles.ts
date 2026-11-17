@@ -3,14 +3,14 @@
  * Same geometry and state behaviour everywhere; only colours follow the
  * background tone.
  *
- * default (`line` / `white/16` border) · hover (`ink/40` / `white/40`) ·
+ * default (`line` / `line-dark` border) · hover (`faint` / `faint-dark`) ·
  * focus-visible (solid border + soft 3px ring, no offset outline) ·
  * error (solid border, set via `invalid`) · disabled (muted, not-allowed).
  */
 export type InputTone = "light" | "dark";
 
 const base =
-  "w-full rounded-field border px-4 text-base transition-colors duration-200 ease-tech focus-visible:outline-none focus-visible:ring-3 disabled:cursor-not-allowed";
+  "w-full rounded-field border px-4 text-body transition-colors duration-200 ease-tech focus-visible:outline-none focus-visible:ring-3 disabled:cursor-not-allowed";
 
 const tones: Record<
   InputTone,
@@ -18,14 +18,14 @@ const tones: Record<
 > = {
   light: {
     field:
-      "bg-white text-ink placeholder:text-ink/45 hover:border-ink/40 focus-visible:border-ink focus-visible:ring-ink/10 disabled:bg-surface disabled:text-ink/70 disabled:hover:border-line",
+      "bg-white text-ink placeholder:text-faint hover:border-faint focus-visible:border-ink focus-visible:ring-line disabled:bg-surface disabled:text-muted disabled:hover:border-line",
     idle: "border-line",
     invalid: "border-ink",
   },
   dark: {
     field:
-      "bg-white/6 text-white placeholder:text-white/55 hover:border-white/40 focus-visible:border-white focus-visible:ring-white/20 disabled:opacity-70 disabled:hover:border-white/16",
-    idle: "border-white/16",
+      "bg-fill-dark text-white placeholder:text-faint-dark hover:border-white focus-visible:border-white focus-visible:ring-line-dark disabled:opacity-70 disabled:hover:border-line-dark",
+    idle: "border-line-dark",
     invalid: "border-white",
   },
 };

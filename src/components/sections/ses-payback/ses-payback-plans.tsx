@@ -20,10 +20,10 @@ import { format } from "@/lib/messages";
 const titleId = "ses-plans-title";
 
 const toneClasses = {
-  sky: { card: "bg-sky text-ink", muted: "text-ink/70", line: "border-ink/15" },
-  surface: { card: "bg-surface text-ink", muted: "text-ink/70", line: "border-ink/15" },
-  navy: { card: "bg-navy text-white", muted: "text-white/75", line: "border-white/16" },
-  ink: { card: "bg-ink text-white", muted: "text-white/75", line: "border-white/16" },
+  sky: { card: "bg-sky text-ink", muted: "text-muted", line: "border-line" },
+  surface: { card: "bg-surface text-ink", muted: "text-muted", line: "border-line" },
+  navy: { card: "bg-navy text-white", muted: "text-muted-dark", line: "border-line-dark" },
+  ink: { card: "bg-ink text-white", muted: "text-muted-dark", line: "border-line-dark" },
 } as const;
 
 /** «Typical solar plants by size»: four segments, capacity from the calculator itself. */
@@ -64,10 +64,10 @@ export function SesPaybackPlans() {
             return (
               <li key={plan.id}>
                 <Reveal delay={index * 0.08} className="h-full">
-                  <article className={`flex h-full min-h-72 flex-col gap-6 rounded-3xl p-card-sm lg:p-card ${tone.card}`}>
+                  <article className={`flex h-full min-h-72 flex-col gap-6 rounded-card p-card-sm lg:p-card ${tone.card}`}>
                     <div className="flex flex-col gap-1">
                       <Heading as="h3" size="h3">{t.plans[plan.id]}</Heading>
-                      <p className={`text-sm ${tone.muted}`}>
+                      <p className={`text-small ${tone.muted}`}>
                         {format(t.planUsage, { kwh: formatNumber(plan.monthlyKwh, locale) })}
                       </p>
                     </div>
@@ -75,11 +75,11 @@ export function SesPaybackPlans() {
                       <span className="font-heading text-number-sm font-light tabular-nums lg:text-number">
                         {formatNumber(kw, locale)}
                       </span>
-                      <span className={`text-base ${tone.muted}`}>{t.kwUnit}</span>
+                      <span className={`text-body ${tone.muted}`}>{t.kwUnit}</span>
                     </p>
                     <Link
                       href={localizePath(product.href, locale)}
-                      className={`group flex items-center justify-between gap-3 border-t pt-4 text-sm font-medium focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current ${tone.line}`}
+                      className={`group flex items-center justify-between gap-3 border-t pt-4 text-small font-medium focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current ${tone.line}`}
                     >
                       <span>{plan.modules > 1 ? `${product.name} × ${plan.modules}` : product.name}</span>
                       <ArrowUpRight
@@ -93,7 +93,7 @@ export function SesPaybackPlans() {
             );
           })}
         </ul>
-        <p className="text-sm text-ink/70">{t.plansNote}</p>
+        <p className="text-small text-muted">{t.plansNote}</p>
         </div>
       </Container>
     </section>

@@ -34,13 +34,13 @@ export function NicheConsumers({ page, locale }: { page: SolutionPage; locale: L
             return (
               <li key={item.name.en}>
                 <Reveal delay={(index % 3) * 0.08} className="h-full">
-                  <article className={`flex h-full min-h-56 flex-col justify-between gap-8 rounded-3xl p-card-sm lg:p-card ${tone.card}`}>
+                  <article className={`flex h-full min-h-56 flex-col justify-between gap-8 rounded-card p-card-sm lg:p-card ${tone.card}`}>
                     <h3>
                       <CardLabel tone={tone.dark ? "dark" : "light"} icon={nicheIcons[item.icon]}>
                         {item.name[locale]}
                       </CardLabel>
                     </h3>
-                    <p className={`text-base leading-relaxed ${tone.dark ? "text-white" : "text-ink"}`}>{item.text[locale]}</p>
+                    <p className={`text-body leading-relaxed ${tone.dark ? "text-white" : "text-ink"}`}>{item.text[locale]}</p>
                   </article>
                 </Reveal>
               </li>

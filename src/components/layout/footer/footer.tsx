@@ -37,7 +37,7 @@ export function Footer() {
       >
         <Logo className="h-auto w-18 shrink-0" />
       </Link>
-      <p className="max-w-80 text-small text-white/75">{t.description}</p>
+      <p className="max-w-80 text-small text-muted-dark">{t.description}</p>
 
       <nav aria-label={t.socialNavLabel}>
         <SocialLinks variant="circle" />
@@ -69,7 +69,7 @@ export function Footer() {
       <Eyebrow tone="dark" size="compact" as="p">
         {t.newsletter.title}
       </Eyebrow>
-      <p className="text-small text-white/75">{t.newsletter.text}</p>
+      <p className="text-small text-muted-dark">{t.newsletter.text}</p>
       <NewsletterForm />
     </div>
   );
@@ -97,7 +97,7 @@ export function Footer() {
         </Reveal>
 
         <Reveal delay={0.08} distance={12}>
-          <div className="mt-18 flex flex-col gap-4 border-t border-white/14 pt-6 text-sm text-white/75 lg:flex-row lg:items-center lg:justify-between">
+          <div className="mt-18 flex flex-col gap-4 border-t border-line-dark pt-6 text-small text-muted-dark lg:flex-row lg:items-center lg:justify-between">
             <div className="flex flex-col gap-1">
               <p>{format(t.copyright, { year: String(year) })}</p>
             </div>
@@ -125,19 +125,19 @@ export function Footer() {
                   >
                     <span
                       aria-hidden
-                      className="flex size-9 shrink-0 items-center justify-center rounded-full border border-white/22 bg-white/8 text-white/80 transition-colors duration-150 ease-tech group-hover:border-white/60 group-hover:bg-white/14 group-hover:text-white"
+                      className="flex size-9 shrink-0 items-center justify-center rounded-full border border-line-dark bg-fill-dark text-muted-dark transition-colors duration-150 ease-tech group-hover:border-muted-dark group-hover:bg-line-dark group-hover:text-white"
                     >
                       <CodeXml size={16} strokeWidth={1.7} />
                     </span>
                     <span className="flex flex-col">
-                      <span className="text-caption text-white/75">
+                      <span className="text-caption text-muted-dark">
                         {t.developedBy}
                       </span>
                       <span className="inline-flex items-center gap-1 font-medium text-white">
                         Nazar Yaremiiy
                         <ArrowUpRight
                           aria-hidden
-                          className="size-3.5 shrink-0 text-white/75 transition duration-150 ease-tech group-hover:text-white motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5"
+                          className="size-3.5 shrink-0 text-muted-dark transition duration-150 ease-tech group-hover:text-white motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5"
                         />
                       </span>
                     </span>

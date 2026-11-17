@@ -22,7 +22,7 @@ export function SectionWatermark({
   // Reads bottom-to-top on the left edge, top-to-bottom on the right edge.
   const position = side === "left" ? "left-20" : "right-20";
   const rotation = side === "left" ? "-rotate-90" : "rotate-90";
-  const color = tone === "dark" ? "text-white/5" : "text-ink/5";
+  const color = tone === "dark" ? "text-fill-dark" : "text-hover";
 
   return (
     <div

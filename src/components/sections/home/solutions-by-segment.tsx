@@ -82,7 +82,7 @@ export function SolutionsBySegment() {
           <Reveal>
             <Link
               href={routes.services.turnkeySes}
-              className="group grid grid-cols-1 items-center gap-4 rounded-3xl bg-surface p-card-sm text-ink transition duration-200 ease-tech focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink motion-safe:hover:-translate-y-0.5 sm:grid-cols-12 lg:p-card"
+              className="group grid grid-cols-1 items-center gap-4 rounded-card bg-surface p-card-sm text-ink transition duration-200 ease-tech focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink motion-safe:hover:-translate-y-0.5 sm:grid-cols-12 lg:p-card"
             >
               <span className="flex size-12 items-center justify-center rounded-full bg-white sm:col-span-1">
                 <Sun aria-hidden className="size-5" strokeWidth={1.7} />
@@ -91,12 +91,12 @@ export function SolutionsBySegment() {
                 <span className="font-heading text-h3-sm font-semibold tracking-tight sm:text-h3">
                   {t.hub.title}
                 </span>
-                <span className="text-small text-ink/70">
+                <span className="text-small text-muted">
                   {t.hub.description}
                 </span>
               </span>
               <span className="flex items-center gap-3 sm:col-span-3 sm:justify-end">
-                <span className="text-base font-medium">{t.hub.details}</span>
+                <span className="text-body font-medium">{t.hub.details}</span>
                 <IconButton decorative variant="solid-dark" />
               </span>
             </Link>
@@ -104,7 +104,7 @@ export function SolutionsBySegment() {
         </div>
 
         <Reveal delay={0.08} distance={12}>
-          <p className="hidden flex-wrap items-center justify-center sm:flex gap-x-3 gap-y-2 font-heading text-eyebrow font-medium tracking-eyebrow text-ink/80 uppercase">
+          <p className="hidden flex-wrap items-center justify-center sm:flex gap-x-3 gap-y-2 font-heading text-eyebrow font-medium tracking-eyebrow text-muted uppercase">
             {t.keywords.map((keyword, index) => (
               <span key={keyword} className="inline-flex items-center gap-3">
                 {index > 0 ? (

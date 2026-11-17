@@ -47,7 +47,7 @@ export function ScalingWidget({
     <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
       <div className="flex flex-col gap-8 lg:col-span-5">
         <fieldset className="m-0 flex min-w-0 flex-col gap-3 border-0 p-0">
-          <legend className="mb-3 text-sm font-medium text-white/75">
+          <legend className="mb-3 text-small font-medium text-muted-dark">
             {labels.legend}
           </legend>
           <div className="flex flex-wrap gap-2">
@@ -70,12 +70,12 @@ export function ScalingWidget({
           <span className="font-heading text-hero-sm font-light text-white tabular-nums md:text-hero-md">
             {totalText}
           </span>
-          <span className="text-sm text-white/75">
+          <span className="text-small text-muted-dark">
             {format(labels.caption, { count: String(modules), name })}
           </span>
         </p>
 
-        <p className="text-sm text-white/75">
+        <p className="text-small text-muted-dark">
           {format(labels.note, {
             capacity: `${formatNumber(moduleCapacityKwh, locale)} ${labels.unit}`,
           })}
@@ -96,10 +96,10 @@ export function ScalingWidget({
             <li
               key={index}
               aria-hidden
-              className={`flex aspect-3/4 items-end justify-center rounded-xl pb-2 font-mono text-xs transition-colors duration-200 ease-tech motion-reduce:transition-none ${
+              className={`flex aspect-3/4 items-end justify-center rounded-tile pb-2 font-mono text-caption transition-colors duration-200 ease-tech motion-reduce:transition-none ${
                 on
                   ? "bg-white text-ink"
-                  : "border border-dashed border-white/25 text-white/40"
+                  : "border border-dashed border-line-dark text-faint-dark"
               }`}
             >
               {String(index + 1).padStart(2, "0")}

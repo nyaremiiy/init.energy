@@ -9,12 +9,12 @@ type BreadcrumbsProps = {
 
 const toneClasses = {
   light: {
-    text: "text-ink/70",
+    text: "text-muted",
     link: "hover:text-ink focus-visible:outline-ink",
     current: "text-ink",
   },
   dark: {
-    text: "text-white/75",
+    text: "text-muted-dark",
     link: "hover:text-white focus-visible:outline-white",
     current: "text-white",
   },
@@ -30,7 +30,7 @@ export function Breadcrumbs({
   return (
     <nav aria-label={label}>
       <ol
-        className={`flex flex-wrap items-center gap-x-2 gap-y-1 text-sm ${classes.text}`}
+        className={`flex flex-wrap items-center gap-x-2 gap-y-1 text-small ${classes.text}`}
       >
         {items.map((item, index) => {
           const last = index === items.length - 1;

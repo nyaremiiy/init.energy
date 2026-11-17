@@ -50,7 +50,7 @@ export function SesPlantTypes() {
 
         <Reveal>
           {/* TODO(content): link «Детальніше: мережева чи гібридна СЕС» to the knowledge-base article once it exists. */}
-          <div role="table" aria-label={t.caption} className="text-sm">
+          <div role="table" aria-label={t.caption} className="text-small">
             <div role="row" className="grid grid-cols-3 items-end md:grid-cols-4">
               <span role="columnheader" className="hidden md:block">
                 <span className="sr-only">{t.feature}</span>
@@ -59,11 +59,11 @@ export function SesPlantTypes() {
                 <span
                   key={type.id}
                   role="columnheader"
-                  className={`font-heading text-base font-semibold ${cellPadding(typeIndex)} ${isHybrid(type.id) ? "rounded-t-2xl bg-ink py-5 text-white" : "py-4 text-ink"}`}
+                  className={`font-heading text-body font-semibold ${cellPadding(typeIndex)} ${isHybrid(type.id) ? "rounded-t-2xl bg-ink py-5 text-white" : "py-4 text-ink"}`}
                 >
                   <span className="block">{type.label[locale]}</span>
                   {isHybrid(type.id) ? (
-                    <span className="mt-1 block font-sans text-xs font-medium text-white/75">
+                    <span className="mt-1 block font-sans text-caption font-medium text-muted-dark">
                       {t.recommended}
                     </span>
                   ) : null}
@@ -79,7 +79,7 @@ export function SesPlantTypes() {
               >
                 <span
                   role="rowheader"
-                  className="col-span-3 pt-4 text-ink/70 md:col-span-1 md:flex md:items-center md:py-5 md:pr-4"
+                  className="col-span-3 pt-4 text-muted md:col-span-1 md:flex md:items-center md:py-5 md:pr-4"
                 >
                   {row.label[locale]}
                 </span>
@@ -99,7 +99,7 @@ export function SesPlantTypes() {
                             <span className="sr-only">{t.yes}</span>
                           </span>
                         ) : (
-                          <span className="flex size-6 items-center justify-center rounded-full border border-ink/20 text-ink/50">
+                          <span className="flex size-6 items-center justify-center rounded-full border border-line text-faint">
                             <X aria-hidden className="size-3" />
                             <span className="sr-only">{t.no}</span>
                           </span>

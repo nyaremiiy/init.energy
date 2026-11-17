@@ -26,7 +26,7 @@ export function SectionHeader({
   aside,
   tone = "light",
 }: SectionHeaderProps) {
-  const titleColor = tone === "dark" ? "text-white" : "text-heading";
+  const titleColor = tone === "dark" ? "text-white" : "text-ink";
   const descriptionTone = tone === "dark" ? "onDark" : "onLight";
 
   return (

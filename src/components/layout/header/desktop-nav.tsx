@@ -41,7 +41,7 @@ export function DesktopNav() {
     >
       <HeaderSectionLinks byPath={sectionsByPath} />
 
-      <ul className="flex h-full items-center gap-8 text-sm font-medium text-white/85">
+      <ul className="flex h-full items-center gap-8 text-small font-medium text-muted-dark">
         {groups.map((item) => (
           <MegaMenuItem key={item.label} group={item} />
         ))}

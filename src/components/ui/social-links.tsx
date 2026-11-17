@@ -31,9 +31,9 @@ type SocialLinksProps = {
 
 const linkClasses = {
   inline:
-    "inline-flex rounded-sm text-white/80 transition-colors duration-150 ease-tech hover:text-white",
+    "inline-flex rounded-sm text-muted-dark transition-colors duration-150 ease-tech hover:text-white",
   circle:
-    "inline-flex size-11 items-center justify-center rounded-full border border-white/22 text-white/80 transition-colors duration-150 ease-tech hover:border-white/60 hover:bg-white/8 hover:text-white",
+    "inline-flex size-11 items-center justify-center rounded-full border border-line-dark text-muted-dark transition-colors duration-150 ease-tech hover:border-white hover:bg-fill-dark hover:text-white",
 };
 
 /** One set of line-style social icons for the header and the footer. */

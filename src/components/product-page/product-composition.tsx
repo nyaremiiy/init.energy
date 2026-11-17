@@ -76,9 +76,9 @@ export function ProductComposition({
             return (
               <li key={item.title[locale]}>
                 <Reveal delay={index * 0.08} className="h-full">
-                  <article className="flex h-full flex-col gap-6 rounded-3xl bg-white/8 p-card-sm lg:p-card">
+                  <article className="flex h-full flex-col gap-6 rounded-card bg-fill-dark p-card-sm lg:p-card">
                     {item.image ? (
-                      <div className="relative aspect-16/10 w-full overflow-hidden rounded-2xl bg-white/6">
+                      <div className="relative aspect-16/10 w-full overflow-hidden rounded-tile bg-fill-dark">
                         <Image
                           src={item.image.src}
                           alt={item.image.alt[locale]}
@@ -94,30 +94,30 @@ export function ProductComposition({
                         caption={format(t.photoPending, {
                           component: item.title[locale],
                         })}
-                        className="aspect-16/10 w-full rounded-2xl"
+                        className="aspect-16/10 w-full rounded-tile"
                       />
                     )}
-                    <span className="font-mono text-sm text-white/75 tabular-nums">
+                    <span className="font-mono text-small text-muted-dark tabular-nums">
                       {String(index + 1).padStart(2, "0")}
                     </span>
                     <div className="flex flex-col gap-3">
                       <Heading as="h3" size="h3" className="text-white">
                         {item.title[locale]}
                       </Heading>
-                      <p className="text-base leading-relaxed text-white/75">
+                      <p className="text-body leading-relaxed text-muted-dark">
                         {item.text[locale]}
                       </p>
                     </div>
-                    <dl className="mt-auto divide-y divide-white/16 border-y border-white/16">
+                    <dl className="mt-auto divide-y divide-line-dark border-y border-line-dark">
                       {item.specs.map((spec) => (
                         <div
                           key={spec.label[locale]}
                           className="flex items-baseline justify-between gap-4 py-3"
                         >
-                          <dt className="text-sm text-white/75">
+                          <dt className="text-small text-muted-dark">
                             {spec.label[locale]}
                           </dt>
-                          <dd className="text-right text-base font-medium text-white">
+                          <dd className="text-right text-body font-medium text-white">
                             {spec.value[locale]}
                           </dd>
                         </div>
@@ -138,7 +138,7 @@ export function ProductComposition({
           })}
         </ol>
 
-        <div className="grid grid-cols-1 gap-8 border-t border-white/16 pt-section-head-sm lg:grid-cols-12 lg:gap-16">
+        <div className="grid grid-cols-1 gap-8 border-t border-line-dark pt-section-head-sm lg:grid-cols-12 lg:gap-16">
           <Reveal className="flex flex-col items-start gap-4 lg:col-span-4">
             <Eyebrow tone="dark">{composition.modesEyebrow[locale]}</Eyebrow>
             <Heading
@@ -152,17 +152,17 @@ export function ProductComposition({
           </Reveal>
           <ul
             aria-labelledby={modesTitleId}
-            className="border-b border-white/16 lg:col-span-8"
+            className="border-b border-line-dark lg:col-span-8"
           >
             {composition.modes.map((mode, index) => {
               const Icon = modeIcons[mode.icon];
               return (
                 <li key={mode.title[locale]}>
                   <Reveal delay={index * 0.08} distance={16}>
-                    <div className="grid grid-cols-1 gap-3 border-t border-white/16 py-6 sm:grid-cols-12 sm:gap-6">
+                    <div className="grid grid-cols-1 gap-3 border-t border-line-dark py-6 sm:grid-cols-12 sm:gap-6">
                       <Icon
                         aria-hidden
-                        className="size-5 text-white/75 sm:col-span-1"
+                        className="size-5 text-muted-dark sm:col-span-1"
                         strokeWidth={1.7}
                       />
                       <Heading
@@ -172,7 +172,7 @@ export function ProductComposition({
                       >
                         {mode.title[locale]}
                       </Heading>
-                      <p className="text-base leading-relaxed text-white/75 sm:col-span-7">
+                      <p className="text-body leading-relaxed text-muted-dark sm:col-span-7">
                         {mode.text[locale]}
                       </p>
                     </div>

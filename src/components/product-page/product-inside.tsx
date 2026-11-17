@@ -35,23 +35,23 @@ export function ProductInside({ page, locale }: { page: ProductPage; locale: Loc
 
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-12">
           <Reveal className="lg:col-span-7">
-            <article className="flex h-full flex-col gap-6 rounded-3xl bg-white/6 p-card-sm text-white lg:p-card">
+            <article className="flex h-full flex-col gap-6 rounded-card bg-fill-dark p-card-sm text-white lg:p-card">
               <div>
                 <Heading as="h3" size="h3">{inside.cellCount} {locale === "uk" ? "комірок" : "cells"} {inside.cellBrand} · {inside.configuration}</Heading>
-                <p className="mt-2 font-mono text-sm text-white/75">{inside.cellCapacityAh} {locale === "uk" ? "А·год" : "Ah"} × {inside.cellCount} · {inside.voltage[locale]}</p>
+                <p className="mt-2 font-mono text-small text-muted-dark">{inside.cellCapacityAh} {locale === "uk" ? "А·год" : "Ah"} × {inside.cellCount} · {inside.voltage[locale]}</p>
               </div>
               <div aria-label={t.cellsLabel} className="grid grid-cols-4 gap-2 sm:grid-cols-8">
                 {Array.from({ length: inside.cellCount }, (_, index) => (
-                  <div key={index} aria-hidden className="flex aspect-square items-center justify-center rounded-2xl border border-white/16 bg-white/6 font-mono text-sm text-white/75">
+                  <div key={index} aria-hidden className="flex aspect-square items-center justify-center rounded-tile border border-line-dark bg-fill-dark font-mono text-small text-muted-dark">
                     {inside.cellBrand} {String(index + 1).padStart(2, "0")}
                   </div>
                 ))}
               </div>
               <dl className="mt-auto grid grid-cols-1 gap-4 sm:grid-cols-3">
                 {inside.stats.map((stat) => (
-                  <div key={stat.label[locale]} className="border-t border-white/16 pt-4">
+                  <div key={stat.label[locale]} className="border-t border-line-dark pt-4">
                     <dd className="font-heading text-stat-sm font-medium whitespace-nowrap sm:text-stat">{stat.value[locale]}</dd>
-                    <dt className="mt-1 text-sm text-white/75">{stat.label[locale]}</dt>
+                    <dt className="mt-1 text-small text-muted-dark">{stat.label[locale]}</dt>
                   </div>
                 ))}
               </dl>
@@ -59,12 +59,12 @@ export function ProductInside({ page, locale }: { page: ProductPage; locale: Loc
           </Reveal>
 
           <Reveal delay={0.08} className="lg:col-span-5">
-            <article className="flex h-full flex-col gap-6 rounded-3xl bg-white p-card-sm text-ink lg:p-card">
+            <article className="flex h-full flex-col gap-6 rounded-card bg-white p-card-sm text-ink lg:p-card">
               <Heading as="h3" size="h3">{inside.bms.title[locale]}</Heading>
-              <p className="text-base leading-relaxed text-ink/70">{inside.bms.lead[locale]}</p>
+              <p className="text-body leading-relaxed text-muted">{inside.bms.lead[locale]}</p>
               <ul aria-label={t.protectionsLabel} className="mt-auto divide-y divide-line border-y border-line">
                 {inside.bms.protections.map((protection) => (
-                  <li key={protection[locale]} className="flex items-center gap-3 py-3 text-base font-medium">
+                  <li key={protection[locale]} className="flex items-center gap-3 py-3 text-body font-medium">
                     <ShieldCheck aria-hidden className="size-5 shrink-0" />
                     {protection[locale]}
                   </li>
@@ -75,14 +75,14 @@ export function ProductInside({ page, locale }: { page: ProductPage; locale: Loc
         </div>
 
         <Reveal delay={0.16}>
-          <div className="flex flex-col gap-6 rounded-3xl bg-white/6 p-card-sm text-white lg:flex-row lg:items-center lg:justify-between lg:p-card">
+          <div className="flex flex-col gap-6 rounded-card bg-fill-dark p-card-sm text-white lg:flex-row lg:items-center lg:justify-between lg:p-card">
             <div>
               <Heading as="h3" size="h3">{inside.compatibility.title[locale]}</Heading>
-              <p className="mt-2 text-base text-white/75">{inside.compatibility.lead[locale]}</p>
+              <p className="mt-2 text-body text-muted-dark">{inside.compatibility.lead[locale]}</p>
             </div>
             <ul className="flex flex-wrap gap-2">
               {inside.compatibility.brands.map((brand) => (
-                <li key={brand.en} className="rounded-full border border-white/16 bg-white/6 px-4 py-2 text-sm font-medium">{brand[locale]}</li>
+                <li key={brand.en} className="rounded-full border border-line-dark bg-fill-dark px-4 py-2 text-small font-medium">{brand[locale]}</li>
               ))}
             </ul>
           </div>

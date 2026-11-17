@@ -57,7 +57,7 @@ function FieldError({ id, message }: { id: string; message?: string }) {
   return (
     <p
       id={id}
-      className={`-mt-0.5 min-h-5 text-sm text-ink transition-opacity duration-200 ease-tech ${message ? "opacity-100" : "opacity-0"}`}
+      className={`-mt-0.5 min-h-5 text-small text-ink transition-opacity duration-200 ease-tech ${message ? "opacity-100" : "opacity-0"}`}
     >
       {message}
     </p>
@@ -65,7 +65,7 @@ function FieldError({ id, message }: { id: string; message?: string }) {
 }
 
 function FieldLabel({ children }: { children: ReactNode }) {
-  return <span className="text-sm font-medium text-ink">{children}</span>;
+  return <span className="text-small font-medium text-ink">{children}</span>;
 }
 
 export function LeadForm({
@@ -178,7 +178,7 @@ export function LeadForm({
       onInput={clearFieldError}
       onChange={clearFieldError}
       aria-busy={submitting}
-      className={`rounded-3xl shadow-card ${cardBg} px-card-sm py-card-sm lg:p-card`}
+      className={`rounded-card shadow-card ${cardBg} px-card-sm py-card-sm lg:p-card`}
     >
       <input type="hidden" name="locale" value={locale} />
       {/* Disabling the fieldset disables every control while sending. */}
@@ -187,7 +187,7 @@ export function LeadForm({
         className="m-0 flex min-w-0 flex-col gap-3 border-0 p-0"
       >
         <fieldset className="m-0 border-0 p-0 pb-2">
-          <legend className="mb-3 text-sm font-medium text-ink">
+          <legend className="mb-3 text-small font-medium text-ink">
             {t.objectType}
           </legend>
           {/* Native radios: arrow keys move the selection inside the group. */}
@@ -207,7 +207,7 @@ export function LeadForm({
         </fieldset>
 
         {calculator ? (
-          <p className="rounded-field border border-line bg-white px-4 py-3 text-sm text-ink/70 motion-safe:animate-enter">
+          <p className="rounded-field border border-line bg-white px-4 py-3 text-small text-muted motion-safe:animate-enter">
             {t.calculatorAttached}{" "}
             <span className="font-medium text-ink">{calculator.summary}</span>
           </p>
@@ -253,7 +253,7 @@ export function LeadForm({
         <label className="flex flex-col gap-2 pb-2">
           <FieldLabel>
             {t.comment}{" "}
-            <span className="font-normal text-ink/70">({t.optional})</span>
+            <span className="font-normal text-muted">({t.optional})</span>
           </FieldLabel>
           <textarea
             name="comment"
@@ -276,7 +276,7 @@ export function LeadForm({
         </div>
 
         <div className="flex flex-col gap-2">
-          <label className="flex cursor-pointer items-start gap-3 text-sm leading-relaxed text-ink/70 has-disabled:cursor-not-allowed">
+          <label className="flex cursor-pointer items-start gap-3 text-small leading-relaxed text-muted has-disabled:cursor-not-allowed">
             {/* Custom box (no accent-color) so it looks the same in every browser. */}
             <span className="relative mt-0.5 inline-flex size-5 shrink-0">
               <input
@@ -285,7 +285,7 @@ export function LeadForm({
                 required
                 aria-invalid={errors.consent ? true : undefined}
                 aria-describedby="lead-consent-error"
-                className={`peer size-5 cursor-pointer appearance-none rounded-md border bg-white transition-colors duration-200 ease-tech hover:border-ink/40 checked:border-ink checked:bg-ink focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-ink/15 disabled:cursor-not-allowed disabled:not-checked:bg-surface ${borderFor(errors.consent)}`}
+                className={`peer size-5 cursor-pointer appearance-none rounded-tile border bg-white transition-colors duration-200 ease-tech hover:border-faint checked:border-ink checked:bg-ink focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-line disabled:cursor-not-allowed disabled:not-checked:bg-surface ${borderFor(errors.consent)}`}
               />
               <Check
                 aria-hidden
@@ -297,7 +297,7 @@ export function LeadForm({
               {t.consentBefore}{" "}
               <Link
                 href={routes.privacy}
-                className="rounded-sm text-ink underline decoration-ink/40 underline-offset-2 transition-colors duration-200 ease-tech hover:decoration-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+                className="rounded-sm text-ink underline decoration-faint underline-offset-2 transition-colors duration-200 ease-tech hover:decoration-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
               >
                 {t.privacyPolicy}
               </Link>{" "}

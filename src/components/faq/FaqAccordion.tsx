@@ -94,7 +94,7 @@ export function FaqAccordion({
                   onClick={() => toggle(item.id)}
                   className="group flex w-full items-start gap-4 text-left focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink sm:gap-6"
                 >
-                  <span className="mt-1 w-6 shrink-0 font-mono text-sm text-ink/50">
+                  <span className="mt-1 w-6 shrink-0 font-mono text-small text-faint">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <span className="flex-1 font-heading text-h3-sm font-semibold text-ink">
@@ -105,7 +105,7 @@ export function FaqAccordion({
                     className={`inline-flex size-11 shrink-0 items-center justify-center rounded-full border transition-colors duration-200 ease-tech ${
                       isOpen
                         ? "border-ink bg-ink text-white"
-                        : "border-ink/20 text-ink group-hover:border-ink"
+                        : "border-line text-ink group-hover:border-ink"
                     }`}
                   >
                     {isOpen ? (
@@ -128,7 +128,7 @@ export function FaqAccordion({
               >
                 <div className="overflow-hidden">
                   <p
-                    className={`max-w-180 pt-4 pl-10 text-base leading-relaxed text-ink/70 sm:pl-12 ${
+                    className={`max-w-180 pt-4 pl-10 text-body leading-relaxed text-muted sm:pl-12 ${
                       isOpen ? "" : "invisible"
                     }`}
                   >

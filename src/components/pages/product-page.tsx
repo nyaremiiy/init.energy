@@ -106,9 +106,9 @@ export function ProductPageView({
     page.consultation.summary?.[locale] ??
     `${product.name} · ${formatQuantity(product.capacity, locale)}`;
   const summary = (
-    <div className="mt-6 flex w-full items-center gap-4 rounded-3xl bg-white p-card-sm lg:p-card">
+    <div className="mt-6 flex w-full items-center gap-4 rounded-card bg-white p-card-sm lg:p-card">
       {product.image && !page.mediaPlaceholder ? (
-        <div className="relative size-16 shrink-0 overflow-hidden rounded-2xl bg-surface">
+        <div className="relative size-16 shrink-0 overflow-hidden rounded-tile bg-surface">
           <Image
             src={product.image.src}
             alt=""
@@ -119,13 +119,13 @@ export function ProductPageView({
           />
         </div>
       ) : (
-        <MediaPlaceholder caption="" className="size-16 shrink-0 rounded-2xl" />
+        <MediaPlaceholder caption="" className="size-16 shrink-0 rounded-tile" />
       )}
       <p className="flex flex-col gap-1">
-        <span className="text-sm text-ink/70">
+        <span className="text-small text-muted">
           {t.consultation.summaryTitle}
         </span>
-        <span className="font-heading text-base font-semibold text-ink">
+        <span className="font-heading text-body font-semibold text-ink">
           {summaryText}
         </span>
       </p>

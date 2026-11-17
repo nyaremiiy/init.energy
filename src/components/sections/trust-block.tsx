@@ -86,9 +86,9 @@ export function TrustBlock({
                 key={stat.id}
                 delay={index * 0.08}
                 distance={16}
-                className="flex flex-col-reverse justify-end gap-3 border-t border-white/16 pt-6"
+                className="flex flex-col-reverse justify-end gap-3 border-t border-line-dark pt-6"
               >
-                <dt className="text-base text-white/75">{stat.label}</dt>
+                <dt className="text-body text-muted-dark">{stat.label}</dt>
                 <dd className="font-heading text-number-sm font-light whitespace-nowrap tabular-nums lg:text-number">
                   {stat.value}
                 </dd>
@@ -112,7 +112,7 @@ export function TrustBlock({
                   <Heading as="h3" size="h3" className="text-white">
                     {item.title}
                   </Heading>
-                  <p className="text-base leading-relaxed text-white/75">
+                  <p className="text-body leading-relaxed text-muted-dark">
                     {item.description}
                   </p>
                 </Reveal>

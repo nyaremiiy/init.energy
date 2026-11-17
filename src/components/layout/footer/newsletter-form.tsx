@@ -121,7 +121,7 @@ export function NewsletterForm() {
       </p>
       <p
         id="footer-newsletter-note"
-        className="mt-1 text-caption text-white/75"
+        className="mt-1 text-caption text-muted-dark"
       >
         {t.note}
       </p>
