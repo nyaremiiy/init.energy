@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-18 — Видалення некоректної Product JSON-LD розмітки
+- **Агент:** Codex
+- **Гілка:** fix/remove-product-schema (статус: змерджено в develop)
+- **Що зроблено:** зі спільного шаблону всіх сторінок продуктів uk/en видалено `Product` JSON-LD без обов’язкових для Google полів `offers`, `review` або `aggregateRating`; невикористовуваний builder `productSchema` і залежний мертвий код також видалено. `BreadcrumbList`, `Organization` та `HowTo` для BESS залишено без змін.
+- **Файли:** src/components/pages/product-page.tsx, src/lib/seo/schema.ts, src/content/product-pages.ts, docs/ai/CONTEXT.md, docs/ai/CHANGELOG.md
+- **Нотатки / що далі:** після production-деплою запустити перевірку виправлення в Google Search Console; звіт оновиться лише після повторного сканування сторінок Google.
+
 ## 2026-11-18 — Файл верифікації Google
 - **Агент:** Codex
 - **Гілка:** chore/google-site-verification (статус: змерджено в develop)

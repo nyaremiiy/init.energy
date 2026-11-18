@@ -13,7 +13,6 @@ import { ProductScaling } from "@/components/product-page/product-scaling";
 import { ProductSectionNav } from "@/components/product-page/product-section-nav";
 import { ProductSpecs } from "@/components/product-page/product-specs";
 import { RelatedProducts } from "@/components/product-page/related-products";
-import { specValueText } from "@/components/product-page/spec-value";
 import { FaqSection } from "@/components/sections/home/faq-section";
 import { LeadSection } from "@/components/sections/LeadSection";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -30,7 +29,6 @@ import {
   breadcrumbSchema,
   howToSchema,
   organizationSchema,
-  productSchema,
 } from "@/lib/seo/schema";
 
 export function buildProductPageMetadata(
@@ -131,39 +129,8 @@ export function ProductPageView({
       </p>
     </div>
   );
-  const compositionParts = page.composition?.items.flatMap((item) =>
-    item.relatedProduct ? [products[item.relatedProduct]] : [],
-  );
-  const relatedProducts = page.related.map((id) => products[id]);
-
   return (
     <>
-      <JsonLd
-        data={productSchema({
-          name: product.name,
-          description: page.hero.lead[locale],
-          category: page.hero.typeLabel[locale],
-          brand: product.brand,
-          provider: product.brand === "LITHIUMVALLEY",
-          url: absoluteUrl(path),
-          image:
-            product.image && !page.mediaPlaceholder
-              ? absoluteUrl(product.image.src)
-              : undefined,
-          properties: (page.specGroups?.flatMap((group) => group.rows) ?? page.specs).map((row) => ({
-            name: row.label[locale],
-            value: specValueText(row.value, locale),
-          })),
-          related: relatedProducts.map((related) => ({
-            name: related.name,
-            url: absoluteUrl(localizePath(related.href, locale)),
-          })),
-          parts: compositionParts?.map((related) => ({
-            name: related.name,
-            url: absoluteUrl(localizePath(related.href, locale)),
-          })),
-        })}
-      />
       <JsonLd
         data={breadcrumbSchema([
           {

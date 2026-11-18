@@ -6,8 +6,8 @@ import { routes } from "./routes";
 /**
  * Content of full product pages (root-level slugs, e.g. /svit-plus-5000/).
  * Only products listed here get a page; the rest keep their current URL
- * outside this template. Every visible spec, the JSON-LD Product and the
- * FAQ come from here and from products.ts.
+ * outside this template. Every visible spec and the FAQ come from here and
+ * from products.ts.
  */
 
 type Text = Record<Locale, string>;
