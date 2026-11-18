@@ -189,8 +189,8 @@ export type SolutionPage = {
     lead: Localized;
     primaryCta: Localized;
     secondaryCta: Localized;
-    /** Responsive hero photo (AVIF 750 / 1280 / 1920 / 2560); without it a placeholder is shown. */
-    image?: { mobile: string; tablet: string; laptop: string; desktop: string; alt: Localized };
+    /** Responsive hero photo (AVIF 750 / 1280 / 1440 / 1920 / 2560); without it a placeholder is shown. */
+    image?: { mobile: string; tablet: string; laptop: string; wide: string; desktop: string; alt: Localized };
     mediaLabel: Localized;
   };
   facts: {
@@ -264,7 +264,8 @@ export const solutionPages: SolutionPage[] = [
       image: {
         mobile: "/images/cec/rishennya/hotel/01-750.avif",
         tablet: "/images/cec/rishennya/hotel/01-1280.avif",
-        laptop: "/images/cec/rishennya/hotel/01-1920.avif",
+        laptop: "/images/cec/rishennya/hotel/01-1440.avif",
+        wide: "/images/cec/rishennya/hotel/01-1920.avif",
         desktop: "/images/cec/rishennya/hotel/01-2560.avif",
         alt: {
           uk: "Гірський готель із сонячними панелями на даху",

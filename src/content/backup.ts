@@ -18,9 +18,10 @@ import type { SegmentIconId } from "./segments";
 
 export const backupHeroImage = {
   desktop: "/images/rezervne-zhyvlennya/hero-2560.avif",
-  laptop: "/images/rezervne-zhyvlennya/hero-1920.avif",
+  laptop: "/images/rezervne-zhyvlennya/hero-1440.avif",
   tablet: "/images/rezervne-zhyvlennya/hero-1280.avif",
   mobile: "/images/rezervne-zhyvlennya/hero-750.avif",
+  wide: "/images/rezervne-zhyvlennya/hero-1920.avif",
   alt: {
     uk: "Інвертор, накопичувач і щиток системи резервного живлення на стіні гаража",
     en: "An inverter, a battery and a switchboard of a backup power system on a garage wall",
