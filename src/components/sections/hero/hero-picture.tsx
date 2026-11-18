@@ -4,7 +4,8 @@ export type HeroImage = {
   fallback: string;
   laptop?: string;
   mobile?: string;
-  position?: "center" | "top";
+  /** "right": 70 % 50 % (equipment on the right of the photo). */
+  position?: "center" | "top" | "right";
   tablet?: string;
   type?: "image/avif";
 };
@@ -12,6 +13,7 @@ export type HeroImage = {
 const imagePositionClasses = {
   center: "object-center",
   top: "object-top",
+  right: "object-hero-right",
 };
 
 /**

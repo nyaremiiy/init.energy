@@ -1,12 +1,11 @@
 import { PackageCheck, Search, Wrench, LifeBuoy } from "lucide-react";
+import { StepsList } from "@/components/ui/steps-list";
 
 import { Container } from "@/components/layout/container";
 import { CardLabel } from "@/components/ui/card-label";
-import { Heading } from "@/components/ui/heading";
 import { Panel } from "@/components/ui/panel";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
-import { StepMarker } from "@/components/ui/step-marker";
 import type { ProductPage } from "@/content/product-pages";
 import { anchors } from "@/content/routes";
 import { getMessages } from "@/i18n/server";
@@ -54,5 +53,5 @@ export function HowToSteps({ page, locale }: { page: ProductPage; locale: Locale
   const data = page.process;
   if (!data) return null;
   const t = getMessages().productPage.process;
-  return <Panel as="section" variant="sky" id={anchors.process} aria-labelledby="process-title" className="scroll-mt-40 bg-white pt-section-sm lg:pt-section"><Container inPanel className="flex flex-col gap-section-head-sm py-panel-y-sm lg:gap-section-head lg:py-panel-y"><SectionHeader eyebrow={t.eyebrow} title={data.title[locale]} titleId="process-title" lead={data.lead[locale]} /><ol className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">{data.steps.map((step, index) => <li key={step.title.en} className="border-t border-line pt-5"><StepMarker index={index} icon={processIcons[index] ?? Wrench} /><Heading as="h3" size="h3" className="mt-4">{step.title[locale]}</Heading><p className="mt-2 text-body text-muted">{step.text[locale]}</p></li>)}</ol></Container></Panel>;
+  return <Panel as="section" variant="sky" id={anchors.process} aria-labelledby="process-title" className="scroll-mt-40 bg-white pt-section-sm lg:pt-section"><Container inPanel className="flex flex-col gap-section-head-sm py-panel-y-sm lg:gap-section-head lg:py-panel-y"><SectionHeader eyebrow={t.eyebrow} title={data.title[locale]} titleId="process-title" lead={data.lead[locale]} /><StepsList steps={data.steps.map((step) => ({ title: step.title[locale], text: step.text[locale] }))} icons={processIcons} /></Container></Panel>;
 }

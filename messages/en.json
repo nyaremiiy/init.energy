@@ -270,7 +270,11 @@
       "nicheConsumers": "Where energy goes",
       "nicheSizing": "System size",
       "nicheBackup": "Running through outages",
-      "nicheBuild": "Equipment and steps"
+      "nicheBuild": "Equipment and steps",
+      "backupHub": "Backup power",
+      "backupHow": "How it works",
+      "backupEquipment": "Equipment",
+      "backupRuntime": "How long it lasts"
     },
     "copyright": "© {year} INIT ENERGY",
     "developedBy": "Developed by",
@@ -772,6 +776,90 @@
       "contactTitle": "Contact",
       "contactText": "Send questions about cookies and personal data to",
       "updated": "Updated: {date}"
+    }
+  },
+  "backup": {
+    "meta": {
+      "title": "Turnkey backup power for homes and businesses",
+      "description": "Turnkey backup power for apartments, houses and businesses: SVIT batteries and Deye, Victron, Huawei systems. Sizing, installation and service by INIT ENERGY."
+    },
+    "home": "Home",
+    "breadcrumb": "Backup power",
+    "hero": {
+      "eyebrow": "Backup power · apartments, houses, business",
+      "title": "Turnkey\nbackup power",
+      "lead": "We will choose, install and service a system that keeps the lights, boiler, fridge and internet on during outages. Built on SVIT batteries or ready-made Deye, Victron and Huawei systems.",
+      "primary": "Find a system",
+      "secondary": "Send a request"
+    },
+    "segments": {
+      "eyebrow": "Who it is for",
+      "title": "Backup power for an apartment, a house and a business",
+      "lead": "The system depends on what has to run without the grid and for how many hours. We size it for your site — from a portable station to an industrial battery.",
+      "cta": "Learn more"
+    },
+    "how": {
+      "eyebrow": "How it works",
+      "title": "How backup power works",
+      "lead": "While the grid is on, the system charges the battery. When the power goes, the inverter switches the house to the battery automatically — nothing to turn on by hand.",
+      "solarTitle": "Add solar panels — and the battery charges from the sun",
+      "solarText": "With a hybrid inverter, a backup system can be extended to a solar plant at any time."
+    },
+    "equipment": {
+      "eyebrow": "Equipment",
+      "title": "What equipment we install",
+      "lead": "We do not tie you to one brand: we recommend SVIT batteries, and we equally select, sell, install and service Deye, Victron and Huawei backup systems — inverters together with batteries.",
+      "svitLabel": "INIT ENERGY line",
+      "svitText": "INIT ENERGY batteries — from a {min} portable station to a {max} system.",
+      "svitListLabel": "SVIT models",
+      "svitLink": "All SVIT batteries",
+      "brandLabel": "Backup power",
+      "brandText": "Inverters and batteries · sales, installation and service"
+    },
+    "runtime": {
+      "eyebrow": "Autonomy",
+      "title": "How long the system will last",
+      "lead": "Runtime = usable battery capacity ÷ appliance power. Guide figures for typical sets with every appliance running all the time:",
+      "calcLink": "Calculate your own set",
+      "caption": "Approximate runtime of SVIT batteries for typical appliance sets",
+      "loadHeader": "Appliance set",
+      "hours": "≈ {hours} h",
+      "withInverter": "+ inverter",
+      "footnote": "Usable capacity is {share} of nominal (typical for LiFePO₄). Appliance power from Minfin data; the pump is {pump}. The fridge and the pump run in cycles, so the real time is usually longer. SVIT PLUS 16000 works with a hybrid inverter."
+    },
+    "promo": {
+      "title": "Add solar panels to your backup power",
+      "description": "A hybrid system charges the battery from the sun by day and keeps the house running during outages. Design, equipment, installation and commissioning — turnkey.",
+      "cta": "Learn more about solar"
+    },
+    "compare": {
+      "eyebrow": "Comparison",
+      "title": "Generator, UPS or a battery system",
+      "lead": "A generator gives plenty of energy but is noisy and needs fuel. A regular UPS lasts minutes. A battery system runs quietly for hours and switches over by itself.",
+      "caption": "A generator, a UPS and an inverter with a battery compared",
+      "feature": "Feature",
+      "recommended": "Recommended",
+      "legendLabel": "Marks",
+      "status": {
+        "good": "advantage",
+        "limited": "with limits",
+        "bad": "drawback"
+      }
+    },
+    "steps": {
+      "eyebrow": "Stages",
+      "title": "How we install backup power",
+      "lead": "From the first call to start-up — five steps, one team from sizing to service."
+    },
+    "faq": {
+      "title": "Backup power questions",
+      "lead": "About choosing a system, brands, autonomy and installation.",
+      "linksTitle": "Useful",
+      "links": {
+        "calculator": "Autonomy calculator",
+        "solar": "Solar power plants",
+        "compare": "Compare SVIT batteries"
+      }
     }
   }
 }

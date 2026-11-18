@@ -12,6 +12,8 @@ type RowLinkProps = {
   meta?: ReactNode;
   tone?: RowLinkTone;
   external?: boolean;
+  /** Top hairline between list rows (default); off for a single row inside a card. */
+  bordered?: boolean;
 };
 
 const toneClasses: Record<RowLinkTone, { border: string; title: string; muted: string; icon: string; focus: string }> = {
@@ -32,13 +34,13 @@ const toneClasses: Record<RowLinkTone, { border: string; title: string; muted: s
 };
 
 /** Full-width list row: title, optional description and value, decorative arrow circle. */
-export function RowLink({ href, title, description, meta, tone = "light", external = false }: RowLinkProps) {
+export function RowLink({ href, title, description, meta, tone = "light", external = false, bordered = true }: RowLinkProps) {
   const c = toneClasses[tone];
   const externalProps = external ? { target: "_blank", rel: "noopener noreferrer" } : {};
   return (
     <Link
       href={href}
-      className={`group flex items-center gap-4 border-t py-5 transition-colors duration-200 ease-tech focus-visible:outline-2 focus-visible:outline-offset-2 ${c.border} ${c.focus}`}
+      className={`group flex items-center gap-4 py-5 transition-colors duration-200 ease-tech focus-visible:outline-2 focus-visible:outline-offset-2 ${bordered ? `border-t ${c.border}` : ""} ${c.focus}`}
       {...externalProps}
     >
       <span className="min-w-0 flex-1">

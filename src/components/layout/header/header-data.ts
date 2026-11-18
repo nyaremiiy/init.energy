@@ -135,6 +135,7 @@ export function getNavItems(locale: Locale): NavItem[] {
           title: t.columns.solar,
           items: [serviceLink("turnkeySes"), paybackCalculatorLink],
         },
+        { title: t.columns.backup, items: [serviceLink("backupHub")] },
         { title: t.columns.industry, items: [serviceLink("hotelSes")] },
       ],
     },
@@ -169,6 +170,7 @@ const headerSectionKeys: Record<string, string[]> = {
   [routes.services.turnkeySes]: ["sesSegments", "products", "calculator", "aboutUs"],
   [routes.solutions.hotel]: ["nicheFacts", "nicheSizing", "nicheBackup", "faq"],
   [routes.calculators.sesPayback]: ["calculator", "sesYield", "sesMethod", "faq"],
+  [routes.backup.hub]: ["backupHow", "backupEquipment", "backupRuntime", "faq"],
 };
 
 /** Product pages: no section links, but the solar hub and the calculator (cross-sell). */
