@@ -31,6 +31,69 @@ export const faqTopics: FaqTopic[] = [
  * (Li-ion in the table, LiFePO₄ in the text).
  */
 export const faqList: Faq[] = [
+  // Backup power hub (/rezervne-zhyvlennya/), questions from the owner's mockup 2026-11-18.
+  // Answers use facts already in content/ (products.ts, appliances.ts, CONTEXT.md).
+  // TODO(content): «Чи обслуговуєте системи, які встановили не ви?» — not confirmed by the owner yet, left out.
+  {
+    id: "backup-apartment-choice",
+    topic: "backup",
+    pages: ["backup"],
+    question: { uk: "Що обрати для квартири?", en: "What should I choose for an apartment?" },
+    answer: {
+      uk: "Для роутера, світла й ноутбука вистачить портативної SVIT 600 — без монтажу. Якщо потрібно живити холодильник і кілька кімнат довше, підійде SVIT HOME з інвертором 6,2 кВт і батареєю 5,12 кВт·год.",
+      en: "A portable SVIT 600 is enough for a router, lights and a laptop — no installation. To run a fridge and several rooms for longer, choose SVIT HOME with a 6.2 kW inverter and a 5.12 kWh battery.",
+    },
+  },
+  {
+    id: "backup-boiler-fridge",
+    topic: "backup",
+    pages: ["backup"],
+    question: { uk: "Чи потягне система котел і холодильник?", en: "Will the system run a boiler and a fridge?" },
+    answer: {
+      uk: "Так. Газовий котел (близько 60 Вт) і холодильник (близько 150 Вт) разом споживають приблизно 210 Вт — це в межах і SVIT 600 (600 Вт), і SVIT HOME з інвертором 6,2 кВт. Скільки годин вони працюватимуть, показує таблиця «Скільки протримається система» вище.",
+      en: "Yes. A gas boiler (about 60 W) and a fridge (about 150 W) together draw roughly 210 W — within both SVIT 600 (600 W) and SVIT HOME with its 6.2 kW inverter. The table «How long the system will last» above shows how many hours they will run.",
+    },
+  },
+  {
+    id: "backup-other-brands",
+    topic: "backup",
+    pages: ["backup"],
+    question: { uk: "Чи можна встановити не SVIT, а інший бренд?", en: "Can you install a brand other than SVIT?" },
+    answer: {
+      uk: "Так. Окрім накопичувачів SVIT, підбираємо, продаємо, монтуємо й обслуговуємо системи резервного живлення Deye, Victron і Huawei — інвертори разом з акумуляторами.",
+      en: "Yes. Besides SVIT batteries, we select, sell, install and service Deye, Victron and Huawei backup systems — inverters together with batteries.",
+    },
+  },
+  {
+    id: "backup-switching",
+    topic: "backup",
+    pages: ["backup"],
+    question: { uk: "Чи треба щось вмикати, коли зникає світло?", en: "Do I have to switch anything on when the power goes?" },
+    answer: {
+      uk: "Ні, якщо система підключена до щита через інвертор: SVIT HOME має режим UPS і перемикає живлення на накопичувач сама. Портативна SVIT 600 до щита не підключається — прилади вмикають у її розетки.",
+      en: "No, if the system is connected to the switchboard through an inverter: SVIT HOME has a UPS mode and switches to the battery by itself. The portable SVIT 600 is not connected to the switchboard — appliances plug into its sockets.",
+    },
+  },
+  {
+    id: "backup-add-solar",
+    topic: "solar",
+    pages: ["backup"],
+    question: { uk: "Чи можна потім додати сонячні панелі?", en: "Can I add solar panels later?" },
+    answer: {
+      uk: "Так, якщо інвертор гібридний. Інвертор VICTOR у складі SVIT HOME підтримує сонячні панелі, тож резервну систему можна розширити до СЕС. Якщо плануєте панелі, скажіть про це інженеру одразу — він підбере обладнання з запасом.",
+      en: "Yes, if the inverter is hybrid. The VICTOR inverter in SVIT HOME supports solar panels, so the backup system can grow into a solar plant. If you plan panels, tell the engineer up front — they will choose equipment with headroom.",
+    },
+  },
+  {
+    id: "backup-battery-life",
+    topic: "products",
+    pages: ["backup"],
+    question: { uk: "Скільки служить батарея?", en: "How long does the battery last?" },
+    answer: {
+      uk: "Ресурс накопичувача вимірюють у циклах заряд-розряд. Батарея SVIT PLUS 5000 (вона ж у складі SVIT HOME) розрахована на понад 10 000 циклів, портативна SVIT 600 — на понад 2 000. Строк у роках залежить від того, як часто система розряджається, тому точний прогноз дасть інженер.",
+      en: "Battery life is measured in charge cycles. The SVIT PLUS 5000 battery (also inside SVIT HOME) is rated for over 10,000 cycles, the portable SVIT 600 for over 2,000. The life in years depends on how often the system discharges, so an engineer will give you an exact estimate.",
+    },
+  },
   {
     id: "calculator-accuracy", topic: "solar", pages: ["calculator"],
     question: { uk: "Наскільки точний розрахунок?", en: "How accurate is this estimate?" },
@@ -108,7 +171,7 @@ export const faqList: Faq[] = [
   {
     id: "svit-home-runtime",
     topic: "backup",
-    pages: ["home", "backup", "products", "svit-home"],
+    pages: ["home", "products", "svit-home"],
     question: {
       uk: "Скільки працюватиме будинок від SVIT HOME під час відключення?",
       en: "How long will a house run on SVIT HOME during an outage?",
@@ -121,7 +184,7 @@ export const faqList: Faq[] = [
   {
     id: "apartment-backup",
     topic: "backup",
-    pages: ["home", "backup", "products"],
+    pages: ["home", "products"],
     question: {
       uk: "Чи можна поставити резервне живлення в квартирі?",
       en: "Can I have backup power in an apartment?",
@@ -160,7 +223,7 @@ export const faqList: Faq[] = [
   {
     id: "backup-then-solar",
     topic: "solar",
-    pages: ["home", "solar", "backup"],
+    pages: ["home", "solar"],
     question: {
       uk: "Чи можна почати з резервного живлення, а панелі додати пізніше?",
       en: "Can I start with backup power and add panels later?",
@@ -199,7 +262,7 @@ export const faqList: Faq[] = [
   {
     id: "turnkey-price",
     topic: "warranty",
-    pages: ["home", "solar", "backup"],
+    pages: ["home", "solar"],
     question: {
       uk: "Скільки коштує система під ключ?",
       en: "How much does a turnkey system cost?",

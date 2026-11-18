@@ -49,7 +49,8 @@ export const solutions: Solution[] = [
     },
     products: [{ product: "svit600" }],
     capacityProducts: ["svit600"],
-    ctaHref: routes.backup.apartment,
+    // Segment pages are planned; the hub is live.
+    ctaHref: routes.backup.hub,
     tone: "light",
   },
   {
@@ -78,7 +79,7 @@ export const solutions: Solution[] = [
         en: "Solar panels for a private house",
       },
     },
-    ctaHref: routes.backup.house,
+    ctaHref: routes.backup.hub,
     tone: "navy",
   },
   {
@@ -106,7 +107,7 @@ export const solutions: Solution[] = [
         en: "Solar power plant for a business",
       },
     },
-    ctaHref: routes.backup.business,
+    ctaHref: routes.backup.hub,
     tone: "dark",
   },
 ];
