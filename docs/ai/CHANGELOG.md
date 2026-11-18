@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-18 — Оптимізація завантаження hero та зображення SVIT HOME
+- **Агент:** Codex
+- **Гілка:** fix/image-delivery (статус: змерджено в develop)
+- **Що зроблено:** додано проміжний AVIF 1440 px до всіх responsive-наборів `HeroPicture` (головна, хаб СЕС, резервне живлення та сторінка готелю) і новий breakpoint 1280–1599 px; на viewport 1362 px головний hero тепер передає 81 КБ замість 123 КБ. Для фото SVIT HOME у картці ємності прибрано `unoptimized`, уточнено `sizes` і відновлено адаптивний `srcset` Next Image: перевірений AVIF 640 px важить 8 КБ замість оригінальних 16,5 КБ. `npm run lint` і `npm run build` проходять.
+- **Файли:** src/components/sections/hero/hero-picture.tsx, src/components/sections/home/hero-slides.ts, src/components/products/CapacityCard.tsx, src/content/backup.ts, src/content/solutions.ts, public/images/{home/hero,cec/hero,cec/rishennya/hotel,rezervne-zhyvlennya}/*-1440.avif, docs/ai/CONTEXT.md, docs/ai/CHANGELOG.md
+- **Нотатки / що далі:** після production-деплою повторити Lighthouse для головної сторінки; точна оцінка економії залежить від viewport і DPR браузера.
+
 ## 2026-11-18 — Видалення некоректної Product JSON-LD розмітки
 - **Агент:** Codex
 - **Гілка:** fix/remove-product-schema (статус: змерджено в develop)
