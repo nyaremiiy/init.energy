@@ -52,7 +52,7 @@ export function SesHybrid() {
             >
               <Reveal delay={index * 0.08} className="flex flex-1">
                 <div
-                  className={`flex flex-1 flex-col gap-3 rounded-3xl p-card-sm lg:p-card ${node.highlight ? "bg-white text-ink" : "bg-white/8 text-white"}`}
+                  className={`flex flex-1 flex-col gap-3 rounded-card p-card-sm lg:p-card ${node.highlight ? "bg-white text-ink" : "bg-fill-dark text-white"}`}
                 >
                   <StepMarker
                     index={index}
@@ -67,7 +67,7 @@ export function SesHybrid() {
                     {node.title[locale]}
                   </Heading>
                   <p
-                    className={`text-base leading-relaxed ${node.highlight ? "text-ink/70" : "text-white/75"}`}
+                    className={`text-body leading-relaxed ${node.highlight ? "text-muted" : "text-muted-dark"}`}
                   >
                     {node.text[locale]}
                   </p>
@@ -76,7 +76,7 @@ export function SesHybrid() {
               {index < hybridFlow.length - 1 ? (
                 <span
                   aria-hidden
-                  className="flex items-center justify-center text-white/75 lg:px-3"
+                  className="flex items-center justify-center text-muted-dark lg:px-3"
                 >
                   <ArrowDown className="size-5 lg:hidden" />
                   <ArrowRight className="hidden size-5 lg:block" />

@@ -38,12 +38,12 @@ export function NicheBackup({ page, locale }: { page: SolutionPage; locale: Loca
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
           <Reveal className="flex flex-col gap-5 lg:col-span-6">
             <h3 className="font-heading text-h3-sm font-medium text-white sm:text-h3">{t.prioritiesTitle}</h3>
-            <ul className="grid grid-cols-1 border-b border-white/16 sm:grid-cols-2 sm:gap-x-8">
+            <ul className="grid grid-cols-1 border-b border-line-dark sm:grid-cols-2 sm:gap-x-8">
               {page.backup.priorities.map((item) => {
                 const Icon = nicheIcons[item.icon];
                 return (
-                  <li key={item.label.en} className="flex items-center gap-3 border-t border-white/16 py-4 text-base text-white">
-                    <span aria-hidden className="flex size-10 shrink-0 items-center justify-center rounded-full border border-white/25">
+                  <li key={item.label.en} className="flex items-center gap-3 border-t border-line-dark py-4 text-body text-white">
+                    <span aria-hidden className="flex size-10 shrink-0 items-center justify-center rounded-full border border-line-dark">
                       <Icon className="size-4.5" strokeWidth={1.7} />
                     </span>
                     {item.label[locale]}
@@ -59,15 +59,15 @@ export function NicheBackup({ page, locale }: { page: SolutionPage; locale: Loca
               {page.backup.modes.map((mode) => (
                 <li
                   key={mode.title.en}
-                  className={`flex flex-col gap-1 rounded-3xl p-card-sm ${mode.highlight ? "bg-white text-ink" : "bg-white/8 text-white"}`}
+                  className={`flex flex-col gap-1 rounded-card p-card-sm ${mode.highlight ? "bg-white text-ink" : "bg-fill-dark text-white"}`}
                 >
-                  <p className="flex flex-wrap items-center gap-3 font-heading text-base font-semibold">
+                  <p className="flex flex-wrap items-center gap-3 font-heading text-body font-semibold">
                     {mode.title[locale]}
                     {mode.highlight ? (
-                      <span className="rounded-full bg-sky px-3 py-1 font-sans text-xs font-medium text-ink">{t.recommended}</span>
+                      <span className="rounded-full bg-sky px-3 py-1 font-sans text-caption font-medium text-ink">{t.recommended}</span>
                     ) : null}
                   </p>
-                  <p className={`text-sm ${mode.highlight ? "text-ink/70" : "text-white/75"}`}>{mode.text[locale]}</p>
+                  <p className={`text-small ${mode.highlight ? "text-muted" : "text-muted-dark"}`}>{mode.text[locale]}</p>
                 </li>
               ))}
             </ul>

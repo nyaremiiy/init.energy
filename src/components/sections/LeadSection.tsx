@@ -1,13 +1,12 @@
+import Image from "next/image";
 import type { ReactNode } from "react";
 
 import { Container } from "@/components/layout/container";
 import { LeadForm, type LeadObjectType } from "@/components/forms/LeadForm";
 import { LeadContactCard } from "@/components/sections/LeadContactCard";
 import { LeadSteps } from "@/components/sections/LeadSteps";
-import { Panel } from "@/components/ui/panel";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
-import { SectionWatermark } from "@/components/ui/section-watermark";
 import { anchors } from "@/content/routes";
 import { getMessages } from "@/i18n/server";
 
@@ -21,13 +20,18 @@ type LeadSectionProps = {
   product?: string;
   submitLabel?: string;
   commentPlaceholder?: string;
-  /** Light-blue panel (product pages) instead of the white section. */
-  panel?: boolean;
   objectTypes?: LeadObjectType[];
 };
 
 const titleId = "lead-section-title";
+// The same roof photo on every page (owner decision); decorative, so alt="".
+const photo = "/images/home/promo/ses-roof-1920.avif";
 
+/**
+ * Lead section on every page: one bordered card. Left (5 of 11): photo under
+ * a dark scrim with the header, steps (or the product summary) and contacts.
+ * Right (6 of 11): the lead form. Mobile: the dark part on top, the form below.
+ */
 export function LeadSection({
   title,
   lead,
@@ -36,75 +40,56 @@ export function LeadSection({
   product,
   submitLabel,
   commentPlaceholder,
-  panel = false,
   objectTypes,
 }: LeadSectionProps) {
-  const messages = getMessages();
-  const t = messages.leadSection;
-
-  const content = (
-    <>
-      <SectionWatermark text="CONTACT" />
-      <Container
-        inPanel={panel}
-        className={`relative ${panel ? "py-panel-y-sm lg:py-panel-y" : ""}`}
-      >
-        <div className="grid grid-cols-1 items-start gap-10 md:grid-cols-2 md:gap-16">
-          <div className="flex flex-col items-start gap-10">
-            <Reveal>
-              <SectionHeader
-                eyebrow={t.eyebrow}
-                title={title ?? t.title}
-                titleId={titleId}
-                lead={lead ?? t.lead}
-              />
-            </Reveal>
-
-            <Reveal delay={0.06} distance={16} className="w-full">
-              {summary ?? <LeadSteps steps={t.steps} />}
-            </Reveal>
-
-            <Reveal delay={0.12} distance={12} className="w-full">
-              <LeadContactCard />
-            </Reveal>
-          </div>
-
-          <Reveal delay={0.08} distance={16} duration={0.5}>
-            <LeadForm
-              defaultObjectType={defaultObjectType}
-              product={product}
-              submitLabel={submitLabel}
-              commentPlaceholder={commentPlaceholder}
-              cardTone={panel ? "white" : "surface"}
-              objectTypes={objectTypes}
-            />
-          </Reveal>
-        </div>
-      </Container>
-    </>
-  );
-
-  if (panel) {
-    return (
-      <Panel
-        as="section"
-        variant="sky"
-        id={anchors.contacts}
-        aria-labelledby={titleId}
-        className="scroll-mt-24 bg-white pt-section-sm lg:pt-section"
-      >
-        {content}
-      </Panel>
-    );
-  }
+  const t = getMessages().leadSection;
 
   return (
     <section
       id={anchors.contacts}
       aria-labelledby={titleId}
-      className="relative scroll-mt-24 overflow-hidden bg-white pt-section-sm lg:pt-section"
+      className="relative scroll-mt-24 bg-white pt-section-sm lg:pt-section"
     >
-      {content}
+      <Container>
+        <div className="grid grid-cols-1 overflow-clip rounded-panel-sm border border-line sm:rounded-panel lg:grid-cols-11">
+          <div className="relative isolate text-white lg:col-span-5">
+            <Image src={photo} alt="" fill sizes="(min-width: 1024px) 45vw, 100vw" className="-z-10 object-cover" />
+            <div aria-hidden className="absolute inset-0 -z-10 scrim-lead" />
+
+            <div className="flex h-full flex-col justify-between gap-10 p-card-sm lg:p-14">
+              <Reveal>
+                <SectionHeader
+                  eyebrow={t.eyebrow}
+                  title={title ?? t.title}
+                  titleId={titleId}
+                  lead={lead ?? t.lead}
+                  tone="dark"
+                />
+              </Reveal>
+
+              <Reveal delay={0.06} distance={16} className="w-full">
+                {summary ?? <LeadSteps steps={t.steps} />}
+              </Reveal>
+
+              <Reveal delay={0.12} distance={12} className="w-full">
+                <LeadContactCard />
+              </Reveal>
+            </div>
+          </div>
+
+          <div className="flex items-center bg-white p-2 lg:col-span-6 lg:p-10">
+            <Reveal delay={0.08} distance={16} duration={0.5} className="w-full">
+              <LeadForm
+                defaultObjectType={defaultObjectType}
+                product={product}
+                submitLabel={submitLabel}
+                commentPlaceholder={commentPlaceholder}
+                objectTypes={objectTypes}
+              />
+            </Reveal>
+          </div>
+        </div>
+      </Container>
     </section>
   );
 }

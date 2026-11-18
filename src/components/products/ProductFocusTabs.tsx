@@ -180,7 +180,7 @@ export function ProductFocusTabs({
               aria-labelledby={`${baseId}-tab-${index}`}
               tabIndex={selected ? 0 : -1}
               inert={!selected}
-              className={`col-start-1 row-start-1 grid min-w-0 grid-cols-1 items-center gap-8 rounded-3xl bg-white p-card-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink lg:grid-cols-12 lg:gap-12 lg:p-card ${
+              className={`col-start-1 row-start-1 grid min-w-0 grid-cols-1 items-center gap-8 rounded-card bg-white p-card-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink lg:grid-cols-12 lg:gap-12 lg:p-card ${
                 selected ? "motion-safe:animate-enter" : "invisible"
               }`}
             >
@@ -195,10 +195,10 @@ export function ProductFocusTabs({
                 >
                   {product.segment}
                 </CardLabel>
-                <h3 className="font-heading text-h2-sm font-semibold tracking-tight text-heading lg:text-h2-md">
+                <h3 className="font-heading text-h2-sm font-semibold tracking-tight text-ink lg:text-h2-md">
                   {product.name}
                 </h3>
-                <p className="text-base leading-relaxed text-ink/70 sm:text-lg">
+                <p className="text-body leading-relaxed text-muted sm:text-lead">
                   {product.description}
                 </p>
 
@@ -209,9 +209,9 @@ export function ProductFocusTabs({
                   {product.specs.map((spec) => (
                     <div
                       key={spec.label}
-                      className="group/spec flex min-w-0 flex-col-reverse gap-1 border-t border-line pt-4 transition-colors duration-200 ease-tech hover:border-ink/40"
+                      className="group/spec flex min-w-0 flex-col-reverse gap-1 border-t border-line pt-4 transition-colors duration-200 ease-tech hover:border-faint"
                     >
-                      <dt className="text-sm text-ink/70 transition-colors duration-200 ease-tech group-hover/spec:text-ink">
+                      <dt className="text-small text-muted transition-colors duration-200 ease-tech group-hover/spec:text-ink">
                         {spec.label}
                       </dt>
                       <dd className="font-heading text-stat-sm font-medium whitespace-nowrap text-ink transition-transform duration-200 ease-tech motion-safe:group-hover/spec:translate-x-1">

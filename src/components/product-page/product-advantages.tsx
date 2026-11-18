@@ -34,22 +34,22 @@ const icons: Record<AdvantageIcon, typeof ShieldCheck> = {
 const tones = {
   sky: {
     card: "bg-sky text-ink",
-    muted: "text-ink/70",
+    muted: "text-muted",
     label: "light" as const,
   },
   light: {
     card: "bg-surface text-ink",
-    muted: "text-ink/70",
+    muted: "text-muted",
     label: "light" as const,
   },
   navy: {
     card: "bg-navy text-white",
-    muted: "text-white/75",
+    muted: "text-muted-dark",
     label: "dark" as const,
   },
   dark: {
     card: "bg-ink text-white",
-    muted: "text-white/75",
+    muted: "text-muted-dark",
     label: "dark" as const,
   },
 };
@@ -93,7 +93,7 @@ export function ProductAdvantages({
               <li key={item.title[locale]}>
                 <Reveal delay={index * 0.08} className="h-full">
                   <article
-                    className={`flex h-full flex-col gap-6 rounded-3xl p-card-sm shadow-card lg:p-card ${tone.card}`}
+                    className={`flex h-full flex-col gap-6 rounded-card p-card-sm shadow-card lg:p-card ${tone.card}`}
                   >
                     <CardLabel tone={tone.label} icon={Icon}>
                       {item.tag[locale]}
@@ -108,7 +108,7 @@ export function ProductAdvantages({
                       <Heading as="h3" size="h3">
                         {item.title[locale]}
                       </Heading>
-                      <p className={`text-base leading-relaxed ${tone.muted}`}>
+                      <p className={`text-body leading-relaxed ${tone.muted}`}>
                         {item.text[locale]}
                       </p>
                     </div>

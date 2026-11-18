@@ -1,9 +1,12 @@
 import {
   BatteryCharging,
   Building2,
+  Ellipsis,
   Factory,
+  Hotel,
   House,
   HousePlus,
+  Landmark,
   Sun,
   type LucideIcon,
 } from "lucide-react";
@@ -19,4 +22,16 @@ export const segmentIcons: Record<SegmentIconId, LucideIcon> = {
   autonomous: BatteryCharging,
   business: Factory,
   solar: Sun,
+};
+
+/** Object types in the lead form (same ids as LeadObjectType); icons for the type tiles. */
+export type ObjectTypeId = "apartment" | "house" | "business" | "hotel" | "infrastructure" | "other";
+
+export const objectTypeIcons: Record<ObjectTypeId, LucideIcon> = {
+  apartment: segmentIcons.apartment,
+  house: segmentIcons.house,
+  business: segmentIcons.business,
+  hotel: Hotel,
+  infrastructure: Landmark,
+  other: Ellipsis,
 };

@@ -87,7 +87,7 @@ export function ProductHero({ page, product, locale }: ProductHeroProps) {
           >
             {product.name}
           </h1>
-          <p className="max-w-2xl text-base leading-relaxed text-white/75 sm:text-lg">
+          <p className="max-w-2xl text-body leading-relaxed text-muted-dark sm:text-lead">
             {page.hero.lead[locale]}
           </p>
 
@@ -95,9 +95,9 @@ export function ProductHero({ page, product, locale }: ProductHeroProps) {
             {page.hero.keySpecs.map((spec) => (
               <div
                 key={spec.label[locale]}
-                className="flex flex-col-reverse gap-1 border-t border-white/16 pt-4"
+                className="flex flex-col-reverse gap-1 border-t border-line-dark pt-4"
               >
-                <dt className="text-sm text-white/75">{spec.label[locale]}</dt>
+                <dt className="text-small text-muted-dark">{spec.label[locale]}</dt>
                 <dd className="font-heading text-stat-sm font-medium whitespace-nowrap text-white sm:text-stat">
                   {specValueText(spec.value, locale)}
                 </dd>
@@ -120,7 +120,7 @@ export function ProductHero({ page, product, locale }: ProductHeroProps) {
 
         <div className="relative lg:col-span-5">
           {product.image && !page.mediaPlaceholder ? (
-            <div className={`relative overflow-hidden rounded-3xl bg-white/6 ${page.hero.mediaAspect === "square" ? "aspect-square" : "aspect-4/3"}`}>
+            <div className={`relative overflow-hidden rounded-card bg-fill-dark ${page.hero.mediaAspect === "square" ? "aspect-square" : "aspect-4/3"}`}>
               <Image
                 src={product.image.src}
                 alt={product.image.alt[locale]}
@@ -135,21 +135,21 @@ export function ProductHero({ page, product, locale }: ProductHeroProps) {
             <MediaPlaceholder
               tone="dark"
               caption={format(t.photoPending, { name: product.name })}
-              className={`${page.hero.mediaAspect === "square" ? "aspect-square" : "aspect-4/3"} w-full rounded-3xl`}
+              className={`${page.hero.mediaAspect === "square" ? "aspect-square" : "aspect-4/3"} w-full rounded-card`}
             />
           )}
 
           <div className="absolute right-4 bottom-4 left-4 flex flex-col items-start gap-3 sm:right-auto">
-            <div className="flex items-center gap-3 rounded-2xl bg-white p-4 text-ink">
+            <div className="flex items-center gap-3 rounded-tile bg-white p-4 text-ink">
               <ShieldCheck aria-hidden className="size-6 shrink-0" />
               <p className="flex flex-col">
-                <span className="text-sm text-ink/70">
+                <span className="text-small text-muted">
                   {page.hero.warranty.title[locale]}
                 </span>
                 <span className="font-heading text-stat-sm font-medium">
                   {page.hero.warranty.value[locale]}
                 </span>
-                <span className="text-sm text-ink/70">
+                <span className="text-small text-muted">
                   {page.hero.warranty.note[locale]}
                 </span>
               </p>
@@ -160,7 +160,7 @@ export function ProductHero({ page, product, locale }: ProductHeroProps) {
               <CardLabel
                 key={tag[locale]}
                 tone={page.hero.tagTone ?? "dark"}
-                className={page.hero.tagTone === "light" ? "bg-white" : "bg-ink/60"}
+                className={page.hero.tagTone === "light" ? "bg-white" : "bg-ink"}
               >
                 {tag[locale]}
               </CardLabel>

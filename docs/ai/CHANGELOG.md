@@ -15,6 +15,142 @@
 
 ---
 
+## 2026-11-18 — Два телефони в секції заявки; фокус полів без кільця
+- **Агент:** Claude Code
+- **Гілка:** fix/lead-phones-input-focus (статус: змерджено в develop)
+- **Що зроблено:**
+  - `LeadContactCard` за `design/lead-phones-focus`: під «Не хочете чекати? Зателефонуйте» — телефон кожного офісу (`offices.map`, Львів, потім Київ, `gap-3`), білий кружок 44 px (`IconButton size="sm"`), номер на крок менший (18 → 24 → 30 px за шириною контейнера); `contact_click` і `aria-label` для кожного номера; рядок з адресою й посиланням на карту прибрано, email лишився. Невикористаний варіант `card` і пропс `variant` видалено. Нових текстів немає; ключів для адреси в повідомленнях не було.
+  - `inputClasses`: фокус без сірого кільця — на світлому рамка `ink` + `shadow-card`, на темному рамка `white` без тіні; `transition-colors` → `transition`, щоб тінь з'являлася плавно. Діє на всі поля (заявка, калькулятори). Чекбокс, перемикач, пігулки й плитки — без змін.
+- **Нотатки / що далі:**
+  - Перевірено на production-збірці: `/`, `/en/`, `/svit-plus-5000/`, `/kalkulyator/okupnist-ses/` на 360 і 1440 — два номери вміщуються, посилань на карту немає, один email, без горизонтального скролу; поле «Ім'я» після Tab: рамка ink, `box-shadow` = shadow-card, кільця й outline немає; наведення — рамка ink 40 %, тож перехід до фокуса помітний. Знімки — `.tmp/lead-phones`.
+
+## 2026-11-17 — Секція заявки: картка з фото й форма з плитками
+- **Агент:** Claude Code
+- **Гілка:** feature/lead-section-redesign (статус: змерджено в develop)
+- **Що зроблено:**
+  - `LeadSection` за `design/lead-form`: одна картка `rounded-panel` з рамкою, 5 : 6 з 11 колонок. Ліворуч фото даху під `.scrim-lead`, шапка секції на темному, вертикальні кроки `LeadSteps` (на сторінках продуктів — картка «У заявці вже вказано»: `rounded-tile`, `bg-fill-dark`, `ring-line-dark`, мініатюра 64 px), контакти `LeadContactCard variant="inline"`. Праворуч форма на `bg-surface`.
+  - Форма: шапка H3 «Заявка на розрахунок» / "Request a quote" + «Передзвонимо протягом робочого часу» (`leadSection.form.cardTitle`, `cardNote`); тип об'єкта — плитки 84 px з іконками (`RadioPills variant="tiles"`, нативні радіо, обрана — `ink` з білим кружком-галочкою); ім'я й телефон в одному рядку з `sm`; відступи між групами 24 px (`FormCard stackClassName`). Валідація, Server Action, honeypot, UTM, міст калькулятора, тост, `#contacts` — без змін.
+  - Блакитну панель (`panel`) прибрано: сторінки продуктів використовують той самий макет. Пропс `cardTone` у LeadForm видалено.
+  - `content/segments.ts`: `objectTypeIcons` (квартира, будинок, бізнес — ті самі іконки, що й `segmentIcons`; готель `Hotel`, інфраструктура `Landmark`, інше `Ellipsis`). globals.css: `.scrim-lead`. Водяний знак CONTACT у секції прибрано.
+- **Нотатки / що далі:**
+  - Перевірено на production-збірці 36 комбінацій (головна, `/cec/`, сторінка готелю, калькулятор, 5 сторінок продуктів; uk і en; 360 і 1440): без горизонтального скролу, один H1, у секції H2 → H3, номер телефону вміщується, фото завантажується, підписи кнопки відправки як раніше. Знімки — `.tmp/lead`.
+  - На 360 px номер у контактах спершу не вміщався (кружок 48 px тепер у тому ж рядку) — розміри за контейнером зменшено на крок (18 → 24 → 30 → 36 px).
+  - Контраст на фото оцінено розрахунком для найгіршого випадку (біле фото під 72 % ink): `text-muted-dark` ≈ 5,7 : 1, білий текст вище.
+  - Кружок телефону 48 px (`IconButton md`), у макеті 52 px — розміру 52 немає.
+
+## 2026-11-17 — Промо-банер «Сонячні електростанції під ключ» на головній
+- **Агент:** Claude Code
+- **Гілка:** feature/promo-banner (статус: змерджено в develop)
+- **Що зроблено:**
+  - Новий `PromoBanner` (`src/components/ui/promo-banner.tsx`) за `design/promo-handoff`: текст ліворуч (11/24 ширини), фото праворуч (7/12) з вигнутим краєм і напівпрозорим обідком через CSS-маску; тони `light` / `dark`; на мобільному фото 200 px угорі з вигнутим низом, кнопка на всю ширину; без фото — `MediaPlaceholder`. Заголовок — `<p>`, посилання лише кнопка.
+  - globals.css: `.bg-ink-glow-start` (світіння з лівого верхнього кута), утиліти `mask-promo-curve`, `mask-promo-curve-bottom`, `object-promo` (позиція фото 60 % 22 %) через `@utility`, щоб працював варіант `lg:`.
+  - Головна: банер між «Що вам потрібно живити?» і «Накопичувачами» (`pt-section-sm lg:pt-section`, у `Reveal`), веде на `/cec/` і `/en/cec/`. Смугу «Сонячні електростанції під ключ» під картками видалено разом із `hub.details`; додано `hub.cta` і `hub.imageAlt` (uk/en).
+  - Фото власника: `public/images/home/promo/ses-roof-{750,1280,1920}.avif`.
+- **Нотатки / що далі:**
+  - Перевірено на production-збірці (`/` і `/en/`, 1440 і 360): висота банера 320 px на десктопі, у банері 0 заголовків і одне посилання, фото завантажується з локалізованим alt, 360 px без горизонтального скролу, один H1. Знімки — `.tmp/promo`.
+  - Заголовок банера: `text-h3` → `text-h2-md` (24 → 36 px) як найближчі токени.
+  - `next/image` бере файл 1920 і сам віддає потрібні розміри (як інші фото сайту); файли 750 / 1280 лежать поруч на майбутнє.
+
+## 2026-11-17 — Футер v2: рядок заклику й колонка «Контакти»
+- **Агент:** Claude Code
+- **Гілка:** feature/footer-v2 (статус: змерджено в develop)
+- **Що зроблено:**
+  - За `design/footer-v2` до футера додано два блоки, решта без змін:
+    - `FooterCta` угорі панелі: «Почнемо з розрахунку», `<p>` «Підберемо СЕС або резервне живлення під ваш об'єкт» (`text-h2-sm` → `text-h2-md`), «або зателефонуйте» + телефон `offices[0]` (`contact_click`, `location: footer_cta`), кнопка «Розрахувати систему» на калькулятор окупності; на мобільному кнопка на всю ширину, телефон під нею.
+    - `FooterContacts`: «Контакти» — кожен офіс з `offices` («місто · адреса» + `tel:`), потім email з `companyContacts`; `<address>`; ті самі дані, що в JSON-LD.
+  - Сітка колонок: 4 : 3 : 3 : 3 (13 треків, `gap-14`), без якорів сторінки 6 : 3 : 3.
+  - `Button`: новий розмір `lg` (56 px).
+  - `formatPhone` тепер дає «+380 67 198 55 50» (було «+38 067 198 55 50») — **змінилось на всьому сайті**: шапка, мобільне меню, картка контактів заявки, FAQ, віджет контактів, `llms.txt`.
+  - Тексти uk/en: `footer.cta` (`eyebrow`, `title`, `callCaption`, `button`), `footer.contactsTitle`.
+- **Нотатки / що далі:**
+  - Перевірено на production-збірці: `/`, `/cec/`, `/svit-plus-5000/`, `/en/`, `/polityka-cookie/`, `/kalkulyator/okupnist-ses/` — 360 px без горизонтального скролу, один H1, у футері 0 заголовків, 3 `tel:` і 1 `mailto:`, кнопка веде на калькулятор поточною мовою. Знімки 1440 / 768 / 390 — `.tmp/footer-v2`.
+  - Розміри за найближчими токенами: заголовок заклику 36 px на lg (у макеті 40), 30 px на мобільному (у макеті 28); номер телефону 18 px (`text-lead`); номери в «Контактах» 14 px (у макеті 15).
+  - Підпис «місто · адреса» — `text-muted-dark`: `text-faint-dark` дає контраст нижче 4,5 : 1 для дрібного тексту на ink.
+  - Окремої події кліку по кнопці заклику немає, нову не додавали (як у handoff).
+
+## 2026-11-17 — Футер за handoff власника; правило папки `design/`
+- **Агент:** Claude Code
+- **Гілка:** feature/footer-handoff (статус: змерджено в develop)
+- **Що зроблено:**
+  - Футер переверстано за `design/footer-handoff` (замінює варіант «З закликом» з feature/footer-cta): колонки бренд · «На цій сторінці» · «Розділи сайту» 6 : 3 : 3 (без якорів 9 : 3), логотип 88 px, опис, кружки соцмереж з рамкою `faint-dark`; поточний розділ білий; нижній рядок — «© {рік} INIT ENERGY», «Конфіденційність · Cookie · Умови» (повна назва в `aria-label`/`title`), «Налаштування cookie» з іконкою 14 px, «UA | EN», авторство; великий напис `FooterMark` повернуто й підтягнуто (viewBox 0 0 1408 170, y 200, `text-line-dark`, `-mt-2`), літери обрізані нижніми кутами.
+  - Перемикач мов: спільний хук `useLanguageLinks` (`src/i18n/use-language-links.ts`) і текстовий `LanguageSwitcher` «UA | EN» з тонами `dark` / `light` — у шапці, мобільному меню й футері; варіант `pill` прибрано.
+  - Видалено розсилку (`newsletter-form.tsx`, `app/actions/newsletter.ts`, `lib/newsletter.ts`, тексти `footer.newsletter`), `InputAction` (використовувався лише нею), заклик і офіси з попереднього варіанта (`footer.cta`, `officesLabel`, `callOffice`, `cityIn` у `company.ts`).
+  - `SocialLinks variant="circle"`: рамка `faint-dark`, hover — біла рамка й іконка (так само у віджеті контактів).
+  - Нове правило в AGENTS.md «Дизайн-handoff»: власник кладе задачі в `design/`, агент виконує й очищає папку; `design/` у `.gitignore`.
+- **Нотатки / що далі:**
+  - Перевірено на production-збірці: 360 px без горизонтального скролу на `/`, `/cec/`, `/svit-plus-5000/`, `/en/`, `/polityka-cookie/`; перемикач веде на ту саму сторінку іншою мовою (шапка й футер); на сторінці без якорів колонки «На цій сторінці» немає; знімки 1440 / 768 / 390 — `.tmp/footer-handoff`.
+  - Розміри: в еталоні посилання й опис 15 px, у нас `text-small` = 14 px (токена 15 px немає після рефакторингу типографіки); `white/12` для напису → `text-line-dark` (16 %) як найближчий токен — як і просить handoff.
+  - Посилання колонок — `NavLink` (спільний компонент навігації), а не `footerLinkClasses`: так вимагає розділ «Кнопки й посилання».
+  - У «Розділах сайту» на макеті є «Резервне живлення» — такої сторінки ще немає, тому пункт не додано (дані — `getSiteSections`, як у handoff).
+
+## 2026-11-17 — Футер «З закликом» і видимість Reveal при reduced motion
+- **Агент:** Claude Code
+- **Гілка:** feature/footer-cta (статус: змерджено в develop)
+- **Що зроблено:**
+  - Футер переверстано за варіантом 2 «З закликом»: рядок заклику (Eyebrow «Консультація», `<p>` «Розрахуємо систему під ваш об'єкт» — `text-hero` на lg як найближчий токен до 64 px, кнопка `HeaderLeadCta`); офіси Львів і Київ із `company.ts` — кожна клітинка є `ContactLink` (`tel:`, `contact_click`, `location: footer`) з декоративним `IconButton` телефону, що заповнюється при hover; навігація (сітка 11 колонок 5/3/3, `NavLink size="body"`, поточна сторінка в «Розділах сайту» біла); розсилка 5/6; нижній рядок з короткими правовими посиланнями, `CookieSettingsLink`, новим `LanguageSwitcher variant="pill"` і авторством.
+  - Мобільний: усе стовпчиком, офіси через горизонтальну лінію, нижній рядок — копірайт → правові → мова й автор; цілі натискання ≥ 44 px. md: заклик стовпчиком, офіси 2 колонки, навігація 2 колонки з брендом угорі.
+  - Нові тексти uk/en: `footer.label`, `footer.cta`, `footer.officesLabel`, `footer.callOffice`, `footer.legalShort`; оновлено `footer.newsletter.text` і `footer.copyright`. `company.ts`: `cityIn` («у Львові», «in Lviv»).
+  - Видалено `footer-mark.tsx` (великий напис), `footerLinkClasses` і старий макет у 24 колонки.
+  - **Вада, знайдена під час перевірки (була й раніше):** при `prefers-reduced-motion: reduce` уміст у `Reveal` лишався невидимим на всьому сайті — сервер віддавав `opacity: 0`, а клієнт підміняв `motion.div` на такий самий `div`, і React не виправляв атрибут `style`. Тепер `Reveal` має один шлях рендеру з `data-reveal`, а CSS у globals.css при reduced motion примусово показує кінцевий стан.
+- **Файли:** src/components/layout/footer/{footer,footer-columns,footer-styles}.tsx, src/components/layout/footer/footer-mark.tsx (видалено), src/components/layout/header/language-switcher.tsx, src/components/ui/{nav-link,reveal}.tsx, src/app/globals.css, src/content/company.ts, messages/{uk,en}.json, scripts/lint-tokens.mjs, docs/ai/{CONTEXT,CHANGELOG}.md
+- **Нотатки / що далі:**
+  - Перевірено на production-збірці: знімки футера `/`, `/cec/`, `/svit-plus-5000/` на 1440, 768 і 390 (`.tmp/footer-after`); 27 зупинок Tab по футеру з видимим фокусом; `contact_click` для телефонів — 0 до згоди, 1 після «Прийняти всі»; з reduced motion усі блоки футера видимі.
+  - Знімки «до» (`.tmp/footer-before`) не показують уміст у `Reveal` через ту саму ваду, тому попіксельне порівняння тут не має сенсу (футер переверстано повністю).
+  - Розмір офісного телефону — `text-h3` → `text-h2-sm` (24 → 30 px), найближче до ≈32 px; розміру `IconButton` 56 px немає, використано `md` (48 px).
+  - 404 у консолі — prefetch запланованих сторінок (/pro-nas/, /svit/, правові) — очікувано.
+
+## 2026-11-17 — Форми й поля: спільні компоненти
+- **Агент:** Claude Code
+- **Гілка:** feature/forms-system (статус: змерджено в develop)
+- **Що зроблено:**
+  - Новий каталог `src/components/ui/form/`: `Field` і `FieldGroup` (підпис, контрол, рядок повідомлення; id, `aria-describedby`, `aria-invalid` через контекст), `TextInput` / `NumberInput` / `Textarea` / `Select` (стилі лише з `inputClasses`, іконка `AlertCircle` при помилці), `Checkbox` (20 px, радіус 6 px), `Switch` (винесено з cookie-баннера без змін), `RadioPills`, `PillRadio` (перенесено), `CheckChip`, `RangeField` (перенесено), `InputAction`, `FormCard`, `focusFirstInvalid`.
+  - LeadForm: `FormCard`, `Field`, `RadioPills`, `Checkbox`, `Button loading`; прибрано `autoComplete="off"` у формі, ім'я — `name`, телефон — `tel` (автозаповнення на мобільному). Власний спінер прибрано.
+  - Калькулятори: `Group`, `SelectField`, `NumberField` у `calculator-fields.tsx` тепер обгортки над `FieldGroup` / `Field` + `Select` / `NumberInput`; чіпи приладів — `CheckChip`. Віджет масштабування — `RadioPills`. Розсилка — `InputAction` з `autoComplete="email"`. Налаштування cookie — `Switch`.
+  - `lint:tokens`: правило `control` (голі `<input>`, `<select>`, `<textarea>` поза `ui/form/`); виняток `radius` для `checkbox.tsx` (6 px за макетом).
+- **Нотатки / що далі:**
+  - Порівняння (1440 і 390): налаштування cookie — 0 px; головна — висота −4 / −2 px; калькулятор — −29 / −38 px (у полів калькулятора відступ підпис → поле 8 px замість 12 px за специфікацією).
+  - `FormStatus` (`ui/form/form-status.tsx`): копія результату вгорі форми поруч із тостом — успіх на `sky` з `Check`, помилка на `ink` з `AlertCircle` і телефоном Львівського офісу з `company.ts`; без червоного. Підключено в LeadForm.
+  - Виправлено під час перевірки: `focusFirstInvalid` шукав `aria-invalid` до рендеру помилок, і фокус не переходив — тепер чекає один кадр; `NumberInput` примусово ставив `inputMode="numeric"` (на iOS без коми для тарифу 4,32) — тепер `decimal` за замовчуванням.
+  - Автоматична перевірка на production-збірці (14 з 14): стрілки в радіо-пігулках, пробіл на чекбоксі (радіус 6 px), порожня відправка → фокус на «Ім'я», 2 помилки з `role=alert`, `aria-describedby` → текст помилки, іконка в полі; `autoComplete` name/tel/email, без `off` на формі; Enter у розсилці; Tab і пробіл на перемикачах cookie; на 390 px усі поля 16 px (головна 5, калькулятор 10), числові поля — `decimal`.
+  - Не перевірено наскрізно: показ `FormStatus` після реальної відправки (записало б справжню заявку в `storage/leads.jsonl`) і автозаповнення на фізичному телефоні.
+
+## 2026-11-17 — Кнопки й посилання: єдині компоненти
+- **Агент:** Claude Code
+- **Гілка:** feature/buttons-links-system (статус: змерджено в develop)
+- **Що зроблено:**
+  - Нові компоненти: `PillLink` (пігулка-посилання з `meta` і стрілкою), `RowLink` (рядок списку: назва, опис, значення, декоративна кругла стрілка), `NavLink` (текстова навігація з `active` / `aria-current`), `InlineLink` (посилання в тексті: зовнішні відкриваються у новій вкладці, `mailto:` і `tel:` — звичайний `<a>`).
+  - `Button`: розмір `wide` замінено на `sm` (40 px, лише для десктопних банерів) і `md` (за замовчуванням); `fullWidth` — булевий прапорець; `loading` — спінер і `disabled` з `aria-busy`.
+  - `IconButton`: prop `icon` (`arrow`, `close`, `menu`, `phone`); зсув при hover лише у стрілки.
+  - Замінено вручну стилізовані елементи: рядки сегментів (`SegmentLinks` → `PillLink`), ліва колонка FAQ (→ `PillLink`), бургер шапки і кнопка закриття cookie-діалогу (→ `IconButton`), кругла кнопка телефону в `LeadContactCard` і в шапці (→ `IconButton`), ряди пов'язаних продуктів (→ `RowLink`), посилання в тексті форми, баннера cookie, сторінки cookie й методології СЕС (→ `InlineLink`), телефон у FAQ (→ `InlineLink`).
+  - `scripts/lint-tokens.mjs`: правило `link` падає на `<a|Link|button>` з `rounded-full` або `underline` поза `components/ui/`; задокументовані винятки друкуються при кожному запуску.
+  - Винятки (з TODO): кредит-ссылка в футері (кругла іконка бренду), триґер мега-меню (кнопка з `aria-expanded`), активна секційна пігулка в шапці (потрібен `NavLink variant="pill"`), кнопка «Налаштування» в баннері cookie (дія, що виглядає як текстове посилання).
+- **Файли:** src/components/ui/{pill-link,row-link,nav-link,inline-link,button,icon-button,segment-card}.tsx, src/components/consent/CookieBanner.tsx, src/components/forms/LeadForm.tsx, src/components/pages/cookie-policy-page.tsx, src/components/layout/header/{mobile-menu,header-main-bar}.tsx, src/components/product-page/related-products.tsx, src/components/sections/{LeadContactCard.tsx,home/faq-section.tsx,hero/hero-copy.tsx}, src/components/pages/ses-payback-page.tsx, scripts/lint-tokens.mjs, AGENTS.md, docs/ai/{CONTEXT,CHANGELOG}.md
+- **Нотатки / що далі:**
+  - Попиксельне порівняння (1440 і 390, 5 сторінок): відмінності до 0,02% на головній, /cec/, /kalkulyator/, /rishennya/; на `/svit-plus-5000/` на 1440 висота на 26 px менша (`PillLink` 14 px замість 16 px у сегментних посиланнях на `sm+` — за специфікацією). Мобільна версія цієї сторінки — 0,2%.
+  - Hero: `size="wide"` замінено на стандартний `md`, бо `fullWidth` розтягнув би кнопки; відступи трохи менші.
+  - Клавіатурний прохід по `/` і `/cec/` ще не виконано. Футер, `section-nav-link`, `mega-menu-item` поки не переведені на `NavLink` (див. винятки).
+
+## 2026-11-17 — Дизайн-токени: один набір кольорів, розмірів і радіусів
+- **Агент:** Claude Code
+- **Гілка:** feature/design-tokens-refactor (статус: змерджено в develop)
+- **Що зроблено:**
+  - Прозорість `ink`/`white` замінено на токени: `muted`, `faint`, `line`, `hover`, `muted-dark`, `faint-dark`, `line-dark`, `fill-dark`. Прибрано `--color-heading` (два місця → `ink`).
+  - Типографіка: `text-lead` 18 px, `text-body` 16 px, `text-small` 14 px (було 15), `text-caption` 13 px. `text-xs/sm/base/lg` замінено на них; `Eyebrow` compact — на `text-eyebrow-sm`.
+  - Радіуси: `rounded-card` 24 px (було `rounded-3xl`), `rounded-tile` 16 px (`rounded-2xl/xl/lg/md`). `rounded-sm` лишився лише для фокус-обводки посилань.
+  - Шрифти: Montserrat — 300/500/600, Inter — 400/500/600 (менше файлів у завантаженні).
+  - Градієнти фото винесено в `globals.css` (`scrim-capacity-x`, `scrim-capacity-y`, `scrim-segment`, `scrim-project`), hex у `layout.tsx` і `manifest.ts` замінено на `rgb(...)`.
+  - `scripts/lint-tokens.mjs` (вбудований у `npm run lint`) падає на `/NN` для ink/white, `text-xs/sm/base/lg`, `rounded-md…3xl`, `font-bold/extrabold`, hex у `.ts/.tsx` і довільні значення `-[…]` (крім `grid-rows`, `transition`, `group-has`).
+  - AGENTS.md: новий розділ «Дизайн-токени» (кольори, шрифти, розміри, радіуси, три тіні). CONTEXT.md: оновлено посилання на токени.
+- **Файли:** src/app/globals.css, src/app/layout.tsx, src/app/manifest.ts, scripts/lint-tokens.mjs, package.json, .gitignore, AGENTS.md, docs/ai/{CONTEXT,CHANGELOG}.md, ~80 файлів у src/components, src/app, src/content (автозаміна).
+- **Нотатки / що далі:**
+  - Лічильники в `src/` до → після: `ink/NN` і `white/NN` — 373 → 1 (лишився `FooterMark` за списком винятків); `text-xs/sm/base/lg/heading` — 212 → 0; `rounded-md…3xl` — 73 → 0; hex у `.ts/.tsx` — 3 → 0; `font-bold/extrabold` — 0 → 0; тіней — 3 токени (`soft`, `card`, `glass`), інших немає.
+  - Значення нових токенів (з таблиці не було): `muted` ink 70%, `faint` ink 40%, `hover` ink 6%, `muted-dark` white 75%, `faint-dark` white 45%, `line-dark` white 16%, `fill-dark` white 8%. `line` лишився ink 12%, як був.
+  - Відступи від таблиці: `hover:bg-ink/90` → `hover:bg-navy` (hover темних кнопок); `hover:bg-white/90` → `hover:bg-surface` (hover білих кнопок); тег на фото `bg-ink/60` → `bg-ink`; фон модального затемнення `bg-ink/35` → `bg-faint`; `bg-white/30` (шкала ємності) → `bg-faint-dark`; `hover:border-white/60|40|45` → `hover:border-white`.
+  - Видимі зміни через розміри й ваги: висота всіх сторінок змінилась на кілька десятків–сотень px (`text-xs` 12→13 px у верхній смузі й дрібних мітках; `text-small` 15→14 px; `line-height` 1.6→1.5 для `small`). Це значення з токенів власника, я їх не коригував.
+  - `font-mono` (системний моноширинний) лишився поза токенами: він не входить у набір шрифтів; вирішити окремо, якщо потрібен токен.
+  - `Montserrat` без ваги 400: текст з `font-heading` без явної ваги рендериться як 500 (найближча доступна).
+  - Скриншоти до/після в `.tmp/ds-before` і `.tmp/ds-after` (папка в .gitignore). Попіксельне порівняння можливе лише там, де висота не змінилась; на всіх 19 знімках висота змінилась, тому перевірка візуальна (головна, SVIT 600, картки, теги, шапка).
+
 ## 2026-11-13 — Англійська сторінка 404
 - **Агент:** Claude Code
 - **Гілка:** fix/english-404 (статус: змерджено в develop)

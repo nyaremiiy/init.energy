@@ -37,7 +37,7 @@ export function CapacityCard({
 
   return (
     <div
-      className={`group relative isolate flex flex-col gap-6 overflow-hidden rounded-3xl p-card-sm transition-shadow duration-300 ease-tech hover:shadow-card focus-within:shadow-card lg:p-card ${
+      className={`group relative isolate flex flex-col gap-6 overflow-hidden rounded-card p-card-sm transition-shadow duration-300 ease-tech hover:shadow-card focus-within:shadow-card lg:p-card ${
         hasImage
           ? "min-h-80 justify-between bg-ink lg:min-h-96"
           : "bg-linear-to-br from-surface to-sky"
@@ -55,11 +55,11 @@ export function CapacityCard({
           />
           <div
             aria-hidden
-            className="absolute inset-0 bg-linear-to-r from-ink/95 via-ink/75 to-ink/35"
+            className="absolute inset-0 scrim-capacity-x"
           />
           <div
             aria-hidden
-            className="absolute inset-0 bg-linear-to-t from-ink/90 via-ink/20 to-ink/35"
+            className="absolute inset-0 scrim-capacity-y"
           />
         </div>
       ) : (
@@ -71,10 +71,10 @@ export function CapacityCard({
 
       <div className="relative z-10 flex min-h-20 items-start justify-between gap-4 lg:min-h-24">
         <p
-          className={`font-mono text-xs tracking-wide transition-colors duration-300 ease-tech ${
+          className={`font-mono text-caption tracking-wide transition-colors duration-300 ease-tech ${
             hasImage
-              ? "text-white/75 group-hover:text-white"
-              : "text-ink/70 group-hover:text-ink"
+              ? "text-muted-dark group-hover:text-white"
+              : "text-muted group-hover:text-ink"
           }`}
         >
           {chemistryLabel}
@@ -82,7 +82,7 @@ export function CapacityCard({
         {!thumbnail ? (
           <MediaPlaceholder
             caption=""
-            className="size-20 shrink-0 rounded-2xl transition-transform duration-300 ease-tech motion-safe:group-hover:-translate-y-1 motion-safe:group-hover:scale-105 lg:size-24"
+            className="size-20 shrink-0 rounded-tile transition-transform duration-300 ease-tech motion-safe:group-hover:-translate-y-1 motion-safe:group-hover:scale-105 lg:size-24"
           />
         ) : null}
       </div>
@@ -93,21 +93,21 @@ export function CapacityCard({
         }`}
       >
         {prefix ? (
-          <span className={`text-base ${hasImage ? "text-white/75" : "text-ink/70"}`}>
+          <span className={`text-body ${hasImage ? "text-muted-dark" : "text-muted"}`}>
             {prefix}
           </span>
         ) : null}
         <span className="font-heading text-number-sm font-light tabular-nums lg:text-number">
           {value}
         </span>
-        <span className={`text-base ${hasImage ? "text-white/75" : "text-ink/70"}`}>
+        <span className={`text-body ${hasImage ? "text-muted-dark" : "text-muted"}`}>
           {unit}
         </span>
       </p>
 
       <div aria-hidden className="relative z-10 flex flex-col gap-2">
         <div
-          className={`relative h-1 rounded-full ${hasImage ? "bg-white/30" : "bg-line"}`}
+          className={`relative h-1 rounded-full ${hasImage ? "bg-faint-dark" : "bg-line"}`}
         >
           <div
             className={`absolute inset-y-0 left-0 rounded-full transition-colors duration-300 ease-tech group-hover:bg-accent-strong ${
@@ -123,8 +123,8 @@ export function CapacityCard({
           />
         </div>
         <div
-          className={`flex justify-between text-xs tabular-nums ${
-            hasImage ? "text-white/75" : "text-ink/70"
+          className={`flex justify-between text-caption tabular-nums ${
+            hasImage ? "text-muted-dark" : "text-muted"
           }`}
         >
           <span>{scaleMin}</span>

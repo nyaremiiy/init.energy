@@ -1,6 +1,6 @@
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 
-import { chipBase } from "./chip-styles";
+import { chipBase } from "@/components/ui/chip-styles";
 
 type PillRadioProps = {
   children: ReactNode;
@@ -14,8 +14,8 @@ type PillRadioProps = {
  */
 const toneClasses = {
   light:
-    "border-line bg-white text-ink peer-checked:border-ink peer-checked:bg-ink peer-checked:text-white peer-focus-visible:ring-ink/15 peer-enabled:hover:border-ink/40",
-  dark: "border-white/20 text-white peer-checked:border-white peer-checked:bg-white peer-checked:text-ink peer-focus-visible:ring-white/25 peer-enabled:hover:border-white",
+    "border-line bg-white text-ink peer-checked:border-ink peer-checked:bg-ink peer-checked:text-white peer-focus-visible:ring-line peer-enabled:hover:border-faint",
+  dark: "border-line-dark text-white peer-checked:border-white peer-checked:bg-white peer-checked:text-ink peer-focus-visible:ring-line-dark peer-enabled:hover:border-white",
 };
 
 export function PillRadio({

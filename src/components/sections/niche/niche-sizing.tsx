@@ -38,12 +38,12 @@ export function NicheSizing({ page, locale }: { page: SolutionPage; locale: Loca
         <div className="flex flex-col gap-8">
           <Reveal>
             <div className="relative overflow-x-auto" tabIndex={0} role="region" aria-labelledby={`${titleId}-caption`}>
-              <table className="w-full min-w-200 border-collapse text-left text-sm sm:text-base">
+              <table className="w-full min-w-200 border-collapse text-left text-small sm:text-body">
                 <caption id={`${titleId}-caption`} className="sr-only">{t.table.caption}</caption>
                 <thead>
                   <tr className="border-b border-line">
                     {columns.map((column) => (
-                      <th key={column} scope="col" className="py-3 pr-6 text-sm font-medium text-ink/70">{column}</th>
+                      <th key={column} scope="col" className="py-3 pr-6 text-small font-medium text-muted">{column}</th>
                     ))}
                   </tr>
                 </thead>
@@ -63,10 +63,10 @@ export function NicheSizing({ page, locale }: { page: SolutionPage; locale: Loca
             </div>
           </Reveal>
           <Reveal delay={0.08} className="flex flex-col gap-3">
-            <h3 className="text-sm font-medium text-ink/70">{t.factorsTitle}</h3>
+            <h3 className="text-small font-medium text-muted">{t.factorsTitle}</h3>
             <ul className="flex flex-wrap gap-2">
               {page.sizing.factors.map((factor) => (
-                <li key={factor.en} className="inline-flex h-10 items-center rounded-full border border-line px-4 text-sm font-medium text-ink sm:h-11 sm:px-5">
+                <li key={factor.en} className="inline-flex h-10 items-center rounded-full border border-line px-4 text-small font-medium text-ink sm:h-11 sm:px-5">
                   {factor[locale]}
                 </li>
               ))}

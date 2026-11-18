@@ -1,6 +1,7 @@
 "use client";
 
-import { ArrowUpRight, Check } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+import { CheckChip } from "@/components/ui/form/check-chip";
 import { useEffect, type ReactNode } from "react";
 
 import { Group, NumberField, RangeField, SelectField } from "@/components/calculator/calculator-fields";
@@ -8,8 +9,7 @@ import { ProductLink, Stat } from "@/components/calculator/calculator-result-par
 import { useSesPayback } from "@/components/calculator/ses-payback-state";
 import { Button } from "@/components/ui/button";
 import { CardLabel } from "@/components/ui/card-label";
-import { chipClasses } from "@/components/ui/chip-styles";
-import { PillRadio } from "@/components/ui/pill-radio";
+import { PillRadio } from "@/components/ui/form/pill-radio";
 import { appliances } from "@/content/appliances";
 import { insolationRegions, regionsByLocale } from "@/content/insolation";
 import { products } from "@/content/products";
@@ -45,7 +45,7 @@ function Step({ index, title, children }: { index: number; title: string; childr
   return (
     <fieldset className="m-0 flex min-w-0 flex-col gap-6 border-0 border-t border-line p-0 pt-8 first:border-t-0 first:pt-0">
       <legend className="float-left mb-2 flex w-full items-center gap-3">
-        <span className="flex size-9 shrink-0 items-center justify-center rounded-full border border-line font-heading text-sm font-medium text-ink tabular-nums">
+        <span className="flex size-9 shrink-0 items-center justify-center rounded-full border border-line font-heading text-small font-medium text-ink tabular-nums">
           {String(index).padStart(2, "0")}
         </span>
         <span className="font-heading text-h3-sm font-medium tracking-tight text-ink sm:text-h3">{title}</span>
@@ -103,7 +103,7 @@ export function SesPaybackCalculator() {
   return (
     <div className="grid grid-cols-1 items-start gap-4 lg:grid-cols-12">
       <form
-        className="flex min-w-0 flex-col gap-8 rounded-3xl border border-line bg-white p-card-sm shadow-card lg:col-span-7 lg:p-card"
+        className="flex min-w-0 flex-col gap-8 rounded-card border border-line bg-white p-card-sm shadow-card lg:col-span-7 lg:p-card"
         onSubmit={(event) => event.preventDefault()}
       >
         <Step index={++stepIndex} title={t.steps[0]}>
@@ -229,7 +229,7 @@ export function SesPaybackCalculator() {
             }}
           />
           {result.limitedByRoof ? (
-            <p role="status" className="rounded-2xl bg-sky p-4 text-sm text-ink">
+            <p role="status" className="rounded-tile bg-sky p-4 text-small text-ink">
               {t.roofLimit}
             </p>
           ) : null}
@@ -241,27 +241,22 @@ export function SesPaybackCalculator() {
               {appliances.map((item) => {
                 const checked = state.backupLoads.includes(item.id);
                 return (
-                  <label key={item.id} className="cursor-pointer">
-                    <input
-                      type="checkbox"
-                      name="backupLoads"
-                      value={item.id}
-                      className="peer sr-only"
-                      checked={checked}
-                      onChange={() => {
+                  <CheckChip
+                    key={item.id}
+                    name="backupLoads"
+                    value={item.id}
+                    checked={checked}
+                    onChange={() => {
                         trackChange("backupLoads");
                         update({
                           backupLoads: checked
                             ? state.backupLoads.filter((id) => id !== item.id)
                             : [...state.backupLoads, item.id],
                         });
-                      }}
-                    />
-                    <span className={`gap-2 peer-focus-visible:ring-3 peer-focus-visible:ring-ink/15 ${chipClasses({ selected: checked })}`}>
-                      {checked ? <Check aria-hidden className="size-4" /> : null}
-                      {item.name[locale]}
-                    </span>
-                  </label>
+                    }}
+                  >
+                    {item.name[locale]}
+                  </CheckChip>
                 );
               })}
             </Group>
@@ -300,11 +295,11 @@ export function SesPaybackCalculator() {
         </Step>
       </form>
 
-      <div className="flex flex-col gap-8 rounded-3xl bg-ink p-card-sm text-white lg:sticky lg:top-28 lg:col-span-5 lg:p-card">
+      <div className="flex flex-col gap-8 rounded-card bg-ink p-card-sm text-white lg:sticky lg:top-28 lg:col-span-5 lg:p-card">
         <div aria-live="polite" className="flex flex-col gap-6">
           <div className="flex items-center justify-between gap-4">
             <CardLabel tone="dark">{t.recommendation}</CardLabel>
-            <span className="inline-flex items-center gap-2 text-sm text-white/75">
+            <span className="inline-flex items-center gap-2 text-small text-muted-dark">
               <span aria-hidden className="size-2 rounded-full bg-accent motion-safe:animate-pulse" />
               {t.live}
             </span>
@@ -314,7 +309,7 @@ export function SesPaybackCalculator() {
             <span className="font-heading text-number-sm font-light tracking-tight tabular-nums lg:text-number">
               {formatNumber(result.kw, locale)} {t.kwUnit}
             </span>
-            <span className="text-base text-white/75">{result.plantType === "grid" ? t.grid : t.hybrid}</span>
+            <span className="text-body text-muted-dark">{result.plantType === "grid" ? t.grid : t.hybrid}</span>
           </p>
 
           <dl className="grid grid-cols-2 gap-x-6 gap-y-5">
@@ -324,17 +319,17 @@ export function SesPaybackCalculator() {
             <Stat label={t.backup} value={result.battery ? `${formatNumber(Math.round(result.battery.backupHours * 10) / 10, locale)} ${t.hoursUnit}` : "—"} />
           </dl>
 
-          <div className="flex items-center justify-between gap-4 rounded-2xl border border-white/16 p-4">
-            <span className="text-sm text-white/75">{t.payback}</span>
+          <div className="flex items-center justify-between gap-4 rounded-tile border border-line-dark p-4">
+            <span className="text-small text-muted-dark">{t.payback}</span>
             {payback ? (
               <span className="font-heading text-stat-sm font-medium tabular-nums sm:text-stat">{payback}</span>
             ) : (
-              <span className="text-right text-sm text-white/75">{t.enterBudget}</span>
+              <span className="text-right text-small text-muted-dark">{t.enterBudget}</span>
             )}
           </div>
 
           {!result.battery && state.goal !== "savings" ? (
-            <p className="text-sm text-white/75">{t.noProduct}</p>
+            <p className="text-small text-muted-dark">{t.noProduct}</p>
           ) : null}
         </div>
 
@@ -353,7 +348,7 @@ export function SesPaybackCalculator() {
           <Button type="button" onClick={handoff} icon={<ArrowUpRight aria-hidden className="size-4.5" />} className="w-full">
             {t.quote}
           </Button>
-          <p className="text-sm text-white/75">
+          <p className="text-small text-muted-dark">
             {format(t.footnote, { tariff: formatNumber(state.tariff, locale), region: region.name[locale] })}
           </p>
         </div>

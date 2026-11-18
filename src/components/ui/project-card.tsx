@@ -38,18 +38,18 @@ export function ProjectCard({ project, variant }: ProjectCardProps) {
     ? {
         card: "bg-ink text-white",
         title: "text-white",
-        muted: "text-white/75",
-        divider: "border-white/25",
-        link: "decoration-white/35 hover:decoration-white focus-visible:outline-white",
+        muted: "text-muted-dark",
+        divider: "border-line-dark",
+        link: "decoration-line-dark hover:decoration-white focus-visible:outline-white",
         eyebrow: "dark" as const,
         button: "outline-dark" as const,
       }
     : {
         card: "bg-surface text-ink",
         title: "text-ink",
-        muted: "text-ink/70",
+        muted: "text-muted",
         divider: "border-line",
-        link: "decoration-ink/30 hover:decoration-ink focus-visible:outline-ink",
+        link: "decoration-faint hover:decoration-ink focus-visible:outline-ink",
         eyebrow: "light" as const,
         button: "outline-light" as const,
       };
@@ -100,7 +100,7 @@ export function ProjectCard({ project, variant }: ProjectCardProps) {
 
   return (
     <article
-      className={`group relative isolate flex h-full flex-col overflow-hidden rounded-3xl shadow-card ${tone.card}`}
+      className={`group relative isolate flex h-full flex-col overflow-hidden rounded-card shadow-card ${tone.card}`}
     >
       {project.image ? (
         <>
@@ -120,14 +120,14 @@ export function ProjectCard({ project, variant }: ProjectCardProps) {
           />
           <div
             aria-hidden
-            className="absolute inset-0 bg-linear-to-t from-ink via-ink/70 to-ink/0"
+            className="absolute inset-0 scrim-project"
           />
         </>
       ) : (
         <div className="min-h-0 flex-1 p-3 pb-0">
           <MediaPlaceholder
             caption={t.imagePending}
-            className="size-full rounded-2xl"
+            className="size-full rounded-tile"
           />
         </div>
       )}
@@ -146,7 +146,7 @@ export function ProjectCard({ project, variant }: ProjectCardProps) {
             {/* One step below the card H3 on the large card, two on the small ones. */}
             <h3
               className={`font-heading font-medium tracking-tight ${tone.title} ${
-                isLarge ? "text-h3-sm" : "text-base"
+                isLarge ? "text-h3-sm" : "text-body"
               }`}
             >
               {title}
@@ -162,7 +162,7 @@ export function ProjectCard({ project, variant }: ProjectCardProps) {
         {specs.length > 0 ? (
           <dl
             // Phones: values sit in a row by their own width; from sm — equal columns.
-            className={`mt-4 flex flex-wrap gap-x-4 gap-y-2 border-t pt-3 sm:grid sm:gap-x-0 ${isLarge ? "text-sm sm:text-base" : "text-sm"} ${tone.divider} ${
+            className={`mt-4 flex flex-wrap gap-x-4 gap-y-2 border-t pt-3 sm:grid sm:gap-x-0 ${isLarge ? "text-small sm:text-body" : "text-small"} ${tone.divider} ${
               isLarge ? "sm:grid-cols-4" : "sm:grid-cols-3"
             }`}
           >
@@ -171,7 +171,7 @@ export function ProjectCard({ project, variant }: ProjectCardProps) {
                 key={spec.label}
                 className={`min-w-0 sm:pr-3 sm:last:pr-0 ${"wideOnly" in spec && spec.wideOnly ? "hidden sm:block" : ""}`}
               >
-                <dt className={`text-sm ${tone.muted}`}>{spec.label}</dt>
+                <dt className={`text-small ${tone.muted}`}>{spec.label}</dt>
                 <dd className="mt-1 truncate font-medium">{spec.value}</dd>
               </div>
             ))}

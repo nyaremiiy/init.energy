@@ -26,6 +26,12 @@
 # visit counter: raw events and daily reports
 /storage/visits/
 
+# local visual checks (screenshots for the design-token refactor)
+/.tmp/
+
+# design handoffs from the owner (read, implement, then empty; never commit)
+/design/
+
 # misc
 .DS_Store
 *.pem

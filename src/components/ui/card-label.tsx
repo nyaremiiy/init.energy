@@ -13,8 +13,8 @@ type CardLabelProps = {
 } & ComponentPropsWithoutRef<"span">;
 
 const toneClasses: Record<CardLabelTone, string> = {
-  light: "border-ink/15 text-ink/60",
-  dark: "border-white/20 text-white/70",
+  light: "border-line text-muted",
+  dark: "border-line-dark text-muted-dark",
 };
 
 /** Pill label for cards: same look as the filter chips on the site. */
@@ -27,12 +27,12 @@ export function CardLabel({
   ...props
 }: CardLabelProps) {
   const hover = hoverInverse
-    ? "group-hover:border-white/20 group-hover:text-white/70"
+    ? "group-hover:border-line-dark group-hover:text-muted-dark"
     : "";
 
   return (
     <span
-      className={`inline-flex w-fit shrink-0 items-center gap-1.5 self-start rounded-full border px-2.5 py-1 text-xs font-medium sm:px-3 sm:text-sm whitespace-nowrap transition-colors duration-200 ease-tech ${toneClasses[tone]} ${hover} ${className ?? ""}`}
+      className={`inline-flex w-fit shrink-0 items-center gap-1.5 self-start rounded-full border px-2.5 py-1 text-caption font-medium sm:px-3 sm:text-small whitespace-nowrap transition-colors duration-200 ease-tech ${toneClasses[tone]} ${hover} ${className ?? ""}`}
       {...props}
     >
       {Icon ? <Icon aria-hidden className="size-4 shrink-0" /> : null}

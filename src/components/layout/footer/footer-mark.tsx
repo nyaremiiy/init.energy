@@ -1,23 +1,24 @@
 /**
  * Decorative wordmark across the full panel width, a quiet background
- * signature (white at 14%). `lengthAdjust="spacing"` only adds letter
- * spacing to fill `textLength`, so glyphs are never stretched or overlapped;
- * the font size is chosen so the natural width already fills the panel.
- * The baseline sits at the bottom edge so the panel's rounded corners crop
- * the letters. Decoration only: aria-hidden, not a heading, no SEO weight.
+ * signature (`line-dark`, the closest token to white at 12%).
+ * `lengthAdjust="spacing"` only adds letter spacing to fill `textLength`, so
+ * glyphs are never stretched; the font size already fills the panel.
+ * The viewBox is shorter than the glyphs (170 vs y=200), so the letters run
+ * past the bottom edge and the panel's rounded corners crop them, with no
+ * empty space underneath. Decoration only: aria-hidden, not a heading.
  */
 export function FooterMark() {
   return (
     <svg
-      viewBox="0 0 1408 210"
+      viewBox="0 0 1408 170"
       width="100%"
       aria-hidden="true"
       focusable="false"
-      className="mt-14 block text-white/14"
+      className="-mt-2 block text-line-dark"
     >
       <text
         x="704"
-        y="222"
+        y="200"
         textAnchor="middle"
         textLength="1376"
         lengthAdjust="spacing"

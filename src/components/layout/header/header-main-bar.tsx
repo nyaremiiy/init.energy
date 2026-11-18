@@ -1,5 +1,5 @@
-import { Phone } from "lucide-react";
 import Link from "next/link";
+import { IconButton } from "@/components/ui/icon-button";
 
 import { Container } from "@/components/layout/container";
 import { Logo } from "@/components/ui/logo";
@@ -31,15 +31,16 @@ export function HeaderMainBar() {
       <DesktopNav />
 
       <div className="flex items-center gap-3">
-        <a
+        <IconButton
           href={primaryPhone.href}
           aria-label={format(t.call, {
             phone: formatPhone(primaryPhone.display),
           })}
-          className="relative z-50 inline-flex size-11 items-center justify-center rounded-full border border-white/40 text-white transition-colors hover:bg-white/10 lg:hidden"
-        >
-          <Phone aria-hidden className="size-5" />
-        </a>
+          variant="outline-dark"
+          size="sm"
+          icon="phone"
+          className="relative z-50 lg:hidden"
+        />
         <div className="hidden shrink-0 lg:block">
           <HeaderLeadCta />
         </div>

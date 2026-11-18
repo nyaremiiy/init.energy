@@ -1,6 +1,7 @@
 "use client";
 
-import { ChevronDown, Mail, MapPin, Menu, Phone, X } from "lucide-react";
+import { ChevronDown, Mail, MapPin, Phone } from "lucide-react";
+import { IconButton } from "@/components/ui/icon-button";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -62,20 +63,16 @@ export function MobileMenu() {
 
   return (
     <div className={hasPageLinks ? "xl:hidden" : "lg:hidden"}>
-      <button
-        type="button"
+      <IconButton
+        variant="outline-dark"
+        size="sm"
+        icon={isOpen ? "close" : "menu"}
         aria-expanded={isOpen}
         aria-controls="mobile-menu"
         aria-label={isOpen ? t.closeMenu : t.openMenu}
         onClick={() => setIsOpen((value) => !value)}
-        className="relative z-50 inline-flex size-11 items-center justify-center rounded-full border border-white/40 text-white transition-colors hover:bg-white/10"
-      >
-        {isOpen ? (
-          <X aria-hidden className="size-5" />
-        ) : (
-          <Menu aria-hidden className="size-5" />
-        )}
-      </button>
+        className="relative z-50"
+      />
 
       {isOpen ? (
         <div
@@ -95,7 +92,7 @@ export function MobileMenu() {
                           className="size-6 transition-transform duration-200 group-open:rotate-180"
                         />
                       </summary>
-                      <div className="mt-5 flex flex-col gap-6 border-l border-white/15 pl-4">
+                      <div className="mt-5 flex flex-col gap-6 border-l border-line-dark pl-4">
                         {item.columns.map((column) => (
                           <div
                             key={column.title}
@@ -110,12 +107,12 @@ export function MobileMenu() {
                                   <NavLink
                                     href={link.href}
                                     onClick={close}
-                                    className="flex flex-col gap-1 rounded-2xl px-3 py-2 transition-colors duration-150 ease-tech active:bg-white/8 focus-visible:bg-white/8 focus-visible:outline-2 focus-visible:outline-white/60"
+                                    className="flex flex-col gap-1 rounded-tile px-3 py-2 transition-colors duration-150 ease-tech active:bg-fill-dark focus-visible:bg-fill-dark focus-visible:outline-2 focus-visible:outline-white"
                                   >
-                                    <span className="text-base font-semibold">
+                                    <span className="text-body font-semibold">
                                       {link.label}
                                     </span>
-                                    <span className="text-sm font-normal text-white/70">
+                                    <span className="text-small font-normal text-muted-dark">
                                       {link.description}
                                     </span>
                                   </NavLink>
@@ -138,7 +135,7 @@ export function MobileMenu() {
             </ul>
           </nav>
 
-          <div className="flex flex-col gap-6 text-sm text-white/80">
+          <div className="flex flex-col gap-6 text-small text-muted-dark">
             {offices.map((office) => (
               <address
                 key={office.id}

@@ -51,13 +51,13 @@ export function ProductSpecs({
             titleId={titleId}
           />
         </Reveal>
-        {page.updatedAt ? <p className="font-mono text-sm text-ink/70">{page.updatedAt[locale]}</p> : null}
+        {page.updatedAt ? <p className="font-mono text-small text-muted">{page.updatedAt[locale]}</p> : null}
 
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
             <div className="flex flex-col gap-4 lg:sticky lg:top-40">
               {product.image && !page.mediaPlaceholder ? (
-                <div className={`relative overflow-hidden rounded-3xl bg-white ${page.specsMediaAspect === "portrait" ? "aspect-4/5" : "aspect-4/3"}`}>
+                <div className={`relative overflow-hidden rounded-card bg-white ${page.specsMediaAspect === "portrait" ? "aspect-4/5" : "aspect-4/3"}`}>
                   <Image
                     src={product.image.src}
                     alt={product.image.alt[locale]}
@@ -70,18 +70,18 @@ export function ProductSpecs({
               ) : (
                 <MediaPlaceholder
                   caption={format(t.photoPending, { name: product.name })}
-                  className={`${page.specsMediaAspect === "portrait" ? "aspect-4/5" : "aspect-4/3"} w-full rounded-3xl`}
+                  className={`${page.specsMediaAspect === "portrait" ? "aspect-4/5" : "aspect-4/3"} w-full rounded-card`}
                 />
               )}
               {page.datasheetUrl ? (
                 <a
                   href={page.datasheetUrl}
-                  className="group flex items-center gap-4 rounded-3xl bg-white p-card-sm text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+                  className="group flex items-center gap-4 rounded-card bg-white p-card-sm text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
                 >
                   <FileText aria-hidden className="size-6 shrink-0" />
                   <span className="flex flex-1 flex-col">
                     <span className="font-medium">{t.specs.datasheet}</span>
-                    <span className="text-sm text-ink/70">
+                    <span className="text-small text-muted">
                       {t.specs.datasheetNote}
                     </span>
                   </span>
@@ -96,7 +96,7 @@ export function ProductSpecs({
             className="lg:col-span-7"
           >
             {process.env.NODE_ENV !== "production" && page.specsDevelopmentNotice ? (
-              <p className="mb-6 rounded-2xl bg-surface p-card-sm text-sm text-ink/70">{page.specsDevelopmentNotice[locale]}</p>
+              <p className="mb-6 rounded-tile bg-surface p-card-sm text-small text-muted">{page.specsDevelopmentNotice[locale]}</p>
             ) : null}
             {page.specGroups ? (
               <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
@@ -108,8 +108,8 @@ export function ProductSpecs({
                     <dl className="divide-y divide-line border-y border-line">
                       {group.rows.map((row) => (
                         <div key={row.label[locale]} className="flex flex-col gap-1 py-4">
-                          <dt className="text-sm text-ink/70">{row.label[locale]}</dt>
-                          <dd className="text-base font-medium text-ink">{specValueText(row.value, locale)}</dd>
+                          <dt className="text-small text-muted">{row.label[locale]}</dt>
+                          <dd className="text-body font-medium text-ink">{specValueText(row.value, locale)}</dd>
                         </div>
                       ))}
                     </dl>
@@ -120,8 +120,8 @@ export function ProductSpecs({
               <dl className="divide-y divide-line border-y border-line">
                 {page.specs.map((row) => (
                   <div key={row.label[locale]} className="grid grid-cols-1 gap-1 py-4 sm:grid-cols-2 sm:gap-6">
-                    <dt className="text-sm text-ink/70 sm:text-base">{row.label[locale]}</dt>
-                    <dd className="text-base font-medium text-ink">{specValueText(row.value, locale)}</dd>
+                    <dt className="text-small text-muted sm:text-body">{row.label[locale]}</dt>
+                    <dd className="text-body font-medium text-ink">{specValueText(row.value, locale)}</dd>
                   </div>
                 ))}
               </dl>

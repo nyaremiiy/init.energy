@@ -47,9 +47,9 @@ export const nicheIcons: Record<NicheIcon, LucideIcon> = {
 
 /** Card colours: light tones use ink text, navy and ink use white text. */
 export const nicheTones: Record<NicheTone, { card: string; muted: string; dark: boolean }> = {
-  white: { card: "bg-white text-ink", muted: "text-ink/70", dark: false },
-  sky: { card: "bg-sky text-ink", muted: "text-ink/70", dark: false },
-  surface: { card: "bg-surface text-ink", muted: "text-ink/70", dark: false },
-  navy: { card: "bg-navy text-white", muted: "text-white/75", dark: true },
-  ink: { card: "bg-ink text-white", muted: "text-white/75", dark: true },
+  white: { card: "bg-white text-ink", muted: "text-muted", dark: false },
+  sky: { card: "bg-sky text-ink", muted: "text-muted", dark: false },
+  surface: { card: "bg-surface text-ink", muted: "text-muted", dark: false },
+  navy: { card: "bg-navy text-white", muted: "text-muted-dark", dark: true },
+  ink: { card: "bg-ink text-white", muted: "text-muted-dark", dark: true },
 };

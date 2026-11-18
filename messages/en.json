@@ -19,7 +19,8 @@
     "hub": {
       "title": "Turnkey solar power plants",
       "description": "For businesses and private sites: design, equipment, installation and commissioning.",
-      "details": "Learn more"
+      "cta": "Learn more about solar",
+      "imageAlt": "Solar panels on the roof of a private house at sunset"
     },
     "keywords": [
       "Solar power plants",
@@ -201,7 +202,9 @@
         "phone": "Please enter a valid phone number.",
         "consent": "Consent to the privacy policy is required."
       },
-      "calculatorAttached": "Calculator parameters:"
+      "calculatorAttached": "Calculator parameters:",
+      "cardTitle": "Request a quote",
+      "cardNote": "We'll call you back during working hours"
     }
   },
   "specs": {
@@ -269,28 +272,27 @@
       "nicheBackup": "Running through outages",
       "nicheBuild": "Equipment and steps"
     },
-    "newsletter": {
-      "title": "Newsletter",
-      "text": "New projects, knowledge base articles and SVIT line-up updates.",
-      "emailLabel": "Email",
-      "emailPlaceholder": "Your email",
-      "submit": "Subscribe",
-      "submitting": "Sending…",
-      "note": "By subscribing, you agree to the privacy policy. You can unsubscribe at any time.",
-      "success": "Thank you! You are subscribed.",
-      "failure": "Could not subscribe. Please try again later.",
-      "errors": {
-        "email": "Please enter a valid email address."
-      }
-    },
-    "copyright": "Copyright © {year} INIT ENERGY | All rights reserved",
+    "copyright": "© {year} INIT ENERGY",
     "developedBy": "Developed by",
     "legalNavLabel": "Legal information",
     "legal": {
       "privacy": "Privacy policy",
       "cookies": "Cookie policy",
       "terms": "Terms of use"
-    }
+    },
+    "label": "Site footer",
+    "legalShort": {
+      "privacy": "Privacy",
+      "cookies": "Cookies",
+      "terms": "Terms"
+    },
+    "cta": {
+      "eyebrow": "Let's start with a calculation",
+      "title": "We'll match a solar plant or backup power system to your site",
+      "callCaption": "or call us",
+      "button": "Calculate a system"
+    },
+    "contactsTitle": "Contacts"
   },
   "productPage": {
     "breadcrumbsLabel": "Breadcrumbs",

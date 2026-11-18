@@ -16,7 +16,7 @@ export function HeaderSectionLinks({ byPath }: { byPath: Record<string, NavLink[
 
   return (
     <>
-      <ul className="hidden h-full items-center gap-1 text-sm font-medium whitespace-nowrap text-white/85 xl:flex">
+      <ul className="hidden h-full items-center gap-1 text-small font-medium whitespace-nowrap text-muted-dark xl:flex">
         {links.map((item) => (
           <li key={item.href}>
             <SectionNavLink
@@ -27,7 +27,7 @@ export function HeaderSectionLinks({ byPath }: { byPath: Record<string, NavLink[
           </li>
         ))}
       </ul>
-      <span aria-hidden className="hidden h-5 w-px shrink-0 bg-white/20 xl:block" />
+      <span aria-hidden className="hidden h-5 w-px shrink-0 bg-line-dark xl:block" />
     </>
   );
 }

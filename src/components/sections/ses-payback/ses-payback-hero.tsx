@@ -62,8 +62,8 @@ export function SesPaybackHero() {
           </div>
           <dl aria-label={t.factsLabel} className="grid grid-cols-2 gap-3 lg:col-span-5">
             {facts.map((fact) => (
-              <div key={fact.label} className="flex min-h-24 flex-col-reverse justify-between gap-2 rounded-2xl bg-white/8 p-4">
-                <dt className="text-sm text-white/75">{fact.label}</dt>
+              <div key={fact.label} className="flex min-h-24 flex-col-reverse justify-between gap-2 rounded-tile bg-fill-dark p-4">
+                <dt className="text-small text-muted-dark">{fact.label}</dt>
                 <dd className="font-heading text-stat-sm font-medium text-white">{fact.value}</dd>
               </div>
             ))}

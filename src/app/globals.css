@@ -7,12 +7,23 @@
 
   /* Brand ink: the same navy used by the hero overlay. */
   --color-ink: rgb(0 2 23);
-  /* Section titles on light backgrounds: a touch bluer than ink. */
-  --color-heading: rgb(4 18 62);
   /* Light section background. */
   --color-surface: rgb(244 246 250);
-  /* Hairlines and dividers on light surfaces. */
+  /*
+   * Ink and white are used only through these tokens (no /NN opacity in class names).
+   * On light: muted = secondary text · faint = placeholders, disabled, dotted marks ·
+   * line = hairlines and borders · hover = hover fill and watermarks.
+   * On dark: muted-dark = secondary text · faint-dark = placeholders and dashed marks ·
+   * line-dark = hairlines and outlines · fill-dark = cards and hover fill.
+   */
+  --color-muted: rgb(0 2 23 / 70%);
+  --color-faint: rgb(0 2 23 / 40%);
   --color-line: rgb(0 2 23 / 12%);
+  --color-hover: rgb(0 2 23 / 6%);
+  --color-muted-dark: rgb(255 255 255 / 75%);
+  --color-faint-dark: rgb(255 255 255 / 45%);
+  --color-line-dark: rgb(255 255 255 / 16%);
+  --color-fill-dark: rgb(255 255 255 / 8%);
   /* Navy, lighter than ink: the second solution card. */
   --color-navy: rgb(8 18 54);
   /* Light blue panel background (calculator section). */
@@ -48,6 +59,9 @@
   --spacing-panel: 1rem;
   --radius-panel-sm: 1.5rem;
   --radius-panel: 2rem;
+  /* Cards (24 px) and tiles / small blocks (16 px). Form fields keep --radius-field. */
+  --radius-card: 1.5rem;
+  --radius-tile: 1rem;
 
   /* Soft light shadow: under the hero and the header mega menu only. */
   --shadow-soft: 0 14px 36px -14px rgb(0 2 23 / 26%);
@@ -100,8 +114,14 @@
   /* Oversized decorative wordmark (background, sections). */
   --text-display: 10rem;
   --text-display--line-height: 1;
-  --text-small: 0.9375rem;
-  --text-small--line-height: 1.6;
+  /* Lead paragraph (18 px) and body copy (16 px). */
+  --text-lead: 1.125rem;
+  --text-lead--line-height: 1.6;
+  --text-body: 1rem;
+  --text-body--line-height: 1.6;
+  /* Secondary copy and UI text (14 px). */
+  --text-small: 0.875rem;
+  --text-small--line-height: 1.5;
   --text-caption: 0.8125rem;
   --text-caption--line-height: 1.25rem;
 
@@ -129,6 +149,17 @@ html {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+}
+
+/*
+ * Reveal (components/ui/reveal.tsx) with reduced motion: show the final state at once.
+ * !important beats the inline opacity/transform that Motion renders on the server.
+ */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 
@@ -223,6 +254,56 @@ button:not(:disabled) {
   );
 }
 
+/*
+ * Photo scrims: dark gradients over photos (ink fading out). Opacity lives here, not in class names.
+ * capacity-x / capacity-y: product capacity cards · segment: solution cards on /cec/ · project: project cards.
+ */
+.scrim-capacity-x {
+  background: linear-gradient(
+    to right,
+    color-mix(in srgb, var(--color-ink) 95%, transparent),
+    color-mix(in srgb, var(--color-ink) 75%, transparent),
+    color-mix(in srgb, var(--color-ink) 35%, transparent)
+  );
+}
+
+.scrim-capacity-y {
+  background: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--color-ink) 90%, transparent),
+    color-mix(in srgb, var(--color-ink) 20%, transparent),
+    color-mix(in srgb, var(--color-ink) 35%, transparent)
+  );
+}
+
+.scrim-segment {
+  background: linear-gradient(
+    to top,
+    var(--color-ink),
+    color-mix(in srgb, var(--color-ink) 80%, transparent),
+    color-mix(in srgb, var(--color-ink) 35%, transparent)
+  );
+}
+
+.scrim-project {
+  background: linear-gradient(
+    to top,
+    var(--color-ink),
+    color-mix(in srgb, var(--color-ink) 70%, transparent),
+    transparent
+  );
+}
+
+/* Lead section photo: dark top-to-bottom scrim behind the white text (no glow layer). */
+.scrim-lead {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--color-ink) 72%, transparent) 0%,
+    color-mix(in srgb, var(--color-ink) 84%, transparent) 50%,
+    color-mix(in srgb, var(--color-ink) 94%, transparent) 100%
+  );
+}
+
 /* Hide the scrollbar of swipeable carousels (arrows and swipe stay available). */
 .scrollbar-none {
   scrollbar-width: none;
@@ -262,6 +343,46 @@ button:not(:disabled) {
       transparent 70%
     ),
     var(--color-ink);
+}
+
+/*
+ * Dark panel glow from the top-left (PromoBanner): the same navy as .bg-ink-glow,
+ * mirrored so it sits behind the text while the photo covers the right side.
+ */
+.bg-ink-glow-start {
+  background:
+    radial-gradient(
+      ellipse 70% 90% at 0% 0%,
+      var(--color-navy) 0%,
+      color-mix(in srgb, var(--color-navy) 55%, transparent) 40%,
+      transparent 75%
+    ),
+    radial-gradient(
+      ellipse 45% 70% at 35% 100%,
+      color-mix(in srgb, var(--color-navy) 70%, transparent) 0%,
+      transparent 70%
+    ),
+    var(--color-ink);
+}
+
+/*
+ * PromoBanner photo edge. Desktop: the left ellipse is transparent (panel and glow show
+ * through) and the half-transparent band is the rim. Mobile: a curved bottom edge on the
+ * 200 px photo. @utility so `lg:` variants work.
+ */
+@utility mask-promo-curve {
+  -webkit-mask-image: radial-gradient(ellipse 30% 82% at 19% 50%, transparent 97%, rgb(0 0 0 / 55%) 97.5%, rgb(0 0 0 / 55%) 109%, black 109.5%);
+  mask-image: radial-gradient(ellipse 30% 82% at 19% 50%, transparent 97%, rgb(0 0 0 / 55%) 97.5%, rgb(0 0 0 / 55%) 109%, black 109.5%);
+}
+
+@utility mask-promo-curve-bottom {
+  -webkit-mask-image: radial-gradient(ellipse 72% 100px at 50% 250px, transparent 98%, black 100%);
+  mask-image: radial-gradient(ellipse 72% 100px at 50% 250px, transparent 98%, black 100%);
+}
+
+/* PromoBanner photo crop: shifted down so more roof and sky stay visible. */
+@utility object-promo {
+  object-position: 60% 22%;
 }
 
 /*

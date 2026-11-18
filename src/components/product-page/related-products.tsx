@@ -1,8 +1,7 @@
-import Link from "next/link";
 
 import { Container } from "@/components/layout/container";
+import { RowLink } from "@/components/ui/row-link";
 import { ArrowLink } from "@/components/ui/arrow-link";
-import { IconButton } from "@/components/ui/icon-button";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
 import { products, productSummary, type ProductId } from "@/content/products";
@@ -10,7 +9,6 @@ import { anchors, sectionHref } from "@/content/routes";
 import { localizePath } from "@/i18n/config";
 import { formatQuantity } from "@/lib/format";
 import { getLocale, getMessages } from "@/i18n/server";
-import { format } from "@/lib/messages";
 
 const titleId = "related-products-title";
 
@@ -42,33 +40,18 @@ export function RelatedProducts({ ids, title, links = [] }: { ids: ProductId[]; 
 
             return (
               <li key={id} className="border-t border-line">
-                <Link
+                <RowLink
                   href={localizePath(product.href, locale)}
-                  aria-label={format(t.link, { name: product.name })}
-                  className="group flex items-center gap-4 py-5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
-                >
-                  <span className="flex min-w-0 flex-1 flex-col gap-1">
-                    <span className="font-heading text-base font-semibold text-ink">
-                      {product.name}
-                    </span>
-                    <span className="text-sm text-ink/70">
-                      {productSummary(id, locale)}
-                    </span>
-                  </span>
-                  <span className="hidden text-base font-medium whitespace-nowrap text-ink sm:inline">
-                    {formatQuantity(product.capacity, locale)}
-                  </span>
-                  <IconButton decorative variant="outline-light" size="sm" />
-                </Link>
+                  title={product.name}
+                  description={productSummary(id, locale)}
+                  meta={formatQuantity(product.capacity, locale)}
+                />
               </li>
             );
           })}
           {links.map((item) => (
             <li key={item.href} className="border-t border-line">
-              <Link href={localizePath(item.href, locale)} className="group flex items-center gap-4 py-5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
-                <span className="flex min-w-0 flex-1 flex-col gap-1"><span className="font-heading text-base font-semibold text-ink">{item.title}</span><span className="text-sm text-ink/70">{item.summary}</span></span>
-                <IconButton decorative variant="outline-light" size="sm" />
-              </Link>
+              <RowLink href={localizePath(item.href, locale)} title={item.title} description={item.summary} />
             </li>
           ))}
         </ul>

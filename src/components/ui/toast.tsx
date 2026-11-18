@@ -60,13 +60,13 @@ export function ToastProvider({ children }: { children: ReactNode }) {
               animate={{ opacity: 1, x: 0 }}
               exit={reduceMotion ? { opacity: 0 } : { opacity: 0, x: 120 }}
               transition={{ duration: 0.5, ease: [0.2, 0.7, 0.2, 1] }}
-              className="flex items-start gap-3 rounded-2xl border border-line bg-white p-4 text-ink shadow-soft"
+              className="flex items-start gap-3 rounded-tile border border-line bg-white p-4 text-ink shadow-soft"
             >
               <Icon
                 aria-hidden
                 className={`mt-0.5 size-5 shrink-0 ${toast.tone === "success" ? "text-success" : "text-ink"}`}
               />
-              <p className="text-sm leading-snug font-medium">{toast.text}</p>
+              <p className="text-small leading-snug font-medium">{toast.text}</p>
             </motion.div>
           ) : null}
         </AnimatePresence>

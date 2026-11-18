@@ -30,16 +30,16 @@ export function NicheFacts({ page, locale }: { page: SolutionPage; locale: Local
         </Reveal>
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
           <Reveal className="flex flex-col gap-6 lg:col-span-6">
-            <p className="text-base leading-relaxed text-ink sm:text-lg">{page.facts.lead[locale]}</p>
+            <p className="text-body leading-relaxed text-ink sm:text-lead">{page.facts.lead[locale]}</p>
             <dl aria-label={t.factsTableLabel} className="border-b border-line">
               {page.facts.rows.map((row) => (
-                <div key={row.label.en} className="grid grid-cols-2 gap-4 border-t border-line py-3 text-sm sm:text-base">
-                  <dt className="text-ink/70">{row.label[locale]}</dt>
+                <div key={row.label.en} className="grid grid-cols-2 gap-4 border-t border-line py-3 text-small sm:text-body">
+                  <dt className="text-muted">{row.label[locale]}</dt>
                   <dd className="font-medium text-ink">{row.value[locale]}</dd>
                 </div>
               ))}
             </dl>
-            <p className="text-sm text-ink/70">
+            <p className="text-small text-muted">
               <time dateTime={page.updatedAt}>{format(t.updated, { date: updated })}</time>
             </p>
           </Reveal>
@@ -48,8 +48,8 @@ export function NicheFacts({ page, locale }: { page: SolutionPage; locale: Local
               {page.facts.cards.map((card) => {
                 const tone = nicheTones[card.tone];
                 return (
-                  <div key={card.value.en} className={`flex min-h-48 flex-col-reverse justify-between gap-6 rounded-3xl p-card-sm lg:p-card ${tone.card}`}>
-                    <dt className={`text-sm ${tone.muted}`}>{card.label[locale]}</dt>
+                  <div key={card.value.en} className={`flex min-h-48 flex-col-reverse justify-between gap-6 rounded-card p-card-sm lg:p-card ${tone.card}`}>
+                    <dt className={`text-small ${tone.muted}`}>{card.label[locale]}</dt>
                     <dd className="font-heading text-number-sm font-light tracking-tight whitespace-nowrap">{card.value[locale]}</dd>
                   </div>
                 );

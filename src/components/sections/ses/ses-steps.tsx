@@ -39,12 +39,12 @@ export function SesSteps() {
           {buildSteps.map((step, index) => (
             <li key={step.title.en}>
               <Reveal delay={index * 0.08} className="h-full">
-                <div className="flex h-full flex-col gap-4 rounded-3xl bg-surface p-card-sm lg:p-card">
+                <div className="flex h-full flex-col gap-4 rounded-card bg-surface p-card-sm lg:p-card">
                   <StepMarker index={index} icon={stepIcons[index] ?? Wrench} />
                   <Heading as="h3" size="h3">
                     {step.title[locale]}
                   </Heading>
-                  <p className="text-base leading-relaxed text-ink/70">{step.text[locale]}</p>
+                  <p className="text-body leading-relaxed text-muted">{step.text[locale]}</p>
                 </div>
               </Reveal>
             </li>

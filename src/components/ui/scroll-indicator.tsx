@@ -22,7 +22,7 @@ export function ScrollIndicator({ className }: ScrollIndicatorProps) {
       type="button"
       aria-label={t.label}
       onClick={scrollToNextSection}
-      className={`group relative flex cursor-pointer flex-col items-center text-white/70 transition duration-200 hover:-translate-y-1 hover:text-white focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white ${className ?? ""}`}
+      className={`group relative flex cursor-pointer flex-col items-center text-muted-dark transition duration-200 hover:-translate-y-1 hover:text-white focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white ${className ?? ""}`}
     >
       <motion.span
         aria-hidden

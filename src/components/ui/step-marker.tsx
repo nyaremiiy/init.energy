@@ -3,8 +3,8 @@ import type { LucideIcon } from "lucide-react";
 type StepMarkerTone = "light" | "dark";
 
 const toneClasses: Record<StepMarkerTone, { index: string; icon: string }> = {
-  light: { index: "text-ink/70", icon: "border-ink/15 text-ink" },
-  dark: { index: "text-white/75", icon: "border-white/25 text-white" },
+  light: { index: "text-muted", icon: "border-line text-ink" },
+  dark: { index: "text-muted-dark", icon: "border-line-dark text-white" },
 };
 
 /**
@@ -27,7 +27,7 @@ export function StepMarker({
     <div className="flex items-center justify-between gap-4">
       <span
         aria-hidden
-        className={`font-heading text-sm font-medium tabular-nums ${classes.index}`}
+        className={`font-heading text-small font-medium tabular-nums ${classes.index}`}
       >
         {String(index + 1).padStart(2, "0")}
       </span>

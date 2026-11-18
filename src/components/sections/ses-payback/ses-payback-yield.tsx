@@ -50,8 +50,8 @@ export function SesPaybackYield() {
 
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-12">
           <Reveal className="lg:col-span-8">
-            <figure className="flex h-full flex-col gap-6 rounded-3xl bg-surface p-card-sm lg:p-card">
-              <div className="flex flex-wrap items-baseline justify-between gap-2 text-sm text-ink/70">
+            <figure className="flex h-full flex-col gap-6 rounded-card bg-surface p-card-sm lg:p-card">
+              <div className="flex flex-wrap items-baseline justify-between gap-2 text-small text-muted">
                 <span>{t.chartLegend}</span>
                 <span className="font-medium text-ink">
                   {format(t.chartTotal, { value: formatNumber(roundTo(result.generationYear, 10), locale) })}
@@ -59,16 +59,16 @@ export function SesPaybackYield() {
               </div>
               <div aria-hidden className="relative flex h-64 items-end gap-1 border-b border-line sm:gap-2">
                 <div
-                  className="pointer-events-none absolute inset-x-0 z-10 border-t border-dashed border-ink/50"
+                  className="pointer-events-none absolute inset-x-0 z-10 border-t border-dashed border-faint"
                   style={{ bottom: height(result.monthlyKwh) }}
                 >
-                  <span className="absolute right-0 -translate-y-full bg-surface pb-1 pl-2 text-xs text-ink/70">
+                  <span className="absolute right-0 -translate-y-full bg-surface pb-1 pl-2 text-caption text-muted">
                     {t.consumptionLine}
                   </span>
                 </div>
                 {months.map((value, index) => (
                   <div key={t.monthNames[index]} className="flex h-full min-w-0 flex-1 flex-col items-center justify-end gap-1">
-                    <span className="hidden text-xs text-ink/70 tabular-nums sm:block">
+                    <span className="hidden text-caption text-muted tabular-nums sm:block">
                       {formatNumber(roundTo(value, 10), locale)}
                     </span>
                     <span
@@ -80,7 +80,7 @@ export function SesPaybackYield() {
               </div>
               <div aria-hidden className="-mt-4 flex gap-1 sm:gap-2">
                 {t.monthNames.map((name) => (
-                  <span key={name} className="min-w-0 flex-1 text-center text-xs text-ink/70">
+                  <span key={name} className="min-w-0 flex-1 text-center text-caption text-muted">
                     {name}
                   </span>
                 ))}
@@ -104,37 +104,37 @@ export function SesPaybackYield() {
                   ))}
                 </tbody>
               </table>
-              <figcaption className="mt-auto text-sm text-ink/70">{t.chartCaption}</figcaption>
+              <figcaption className="mt-auto text-small text-muted">{t.chartCaption}</figcaption>
             </figure>
           </Reveal>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:col-span-4 lg:grid-cols-1">
             <Reveal delay={0.08} className="h-full">
-              <article className="flex h-full flex-col gap-4 rounded-3xl bg-sky p-card-sm text-ink lg:p-card">
-                <p className="text-sm text-ink/70">
+              <article className="flex h-full flex-col gap-4 rounded-card bg-sky p-card-sm text-ink lg:p-card">
+                <p className="text-small text-muted">
                   {format(t.surplusText, { month: t.monthNamesFull[result.surplus.monthIndex] })}
                 </p>
                 <p className="flex items-baseline gap-2">
                   <span className="font-heading text-number-sm font-light tabular-nums">
                     +{formatNumber(roundTo(result.surplus.kwh, 10), locale)}
                   </span>
-                  <span className="text-sm text-ink/70">{t.perMonth}</span>
+                  <span className="text-small text-muted">{t.perMonth}</span>
                 </p>
-                <p className="mt-auto text-sm text-ink/70">{t.surplusHint}</p>
+                <p className="mt-auto text-small text-muted">{t.surplusHint}</p>
               </article>
             </Reveal>
             <Reveal delay={0.16} className="h-full">
-              <article className="flex h-full flex-col gap-4 rounded-3xl bg-navy p-card-sm text-white lg:p-card">
-                <p className="text-sm text-white/75">
+              <article className="flex h-full flex-col gap-4 rounded-card bg-navy p-card-sm text-white lg:p-card">
+                <p className="text-small text-muted-dark">
                   {format(t.deficitText, { month: t.monthNamesFull[result.deficit.monthIndex] })}
                 </p>
                 <p className="flex items-baseline gap-2">
                   <span className="font-heading text-number-sm font-light tabular-nums">
                     −{formatNumber(roundTo(result.deficit.kwh, 10), locale)}
                   </span>
-                  <span className="text-sm text-white/75">{t.perMonth}</span>
+                  <span className="text-small text-muted-dark">{t.perMonth}</span>
                 </p>
-                <p className="mt-auto text-sm text-white/75">{t.deficitHint}</p>
+                <p className="mt-auto text-small text-muted-dark">{t.deficitHint}</p>
               </article>
             </Reveal>
           </div>

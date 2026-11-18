@@ -48,7 +48,7 @@ export function NotFoundView({ planned }: { planned: boolean }) {
           inPanel
           className="flex flex-col items-start gap-6 pt-28 pb-panel-y-sm lg:pt-36 lg:pb-panel-y"
         >
-          <span className="flex size-14 items-center justify-center rounded-full border border-white/25 text-white">
+          <span className="flex size-14 items-center justify-center rounded-full border border-line-dark text-white">
             <Icon aria-hidden className="size-6" />
           </span>
           <Eyebrow tone="dark">{copy.eyebrow}</Eyebrow>
@@ -76,8 +76,8 @@ export function NotFoundView({ planned }: { planned: boolean }) {
             </Button>
           </div>
 
-          <nav aria-label={t.available} className="mt-6 w-full border-t border-white/16 pt-6">
-            <p className="mb-3 font-heading text-eyebrow-sm font-medium tracking-eyebrow text-white/75 uppercase sm:text-eyebrow">
+          <nav aria-label={t.available} className="mt-6 w-full border-t border-line-dark pt-6">
+            <p className="mb-3 font-heading text-eyebrow-sm font-medium tracking-eyebrow text-muted-dark uppercase sm:text-eyebrow">
               {t.available}
             </p>
             <ul className="flex flex-wrap gap-2">
