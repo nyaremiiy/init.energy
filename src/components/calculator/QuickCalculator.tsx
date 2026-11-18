@@ -298,7 +298,7 @@ export function QuickCalculator() {
         ) : null}
       </form>
 
-      <div className="flex flex-col gap-8 rounded-card bg-ink p-card-sm text-white lg:col-span-5 lg:p-card">
+      <div className="flex flex-col gap-8 rounded-card bg-ink-glow p-card-sm text-white lg:col-span-5 lg:p-card">
         <div aria-live="polite" className="flex flex-col gap-6">
           <div className="flex items-center justify-between gap-4">
             <CardLabel tone="dark">{t.result.eyebrow}</CardLabel>
