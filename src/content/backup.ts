@@ -22,8 +22,8 @@ export const backupHeroImage = {
   tablet: "/images/rezervne-zhyvlennya/hero-1280.avif",
   mobile: "/images/rezervne-zhyvlennya/hero-750.avif",
   alt: {
-    uk: "Інвертори й шафи системи резервного живлення на стіні",
-    en: "Inverters and cabinets of a backup power system on a wall",
+    uk: "Інвертор, накопичувач і щиток системи резервного живлення на стіні гаража",
+    en: "An inverter, a battery and a switchboard of a backup power system on a garage wall",
   } satisfies Localized,
 };
 
