@@ -40,60 +40,6 @@ export function howToSchema(name: string, description: string, steps: { name: st
   return { "@context": "https://schema.org", "@type": "HowTo", name, description, step: steps.map((step, index) => ({ "@type": "HowToStep", position: index + 1, name: step.name, text: step.text })) };
 }
 
-type ProductSchemaInput = {
-  name: string;
-  description: string;
-  url: string;
-  /** Product type as shown on the page, e.g. «Акумуляторна батарея LiFePO₄». */
-  category?: string;
-  image?: string;
-  /** Spec rows as label/value pairs, exactly as shown on the page. */
-  properties: { name: string; value: string }[];
-  related?: { name: string; url: string }[];
-  parts?: { name: string; url: string }[];
-  brand?: string;
-  provider?: boolean;
-};
-
-/** Product without `offers`: INIT ENERGY does not publish prices. */
-export function productSchema(input: ProductSchemaInput) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "@id": `${input.url}#product`,
-    name: input.name,
-    description: input.description,
-    url: input.url,
-    ...(input.category ? { category: input.category } : {}),
-    ...(input.image ? { image: input.image } : {}),
-    brand: { "@type": "Brand", name: input.brand ?? "SVIT" },
-    ...(input.provider ? { seller: { "@id": `${siteUrl}/#organization` }, provider: { "@id": `${siteUrl}/#organization` } } : {}),
-    additionalProperty: input.properties.map((property) => ({
-      "@type": "PropertyValue",
-      name: property.name,
-      value: property.value,
-    })),
-    ...(input.related?.length
-      ? {
-          isRelatedTo: input.related.map((product) => ({
-            "@type": "Product",
-            name: product.name,
-            url: product.url,
-          })),
-        }
-      : {}),
-    ...(input.parts?.length
-      ? {
-          hasPart: input.parts.map((product) => ({
-            "@type": "Product",
-            name: product.name,
-            url: product.url,
-          })),
-        }
-      : {}),
-  };
-}
-
 /**
  * The company for GEO and the Knowledge Graph: name, contacts, both offices,
  * service area and social profiles — from content/company.ts and header data.
