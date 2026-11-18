@@ -72,7 +72,7 @@ export function LeadSection({
               </Reveal>
 
               <Reveal delay={0.12} distance={12} className="w-full">
-                <LeadContactCard variant="inline" />
+                <LeadContactCard />
               </Reveal>
             </div>
           </div>
