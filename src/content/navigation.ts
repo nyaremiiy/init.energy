@@ -42,6 +42,10 @@ type FooterLinkLabels = {
   nicheSizing: string;
   nicheBackup: string;
   nicheBuild: string;
+  backupHub: string;
+  backupHow: string;
+  backupEquipment: string;
+  backupRuntime: string;
   svitCatalog: string;
   about: string;
   contacts: string;
@@ -90,6 +94,18 @@ function sesNavigation(locale: Locale): NavEntry[] {
   ];
 }
 
+/** Backup power hub (/rezervne-zhyvlennya/): its main sections in page order. */
+function backupNavigation(locale: Locale): NavEntry[] {
+  const href = (anchor: string) => localizePath(`${routes.backup.hub}#${anchor}`, locale);
+  return [
+    { href: href(anchors.backupHow), labelKey: "backupHow" },
+    { href: href(anchors.backupEquipment), labelKey: "backupEquipment" },
+    { href: href(anchors.backupRuntime), labelKey: "backupRuntime" },
+    { href: href(anchors.faq), labelKey: "faq" },
+    { href: href(anchors.contacts), labelKey: "consultation" },
+  ];
+}
+
 function sesCalculatorNavigation(locale: Locale): NavEntry[] {
   const path = localizePath(routes.calculators.sesPayback, locale);
   return [
@@ -122,6 +138,8 @@ export const pageNavigation: Record<string, NavEntry[]> = {
   [localizePath(routes.home, "en")]: homeNavigation("en"),
   [routes.services.turnkeySes]: sesNavigation("uk"),
   [localizePath(routes.services.turnkeySes, "en")]: sesNavigation("en"),
+  [routes.backup.hub]: backupNavigation("uk"),
+  [localizePath(routes.backup.hub, "en")]: backupNavigation("en"),
   [routes.calculators.sesPayback]: sesCalculatorNavigation("uk"),
   [localizePath(routes.calculators.sesPayback, "en")]: sesCalculatorNavigation("en"),
 };
@@ -185,6 +203,7 @@ for (const page of productPages) {
 export function getSiteSections(locale: Locale): NavEntry[] {
   return [
     { href: localizePath(routes.services.turnkeySes, locale), labelKey: "turnkeySes" },
+    { href: localizePath(routes.backup.hub, locale), labelKey: "backupHub" },
     {
       href: localizePath(routes.calculators.sesPayback, locale),
       labelKey: "calculatorPage",
@@ -200,6 +219,6 @@ export function getSiteSections(locale: Locale): NavEntry[] {
       : []),
     { href: routes.about, labelKey: "about" },
     { href: sectionHref(anchors.contacts, locale), labelKey: "contacts" },
-    // TODO(content): «Резервне живлення» and «База знань» — add when these pages enter the site structure.
+    // TODO(content): «База знань» — add when the knowledge base enters the site structure.
   ];
 }

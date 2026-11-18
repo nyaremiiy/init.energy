@@ -3,7 +3,7 @@ import type { Localized } from "@/i18n/config";
 import { routes } from "./routes";
 
 // Source: https://init.energy (checked 2026-11-06).
-export type ServiceId = "turnkeySes" | "hotelSes";
+export type ServiceId = "turnkeySes" | "hotelSes" | "backupHub";
 
 export type Service = {
   id: ServiceId;
@@ -13,6 +13,15 @@ export type Service = {
 };
 
 export const services: Record<ServiceId, Service> = {
+  backupHub: {
+    id: "backupHub",
+    name: { uk: "Резервне живлення під ключ", en: "Turnkey backup power" },
+    href: routes.backup.hub,
+    summary: {
+      uk: "Накопичувачі SVIT і системи Deye, Victron, Huawei для квартири, будинку й бізнесу",
+      en: "SVIT batteries and Deye, Victron, Huawei systems for apartments, houses and businesses",
+    },
+  },
   turnkeySes: {
     id: "turnkeySes",
     name: { uk: "СЕС під ключ", en: "Turnkey solar plants" },

@@ -75,6 +75,13 @@ export const anchors = {
   nicheBuild: "build",
   sesYield: "ses-yield",
   sesMethod: "ses-method",
+  // Backup power hub (/rezervne-zhyvlennya/).
+  backupSegments: "backup-segments",
+  backupHow: "backup-how",
+  backupEquipment: "backup-equipment",
+  backupRuntime: "backup-runtime",
+  backupCompare: "backup-compare",
+  backupSteps: "backup-steps",
 } as const;
 
 export function toPath(...segments: string[]): string {
@@ -112,6 +119,7 @@ export const routes = {
     business: toPath(slugs.services.turnkeySes, slugs.services.business),
   },
   backup: {
+    hub: toPath(slugs.backup.hub),
     apartment: toPath(slugs.backup.hub, slugs.backup.apartment),
     house: toPath(slugs.backup.hub, slugs.backup.house),
     business: toPath(slugs.backup.hub, slugs.backup.business),
