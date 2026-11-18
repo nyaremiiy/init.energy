@@ -6,7 +6,7 @@ import { MediaPlaceholder } from "@/components/ui/media-placeholder";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
 import { SectionWatermark } from "@/components/ui/section-watermark";
-import { StepMarker } from "@/components/ui/step-marker";
+import { StepsList } from "@/components/ui/steps-list";
 import { anchors } from "@/content/routes";
 import type { SolutionPage } from "@/content/solutions";
 import type { Locale } from "@/i18n/config";
@@ -73,15 +73,12 @@ export function NicheBuild({ page, locale }: { page: SolutionPage; locale: Local
 
           <Reveal delay={0.16} className="flex flex-col gap-4 md:col-span-2 lg:col-span-1">
             <h3 className="font-heading text-h3-sm font-medium text-ink sm:text-h3">{t.stepsTitle}</h3>
-            <ol className="flex flex-col gap-3">
-              {page.build.steps.map((step, index) => (
-                <li key={step.title.en} className="flex flex-col gap-3 rounded-card bg-surface p-card-sm">
-                  <StepMarker index={index} icon={stepIcons[index] ?? Wrench} />
-                  <p className="font-heading text-body font-semibold text-ink">{step.title[locale]}</p>
-                  <p className="text-small text-muted">{step.text[locale]}</p>
-                </li>
-              ))}
-            </ol>
+            <StepsList
+              layout="compact"
+              titleAs="p"
+              steps={page.build.steps.map((step) => ({ title: step.title[locale], text: step.text[locale] }))}
+              icons={stepIcons}
+            />
           </Reveal>
         </div>
       </Container>
