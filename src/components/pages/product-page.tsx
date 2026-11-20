@@ -14,6 +14,7 @@ import { ProductSectionNav } from "@/components/product-page/product-section-nav
 import { ProductSpecs } from "@/components/product-page/product-specs";
 import { RelatedProducts } from "@/components/product-page/related-products";
 import { FaqSection } from "@/components/sections/home/faq-section";
+import { RegionLinks } from "@/components/sections/region-links";
 import { LeadSection } from "@/components/sections/LeadSection";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { MediaPlaceholder } from "@/components/ui/media-placeholder";
@@ -189,6 +190,7 @@ export function ProductPageView({
           defaultObjectType={page.slug === "bess" ? "business" : page.slug === "svit-600" ? "apartment" : undefined}
           objectTypes={page.slug === "bess" ? ["house", "business", "infrastructure", "other"] : undefined}
         />
+        <RegionLinks variant="all" />
       </main>
     </>
   );

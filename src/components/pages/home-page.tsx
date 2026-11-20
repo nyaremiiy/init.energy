@@ -5,6 +5,7 @@ import { PageHero } from "@/components/sections/PageHero";
 import { getHeroSlides } from "@/components/sections/home/hero-slides";
 import { ProductLine } from "@/components/sections/home/product-line";
 import { SolutionsBySegment } from "@/components/sections/home/solutions-by-segment";
+import { RegionLinks } from "@/components/sections/region-links";
 import { LeadSection } from "@/components/sections/LeadSection";
 import { ProjectsShowcase } from "@/components/sections/projects-showcase";
 import { TrustSection } from "@/components/sections/trust-section";
@@ -49,6 +50,7 @@ export function HomePage() {
         <CalculatorSection />
         <FaqSection />
         <LeadSection />
+        <RegionLinks variant="all" />
       </main>
     </>
   );

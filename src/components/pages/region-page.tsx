@@ -4,8 +4,8 @@ import { FaqSection } from "@/components/sections/home/faq-section";
 import { sesOverviewHeroImage } from "@/components/sections/home/hero-slides";
 import { LeadSection } from "@/components/sections/LeadSection";
 import { PageHero } from "@/components/sections/PageHero";
+import { RegionLinks } from "@/components/sections/region-links";
 import { RegionCalculator } from "@/components/sections/regions/region-calculator";
-import { RegionOthers } from "@/components/sections/regions/region-others";
 import { RegionYield } from "@/components/sections/regions/region-yield";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { regionPath, type InsolationRegion } from "@/content/insolation";
@@ -82,7 +82,7 @@ export function RegionPage({ region, locale }: { region: InsolationRegion; local
           }}
         />
         <LeadSection commentPlaceholder={t.lead.comment} />
-        <RegionOthers region={region} locale={locale} />
+        <RegionLinks variant="other" exclude={region.id} />
       </main>
     </>
   );

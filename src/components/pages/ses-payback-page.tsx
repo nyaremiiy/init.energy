@@ -4,6 +4,7 @@ import { InlineLink } from "@/components/ui/inline-link";
 import { SesPaybackCalculator } from "@/components/calculator/ses-payback-calculator";
 import { SesPaybackProvider } from "@/components/calculator/ses-payback-state";
 import { Container } from "@/components/layout/container";
+import { RegionLinks } from "@/components/sections/region-links";
 import { LeadSection } from "@/components/sections/LeadSection";
 import { FaqSection } from "@/components/sections/home/faq-section";
 import { SesPaybackHero } from "@/components/sections/ses-payback/ses-payback-hero";
@@ -118,6 +119,7 @@ export function SesPaybackPage({ locale }: { locale: Locale }) {
         <SesPaybackPlans />
         <FaqSection page="calculator" title={t.faqTitle} lead={t.faqLead} filter={false} />
         <LeadSection title={t.formTitle} lead={t.formLead} defaultObjectType="house" />
+        <RegionLinks variant="all" />
       </main>
     </>
   );
