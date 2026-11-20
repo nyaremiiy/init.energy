@@ -15,6 +15,12 @@
 
 ---
 
+## 2026-11-20 — Опис у блоці областей і на сторінках областей
+- **Агент:** Claude Code
+- **Гілка:** fix/region-links-text (статус: змерджено в develop)
+- **Що зроблено:** за проханням власника речення «Генерація, приклад станції й окупність для кожної області.» / "Generation, an example plant and payback for every region." показується під заголовком `RegionLinks` і на сторінках областей («Сонячні панелі в інших областях»). Ключ `regionLinks.allText` → `regionLinks.text`.
+- **Файли:** src/components/sections/region-links.tsx, messages/{uk,en}.json, docs/ai/{CONTEXT,CHANGELOG}.md
+
 ## 2026-11-20 — Мега-меню, мобільне меню й плаваючі кнопки
 - **Агент:** Claude Code
 - **Гілка:** fix/menu-floating-buttons (статус: змерджено в develop)
