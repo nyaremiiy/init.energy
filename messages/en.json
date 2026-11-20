@@ -617,7 +617,7 @@
   "regionLinks": {
     "otherTitle": "Solar panels in other regions",
     "allTitle": "Solar panels by region of Ukraine",
-    "allText": "Generation, an example plant and payback for every region."
+    "text": "Generation, an example plant and payback for every region."
   },
   "sesRegions": {
     "eyebrow": "By region",

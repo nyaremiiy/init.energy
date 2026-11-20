@@ -7,7 +7,7 @@ import { RegionPills } from "./regions/region-pills";
 const titleId = "region-links-title";
 
 type RegionLinksProps = {
-  /** `other`: on a region page («в інших областях»); `all`: on every other main page, with a one-line lead. */
+  /** `other`: on a region page («в інших областях»); `all`: on every other main page. Both show the one-line lead. */
   variant: "other" | "all";
   /** Id of the current region (content/insolation.ts), left out of the list. */
   exclude?: string;
@@ -39,9 +39,7 @@ export function RegionLinks({ variant, exclude }: RegionLinksProps) {
             >
               {title}
             </Heading>
-            {variant === "all" ? (
-              <p className="text-small text-muted">{t.allText}</p>
-            ) : null}
+            <p className="text-small text-muted">{t.text}</p>
           </div>
           <div className="lg:col-span-8">
             <RegionPills locale={locale} exclude={exclude} label={title} />
