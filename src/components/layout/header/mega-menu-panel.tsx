@@ -61,7 +61,7 @@ export function MegaMenuPanel({ group, open, onNavigate }: MegaMenuPanelProps) {
             ))}
           </div>
 
-          <div className="flex w-80 flex-col items-start gap-3 rounded-tile bg-fill-dark p-6 ring-1 ring-line-dark">
+          <div className="flex w-80 shrink-0 flex-col items-start gap-3 self-start rounded-tile bg-fill-dark p-6 ring-1 ring-line-dark">
             <p className="text-lead font-semibold text-white">{navCta.title}</p>
             <p className="text-small text-muted-dark">{navCta.text}</p>
             <Button
