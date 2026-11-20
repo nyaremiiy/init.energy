@@ -104,7 +104,7 @@ export function ContactWidget() {
         aria-expanded={open}
         aria-controls="contact-widget-panel"
         onClick={() => setOpen((value) => !value)}
-        className="inline-flex size-12 items-center justify-center rounded-full bg-ink text-white shadow-soft transition-colors duration-200 ease-tech hover:bg-navy focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+        className="inline-flex size-12 items-center justify-center rounded-full bg-ink text-white shadow-soft ring-1 ring-faint-dark transition-all duration-200 ease-tech hover:bg-navy hover:ring-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
       >
         <Phone aria-hidden className="size-5" />
       </button>

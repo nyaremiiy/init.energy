@@ -33,7 +33,10 @@ export function MobileMenu() {
   const pageLinks = pageSectionLinks(pathname, locale);
   const visibleItems: NavItem[] = onHome
     ? navItems
-    : [...navItems.filter((item) => isNavGroup(item) || !item.sectionId), ...pageLinks];
+    : [
+        ...navItems.filter((item) => isNavGroup(item) || !item.sectionId),
+        ...pageLinks,
+      ];
   // Page sections appear in the desktop header only from xl; between lg and xl
   // the burger stays (after the CTA) so they remain reachable.
   const hasPageLinks = onHome || pageLinks.length > 0;
@@ -77,95 +80,98 @@ export function MobileMenu() {
       {isOpen ? (
         <div
           id="mobile-menu"
-          className="fixed inset-0 z-40 flex flex-col gap-10 overflow-y-auto bg-ink-glow px-6 pt-28 pb-10 text-white sm:px-8 lg:px-10 lg:pt-40"
+          className="fixed inset-0 z-40 bg-ink-glow text-white"
         >
-          <nav aria-label={t.mobileMenu}>
-            <ul className="flex flex-col gap-5 text-h3 font-semibold">
-              {visibleItems.map((item) =>
-                isNavGroup(item) ? (
-                  <li key={item.label}>
-                    <details className="group">
-                      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 [&::-webkit-details-marker]:hidden">
+          {/* Only the area under the header bar scrolls: the logo and buttons stay on a solid background. */}
+          <div className="absolute inset-x-0 top-20 bottom-0 flex flex-col gap-10 overflow-y-auto overscroll-contain border-t border-line-dark px-6 pt-8 pb-10 sm:px-8 lg:top-32 lg:px-10">
+            <nav aria-label={t.mobileMenu}>
+              <ul className="flex flex-col gap-5 text-h3 font-semibold">
+                {visibleItems.map((item) =>
+                  isNavGroup(item) ? (
+                    <li key={item.label}>
+                      <details className="group">
+                        <summary className="flex cursor-pointer list-none items-center justify-between gap-4 [&::-webkit-details-marker]:hidden">
+                          {item.label}
+                          <ChevronDown
+                            aria-hidden
+                            className="size-6 transition-transform duration-200 group-open:rotate-180"
+                          />
+                        </summary>
+                        <div className="mt-5 flex flex-col gap-6 border-l border-line-dark pl-4">
+                          {item.columns.map((column) => (
+                            <div
+                              key={column.title}
+                              className="flex flex-col gap-3"
+                            >
+                              <Eyebrow tone="dark" as="p">
+                                {column.title}
+                              </Eyebrow>
+                              <ul className="-mx-3 flex flex-col gap-1">
+                                {column.items.map((link) => (
+                                  <li key={link.href}>
+                                    <NavLink
+                                      href={link.href}
+                                      onClick={close}
+                                      className="flex flex-col gap-1 rounded-tile px-3 py-2 transition-colors duration-150 ease-tech active:bg-fill-dark focus-visible:bg-fill-dark focus-visible:outline-2 focus-visible:outline-white"
+                                    >
+                                      <span className="text-body font-semibold">
+                                        {link.label}
+                                      </span>
+                                      <span className="text-small font-normal text-muted-dark">
+                                        {link.description}
+                                      </span>
+                                    </NavLink>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          ))}
+                        </div>
+                      </details>
+                    </li>
+                  ) : (
+                    <li key={item.href}>
+                      <NavLink href={item.href} onClick={close}>
                         {item.label}
-                        <ChevronDown
-                          aria-hidden
-                          className="size-6 transition-transform duration-200 group-open:rotate-180"
-                        />
-                      </summary>
-                      <div className="mt-5 flex flex-col gap-6 border-l border-line-dark pl-4">
-                        {item.columns.map((column) => (
-                          <div
-                            key={column.title}
-                            className="flex flex-col gap-3"
-                          >
-                            <Eyebrow tone="dark" as="p">
-                              {column.title}
-                            </Eyebrow>
-                            <ul className="-mx-3 flex flex-col gap-1">
-                              {column.items.map((link) => (
-                                <li key={link.href}>
-                                  <NavLink
-                                    href={link.href}
-                                    onClick={close}
-                                    className="flex flex-col gap-1 rounded-tile px-3 py-2 transition-colors duration-150 ease-tech active:bg-fill-dark focus-visible:bg-fill-dark focus-visible:outline-2 focus-visible:outline-white"
-                                  >
-                                    <span className="text-body font-semibold">
-                                      {link.label}
-                                    </span>
-                                    <span className="text-small font-normal text-muted-dark">
-                                      {link.description}
-                                    </span>
-                                  </NavLink>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        ))}
-                      </div>
-                    </details>
-                  </li>
-                ) : (
-                  <li key={item.href}>
-                    <NavLink href={item.href} onClick={close}>
-                      {item.label}
-                    </NavLink>
-                  </li>
-                ),
-              )}
-            </ul>
-          </nav>
+                      </NavLink>
+                    </li>
+                  ),
+                )}
+              </ul>
+            </nav>
 
-          <div className="flex flex-col gap-6 text-small text-muted-dark">
-            {offices.map((office) => (
-              <address
-                key={office.id}
-                className="flex flex-col gap-2 not-italic"
-              >
-                <span className="inline-flex items-center gap-2">
-                  <MapPin aria-hidden className="size-4 shrink-0" />
-                  {office.city[locale]}, {office.address[locale]}
-                </span>
-                <a
-                  href={office.phone.href}
-                  className="inline-flex items-center gap-2 hover:text-white"
+            <div className="flex flex-col gap-6 text-small text-muted-dark">
+              {offices.map((office) => (
+                <address
+                  key={office.id}
+                  className="flex flex-col gap-2 not-italic"
                 >
-                  <Phone aria-hidden className="size-4 shrink-0" />
-                  {formatPhone(office.phone.display)}
-                </a>
-              </address>
-            ))}
-            <a
-              href={`mailto:${contactEmail}`}
-              className="inline-flex items-center gap-2 hover:text-white"
-            >
-              <Mail aria-hidden className="size-4 shrink-0" />
-              {contactEmail}
-            </a>
+                  <span className="inline-flex items-center gap-2">
+                    <MapPin aria-hidden className="size-4 shrink-0" />
+                    {office.city[locale]}, {office.address[locale]}
+                  </span>
+                  <a
+                    href={office.phone.href}
+                    className="inline-flex items-center gap-2 hover:text-white"
+                  >
+                    <Phone aria-hidden className="size-4 shrink-0" />
+                    {formatPhone(office.phone.display)}
+                  </a>
+                </address>
+              ))}
+              <a
+                href={`mailto:${contactEmail}`}
+                className="inline-flex items-center gap-2 hover:text-white"
+              >
+                <Mail aria-hidden className="size-4 shrink-0" />
+                {contactEmail}
+              </a>
+            </div>
+
+            <SocialLinks iconClassName="size-6" className="gap-5" />
+
+            <LanguageSwitcher className="mt-auto" />
           </div>
-
-          <SocialLinks iconClassName="size-6" className="gap-5" />
-
-          <LanguageSwitcher className="mt-auto" />
         </div>
       ) : null}
     </div>
