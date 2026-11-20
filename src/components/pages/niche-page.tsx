@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { FaqSection } from "@/components/sections/home/faq-section";
+import { RegionLinks } from "@/components/sections/region-links";
 import { LeadSection } from "@/components/sections/LeadSection";
 import { NicheBackup } from "@/components/sections/niche/niche-backup";
 import { NicheBuild } from "@/components/sections/niche/niche-build";
@@ -102,6 +103,7 @@ export function NichePage({ page, locale }: { page: SolutionPage; locale: Locale
           objectTypes={["hotel", "business", "infrastructure", "other"]}
           commentPlaceholder={page.lead.comment[locale]}
         />
+        <RegionLinks variant="all" />
       </main>
     </>
   );

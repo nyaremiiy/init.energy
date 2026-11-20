@@ -8,6 +8,7 @@ import { BackupHow } from "@/components/sections/backup/backup-how";
 import { BackupRuntime } from "@/components/sections/backup/backup-runtime";
 import { BackupSegments } from "@/components/sections/backup/backup-segments";
 import { FaqSection } from "@/components/sections/home/faq-section";
+import { RegionLinks } from "@/components/sections/region-links";
 import { LeadSection } from "@/components/sections/LeadSection";
 import { PageHero } from "@/components/sections/PageHero";
 import { StepsSection } from "@/components/sections/steps-section";
@@ -105,6 +106,7 @@ export function BackupPage() {
           }}
         />
         <LeadSection />
+        <RegionLinks variant="all" />
       </main>
     </>
   );

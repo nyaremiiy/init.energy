@@ -485,7 +485,7 @@
       "suffixOccupied": " — solar yield",
       "description": "Solar panels {locative}: a 5 kW plant produces ≈ {year} kWh a year. Turnkey solar design, installation and service by INIT ENERGY. Payback calculator.",
       "descriptionShort": "Solar panels {locative}: a 5 kW plant produces ≈ {year} kWh a year. Turnkey solar installation and service by INIT ENERGY, payback calculator.",
-        "descriptionOccupied": "Solar panels {locative}: a 5 kW plant produces ≈ {year} kWh a year. Monthly solar yield and a payback calculator for a solar plant by INIT ENERGY.",
+      "descriptionOccupied": "Solar panels {locative}: a 5 kW plant produces ≈ {year} kWh a year. Monthly solar yield and a payback calculator for a solar plant by INIT ENERGY.",
       "serviceType": "Turnkey solar power plant"
     },
     "crumbs": {
@@ -612,11 +612,12 @@
     },
     "lead": {
       "comment": "Town or village where you need the plant, roof area"
-    },
-    "others": {
-      "title": "Solar panels in other regions",
-      "label": "Other regions"
     }
+  },
+  "regionLinks": {
+    "otherTitle": "Solar panels in other regions",
+    "allTitle": "Solar panels by region of Ukraine",
+    "allText": "Generation, an example plant and payback for every region."
   },
   "sesRegions": {
     "eyebrow": "By region",
