@@ -3,6 +3,8 @@
  * English under /en/. Only pages listed in `localizedPaths` have an English
  * version; everything else stays Ukrainian-only.
  */
+import { regionPaths } from "@/content/insolation";
+
 export const locales = ["uk", "en"] as const;
 export type Locale = (typeof locales)[number];
 
@@ -17,8 +19,8 @@ export const ogLocale: Record<Locale, string> = { uk: "uk_UA", en: "en_US" };
 /** Prefix for a locale: "" for Ukrainian (root), "/en" for English. */
 export const localePrefix: Record<Locale, string> = { uk: "", en: "/en" };
 
-/** Paths (with trailing slash) that exist in English. */
-export const localizedPaths = [
+/** Paths (with trailing slash) that exist in English: static pages and every region page (/cec/{region}/). */
+const staticLocalizedPaths = [
   "/",
   "/svit-600/",
   "/svit-plus-5000/",
@@ -32,8 +34,10 @@ export const localizedPaths = [
   "/polityka-cookie/",
 ] as const;
 
+export const localizedPaths: readonly string[] = [...staticLocalizedPaths, ...regionPaths];
+
 export function hasEnglish(path: string): boolean {
-  return (localizedPaths as readonly string[]).includes(path);
+  return localizedPaths.includes(path);
 }
 
 /**

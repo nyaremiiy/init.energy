@@ -90,10 +90,19 @@ export function websiteSchema(locale: Locale) {
   };
 }
 
-/** The plant service (hub page): provider is the organization, area is the country. */
+/**
+ * The plant service: provider is the organization, area is the country
+ * unless `areaServed` names a region (region pages: AdministrativeArea / City).
+ */
 export function serviceSchema(
   locale: Locale,
-  input: { name: string; description: string; url: string; serviceType?: string },
+  input: {
+    name: string;
+    description: string;
+    url: string;
+    serviceType?: string;
+    areaServed?: { type: "AdministrativeArea" | "City"; name: string };
+  },
 ) {
   return {
     "@context": "https://schema.org",
@@ -104,9 +113,12 @@ export function serviceSchema(
     url: input.url,
     serviceType: input.serviceType ?? input.name,
     provider: { "@id": `${siteUrl}/#organization` },
-    areaServed: {
-      "@type": "Country",
-      name: serviceArea[locale],
-    },
+    areaServed: input.areaServed
+      ? {
+          "@type": input.areaServed.type,
+          name: input.areaServed.name,
+          containedInPlace: { "@type": "Country", name: serviceArea[locale] },
+        }
+      : { "@type": "Country", name: serviceArea[locale] },
   };
 }

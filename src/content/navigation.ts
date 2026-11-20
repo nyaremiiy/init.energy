@@ -1,3 +1,4 @@
+import { regionPaths } from "./insolation";
 import { productPages } from "./product-pages";
 import { featuredProjects } from "./projects";
 import { localizePath, type Locale } from "@/i18n/config";
@@ -37,6 +38,8 @@ type FooterLinkLabels = {
   sesSteps: string;
   sesYield: string;
   sesMethod: string;
+  sesRegions: string;
+  regionYield: string;
   nicheFacts: string;
   nicheConsumers: string;
   nicheSizing: string;
@@ -88,9 +91,21 @@ function sesNavigation(locale: Locale): NavEntry[] {
     section(anchors.sesSteps, "sesSteps"),
     section(anchors.products, "products"),
     ...(hasProjects ? [section(anchors.projects, "projects")] : []),
+    section(anchors.sesRegions, "sesRegions"),
     section(anchors.calculator, "calculator"),
     section(anchors.faq, "faq"),
     section(anchors.contacts, "consultation"),
+  ];
+}
+
+/** Region pages (/cec/{region}/): the same sections on every region. */
+function regionNavigation(path: string, locale: Locale): NavEntry[] {
+  const href = (anchor: string) => `${localizePath(path, locale)}#${anchor}`;
+  return [
+    { href: href(anchors.regionYield), labelKey: "regionYield" },
+    { href: href(anchors.calculator), labelKey: "calculator" },
+    { href: href(anchors.faq), labelKey: "faq" },
+    { href: href(anchors.contacts), labelKey: "consultation" },
   ];
 }
 
@@ -143,6 +158,11 @@ export const pageNavigation: Record<string, NavEntry[]> = {
   [routes.calculators.sesPayback]: sesCalculatorNavigation("uk"),
   [localizePath(routes.calculators.sesPayback, "en")]: sesCalculatorNavigation("en"),
 };
+
+for (const path of regionPaths) {
+  pageNavigation[path] = regionNavigation(path, "uk");
+  pageNavigation[localizePath(path, "en")] = regionNavigation(path, "en");
+}
 
 /** Product pages: the same anchors as the sticky in-page nav. */
 for (const page of productPages) {

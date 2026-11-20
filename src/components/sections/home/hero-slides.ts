@@ -49,7 +49,7 @@ const backupPowerHeroImage: HeroImage = {
 };
 
 /** Dedicated responsive media for the solar plant hub (/cec/). */
-const sesOverviewHeroImage: HeroImage = {
+export const sesOverviewHeroImage: HeroImage = {
   desktop: "/images/cec/hero/01-2560.avif",
   fallback: "/images/cec/hero/01-2560.webp",
   laptop: "/images/cec/hero/01-1440.avif",
@@ -198,8 +198,8 @@ const sesSlides: SlideSource[] = [
     },
     headingLevel: "h1",
     description: {
-      uk: "Проєктуємо й встановлюємо СЕС для дому й бізнесу: від розрахунку споживання до запуску й сервісу. Накопичувачі SVIT — власного виробництва.",
-      en: "We design and install solar power plants for homes and businesses: from consumption estimate to commissioning and service. SVIT batteries are made in-house.",
+      uk: "Проєктуємо й встановлюємо сонячні панелі та СЕС для дому й бізнесу: від розрахунку споживання до запуску й сервісу. Накопичувачі SVIT — власного виробництва.",
+      en: "We design and install solar panels and solar power plants for homes and businesses: from consumption estimate to commissioning and service. SVIT batteries are made in-house.",
     },
     actions: [
       {

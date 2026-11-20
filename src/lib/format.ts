@@ -24,6 +24,14 @@ export function formatNumber(value: number, locale: Locale) {
   }).format(value);
 }
 
+/** A data date (ISO "2026-11-20"): «20.11.2026» in Ukrainian, «20 November 2026» in English. */
+export function formatDate(iso: string, locale: Locale) {
+  const date = new Date(`${iso}T12:00:00Z`);
+  return locale === "en"
+    ? new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(date)
+    : new Intl.DateTimeFormat("uk-UA", { day: "2-digit", month: "2-digit", year: "numeric", timeZone: "UTC" }).format(date);
+}
+
 export function formatPhone(value: string) {
   const digits = value.replace(/\D/g, "");
 

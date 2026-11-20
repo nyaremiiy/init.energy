@@ -275,7 +275,9 @@
       "backupHub": "Backup power",
       "backupHow": "How it works",
       "backupEquipment": "Equipment",
-      "backupRuntime": "How long it lasts"
+      "backupRuntime": "How long it lasts",
+      "regionYield": "Yield in the region",
+      "sesRegions": "By region"
     },
     "copyright": "© {year} INIT ENERGY",
     "developedBy": "Developed by",
@@ -390,7 +392,7 @@
     "note": "Thank you for your patience."
   },
   "meta": {
-    "homeTitle": "Solar power plants and backup power — INIT ENERGY",
+    "homeTitle": "Turnkey solar panels and backup power across Ukraine",
     "homeDescription": "INIT ENERGY designs and installs turnkey solar power plants and backup power in Ukraine: SVIT and LITHIUMVALLEY batteries for homes and businesses.",
     "siteName": "INIT ENERGY",
     "organizationDescription": "Design, supply and installation of turnkey solar power plants and backup power systems in Ukraine."
@@ -420,7 +422,9 @@
         "solar": "Solar power plants",
         "industry": "Industry solutions",
         "calculatorLink": "Solar payback calculator",
-        "calculatorDescription": "Estimate system size, bill savings and payback for your property."
+        "calculatorDescription": "Estimate system size, bill savings and payback for your property.",
+        "regionsLink": "Solar by region",
+        "regionsDescription": "Solar yield and a sample plant for every region"
       },
       "menuCta": {
         "title": "Not sure what to choose?",
@@ -440,14 +444,14 @@
   },
   "ses": {
     "meta": {
-      "title": "Solar power plants turnkey for homes and businesses",
+      "title": "Turnkey solar panels: solar plants for homes and business",
       "description": "Turnkey solar power plants for homes and businesses: design, installation and service. Over 30 years in the energy sector, 20+ projects, 1 MW+ installed."
     },
     "home": "Home",
     "segments": {
       "eyebrow": "For whom",
       "title": "Solar plants for homes and businesses",
-      "lead": "One technology at different scales: from a plant for a private house to a system for a business.",
+      "lead": "Solar panels for homes and businesses — one technology at different scales: from a plant for a private house to a system for a company.",
       "cta": "Learn more",
       "checklist": "What is included",
       "photoPending": "Photo to be added",
@@ -474,14 +478,180 @@
       "lead": "From consumption estimate to service — five stages."
     }
   },
+  "regionPage": {
+    "meta": {
+      "title": "Solar panels {centerLocative} and the oblast",
+      "suffix": " — turnkey solar",
+      "suffixOccupied": " — solar yield",
+      "description": "Solar panels {locative}: a 5 kW plant produces ≈ {year} kWh a year. Turnkey solar design, installation and service by INIT ENERGY. Payback calculator.",
+      "descriptionShort": "Solar panels {locative}: a 5 kW plant produces ≈ {year} kWh a year. Turnkey solar installation and service by INIT ENERGY, payback calculator.",
+        "descriptionOccupied": "Solar panels {locative}: a 5 kW plant produces ≈ {year} kWh a year. Monthly solar yield and a payback calculator for a solar plant by INIT ENERGY.",
+      "serviceType": "Turnkey solar power plant"
+    },
+    "crumbs": {
+      "home": "Home",
+      "ses": "Solar power plants"
+    },
+    "hero": {
+      "eyebrow": "Solar power plants · {name}",
+      "lead": "We design, install and service solar power plants for homes and businesses {area}. Here a 5 kW plant (≈ 10 panels) produces about {year} kWh a year — {month} a month on average.",
+      "leadOccupied": "How much energy a solar plant gives {locative}: a 5 kW plant (≈ 10 panels) produces about {year} kWh a year — {month} a month on average. Size a plant for your home with the calculator below.",
+      "primary": "Size a plant",
+      "secondary": "Leave a request",
+      "imageAlt": "An installer mounting solar panels on a ground-mounted plant"
+    },
+    "areaRegion": "{centerLocative} and across the oblast",
+    "yield": {
+      "eyebrow": "Sun in the region",
+      "title": "How much energy solar panels produce {locative}",
+      "leadStart": "{Locative} a 5 kW plant (≈ 10 panels) produces about {year} kWh a year — {month} a month on average.",
+      "leadLess": "That is {pct}% less than the Ukrainian average, so the same electricity bill needs a slightly larger plant here than in the south.",
+      "leadMore": "That is {pct}% more than the Ukrainian average, so the same electricity bill needs a smaller plant here than in the west.",
+      "leadEqual": "That is about the Ukrainian average.",
+      "yearLabel": "a year from a 5 kW plant (≈ 10 panels)",
+      "yearNote": "{month} kWh a month on average",
+      "deviationLess": "less sun than the Ukrainian average",
+      "deviationMore": "more sun than the Ukrainian average",
+      "deviationEqual": "sun — the Ukrainian average",
+      "deviationNote": "The same plant gives ≈ {national} kWh a year on average in Ukraine",
+      "bestLabel": "{month} — and about {december} in December",
+      "bestNote": "In winter the grid covers part of the demand",
+      "houseLabel": "is enough for a house using {kwh} kWh a month",
+      "houseNote": "For {kwh} kWh a month — about {kw} kW",
+      "chartTitle": "What a 5 kW plant produces each month",
+      "chartUnit": "kWh · {name}",
+      "chartNote": "Compare it with your bill: in summer the plant gives up to {best} kWh a month, in December about {december}. In winter the grid covers part of the demand; in summer the surplus can be stored in a battery or sold.",
+      "tableCaption": "Monthly output of a 5 kW plant, {name}, kWh",
+      "tableMonth": "Month",
+      "tableKwh": "kWh",
+      "updated": "PVGIS data, updated {date}",
+      "updatedEstimate": "Yield estimate (being checked against PVGIS), updated {date}"
+    },
+    "monthsShort": [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec"
+    ],
+    "monthsLong": [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ],
+    "monthsLocative": [
+      "in January",
+      "in February",
+      "in March",
+      "in April",
+      "in May",
+      "in June",
+      "in July",
+      "in August",
+      "in September",
+      "in October",
+      "in November",
+      "in December"
+    ],
+    "area": {
+      "title": "Where we work in the oblast",
+      "titleCity": "Where we work in the city",
+      "text": "We size and install solar plants {centerLocative} and across the oblast — in towns and villages.",
+      "textCity": "We size and install solar plants in every district of the city.",
+      "textOccupied": "The yield data is here to size a plant. An engineer will confirm by phone whether a site visit is possible.",
+      "citiesLabel": "Towns of the oblast",
+      "districtsLabel": "City districts",
+      "office": "Office {centerLocative} · {address}",
+      "callLabel": "Call {phone}"
+    },
+    "calculator": {
+      "eyebrow": "Calculator",
+      "title": "Size a plant for your home",
+      "lead": "The region is already selected: {name}. Change your consumption and appliances — the calculator picks the plant size and an SVIT battery.",
+      "link": "Full payback calculator"
+    },
+    "faq": {
+      "title": "Questions about solar panels {locative}",
+      "lead": "Yield, plant size and winter output — calculated for the region.",
+      "linksTitle": "Useful pages",
+      "links": {
+        "calculator": "Solar payback calculator",
+        "ses": "Turnkey solar power plants",
+        "backup": "Backup power"
+      },
+      "profitQ": "Are solar panels worth it {locative}?",
+      "profitLess": "Yes. A 5 kW plant here produces about {year} kWh a year — {pct}% less than the Ukrainian average, so the same bill needs a slightly larger plant than in the south. The calculator above shows how much you save at your tariff.",
+      "profitMore": "Yes. A 5 kW plant here produces about {year} kWh a year — {pct}% more than the Ukrainian average, so the investment pays back faster. The calculator above shows how much you save at your tariff.",
+      "profitEqual": "Yes. A 5 kW plant here produces about {year} kWh a year — close to the Ukrainian average. The calculator above shows how much you save at your tariff.",
+      "panelsQ": "How many solar panels does a home need {locative}?",
+      "panelsA": "A house using {kwh} kWh a month needs a plant of about {kw} kW {locative} — roughly {panels} panels. For {kwhBig} kWh a month — about {kwBig} kW. An engineer will work out the exact number for your roof and orientation.",
+      "winterQ": "How much do solar panels produce in winter {centerLocative}?",
+      "winterA": "In December a 5 kW plant {centerLocative} produces about {december} kWh — roughly {ratio} times less than {bestMonth} ({best} kWh). In winter the grid covers part of the demand, and a hybrid plant with a battery keeps energy for outages.",
+      "coverageQ": "Do you work across {regionDative}?",
+      "coverageQCity": "Do you work across Kyiv?",
+      "coverageA": "Yes, we work across Ukraine: {locative} we size, supply and install solar plants in towns and villages.",
+      "coverageACity": "Yes, we work across Ukraine and in every district of Kyiv.",
+      "coverageOffice": "Our office {centerLocative}: {address}, phone {phone}.",
+      "coverageCall": "Call {phone} — an engineer will refine the estimate for your address."
+    },
+    "lead": {
+      "comment": "Town or village where you need the plant, roof area"
+    },
+    "others": {
+      "title": "Solar panels in other regions",
+      "label": "Other regions"
+    }
+  },
+  "sesRegions": {
+    "eyebrow": "By region",
+    "title": "Solar panels in your region",
+    "lead": "How much energy solar panels produce depends on the region: in the south a 5 kW plant (≈ 10 panels) gives up to {max} kWh a year, in the west about {min}. Pick your region for its monthly yield, a sample plant and payback.",
+    "link": "Calculate for your region",
+    "mapTitle": "What a 5 kW plant gives in a year",
+    "spreadThird": "The same plant produces almost a third more in the south than in the west.",
+    "spreadPercent": "The same plant produces {pct}% more in the south than in the west.",
+    "south": "South",
+    "average": "Ukrainian average",
+    "averageNote": "across {count} regions",
+    "west": "West",
+    "mapLabel": "Map of Ukraine: yearly output of a 5 kW plant by region",
+    "regionLabel": "{name}: a 5 kW plant ≈ {year} kWh a year",
+    "tooltip": "A 5 kW plant (≈ 10 panels) produces ≈ {year} kWh a year here — {month} a month on average",
+    "tooltipLink": "Open the region page",
+    "legendTitle": "5 kW plant per year, kWh (PVGIS):",
+    "legendUpTo": "up to {value}",
+    "legendOver": "over {value}",
+    "attribution": "Map:",
+    "license": "CC BY 4.0",
+    "listTitle": "Choose your region",
+    "listText": "Click a region on the map or pick it from the list. Each region page has the monthly yield, a sample plant and payback.",
+    "cardText": "The south yields up to {pct}% more than the west. An engineer will size the plant for your address and roof.",
+    "cardLink": "Leave a request"
+  },
   "sesPayback": {
     "meta": {
-      "title": "Solar power calculator: system size and payback",
-      "description": "Estimate solar plant capacity, bill savings and SVIT storage for your home or business using PVGIS yield data for 22 Ukrainian regions."
+      "title": "Solar panel calculator: system size and payback",
+      "description": "Estimate solar plant capacity, bill savings and SVIT storage for your home or business using PVGIS yield data for every Ukrainian region."
     },
     "home": "Home",
     "eyebrow": "Payback calculator",
-    "title": "Solar power plant calculator",
+    "title": "Solar panel and solar plant calculator",
     "lead": "Enter your electricity use, region and the appliances that should stay on during an outage. The calculator estimates solar capacity, SVIT storage and potential savings in about a minute.",
     "steps": [
       "Property and goal",
@@ -536,6 +706,7 @@
       "roof-east-west": "East–west roof",
       "ground": "Ground-mounted"
     },
+    "regionPageLink": "More about solar panels {locative}",
     "roofArea": "Free roof area (optional)",
     "roofLimit": "Capacity is limited by the available roof area.",
     "backupLoads": "Appliances to keep running",
@@ -593,11 +764,11 @@
     "maxPlus": "{value}+",
     "productLink": "More about {name}",
     "chartEyebrow": "Generation",
-    "chartLead": "In summer a {kw} kW plant produces several times more than in winter ({region} region), so the battery and the grid cover the winter shortfall.",
+    "chartLead": "In summer a {kw} kW plant produces several times more than in winter ({region}), so the battery and the grid cover the winter shortfall.",
     "consumptionLine": "Your consumption",
     "methodEyebrow": "Method",
     "methodLead": "Four simple formulas and open data sources. The result is an estimate; an engineer confirms the exact configuration after a site visit.",
-    "example": "Example: a house in the {region} region using {kwh} kWh a month. The calculator recommends a {kw} kW {type}, producing about {generation} kWh a year{battery}.",
+    "example": "Example: a house in {region} using {kwh} kWh a month. The calculator recommends a {kw} kW {type}, producing about {generation} kWh a year{battery}.",
     "exampleBattery": ", and the {battery} battery gives about {hours} h of backup for the boiler, fridge, lights and router",
     "exampleTypes": {
       "grid": "grid-tied solar plant",
@@ -616,7 +787,7 @@
       "solar": "Solar plant and payback",
       "autonomy": "Autonomy during outages"
     },
-    "updatedLine": "Data updated 11 November 2026 · regions covered: {count}",
+    "updatedLine": "Data updated {date} · regions covered: {count}",
     "methodLink": "How we calculate",
     "chartLegend": "Generation, kWh / month",
     "chartTotal": "per year ≈ {value} kWh",
@@ -781,7 +952,7 @@
   },
   "backup": {
     "meta": {
-      "title": "Turnkey backup power for homes and businesses",
+      "title": "Turnkey backup power for blackouts and power outages",
       "description": "Turnkey backup power for apartments, houses and businesses: SVIT batteries and Deye, Victron, Huawei systems. Sizing, installation and service by INIT ENERGY."
     },
     "home": "Home",

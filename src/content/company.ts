@@ -45,6 +45,12 @@ export const companyContacts = {
 
 export const serviceArea: Localized = { uk: "Україна", en: "Ukraine" };
 
+/** Owner's statement (2026-11-20): we work across the whole country. Used on region pages and /cec/. */
+export const nationwideService = {
+  text: { uk: "Працюємо по всій Україні", en: "We work across Ukraine" } satisfies Localized,
+  confirmed: "2026-11-20",
+} as const;
+
 export type TrustStat = {
   id: "years" | "projects" | "installedPower" | "svitModels";
   value: Localized;
