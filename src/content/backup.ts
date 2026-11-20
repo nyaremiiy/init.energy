@@ -1,7 +1,7 @@
 import type { Localized } from "@/i18n/config";
 
 import { appliances } from "./appliances";
-import { products, type ProductId } from "./products";
+import type { ProductId } from "./products";
 import { routes } from "./routes";
 import type { SegmentIconId } from "./segments";
 
@@ -18,9 +18,10 @@ import type { SegmentIconId } from "./segments";
 
 export const backupHeroImage = {
   desktop: "/images/rezervne-zhyvlennya/hero-2560.avif",
-  laptop: "/images/rezervne-zhyvlennya/hero-1920.avif",
+  laptop: "/images/rezervne-zhyvlennya/hero-1440.avif",
   tablet: "/images/rezervne-zhyvlennya/hero-1280.avif",
   mobile: "/images/rezervne-zhyvlennya/hero-750.avif",
+  wide: "/images/rezervne-zhyvlennya/hero-1920.avif",
   alt: {
     uk: "Інвертор, накопичувач і щиток системи резервного живлення на стіні гаража",
     en: "An inverter, a battery and a switchboard of a backup power system on a garage wall",
@@ -153,9 +154,6 @@ export const backupBrands = ["Deye", "Victron", "Huawei"] as const;
 /** SVIT line shown on the equipment card (INIT ENERGY's own brand). */
 export const svitLine: ProductId[] = ["svit600", "svitHome", "svitPlus5000", "svitPlus16000"];
 
-/** Usable share of the nominal capacity (typical depth of discharge for LiFePO₄). */
-export const usableShare = 0.9;
-
 export type LoadSet = {
   id: "basic" | "fridge" | "house";
   label: Localized;
@@ -199,22 +197,6 @@ export const backupRuntimeProducts: { id: ProductId; withInverter?: boolean }[] 
   { id: "svitHome" },
   { id: "svitPlus16000", withInverter: true },
 ];
-
-/** Nominal capacity in Wh. */
-export function capacityWh(id: ProductId): number {
-  const capacity = products[id].capacity;
-  return capacity.unit === "kWh" ? capacity.value * 1000 : capacity.value;
-}
-
-/** Output limit in W: the station's power or the kit's inverter; none for a bare battery. */
-export function outputLimitW(id: ProductId): number | undefined {
-  const spec = products[id].specs.find((item) => item.key === "power" || item.key === "inverter");
-  const value = spec && typeof spec.value === "object" && "unit" in spec.value ? spec.value : undefined;
-  if (!value) return undefined;
-  if (value.unit === "kW") return value.value * 1000;
-  if (value.unit === "W") return value.value;
-  return undefined;
-}
 
 export type CompareStatus = "good" | "limited" | "bad";
 export type CompareColumnId = "generator" | "ups" | "battery";

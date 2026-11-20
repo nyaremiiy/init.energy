@@ -1,17 +1,20 @@
 "use client";
 
 import { ArrowUpRight } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { CheckChip } from "@/components/ui/form/check-chip";
 import { useEffect, type ReactNode } from "react";
 
 import { Group, NumberField, RangeField, SelectField } from "@/components/calculator/calculator-fields";
 import { ProductLink, Stat } from "@/components/calculator/calculator-result-parts";
-import { useSesPayback } from "@/components/calculator/ses-payback-state";
+import { useSesPayback, type SesField } from "@/components/calculator/ses-payback-state";
+import { useLeadAttachment } from "@/components/calculator/use-lead-attachment";
+import { ArrowLink } from "@/components/ui/arrow-link";
 import { Button } from "@/components/ui/button";
 import { CardLabel } from "@/components/ui/card-label";
 import { PillRadio } from "@/components/ui/form/pill-radio";
 import { appliances } from "@/content/appliances";
-import { insolationRegions, regionsByLocale } from "@/content/insolation";
+import { insolationRegions, regionPath, regionsByLocale } from "@/content/insolation";
 import { products } from "@/content/products";
 import { anchors } from "@/content/routes";
 import { sesCalculatorConfig, type SesGoal, type SesObjectType, type SesPlacement } from "@/content/ses-calculator";
@@ -19,7 +22,8 @@ import { householdTariff } from "@/content/tariffs";
 import { useLocale, useMessages } from "@/i18n/client";
 import { localizePath } from "@/i18n/config";
 import { trackEvent } from "@/lib/analytics";
-import { applyCalculatorToLeadForm } from "@/lib/calculator-bridge";
+import { goToLeadForm } from "@/lib/calculator-bridge";
+import { buildCalculatorLeadData, type CalculatorValue } from "@/lib/calculator-lead";
 import { formatNumber } from "@/lib/format";
 import { format } from "@/lib/messages";
 
@@ -58,15 +62,19 @@ function Step({ index, title, children }: { index: number; title: string; childr
 /**
  * SES payback calculator: the form (7 columns) and a sticky dark result card
  * (5 columns) that updates as the user types. On phones the result follows
- * the form. «Get a quote» hands every parameter to the lead form below.
+ * the form. «Get a quote» attaches the fields the visitor chose (and keeps
+ * them in sync) to the lead form below; untouched defaults are not attached.
  */
 export function SesPaybackCalculator() {
   const locale = useLocale();
   const messages = useMessages();
   const t = messages.sesPayback;
-  const { state, update, input, result } = useSesPayback();
+  const { state, update, changed, sources, resetChanged, result } = useSesPayback();
   const region = insolationRegions.find((item) => item.id === state.regionId) ?? insolationRegions[0];
   const kwh = t.kwh;
+  const pathname = usePathname();
+  // Region page of the chosen region; hidden on that page itself.
+  const regionHref = localizePath(regionPath(region), locale);
   let stepIndex = 0;
 
   useEffect(() => {
@@ -82,18 +90,110 @@ export function SesPaybackCalculator() {
     return result.battery.modules > 1 ? `${result.battery.name} × ${result.battery.modules}` : result.battery.name;
   }
 
+  const usesBill = state.monthlyBill > 0;
+  const backup = state.goal !== "savings";
+  /** Inputs in display order; `undefined` = optional field left empty. */
+  const values: [SesField, CalculatorValue | undefined][] = [
+    ["objectType", state.objectType],
+    ["goal", state.goal],
+    ["monthlyKwh", state.monthlyKwh],
+    ["monthlyBill", state.monthlyBill || undefined],
+    ["tariff", state.tariff || undefined],
+    ["regionId", state.regionId],
+    ["placement", state.placement],
+    ["roofArea", state.roofArea || undefined],
+    ["backupLoads", state.backupLoads],
+    ["backupHours", state.backupHours],
+    ["budget", state.budget || undefined],
+  ];
+  const applicable = (field: string) => {
+    if (field === "monthlyKwh") return !usesBill;
+    if (field === "monthlyBill") return usesBill;
+    if (field === "backupLoads" || field === "backupHours") return backup;
+    return true;
+  };
+
+  const data = buildCalculatorLeadData({
+    calculator: "ses-payback",
+    values,
+    applicable,
+    changed,
+    sources,
+    recommendation: {
+      monthlyKwh: Math.round(result.monthlyKwh),
+      kw: result.kw,
+      plantType: result.plantType,
+      limitedByRoof: result.limitedByRoof,
+      generationYearKwh: roundTo(result.generationYear, 10),
+      savingsYearUah: roundTo(result.savingsYear, 100),
+      paybackYears: result.paybackYears ? Math.round(result.paybackYears * 10) / 10 : undefined,
+      battery: result.battery
+        ? {
+            product: result.battery.id,
+            modules: result.battery.modules,
+            capacityKwh: result.battery.capacityKwh,
+            backupHours: Math.round(result.battery.backupHours * 10) / 10,
+            separateInverter: result.battery.inverterNote,
+          }
+        : undefined,
+    },
+  });
+
+  /** Chosen fields and the recommendation only, e.g. «Квартира · 260 кВт·год/міс. → 2 кВт · SVIT HOME». */
+  function summary(): string {
+    const label = (field: SesField): string => {
+      switch (field) {
+        case "objectType":
+          return t.objects[state.objectType];
+        case "goal":
+          return t.goals[state.goal];
+        case "monthlyKwh":
+          return `${formatNumber(state.monthlyKwh, locale)} ${kwh}/${t.monthUnit}`;
+        case "monthlyBill":
+          return `${formatNumber(state.monthlyBill, locale)} ${t.uah}`;
+        case "tariff":
+          return `${formatNumber(state.tariff, locale)} ${t.tariffUnit}`;
+        case "regionId":
+          return region.name[locale];
+        case "placement":
+          return t.placements[state.placement];
+        case "roofArea":
+          return `${formatNumber(state.roofArea, locale)} ${t.m2}`;
+        case "backupLoads":
+          return appliances
+            .filter((item) => state.backupLoads.includes(item.id))
+            .map((item) => item.name[locale])
+            .join(", ");
+        case "backupHours":
+          return `${state.backupHours} ${t.hoursUnit}`;
+        case "budget":
+          return `${formatNumber(state.budget, locale)} ${t.uah}`;
+      }
+    };
+    const chosen = values
+      .filter(([field, value]) => changed.has(field) && applicable(field) && value !== undefined)
+      .map(([field]) => label(field))
+      .filter(Boolean);
+    const recommendation = [`${formatNumber(result.kw, locale)} ${t.kwUnit}`, batteryName()].filter(Boolean);
+    return `${chosen.join(" · ")} → ${recommendation.join(" · ")}`;
+  }
+
+  const attach = useLeadAttachment(
+    data
+      ? {
+          objectType: changed.has("objectType") ? state.objectType : undefined,
+          resultObjectType: state.objectType,
+          summary: summary(),
+          data,
+        }
+      : null,
+    resetChanged,
+  );
+
   function handoff() {
-    const parts = [
-      t.objects[state.objectType],
-      `${formatNumber(result.monthlyKwh, locale)} ${kwh}/${t.monthUnit}`,
-      region.name[locale],
-      `${formatNumber(result.kw, locale)} ${t.kwUnit}`,
-      ...(state.goal !== "savings" ? [`${state.backupHours} ${t.hoursUnit}`] : []),
-      ...(batteryName() ? [batteryName() as string] : []),
-    ];
-    applyCalculatorToLeadForm({ objectType: state.objectType, summary: parts.join(" · "), data: JSON.stringify({ input, result }) });
-    trackEvent({ event: "calculator_cta_click", kw: result.kw, product: result.battery?.id ?? "none", region: state.regionId });
-    document.getElementById(anchors.contacts)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    const interacted = attach();
+    trackEvent({ event: "calculator_cta_click", kw: result.kw, product: result.battery?.id ?? "none", region: state.regionId, interacted });
+    goToLeadForm(anchors.contacts);
   }
 
   const payback = result.paybackYears
@@ -117,10 +217,11 @@ export function SesPaybackCalculator() {
                 onChange={() => {
                   trackChange("objectType");
                   // Business has no regulated tariff: the user enters their own price.
-                  update({
-                    objectType: option,
-                    tariff: option === "business" ? 0 : state.tariff || householdTariff.value,
-                  });
+                  const tariff = option === "business" ? 0 : state.tariff || householdTariff.value;
+                  update(
+                    { objectType: option, tariff },
+                    { chosen: ["objectType"], reset: tariff !== state.tariff ? ["tariff"] : [] },
+                  );
                 }}
               >
                 {t.objects[option]}
@@ -157,7 +258,7 @@ export function SesPaybackCalculator() {
             maxLabel={format(t.maxPlus, { value: formatNumber(sesCalculatorConfig.consumption.max, locale) })}
             onChange={(value) => {
               trackChange("monthlyKwh");
-              update({ monthlyKwh: value, monthlyBill: 0 });
+              update({ monthlyKwh: value, monthlyBill: 0 }, { chosen: ["monthlyKwh"], reset: ["monthlyBill"] });
             }}
           />
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-4">
@@ -215,6 +316,11 @@ export function SesPaybackCalculator() {
               }}
             />
           </div>
+          {pathname !== regionHref ? (
+            <ArrowLink href={regionHref} className="self-start text-small">
+              {format(t.regionPageLink, { locative: region.locative[locale] })}
+            </ArrowLink>
+          ) : null}
           <NumberField
             name="roofArea"
             label={t.roofArea}

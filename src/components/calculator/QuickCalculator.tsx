@@ -1,10 +1,11 @@
 "use client";
 
 import { ArrowUpRight } from "lucide-react";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 import { Group, RangeField, SelectField } from "@/components/calculator/calculator-fields";
 import { ResultLink, Stat } from "@/components/calculator/calculator-result-parts";
+import { useLeadAttachment } from "@/components/calculator/use-lead-attachment";
 import { Button } from "@/components/ui/button";
 import { CardLabel } from "@/components/ui/card-label";
 import { PillRadio } from "@/components/ui/form/pill-radio";
@@ -17,12 +18,12 @@ import {
   calculatorSegments,
   consumptionRange,
   criticalLoadShare,
-  regions,
   solarPlans,
-  solutionLinks,
+  solutionLink,
   type CalculatorGoal,
   type CalculatorSegment,
 } from "@/content/calculator";
+import { insolationRegions, regionsByLocale } from "@/content/insolation";
 import { products, productSummary, type ProductId } from "@/content/products";
 import { anchors } from "@/content/routes";
 import { services } from "@/content/services";
@@ -32,7 +33,8 @@ import {
   roundToHundreds,
   type Recommendation,
 } from "@/lib/calculator";
-import { applyCalculatorToLeadForm } from "@/lib/calculator-bridge";
+import { goToLeadForm } from "@/lib/calculator-bridge";
+import { buildCalculatorLeadData } from "@/lib/calculator-lead";
 import { formatNumber } from "@/lib/format";
 import { useLocale, useMessages } from "@/i18n/client";
 import type { Locale } from "@/i18n/config";
@@ -54,6 +56,9 @@ function batteryName(
     ? format(t.result.modules, { count: String(rec.battery.modules), name })
     : name;
 }
+
+/** Inputs in display order; these names are the keys of `calculatorData`. */
+type QuickField = "segment" | "goal" | "monthlyKwh" | "region" | "backupHours";
 
 function configuration(
   rec: Recommendation,
@@ -88,18 +93,19 @@ export function QuickCalculator() {
   const [consumption, setConsumption] = useState(
     consumptionRange[calculatorDefaults.segment].default,
   );
-  const [regionSlug, setRegionSlug] = useState(calculatorDefaults.region);
+  const [regionId, setRegionId] = useState(calculatorDefaults.region);
   const [hours, setHours] = useState(calculatorDefaults.hours);
-  const interacted = useRef(false);
+  // Fields the visitor touched; only these count as chosen for the lead.
+  const [changed, setChanged] = useState<ReadonlySet<QuickField>>(new Set());
 
   const range = consumptionRange[segment];
-  const region = regions.find((item) => item.slug === regionSlug) ?? regions[0];
+  const region = insolationRegions.find((item) => item.id === regionId) ?? insolationRegions[0];
   const needSolar = goal !== "reserve";
   const needBattery = goal !== "economy";
 
   const rec = calculate({
     monthlyKwh: consumption,
-    specificYield: region.specificYield,
+    specificYield: region.yield,
     solarPlans,
     backupHours: hours,
     criticalLoadShare: criticalLoadShare[segment],
@@ -109,69 +115,110 @@ export function QuickCalculator() {
   });
   const config = configuration(rec, t, units, locale);
   const isCustom = rec.solarFits === false || rec.battery?.fits === false;
-  const solution = needSolar ? solutionLinks[segment] : undefined;
+  const solution = solutionLink(goal);
 
-  /** First change of any input → one analytics event. */
-  function touched(next: { segment?: CalculatorSegment }) {
-    if (interacted.current) return;
-    interacted.current = true;
-    trackEvent({
-      event: "calculator_interaction",
-      segment: next.segment ?? segment,
+  /** Marks `field` as chosen; `reset` fields went back to defaults on their own. */
+  function touch(
+    field: QuickField,
+    reset: QuickField[] = [],
+    nextSegment: CalculatorSegment = segment,
+  ) {
+    // First change of any input → one analytics event.
+    if (changed.size === 0) {
+      trackEvent({ event: "calculator_interaction", segment: nextSegment });
+    }
+    setChanged((current) => {
+      const next = new Set(current);
+      reset.forEach((item) => next.delete(item));
+      next.add(field);
+      return next;
     });
   }
 
   function changeSegment(next: CalculatorSegment) {
-    touched({ segment: next });
+    const goalAllowed = allowedGoals[next].includes(goal);
+    // The consumption (and a goal the segment does not offer) jump to defaults.
+    touch("segment", goalAllowed ? ["monthlyKwh"] : ["monthlyKwh", "goal"], next);
     setSegment(next);
     setConsumption(consumptionRange[next].default);
-    if (!allowedGoals[next].includes(goal)) setGoal(allowedGoals[next][0]);
+    if (!goalAllowed) setGoal(allowedGoals[next][0]);
   }
 
-  function handleCta() {
-    const data = {
-      segment,
-      goal,
-      monthlyKwh: consumption,
-      region: needSolar ? region.slug : undefined,
-      backupHours: needBattery ? hours : undefined,
-      recommendation: {
-        configuration: config,
-        solarKw: rec.solarKw,
-        annualGenerationKwh: rec.annualGenerationKwh
-          ? roundToHundreds(rec.annualGenerationKwh)
-          : undefined,
-        battery: rec.battery
-          ? {
-              product: rec.battery.id,
-              modules: rec.battery.modules,
-              capacityKwh: rec.battery.capacityKwh,
-            }
-          : undefined,
-        backupHours: rec.backupHours ? Math.round(rec.backupHours) : undefined,
-        custom: isCustom,
-      },
-    };
+  const values: [QuickField, string | number][] = [
+    ["segment", segment],
+    ["goal", goal],
+    ["monthlyKwh", consumption],
+    ["region", region.id],
+    ["backupHours", hours],
+  ];
+  const applicable = (field: string) =>
+    (field !== "region" || needSolar) && (field !== "backupHours" || needBattery);
 
-    applyCalculatorToLeadForm({
-      objectType: segment,
-      summary: config,
-      data: JSON.stringify(data),
-    });
+  const data = buildCalculatorLeadData({
+    calculator: "quick",
+    values,
+    applicable,
+    changed,
+    recommendation: {
+      configuration: config,
+      solarKw: rec.solarKw,
+      annualGenerationKwh: rec.annualGenerationKwh
+        ? roundToHundreds(rec.annualGenerationKwh)
+        : undefined,
+      battery: rec.battery
+        ? {
+            product: rec.battery.id,
+            modules: rec.battery.modules,
+            capacityKwh: rec.battery.capacityKwh,
+          }
+        : undefined,
+      backupHours: rec.backupHours ? Math.round(rec.backupHours) : undefined,
+      custom: isCustom,
+    },
+  });
+
+  /** «Квартира · 260 кВт·год/міс. → SVIT HOME»: chosen fields and the recommendation only. */
+  function summary(): string {
+    const parts = values
+      .filter(([field]) => changed.has(field) && applicable(field))
+      .map(([field]) => {
+        switch (field) {
+          case "segment":
+            return t.segments[segment];
+          case "goal":
+            return t.goals[goal];
+          case "monthlyKwh":
+            return format(t.summaryKwh, { value: formatNumber(consumption, locale) });
+          case "region":
+            return region.name[locale];
+          case "backupHours":
+            return format(t.result.hoursValue, { value: formatNumber(hours, locale) });
+        }
+      });
+    return `${parts.join(" · ")} → ${config}`;
+  }
+
+  const attach = useLeadAttachment(
+    data
+      ? {
+          objectType: changed.has("segment") ? segment : undefined,
+          resultObjectType: segment,
+          summary: summary(),
+          data,
+        }
+      : null,
+    () => setChanged(new Set()),
+  );
+
+  function handleCta() {
+    const interacted = attach();
     trackEvent({
       event: "calculator_result_cta",
       segment,
       configuration: config,
+      interacted,
     });
-
-    const target = document.getElementById(anchors.contacts);
-    const reduce = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-    target?.scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
-    target
-      ?.querySelector<HTMLInputElement>('input[name="name"]')
-      ?.focus({ preventScroll: true });
+    goToLeadForm(anchors.contacts);
   }
 
   const stats: { value: string; label: string }[] = [];
@@ -239,7 +286,7 @@ export function QuickCalculator() {
               checked={goal === item}
               disabled={!allowedGoals[segment].includes(item)}
               onChange={() => {
-                touched({});
+                touch("goal");
                 setGoal(item);
               }}
             >
@@ -260,7 +307,7 @@ export function QuickCalculator() {
           })}
           hint={t.consumptionHint}
           onChange={(value) => {
-            touched({});
+            touch("monthlyKwh");
             setConsumption(value);
           }}
         />
@@ -268,15 +315,15 @@ export function QuickCalculator() {
         {needSolar ? (
           <SelectField
             label={t.region}
-            value={region.slug}
+            value={region.id}
             hint={t.regionHint}
-            options={regions.map((item) => ({
-              value: item.slug,
+            options={regionsByLocale(locale).map((item) => ({
+              value: item.id,
               label: item.name[locale],
             }))}
             onChange={(value) => {
-              touched({});
-              setRegionSlug(value);
+              touch("region");
+              setRegionId(value);
             }}
           />
         ) : null}
@@ -291,7 +338,7 @@ export function QuickCalculator() {
             unit={t.hoursUnit}
             maxLabel={formatNumber(backupHoursRange.max, locale)}
             onChange={(value) => {
-              touched({});
+              touch("backupHours");
               setHours(value);
             }}
           />
@@ -331,14 +378,12 @@ export function QuickCalculator() {
               kind={t.result.product}
             />
           ) : null}
-          {solution ? (
-            <ResultLink
-              href={localizePath(solution.href, locale)}
-              title={services[solution.serviceKey].name[locale]}
-              text={services[solution.serviceKey].summary[locale]}
-              kind={t.result.solution}
-            />
-          ) : null}
+          <ResultLink
+            href={localizePath(solution.href, locale)}
+            title={services[solution.serviceKey].name[locale]}
+            text={services[solution.serviceKey].summary[locale]}
+            kind={t.result.solution}
+          />
         </div>
 
         <div className="mt-auto flex flex-col gap-4">

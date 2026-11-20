@@ -49,8 +49,7 @@ export function CapacityCard({
             src={thumbnail.src}
             alt={thumbnail.alt}
             fill
-            unoptimized
-            sizes="(min-width: 1024px) 40vw, 100vw"
+            sizes="(min-width: 1440px) 512px, (min-width: 1024px) 38vw, calc(100vw - 48px)"
             className="object-cover transition-transform duration-500 ease-tech motion-safe:group-hover:scale-105"
           />
           <div

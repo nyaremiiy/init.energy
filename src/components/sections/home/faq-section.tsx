@@ -34,6 +34,8 @@ type FaqSectionProps = {
   initialTopic?: FaqTopic;
   /** Related pages under the header (niche pages: parent page, calculator, articles). */
   links?: { title: string; items: { label: string; href: string }[] };
+  /** Questions built on the page from its data (region pages); replaces `page`. */
+  questions?: { id: string; question: string; answer: string }[];
 };
 
 /**
@@ -47,18 +49,20 @@ export function FaqSection({
   filter = true,
   initialTopic,
   links,
+  questions,
 }: FaqSectionProps) {
   const messages = getMessages();
   const locale = getLocale();
   const t = messages.faq;
-  const faqs = faqForPage(page);
   const phone = offices[0].phone;
-  const items = faqs.map((faq) => ({
-    id: faq.id,
-    topic: faq.topic,
-    question: faq.question[locale],
-    answer: faq.answer[locale],
-  }));
+  const items = questions
+    ? questions.map((item) => ({ ...item, topic: "solar" as FaqTopic }))
+    : faqForPage(page).map((faq) => ({
+        id: faq.id,
+        topic: faq.topic,
+        question: faq.question[locale],
+        answer: faq.answer[locale],
+      }));
 
   return (
     <section

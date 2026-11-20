@@ -1,4 +1,5 @@
 import { companyContacts, offices, type Office } from "@/content/company";
+import { regionPaths } from "@/content/insolation";
 import { products, productSummary, type ProductId } from "@/content/products";
 import { featuredProjects } from "@/content/projects";
 import { pageNavigation } from "@/content/navigation";
@@ -102,6 +103,11 @@ export function getNavItems(locale: Locale): NavItem[] {
     label: services[id].name[locale],
     description: services[id].summary[locale],
   });
+  const regionsLink: NavMenuLink = {
+    href: localizePath(`${routes.services.turnkeySes}#${anchors.sesRegions}`, locale),
+    label: t.columns.regionsLink,
+    description: t.columns.regionsDescription,
+  };
   const paybackCalculatorLink: NavMenuLink = {
     href: localizePath(routes.calculators.sesPayback, locale),
     label: t.columns.calculatorLink,
@@ -133,7 +139,7 @@ export function getNavItems(locale: Locale): NavItem[] {
       columns: [
         {
           title: t.columns.solar,
-          items: [serviceLink("turnkeySes"), paybackCalculatorLink],
+          items: [serviceLink("turnkeySes"), regionsLink, paybackCalculatorLink],
         },
         { title: t.columns.backup, items: [serviceLink("backupHub")] },
         { title: t.columns.industry, items: [serviceLink("hotelSes")] },
@@ -167,10 +173,11 @@ export function isHomePath(pathname: string | null): boolean {
  * sections). Only the main ones: the full list stays in the footer column.
  */
 const headerSectionKeys: Record<string, string[]> = {
-  [routes.services.turnkeySes]: ["sesSegments", "products", "calculator", "aboutUs"],
+  [routes.services.turnkeySes]: ["sesSegments", "products", "sesRegions", "calculator"],
   [routes.solutions.hotel]: ["nicheFacts", "nicheSizing", "nicheBackup", "faq"],
   [routes.calculators.sesPayback]: ["calculator", "sesYield", "sesMethod", "faq"],
   [routes.backup.hub]: ["backupHow", "backupEquipment", "backupRuntime", "faq"],
+  ...Object.fromEntries(regionPaths.map((path) => [path, ["regionYield", "calculator", "faq"]])),
 };
 
 /** Product pages: no section links, but the solar hub and the calculator (cross-sell). */

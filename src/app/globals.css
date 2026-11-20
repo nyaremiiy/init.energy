@@ -34,6 +34,15 @@
    */
   --color-accent: #2e6bff;
   --color-accent-strong: #1a3fcc;
+  /*
+   * Map scale (region map on /cec/ only): five steps of the accent, light → strong,
+   * for a 5 kW plant's year < 5 500 / 5 500–5 750 / 5 750–6 000 / 6 000–6 500 / ≥ 6 500 kWh.
+   */
+  --color-scale-1: rgb(221 231 252);
+  --color-scale-2: rgb(188 207 248);
+  --color-scale-3: rgb(147 176 240);
+  --color-scale-4: rgb(98 133 228);
+  --color-scale-5: rgb(49 87 199);
   /* Success state (toast icon only): a muted green, not for text or buttons. */
   --color-success: #15803d;
 

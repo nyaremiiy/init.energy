@@ -20,57 +20,63 @@ export type HeroSlide = {
 const generalHeroImage: HeroImage = {
   desktop: "/images/home/hero/01-2560.avif",
   fallback: "/images/home/hero/01-2560.avif",
-  laptop: "/images/home/hero/01-1920.avif",
+  laptop: "/images/home/hero/01-1440.avif",
   mobile: "/images/home/hero/01-750.avif",
   tablet: "/images/home/hero/01-1280.avif",
   type: "image/avif",
+  wide: "/images/home/hero/01-1920.avif",
 };
 
 const solarHeroImage: HeroImage = {
   desktop: "/images/home/hero/02-2560.avif",
   fallback: "/images/home/hero/02-2560.webp",
-  laptop: "/images/home/hero/02-1920.avif",
+  laptop: "/images/home/hero/02-1440.avif",
   mobile: "/images/home/hero/02-750.avif",
   tablet: "/images/home/hero/02-1280.avif",
   type: "image/avif",
+  wide: "/images/home/hero/02-1920.avif",
 };
 
 const backupPowerHeroImage: HeroImage = {
   desktop: "/images/home/hero/03-2560.avif",
   fallback: "/images/home/hero/03-2560.avif",
-  laptop: "/images/home/hero/03-1920.avif",
+  laptop: "/images/home/hero/03-1440.avif",
   mobile: "/images/home/hero/03-750.avif",
   position: "top",
   tablet: "/images/home/hero/03-1280.avif",
   type: "image/avif",
+  wide: "/images/home/hero/03-1920.avif",
 };
 
 /** Dedicated responsive media for the solar plant hub (/cec/). */
-const sesOverviewHeroImage: HeroImage = {
+export const sesOverviewHeroImage: HeroImage = {
   desktop: "/images/cec/hero/01-2560.avif",
   fallback: "/images/cec/hero/01-2560.webp",
-  laptop: "/images/cec/hero/01-1920.avif",
+  laptop: "/images/cec/hero/01-1440.avif",
   mobile: "/images/cec/hero/01-750.avif",
   tablet: "/images/cec/hero/01-1280.avif",
   type: "image/avif",
+  wide: "/images/cec/hero/01-1920.avif",
 };
 
 const sesStorageHeroImage: HeroImage = {
   desktop: "/images/cec/hero/02-2560.avif",
   fallback: "/images/cec/hero/02-2560.avif",
-  laptop: "/images/cec/hero/02-1920.avif",
+  laptop: "/images/cec/hero/02-1440.avif",
   mobile: "/images/cec/hero/02-750.avif",
   tablet: "/images/cec/hero/02-1280.avif",
   type: "image/avif",
+  wide: "/images/cec/hero/02-1920.avif",
 };
 
 const sesHybridHeroImage: HeroImage = {
   desktop: "/images/cec/hero/03-2560.avif",
   fallback: "/images/cec/hero/03-2560.avif",
-  laptop: "/images/cec/hero/03-1920.avif",
+  laptop: "/images/cec/hero/03-1440.avif",
   mobile: "/images/cec/hero/03-750.avif",
   tablet: "/images/cec/hero/03-1280.avif",
   type: "image/avif",
+  wide: "/images/cec/hero/03-1920.avif",
 };
 
 type SlideSource = {
@@ -192,8 +198,8 @@ const sesSlides: SlideSource[] = [
     },
     headingLevel: "h1",
     description: {
-      uk: "Проєктуємо й встановлюємо СЕС для дому й бізнесу: від розрахунку споживання до запуску й сервісу. Накопичувачі SVIT — власного виробництва.",
-      en: "We design and install solar power plants for homes and businesses: from consumption estimate to commissioning and service. SVIT batteries are made in-house.",
+      uk: "Проєктуємо й встановлюємо сонячні панелі та СЕС для дому й бізнесу: від розрахунку споживання до запуску й сервісу. Накопичувачі SVIT — власного виробництва.",
+      en: "We design and install solar panels and solar power plants for homes and businesses: from consumption estimate to commissioning and service. SVIT batteries are made in-house.",
     },
     actions: [
       {

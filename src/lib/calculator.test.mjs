@@ -13,11 +13,21 @@ import {
 } from "./calculator.ts";
 
 const plans = [3, 5, 8, 10, 15, 20, 30, 50];
-const house = [
-  { id: "svitHome", capacityKwh: 5.12, usableDepth: 0.9, maxModules: 1 },
-  { id: "svitPlus5000", capacityKwh: 5.12, usableDepth: 0.9, maxModules: 3 },
-  { id: "svitPlus16000", capacityKwh: 16.07, usableDepth: 0.9, maxModules: 2 },
-];
+// Mirrors content/storage.ts (order) and products.ts (capacity, maxParallel).
+const unit = {
+  svit600: { capacityKwh: 0.865, maxModules: 1 },
+  svitHome: { capacityKwh: 5.12, maxModules: 1 },
+  svitPlus5000: { capacityKwh: 5.12, maxModules: 16 },
+  svitPlus16000: { capacityKwh: 16.07, maxModules: 1 },
+  lithiumvalley: { capacityKwh: 208, maxModules: 5 },
+};
+const candidates = (ids) => ids.map((id) => ({ id, usableDepth: 0.9, ...unit[id] }));
+const segments = {
+  apartment: { share: 0.3, kwh: [50, 600, 10], order: candidates(["svit600", "svitHome", "svitPlus5000"]) },
+  house: { share: 0.5, kwh: [100, 1200, 10], order: candidates(["svitHome", "svitPlus5000", "svitPlus16000"]) },
+  business: { share: 0.6, kwh: [500, 50000, 500], order: candidates(["svitPlus16000", "svitPlus5000", "lithiumvalley"]) },
+};
+const house = segments.house.order;
 
 test("solar plan rounds up to the next standard size", () => {
   // 450 × 12 = 5400 kWh/yr ÷ 1100 = 4.91 kW → 5 kW
@@ -58,11 +68,51 @@ test("battery: modular product takes the fewest modules", () => {
 });
 
 test("battery: nothing fits → largest option, flagged", () => {
-  // 5000 kWh → 6.94 kW × 24 h × 0.5 ÷ 0.9 = 92.6 kWh > 2 × 16.07
+  // 5000 kWh → 6.94 kW × 24 h × 0.5 ÷ 0.9 = 92.6 kWh > 16 × 5.12 = 81.92
   const pick = pickBattery(5000, 24, 0.5, house);
-  assert.equal(pick.id, "svitPlus16000");
-  assert.equal(pick.modules, 2);
+  assert.equal(pick.id, "svitPlus5000");
+  assert.equal(pick.modules, 16);
   assert.equal(pick.fits, false);
+});
+
+test("capacity never shrinks as consumption grows, in every segment", () => {
+  for (const [name, { share, kwh, order }] of Object.entries(segments)) {
+    for (let hours = 2; hours <= 24; hours += 1) {
+      let previous = 0;
+      for (let monthly = kwh[0]; monthly <= kwh[1]; monthly += kwh[2]) {
+        const pick = pickBattery(monthly, hours, share, order);
+        assert.ok(
+          pick.capacityKwh >= previous - 1e-9,
+          `${name}: ${monthly} kWh × ${hours} h gave ${pick.capacityKwh} < ${previous}`,
+        );
+        previous = pick.capacityKwh;
+      }
+    }
+  }
+});
+
+test("SVIT PLUS 16000 is never offered as more than one unit", () => {
+  for (const { share, kwh, order } of Object.values(segments)) {
+    for (let hours = 2; hours <= 24; hours += 1) {
+      for (let monthly = kwh[0]; monthly <= kwh[1]; monthly += kwh[2]) {
+        const pick = pickBattery(monthly, hours, share, order);
+        if (pick.id === "svitPlus16000") assert.equal(pick.modules, 1);
+        assert.ok(pick.modules <= unit[pick.id].maxModules);
+      }
+    }
+  }
+});
+
+test("business: SVIT PLUS 16000 → SVIT PLUS 5000 × n → LITHIUMVALLEY", () => {
+  const { share, order } = segments.business;
+  // 5000 kWh × 2 h → 6.94 × 2 × 0.6 ÷ 0.9 = 9.26 kWh
+  assert.equal(pickBattery(5000, 2, share, order).id, "svitPlus16000");
+  // 5000 kWh × 8 h → 37 kWh → 8 × SVIT PLUS 5000
+  const mid = pickBattery(5000, 8, share, order);
+  assert.equal(mid.id, "svitPlus5000");
+  assert.equal(mid.modules, 8);
+  // 20 000 kWh × 8 h → 148 kWh → one 208 kWh block
+  assert.equal(pickBattery(20000, 8, share, order).id, "lithiumvalley");
 });
 
 test("backup hours from capacity", () => {
@@ -93,11 +143,7 @@ test("calculate: goals switch parts on and off", () => {
 });
 
 test("apartment: bigger need moves from SVIT 600 to grid-charged batteries", () => {
-  const apartment = [
-    { id: "svit600", capacityKwh: 0.865, usableDepth: 0.9, maxModules: 1 },
-    { id: "svitHome", capacityKwh: 5.12, usableDepth: 0.9, maxModules: 1 },
-    { id: "svitPlus5000", capacityKwh: 5.12, usableDepth: 0.9, maxModules: 3 },
-  ];
+  const apartment = segments.apartment.order;
   // 200 kWh → 0.278 kW × 8 h × 0.3 ÷ 0.9 = 0.74 kWh → SVIT 600
   assert.equal(pickBattery(200, 8, 0.3, apartment).id, "svit600");
   // 400 kWh × 12 h → 0.556 × 12 × 0.3 ÷ 0.9 = 2.22 kWh → SVIT HOME

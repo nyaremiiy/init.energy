@@ -1,7 +1,8 @@
 import { appliances } from "@/content/appliances";
 import { insolationRegions, monthlyShare } from "@/content/insolation";
 import { products, type ProductId } from "@/content/products";
-import { sesCalculatorConfig, storageCandidates, type SesGoal, type SesObjectType, type SesPlacement } from "@/content/ses-calculator";
+import { sesCalculatorConfig, type SesGoal, type SesObjectType, type SesPlacement } from "@/content/ses-calculator";
+import { storageCandidates, usableShare } from "@/content/storage";
 
 import { calculateSesCore, type SesCalcInput, type SesCalcResult } from "./ses-core";
 
@@ -18,9 +19,13 @@ export function calculateSes(input: SesCalculationInput): SesCalculation {
     kwStep: sesCalculatorConfig.kwStep,
     minKw: sesCalculatorConfig.minKw,
     kwpPerM2: sesCalculatorConfig.kwpPerM2,
-    usableCapacityFactor: sesCalculatorConfig.usableCapacityFactor,
+    usableShare,
     appliances,
     products: productData,
-    candidates: storageCandidates,
+    candidates: {
+      apartment: storageCandidates("apartment"),
+      house: storageCandidates("house"),
+      business: storageCandidates("business"),
+    },
   });
 }

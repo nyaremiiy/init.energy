@@ -1,4 +1,4 @@
-/** Pre-sized responsive set of a hero photo (AVIF 750 / 1280 / 1920 / 2560). */
+/** Pre-sized responsive set of a hero photo (AVIF 750 / 1280 / 1440 / 1920 / 2560). */
 export type HeroImage = {
   desktop: string;
   fallback: string;
@@ -8,6 +8,7 @@ export type HeroImage = {
   position?: "center" | "top" | "right";
   tablet?: string;
   type?: "image/avif";
+  wide?: string;
 };
 
 const imagePositionClasses = {
@@ -28,7 +29,8 @@ export function HeroPicture({ image, alt = "", priority = false }: { image: Hero
     <picture className="block size-full">
       {image.mobile ? <source media="(max-width: 767px)" srcSet={image.mobile} type={image.type} /> : null}
       {image.tablet ? <source media="(max-width: 1279px)" srcSet={image.tablet} type={image.type} /> : null}
-      {image.laptop ? <source media="(max-width: 1919px)" srcSet={image.laptop} type={image.type} /> : null}
+      {image.laptop ? <source media="(max-width: 1599px)" srcSet={image.laptop} type={image.type} /> : null}
+      {image.wide ? <source media="(max-width: 1919px)" srcSet={image.wide} type={image.type} /> : null}
       {image.type ? <source srcSet={image.desktop} type={image.type} /> : null}
       <img
         src={image.fallback}

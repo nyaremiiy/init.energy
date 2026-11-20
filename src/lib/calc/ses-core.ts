@@ -1,3 +1,5 @@
+import { exceedsOutput, runtimeHours } from "./backup-runtime.ts";
+
 export type SesCalcInput = {
   objectType: "apartment" | "house" | "business";
   goal: "savings" | "backup" | "both";
@@ -19,10 +21,23 @@ export type SesCalcDataset<Id extends string> = {
   kwStep: number;
   minKw: number;
   kwpPerM2: number;
-  usableCapacityFactor: number;
+  /** Usable share of the nominal capacity (content/storage.ts). */
+  usableShare: number;
   appliances: { id: string; powerW: number }[];
   products: Record<Id, { name: string; href: string }>;
-  candidates: { id: Id; capacityKwh: number; inverterKw?: number; stackable?: boolean; maxModules: number; segments: SesCalcInput["objectType"][] }[];
+  /** Battery candidates per object type, tried in order (content/storage.ts). */
+  candidates: Record<SesCalcInput["objectType"], SesStorageCandidate<Id>[]>;
+};
+
+export type SesStorageCandidate<Id extends string> = {
+  id: Id;
+  /** One unit, kWh. */
+  capacityKwh: number;
+  maxModules: number;
+  /** Output of the product itself, W; undefined = no limit (separate inverter). */
+  outputW?: number;
+  /** Bare battery: shown with «+ hybrid inverter». */
+  needsInverter: boolean;
 };
 
 export type SesCalcResult<Id extends string> = {
@@ -64,20 +79,21 @@ export function calculateSesCore<Id extends string>(input: SesCalcInput, data: S
   const savingsYear = generationByMonth.reduce((sum, value) => sum + Math.min(value, monthlyKwh), 0) * tariff;
   // 6. Payback requires an estimated project budget.
   const paybackYears = input.budget && savingsYear > 0 && tariff > 0 ? input.budget / savingsYear : null;
-  // 7. Sum selected loads and choose the smallest compatible battery configuration.
-  const loadKw = data.appliances.filter((item) => input.backupLoads.includes(item.id)).reduce((sum, item) => sum + item.powerW, 0) / 1000;
+  // 7. Sum selected loads and take the first candidate (in segment order) whose
+  // usable capacity covers the need and whose own output carries the load.
+  // Hours use the same formula as the autonomy table on /rezervne-zhyvlennya/.
+  const loadW = data.appliances.filter((item) => input.backupLoads.includes(item.id)).reduce((sum, item) => sum + item.powerW, 0);
+  const loadKw = loadW / 1000;
   const neededKwh = loadKw * input.backupHours;
   let battery: SesCalcResult<Id>["battery"] = null;
-  if (input.goal !== "savings" && loadKw > 0) {
-    const candidates = data.candidates.filter((candidate) => candidate.segments.includes(input.objectType)).sort((a, b) => a.capacityKwh - b.capacityKwh);
-    for (const candidate of candidates) {
-      const modules = candidate.stackable ? Math.ceil(neededKwh / (candidate.capacityKwh * data.usableCapacityFactor)) : 1;
+  if (input.goal !== "savings" && loadW > 0) {
+    for (const candidate of data.candidates[input.objectType]) {
+      if (exceedsOutput(loadW, candidate.outputW)) continue;
+      const modules = Math.max(1, Math.ceil(neededKwh / (candidate.capacityKwh * data.usableShare) - 1e-9));
+      if (modules > candidate.maxModules) continue;
       const capacityKwh = modules * candidate.capacityKwh;
-      const inverterFits = candidate.inverterKw === undefined || candidate.inverterKw >= loadKw;
-      if (modules <= candidate.maxModules && capacityKwh * data.usableCapacityFactor >= neededKwh && inverterFits) {
-        battery = { id: candidate.id, name: data.products[candidate.id].name, href: data.products[candidate.id].href, modules, capacityKwh, backupHours: capacityKwh * data.usableCapacityFactor / loadKw, inverterNote: candidate.inverterKw === undefined };
-        break;
-      }
+      battery = { id: candidate.id, name: data.products[candidate.id].name, href: data.products[candidate.id].href, modules, capacityKwh, backupHours: runtimeHours(capacityKwh * 1000, loadW, data.usableShare), inverterNote: candidate.needsInverter };
+      break;
     }
   }
   // 8. Find the largest monthly surplus and deficit versus consumption.

@@ -26,6 +26,7 @@ import { routes } from "@/content/routes";
 import { formatPhone } from "@/lib/format";
 import {
   CALCULATOR_APPLY_EVENT,
+  resetCalculators,
   type CalculatorApplyDetail,
 } from "@/lib/calculator-bridge";
 import { validateLeadForm, type LeadFieldErrors } from "@/lib/lead-form-schema";
@@ -73,19 +74,31 @@ export function LeadForm({
   const [objectType, setObjectType] = useState<LeadObjectType | undefined>(
     defaultObjectType,
   );
-  // Parameters handed over by the quick calculator (hidden field → CRM).
+  // Fields chosen in a calculator on this page (hidden field → CRM). Re-sent
+  // on every calculator change after the first hand-over.
   const [calculator, setCalculator] = useState<CalculatorApplyDetail>();
+  // Once the visitor picks the object type here, calculator updates no longer change it.
+  const typePickedInForm = useRef(false);
 
   useEffect(() => {
     function onApply(event: Event) {
       const detail = (event as CustomEvent<CalculatorApplyDetail>).detail;
-      setObjectType(detail.objectType);
+      if (detail.objectType && !typePickedInForm.current) setObjectType(detail.objectType);
       setCalculator(detail);
     }
 
     window.addEventListener(CALCULATOR_APPLY_EVENT, onApply);
     return () => window.removeEventListener(CALCULATOR_APPLY_EVENT, onApply);
   }, []);
+
+  // The calculator data stays, but the CRM sees that the form type differs.
+  const calculatorData = calculator
+    ? JSON.stringify(
+        objectType !== undefined && objectType !== calculator.resultObjectType
+          ? { ...calculator.data, objectTypeOverridden: true }
+          : calculator.data,
+      )
+    : "";
 
   const focusFirstError = (fieldErrors: LeadFieldErrors) => {
     const first = fieldOrder.find((key) => fieldErrors[key]);
@@ -144,8 +157,14 @@ export function LeadForm({
 
       form.reset();
       setCalculator(undefined);
+      typePickedInForm.current = false;
+      resetCalculators();
       setSubmitting(false);
-      trackEvent({ event: "generate_lead", calculator: calculator?.data ?? "" });
+      trackEvent({
+        event: "generate_lead",
+        calculator: calculator?.data.calculator ?? "",
+        calculatorFields: calculator?.data.changedFields.length ?? 0,
+      });
       setResult("success");
       toast.show("success", t.success);
     } catch {
@@ -191,7 +210,10 @@ export function LeadForm({
         variant="tiles"
         options={objectTypes.map((type) => ({ value: type, label: t.objectTypes[type], icon: objectTypeIcons[type] }))}
         value={objectType}
-        onChange={(value) => setObjectType(value as LeadObjectType)}
+        onChange={(value) => {
+          typePickedInForm.current = true;
+          setObjectType(value as LeadObjectType);
+        }}
       />
 
       {calculator ? (
@@ -201,7 +223,7 @@ export function LeadForm({
         </p>
       ) : null}
       <input type="hidden" name="product" value={product ?? ""} />
-      <input type="hidden" name="calculatorData" value={calculator?.data ?? ""} />
+      <input type="hidden" name="calculatorData" value={calculatorData} />
 
       {/* Name and phone side by side from sm. */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">

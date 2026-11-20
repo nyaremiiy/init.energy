@@ -13,7 +13,7 @@ import { SesPaybackYield } from "@/components/sections/ses-payback/ses-payback-y
 import { JsonLd } from "@/components/seo/JsonLd";
 import { serviceArea } from "@/content/company";
 import { defaultApplianceIds } from "@/content/appliances";
-import { insolationRegions } from "@/content/insolation";
+import { insolationRegions, updatedAt as insolationUpdatedAt } from "@/content/insolation";
 import { anchors, routes } from "@/content/routes";
 import { sesCalculatorConfig } from "@/content/ses-calculator";
 import { householdTariff } from "@/content/tariffs";
@@ -21,6 +21,7 @@ import { localizePath, type Locale } from "@/i18n/config";
 import { getMessagesFor } from "@/i18n/messages";
 import { getMessages } from "@/i18n/server";
 import { calculateSes } from "@/lib/calc/ses";
+import { formatDate } from "@/lib/format";
 import { format } from "@/lib/messages";
 import { absoluteUrl, buildMetadata } from "@/lib/seo/metadata";
 import { breadcrumbSchema } from "@/lib/seo/schema";
@@ -104,7 +105,7 @@ export function SesPaybackPage({ locale }: { locale: Locale }) {
             <Container className="flex flex-col gap-4">
               <SesPaybackCalculator />
               <p className="text-small text-muted">
-                {format(t.updatedLine, { count: String(insolationRegions.length) })} ·{" "}
+                {format(t.updatedLine, { count: String(insolationRegions.length), date: formatDate(insolationUpdatedAt, locale) })} ·{" "}
                 <InlineLink href={`#${anchors.sesMethod}`}>
                   {t.methodLink}
                 </InlineLink>
