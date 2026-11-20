@@ -5,7 +5,7 @@ import { SectionHeader } from "@/components/ui/section-header";
 import { SectionWatermark } from "@/components/ui/section-watermark";
 import { insolationRegions } from "@/content/insolation";
 import { anchors } from "@/content/routes";
-import { sesCalculatorProductCount } from "@/content/ses-calculator";
+import { svitModelCount, usableShare } from "@/content/storage";
 import { householdTariff } from "@/content/tariffs";
 import { getLocale, getMessages } from "@/i18n/server";
 import type { SesCalculation } from "@/lib/calc/ses";
@@ -28,7 +28,7 @@ export function SesPaybackMethod({ example }: { example: SesCalculation }) {
   const sources = [
     { label: t.yieldSource, value: t.yieldSourceDetail },
     { label: t.houseTariff, value: `${formatNumber(householdTariff.value, locale)} ${t.tariffUnit} · ${t.tariffSource}` },
-    { label: t.productModels, value: String(sesCalculatorProductCount) },
+    { label: t.productModels, value: String(svitModelCount) },
     { label: t.appliancePower, value: t.applianceSource },
   ];
   const exampleText = format(t.example, {
@@ -77,7 +77,9 @@ export function SesPaybackMethod({ example }: { example: SesCalculation }) {
                     </span>
                     {t.formulaTitles[index]}
                   </h3>
-                  <p className="font-mono text-small text-muted-dark sm:col-span-7">{formula}</p>
+                  <p className="font-mono text-small text-muted-dark sm:col-span-7">
+                    {format(formula, { share: `${formatNumber(usableShare * 100, locale)}%` })}
+                  </p>
                 </li>
               ))}
             </ol>

@@ -113,6 +113,7 @@
     "hours": "Hours without the grid",
     "hoursUnit": "h",
     "maxPlus": "{value}+",
+    "summaryKwh": "{value} kWh/mo",
     "result": {
       "eyebrow": "Recommendation",
       "approximate": "estimate",
@@ -130,7 +131,7 @@
       "product": "Product",
       "solution": "Solution",
       "cta": "Get an exact quote",
-      "note": "This is an estimate. An engineer confirms the exact configuration and price — the calculator parameters are added to your request."
+      "note": "This is an estimate. An engineer confirms the exact configuration and price — the parameters you changed are added to your request."
     }
   },
   "faq": {
@@ -518,7 +519,7 @@
     "formulaRows": [
       "monthly kWh × 12",
       "annual consumption ÷ yield per 1 kW",
-      "selected appliance load × backup hours",
+      "selected appliance load × backup hours ÷ usable share of capacity ({share})",
       "self-used energy × tariff"
     ],
     "consumption": "Monthly electricity use",

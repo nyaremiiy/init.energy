@@ -4,16 +4,10 @@ import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
 import { SectionWatermark } from "@/components/ui/section-watermark";
 import { appliances } from "@/content/appliances";
-import {
-  backupLoadSets,
-  backupRuntimeProducts,
-  capacityWh,
-  loadSetPowerW,
-  outputLimitW,
-  usableShare,
-} from "@/content/backup";
+import { backupLoadSets, backupRuntimeProducts, loadSetPowerW } from "@/content/backup";
 import { products } from "@/content/products";
 import { anchors, routes } from "@/content/routes";
+import { capacityWh, outputLimitW, usableShare } from "@/content/storage";
 import { localizePath } from "@/i18n/config";
 import { getLocale, getMessages } from "@/i18n/server";
 import { exceedsOutput, roundHours, runtimeHours } from "@/lib/calc/backup-runtime";

@@ -5,7 +5,7 @@ import { Eyebrow } from "@/components/ui/eyebrow";
 import { Heading } from "@/components/ui/heading";
 import { Panel } from "@/components/ui/panel";
 import { routes } from "@/content/routes";
-import { sesCalculatorProductCount } from "@/content/ses-calculator";
+import { svitModelCount } from "@/content/storage";
 import { localizePath } from "@/i18n/config";
 import { getLocale, getMessages } from "@/i18n/server";
 
@@ -21,7 +21,7 @@ export function SesPaybackHero() {
   const t = getMessages().sesPayback;
   const facts = [
     { value: t.minuteValue, label: t.minutes },
-    { value: String(sesCalculatorProductCount), label: t.models },
+    { value: String(svitModelCount), label: t.models },
     { value: t.noRegistration, label: t.registration },
     { value: t.open, label: t.methodology },
   ];
