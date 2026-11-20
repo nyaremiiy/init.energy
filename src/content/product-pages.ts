@@ -168,8 +168,8 @@ const standaloneProductPages: ProductPage[] = [
     slug: "svit-plus-5000",
     meta: {
       title: {
-        uk: "SVIT PLUS 5000 — батарея LiFePO₄ 5,12 кВт·год",
-        en: "SVIT PLUS 5000 — 5.12 kWh LiFePO₄ battery",
+        uk: "Батарея LiFePO₄ для дому SVIT PLUS 5000 — 5,12 кВт·год",
+        en: "LiFePO₄ home battery SVIT PLUS 5000 — 5.12 kWh",
       },
       description: {
         uk: "Батарея SVIT PLUS 5000 LiFePO₄ 48 В на 5,12 кВт·год: понад 10 000 циклів, до 16 модулів паралельно (81 кВт·год), гарантія 5 років. Для дому й бізнесу.",

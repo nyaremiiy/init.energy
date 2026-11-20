@@ -56,6 +56,7 @@ export function toCalculationInput(state: SesPaybackState): SesCalculationInput 
 }
 
 export type SesField = keyof SesPaybackState;
+export type FieldSource = "url" | "page";
 
 type ContextValue = {
   state: SesPaybackState;
@@ -67,8 +68,8 @@ type ContextValue = {
   update: (next: Partial<SesPaybackState>, options?: { chosen?: SesField[]; reset?: SesField[] }) => void;
   /** Fields the visitor touched (sent to the lead as `selected`). */
   changed: ReadonlySet<SesField>;
-  /** Fields chosen from outside the form: `?type=` from a niche page. */
-  sources: Partial<Record<SesField, "url">>;
+  /** Fields chosen outside the form: `?type=` from a niche page, the region of a region page. */
+  sources: Partial<Record<SesField, FieldSource>>;
   /** Forgets the touched fields (after a successful lead submit). */
   resetChanged: () => void;
   input: SesCalculationInput;
@@ -82,10 +83,14 @@ const SesPaybackContext = createContext<ContextValue | null>(null);
  * monthly chart and the summary next to the lead form read the same values.
  * Nothing is written to the URL: the page stays one static, indexable URL.
  */
-export function SesPaybackProvider({ children }: { children: ReactNode }) {
-  const [state, setState] = useState(sesPaybackDefaults);
-  const [changed, setChanged] = useState<ReadonlySet<SesField>>(new Set());
-  const [sources, setSources] = useState<Partial<Record<SesField, "url">>>({});
+/** A region page preselects its region: it counts as chosen (source «page»). */
+const initialChanged = (regionId?: string): ReadonlySet<SesField> => new Set<SesField>(regionId ? ["regionId"] : []);
+const initialSources = (regionId?: string): Partial<Record<SesField, FieldSource>> => (regionId ? { regionId: "page" } : {});
+
+export function SesPaybackProvider({ children, regionId }: { children: ReactNode; regionId?: string }) {
+  const [state, setState] = useState<SesPaybackState>(() => (regionId ? { ...sesPaybackDefaults, regionId } : sesPaybackDefaults));
+  const [changed, setChanged] = useState(() => initialChanged(regionId));
+  const [sources, setSources] = useState(() => initialSources(regionId));
 
   // Links from niche pages preselect the object type: ?type=business. Read once,
   // never written back — the page keeps one parameter-free URL. Counts as chosen.
@@ -97,7 +102,7 @@ export function SesPaybackProvider({ children }: { children: ReactNode }) {
     const id = window.setTimeout(() => {
       setState((current) => ({ ...current, objectType: type, tariff: type === "business" ? 0 : current.tariff }));
       setChanged((current) => new Set(current).add("objectType"));
-      setSources({ objectType: "url" });
+      setSources((current) => ({ ...current, objectType: "url" }));
     });
     return () => window.clearTimeout(id);
   }, []);
@@ -114,19 +119,26 @@ export function SesPaybackProvider({ children }: { children: ReactNode }) {
           (options?.chosen ?? (Object.keys(next) as SesField[])).forEach((field) => updated.add(field));
           return updated;
         });
-        // A field the visitor changed is no longer «from the URL».
-        if (next.objectType !== undefined) setSources({});
+        // A field the visitor changed is no longer «from the URL / page».
+        setSources((current) => {
+          const keys = options?.chosen ?? (Object.keys(next) as SesField[]);
+          if (!keys.some((key) => key in current)) return current;
+          const updated = { ...current };
+          keys.forEach((key) => delete updated[key]);
+          return updated;
+        });
       },
       changed,
       sources,
+      // After a submit the page's own region stays chosen.
       resetChanged: () => {
-        setChanged(new Set());
-        setSources({});
+        setChanged(initialChanged(regionId));
+        setSources(initialSources(regionId));
       },
       input,
       result: calculateSes(input),
     };
-  }, [state, changed, sources]);
+  }, [state, changed, sources, regionId]);
 
   return <SesPaybackContext value={value}>{children}</SesPaybackContext>;
 }

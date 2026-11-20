@@ -17,8 +17,8 @@ export type CalculatorLeadData = {
   changedFields: string[];
   selected: Record<string, CalculatorValue>;
   assumed: Record<string, CalculatorValue>;
-  /** Fields chosen from outside the form, e.g. `{ objectType: "url" }` (?type= from a niche page). */
-  sources?: Record<string, "url">;
+  /** Fields chosen outside the form: `{ objectType: "url" }` (?type= from a niche page), `{ regionId: "page" }` (region page). */
+  sources?: Record<string, "url" | "page">;
   recommendation: unknown;
   /** Set by the lead form when the visitor picked another object type there. */
   objectTypeOverridden?: true;
@@ -31,7 +31,7 @@ export type CalculatorLeadInput = {
   /** Fields that apply to the current goal. */
   applicable: (field: string) => boolean;
   changed: ReadonlySet<string>;
-  sources?: Record<string, "url">;
+  sources?: Record<string, "url" | "page">;
   recommendation: unknown;
 };
 

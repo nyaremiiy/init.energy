@@ -11,6 +11,8 @@ type PillLinkProps = {
   featured?: boolean;
   /** Right-hand value, e.g. a capacity or a price. */
   meta?: ReactNode;
+  /** `compact`: an inline pill sized to its text (lists of regions); hover fills it with ink. */
+  size?: "default" | "compact";
   children: ReactNode;
 } & Omit<ComponentPropsWithoutRef<"a">, "href" | "children">;
 
@@ -39,8 +41,23 @@ const focusClasses: Record<PillLinkTone, string> = {
 };
 
 /** Pill-shaped navigation link for rows of links (segment cards, FAQ topics). */
-export function PillLink({ href, tone = "light", featured = false, meta, children, className, ...props }: PillLinkProps) {
+export function PillLink({ href, tone = "light", featured = false, meta, size = "default", children, className, ...props }: PillLinkProps) {
   const colours = toneClasses[tone];
+  if (size === "compact") {
+    return (
+      <Link
+        href={href}
+        className={`group inline-flex min-h-11 items-center gap-2 rounded-full border border-line px-4 text-small font-medium text-ink transition-colors duration-200 ease-tech hover:border-ink hover:bg-ink hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink ${className ?? ""}`}
+        {...props}
+      >
+        {children}
+        <ArrowUpRight
+          aria-hidden
+          className="size-3.5 shrink-0 text-muted transition duration-200 group-hover:text-white motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5"
+        />
+      </Link>
+    );
+  }
   return (
     <Link
       href={href}

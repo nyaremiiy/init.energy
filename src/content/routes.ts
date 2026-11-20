@@ -75,6 +75,9 @@ export const anchors = {
   nicheBuild: "build",
   sesYield: "ses-yield",
   sesMethod: "ses-method",
+  // Solar by region: the section on /cec/ and the region pages (/cec/{region}/).
+  sesRegions: "ses-regions",
+  regionYield: "region-yield",
   // Backup power hub (/rezervne-zhyvlennya/).
   backupSegments: "backup-segments",
   backupHow: "backup-how",

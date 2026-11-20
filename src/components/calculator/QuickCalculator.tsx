@@ -18,12 +18,12 @@ import {
   calculatorSegments,
   consumptionRange,
   criticalLoadShare,
-  regions,
   solarPlans,
   solutionLink,
   type CalculatorGoal,
   type CalculatorSegment,
 } from "@/content/calculator";
+import { insolationRegions, regionsByLocale } from "@/content/insolation";
 import { products, productSummary, type ProductId } from "@/content/products";
 import { anchors } from "@/content/routes";
 import { services } from "@/content/services";
@@ -93,19 +93,19 @@ export function QuickCalculator() {
   const [consumption, setConsumption] = useState(
     consumptionRange[calculatorDefaults.segment].default,
   );
-  const [regionSlug, setRegionSlug] = useState(calculatorDefaults.region);
+  const [regionId, setRegionId] = useState(calculatorDefaults.region);
   const [hours, setHours] = useState(calculatorDefaults.hours);
   // Fields the visitor touched; only these count as chosen for the lead.
   const [changed, setChanged] = useState<ReadonlySet<QuickField>>(new Set());
 
   const range = consumptionRange[segment];
-  const region = regions.find((item) => item.slug === regionSlug) ?? regions[0];
+  const region = insolationRegions.find((item) => item.id === regionId) ?? insolationRegions[0];
   const needSolar = goal !== "reserve";
   const needBattery = goal !== "economy";
 
   const rec = calculate({
     monthlyKwh: consumption,
-    specificYield: region.specificYield,
+    specificYield: region.yield,
     solarPlans,
     backupHours: hours,
     criticalLoadShare: criticalLoadShare[segment],
@@ -148,7 +148,7 @@ export function QuickCalculator() {
     ["segment", segment],
     ["goal", goal],
     ["monthlyKwh", consumption],
-    ["region", region.slug],
+    ["region", region.id],
     ["backupHours", hours],
   ];
   const applicable = (field: string) =>
@@ -315,15 +315,15 @@ export function QuickCalculator() {
         {needSolar ? (
           <SelectField
             label={t.region}
-            value={region.slug}
+            value={region.id}
             hint={t.regionHint}
-            options={regions.map((item) => ({
-              value: item.slug,
+            options={regionsByLocale(locale).map((item) => ({
+              value: item.id,
               label: item.name[locale],
             }))}
             onChange={(value) => {
               touch("region");
-              setRegionSlug(value);
+              setRegionId(value);
             }}
           />
         ) : null}

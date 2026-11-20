@@ -6,6 +6,7 @@ import { getSesHeroSlides } from "@/components/sections/home/hero-slides";
 import { ProductLine } from "@/components/sections/home/product-line";
 import { LeadSection } from "@/components/sections/LeadSection";
 import { ProjectsShowcase } from "@/components/sections/projects-showcase";
+import { SesRegions } from "@/components/sections/regions/ses-regions";
 import { TrustSection } from "@/components/sections/trust-section";
 import { SesHybrid } from "@/components/sections/ses/ses-how-hybrid";
 import { SesPlantTypes } from "@/components/sections/ses/ses-plant-types";
@@ -54,6 +55,7 @@ export function SesPage() {
         {/* TODO(content): «Корисне перед покупкою СЕС» — render only when at least 3 articles exist in content/articles/. */}
         <ProductLine />
         <ProjectsShowcase />
+        <SesRegions />
         <CalculatorSection />
         <FaqSection page="solar" initialTopic="solar" />
         <LeadSection />

@@ -3,13 +3,13 @@ import { Panel } from "@/components/ui/panel";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
 import { SectionWatermark } from "@/components/ui/section-watermark";
-import { insolationRegions } from "@/content/insolation";
+import { insolationRegions, updatedAt as insolationUpdatedAt } from "@/content/insolation";
 import { anchors } from "@/content/routes";
 import { svitModelCount, usableShare } from "@/content/storage";
 import { householdTariff } from "@/content/tariffs";
 import { getLocale, getMessages } from "@/i18n/server";
 import type { SesCalculation } from "@/lib/calc/ses";
-import { formatNumber } from "@/lib/format";
+import { formatDate, formatNumber } from "@/lib/format";
 import { format } from "@/lib/messages";
 
 const titleId = "ses-method-title";
@@ -98,7 +98,7 @@ export function SesPaybackMethod({ example }: { example: SesCalculation }) {
                 ))}
               </dl>
               <p className="text-small leading-relaxed text-muted-dark">{t.notIncluded}</p>
-              <p className="text-small text-muted-dark">{format(t.updatedLine, { count: String(insolationRegions.length) })}</p>
+              <p className="text-small text-muted-dark">{format(t.updatedLine, { count: String(insolationRegions.length), date: formatDate(insolationUpdatedAt, locale) })}</p>
             </aside>
           </Reveal>
         </div>

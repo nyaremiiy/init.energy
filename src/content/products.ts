@@ -122,7 +122,7 @@ export const productList: Product[] = [
     page: {
       slug: "svit-600",
       meta: {
-        title: { uk: "SVIT 600 — портативна зарядна станція 865 Вт·год", en: "SVIT 600 — 865 Wh portable power station" },
+        title: { uk: "Зарядна станція для квартири SVIT 600 — 865 Вт·год", en: "Portable power station for apartments SVIT 600 — 865 Wh" },
         description: { uk: "Портативна станція SVIT 600: 865 Вт·год, 600 Вт номінально й 1 200 Вт піково, 9 виходів, тиха робота та заряджання від мережі або сонця.", en: "SVIT 600 portable power station with 865 Wh, 600 W rated and 1,200 W peak output, nine ports, quiet operation and solar charging." },
       },
       hero: {
@@ -282,8 +282,8 @@ export const productList: Product[] = [
       slug: "svit-home",
       meta: {
         title: {
-          uk: "SVIT HOME — комплект резервного живлення 6,2 кВт, 5,12 кВт·год",
-          en: "SVIT HOME — 6.2 kW, 5.12 kWh backup power kit",
+          uk: "Інвертор з батареєю для дому SVIT HOME — 6,2 кВт",
+          en: "Home inverter with battery SVIT HOME — 6.2 kW",
         },
         description: {
           uk: "Готовий комплект резервного живлення: гібридний інвертор VICTOR 6,2 кВт і батарея LiFePO₄ 5,12 кВт·год. Для квартири, будинку, ОСББ і бізнесу.",
@@ -772,8 +772,8 @@ export const productList: Product[] = [
       slug: "svit-plus-16000",
       meta: {
         title: {
-          uk: "SVIT PLUS 16000 — батарея LiFePO₄ 16,07 кВт·год",
-          en: "SVIT PLUS 16000 — 16.07 kWh LiFePO₄ battery",
+          uk: "Акумулятор LiFePO₄ 16 кВт·год для СЕС — SVIT PLUS 16000",
+          en: "16 kWh LiFePO₄ solar battery — SVIT PLUS 16000",
         },
         description: {
           uk: "SVIT PLUS 16000: LiFePO₄ батарея 16,07 кВт·год, 51,2 В, 16 комірок EVE 314 А·год, BMS 200 А та 6 000–9 000+ циклів. Гарантія 5 років. Для СЕС і резерву.",
@@ -962,7 +962,7 @@ export const productList: Product[] = [
     page: {
       slug: "bess",
       meta: {
-        title: { uk: "LITHIUMVALLEY BESS — накопичення 208–1 044 кВт·год", en: "LITHIUMVALLEY BESS — 208–1,044 kWh energy storage" },
+        title: { uk: "Промислова система накопичення енергії BESS — LITHIUMVALLEY", en: "Industrial battery energy storage BESS — LITHIUMVALLEY" },
         description: { uk: "Промислова BESS LITHIUMVALLEY на 208–1 044 кВт·год: LiFePO₄, інвертори SOLIS до 125 кВт, перемикання до 10 мс і гарантія 10 років для бізнесу та інфраструктури.", en: "LITHIUMVALLEY industrial BESS from 208 to 1,044 kWh: LiFePO₄, SOLIS inverters up to 125 kW, sub-10 ms transfer and a 10-year warranty for business." },
       },
       hero: {

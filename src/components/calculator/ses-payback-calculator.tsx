@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowUpRight } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { CheckChip } from "@/components/ui/form/check-chip";
 import { useEffect, type ReactNode } from "react";
 
@@ -8,11 +9,12 @@ import { Group, NumberField, RangeField, SelectField } from "@/components/calcul
 import { ProductLink, Stat } from "@/components/calculator/calculator-result-parts";
 import { useSesPayback, type SesField } from "@/components/calculator/ses-payback-state";
 import { useLeadAttachment } from "@/components/calculator/use-lead-attachment";
+import { ArrowLink } from "@/components/ui/arrow-link";
 import { Button } from "@/components/ui/button";
 import { CardLabel } from "@/components/ui/card-label";
 import { PillRadio } from "@/components/ui/form/pill-radio";
 import { appliances } from "@/content/appliances";
-import { insolationRegions, regionsByLocale } from "@/content/insolation";
+import { insolationRegions, regionPath, regionsByLocale } from "@/content/insolation";
 import { products } from "@/content/products";
 import { anchors } from "@/content/routes";
 import { sesCalculatorConfig, type SesGoal, type SesObjectType, type SesPlacement } from "@/content/ses-calculator";
@@ -70,6 +72,9 @@ export function SesPaybackCalculator() {
   const { state, update, changed, sources, resetChanged, result } = useSesPayback();
   const region = insolationRegions.find((item) => item.id === state.regionId) ?? insolationRegions[0];
   const kwh = t.kwh;
+  const pathname = usePathname();
+  // Region page of the chosen region; hidden on that page itself.
+  const regionHref = localizePath(regionPath(region), locale);
   let stepIndex = 0;
 
   useEffect(() => {
@@ -311,6 +316,11 @@ export function SesPaybackCalculator() {
               }}
             />
           </div>
+          {pathname !== regionHref ? (
+            <ArrowLink href={regionHref} className="self-start text-small">
+              {format(t.regionPageLink, { locative: region.locative[locale] })}
+            </ArrowLink>
+          ) : null}
           <NumberField
             name="roofArea"
             label={t.roofArea}
