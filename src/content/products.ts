@@ -59,6 +59,16 @@ export type Product = {
   cellCount?: number;
   /** Number of cabinets/modules for industrial systems (drawn as a row). */
   modules?: number;
+  /**
+   * How many units work in parallel (1 = a single unit). The calculators read
+   * it as the module limit. LITHIUMVALLEY counts 208 kWh blocks.
+   */
+  maxParallel: number;
+  /**
+   * `built-in`: the product has its own output (station, kit, BESS module);
+   * `separate`: a bare battery, the inverter is chosen for the project.
+   */
+  inverter: "built-in" | "separate";
   /** The three specs shown next to the capacity card (keys of `specs`). */
   focusSpecs: [SpecKey, SpecKey, SpecKey];
   /** Rows of the product card spec list. */
@@ -88,6 +98,8 @@ export const productList: Product[] = [
       uk: "Портативна станція з чистою синусоїдою: 865 Вт·год і 600 Вт (пікова 1 200 Вт). Роутер і освітлення працюють до 70 годин, ноутбук — до 10. Заряджається від мережі, генератора або сонячної панелі приблизно за 4 години.",
       en: "A pure sine wave portable station: 865 Wh and 600 W (1,200 W peak). A router and lights run for up to 70 hours, a laptop for up to 10. It charges from the grid, a generator or a solar panel in about 4 hours.",
     },
+    maxParallel: 1,
+    inverter: "built-in",
     capacity: { value: 865, unit: "Wh" },
     // Owner data; /svit-600/ itself shows both Li-ion (table) and LiFePO₄ (text).
     chemistryLabel: { uk: "LiFePO₄", en: "LiFePO₄" },
@@ -242,6 +254,8 @@ export const productList: Product[] = [
       uk: "Готовий комплект для будинку й малого бізнесу: гібридний інвертор 6,2 кВт і батарея SVIT PLUS 5000 на 5,12 кВт·год на стійці на ніжках — без настінного монтажу. Під час відключення сам переходить на батарею, а з панелями працює як сонячна станція.",
       en: "A ready kit for a house or small business: a 6.2 kW hybrid inverter and a 5.12 kWh SVIT PLUS 5000 battery on a rack on legs — no wall mounting. It switches to the battery by itself during an outage and works as a solar plant with panels.",
     },
+    maxParallel: 1,
+    inverter: "built-in",
     capacity: { value: 5.12, unit: "kWh" },
     // /svit-home/: battery SVIT Plus 5000, LiFePO₄.
     chemistryLabel: {
@@ -681,6 +695,9 @@ export const productList: Product[] = [
       uk: "Батарея LiFePO₄ на 5,12 кВт·год і 5 кВт для дому, малого бізнесу й промислових об'єктів. Працює з інвертором у сонячній або гібридній станції, батареї з'єднуються паралельно — до 81 кВт·год. Гарантія 5 років.",
       en: "A 5.12 kWh, 5 kW LiFePO₄ battery for homes, small businesses and industrial sites. It works with an inverter in a solar or hybrid plant, and batteries connect in parallel up to 81 kWh. 5-year warranty.",
     },
+    // /svit-plus-5000/: «до 16 модулів», «паралельно — до 81 кВт·год».
+    maxParallel: 16,
+    inverter: "separate",
     capacity: { value: 5.12, unit: "kWh" },
     chemistryLabel: {
       uk: "LiFePO₄ · до 16 модулів",
@@ -727,6 +744,9 @@ export const productList: Product[] = [
       uk: "Батарея LiFePO₄ на 16,07 кВт·год з 16 комірок EVE для сонячних станцій, резервного живлення, автономних і гібридних систем. Вбудована BMS із CAN, RS485 і Bluetooth, сумісна з інверторами Deye, Growatt, Victron, Luxpower.",
       en: "A 16.07 kWh LiFePO₄ battery built from 16 EVE cells for solar plants, backup power, off-grid and hybrid systems. Built-in BMS with CAN, RS485 and Bluetooth, compatible with Deye, Growatt, Victron and Luxpower inverters.",
     },
+    // TODO(content): parallel connection is not confirmed on /svit-plus-16000/ — a single unit until it is.
+    maxParallel: 1,
+    inverter: "separate",
     capacity: { value: 16.07, unit: "kWh" },
     chemistryLabel: {
       uk: "LiFePO₄ · 16 комірок EVE",
@@ -917,6 +937,10 @@ export const productList: Product[] = [
       uk: "Заводський модуль BESS для підприємств, агро, логістики, медицини й критичної інфраструктури: батареї LiFePO₄ від 208 до 1 044 кВт·год, гібридні інвертори SOLIS 50–125 кВт, рідинне охолодження. Гарантія виробника 10 років. INIT ENERGY — офіційний представник та інсталятор.",
       en: "A factory-built BESS module for industry, agriculture, logistics, healthcare and critical infrastructure: 208 to 1,044 kWh of LiFePO₄ batteries, 50–125 kW SOLIS hybrid inverters and liquid cooling. 10-year manufacturer warranty. INIT ENERGY is the official representative and installer.",
     },
+    // /bess/: 208 kWh blocks up to 1 044 kWh → 5 × 208 = 1 040 kWh.
+    // TODO(content): confirm the block count per configuration (208 / 261 kWh).
+    maxParallel: 5,
+    inverter: "built-in",
     capacity: { value: 208, unit: "kWh", qualifier: "from" },
     chemistryLabel: { uk: "LiFePO₄ · BESS", en: "LiFePO₄ · BESS" },
     // TODO(content): number of cabinets per configuration (208 / 261 kWh blocks) is not fixed yet.

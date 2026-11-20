@@ -1,7 +1,7 @@
 import type { BatteryCandidate } from "@/lib/calculator";
 
-import { products, type ProductId } from "./products";
 import { routes } from "./routes";
+import { storageCandidates, usableShare } from "./storage";
 
 export type CalculatorSegment = "apartment" | "house" | "business";
 export type CalculatorGoal = "reserve" | "economy" | "both";
@@ -192,70 +192,33 @@ export const criticalLoadShare: Record<CalculatorSegment, number> = {
 
 export const backupHoursRange = { min: 2, max: 24, step: 1, default: 8 };
 
-/**
- * Usable depth of discharge per product.
- * TODO(content): products.ts has no DoD yet — 0.9 is a typical LiFePO₄ value, confirm per product.
- */
-export const usableDepth: Record<ProductId, number> = {
-  svit600: 0.9,
-  svitHome: 0.9,
-  svitPlus5000: 0.9,
-  svitPlus16000: 0.9,
-  lithiumvalley: 0.9,
-};
-
-type CandidateRule = { product: ProductId; maxModules: number };
-
-/**
- * Battery candidates per segment, tried in order.
- * TODO(content): confirm max parallel modules for SVIT PLUS 5000/16000 and
- * the LITHIUMVALLEY step (208 kWh blocks up to 1 044 kWh assumed).
- */
-const candidateRules: Record<CalculatorSegment, CandidateRule[]> = {
-  // Apartments: no panels, batteries charge from the grid.
-  apartment: [
-    { product: "svit600", maxModules: 1 },
-    { product: "svitHome", maxModules: 1 },
-    { product: "svitPlus5000", maxModules: 3 },
-  ],
-  house: [
-    { product: "svitHome", maxModules: 1 },
-    { product: "svitPlus5000", maxModules: 3 },
-    { product: "svitPlus16000", maxModules: 2 },
-  ],
-  business: [
-    { product: "svitPlus16000", maxModules: 4 },
-    { product: "lithiumvalley", maxModules: 5 },
-  ],
-};
-
-function capacityKwh(id: ProductId): number {
-  const { value, unit } = products[id].capacity;
-  return unit === "Wh" ? value / 1000 : value;
-}
-
+/** Battery candidates for a segment: order, capacities and module limits from content/storage.ts. */
 export function batteryCandidates(
   segment: CalculatorSegment,
 ): BatteryCandidate[] {
-  return candidateRules[segment].map(({ product, maxModules }) => ({
-    id: product,
-    capacityKwh: capacityKwh(product),
-    usableDepth: usableDepth[product],
+  return storageCandidates(segment).map(({ id, capacityKwh, maxModules }) => ({
+    id,
+    capacityKwh,
+    usableDepth: usableShare,
     maxModules,
   }));
 }
 
-/**
- * Solution page per segment for goals with solar.
- * TODO(content): no reserve-power or per-segment solar pages exist in the
- * site structure yet; reserve-only results link to the product only.
- */
-export const solutionLinks: Partial<
-  Record<CalculatorSegment, { href: string; serviceKey: "turnkeySes" }>
-> = {
-  house: { href: routes.services.turnkeySes, serviceKey: "turnkeySes" },
-  business: { href: routes.services.turnkeySes, serviceKey: "turnkeySes" },
+export type SolutionLink = {
+  href: string;
+  serviceKey: "turnkeySes" | "backupHub";
 };
+
+/**
+ * Solution page for the result card. Backup only (always for apartments) →
+ * the backup power hub (segment pages are still planned); goals with solar →
+ * turnkey solar plants. Localised with `localizePath` in the view.
+ */
+export function solutionLink(goal: CalculatorGoal): SolutionLink {
+  return goal === "reserve"
+    ? { href: routes.backup.hub, serviceKey: "backupHub" }
+    : { href: routes.services.turnkeySes, serviceKey: "turnkeySes" };
+}
 
 export const calculatorDefaults = {
   segment: "house" as CalculatorSegment,

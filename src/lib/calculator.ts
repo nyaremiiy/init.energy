@@ -89,8 +89,9 @@ export function requiredCapacity(
 
 /**
  * First candidate (in order) whose capacity × the fewest modules covers the
- * need for its own usable depth. If none fits, the last candidate at its
- * maximum size, marked `fits: false`.
+ * need for its own usable depth. If none fits, the largest option (capacity ×
+ * maximum modules), marked `fits: false` — so the recommendation never shrinks
+ * as the need grows.
  */
 export function pickBattery(
   monthlyKwh: number,
@@ -118,14 +119,21 @@ export function pickBattery(
     }
   }
 
-  const last = candidates[candidates.length - 1];
-  if (!last) return undefined;
+  const largest = candidates.reduce<BatteryCandidate | undefined>(
+    (best, item) =>
+      !best ||
+      item.maxModules * item.capacityKwh > best.maxModules * best.capacityKwh
+        ? item
+        : best,
+    undefined,
+  );
+  if (!largest) return undefined;
 
   return {
-    id: last.id,
-    modules: last.maxModules,
-    capacityKwh: last.maxModules * last.capacityKwh,
-    usableDepth: last.usableDepth,
+    id: largest.id,
+    modules: largest.maxModules,
+    capacityKwh: largest.maxModules * largest.capacityKwh,
+    usableDepth: largest.usableDepth,
     fits: false,
   };
 }
