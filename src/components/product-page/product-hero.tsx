@@ -125,7 +125,7 @@ export function ProductHero({ page, product, locale }: ProductHeroProps) {
                 src={product.image.src}
                 alt={product.image.alt[locale]}
                 fill
-                priority
+                preload
                 unoptimized
                 sizes="(min-width: 1024px) 40vw, 100vw"
                 className="object-cover object-center"
