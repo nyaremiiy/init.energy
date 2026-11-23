@@ -36,8 +36,8 @@ export function ProjectsShowcase({ segment }: { segment?: ProjectSegment } = {})
   const messages = getMessages();
   const t = messages.projects;
   const projects = segment
-    ? [...visibleProjects]
-        .sort((a, b) => Number(b.segment === segment) - Number(a.segment === segment))
+    ? visibleProjects
+        .toSorted((a, b) => Number(b.segment === segment) - Number(a.segment === segment))
         .slice(0, showcaseSize)
     : featuredProjects;
 
