@@ -15,6 +15,16 @@
 
 ---
 
+## 2026-11-23 — HTML кожної сторінки на ~94 КБ менший: 404 без шапки в RSC-даних
+- **Агент:** Claude Code
+- **Гілка:** perf/home-html (статус: змерджено в develop)
+- **Діагностика:** у RSC-даних головної (221 тис. символів) шапка (меню 10,7 КБ) і футер були тричі: сама сторінка і дві копії кореневого `not-found.tsx` з `SiteChrome` — Next вбудовує дерево `not-found` у проп `notFound` кореневої й мовної розкладки на кожній сторінці.
+- **Що зроблено:** невідомі українські адреси `src/proxy.ts` тепер переписує на нову статичну `/ne-znaideno/` (404, noindex, шапка й футер), як англійські — на `/en/ne-znaideno/`; список відомих сторінок — той самий `localizedPaths`. Кореневий `not-found.tsx` — запасний, той самий `NotFoundView` без `SiteChrome`. `routes.notFoundEn` → `routes.notFound`, robots.txt закриває обидві адреси.
+- **Результат (HTML головної):** 510 → 424 КБ, gzip 74,8 → 63,3 КБ (−15 %); те саме зменшення на всіх сторінках з розкладками. LCP у локальному профілі (HTTP/1.1) 2 376 → 2 364 мс — у межах шуму: фото там стартує незалежно від HTML; на production з HTTP/2 фото ділить канал з HTML, тож виграш ~50–70 мс при 1,6 Мбіт/с. Менше також розбору й гідратації.
+- **Перевірено:** усі 74 адреси sitemap — 200; `/abc/`, `/cec/xyz/`, `/a/b/c/`, `/svit-xyz/` → 404 «Сторінку не знайдено» з шапкою й футером, `/en/abc/` → 404 «Page not found», `/pro-nas/` (uk/en) → «в розробці», `/ses/` → 308, `/maintenance/`, файли (`llms.txt`, `robots.txt`, `sitemap.xml`, маніфест, `og-image.png`, google…html) і `POST /api/visit/` — як раніше; усі сторінки статичні. Lint, build.
+- **Файли:** src/proxy.ts, src/app/not-found.tsx, src/app/(uk)/ne-znaideno/page.tsx, src/content/routes.ts, src/app/robots.ts, docs/ai/{CONTEXT,CHANGELOG}.md
+- **Що далі:** якщо LCP у Lighthouse лишиться > 2,5 с — прибрати preload другорядних шрифтів (4 файли, 123 КБ ділять канал із фото героя).
+
 ## 2026-11-23 — Кешування фото з public/images
 - **Агент:** Claude Code
 - **Гілка:** chore/image-cache (статус: змерджено в develop)
