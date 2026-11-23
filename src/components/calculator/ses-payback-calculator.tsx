@@ -317,7 +317,7 @@ export function SesPaybackCalculator() {
             />
           </div>
           {pathname !== regionHref ? (
-            <ArrowLink href={regionHref} className="self-start text-small">
+            <ArrowLink href={regionHref} wrap className="self-start text-small">
               {format(t.regionPageLink, { locative: region.locative[locale] })}
             </ArrowLink>
           ) : null}
