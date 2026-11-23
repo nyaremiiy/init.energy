@@ -1,4 +1,13 @@
 {
+  "hero": {
+    "controls": {
+      "label": "Слайди",
+      "position": "Слайд {current} з {total}",
+      "goTo": "Слайд {index}: {title}",
+      "pause": "Зупинити перемикання слайдів",
+      "play": "Відновити перемикання слайдів"
+    }
+  },
   "solutionsBySegment": {
     "eyebrow": "Рішення",
     "title": "Що вам потрібно живити?",

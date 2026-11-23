@@ -1,4 +1,13 @@
 {
+  "hero": {
+    "controls": {
+      "label": "Slides",
+      "position": "Slide {current} of {total}",
+      "goTo": "Slide {index}: {title}",
+      "pause": "Pause slide rotation",
+      "play": "Resume slide rotation"
+    }
+  },
   "solutionsBySegment": {
     "eyebrow": "Solutions",
     "title": "What do you need to power?",
