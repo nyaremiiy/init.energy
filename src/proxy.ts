@@ -9,8 +9,8 @@ const englishPrefix = "/en";
 /**
  * Pages that are linked but not built yet (`plannedPaths`) are rewritten to
  * the static «page in progress» screen; /en/… URLs without an English version
- * are rewritten to the static English 404 (the root not-found.tsx is
- * Ukrainian). Both answer 404 and the address bar keeps the original URL.
+ * and any other unknown URL are rewritten to the static 404 screen of their
+ * language (/ne-znaideno/, /en/ne-znaideno/). Both answer 404 and the address bar keeps the original URL.
  * Everything else passes through untouched, so pages stay static.
  */
 export function proxy(request: NextRequest) {
@@ -35,11 +35,13 @@ export function proxy(request: NextRequest) {
     return NextResponse.rewrite(target, { status: 404 });
   }
 
+  // Every public page exists in both languages, so `localizedPaths` (hasEnglish)
+  // is the list of known pages for Ukrainian URLs too. A new page missing from it answers 404.
   // The 404 screen itself is not exempt: opened directly it also answers 404.
-  const englishServicePaths = [routes.inProgress, routes.maintenance];
-  if (english && !hasEnglish(base) && !englishServicePaths.includes(base)) {
+  const servicePaths = [routes.inProgress, routes.maintenance];
+  if (!hasEnglish(base) && !servicePaths.includes(base)) {
     const target = request.nextUrl.clone();
-    target.pathname = `${englishPrefix}${routes.notFoundEn}`;
+    target.pathname = english ? `${englishPrefix}${routes.notFound}` : routes.notFound;
     return NextResponse.rewrite(target, { status: 404 });
   }
 
