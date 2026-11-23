@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useReducer } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { useReducedMotion } from "motion/react";
 
 import { HeroContentSlider } from "./hero-content-slider";
@@ -38,6 +38,12 @@ export function HeroSlider({ slides }: { slides: HeroSlide[] }) {
     previousIndex: null,
   });
   const prefersReducedMotion = useReducedMotion();
+  // Rotation pauses while the pointer or keyboard focus is on the text and
+  // while the tab is hidden, so nobody loses the slide they are reading.
+  const [hovered, setHovered] = useState(false);
+  const [focused, setFocused] = useState(false);
+  const [pageHidden, setPageHidden] = useState(false);
+  const paused = hovered || focused || pageHidden;
   const heroSlides = slides;
   const activeSlide = heroSlides[activeIndex];
   const previousSlide =
@@ -48,7 +54,13 @@ export function HeroSlider({ slides }: { slides: HeroSlide[] }) {
       : previousSlide;
 
   useEffect(() => {
-    if (prefersReducedMotion) {
+    const onVisibility = () => setPageHidden(document.visibilityState === "hidden");
+    document.addEventListener("visibilitychange", onVisibility);
+    return () => document.removeEventListener("visibilitychange", onVisibility);
+  }, []);
+
+  useEffect(() => {
+    if (prefersReducedMotion || paused) {
       return;
     }
 
@@ -58,7 +70,7 @@ export function HeroSlider({ slides }: { slides: HeroSlide[] }) {
     );
 
     return () => window.clearInterval(intervalId);
-  }, [prefersReducedMotion, slides.length]);
+  }, [prefersReducedMotion, paused, slides.length]);
 
   useEffect(() => {
     if (previousIndex === null) {
@@ -76,7 +88,11 @@ export function HeroSlider({ slides }: { slides: HeroSlide[] }) {
   return (
     <>
       <HeroMediaSlider slide={activeSlide} previousSlide={crossfadeSlide} />
-      <HeroContentSlider slide={activeSlide} />
+      <HeroContentSlider
+        slide={activeSlide}
+        onHoverChange={setHovered}
+        onFocusChange={setFocused}
+      />
     </>
   );
 }

@@ -9,15 +9,28 @@ import type { HeroSlide } from "./hero-slides";
 
 type HeroContentSliderProps = {
   slide: HeroSlide;
+  /** Pointer over the text (pauses rotation). */
+  onHoverChange?: (hovered: boolean) => void;
+  /** Keyboard focus inside the text (pauses rotation). */
+  onFocusChange?: (focused: boolean) => void;
 };
 
-export function HeroContentSlider({ slide }: HeroContentSliderProps) {
+export function HeroContentSlider({ slide, onHoverChange, onFocusChange }: HeroContentSliderProps) {
   const prefersReducedMotion = useReducedMotion();
 
   return (
     <div className="absolute inset-0 z-10 flex items-center overflow-hidden pt-28 pb-24 lg:pt-32 lg:pb-0">
       <Container inPanel>
-        <div className="relative" aria-live="polite">
+        {/* No aria-live: an auto-rotating slide would be read out every 10 s. */}
+        <div
+          className="relative"
+          onMouseEnter={() => onHoverChange?.(true)}
+          onMouseLeave={() => onHoverChange?.(false)}
+          onFocus={() => onFocusChange?.(true)}
+          onBlur={(event) => {
+            if (!event.currentTarget.contains(event.relatedTarget)) onFocusChange?.(false);
+          }}
+        >
           <AnimatePresence initial={false} mode="popLayout">
             <motion.div
               key={slide.id}
