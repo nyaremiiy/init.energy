@@ -57,7 +57,8 @@ export function ComparisonTable({ caption, featureLabel, recommendedLabel, legen
     <div className="flex flex-col gap-6">
       <div role="table" aria-label={caption} className="text-small">
         <div role="row" className={`grid items-end ${gridCols}`}>
-          <span role="columnheader" className="hidden md:block">
+          {/* Phones: out of the grid (sr-only) but still a column header, or every cell would map to the wrong column. */}
+          <span role="columnheader" className="sr-only md:not-sr-only">
             <span className="sr-only">{featureLabel}</span>
           </span>
           {columns.map((column, index) => {
