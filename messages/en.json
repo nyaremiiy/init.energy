@@ -141,6 +141,11 @@
       "solution": "Solution",
       "cta": "Get an exact quote",
       "note": "This is an estimate. An engineer confirms the exact configuration and price — the parameters you changed are added to your request."
+    },
+    "summary": {
+      "solar": "Solar plant {kw} kW",
+      "battery": "battery {product}",
+      "backup": "about {hours} h of backup"
     }
   },
   "faq": {
@@ -839,7 +844,12 @@
       "October",
       "November",
       "December"
-    ]
+    ],
+    "summary": {
+      "solar": "Solar plant {kw} kW",
+      "payback": "payback in about {years} years",
+      "battery": "battery {product}"
+    }
   },
   "notFound": {
     "metaTitle": "Page in progress — INIT ENERGY",
