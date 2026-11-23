@@ -3,7 +3,7 @@
 import { ChevronDown, Mail, MapPin, Phone } from "lucide-react";
 import { IconButton } from "@/components/ui/icon-button";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { formatPhone } from "@/lib/format";
 
@@ -41,6 +41,7 @@ export function MobileMenu() {
   // the burger stays (after the CTA) so they remain reachable.
   const hasPageLinks = onHome || pageLinks.length > 0;
   const [isOpen, setIsOpen] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!isOpen) {
@@ -50,13 +51,31 @@ export function MobileMenu() {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setIsOpen(false);
+        // The focused link disappears with the menu: return focus to the toggle.
+        rootRef.current?.querySelector<HTMLElement>("[aria-controls='mobile-menu']")?.focus();
       }
     };
+
+    // The menu covers the page: everything outside the header (main, footer,
+    // floating buttons) leaves the Tab order and the accessibility tree.
+    // Siblings on every level from the header up to <body> (English pages wrap it in <div lang="en">).
+    const outside: HTMLElement[] = [];
+    for (let node = rootRef.current?.closest("header") as Element | null | undefined; node && node !== document.body; node = node.parentElement) {
+      for (const sibling of node.parentElement?.children ?? []) {
+        if (sibling !== node && sibling instanceof HTMLElement && !sibling.inert) outside.push(sibling);
+      }
+    }
+    outside.forEach((element) => {
+      element.inert = true;
+    });
 
     document.body.style.overflow = "hidden";
     window.addEventListener("keydown", handleKeyDown);
 
     return () => {
+      outside.forEach((element) => {
+        element.inert = false;
+      });
       document.body.style.overflow = "";
       window.removeEventListener("keydown", handleKeyDown);
     };
@@ -65,7 +84,7 @@ export function MobileMenu() {
   const close = () => setIsOpen(false);
 
   return (
-    <div className={hasPageLinks ? "xl:hidden" : "lg:hidden"}>
+    <div ref={rootRef} className={hasPageLinks ? "xl:hidden" : "lg:hidden"}>
       <IconButton
         variant="outline-dark"
         size="sm"
