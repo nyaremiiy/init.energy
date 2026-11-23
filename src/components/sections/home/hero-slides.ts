@@ -55,6 +55,7 @@ export const sesOverviewHeroImage: HeroImage = {
   fallback: "/images/cec/hero/01-2560.webp",
   laptop: "/images/cec/hero/01-1440.avif",
   mobile: "/images/cec/hero/01-750.avif",
+  mobilePortrait: "/images/cec/hero/01-portrait.avif",
   tablet: "/images/cec/hero/01-1280.avif",
   type: "image/avif",
   wide: "/images/cec/hero/01-1920.avif",
