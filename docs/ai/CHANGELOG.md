@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-23 — Плагін Modern Web Guidance (Google Chrome)
+- **Агент:** Claude Code
+- **Гілка:** chore/modern-web-guidance (статус: змерджено в develop)
+- **Що зроблено:** у `.claude/settings.json` додано маркетплейс `googlechrome` і плагін `modern-web-guidance@googlechrome` (наявні плагіни без змін). В AGENTS.md — розділ «Modern Web Guidance»: Baseline target Widely available, поради довідкові, AGENTS.md має пріоритет, без нових залежностей і поліфілів, коли викликати плагін. CONTEXT.md — рядок у «Прийняті рішення».
+- **Файли:** .claude/settings.json, AGENTS.md, docs/ai/{CONTEXT,CHANGELOG}.md
+- **Нотатки / що далі:** плагін підхоплюється з нової сесії Claude Code (trust-запит). Сканування й покращення — окрема гілка `fix/modern-web-scan`.
+
 ## 2026-11-20 — Опис у блоці областей і на сторінках областей
 - **Агент:** Claude Code
 - **Гілка:** fix/region-links-text (статус: змерджено в develop)

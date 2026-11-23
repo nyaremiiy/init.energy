@@ -164,6 +164,7 @@ CLAUDE.md       # точка входу для Claude Code (імпортує AGE
 - Агенти: Claude Code і Codex, синхронізуються через `AGENTS.md` + `docs/ai/`.
 - GitHub remote `origin`: `https://github.com/nyaremiiy/init.energy.git`. Робочі зміни пушимо лише після lint/build і merge task-гілки в `develop`; `main` не мерджимо без прямої вказівки власника.
 - Плагіни Claude Code для SEO/GEO/маркетингу підключені на рівні репо через .claude/settings.json: searchfit-seo (основний), marketing (Anthropic knowledge-work), rampstack-seo. Плагіни з платними MCP вмикати лише з підтвердження власника.
+- Плагін `modern-web-guidance@googlechrome` (Google Chrome, Apache 2.0) підключено 2026-11-23 для верстки, CSS, форм, доступності й клієнтського JS. Baseline target — Widely available; поради довідкові, AGENTS.md має пріоритет (розділ «Modern Web Guidance»).
 - Усі секції використовують `Container`: максимум `1440px`, центрування та адаптивні горизонтальні відступи.
 - Лейбли секцій використовують компонент `Eyebrow` зі спільною mobile-first типографікою та декоративним кругом.
 - Заголовки використовують компонент `Heading` із семантичним рівнем через проп `as` і типовими розмірами `h2`/`h3` із токенів `globals.css`.

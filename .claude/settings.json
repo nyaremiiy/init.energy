@@ -8,11 +8,15 @@
     },
     "rampstack": {
       "source": { "source": "github", "repo": "rampstackco/plugins" }
+    },
+    "googlechrome": {
+      "source": { "source": "github", "repo": "GoogleChrome/modern-web-guidance" }
     }
   },
   "enabledPlugins": {
     "searchfit-seo@searchfit-seo": true,
     "marketing@knowledge-work-plugins": true,
-    "rampstack-seo@rampstack": true
+    "rampstack-seo@rampstack": true,
+    "modern-web-guidance@googlechrome": true
   }
 }
