@@ -22,6 +22,7 @@ const generalHeroImage: HeroImage = {
   fallback: "/images/home/hero/01-2560.avif",
   laptop: "/images/home/hero/01-1440.avif",
   mobile: "/images/home/hero/01-750.avif",
+  mobilePortrait: "/images/home/hero/01-portrait.avif",
   tablet: "/images/home/hero/01-1280.avif",
   type: "image/avif",
   wide: "/images/home/hero/01-1920.avif",
