@@ -15,6 +15,25 @@
 
 ---
 
+## 2026-11-23 — Оптимізація фото hero на інших сторінках
+- **Агент:** Claude Code
+- **Гілка:** perf/hero-images-all (статус: змерджено в develop)
+- **Що зроблено:** як на головній — мобільне фото hero перекодовано q40 і додано обрізану середину для вертикальних телефонів (`mobilePortrait`, 720 px):
+  - `/cec/` і 52 сторінки областей (uk/en) — `cec/hero/01-750.avif` 67 → 37 КБ, `01-portrait.avif` 27 КБ;
+  - `/rishennya/ses-dlya-gotelyu/` (uk/en) — `hotel/01-750.avif` 113 → 72 КБ, `01-portrait.avif` 53 КБ.
+  Не чіпали: `/rezervne-zhyvlennya/` (фото вже 10 КБ), продукти, калькулятор, політика cookie (LCP там — текст, не фото).
+
+| Сторінка (360×780, CPU ×4, ~1,6 Мбіт/с, медіана з 5) | LCP до | LCP після |
+|---|---|---|
+| `/cec/` | 2 624 мс | 1 736 мс |
+| `/cec/lvivska-oblast/` | 2 488 мс | 1 588 мс |
+| `/en/cec/kyiv/` | 2 348 мс | 1 364 мс |
+| `/rishennya/ses-dlya-gotelyu/` | 3 180 мс | 2 160 мс |
+
+- **Перевірка вигляду:** перший екран з новими й попередніми файлами на 360 / 390 / 412 / 600 / 740×360 px — середня різниця 0,02–0,53 з 255 (≤ 0,22 % пікселів > 8). CLS 0,0001 без змін. Lint, build, `npm test` (47).
+- **Помічено:** HTML `/cec/` — 146 КБ у gzip (789 КБ без стиснення): SVG-карта областей (152 КБ) у розмітці й ще раз у RSC-даних. Не змінювали.
+- **Файли:** public/images/cec/hero/01-{750,portrait}.avif, public/images/cec/rishennya/hotel/01-{750,portrait}.avif, src/components/sections/home/hero-slides.ts, src/content/solutions.ts, docs/ai/{CONTEXT,CHANGELOG}.md
+
 ## 2026-11-23 — Обрізане фото героя для вертикальних телефонів
 - **Агент:** Claude Code
 - **Гілка:** perf/hero-portrait (статус: змерджено в develop)
