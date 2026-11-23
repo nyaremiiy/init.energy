@@ -12,7 +12,8 @@ export default function robots(): MetadataRoute.Robots {
       disallow: [
         routes.inProgress,
         `/en${routes.inProgress}`,
-        `/en${routes.notFoundEn}`,
+        routes.notFound,
+        `/en${routes.notFound}`,
         routes.maintenance,
       ],
     },
