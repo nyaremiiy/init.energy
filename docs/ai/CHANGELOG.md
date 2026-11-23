@@ -15,6 +15,15 @@
 
 ---
 
+## 2026-11-23 — Калькулятори: коротке зведення для скрінрідера
+- **Агент:** Claude Code
+- **Гілка:** fix/calc-live-summary (статус: змерджено в develop)
+- **Що зроблено:** з карток результату `QuickCalculator` і `ses-payback-calculator` прибрано `aria-live` (вся картка зачитувалась при кожному кроці повзунка). Замість цього — один `sr-only` `<p role="status">` (`components/calculator/result-summary.tsx`), завжди в DOM, оновлюється через 500 мс після останньої зміни (`use-debounced-value.ts`). Рядок будує чиста `buildCalculatorSummary` (`lib/calculator-summary.ts`, тест `calculator-summary.test.mjs`): частини без значення пропускаються, перша літера велика. Тексти — `calculator.summary` і `sesPayback.summary` (uk/en), числа через `formatNumber`:
+  - головна: «СЕС 5 кВт, накопичувач SVIT HOME, резерв близько 15 год.» / "Solar plant 5 kW, battery SVIT HOME, about 15 h of backup.";
+  - калькулятор окупності: «СЕС {kw} кВт, окупність близько {years} років, накопичувач {product}.» — окупність лише коли введено бюджет, інакше «СЕС 5 кВт, накопичувач SVIT HOME.».
+- **Перевірено:** на головній і калькуляторі (uk, en) 10 змін повзунка за 300 мс → одне оновлення зведення через ~0,5 с; у `main` немає жодного `aria-live`. Знімки 6 сторінок × uk/en × 1440/360 — 0 % різниці. `npm test` (47), lint, build.
+- **Файли:** src/lib/calculator-summary.ts (+ тест), src/components/calculator/{result-summary.tsx,use-debounced-value.ts,QuickCalculator.tsx,ses-payback-calculator.tsx}, messages/{uk,en}.json, docs/ai/{CONTEXT,CHANGELOG}.md
+
 ## 2026-11-23 — Керування hero-слайдером: лічильник, смуги, пауза
 - **Агент:** Claude Code
 - **Гілка:** feature/hero-slider-controls (статус: змерджено в develop)

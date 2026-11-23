@@ -8,6 +8,7 @@ import { useEffect, type ReactNode } from "react";
 import { Group, NumberField, RangeField, SelectField } from "@/components/calculator/calculator-fields";
 import { ProductLink, Stat } from "@/components/calculator/calculator-result-parts";
 import { useSesPayback, type SesField } from "@/components/calculator/ses-payback-state";
+import { ResultSummary } from "@/components/calculator/result-summary";
 import { useLeadAttachment } from "@/components/calculator/use-lead-attachment";
 import { ArrowLink } from "@/components/ui/arrow-link";
 import { Button } from "@/components/ui/button";
@@ -24,6 +25,7 @@ import { localizePath } from "@/i18n/config";
 import { trackEvent } from "@/lib/analytics";
 import { goToLeadForm } from "@/lib/calculator-bridge";
 import { buildCalculatorLeadData, type CalculatorValue } from "@/lib/calculator-lead";
+import { buildCalculatorSummary } from "@/lib/calculator-summary";
 import { formatNumber } from "@/lib/format";
 import { format } from "@/lib/messages";
 
@@ -195,6 +197,13 @@ export function SesPaybackCalculator() {
     trackEvent({ event: "calculator_cta_click", kw: result.kw, product: result.battery?.id ?? "none", region: state.regionId, interacted });
     goToLeadForm(anchors.contacts);
   }
+
+  const summaryBattery = batteryName();
+  const spokenSummary = buildCalculatorSummary([
+    result.kw > 0 && format(t.summary.solar, { kw: formatNumber(result.kw, locale) }),
+    result.paybackYears ? format(t.summary.payback, { years: formatNumber(Math.round(result.paybackYears * 10) / 10, locale) }) : undefined,
+    summaryBattery && format(t.summary.battery, { product: summaryBattery }),
+  ]);
 
   const payback = result.paybackYears
     ? `${formatNumber(Math.round(result.paybackYears * 10) / 10, locale)} ${t.year}`
@@ -402,7 +411,8 @@ export function SesPaybackCalculator() {
       </form>
 
       <div className="flex flex-col gap-8 rounded-card bg-ink-glow p-card-sm text-white lg:sticky lg:top-28 lg:col-span-5 lg:p-card">
-        <div aria-live="polite" className="flex flex-col gap-6">
+        <ResultSummary text={spokenSummary} />
+        <div className="flex flex-col gap-6">
           <div className="flex items-center justify-between gap-4">
             <CardLabel tone="dark">{t.recommendation}</CardLabel>
             <span className="inline-flex items-center gap-2 text-small text-muted-dark">
