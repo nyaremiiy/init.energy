@@ -190,7 +190,7 @@ export type SolutionPage = {
     primaryCta: Localized;
     secondaryCta: Localized;
     /** Responsive hero photo (AVIF 750 / 1280 / 1440 / 1920 / 2560); without it a placeholder is shown. */
-    image?: { mobile: string; tablet: string; laptop: string; wide: string; desktop: string; alt: Localized };
+    image?: { mobile: string; mobilePortrait?: string; tablet: string; laptop: string; wide: string; desktop: string; alt: Localized };
     mediaLabel: Localized;
   };
   facts: {
@@ -263,6 +263,7 @@ export const solutionPages: SolutionPage[] = [
       secondaryCta: { uk: "Залишити заявку", en: "Send a request" },
       image: {
         mobile: "/images/cec/rishennya/hotel/01-750.avif",
+        mobilePortrait: "/images/cec/rishennya/hotel/01-portrait.avif",
         tablet: "/images/cec/rishennya/hotel/01-1280.avif",
         laptop: "/images/cec/rishennya/hotel/01-1440.avif",
         wide: "/images/cec/rishennya/hotel/01-1920.avif",
