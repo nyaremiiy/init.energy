@@ -4,6 +4,8 @@ export type HeroImage = {
   fallback: string;
   laptop?: string;
   mobile?: string;
+  /** Narrow portrait phones (aspect ≤ 3/5): the mobile photo cropped to its visible middle, fewer bytes for the LCP. */
+  mobilePortrait?: string;
   /** "right": 70 % 50 % (equipment on the right of the photo). */
   position?: "center" | "top" | "right";
   tablet?: string;
@@ -27,6 +29,7 @@ export function HeroPicture({ image, alt = "", priority = false }: { image: Hero
 
   return (
     <picture className="block size-full">
+      {image.mobilePortrait ? <source media="(max-width: 767px) and (max-aspect-ratio: 3/5)" srcSet={image.mobilePortrait} type={image.type} /> : null}
       {image.mobile ? <source media="(max-width: 767px)" srcSet={image.mobile} type={image.type} /> : null}
       {image.tablet ? <source media="(max-width: 1279px)" srcSet={image.tablet} type={image.type} /> : null}
       {image.laptop ? <source media="(max-width: 1599px)" srcSet={image.laptop} type={image.type} /> : null}
