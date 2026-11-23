@@ -36,7 +36,14 @@
 
 Сайт працює як Node.js-сервіс (systemd, назва за замовчуванням `init.energy`).
 
-Сервіс запускаємо з `-H localhost`, а не `-H 127.0.0.1` / `::1`: `ExecStart=/usr/bin/npm run start -- -H localhost -p 3001`. Next нормалізує `127.0.0.1` до `localhost`, і переписування в `src/proxy.ts` (404, «в розробці», технічні роботи) з `127.0.0.1` вважає зовнішнім — відповідь 500. nginx — `proxy_pass http://localhost:3001` (працює, хоч би на яку loopback-адресу Node прив'язався).
+Юніт запускає Next з `-H localhost` і IPv4 першим, nginx (`/etc/nginx/sites-available/init.energy`) іде на `proxy_pass http://127.0.0.1:3001`:
+
+```ini
+Environment=NODE_OPTIONS=--dns-result-order=ipv4first
+ExecStart=/usr/bin/npm run start -- -H localhost -p 3001
+```
+
+Не `-H 127.0.0.1`: Next нормалізує `127.0.0.1` до `localhost` і вважає переписування з `src/proxy.ts` (404, «в розробці», технічні роботи) зовнішнім — відповідь 500. Без `ipv4first` Node прив'язується до `::1`, і nginx дає 502.
 
 ```bash
 ./deploy.sh        # git pull гілки main, npm ci, npm run build, перезапуск сервісу
