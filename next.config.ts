@@ -26,6 +26,13 @@ const nextConfig: NextConfig = {
           { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
         ],
       },
+      {
+        // Photos in public/images have no content hash in the name: 7 days fresh, then up to
+        // 7 more days served from cache while the browser revalidates in the background.
+        // A replaced photo reaches returning visitors within a week at most.
+        source: "/images/:path*",
+        headers: [{ key: "Cache-Control", value: "public, max-age=604800, stale-while-revalidate=604800" }],
+      },
     ];
   },
   async redirects() {
