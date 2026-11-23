@@ -11,11 +11,14 @@ import { heroMediaTransitionDuration } from "./hero-slider.constants";
 type HeroMediaSliderProps = {
   slide: HeroSlide;
   previousSlide?: HeroSlide;
+  /** The first slide's photo is the LCP image: high fetch priority, sync decoding. */
+  priority?: boolean;
 };
 
 export function HeroMediaSlider({
   slide,
   previousSlide,
+  priority = false,
 }: HeroMediaSliderProps) {
   const prefersReducedMotion = useReducedMotion();
 
@@ -38,7 +41,7 @@ export function HeroMediaSlider({
         }}
         className="absolute inset-0 z-10"
       >
-        <HeroPicture image={slide.image} />
+        <HeroPicture image={slide.image} priority={priority} />
       </motion.div>
     </HeroParallax>
   );
