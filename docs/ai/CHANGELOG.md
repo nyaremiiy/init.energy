@@ -15,6 +15,99 @@
 
 ---
 
+## 2026-11-23 — LCP головної на мобільному: 3,24 → 2,38 с
+- **Агент:** Claude Code
+- **Гілка:** perf/home-lcp (статус: змерджено в develop)
+- **Діагностика** (production `next start`, headless Chrome 360×780, CPU ×4, ~1,6 Мбіт/с, затримка 150 мс): LCP-елемент — фото першого слайда `01-750.avif` (не текст; текст-кандидат — лід на ~1,5 с). Розклад до змін: TTFB 151 мс → затримка запиту фото до ~800 мс (знайдене на 205 мс, але на локальному HTTP/1.1 шість з'єднань зайняті HTML, CSS і чотирма шрифтами) → завантаження 98 КБ ~2,35 с (канал ділиться з 221 КБ JS, 123 КБ шрифтів, 74 КБ HTML) → рендер ~50 мс. Тобто LCP упирається в обсяг байтів до LCP, а не в JS чи рендер.
+- **Знайдена вада:** перше фото слайдера рендерилось без `fetchpriority="high"` і з `decoding="async"` — `HeroMediaSlider` не передавав `priority` (у звіті Modern Web Guidance я помилково вважав, що hero вже з високим пріоритетом — так було лише на сторінках з одним фото).
+
+| Зміна | LCP `/`, медіана з 5 |
+|---|---|
+| До змін | 3 244 мс |
+| `priority` для першого слайда (`fetchpriority="high"`, `decoding="sync"`) | 3 208 мс |
+| `01-750.avif` перекодовано q45: 98 → 73 КБ (перевірка) | 2 772 мс |
+| `01-750.avif` q40: 98 → 59 КБ (застосовано) | **2 376 мс** |
+
+  CLS 0,0001 без змін. Сторінка області — 2 528 мс (не змінювалась).
+- **Чому фото можна стиснути без зміни вигляду:** джерело `(max-width: 767px)` завжди лежить під затемненням `.hero::after` 74 %; після нього середня різниця з оригіналом 0,9/255 (3,5 % пікселів > 4/255), на фрагменті з людьми в натуральному розмірі оригінал, q45 і q40 не відрізнити; знімки 6 сторінок × uk/en × 1440/360 — 0 % різниці. Роздільність та сама (980×1314), перекодовано з наявного AVIF (оригіналу в репозиторії немає). Інші слайди (`02-750`, `03-750`) не чіпав: вони вантажаться лише при перемиканні.
+- **Що ще заважає / не робили:** 221 КБ JS до LCP — це React, Next і Motion (слайдер, `Reveal`), без зміни компонентів не відкласти; калькулятор (30 КБ gz) нижче екрана, але React 19 не гідратує острівці пізніше без втрати серверного HTML. Шрифти (4 preload, 123 КБ) не чіпав — інакше текст миготить при завантаженні. На production за nginx з HTTP/2 затримка старту запиту фото (~0,6 с черги на HTTP/1.1) має бути меншою — варто переміряти Lighthouse після деплою. Hero сторінок областей (`/cec/` фото, 2,5 с) можна полегшити так само.
+- **Перевірено:** `npm test` (47), lint, build; сторінка лишилась статичною.
+- **Файли:** src/components/sections/home/{hero-media-slider,hero-slider}.tsx, public/images/home/hero/01-750.avif, docs/ai/{CONTEXT,CHANGELOG}.md
+
+## 2026-11-23 — Калькулятори: коротке зведення для скрінрідера
+- **Агент:** Claude Code
+- **Гілка:** fix/calc-live-summary (статус: змерджено в develop)
+- **Що зроблено:** з карток результату `QuickCalculator` і `ses-payback-calculator` прибрано `aria-live` (вся картка зачитувалась при кожному кроці повзунка). Замість цього — один `sr-only` `<p role="status">` (`components/calculator/result-summary.tsx`), завжди в DOM, оновлюється через 500 мс після останньої зміни (`use-debounced-value.ts`). Рядок будує чиста `buildCalculatorSummary` (`lib/calculator-summary.ts`, тест `calculator-summary.test.mjs`): частини без значення пропускаються, перша літера велика. Тексти — `calculator.summary` і `sesPayback.summary` (uk/en), числа через `formatNumber`:
+  - головна: «СЕС 5 кВт, накопичувач SVIT HOME, резерв близько 15 год.» / "Solar plant 5 kW, battery SVIT HOME, about 15 h of backup.";
+  - калькулятор окупності: «СЕС {kw} кВт, окупність близько {years} років, накопичувач {product}.» — окупність лише коли введено бюджет, інакше «СЕС 5 кВт, накопичувач SVIT HOME.».
+- **Перевірено:** на головній і калькуляторі (uk, en) 10 змін повзунка за 300 мс → одне оновлення зведення через ~0,5 с; у `main` немає жодного `aria-live`. Знімки 6 сторінок × uk/en × 1440/360 — 0 % різниці. `npm test` (47), lint, build.
+- **Файли:** src/lib/calculator-summary.ts (+ тест), src/components/calculator/{result-summary.tsx,use-debounced-value.ts,QuickCalculator.tsx,ses-payback-calculator.tsx}, messages/{uk,en}.json, docs/ai/{CONTEXT,CHANGELOG}.md
+
+## 2026-11-23 — Керування hero-слайдером: лічильник, смуги, пауза
+- **Агент:** Claude Code
+- **Гілка:** feature/hero-slider-controls (статус: змерджено в develop)
+- **Що зроблено:** за `design/hero-pause-perf` (рішення власника за звітом Modern Web Guidance, WCAG 2.2.2) у hero зі слайдами (головна, `/cec/`, uk/en) — група `role="group"` «Слайди» / "Slides": лічильник «01 / 03» (Montserrat 500, `tabular-nums`, « / 03» `text-muted-dark`, для скрінрідера `sr-only` «Слайд 1 з 3» без `aria-live`), смуга-кнопка на кожен слайд (новий `ui/progress-bar-button.tsx`: ціль 44 px, видима смуга 40×3 px — `w-10 h-0.75`, `aria-label` «Слайд N: {заголовок}», `aria-current`), кнопка паузи `IconButton` (нові гліфи `pause` / `play`, підпис «Зупинити / Відновити перемикання слайдів»). На lg — праворуч у рядку CTA (низ групи = низ кнопок), нижче — окремим рядком під кнопками. Тексти — `messages.hero.controls`.
+  - Перемикання тепер рахує сама CSS-анімація активної смуги: кінець анімації (`animationend`) → наступний слайд, пауза — `animation-play-state: paused` (той самий патерн і ключові кадри `tab-progress`, що у вкладках накопичувачів). `setInterval` прибрано, заповнення й перемикання не розходяться після паузи.
+  - `paused = userPaused || hovered || focused || pageHidden`; пауза кнопкою тримається, доки людина не натисне «Відновити». Наведення й фокус ставлять на паузу лише текст слайда, не контроли — інакше «Відновити» не діяло б, поки фокус на кнопці.
+  - Контроли поза анімованим текстом: фокус на смузі не губиться при зміні слайда.
+  - `prefers-reduced-motion`: ротації немає → немає кнопки паузи й заповнення; активна смуга повна, перемикання вручну.
+  - На телефонах текст hero зі слайдами тепер у потоці (`flex-1` у колонці `.hero`): поки вміщається — та сама висота, на коротких екранах hero росте. На 568 px раніше eyebrow заходив під логотип (вада була й до цієї задачі), а контроли лягали б на індикатор прокрутки.
+- **Відхилення від макета:** заповнення — `scaleX`, а не ширина (той самий вигляд, без перерахунку layout); hover кнопки паузи — наявний варіант `IconButton outline-dark` (рамка біла + `bg-line-dark`), а не `bg-fill-dark`, щоб усі круглі кнопки на темному були однакові.
+- **Перевірено** (production-збірка): клавіатура — Tab: CTA → 3 смуги → пауза; Enter на паузі → «Відновити», заповнення стоїть; Esc нічого не робить; Space на смузі 2 → слайд 2, фокус лишається; пауза тримається 11 с; після «Відновити» за 10 с — слайд 3. Reduced motion (EN, 360): кнопки паузи й анімації немає, ручне перемикання працює. Група в серверному HTML; на сторінках з одним слайдом її немає. Знімки 6 сторінок × uk/en × 1440/360: зміни лише в hero головної й `/cec/`, висоти сторінок ті самі; без горизонтального скролу; 568 / 640 / 780 px — текст і контроли вміщаються. LCP головної 3 188 → 3 208 мс (шум), CLS 0,0001. `npm test`, lint, build.
+- **Файли:** src/components/ui/{progress-bar-button,icon-button}.tsx, src/components/sections/home/{hero-slider,hero-slider-controls,hero-content-slider}.tsx, src/components/sections/PageHero.tsx, messages/{uk,en}.json, docs/ai/{CONTEXT,CHANGELOG}.md
+
+## 2026-11-23 — Modern Web Guidance: сканування й покращення
+- **Агент:** Claude Code
+- **Гілка:** fix/modern-web-scan (статус: змерджено в develop)
+- **Що зроблено:** `legacy-scan src` (3 знахідки) + ручний прохід гайдів `optimize-image-priority`, `dialog`, `light-dismiss-a-dialog`, `prevent-page-scroll-under-modal-dialog`, `navbar`, `menu`, `navigation-drawer`, `accordion`, `search-hidden-content`, `forms`, `accessible-error-announcement`, `required-field-feedback`, `persistent-toast-notifications`, `responsive-table`, `accessibility`, `motion`, `parallax-scroll-effects`, `scroll-entry-exit-effects`, `security`, `performance`, `visually-stable-font-fallbacks`, `switch`, `slider`. Вигляд сторінок не змінився (крім виправленого скролу на калькуляторі).
+
+| Знахідка | Файл | Що радить гайд | Рішення |
+|---|---|---|---|
+| `[...arr].sort()` ×3 | `projects-showcase.tsx`, `content/insolation.ts` | `toSorted()` (js/copying-array-methods) | застосовано (лише код функцій, дані не змінено) |
+| `priority` у `next/image` застарів у Next 16 | `PageHero`, `hero-video`, `product-hero` | LCP-зображенню — високий пріоритет | застосовано: `preload` (той самий preload + `fetchpriority=high`) |
+| Вікно налаштувань cookie — `div role=dialog` з ручною пасткою фокусу | `CookieBanner.tsx` | нативний `<dialog>` + `showModal()`: inert-сторінка, Esc, top layer | застосовано; вигляд той самий (діалог — повноекранний шар, панель усередині) |
+| Блокування скролу через `body { overflow: hidden }` | `CookieBanner.tsx`, `mobile-menu.tsx` | `overscroll-behavior: contain` на `dialog`/`::backdrop` | **ні**: у Safari `overscroll-behavior` не працює на неспрокручуваних елементах — сторінка під вікном прокручувалась би |
+| Мобільне меню на весь екран, але Tab і скрінрідер ідуть на сторінку під ним | `mobile-menu.tsx` | модальний шар з inert-фоном | застосовано: усе поза шапкою `inert`, поки меню відкрите (UA і EN); Esc повертає фокус на бургер. На `<dialog>` не переводили — кнопка меню в шапці мусить лишатись активною |
+| `aria-haspopup="true"` на мега-меню (= «menu») | `mega-menu-item.tsx` | навігація — disclosure без `aria-haspopup`, з `aria-controls` | застосовано; Esc тепер лишає фокус на кнопці (раніше фокус зникав разом із панеллю), Enter знову відкриває |
+| Закриті відповіді FAQ (`visibility: hidden`) не знаходить Ctrl+F і текстові фрагменти | `FaqAccordion.tsx` | `hidden="until-found"` + `beforematch` | застосовано там, де підтримується (Chrome, Edge, Firefox); у Safari — як раніше. `<details name>` не беремо: кілька відкритих, фільтр тем і анімація |
+| `aria-live="polite"` на hero-слайдері, що сам перемикається кожні 10 с | `hero-content-slider.tsx` | не оголошувати автоматичну ротацію | застосовано; ротація стає на паузу при наведенні, фокусі в тексті й прихованій вкладці |
+| `role="alert"` на кожному повідомленні поля | `ui/form/field.tsx` | при submit — фокус на перше поле з помилкою, без окремого live-регіону на кожне поле | застосовано; `focusFirstInvalid` тепер шукає лише контроли (не `fieldset`) |
+| Live-регіон тосту створювався разом із текстом | `toast.tsx` | постійний регіон | застосовано: контейнер `role="status"` завжди в DOM, помилка — `alert` |
+| Прихована кнопка «вгору» лишалась у дереві доступності | `back-to-top.tsx` | — | застосовано: `inert`, поки кнопка схована |
+| Перша клітинка шапки таблиць порівняння на мобільному `display:none` → для скрінрідера колонки зсунуті на одну | `comparison-table.tsx`, `backup-runtime.tsx`, `ses-plant-types.tsx` | `responsive-table`: заголовки мають відповідати клітинкам | застосовано: `sr-only md:not-sr-only` |
+| Власне `.sr-only` у `globals.css` (з першого коміту, застаріла `clip`) поза шарами перебивало всі утиліти, зокрема `md:not-sr-only` | `globals.css` | `clip-path` замість `clip` | застосовано: дубль видалено, працює вбудований `sr-only` Tailwind (ідентичний вигляд) |
+| Горизонтальний скрол на `/kalkulyator/okupnist-ses/` при 360 px (наявна вада) | `ses-payback-calculator.tsx` | — | застосовано: `ArrowLink wrap` для посилання «Детальніше про сонячні панелі у … області» |
+| Немає `frame-ancestors`, COOP | `next.config.ts` | `Content-Security-Policy: frame-ancestors 'self'` + `X-Frame-Options`, `Cross-Origin-Opener-Policy: same-origin-allow-popups` | застосовано (CSP лише з `frame-ancestors` не обмежує скрипти) |
+| Повна CSP з nonce, HSTS | `next.config.ts` | обов'язкові заголовки | **рішення власника** (див. нижче) |
+| `Reveal` / паралакс на Motion | `reveal.tsx`, hero | CSS scroll-driven animations | **ні**: заміна наших компонентів; `animation-timeline` у Safari обмежений |
+| Кольори в `oklch`, `:user-invalid`, `<input switch>`, `accent-color` | — | сучасні CSS-можливості | **ні**: токени в `@theme`; помилки форм — за нашою схемою (після submit); `switch` — лише Safari |
+| Шрифти: стабільні fallback | `layout.tsx` | `size-adjust` для fallback | не потрібно: `next/font` уже робить `adjustFontFallback` |
+| Посилання `target="_blank"` | футер, соцмережі, віджет | `noopener` | уже є |
+
+- **Вимірювання** (production-збірка, headless Chrome, 360×780, CPU ×4, ~1,6 Мбіт/с, медіана з 3; Lighthouse не запускали):
+
+| | LCP до → після | CLS до → після | тап по FAQ (тривалість події) |
+|---|---|---|---|
+| `/` | 3 144 → 3 188 мс | 0,0001 → 0,0001 | 24 → 16 мс |
+| `/cec/lvivska-oblast/` | 2 540 → 2 544 мс | 0,0001 → 0,0001 | 16 → 24 мс |
+
+  Різниця — у межах шуму; ці зміни не стосувались LCP (hero вже мав `fetchpriority=high`).
+- **Перевірено:** `npm test` (44), `npm run lint` (з `lint:tokens`), `npm run build` — маршрути ті самі, усі статичні. Знімки 6 сторінок (головна, `/cec/`, Львівська область, резервне живлення, калькулятор, SVIT HOME) × uk/en × 1440/360 до й після: 22 з 24 — 0 % різниці пікселів; калькулятор 360 — +21 px (посилання переноситься), горизонтального скролу більше немає. Клавіатура (22 перевірки, uk і en): мобільне меню (inert, Esc → бургер), мега-меню (Esc → кнопка, Enter відкриває), вікно cookie (модальне, Tab не виходить на сторінку, Esc закриває й повертає фокус), FAQ відкривається за текстовим фрагментом, порожня заявка → фокус на «Ім'я» без `alert`. Заявка відправлена (тестовий рядок з `storage/leads.jsonl` прибрано). Повторний `legacy-scan src` — 0 знахідок.
+- **Потрібне рішення власника:**
+  - кнопка паузи для hero-слайдера (WCAG 2.2.2 вимагає видимого керування для автоматичного руху довше 5 с; зараз — пауза при наведенні й фокусі);
+  - повна `Content-Security-Policy` з nonce: у Next nonce робить усі сторінки динамічними, плюс треба погодити домени GTM, GA4, Ads, Meta, TikTok;
+  - `Strict-Transport-Security`: залежить від nginx і HTTPS на сервері; почати з короткого `max-age`;
+  - калькулятори: `aria-live` на всьому блоці результату зачитує його при кожному русі повзунка — краще коротке зведення (потрібен новий текст у `messages`);
+  - заміна `Reveal` / паралакса на CSS scroll-driven animations — не робили.
+- **Файли:** src/components/{consent/CookieBanner,faq/FaqAccordion,calculator/ses-payback-calculator}.tsx, src/components/layout/header/{mobile-menu,mega-menu-item,mega-menu-panel}.tsx, src/components/sections/{PageHero,projects-showcase}.tsx, src/components/sections/hero/hero-video.tsx, src/components/sections/home/{hero-slider,hero-content-slider}.tsx, src/components/sections/{backup/backup-runtime,ses/ses-plant-types}.tsx, src/components/product-page/product-hero.tsx, src/components/ui/{arrow-link,back-to-top,comparison-table,toast}.tsx, src/components/ui/form/{field,focus}.ts(x), src/content/insolation.ts, src/app/globals.css, next.config.ts, docs/ai/{CONTEXT,CHANGELOG}.md
+
+## 2026-11-23 — Плагін Modern Web Guidance (Google Chrome)
+- **Агент:** Claude Code
+- **Гілка:** chore/modern-web-guidance (статус: змерджено в develop)
+- **Що зроблено:** у `.claude/settings.json` додано маркетплейс `googlechrome` і плагін `modern-web-guidance@googlechrome` (наявні плагіни без змін). В AGENTS.md — розділ «Modern Web Guidance»: Baseline target Widely available, поради довідкові, AGENTS.md має пріоритет, без нових залежностей і поліфілів, коли викликати плагін. CONTEXT.md — рядок у «Прийняті рішення».
+- **Файли:** .claude/settings.json, AGENTS.md, docs/ai/{CONTEXT,CHANGELOG}.md
+- **Нотатки / що далі:** плагін підхоплюється з нової сесії Claude Code (trust-запит). Сканування й покращення — окрема гілка `fix/modern-web-scan`.
+
 ## 2026-11-20 — Опис у блоці областей і на сторінках областей
 - **Агент:** Claude Code
 - **Гілка:** fix/region-links-text (статус: змерджено в develop)

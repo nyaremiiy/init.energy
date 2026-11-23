@@ -5,6 +5,7 @@
  */
 export function focusFirstInvalid(form: HTMLFormElement | null) {
   requestAnimationFrame(() => {
-    form?.querySelector<HTMLElement>("[aria-invalid='true']")?.focus();
+    // Controls only: a <fieldset aria-invalid> (radio group) cannot take focus.
+    form?.querySelector<HTMLElement>(":is(input, select, textarea, button)[aria-invalid='true']")?.focus();
   });
 }

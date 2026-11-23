@@ -667,11 +667,11 @@ export function regionById(id: string): InsolationRegion | undefined {
 
 /** Alphabetical by the full name in a locale (selects). */
 export function regionsByLocale(locale: Locale) {
-  return [...insolationRegions].sort((a, b) => a.name[locale].localeCompare(b.name[locale], locale));
+  return insolationRegions.toSorted((a, b) => a.name[locale].localeCompare(b.name[locale], locale));
 }
 
 /** Alphabetical by the short name in a locale (pills, «other regions»), ignoring «м.» / «АР»: м. Київ next to Київська. */
 export function regionsByShortName(locale: Locale) {
   const key = (region: InsolationRegion) => region.shortName[locale].replace(/^(м\.|АР)\s+/, "");
-  return [...insolationRegions].sort((a, b) => key(a).localeCompare(key(b), locale));
+  return insolationRegions.toSorted((a, b) => key(a).localeCompare(key(b), locale));
 }

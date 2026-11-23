@@ -43,7 +43,7 @@ const titleId = "hero-title";
 function HeroMedia({ media }: { media: PageHeroMedia }) {
   if (media.type === "image") {
     // LCP image: preloaded, full width of the viewport.
-    return <Image src={media.src} alt={media.alt} fill priority sizes="100vw" className="hero__image" />;
+    return <Image src={media.src} alt={media.alt} fill preload sizes="100vw" className="hero__image" />;
   }
   if (media.type === "picture") return <HeroPicture image={media.image} alt={media.alt} priority />;
   if (media.type === "video") return <HeroVideo src={media.src} poster={media.poster} />;
@@ -76,7 +76,8 @@ export function PageHero(props: PageHeroProps) {
       variant="dark"
       aria-labelledby={content ? titleId : (props as { slides: HeroSlide[] }).slides[0]?.id}
       className="bg-white pt-panel-sm sm:pt-panel"
-      panelClassName="hero shadow-soft"
+      // Slider on phones: a flex column whose copy is in the flow, so a short screen grows the hero instead of clipping it.
+      panelClassName={`hero shadow-soft ${content ? "" : "flex flex-col md:block"}`}
     >
       {content ? (
         <>

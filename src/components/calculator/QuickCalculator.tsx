@@ -5,6 +5,7 @@ import { useState } from "react";
 
 import { Group, RangeField, SelectField } from "@/components/calculator/calculator-fields";
 import { ResultLink, Stat } from "@/components/calculator/calculator-result-parts";
+import { ResultSummary } from "@/components/calculator/result-summary";
 import { useLeadAttachment } from "@/components/calculator/use-lead-attachment";
 import { Button } from "@/components/ui/button";
 import { CardLabel } from "@/components/ui/card-label";
@@ -35,6 +36,7 @@ import {
 } from "@/lib/calculator";
 import { goToLeadForm } from "@/lib/calculator-bridge";
 import { buildCalculatorLeadData } from "@/lib/calculator-lead";
+import { buildCalculatorSummary } from "@/lib/calculator-summary";
 import { formatNumber } from "@/lib/format";
 import { useLocale, useMessages } from "@/i18n/client";
 import type { Locale } from "@/i18n/config";
@@ -114,6 +116,12 @@ export function QuickCalculator() {
     needBattery,
   });
   const config = configuration(rec, t, units, locale);
+  const battery = batteryName(rec, t);
+  const spokenSummary = buildCalculatorSummary([
+    rec.solarKw !== undefined && format(t.summary.solar, { kw: formatNumber(rec.solarKw, locale) }),
+    battery && format(t.summary.battery, { product: battery }),
+    battery && rec.backupHours !== undefined && format(t.summary.backup, { hours: formatNumber(Math.round(rec.backupHours), locale) }),
+  ]);
   const isCustom = rec.solarFits === false || rec.battery?.fits === false;
   const solution = solutionLink(goal);
 
@@ -346,7 +354,8 @@ export function QuickCalculator() {
       </form>
 
       <div className="flex flex-col gap-8 rounded-card bg-ink-glow p-card-sm text-white lg:col-span-5 lg:p-card">
-        <div aria-live="polite" className="flex flex-col gap-6">
+        <ResultSummary text={spokenSummary} />
+        <div className="flex flex-col gap-6">
           <div className="flex items-center justify-between gap-4">
             <CardLabel tone="dark">{t.result.eyebrow}</CardLabel>
             <span className="text-small text-muted-dark">

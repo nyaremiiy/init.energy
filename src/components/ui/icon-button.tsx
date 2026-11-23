@@ -1,10 +1,10 @@
-import { ArrowUpRight, Loader2, Menu, Phone, X } from "lucide-react";
+import { ArrowUpRight, Loader2, Menu, Pause, Phone, Play, X } from "lucide-react";
 import Link from "next/link";
 import type { ComponentPropsWithoutRef } from "react";
 
 type IconButtonVariant = "outline-light" | "outline-dark" | "solid-light" | "solid-dark";
 type IconButtonSize = "md" | "sm";
-type IconButtonIcon = "arrow" | "close" | "menu" | "phone";
+type IconButtonIcon = "arrow" | "close" | "menu" | "phone" | "pause" | "play";
 
 type SharedProps = {
   variant?: IconButtonVariant;
@@ -69,6 +69,10 @@ export function IconButton(props: IconButtonProps) {
     <Menu {...glyphProps} />
   ) : icon === "phone" ? (
     <Phone {...glyphProps} />
+  ) : icon === "pause" ? (
+    <Pause {...glyphProps} />
+  ) : icon === "play" ? (
+    <Play {...glyphProps} />
   ) : (
     <ArrowUpRight {...glyphProps} className={arrowMove} />
   );

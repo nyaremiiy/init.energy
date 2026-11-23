@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 type NavigatorWithConnection = Navigator & { connection?: { saveData?: boolean } };
 
 /**
- * Hero video: the poster is the LCP image (next/image, priority); the video
+ * Hero video: the poster is the LCP image (next/image, preload); the video
  * is mounted only after the page has loaded, and never with reduced motion
  * or the browser's data saver.
  */
@@ -29,7 +29,7 @@ export function HeroVideo({ src, poster }: { src: string; poster: string }) {
 
   return (
     <>
-      <Image src={poster} alt="" fill priority sizes="100vw" className="hero__image" />
+      <Image src={poster} alt="" fill preload sizes="100vw" className="hero__image" />
       {play ? (
         <video
           className="hero__image absolute inset-0"

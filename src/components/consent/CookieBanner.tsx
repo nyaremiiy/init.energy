@@ -4,7 +4,7 @@ import { Cookie, Lock } from "lucide-react";
 import { InlineLink } from "@/components/ui/inline-link";
 import { IconButton } from "@/components/ui/icon-button";
 import { Switch } from "@/components/ui/form/switch";
-import { useEffect, useId, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { routes } from "@/content/routes";
@@ -30,18 +30,28 @@ function CookieMark({ size }: { size: "sm" | "md" }) {
 }
 
 /** Real switch: role="switch", labelled by the row title, Space/Enter toggle natively. */
-/** Settings: centred dialog on desktop, bottom sheet on phones; focus trapped, Esc / backdrop close. */
+/** Settings: centred dialog on desktop, bottom sheet on phones; native modal <dialog>, Esc / backdrop close. */
 function CookieSettings() {
   const locale = useLocale();
   const t = useMessages().cookies;
   const { consent, accept, reject, save, closeSettings } = useConsent();
   const [analytics, setAnalytics] = useState(consent?.analytics ?? false);
   const [marketing, setMarketing] = useState(consent?.marketing ?? false);
-  const dialogRef = useRef<HTMLDivElement>(null);
+  const dialogRef = useRef<HTMLDialogElement>(null);
   const id = useId();
 
+  /** Closes the native modal first: while it is open the page is inert and focus cannot return to the opener. */
+  const finish = (action: () => void) => () => {
+    dialogRef.current?.close();
+    action();
+  };
+
+  // Native modal: the page behind becomes inert, focus stays inside, Esc fires
+  // `cancel`. Scrolling is still locked on <body>: Safari ignores
+  // overscroll-behavior on the backdrop.
   useEffect(() => {
     const dialog = dialogRef.current;
+    if (dialog && !dialog.open) dialog.showModal();
     dialog?.querySelector<HTMLElement>("[data-autofocus]")?.focus();
     const overflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -50,25 +60,6 @@ function CookieSettings() {
     };
   }, []);
 
-  function onKeyDown(event: ReactKeyboardEvent) {
-    if (event.key === "Escape") {
-      event.stopPropagation();
-      closeSettings();
-      return;
-    }
-    if (event.key !== "Tab") return;
-    const focusable = [...(dialogRef.current?.querySelectorAll<HTMLElement>("button:not([disabled]), a[href]") ?? [])];
-    const first = focusable[0];
-    const last = focusable.at(-1);
-    if (event.shiftKey && document.activeElement === first) {
-      event.preventDefault();
-      last?.focus();
-    } else if (!event.shiftKey && document.activeElement === last) {
-      event.preventDefault();
-      first?.focus();
-    }
-  }
-
   const rows = [
     { key: "necessary", checked: true, disabled: true, onChange: undefined },
     { key: "analytics", checked: analytics, disabled: false, onChange: setAnalytics },
@@ -76,14 +67,19 @@ function CookieSettings() {
   ] as const;
 
   return (
-    <div className="fixed inset-0 z-60 flex items-end justify-center md:p-6" onKeyDown={onKeyDown}>
-      <div aria-hidden className="absolute inset-0 bg-faint motion-safe:animate-enter" onClick={closeSettings} />
+    // The <dialog> is the full-screen layer (as the old fixed wrapper); the panel inside keeps its look.
+    <dialog
+      ref={dialogRef}
+      aria-labelledby={`${id}-title`}
+      aria-describedby={`${id}-subtitle`}
+      onCancel={(event) => {
+        event.preventDefault();
+        finish(closeSettings)();
+      }}
+      className="fixed inset-0 m-0 size-full max-h-none max-w-none items-end justify-center overflow-hidden bg-transparent p-0 text-ink backdrop:bg-transparent open:flex md:p-6"
+    >
+      <div aria-hidden className="absolute inset-0 bg-faint motion-safe:animate-enter" onClick={finish(closeSettings)} />
       <div
-        ref={dialogRef}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby={`${id}-title`}
-        aria-describedby={`${id}-subtitle`}
         style={{ maxHeight: "85dvh" }}
         className="relative flex w-full flex-col overflow-hidden rounded-t-3xl bg-white motion-safe:animate-enter md:max-w-176 md:rounded-card md:bg-glass md:shadow-glass"
       >
@@ -100,7 +96,7 @@ function CookieSettings() {
               variant="outline-light"
               size="sm"
               icon="close"
-              onClick={closeSettings}
+              onClick={finish(closeSettings)}
               aria-label={t.settings.close}
             />
           </div>
@@ -141,20 +137,20 @@ function CookieSettings() {
             {t.policyLink}
           </InlineLink>
           <div className="grid grid-cols-2 gap-2 md:flex md:justify-end">
-            <Button type="button" variant="dark" onClick={accept} className={`col-span-2 md:order-3 ${decisionButton}`}>
+            <Button type="button" variant="dark" onClick={finish(accept)} className={`col-span-2 md:order-3 ${decisionButton}`}>
               {t.settings.acceptAll}
             </Button>
-            <Button type="button" variant="outline-light" onClick={reject} className={`md:order-1 ${decisionButton}`}>
+            <Button type="button" variant="outline-light" onClick={finish(reject)} className={`md:order-1 ${decisionButton}`}>
               {t.settings.rejectAll}
             </Button>
-            <Button type="button" variant="outline-light" onClick={() => save({ analytics, marketing })} className={`md:order-2 ${decisionButton}`}>
+            <Button type="button" variant="outline-light" onClick={finish(() => save({ analytics, marketing }))} className={`md:order-2 ${decisionButton}`}>
               {t.settings.save}
             </Button>
           </div>
         </div>
         </div>
       </div>
-    </div>
+    </dialog>
   );
 }
 
