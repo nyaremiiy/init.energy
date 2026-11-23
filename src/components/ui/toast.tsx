@@ -50,12 +50,13 @@ export function ToastProvider({ children }: { children: ReactNode }) {
   return (
     <ToastContext.Provider value={value}>
       {children}
-      <div className="pointer-events-none fixed top-32 right-4 left-4 z-50 sm:left-auto sm:w-96">
+      {/* Always in the DOM: a live region inserted together with its text is often not announced. Errors use alert. */}
+      <div role="status" className="pointer-events-none fixed top-32 right-4 left-4 z-50 sm:left-auto sm:w-96">
         <AnimatePresence>
           {toast ? (
             <motion.div
               key={toast.id}
-              role={toast.tone === "error" ? "alert" : "status"}
+              role={toast.tone === "error" ? "alert" : undefined}
               initial={reduceMotion ? { opacity: 0 } : { opacity: 0, x: 120 }}
               animate={{ opacity: 1, x: 0 }}
               exit={reduceMotion ? { opacity: 0 } : { opacity: 0, x: 120 }}

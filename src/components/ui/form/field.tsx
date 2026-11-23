@@ -44,14 +44,18 @@ const labelTone: Record<FieldTone, { text: string; muted: string; message: strin
   dark: { text: "text-white", muted: "text-muted-dark", message: "text-white" },
 };
 
-/** Message line under a control: the error replaces the hint, space is always reserved. */
-export function FieldMessage({ id, text, error, tone = "light", reserve = false }: { id: string; text?: string; error: boolean; tone?: FieldTone; reserve?: boolean }) {
+/**
+ * Message line under a control: the error replaces the hint, space is always reserved.
+ * Not a live region: errors appear on submit and focus moves to the first invalid
+ * control, which reads its message through aria-describedby. One alert per field
+ * would read every error at once and talk over the focused one.
+ */
+export function FieldMessage({ id, text, tone = "light", reserve = false }: { id: string; text?: string; tone?: FieldTone; reserve?: boolean }) {
   // Without reserve (calculators) the line exists only when there is text; forms reserve it so errors never shift the layout.
   if (!reserve && !text) return null;
   return (
     <p
       id={id}
-      role={error && text ? "alert" : undefined}
       className={`min-h-5 text-small ${labelTone[tone].message} ${text ? "opacity-100" : "opacity-0"} transition-opacity duration-200 ease-tech`}
     >
       {text ?? ""}
@@ -76,7 +80,7 @@ export function Field({ label, optional = false, optionalLabel, reserveMessage =
           {optional && optionalLabel ? <span className={`font-normal ${t.muted}`}> ({optionalLabel})</span> : null}
         </label>
         {children}
-        <FieldMessage id={messageId} text={message} error={invalid} tone={tone} reserve={reserveMessage} />
+        <FieldMessage id={messageId} text={message} tone={tone} reserve={reserveMessage} />
       </div>
     </FieldContext.Provider>
   );
@@ -97,7 +101,7 @@ export function FieldGroup({ legend, hint, error, tone = "light", children, clas
     >
       <legend className={`mb-1 text-small font-medium ${t.text}`}>{legend}</legend>
       {children}
-      <FieldMessage id={messageId} text={message} error={Boolean(error)} tone={tone} />
+      <FieldMessage id={messageId} text={message} tone={tone} />
     </fieldset>
   );
 }

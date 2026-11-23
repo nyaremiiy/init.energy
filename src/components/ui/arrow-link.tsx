@@ -7,6 +7,8 @@ type ArrowLinkTone = "light" | "dark";
 type ArrowLinkProps = {
   href: string;
   tone?: ArrowLinkTone;
+  /** Lets long, data-driven text wrap (e.g. region names) instead of widening the page. */
+  wrap?: boolean;
   children: ReactNode;
 } & Omit<ComponentPropsWithoutRef<"a">, "href" | "children">;
 
@@ -20,6 +22,7 @@ const toneClasses: Record<ArrowLinkTone, string> = {
 export function ArrowLink({
   href,
   tone = "light",
+  wrap = false,
   className,
   children,
   ...props
@@ -27,7 +30,7 @@ export function ArrowLink({
   return (
     <Link
       href={href}
-      className={`group inline-flex items-center gap-2 font-semibold whitespace-nowrap underline underline-offset-4 transition-colors duration-150 ease-tech focus-visible:outline-2 focus-visible:outline-offset-4 ${toneClasses[tone]} ${className ?? ""}`}
+      className={`group inline-flex items-center gap-2 font-semibold ${wrap ? "" : "whitespace-nowrap"} underline underline-offset-4 transition-colors duration-150 ease-tech focus-visible:outline-2 focus-visible:outline-offset-4 ${toneClasses[tone]} ${className ?? ""}`}
       {...props}
     >
       {children}

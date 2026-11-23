@@ -12,16 +12,18 @@ import { getNavCta, type NavGroup } from "./header-data";
 import { NavLink } from "./nav-link";
 
 type MegaMenuPanelProps = {
+  id: string;
   group: NavGroup;
   open: boolean;
   /** Closes the menu when a link in it is followed. */
   onNavigate: () => void;
 };
 
-export function MegaMenuPanel({ group, open, onNavigate }: MegaMenuPanelProps) {
+export function MegaMenuPanel({ id, group, open, onNavigate }: MegaMenuPanelProps) {
   const navCta = getNavCta(useLocale());
   return (
     <div
+      id={id}
       className={`absolute inset-x-0 top-full transition duration-200 ${open ? "visible opacity-100" : "invisible opacity-0"}`}
     >
       <div className="rounded-b-3xl border-y border-line-dark bg-ink-glow shadow-soft">

@@ -46,7 +46,7 @@ export function BackupRuntime() {
         <Reveal className="flex flex-col gap-6">
           <div role="table" aria-label={t.caption} className="text-small">
             <div role="row" className="grid grid-cols-3 items-end md:grid-cols-4">
-              <span role="columnheader" className="hidden md:block">
+              <span role="columnheader" className="sr-only md:not-sr-only">
                 <span className="sr-only">{t.loadHeader}</span>
               </span>
               {backupRuntimeProducts.map(({ id, withInverter }, index) => {

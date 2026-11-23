@@ -15,6 +15,51 @@
 
 ---
 
+## 2026-11-23 — Modern Web Guidance: сканування й покращення
+- **Агент:** Claude Code
+- **Гілка:** fix/modern-web-scan (статус: змерджено в develop)
+- **Що зроблено:** `legacy-scan src` (3 знахідки) + ручний прохід гайдів `optimize-image-priority`, `dialog`, `light-dismiss-a-dialog`, `prevent-page-scroll-under-modal-dialog`, `navbar`, `menu`, `navigation-drawer`, `accordion`, `search-hidden-content`, `forms`, `accessible-error-announcement`, `required-field-feedback`, `persistent-toast-notifications`, `responsive-table`, `accessibility`, `motion`, `parallax-scroll-effects`, `scroll-entry-exit-effects`, `security`, `performance`, `visually-stable-font-fallbacks`, `switch`, `slider`. Вигляд сторінок не змінився (крім виправленого скролу на калькуляторі).
+
+| Знахідка | Файл | Що радить гайд | Рішення |
+|---|---|---|---|
+| `[...arr].sort()` ×3 | `projects-showcase.tsx`, `content/insolation.ts` | `toSorted()` (js/copying-array-methods) | застосовано (лише код функцій, дані не змінено) |
+| `priority` у `next/image` застарів у Next 16 | `PageHero`, `hero-video`, `product-hero` | LCP-зображенню — високий пріоритет | застосовано: `preload` (той самий preload + `fetchpriority=high`) |
+| Вікно налаштувань cookie — `div role=dialog` з ручною пасткою фокусу | `CookieBanner.tsx` | нативний `<dialog>` + `showModal()`: inert-сторінка, Esc, top layer | застосовано; вигляд той самий (діалог — повноекранний шар, панель усередині) |
+| Блокування скролу через `body { overflow: hidden }` | `CookieBanner.tsx`, `mobile-menu.tsx` | `overscroll-behavior: contain` на `dialog`/`::backdrop` | **ні**: у Safari `overscroll-behavior` не працює на неспрокручуваних елементах — сторінка під вікном прокручувалась би |
+| Мобільне меню на весь екран, але Tab і скрінрідер ідуть на сторінку під ним | `mobile-menu.tsx` | модальний шар з inert-фоном | застосовано: усе поза шапкою `inert`, поки меню відкрите (UA і EN); Esc повертає фокус на бургер. На `<dialog>` не переводили — кнопка меню в шапці мусить лишатись активною |
+| `aria-haspopup="true"` на мега-меню (= «menu») | `mega-menu-item.tsx` | навігація — disclosure без `aria-haspopup`, з `aria-controls` | застосовано; Esc тепер лишає фокус на кнопці (раніше фокус зникав разом із панеллю), Enter знову відкриває |
+| Закриті відповіді FAQ (`visibility: hidden`) не знаходить Ctrl+F і текстові фрагменти | `FaqAccordion.tsx` | `hidden="until-found"` + `beforematch` | застосовано там, де підтримується (Chrome, Edge, Firefox); у Safari — як раніше. `<details name>` не беремо: кілька відкритих, фільтр тем і анімація |
+| `aria-live="polite"` на hero-слайдері, що сам перемикається кожні 10 с | `hero-content-slider.tsx` | не оголошувати автоматичну ротацію | застосовано; ротація стає на паузу при наведенні, фокусі в тексті й прихованій вкладці |
+| `role="alert"` на кожному повідомленні поля | `ui/form/field.tsx` | при submit — фокус на перше поле з помилкою, без окремого live-регіону на кожне поле | застосовано; `focusFirstInvalid` тепер шукає лише контроли (не `fieldset`) |
+| Live-регіон тосту створювався разом із текстом | `toast.tsx` | постійний регіон | застосовано: контейнер `role="status"` завжди в DOM, помилка — `alert` |
+| Прихована кнопка «вгору» лишалась у дереві доступності | `back-to-top.tsx` | — | застосовано: `inert`, поки кнопка схована |
+| Перша клітинка шапки таблиць порівняння на мобільному `display:none` → для скрінрідера колонки зсунуті на одну | `comparison-table.tsx`, `backup-runtime.tsx`, `ses-plant-types.tsx` | `responsive-table`: заголовки мають відповідати клітинкам | застосовано: `sr-only md:not-sr-only` |
+| Власне `.sr-only` у `globals.css` (з першого коміту, застаріла `clip`) поза шарами перебивало всі утиліти, зокрема `md:not-sr-only` | `globals.css` | `clip-path` замість `clip` | застосовано: дубль видалено, працює вбудований `sr-only` Tailwind (ідентичний вигляд) |
+| Горизонтальний скрол на `/kalkulyator/okupnist-ses/` при 360 px (наявна вада) | `ses-payback-calculator.tsx` | — | застосовано: `ArrowLink wrap` для посилання «Детальніше про сонячні панелі у … області» |
+| Немає `frame-ancestors`, COOP | `next.config.ts` | `Content-Security-Policy: frame-ancestors 'self'` + `X-Frame-Options`, `Cross-Origin-Opener-Policy: same-origin-allow-popups` | застосовано (CSP лише з `frame-ancestors` не обмежує скрипти) |
+| Повна CSP з nonce, HSTS | `next.config.ts` | обов'язкові заголовки | **рішення власника** (див. нижче) |
+| `Reveal` / паралакс на Motion | `reveal.tsx`, hero | CSS scroll-driven animations | **ні**: заміна наших компонентів; `animation-timeline` у Safari обмежений |
+| Кольори в `oklch`, `:user-invalid`, `<input switch>`, `accent-color` | — | сучасні CSS-можливості | **ні**: токени в `@theme`; помилки форм — за нашою схемою (після submit); `switch` — лише Safari |
+| Шрифти: стабільні fallback | `layout.tsx` | `size-adjust` для fallback | не потрібно: `next/font` уже робить `adjustFontFallback` |
+| Посилання `target="_blank"` | футер, соцмережі, віджет | `noopener` | уже є |
+
+- **Вимірювання** (production-збірка, headless Chrome, 360×780, CPU ×4, ~1,6 Мбіт/с, медіана з 3; Lighthouse не запускали):
+
+| | LCP до → після | CLS до → після | тап по FAQ (тривалість події) |
+|---|---|---|---|
+| `/` | 3 144 → 3 188 мс | 0,0001 → 0,0001 | 24 → 16 мс |
+| `/cec/lvivska-oblast/` | 2 540 → 2 544 мс | 0,0001 → 0,0001 | 16 → 24 мс |
+
+  Різниця — у межах шуму; ці зміни не стосувались LCP (hero вже мав `fetchpriority=high`).
+- **Перевірено:** `npm test` (44), `npm run lint` (з `lint:tokens`), `npm run build` — маршрути ті самі, усі статичні. Знімки 6 сторінок (головна, `/cec/`, Львівська область, резервне живлення, калькулятор, SVIT HOME) × uk/en × 1440/360 до й після: 22 з 24 — 0 % різниці пікселів; калькулятор 360 — +21 px (посилання переноситься), горизонтального скролу більше немає. Клавіатура (22 перевірки, uk і en): мобільне меню (inert, Esc → бургер), мега-меню (Esc → кнопка, Enter відкриває), вікно cookie (модальне, Tab не виходить на сторінку, Esc закриває й повертає фокус), FAQ відкривається за текстовим фрагментом, порожня заявка → фокус на «Ім'я» без `alert`. Заявка відправлена (тестовий рядок з `storage/leads.jsonl` прибрано). Повторний `legacy-scan src` — 0 знахідок.
+- **Потрібне рішення власника:**
+  - кнопка паузи для hero-слайдера (WCAG 2.2.2 вимагає видимого керування для автоматичного руху довше 5 с; зараз — пауза при наведенні й фокусі);
+  - повна `Content-Security-Policy` з nonce: у Next nonce робить усі сторінки динамічними, плюс треба погодити домени GTM, GA4, Ads, Meta, TikTok;
+  - `Strict-Transport-Security`: залежить від nginx і HTTPS на сервері; почати з короткого `max-age`;
+  - калькулятори: `aria-live` на всьому блоці результату зачитує його при кожному русі повзунка — краще коротке зведення (потрібен новий текст у `messages`);
+  - заміна `Reveal` / паралакса на CSS scroll-driven animations — не робили.
+- **Файли:** src/components/{consent/CookieBanner,faq/FaqAccordion,calculator/ses-payback-calculator}.tsx, src/components/layout/header/{mobile-menu,mega-menu-item,mega-menu-panel}.tsx, src/components/sections/{PageHero,projects-showcase}.tsx, src/components/sections/hero/hero-video.tsx, src/components/sections/home/{hero-slider,hero-content-slider}.tsx, src/components/sections/{backup/backup-runtime,ses/ses-plant-types}.tsx, src/components/product-page/product-hero.tsx, src/components/ui/{arrow-link,back-to-top,comparison-table,toast}.tsx, src/components/ui/form/{field,focus}.ts(x), src/content/insolation.ts, src/app/globals.css, next.config.ts, docs/ai/{CONTEXT,CHANGELOG}.md
+
 ## 2026-11-23 — Плагін Modern Web Guidance (Google Chrome)
 - **Агент:** Claude Code
 - **Гілка:** chore/modern-web-guidance (статус: змерджено в develop)

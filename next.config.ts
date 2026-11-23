@@ -19,6 +19,10 @@ const nextConfig: NextConfig = {
           { key: "X-Content-Type-Options", value: "nosniff" },
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
           { key: "X-Frame-Options", value: "SAMEORIGIN" },
+          // Same rule in the current standard; a CSP with only frame-ancestors does not restrict scripts or styles.
+          { key: "Content-Security-Policy", value: "frame-ancestors 'self'" },
+          // Isolates the window from pages that open it (XS-leaks); popups the site opens keep working.
+          { key: "Cross-Origin-Opener-Policy", value: "same-origin-allow-popups" },
           { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
         ],
       },
