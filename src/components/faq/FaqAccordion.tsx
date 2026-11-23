@@ -1,7 +1,8 @@
 "use client";
 
 import { Minus, Plus } from "lucide-react";
-import { useId, useState } from "react";
+import { useEffect, useId, useRef, useState, useSyncExternalStore } from "react";
+import { flushSync } from "react-dom";
 
 import { chipClasses } from "@/components/ui/chip-styles";
 import type { FaqTopic } from "@/content/faq";
@@ -19,6 +20,9 @@ type FaqAccordionProps = {
   labels: { filter: string; all: string };
 };
 
+const noSubscribe = () => () => {};
+const supportsUntilFound = () => "onbeforematch" in HTMLElement.prototype;
+
 /**
  * Topic filter + accordion. Every answer is server-rendered; the filter and
  * closed items only hide rows, they never remove them from the DOM.
@@ -35,6 +39,25 @@ export function FaqAccordion({
   const [open, setOpen] = useState<Set<string>>(
     () => new Set(items[0] ? [items[0].id] : []),
   );
+
+  // Closed answers use hidden="until-found" where supported: Ctrl+F / text
+  // fragments find them and open the item. React cannot render that value,
+  // so it is set on the DOM; elsewhere they stay `invisible` as before.
+  const untilFound = useSyncExternalStore(noSubscribe, supportsUntilFound, () => false);
+  const listRef = useRef<HTMLUListElement>(null);
+
+  useEffect(() => {
+    if (!supportsUntilFound()) return;
+    const list = listRef.current;
+    const onBeforeMatch = (event: Event) => {
+      const id = (event.target as HTMLElement).closest<HTMLElement>("[data-faq-id]")?.dataset.faqId;
+      if (!id) return;
+      // Synchronous render: the row must open before the browser scrolls to the match.
+      flushSync(() => setOpen((current) => new Set(current).add(id)));
+    };
+    list?.addEventListener("beforematch", onBeforeMatch);
+    return () => list?.removeEventListener("beforematch", onBeforeMatch);
+  }, []);
 
   function toggle(id: string) {
     setOpen((current) => {
@@ -72,7 +95,7 @@ export function FaqAccordion({
         </div>
       ) : null}
 
-      <ul className="border-b border-line">
+      <ul ref={listRef} className="border-b border-line">
         {items.map((item, index) => {
           const isOpen = open.has(item.id);
           const buttonId = `${baseId}-q-${item.id}`;
@@ -82,6 +105,7 @@ export function FaqAccordion({
           return (
             <li
               key={item.id}
+              data-faq-id={item.id}
               hidden={!visible}
               className="border-t border-line py-6"
             >
@@ -128,8 +152,13 @@ export function FaqAccordion({
               >
                 <div className="overflow-hidden">
                   <p
+                    ref={(node) => {
+                      if (!node || !untilFound) return;
+                      if (isOpen) node.removeAttribute("hidden");
+                      else node.setAttribute("hidden", "until-found");
+                    }}
                     className={`max-w-180 pt-4 pl-10 text-body leading-relaxed text-muted sm:pl-12 ${
-                      isOpen ? "" : "invisible"
+                      isOpen || untilFound ? "" : "invisible"
                     }`}
                   >
                     {item.answer}
