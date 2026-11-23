@@ -85,7 +85,7 @@ export function HeroSlider({ slides }: { slides: HeroSlide[] }) {
 
   return (
     <>
-      <HeroMediaSlider slide={activeSlide} previousSlide={crossfadeSlide} />
+      <HeroMediaSlider slide={activeSlide} previousSlide={crossfadeSlide} priority={activeIndex === 0} />
       <HeroContentSlider
         slide={activeSlide}
         onHoverChange={setHovered}
