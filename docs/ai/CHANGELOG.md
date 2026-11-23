@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-23 — 500 замість 404 на production: запуск з `-H 127.0.0.1`
+- **Агент:** Claude Code
+- **Гілка:** chore/doc-server-host (статус: змерджено в develop)
+- **Проблема:** на production усі адреси, які переписує `src/proxy.ts` (неіснуючі, «в розробці», `/en/…` без версії), відповідали 500. Юніт запускав `npm run start -- -H 127.0.0.1 -p 3001`; Next будує базову адресу запиту з `127.0.0.1`, а `request.nextUrl` у proxy нормалізує його до `localhost`, тож ціль переписування має «інше» походження й обробляється як зовнішня → 500 (`x-middleware-rewrite: https://localhost:3001/ne-znaideno/`). Відтворено локально: `-H 127.0.0.1` → 500, без `-H` або з `-H localhost` → 404 і `x-middleware-rewrite: /ne-znaideno/`. Для `/pro-nas/` і `/en/…` вада існувала й раніше; після попередньої задачі під неї потрапили й неіснуючі українські адреси.
+- **Що зроблено:** інструкцію для сервера (власник): `-H localhost` у `ExecStart`, nginx `proxy_pass http://localhost:3001`; записано в README («Деплой») і CONTEXT.
+- **Файли:** README.md, docs/ai/{CONTEXT,CHANGELOG}.md
+
 ## 2026-11-23 — HTML кожної сторінки на ~94 КБ менший: 404 без шапки в RSC-даних
 - **Агент:** Claude Code
 - **Гілка:** perf/home-html (статус: змерджено в develop)

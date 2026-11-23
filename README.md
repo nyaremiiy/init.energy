@@ -36,6 +36,8 @@
 
 Сайт працює як Node.js-сервіс (systemd, назва за замовчуванням `init.energy`).
 
+Сервіс запускаємо з `-H localhost`, а не `-H 127.0.0.1` / `::1`: `ExecStart=/usr/bin/npm run start -- -H localhost -p 3001`. Next нормалізує `127.0.0.1` до `localhost`, і переписування в `src/proxy.ts` (404, «в розробці», технічні роботи) з `127.0.0.1` вважає зовнішнім — відповідь 500. nginx — `proxy_pass http://localhost:3001` (працює, хоч би на яку loopback-адресу Node прив'язався).
+
 ```bash
 ./deploy.sh        # git pull гілки main, npm ci, npm run build, перезапуск сервісу
 ./maintenance.sh   # увімкнути / вимкнути екран «технічні роботи» (503) і перезапустити
