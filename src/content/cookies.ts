@@ -6,7 +6,7 @@ import type { ConsentCategory } from "@/lib/consent/consent";
  * Cookie policy (/polityka-cookie/, /en/polityka-cookie/).
  * TODO(content): legal review of the whole text before launch.
  */
-export const cookiePolicyUpdatedAt = "2026-11-11";
+export const cookiePolicyUpdatedAt = "2026-11-24";
 
 export type CookieRecord = {
   name: string;
@@ -97,9 +97,4 @@ export const cookiePolicyText = {
     en: "Necessary cookies are always on. Analytics and marketing cookies are turned on only after your consent; until then the site loads no Google Analytics, Google Ads, Meta or TikTok tags.",
   },
   tableTitle: { uk: "Які cookie ми використовуємо", en: "Cookies we use" },
-  statsTitle: { uk: "Статистика без cookie", en: "Statistics without cookies" },
-  statsText: {
-    uk: "Окремо сайт рахує кількість відвідувань і переглянуті сторінки без cookie: IP-адреса не зберігається, а відвідувача неможливо встановити. Якщо браузер передає сигнал «не відстежувати», візит не рахується.",
-    en: "Separately, the site counts visits and viewed pages without cookies: IP addresses are not stored and visitors cannot be identified. If your browser sends a Do Not Track signal, the visit is not counted.",
-  },
 } satisfies Record<string, Localized>;

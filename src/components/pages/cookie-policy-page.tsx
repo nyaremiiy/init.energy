@@ -133,11 +133,6 @@ export function CookiePolicyPage({ locale }: { locale: Locale }) {
             </ul>
           </section>
 
-          <section aria-labelledby="cookies-stats" className="flex flex-col gap-4">
-            <h2 id="cookies-stats" className={sectionTitle}>{text.statsTitle[locale]}</h2>
-            <p className={paragraph}>{text.statsText[locale]}</p>
-          </section>
-
           <section aria-labelledby="cookies-change" className="flex flex-col items-start gap-4">
             <h2 id="cookies-change" className={sectionTitle}>{t.policy.changeTitle}</h2>
             <p className={paragraph}>{t.policy.changeText}</p>
