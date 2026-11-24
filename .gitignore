@@ -23,8 +23,6 @@
 
 # local lead storage (contains personal data)
 /storage/leads.jsonl
-# visit counter: raw events and daily reports
-/storage/visits/
 
 # local visual checks (screenshots for the design-token refactor)
 /.tmp/

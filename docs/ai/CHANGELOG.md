@@ -15,6 +15,18 @@
 
 ---
 
+## 2026-11-24 — Власний лічильник відвідувачів прибрано
+- **Агент:** Claude Code
+- **Гілка:** chore/remove-visit-counter (статус: змерджено в develop)
+- **Що зроблено:** за `design/remove-visit-counter` (рішення власника: сайт переходить за Cloudflare, статистика — Cloudflare Web Analytics і GA4 після згоди) лічильник видалено повністю:
+  - видалено `src/components/layout/visit-beacon.tsx` (і його підключення в `SiteChrome`), `src/app/api/visit/route.ts` (папка `src/app/api/` теж зникла), `src/lib/visits/` (`visits-core.ts`, `visits-store.ts`, `visits-scheduler.ts`, `visits.test.mjs`), `src/instrumentation.ts` (запускав лише звіти);
+  - `.gitignore` — без `/storage/visits/`; README — без `VISITS_DIR` і розділу «Лічильник відвідувачів»;
+  - «Політика cookie» (uk/en): прибрано розділ «Статистика без cookie» / "Statistics without cookies" (`statsTitle`, `statsText`), дата оновлення політики — 2026-11-24. Таблиця cookie, GA4 і згода без змін, `CONSENT_VERSION` не змінювали (нових cookie немає).
+  - `next.config.ts`, `robots.ts`, `package.json` (тести за маскою) змін не потребували; `allowImportingTsExtensions` лишився.
+- **Перевірено:** `npm test` (43), lint, build — маршруту `/api/visit` немає, усі сторінки статичні як раніше; production: `/`, `/en/`, `/polityka-cookie/`, `/en/polityka-cookie/` — 200 (prerender), у бандлах і мережі жодного запиту на `/api/visit/`, `POST /api/visit/` → 404; у консолі лише відомі 404 prefetch запланованих сторінок (`/svit/`, `/pro-nas/`, правові).
+- **Що далі:** папку `storage/visits/` на сервері (поза Git) можна видалити вручну.
+- **Файли:** src/components/layout/{site-chrome,visit-beacon}.tsx, src/app/api/visit/route.ts, src/lib/visits/*, src/instrumentation.ts, src/content/cookies.ts, src/components/pages/cookie-policy-page.tsx, .gitignore, README.md, docs/ai/{CONTEXT,CHANGELOG}.md
+
 ## 2026-11-23 — Оптимізація фото hero на інших сторінках
 - **Агент:** Claude Code
 - **Гілка:** perf/hero-images-all (статус: змерджено в develop)
