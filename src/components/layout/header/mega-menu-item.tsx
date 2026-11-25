@@ -40,9 +40,7 @@ export function MegaMenuItem({ group }: { group: NavGroup }) {
 
   return (
     <li
-      data-mega-menu
-      data-open={open}
-      className="group flex h-full items-center"
+      className="group relative flex h-full items-center"
       onMouseEnter={openMenu}
       onMouseLeave={closeLater}
       onFocus={() => {

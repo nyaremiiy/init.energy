@@ -350,6 +350,11 @@ button:not(:disabled) {
 }
 
 /* Hide the scrollbar of swipeable carousels (arrows and swipe stay available). */
+/* Mobile menu open (mobile-menu.tsx sets the attribute): floating buttons would cover the white sheet. */
+body[data-menu-open] [data-floating] {
+  display: none;
+}
+
 .scrollbar-none {
   scrollbar-width: none;
 }

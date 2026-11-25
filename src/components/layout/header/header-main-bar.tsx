@@ -19,7 +19,7 @@ export function HeaderMainBar() {
   const t = getMessages().chrome.header;
 
   return (
-    <Container className="flex h-20 items-center justify-between gap-6">
+    <Container data-header-bar className="flex h-20 items-center justify-between gap-6">
       <Link
         href={localizePath("/", locale)}
         aria-label={t.homeLabel}

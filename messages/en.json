@@ -462,21 +462,25 @@
       },
       "columns": {
         "backup": "Backup power",
-        "batteries": "Batteries",
-        "business": "For business",
-        "solar": "Solar power plants",
-        "industry": "Industry solutions",
-        "calculatorLink": "Solar payback calculator",
-        "calculatorDescription": "Estimate system size, bill savings and payback for your property.",
-        "regionsLink": "Solar by region",
-        "regionsDescription": "Solar yield and a sample plant for every region",
-        "backupRegionsLink": "Backup power by region",
-        "backupRegionsDescription": "Towns, offices and system options for every region"
+        "solar": "Solar power plants"
       },
-      "menuCta": {
-        "title": "Not sure what to choose?",
-        "text": "An INIT ENERGY engineer will size a system for your consumption and budget.",
-        "label": "Get a quote"
+      "menu": {
+        "regionCount": "{count} regions",
+        "ses": "Turnkey solar",
+        "sesNote": "For homes and businesses",
+        "sesRegions": "Solar by region",
+        "hotel": "Solar for hotels",
+        "hotelNote": "Industry solution",
+        "backup": "Turnkey backup power",
+        "backupNote": "SVIT, Deye, Victron, Huawei",
+        "backupRegions": "Backup power by region",
+        "calculator": "Calculator",
+        "calculatorNote": "Payback and autonomy",
+        "solutionsFooter": "Not sure what to choose? An engineer will size the system.",
+        "solutionsCta": "Get a quote",
+        "catalogTitle": "Batteries",
+        "catalogFooter": "All models in one table.",
+        "catalogCta": "Compare models"
       }
     },
     "contactWidget": {
