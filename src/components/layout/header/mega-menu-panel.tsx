@@ -1,15 +1,14 @@
 "use client";
 
 import { ArrowUpRight } from "lucide-react";
+import { useLayoutEffect, useRef, useState } from "react";
 
-import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
 import { Eyebrow } from "@/components/ui/eyebrow";
 
-import { useLocale } from "@/i18n/client";
-
-import { getNavCta, type NavGroup } from "./header-data";
-import { NavLink } from "./nav-link";
+import type { NavGroup } from "./header-data";
+import { goToLeadForm } from "./header-lead-cta";
+import { MenuLink } from "./menu-link";
 
 type MegaMenuPanelProps = {
   id: string;
@@ -19,63 +18,80 @@ type MegaMenuPanelProps = {
   onNavigate: () => void;
 };
 
+/**
+ * Compact light dropdown under its menu item (owner's decision 2026-11-25,
+ * replaces the full-width dark panel): white card, columns of links and a
+ * bottom row with one action. Aligned to the item's left edge and pushed back
+ * inside the header container when it would run past its right edge.
+ */
 export function MegaMenuPanel({ id, group, open, onNavigate }: MegaMenuPanelProps) {
-  const navCta = getNavCta(useLocale());
+  const rootRef = useRef<HTMLDivElement>(null);
+  const [shift, setShift] = useState(0);
+  const twoColumns = group.columns.length > 1;
+
+  useLayoutEffect(() => {
+    if (!open) return;
+    const place = () => {
+      const root = rootRef.current;
+      const bar = root?.closest("[data-header-bar]");
+      if (!root || !bar) return;
+      const style = getComputedStyle(bar);
+      const barRect = bar.getBoundingClientRect();
+      const right = barRect.right - parseFloat(style.paddingRight);
+      const left = barRect.left + parseFloat(style.paddingLeft);
+      const anchor = (root.parentElement ?? root).getBoundingClientRect().left;
+      const width = root.offsetWidth;
+      setShift(Math.max(left - anchor, Math.min(0, right - (anchor + width))));
+    };
+    place();
+    window.addEventListener("resize", place);
+    return () => window.removeEventListener("resize", place);
+  }, [open]);
+
   return (
     <div
+      ref={rootRef}
       id={id}
-      className={`absolute inset-x-0 top-full transition duration-200 ${open ? "visible opacity-100" : "invisible opacity-0"}`}
+      style={{ left: shift }}
+      // pt-3 is a transparent bridge: the pointer reaches the panel without leaving the item.
+      className={`absolute top-full z-40 pt-3 transition duration-200 ease-tech ${twoColumns ? "w-160" : "w-104"} ${
+        open ? "visible opacity-100" : "invisible opacity-0 motion-safe:translate-y-1.5"
+      }`}
     >
-      <div className="rounded-b-3xl border-y border-line-dark bg-ink-glow shadow-soft">
-        <Container className="flex gap-10 py-10">
-          <div className="grid flex-1 auto-cols-fr grid-flow-col gap-10">
-            {group.columns.map((column) => (
-              <div key={column.title} className="flex flex-col gap-3">
-                <Eyebrow tone="dark" as="p">
-                  {column.title}
-                </Eyebrow>
-                {/* Items are tiles: hover / keyboard focus light up the background (fill-dark). */}
-                <ul className="-mx-3 flex flex-col gap-1">
-                  {column.items.map((link) => (
-                    <li key={link.href}>
-                      <NavLink
-                        href={link.href}
-                        className="group/link flex items-start gap-3 rounded-tile px-3 py-2.5 transition-colors duration-150 ease-tech hover:bg-fill-dark focus-visible:bg-fill-dark focus-visible:outline-2 focus-visible:outline-white"
-                        onClick={onNavigate}
-                      >
-                        <span className="flex min-w-0 flex-1 flex-col gap-1">
-                          <span className="text-body font-semibold text-white transition-colors duration-150 ease-tech group-hover/link:text-white group-focus-visible/link:text-white">
-                            {link.label}
-                          </span>
-                          <span className="text-small text-muted-dark transition-colors duration-150 ease-tech group-hover/link:text-muted-dark group-focus-visible/link:text-muted-dark">
-                            {link.description}
-                          </span>
-                        </span>
-                        <ArrowUpRight
-                          aria-hidden
-                          className="mt-0.5 size-4 shrink-0 text-white opacity-0 transition duration-150 ease-tech group-hover/link:opacity-100 group-focus-visible/link:opacity-100 motion-safe:group-hover/link:translate-x-0.5 motion-safe:group-hover/link:-translate-y-0.5"
-                        />
-                      </NavLink>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
+      <div className="overflow-clip rounded-card bg-white text-ink shadow-soft">
+        <div className={`grid gap-4 p-5 ${twoColumns ? "grid-cols-2" : "grid-cols-1"}`}>
+          {group.columns.map((column) => (
+            <div key={column.title} className="flex flex-col gap-2">
+              <Eyebrow as="p" className="px-3 pb-1">
+                {column.title}
+              </Eyebrow>
+              <ul className="flex flex-col gap-1">
+                {column.items.map((link) => (
+                  <li key={link.href}>
+                    <MenuLink link={link} onNavigate={onNavigate} />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
 
-          <div className="flex w-80 shrink-0 flex-col items-start gap-3 self-start rounded-tile bg-fill-dark p-6 ring-1 ring-line-dark">
-            <p className="text-lead font-semibold text-white">{navCta.title}</p>
-            <p className="text-small text-muted-dark">{navCta.text}</p>
-            <Button
-              href={navCta.href}
-              className="mt-2"
-              onClick={onNavigate}
-              icon={<ArrowUpRight aria-hidden className="size-4" />}
-            >
-              {navCta.label}
-            </Button>
-          </div>
-        </Container>
+        <div className="flex items-center justify-between gap-4 bg-surface px-8 py-4">
+          <p className="text-small text-muted">{group.footer.text}</p>
+          <Button
+            href={group.footer.href}
+            variant="dark"
+            size="sm"
+            className="shrink-0"
+            onClick={(event) => {
+              if (group.footer.contacts) goToLeadForm(event);
+              onNavigate();
+            }}
+            icon={<ArrowUpRight aria-hidden className="size-4" />}
+          >
+            {group.footer.label}
+          </Button>
+        </div>
       </div>
     </div>
   );

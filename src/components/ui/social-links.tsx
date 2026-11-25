@@ -26,12 +26,16 @@ type SocialLinksProps = {
   variant?: "inline" | "circle";
   /** Icon size class; defaults to 16px inline, 18px in circles. */
   iconClassName?: string;
+  /** "dark" on dark backgrounds (default); "light" on white (mobile menu). Inline variant only. */
+  tone?: "dark" | "light";
   className?: string;
 };
 
 const linkClasses = {
   inline:
     "inline-flex rounded-sm text-muted-dark transition-colors duration-150 ease-tech hover:text-white",
+  inlineLight:
+    "inline-flex rounded-sm text-muted transition-colors duration-150 ease-tech hover:text-ink",
   circle:
     "inline-flex size-11 items-center justify-center rounded-full border border-faint-dark text-muted-dark transition-colors duration-150 ease-tech hover:border-white hover:text-white",
 };
@@ -40,8 +44,10 @@ const linkClasses = {
 export function SocialLinks({
   variant = "inline",
   iconClassName,
+  tone = "dark",
   className,
 }: SocialLinksProps) {
+  const light = tone === "light" && variant === "inline";
   const t = useMessages().footer;
 
   return (
@@ -59,7 +65,7 @@ export function SocialLinks({
               target="_blank"
               rel="noopener"
               aria-label={format(t.socialLabel, { network: link.label })}
-              className={`${linkClasses[variant]} focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white`}
+              className={`${light ? linkClasses.inlineLight : linkClasses[variant]} focus-visible:outline-2 focus-visible:outline-offset-2 ${light ? "focus-visible:outline-ink" : "focus-visible:outline-white"}`}
             >
               <Icon
                 className={

@@ -1,13 +1,14 @@
 import { companyContacts, offices, type Office } from "@/content/company";
-import { backupRegionPaths, regionPaths } from "@/content/insolation";
-import { products, productSummary, type ProductId } from "@/content/products";
+import { backupRegionPaths, insolationRegions, regionPaths } from "@/content/insolation";
+import { products, type ProductId } from "@/content/products";
 import { featuredProjects } from "@/content/projects";
 import { pageNavigation } from "@/content/navigation";
 import { productPages } from "@/content/product-pages";
 import { anchors, routes, sectionHref, toPath } from "@/content/routes";
-import { services, type ServiceId } from "@/content/services";
 import type { Locale } from "@/i18n/config";
 import { getMessagesFor } from "@/i18n/messages";
+import { formatNumber, formatQuantity } from "@/lib/format";
+import { format } from "@/lib/messages";
 import { localizePath } from "@/i18n/config";
 
 export type { Office };
@@ -21,6 +22,8 @@ export type NavLink = {
 
 export type NavMenuLink = NavLink & {
   description: string;
+  /** Right-hand value (a product's capacity). */
+  meta?: string;
 };
 
 export type NavColumn = {
@@ -31,17 +34,12 @@ export type NavColumn = {
 export type NavGroup = {
   label: string;
   columns: NavColumn[];
+  /**
+   * Bottom row of the panel: a line of text and one button. `contacts` leads to the
+   * lead form of the current page (the same logic as the header CTA).
+   */
+  footer: { text: string; label: string; href: string; contacts?: boolean };
 };
-
-export function getNavCta(locale: Locale) {
-  const t = getMessagesFor(locale).chrome.header.menuCta;
-  return {
-    title: t.title,
-    text: t.text,
-    href: localizePath(routes.calculators.sesPayback, locale),
-    label: t.label,
-  };
-}
 
 export type NavItem = NavLink | NavGroup;
 
@@ -93,31 +91,19 @@ export const socialLinks: SocialLink[] = [
 /** Header navigation for a locale (product and service pages are Ukrainian-only). */
 export function getNavItems(locale: Locale): NavItem[] {
   const t = getMessagesFor(locale).chrome.header;
+  const m = t.menu;
+  const regionCount = format(m.regionCount, { count: formatNumber(insolationRegions.length, locale) });
+  const link = (href: string, label: string, description: string): NavMenuLink => ({
+    href: localizePath(href, locale),
+    label,
+    description,
+  });
   const productLink = (id: ProductId): NavMenuLink => ({
     href: localizePath(products[id].href, locale),
     label: products[id].name,
-    description: productSummary(id, locale),
+    description: products[id].segment[locale],
+    meta: formatQuantity(products[id].capacity, locale),
   });
-  const serviceLink = (id: ServiceId): NavMenuLink => ({
-    href: localizePath(services[id].href, locale),
-    label: services[id].name[locale],
-    description: services[id].summary[locale],
-  });
-  const regionsLink: NavMenuLink = {
-    href: localizePath(`${routes.services.turnkeySes}#${anchors.sesRegions}`, locale),
-    label: t.columns.regionsLink,
-    description: t.columns.regionsDescription,
-  };
-  const backupRegionsLink: NavMenuLink = {
-    href: localizePath(`${routes.backup.hub}#${anchors.backupRegions}`, locale),
-    label: t.columns.backupRegionsLink,
-    description: t.columns.backupRegionsDescription,
-  };
-  const paybackCalculatorLink: NavMenuLink = {
-    href: localizePath(routes.calculators.sesPayback, locale),
-    label: t.columns.calculatorLink,
-    description: t.columns.calculatorDescription,
-  };
   const section = (anchor: string, label: string): NavLink => ({
     href: sectionHref(anchor, locale),
     label,
@@ -129,26 +115,33 @@ export function getNavItems(locale: Locale): NavItem[] {
       label: t.nav.catalog,
       columns: [
         {
-          title: t.columns.backup,
-          items: [productLink("svitHome"), productLink("svit600")],
+          title: m.catalogTitle,
+          items: (["svit600", "svitHome", "svitPlus5000", "svitPlus16000", "lithiumvalley"] as const).map(productLink),
         },
-        {
-          title: t.columns.batteries,
-          items: [productLink("svitPlus5000"), productLink("svitPlus16000")],
-        },
-        { title: t.columns.business, items: [productLink("lithiumvalley")] },
       ],
+      footer: { text: m.catalogFooter, label: m.catalogCta, href: sectionHref(anchors.compare, locale) },
     },
     {
       label: t.nav.solutions,
       columns: [
         {
           title: t.columns.solar,
-          items: [serviceLink("turnkeySes"), regionsLink, paybackCalculatorLink],
+          items: [
+            link(routes.services.turnkeySes, m.ses, m.sesNote),
+            link(`${routes.services.turnkeySes}#${anchors.sesRegions}`, m.sesRegions, regionCount),
+            link(routes.solutions.hotel, m.hotel, m.hotelNote),
+          ],
         },
-        { title: t.columns.backup, items: [serviceLink("backupHub"), backupRegionsLink] },
-        { title: t.columns.industry, items: [serviceLink("hotelSes")] },
+        {
+          title: t.columns.backup,
+          items: [
+            link(routes.backup.hub, m.backup, m.backupNote),
+            link(`${routes.backup.hub}#${anchors.backupRegions}`, m.backupRegions, regionCount),
+            link(routes.calculators.sesPayback, m.calculator, m.calculatorNote),
+          ],
+        },
       ],
+      footer: { text: m.solutionsFooter, label: m.solutionsCta, href: sectionHref(anchors.contacts, locale), contacts: true },
     },
     section(anchors.solutions, t.nav.solutionsSection),
     section(anchors.products, t.nav.products),
