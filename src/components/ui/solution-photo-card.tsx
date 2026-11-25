@@ -88,13 +88,13 @@ export function SolutionPhotoCard({
         <p className="mt-2 text-body leading-relaxed text-muted-dark">{description}</p>
 
         <div className="@container mt-5">
-          <ul className="grid grid-cols-2 gap-x-3 gap-y-4 @2xs:flex @2xs:justify-between @2xs:gap-2">
+          <ul className="grid grid-cols-2 gap-x-3 gap-y-4 @2xs:flex @2xs:justify-between @2xs:gap-1">
             {loads.map(({ icon: Icon, label }) => (
-              <li key={label} className="flex items-center gap-3 @2xs:w-min @2xs:flex-col @2xs:gap-2 @2xs:text-center">
+              <li key={label} className="flex flex-col items-center gap-2 text-center">
                 <span className="flex size-12 shrink-0 items-center justify-center rounded-full border border-line-dark bg-fill-dark backdrop-blur-sm">
                   <Icon aria-hidden className="size-5" strokeWidth={1.7} />
                 </span>
-                <span className="text-small leading-tight text-muted-dark">{label}</span>
+                <span className="text-small leading-tight whitespace-nowrap text-muted-dark">{label}</span>
               </li>
             ))}
           </ul>
