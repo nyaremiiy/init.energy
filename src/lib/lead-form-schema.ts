@@ -45,6 +45,17 @@ export function normalizePhone(value: string): string {
   return phone.startsWith("+") ? `+${digits}` : digits;
 }
 
+/** Drops the `#…` anchor from a page address; query parameters stay. Non-URLs are returned as is. */
+export function stripUrlHash(value: string): string {
+  try {
+    const url = new URL(value);
+    url.hash = "";
+    return url.href;
+  } catch {
+    return value;
+  }
+}
+
 export function isValidPhone(value: string): boolean {
   const phone = value.trim();
   if (!phoneCharacters.test(phone)) return false;
@@ -81,7 +92,8 @@ export function validateLeadForm(
       objectType: getText(formData, "objectType"),
       calculatorData: getText(formData, "calculatorData"),
       product: getText(formData, "product"),
-      pageUrl: getText(formData, "pageUrl"),
+      // Also on the server: visitors with an older cached page still send `#contacts`.
+      pageUrl: stripUrlHash(getText(formData, "pageUrl")),
       tracking: Object.fromEntries(
         trackingKeys.map((key) => [key, getText(formData, key)]),
       ),

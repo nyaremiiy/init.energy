@@ -4,7 +4,21 @@ import test from "node:test";
 import {
   isValidPhone,
   normalizePhone,
+  stripUrlHash,
 } from "./lead-form-schema.ts";
+
+test("drops the anchor from the page address but keeps the query", () => {
+  assert.equal(
+    stripUrlHash("https://init.energy/cec/vinnytska-oblast/#contacts"),
+    "https://init.energy/cec/vinnytska-oblast/",
+  );
+  assert.equal(
+    stripUrlHash("https://init.energy/rishennya/ses-dlya-gotelyu/?type=hotel#contacts"),
+    "https://init.energy/rishennya/ses-dlya-gotelyu/?type=hotel",
+  );
+  assert.equal(stripUrlHash("not a url"), "not a url");
+  assert.equal(stripUrlHash(""), "");
+});
 
 test("accepts local and international phone formats", () => {
   const validPhones = [
