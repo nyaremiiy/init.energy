@@ -15,6 +15,52 @@
 
 ---
 
+## 2026-11-25 — Фото-картки «Що вам потрібно живити?»: чіткі фото й назви продуктів
+- **Агент:** Claude Code
+- **Гілка:** fix/solution-cards-names-photos (статус: змерджено в develop)
+- **Що зроблено:** за зауваженням власника:
+  - **Фото розмите.** Причина — `sizes="(min-width: 1024px) 33vw, 100vw"`: горизонтальне фото у високій картці обрізається по висоті й рендериться ~1 400 px завширшки, а браузер за `33vw` брав файл 640–750 px і розтягував удвічі. Тепер `sizes="1440px"` і `quality={90}` — віддається оригінал (`home.avif` 1919 px, `factory.avif` і фото квартири 1280 px).
+  - **Назви не вміщались** («SVIT PLUS 5000 × 16» переносилось). Назва й ємність тепер без розривів; якщо разом не вміщаються — ємність переходить під назву.
+- **Перевірено:** 360 / 390 (DPR 3), 1024, 1280, 1440 (DPR 2), uk і en — жодна назва не обрізана й не переноситься, без горизонтального скролу; розкрита картка на 1280–1920 вміщається у 768 px. Lint, build.
+- **Що далі:** джерела фото квартири й заводу — 1280 px, на екранах із DPR 2–3 вони все одно трохи м'якші. Фото заводу спільне з карткою «Бізнес» на `/cec/` (`solutions.ts`), тому не замінене. Для повної чіткості потрібні оригінали від власника (≥ 2 000 px по висоті, бо картка вертикальна).
+- **Файли:** src/components/ui/solution-photo-card.tsx, docs/ai/CHANGELOG.md
+
+## 2026-11-25 — Іконки «що живить» на мобільному
+- **Агент:** Claude Code
+- **Гілка:** fix/solution-loads-layout (статус: змерджено в develop)
+- **Що зроблено:** за зауваженням власника: на телефоні у сітці 2×2 підписи стояли праворуч від іконки й обрізались («Виробництво», «Холодильник»); тепер скрізь іконка над підписом, по центру колонки. «Сонце вдень» / "Solar by day" і "Critical site" більше не переносяться (`whitespace-nowrap`), мінімальний проміжок у ряду — 4 px.
+- **Перевірено:** 320 / 360 / 390 / 768 / 1024 / 1280 / 1440 / 1920, uk і en — підписи в межах ряду, без накладань і горизонтального скролу; розкрита картка на 1280–1440 вміщається у 768 px, як і раніше. Lint, build.
+- **Файли:** src/components/ui/solution-photo-card.tsx, docs/ai/{CONTEXT,CHANGELOG}.md
+
+## 2026-11-25 — «Що вам потрібно живити?» на фото-картках
+- **Агент:** Claude Code
+- **Гілка:** feature/solutions-photo-cards (статус: змерджено в develop)
+- **Що зроблено:** за `design/home-solutions-photo-cards` (варіант B) три картки секції на головній — фото на всю картку з градієнтом, зверху `CardLabel` і номер, унизу ємність, підпис, H3, опис, 4 іконки «що живить», рекомендовані продукти й біла кнопка.
+  - Новий `SolutionPhotoCard` (`ui/solution-photo-card.tsx`, Server Component, лише CSS): на десктопі з мишею рекомендації й кнопка відкриваються на hover / `focus-within`, у спокої — підкреслене посилання; на сенсорних екранах і вужче 1280 px рекомендації й кнопка видно завжди. Розмітка `ul > li > article`.
+  - `solutions.ts`: `image` обов'язкове (квартира — фото з хабу резервного живлення, alt з `backup.ts`), нове `loads` (4 іконки з підписами uk/en з описів карток), прибрано `tone`; `getSolutionCapacity` повертає `{ value, unit }`; посилання на продукти й CTA тепер локалізовані (на `/en/` раніше вели на українські сторінки).
+  - `segments.ts`: `LoadIconId` і `loadIcons` (Wifi, Lightbulb, Laptop, Smartphone, Flame, Droplets, Refrigerator, Sun, Factory, Warehouse, Hotel, Server — усі є в lucide-react 1.69).
+  - `globals.css`: `.scrim-solution`, `.scrim-solution-active`, `@custom-variant can-hover` (≥ 1280 px, `hover: hover`, `pointer: fine`).
+  - Режим `showcase` у `SegmentCard` видалено (використовувався лише тут) разом із невикористаними класами тонів.
+- **Відхилення від брифу:**
+  - Розкриття на наведення — з 1280 px (`xl`), а не з `lg`: на 1024–1279 px картки ~300 px завширшки, розкрита картка не вміщалась би без зміни висоти ряду; там рекомендації видно завжди, як на планшеті.
+  - Висота `min-h-192` (768 px) на десктопі з мишею: розкрита картка потребує 768 px на 1280 і 738 px від 1366, тож наведення не змінює висоту ряду (перевірено: 768 px у спокої й при наведенні на 1280 / 1440 / 1920).
+  - Градієнт спокою темніший угорі, ніж у референсі (82 % → 50 % → 10 % на 0 / 15 / 30 %): з `.35` пігулка «Приватний будинок» на світлому даху мала контраст 2,2 : 1.
+  - Іконки «що живить»: на вузьких картках (вужче 288 px вмісту — телефон 360 px, ряд 1024–1279) — 2×2; ширше — ряд (див. виправлення вище), бо «Холодильник» і «Виробництво» (~91 px) не вміщаються в 4 рівні колонки.
+- **Перевірено** (production-збірка, headless Edge): контраст тексту на найсвітлішій ділянці (98-й перцентиль пікселів під текстом) у спокої ≥ 4,78 : 1 (найнижче — великі цифри «5–16», для решти ≥ 5,5), у відкритому стані й на телефоні ≥ 6,5 : 1; один H2 і три H3; 360 / 768 / 1024 / 1280 / 1440 / 1920 без горизонтального скролу; Tab на посиланні продукту розкриває картку, фокус видно, «посилання спокою» поза Tab-порядком; reduced motion — без масштабування фото й анімацій; `/en/` — англійські підписи й посилання `/en/…`. Lint (з `lint:tokens`), build.
+- **Файли:** src/components/ui/{solution-photo-card,segment-card}.tsx, src/components/sections/home/solutions-by-segment.tsx, src/content/{solutions,segments}.ts, src/app/globals.css, docs/ai/{CONTEXT,CHANGELOG}.md
+
+## 2026-11-24 — Власний лічильник відвідувачів прибрано
+- **Агент:** Claude Code
+- **Гілка:** chore/remove-visit-counter (статус: змерджено в develop)
+- **Що зроблено:** за `design/remove-visit-counter` (рішення власника: сайт переходить за Cloudflare, статистика — Cloudflare Web Analytics і GA4 після згоди) лічильник видалено повністю:
+  - видалено `src/components/layout/visit-beacon.tsx` (і його підключення в `SiteChrome`), `src/app/api/visit/route.ts` (папка `src/app/api/` теж зникла), `src/lib/visits/` (`visits-core.ts`, `visits-store.ts`, `visits-scheduler.ts`, `visits.test.mjs`), `src/instrumentation.ts` (запускав лише звіти);
+  - `.gitignore` — без `/storage/visits/`; README — без `VISITS_DIR` і розділу «Лічильник відвідувачів»;
+  - «Політика cookie» (uk/en): прибрано розділ «Статистика без cookie» / "Statistics without cookies" (`statsTitle`, `statsText`), дата оновлення політики — 2026-11-24. Таблиця cookie, GA4 і згода без змін, `CONSENT_VERSION` не змінювали (нових cookie немає).
+  - `next.config.ts`, `robots.ts`, `package.json` (тести за маскою) змін не потребували; `allowImportingTsExtensions` лишився.
+- **Перевірено:** `npm test` (43), lint, build — маршруту `/api/visit` немає, усі сторінки статичні як раніше; production: `/`, `/en/`, `/polityka-cookie/`, `/en/polityka-cookie/` — 200 (prerender), у бандлах і мережі жодного запиту на `/api/visit/`, `POST /api/visit/` → 404; у консолі лише відомі 404 prefetch запланованих сторінок (`/svit/`, `/pro-nas/`, правові).
+- **Що далі:** папку `storage/visits/` на сервері (поза Git) можна видалити вручну.
+- **Файли:** src/components/layout/{site-chrome,visit-beacon}.tsx, src/app/api/visit/route.ts, src/lib/visits/*, src/instrumentation.ts, src/content/cookies.ts, src/components/pages/cookie-policy-page.tsx, .gitignore, README.md, docs/ai/{CONTEXT,CHANGELOG}.md
+
 ## 2026-11-23 — Оптимізація фото hero на інших сторінках
 - **Агент:** Claude Code
 - **Гілка:** perf/hero-images-all (статус: змерджено в develop)

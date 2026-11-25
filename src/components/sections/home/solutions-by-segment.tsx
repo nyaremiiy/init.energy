@@ -4,10 +4,10 @@ import { ArrowLink } from "@/components/ui/arrow-link";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
 import { SectionWatermark } from "@/components/ui/section-watermark";
-import { SegmentCard } from "@/components/ui/segment-card";
+import { SolutionPhotoCard } from "@/components/ui/solution-photo-card";
 import { anchors, routes } from "@/content/routes";
 import { localizePath } from "@/i18n/config";
-import { segmentIcons } from "@/content/segments";
+import { loadIcons, segmentIcons } from "@/content/segments";
 import {
   getSolutionCapacity,
   getSolutionLinks,
@@ -45,38 +45,35 @@ export function SolutionsBySegment() {
           />
         </Reveal>
 
-        <div className="flex flex-col gap-4">
-          <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-            {solutions.map((solution, cardIndex) => (
-              <Reveal
-                key={solution.id}
-                delay={cardIndex * 0.12}
-                className="h-full"
-              >
-                <SegmentCard
+        <ul className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+          {solutions.map((solution, cardIndex) => (
+            <li key={solution.id}>
+              <Reveal delay={cardIndex * 0.12} className="h-full">
+                <SolutionPhotoCard
                   index={solution.index}
                   segment={solution.segment[locale]}
                   segmentIcon={segmentIcons[solution.segmentIcon]}
+                  image={{ src: solution.image.src, alt: solution.image.alt[locale] }}
+                  capacity={getSolutionCapacity(solution, locale)}
+                  capacityLabel={t.capacityLabels[solution.id]}
                   title={solution.title[locale]}
                   description={solution.description[locale]}
+                  loads={solution.loads.map((load) => ({
+                    icon: loadIcons[load.icon],
+                    label: load.label[locale],
+                  }))}
+                  recommendLabel={t.recommend}
                   links={getSolutionLinks(solution, locale)}
                   navLabel={format(t.cardNavLabel, {
                     segment: solution.segment[locale],
                   })}
-                  tone={solution.tone}
-                  showcase={{
-                    capacity: getSolutionCapacity(solution, locale),
-                    capacityLabel: t.capacityLabels[solution.id],
-                    recommendLabel: t.recommend,
-                    ctaLabel: t.cardCtas[solution.id],
-                    ctaHref: solution.ctaHref,
-                  }}
+                  ctaLabel={t.cardCtas[solution.id]}
+                  ctaHref={localizePath(solution.ctaHref, locale)}
                 />
               </Reveal>
-            ))}
-          </div>
-
-        </div>
+            </li>
+          ))}
+        </ul>
 
         <Reveal delay={0.08} distance={12}>
           <p className="hidden flex-wrap items-center justify-center sm:flex gap-x-3 gap-y-2 font-heading text-eyebrow font-medium tracking-eyebrow text-muted uppercase">
