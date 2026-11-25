@@ -172,8 +172,8 @@ const standaloneProductPages: ProductPage[] = [
         en: "LiFePO₄ home battery SVIT PLUS 5000 — 5.12 kWh",
       },
       description: {
-        uk: "Батарея SVIT PLUS 5000 LiFePO₄ 48 В на 5,12 кВт·год: понад 10 000 циклів, до 16 модулів паралельно (81 кВт·год), гарантія 5 років. Для дому й бізнесу.",
-        en: "SVIT PLUS 5000 48 V LiFePO₄ battery, 5.12 kWh: over 10,000 cycles, up to 16 modules in parallel (81 kWh), 5-year warranty. For homes and businesses.",
+        uk: "SVIT PLUS 5000 — батарея LiFePO₄ 48 В на 5,12 кВт·год для резерву під час відключень: понад 10 000 циклів, до 16 модулів (81 кВт·год), гарантія 5 років.",
+        en: "SVIT PLUS 5000 48 V LiFePO₄ battery, 5.12 kWh, for backup during power outages: over 10,000 cycles, up to 16 modules in parallel (81 kWh), 5-year warranty.",
       },
     },
     hero: {
@@ -344,8 +344,8 @@ const standaloneProductPages: ProductPage[] = [
         en: "From 5 to 81 kWh — when you need more",
       },
       lead: {
-        uk: "Почніть з однієї батареї, а коли зросте споживання — додайте модулі паралельно. Нова система не потрібна.",
-        en: "Start with one battery and add modules in parallel as consumption grows. No new system needed.",
+        uk: "Почніть з однієї батареї, а щоб протримати довше відключення чи коли зросте споживання — додайте модулі паралельно. Нова система не потрібна.",
+        en: "Start with one battery and add modules in parallel to ride out longer outages or as consumption grows. No new system needed.",
       },
       moduleCapacityKwh: 5.12,
       options: [1, 2, 4, 8, 16],

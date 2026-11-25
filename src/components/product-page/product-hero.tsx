@@ -22,6 +22,7 @@ import { getMessages } from "@/i18n/server";
 import { format } from "@/lib/messages";
 
 import { specValueText } from "./spec-value";
+import { fillHours } from "@/lib/product-text";
 
 type ProductHeroProps = {
   page: ProductPage;
@@ -88,7 +89,7 @@ export function ProductHero({ page, product, locale }: ProductHeroProps) {
             {product.name}
           </h1>
           <p className="max-w-2xl text-body leading-relaxed text-muted-dark sm:text-lead">
-            {page.hero.lead[locale]}
+            {fillHours(page.hero.lead[locale], locale)}
           </p>
 
           <dl className="grid w-full grid-cols-2 gap-4 sm:grid-cols-4">

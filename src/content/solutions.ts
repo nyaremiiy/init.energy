@@ -364,8 +364,8 @@ export const solutionPages: SolutionPage[] = [
     backup: {
       title: { uk: "Готель працює й під час відключень", en: "The hotel keeps running through outages" },
       lead: {
-        uk: "Гібридна СЕС з накопичувачем автоматично тримає критичні системи готелю, коли зникає мережа. Мережева СЕС під час відключення вимикається.",
-        en: "A hybrid plant with storage automatically keeps the hotel’s critical systems running when the grid goes down. A grid-tied plant switches off during an outage.",
+        uk: "Коли діють графіки погодинних відключень (ГПВ) чи обмеження потужності (ГОП), гібридна СЕС з накопичувачем автоматично тримає критичні системи готелю. Мережева СЕС під час відключення вимикається.",
+        en: "When rolling blackouts or power limitation schedules are in force, a hybrid plant with storage automatically keeps the hotel’s critical systems running. A grid-tied plant switches off during an outage.",
       },
       priorities: [
         { icon: "reception", label: { uk: "Рецепція", en: "Reception" } },

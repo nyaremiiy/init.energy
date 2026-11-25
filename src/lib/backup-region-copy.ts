@@ -1,12 +1,10 @@
-import { backupLoadSets, loadSetPowerW, outageExample, type LoadSet } from "@/content/backup";
+import { loadSetById, loadSetHours, loadSetPowerW, outageExample, type LoadSet } from "@/content/backup";
 import { offices } from "@/content/company";
 import type { InsolationRegion } from "@/content/insolation";
 import { partnerBrands } from "@/content/partner-brands";
 import { products, type ProductId } from "@/content/products";
-import { capacityWh, outputLimitW, usableShare } from "@/content/storage";
 import type { Locale } from "@/i18n/config";
 import { getMessagesFor } from "@/i18n/messages";
-import { exceedsOutput, roundHours, runtimeHours } from "@/lib/calc/backup-runtime";
 import { formatNumber, formatPhone, formatQuantity } from "@/lib/format";
 import { format } from "@/lib/messages";
 import { isCity, isOccupied, regionArea, regionOffice, type RegionFaq } from "@/lib/region-copy";
@@ -28,16 +26,10 @@ const capitalize = (text: string) => text.charAt(0).toUpperCase() + text.slice(1
 
 /** Runtime of a load set on a product, hours rounded for display; null when the load is above its output. */
 export function setRuntime(set: LoadSet, id: ProductId): number | null {
-  const loadW = loadSetPowerW(set);
-  if (exceedsOutput(loadW, outputLimitW(id))) return null;
-  return roundHours(runtimeHours(capacityWh(id), loadW, usableShare));
+  return loadSetHours(set.id, id);
 }
 
-export function loadSetById(id: LoadSet["id"]): LoadSet {
-  const set = backupLoadSets.find((item) => item.id === id);
-  if (!set) throw new Error(`Unknown load set ${id}`);
-  return set;
-}
+export { loadSetById };
 
 /** «Резервне живлення у Львові та Львівській області» from the solar H1 of the same region. */
 export function backupH1(region: InsolationRegion, locale: Locale): string {
