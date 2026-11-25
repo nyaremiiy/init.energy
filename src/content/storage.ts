@@ -17,7 +17,7 @@ export type StorageSegment = "apartment" | "house" | "business";
 /**
  * Battery candidates per segment, tried in order; the first one that covers
  * the need wins. Module limits come from `products[id].maxParallel`.
- * SVIT PLUS 16000 stays a single unit until parallel connection is confirmed.
+ * SVIT PLUS 16000 scales up to 16 batteries (owner's datasheet, 2026-11-25).
  */
 export const storageOrder: Record<StorageSegment, ProductId[]> = {
   // Apartments: no panels, batteries charge from the grid.
