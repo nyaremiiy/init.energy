@@ -55,7 +55,10 @@ export function SolutionPhotoCard({
         src={image.src}
         alt={image.alt}
         fill
-        sizes="(min-width: 1024px) 33vw, 100vw"
+        // A landscape photo in a tall card is cropped by height: it renders ~1.4–1.8× the card height wide
+        // (≈ 1 400 px for a 768 px card), not 33vw. With 33vw the browser took a 640 px file and stretched it.
+        sizes="1440px"
+        quality={90}
         className="-z-10 object-cover transition-transform duration-700 ease-tech motion-safe:group-hover:scale-105 motion-safe:group-focus-within:scale-105"
       />
       <div aria-hidden className="absolute inset-0 -z-10 scrim-solution" />
@@ -125,12 +128,15 @@ export function SolutionPhotoCard({
                         href={link.href}
                         className="group/row flex min-h-11 min-w-0 items-center gap-2 py-3 text-body font-semibold transition-colors duration-200 ease-tech focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                       >
-                        <span className="min-w-0 flex-1 leading-tight">{link.label}</span>
-                        {link.spec ? (
-                          <span className="shrink-0 text-small font-normal whitespace-nowrap text-muted-dark tabular-nums transition-colors duration-200 group-hover/row:text-white">
-                            {link.spec}
-                          </span>
-                        ) : null}
+                        {/* Name and capacity never break inside; if both don't fit, the capacity moves under the name. */}
+                        <span className="flex min-w-0 flex-1 flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5">
+                          <span className="leading-tight whitespace-nowrap">{link.label}</span>
+                          {link.spec ? (
+                            <span className="text-small font-normal whitespace-nowrap text-muted-dark tabular-nums transition-colors duration-200 group-hover/row:text-white">
+                              {link.spec}
+                            </span>
+                          ) : null}
+                        </span>
                         <ArrowUpRight
                           aria-hidden
                           className="size-4 shrink-0 transition-transform duration-200 motion-safe:group-hover/row:translate-x-0.5 motion-safe:group-hover/row:-translate-y-0.5"
