@@ -15,6 +15,20 @@
 
 ---
 
+## 2026-11-25 — Нова таблиця «Порівняння лінійки» на головній
+- **Агент:** Claude Code
+- **Гілка:** feature/home-compare-table (статус: змерджено в develop)
+- **Що зроблено** (за `design/home-compare-table`):
+  - Таблиця під вкладками «Накопичувачі»: Модель (назва, тип, монтаж) · Ємність з міні-шкалою · Потужність · Ресурс · «Будинок · 1 068 Вт» · Для кого (пігулки з іконками) · Детальніше. Колонку «Тип» об'єднано з назвою.
+  - Усі числа — з даних: ємність, потужність і цикли з `products.ts`; «до 16 шт. · 81,9 кВт·год» = `maxParallel × capacity`; LITHIUMVALLEY — 208–1 044 кВт·год і «до 5 блоків по 208»; години — `loadSetHours` (SVIT 600 — «не потягне насос», SVIT HOME / SVIT PLUS 5000 ≈ 4,3 год, SVIT PLUS 16000 ≈ 13,5 год «з інвертором»; для голих батарей функція вже рахувала години, змін не знадобилось); 1 068 Вт — з `appliances.ts`.
+  - Шкала ємності — спільний `lib/capacity-scale.ts` (той самий логарифм, що в картці продукту; дублікат у `product-line.tsx` прибрано).
+  - Над таблицею — речення про будинок і фільтр «Усі / Квартира / Будинок / Бізнес» (`aria-pressed`): невідповідні рядки приглушуються, з DOM не зникають. Під таблицею — примітка про шкалу й 90 % і «Розрахувати свій набір» → калькулятор (`#calculator`).
+  - Нове в `products.ts`: `compare` (монтаж, «для кого», підпис потужності, потужність BESS текстом); поле `audience` видалено.
+- **TODO(content):** потужність SVIT PLUS 16000 — у даних немає, у таблиці «—».
+- **Помічено, не змінювалось:** у `focusDescription` SVIT 600 (картка у вкладках) — «роутер і освітлення до 70 годин, ноутбук — до 10» з init.energy; таблиця й FAQ рахують роутер, світло й ноутбук разом (168 Вт) — ≈ 4,6 год. Варто звірити формулювання.
+- **Перевірено:** lint з `lint:tokens`, build, `npm test`. 360 / 768 / 1024 / 1280 / 1440, uk і en — без горизонтального скролу; фільтр з клавіатури (Enter на «Будинок» приглушує SVIT 600 і LITHIUMVALLEY); у HTML 5 рядків, `<caption>`, `th scope="row"`. Знімки — `.tmp/home-compare`.
+- **Файли:** src/components/ui/product-compare-table.tsx, src/components/products/compare-filter.tsx, src/components/sections/home/product-line.tsx, src/lib/capacity-scale.ts, src/content/products.ts, src/app/globals.css, messages/{uk,en}.json, docs/ai/{CONTEXT,CHANGELOG}.md
+
 ## 2026-11-25 — Світле компактне мега-меню
 - **Агент:** Claude Code
 - **Гілка:** feature/mega-menu-light (статус: змерджено в develop)
