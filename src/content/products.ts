@@ -20,6 +20,9 @@ export type SpecKey =
   | "maxCapacity"
   | "type";
 
+/** Who a product fits in the comparison table (icons from segmentIcons). */
+export type CompareFit = "apartment" | "house" | "business" | "solar";
+
 export type ProductSpec = {
   key: SpecKey;
   /** A quantity (formatted per locale) or the same text in every locale. */
@@ -40,10 +43,8 @@ export type Product = {
   name: string;
   /** Product pages exist in Ukrainian only, so the same URL on every locale. */
   href: string;
-  /** Product type for the comparison table. */
+  /** Product type (the comparison table, under the name). */
   type: Localized;
-  /** Who it is for; `undefined` = not stated on init.energy yet. */
-  audience?: Localized;
   /** Short description for product cards. */
   description: Localized;
   /**
@@ -77,6 +78,15 @@ export type Product = {
   segment: Localized;
   segmentIcon: SegmentIconId;
   image?: ProductImage;
+  /** Home comparison table: install line, who it fits (filter + pills), power caption. */
+  compare: {
+    install: Localized;
+    fits: CompareFit[];
+    /** Caption under the power value; batteries with a separate inverter get the shared caption from messages. */
+    powerNote?: Localized;
+    /** Power as text when it is not a spec (LITHIUMVALLEY inverters). */
+    powerText?: Localized;
+  };
   /** Full product page content; this product remains its single source. */
   page?: ProductPageContent;
 };
@@ -89,7 +99,6 @@ export const productList: Product[] = [
     name: "SVIT 600",
     href: routes.products.svit600,
     type: { uk: "Портативна станція", en: "Portable power station" },
-    audience: { uk: "Квартира", en: "Apartment" },
     description: {
       uk: "Портативна станція для квартири",
       en: "Portable power station for an apartment",
@@ -116,6 +125,11 @@ export const productList: Product[] = [
     ],
     segment: { uk: "Квартира", en: "Apartment" },
     segmentIcon: "apartment",
+    compare: {
+      install: { uk: "Без монтажу, від розетки", en: "No installation, from a socket" },
+      fits: ["apartment"],
+      powerNote: { uk: "пік 1 200 Вт", en: "1,200 W peak" },
+    },
     // TODO(content): confirm whether the nominal capacity is 865 or 864 Wh and whether the battery chemistry is LiFePO₄ or Li-ion.
     // TODO(content): add confirmed weight, dimensions, operating temperature, warranty, grid charging power, IP rating, certificates and a dedicated 1200×630 OG image.
     // TODO(content): confirm the typical load in watts for every runtime example.
@@ -245,7 +259,6 @@ export const productList: Product[] = [
     name: "SVIT HOME",
     href: routes.products.svitHome,
     type: { uk: "Комплекс резервного живлення", en: "Backup power kit" },
-    audience: { uk: "Приватний будинок", en: "Private house" },
     description: {
       uk: "Резервне живлення для всього будинку",
       en: "Backup power for the whole house",
@@ -274,6 +287,11 @@ export const productList: Product[] = [
     ],
     segment: { uk: "Приватний будинок", en: "Private house" },
     segmentIcon: "house",
+    compare: {
+      install: { uk: "Готовий комплект на стійці", en: "A ready kit on a rack" },
+      fits: ["house", "solar"],
+      powerNote: { uk: "інвертор у комплекті", en: "inverter included" },
+    },
     // Hero and composition photos are in place; a photo of the whole kit is still TODO(content).
     // TODO(content): add system voltage, dimensions, weight, interfaces,
     // inverter warranty and datasheet PDF when the owner confirms them.
@@ -684,9 +702,12 @@ export const productList: Product[] = [
     href: routes.products.svitPlus5000,
     type: { uk: "Батарея", en: "Battery" },
     // Source: /svit-plus-5000/ — «Підходить як для дому, так і для бізнесу».
-    audience: { uk: "Дім і бізнес", en: "Home and business" },
     segment: { uk: "Дім і бізнес", en: "Home and business" },
     segmentIcon: "homeBusiness",
+    compare: {
+      install: { uk: "Масштабується модулями", en: "Scales with modules" },
+      fits: ["house", "business"],
+    },
     description: {
       uk: "Акумуляторна батарея LiFePO₄",
       en: "LiFePO₄ battery",
@@ -730,12 +751,13 @@ export const productList: Product[] = [
     href: routes.products.svitPlus16000,
     type: { uk: "Батарея", en: "Battery" },
     // Source: /svit-plus-16000/ names use cases, not an audience.
-    audience: {
-      uk: "Сонячні станції та автономні системи",
-      en: "Solar plants and off-grid systems",
-    },
     segment: { uk: "Автономні системи", en: "Off-grid systems" },
     segmentIcon: "autonomous",
+    compare: {
+      install: { uk: "Для СЕС і автономних систем", en: "For solar and off-grid systems" },
+      fits: ["house", "solar"],
+      // TODO(content): output power of SVIT PLUS 16000 is not stated — the table shows «—».
+    },
     description: {
       uk: "Акумуляторна батарея LiFePO₄ для автономних систем",
       en: "LiFePO₄ battery for off-grid systems",
@@ -928,7 +950,6 @@ export const productList: Product[] = [
     name: "LITHIUMVALLEY",
     href: routes.products.lithiumvalley,
     type: { uk: "BESS", en: "BESS" },
-    audience: { uk: "Бізнес", en: "Business" },
     description: {
       uk: "Промислові системи накопичення для підприємств",
       en: "Industrial energy storage for companies",
@@ -955,6 +976,13 @@ export const productList: Product[] = [
     ],
     segment: { uk: "Бізнес", en: "Business" },
     segmentIcon: "business",
+    compare: {
+      install: { uk: "Проєкт і монтаж на об'єкті", en: "Designed and installed on site" },
+      fits: ["business"],
+      // From the BESS page: SOLIS hybrid inverters up to 125 kW (hero key specs).
+      powerText: { uk: "до 125 кВт", en: "up to 125 kW" },
+      powerNote: { uk: "інвертори SOLIS", en: "SOLIS inverters" },
+    },
     // TODO(content): nominal voltage, DoD, round-trip efficiency, dimensions,
     // weight, EMS/PCS models, fire agent, certificates and datasheet are absent.
     // TODO(content): clarify the 100 kW PCS option and whether IP54/IP55 applies

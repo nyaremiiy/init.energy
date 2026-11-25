@@ -350,6 +350,16 @@ button:not(:disabled) {
 }
 
 /* Hide the scrollbar of swipeable carousels (arrows and swipe stay available). */
+/*
+ * Home comparison table filter (compare-filter.tsx sets data-filter): rows that
+ * don't fit the chosen object type are dimmed, never hidden.
+ */
+.compare-table[data-filter="apartment"] [data-fits]:not([data-fits~="apartment"]),
+.compare-table[data-filter="house"] [data-fits]:not([data-fits~="house"]),
+.compare-table[data-filter="business"] [data-fits]:not([data-fits~="business"]) {
+  opacity: 0.35;
+}
+
 /* Mobile menu open (mobile-menu.tsx sets the attribute): floating buttons would cover the white sheet. */
 body[data-menu-open] [data-floating] {
   display: none;
