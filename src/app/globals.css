@@ -88,6 +88,9 @@
    */
   --grid-template-columns-steps: auto auto minmax(0, 4fr) minmax(0, 6fr);
   --grid-template-columns-steps-compact: auto auto minmax(0, 1fr);
+  /* Backup region pages: product name | bar (runtime chart); axis labels | plot (day chart). */
+  --grid-template-columns-runtime-bar: 8rem minmax(0, 1fr);
+  --grid-template-columns-chart-axis: 2.5rem minmax(0, 1fr);
 
   /* Form controls. */
   --radius-field: 14px;

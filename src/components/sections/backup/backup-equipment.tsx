@@ -7,7 +7,8 @@ import { Heading } from "@/components/ui/heading";
 import { Panel } from "@/components/ui/panel";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
-import { backupBrands, svitLine } from "@/content/backup";
+import { svitLine } from "@/content/backup";
+import { partnerBrands } from "@/content/partner-brands";
 import { products } from "@/content/products";
 import { anchors, sectionHref } from "@/content/routes";
 import { getLocale, getMessages } from "@/i18n/server";
@@ -65,15 +66,16 @@ export function BackupEquipment() {
           </Reveal>
 
           <ul className="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:col-span-7">
-            {backupBrands.map((brand, index) => (
-              <li key={brand}>
+            {partnerBrands.map((brand, index) => (
+              <li key={brand.id}>
                 <Reveal delay={0.06 + index * 0.06} className="h-full">
                   <article className="flex h-full min-h-56 flex-col items-start gap-4 rounded-card bg-white p-card-sm">
                     <Heading as="h3" size="h3">
-                      {brand}
+                      {brand.name}
                     </Heading>
                     <CardLabel icon={PlugZap}>{t.brandLabel}</CardLabel>
-                    <p className="mt-auto text-small text-muted">{t.brandText}</p>
+                    <p className="mt-auto text-body text-ink">{brand.description[locale]}</p>
+                    <p className="-mt-2 text-small text-muted">{t.brandText}</p>
                   </article>
                 </Reveal>
               </li>

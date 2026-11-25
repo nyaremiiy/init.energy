@@ -1,5 +1,5 @@
 import { companyContacts, offices, type Office } from "@/content/company";
-import { regionPaths } from "@/content/insolation";
+import { backupRegionPaths, regionPaths } from "@/content/insolation";
 import { products, productSummary, type ProductId } from "@/content/products";
 import { featuredProjects } from "@/content/projects";
 import { pageNavigation } from "@/content/navigation";
@@ -108,6 +108,11 @@ export function getNavItems(locale: Locale): NavItem[] {
     label: t.columns.regionsLink,
     description: t.columns.regionsDescription,
   };
+  const backupRegionsLink: NavMenuLink = {
+    href: localizePath(`${routes.backup.hub}#${anchors.backupRegions}`, locale),
+    label: t.columns.backupRegionsLink,
+    description: t.columns.backupRegionsDescription,
+  };
   const paybackCalculatorLink: NavMenuLink = {
     href: localizePath(routes.calculators.sesPayback, locale),
     label: t.columns.calculatorLink,
@@ -141,7 +146,7 @@ export function getNavItems(locale: Locale): NavItem[] {
           title: t.columns.solar,
           items: [serviceLink("turnkeySes"), regionsLink, paybackCalculatorLink],
         },
-        { title: t.columns.backup, items: [serviceLink("backupHub")] },
+        { title: t.columns.backup, items: [serviceLink("backupHub"), backupRegionsLink] },
         { title: t.columns.industry, items: [serviceLink("hotelSes")] },
       ],
     },
@@ -176,8 +181,10 @@ const headerSectionKeys: Record<string, string[]> = {
   [routes.services.turnkeySes]: ["sesSegments", "products", "sesRegions", "calculator"],
   [routes.solutions.hotel]: ["nicheFacts", "nicheSizing", "nicheBackup", "faq"],
   [routes.calculators.sesPayback]: ["calculator", "sesYield", "sesMethod", "faq"],
-  [routes.backup.hub]: ["backupHow", "backupEquipment", "backupRuntime", "faq"],
+  // Four links fit next to the menus at 1280 px; «Обладнання» stays in the footer column.
+  [routes.backup.hub]: ["backupHow", "backupRuntime", "backupRegions", "faq"],
   ...Object.fromEntries(regionPaths.map((path) => [path, ["regionYield", "calculator", "faq"]])),
+  ...Object.fromEntries(backupRegionPaths.map((path) => [path, ["backupChoice", "backupRuntime", "faq"]])),
 };
 
 /** Product pages: no section links, but the solar hub and the calculator (cross-sell). */

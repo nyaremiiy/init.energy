@@ -190,7 +190,8 @@ export function ProductPageView({
           defaultObjectType={page.slug === "bess" ? "business" : page.slug === "svit-600" ? "apartment" : undefined}
           objectTypes={page.slug === "bess" ? ["house", "business", "infrastructure", "other"] : undefined}
         />
-        <RegionLinks variant="all" />
+        {/* Backup products link to the backup region pages, the rest to the solar ones. */}
+        <RegionLinks variant="all" kind={page.slug === "svit-600" || page.slug === "svit-home" ? "backup" : "solar"} />
       </main>
     </>
   );

@@ -2,11 +2,12 @@
 
 import { ArrowUpRight } from "lucide-react";
 import { useReducedMotion } from "motion/react";
-import { type KeyboardEvent, useEffect, useId, useRef, useState } from "react";
+import { type KeyboardEvent, type ReactNode, useEffect, useId, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { chipClasses } from "@/components/ui/chip-styles";
 import { CardLabel } from "@/components/ui/card-label";
+import { IconButton } from "@/components/ui/icon-button";
 import { segmentIcons, type SegmentIconId } from "@/content/segments";
 import { trackEvent } from "@/lib/analytics";
 
@@ -36,6 +37,16 @@ type ProductFocusTabsProps = {
     compare: string;
   };
   compareHref: string;
+  /**
+   * Extra tab after a divider (partner brands): its panel comes from the server,
+   * the timer skips it, and a strip under the SVIT panels switches to it.
+   */
+  extra?: {
+    id: string;
+    label: string;
+    panel: ReactNode;
+    strip: { brands: string[]; title: string; text: string };
+  };
 };
 
 /**
@@ -49,6 +60,7 @@ export function ProductFocusTabs({
   defaultIndex,
   labels,
   compareHref,
+  extra,
 }: ProductFocusTabsProps) {
   const baseId = useId();
   const rootRef = useRef<HTMLDivElement>(null);
@@ -65,7 +77,10 @@ export function ProductFocusTabs({
 
   const running =
     mode === "auto" && inView && !hovered && !focused && pageVisible;
+  // The timer cycles through the products only; the extra tab is reached by choice.
   const next = (active + 1) % products.length;
+  const tabCount = products.length + (extra ? 1 : 0);
+  const extraIndex = products.length;
 
   // Start only while the section is on screen.
   useEffect(() => {
@@ -92,11 +107,11 @@ export function ProductFocusTabs({
     setActive(index);
     setMode("stopped");
     if (moveFocus) tabRefs.current[index]?.focus();
-    trackEvent({ event: "product_tab_select", product: products[index].id });
+    trackEvent({ event: "product_tab_select", product: index === extraIndex ? (extra?.id ?? "") : products[index].id });
   }
 
   function onTabKeyDown(event: KeyboardEvent<HTMLButtonElement>) {
-    const last = products.length - 1;
+    const last = tabCount - 1;
     const keys: Record<string, number> = {
       ArrowRight: active === last ? 0 : active + 1,
       ArrowLeft: active === 0 ? last : active - 1,
@@ -144,7 +159,7 @@ export function ProductFocusTabs({
                 tabIndex={selected ? 0 : -1}
                 onClick={() => select(index, false)}
                 onKeyDown={onTabKeyDown}
-                className={`relative overflow-hidden ${chipClasses({ selected, tone: "tint" })}`}
+                className={`relative overflow-hidden ${chipClasses({ selected })}`}
               >
                 {product.name}
                 {/* Invisible timer: its animation end advances to the next tab. */}
@@ -163,6 +178,27 @@ export function ProductFocusTabs({
               </button>
             );
           })}
+          {extra ? (
+            <>
+              <span aria-hidden className="mx-1 w-px self-stretch bg-line" />
+              <button
+                ref={(element) => {
+                  tabRefs.current[extraIndex] = element;
+                }}
+                type="button"
+                role="tab"
+                id={`${baseId}-tab-${extraIndex}`}
+                aria-selected={active === extraIndex}
+                aria-controls={`${baseId}-panel-${extraIndex}`}
+                tabIndex={active === extraIndex ? 0 : -1}
+                onClick={() => select(extraIndex, false)}
+                onKeyDown={onTabKeyDown}
+                className={`${chipClasses({ selected: active === extraIndex })} ${active === extraIndex ? "" : "border-dashed"}`}
+              >
+                {extra.label}
+              </button>
+            </>
+          ) : null}
         </div>
       </div>
 
@@ -180,7 +216,7 @@ export function ProductFocusTabs({
               aria-labelledby={`${baseId}-tab-${index}`}
               tabIndex={selected ? 0 : -1}
               inert={!selected}
-              className={`col-start-1 row-start-1 grid min-w-0 grid-cols-1 items-center gap-8 rounded-card bg-white p-card-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink lg:grid-cols-12 lg:gap-12 lg:p-card ${
+              className={`col-start-1 row-start-1 grid min-w-0 grid-cols-1 items-center gap-8 rounded-card bg-surface p-card-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink lg:grid-cols-12 lg:gap-12 lg:p-card ${
                 selected ? "motion-safe:animate-enter" : "invisible"
               }`}
             >
@@ -237,7 +273,47 @@ export function ProductFocusTabs({
             </div>
           );
         })}
+        {extra ? (
+          <div
+            role="tabpanel"
+            id={`${baseId}-panel-${extraIndex}`}
+            aria-labelledby={`${baseId}-tab-${extraIndex}`}
+            tabIndex={active === extraIndex ? 0 : -1}
+            inert={active !== extraIndex}
+            className={`col-start-1 row-start-1 grid min-w-0 grid-cols-1 items-center gap-8 rounded-card bg-surface p-card-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink lg:grid-cols-12 lg:gap-12 lg:p-card ${
+              active === extraIndex ? "motion-safe:animate-enter" : "invisible"
+            }`}
+          >
+            {extra.panel}
+          </div>
+        ) : null}
       </div>
+
+      {/* «Потрібен інший бренд?» under every SVIT panel: switches to the brands tab and brings it into view. */}
+      {extra ? (
+        <button
+          type="button"
+          hidden={active === extraIndex}
+          onClick={() => {
+            select(extraIndex, true);
+            tabRefs.current[extraIndex]?.scrollIntoView({ block: "nearest", behavior: prefersReducedMotion ? "auto" : "smooth" });
+          }}
+          className="group -mt-4 flex w-full cursor-pointer flex-col gap-4 rounded-card bg-ink-glow p-card-sm text-left text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink sm:flex-row sm:items-center sm:gap-6 lg:-mt-8 lg:px-card lg:py-5"
+        >
+          <span aria-hidden className="flex shrink-0 flex-wrap gap-2">
+            {extra.strip.brands.map((brand) => (
+              <span key={brand} className="inline-flex h-8 items-center rounded-full border border-line-dark px-3 text-caption font-medium">
+                {brand}
+              </span>
+            ))}
+          </span>
+          <span className="flex min-w-0 flex-1 flex-col gap-1">
+            <span className="font-heading text-body font-semibold">{extra.strip.title}</span>
+            <span className="text-small text-muted-dark">{extra.strip.text}</span>
+          </span>
+          <IconButton decorative variant="solid-light" size="sm" icon="arrow" className="hidden shrink-0 sm:flex" />
+        </button>
+      ) : null}
     </div>
   );
 }
