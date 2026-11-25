@@ -131,6 +131,12 @@ export function regionFaq(region: InsolationRegion, locale: Locale, stats: Regio
         best: n(stats.best.kwh),
       }),
     },
+    {
+      // Which plant keeps working without the grid — the same facts as `plantRows` in content/ses.ts.
+      id: "outage",
+      question: f.outageQ,
+      answer: format(f.outageA, { Locative: capitalize(locative), locative }),
+    },
   ];
 
   if (!isOccupied(region)) {

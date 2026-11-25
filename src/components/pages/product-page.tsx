@@ -26,6 +26,7 @@ import { getMessages } from "@/i18n/server";
 import { formatQuantity, type Locale } from "@/lib/format";
 import { format } from "@/lib/messages";
 import { absoluteUrl, buildMetadata } from "@/lib/seo/metadata";
+import { fillHours } from "@/lib/product-text";
 import {
   breadcrumbSchema,
   howToSchema,
@@ -41,7 +42,7 @@ export function buildProductPageMetadata(
 
   return buildMetadata({
     title: page.meta.title[locale],
-    description: page.meta.description[locale],
+    description: fillHours(page.meta.description[locale], locale),
     path: toPath(page.slug),
     locale,
   });

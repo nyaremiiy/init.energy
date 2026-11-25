@@ -2,7 +2,7 @@ import { roundHours, runtimeHours } from "@/lib/calc/backup-runtime";
 import { chargeAfter } from "@/lib/calc/backup-day";
 import { formatNumber, formatQuantity, type Locale } from "@/lib/format";
 
-import { backupLoadSets, loadSetPowerW, outageExample } from "./backup";
+import { backupLoadSets, loadSetById, loadSetHours, loadSetPowerW, outageExample, type LoadSet } from "./backup";
 import type { ProductPageSlug } from "./product-pages";
 import { products } from "./products";
 import { capacityWh, usableShare } from "./storage";
@@ -35,6 +35,16 @@ const outage = (() => {
     minEn: min.en,
   };
 })();
+
+/** Runtime figures for product answers: the same calculation as the hub table (content/backup.ts). */
+const rt = {
+  /** Hours of a load set on a product. */
+  h: (set: LoadSet["id"], id: Parameters<typeof loadSetHours>[1], locale: Locale) => formatNumber(loadSetHours(set, id) ?? 0, locale),
+  /** Power of a load set, «1 068 Вт». */
+  w: (set: LoadSet["id"], locale: Locale) => formatQuantity({ value: loadSetPowerW(loadSetById(set)), unit: "W" }, locale),
+  /** How many example outages a product covers on the house set. */
+  outages: (id: Parameters<typeof loadSetHours>[1]) => Math.floor((loadSetHours("house", id) ?? 0) / outageExample.hours),
+};
 
 export type FaqTopic = "backup" | "solar" | "products" | "warranty";
 
@@ -193,6 +203,14 @@ export const faqList: Faq[] = [
     answer: { uk: "Так. Мережева СЕС працює без батареї, але під час відключень вона вимикається. Щоб мати світло без мережі, потрібна гібридна СЕС з накопичувачем SVIT.", en: "Yes. A grid-tied solar plant can work without a battery, but it shuts down during outages. To keep power when the grid is off, choose a hybrid system with SVIT storage." },
   },
   {
+    id: "calculator-outage-battery", topic: "backup", pages: ["calculator"],
+    question: { uk: "Як розрахувати батарею під свій графік відключень?", en: "How do I size a battery for my outage schedule?" },
+    answer: {
+      uk: `Відкрийте вкладку «Автономність під час відключень», позначте прилади, які мають працювати, і вкажіть, скільки годин поспіль немає світла за вашою чергою. Калькулятор порахує їхню потужність і підбере накопичувач SVIT за корисною ємністю (90 % номінальної): наприклад, будинок з котлом, насосом, холодильником, світлом і роутером (${outage.loadUk}) SVIT HOME тримає близько ${outage.hoursUk} год. Якщо відключень кілька на добу, інженер перевірить, чи встигає батарея зарядитися між ними.`,
+      en: `Open the “Autonomy during outages” tab, tick the appliances that must keep running and enter how many hours in a row your group is usually without power. The calculator adds up their power and picks an SVIT battery by usable capacity (90% of nominal): for example, SVIT HOME runs a house with a boiler, pump, fridge, lights and router (${outage.loadEn}) for about ${outage.hoursEn} h. If there are several outages a day, an engineer checks that the battery recharges between them.`,
+    },
+  },
+  {
     id: "calculator-data", topic: "solar", pages: ["calculator"],
     question: { uk: "Що відбувається з даними після розрахунку?", en: "What happens to my data after the calculation?" },
     answer: { uk: "Розрахунок виконується у вашому браузері. Параметри передаються нам лише разом із заявкою, щоб фахівець не перепитував їх повторно.", en: "The calculation runs in your browser. Your settings are sent to us only with a request, so a specialist does not need to ask for them again." },
@@ -201,8 +219,8 @@ export const faqList: Faq[] = [
     id: "svit-600-runtime",
     topic: "products",
     pages: ["svit-600"],
-    question: { uk: "Скільки працює SVIT 600 від одного заряду?", en: "How long does SVIT 600 run on one charge?" },
-    answer: { uk: "Час роботи залежить від навантаження. Орієнтовно ноутбук працює до 10 годин, роутер з освітленням — до 70 годин, а холодильник — 2–3 години.", en: "Runtime depends on the load. As a guide, a laptop can run for up to 10 hours, a router with lighting for up to 70 hours, and a fridge for 2–3 hours." },
+    question: { uk: "На скільки годин вистачить SVIT 600 під час відключення світла?", en: "How many hours does SVIT 600 last during a power outage?" },
+    answer: { uk: `Роутер, світло й ноутбук (${rt.w("basic", "uk")}) SVIT 600 живить близько ${rt.h("basic", "svit600", "uk")} год, а разом з холодильником (${rt.w("fridge", "uk")}) — близько ${rt.h("fridge", "svit600", "uk")} год; холодильник працює циклами, тож на практиці довше. Свердловинний насос станція не потягне: він потужніший за її вихід 600 Вт — для будинку з насосом потрібен SVIT HOME.`, en: `SVIT 600 runs the router, lights and a laptop (${rt.w("basic", "en")}) for about ${rt.h("basic", "svit600", "en")} h, and with a fridge (${rt.w("fridge", "en")}) for about ${rt.h("fridge", "svit600", "en")} h; the fridge runs in cycles, so in practice it lasts longer. A well pump is too much for the station's 600 W output — a house with a pump needs SVIT HOME.` },
   },
   {
     id: "svit-600-solar",
@@ -251,12 +269,12 @@ export const faqList: Faq[] = [
     topic: "backup",
     pages: ["home", "products", "svit-home"],
     question: {
-      uk: "Скільки працюватиме будинок від SVIT HOME під час відключення?",
-      en: "How long will a house run on SVIT HOME during an outage?",
+      uk: "Чи потягне SVIT HOME котел і насос під час відключення?",
+      en: "Will SVIT HOME run a boiler and a pump during an outage?",
     },
     answer: {
-      uk: "Залежить від навантаження. SVIT HOME має ємність 5,12 кВт·год: якщо одночасно працюють котел, холодильник, світло й роутер — приблизно 0,5 кВт, — заряду вистачить на 9–10 годин. Точний час під ваше навантаження розрахує інженер INIT ENERGY.",
-      en: "It depends on the load. SVIT HOME stores 5.12 kWh: with a boiler, fridge, lights and router running together — about 0.5 kW — a full charge lasts 9–10 hours. An INIT ENERGY engineer will calculate the exact time for your load.",
+      uk: `Так. Котел, насос, холодильник, світло й роутер разом споживають ${rt.w("house", "uk")} — це в межах інвертора 6,2 кВт. Батарея 5,12 кВт·год тримає такий набір близько ${rt.h("house", "svitHome", "uk")} год, а коли світло зникає, комплект сам перемикає будинок на батарею. Для довших відключень додають ще одну батарею SVIT PLUS 5000; точний час під ваші прилади розрахує інженер INIT ENERGY.`,
+      en: `Yes. A boiler, pump, fridge, lights and router draw ${rt.w("house", "en")} together — within the 6.2 kW inverter. The 5.12 kWh battery runs this set for about ${rt.h("house", "svitHome", "en")} h, and when the power goes off the kit switches the house to the battery by itself. For longer outages another SVIT PLUS 5000 battery is added; an INIT ENERGY engineer will calculate the exact time for your appliances.`,
     },
   },
   {
@@ -528,8 +546,8 @@ export const faqList: Faq[] = [
       en: "How many hours does one SVIT PLUS 5000 battery last?",
     },
     answer: {
-      uk: "Залежить від навантаження: 5,12 кВт·год при 0,5 кВт (котел, холодильник, світло й роутер) — приблизно 9–10 годин. Для довшого резерву модулі з'єднують паралельно — до 16 штук, до 81 кВт·год.",
-      en: "It depends on the load: 5.12 kWh at 0.5 kW (boiler, fridge, lights and router) lasts about 9–10 hours. For longer backup, connect modules in parallel — up to 16, up to 81 kWh.",
+      uk: `Залежить від навантаження. З інвертором одна батарея 5,12 кВт·год під час відключення тримає роутер, світло, ноутбук і холодильник (${rt.w("fridge", "uk")}) близько ${rt.h("fridge", "svitPlus5000", "uk")} год, а будинок з котлом і насосом (${rt.w("house", "uk")}) — близько ${rt.h("house", "svitPlus5000", "uk")} год. Щоб протримати довше відключення, модулі з'єднують паралельно — до 16 штук, до 81 кВт·год.`,
+      en: `It depends on the load. With an inverter, one 5.12 kWh battery runs the router, lights, laptop and fridge (${rt.w("fridge", "en")}) for about ${rt.h("fridge", "svitPlus5000", "en")} h during an outage, and a house with a boiler and pump (${rt.w("house", "en")}) for about ${rt.h("house", "svitPlus5000", "en")} h. To ride out a longer outage, connect modules in parallel — up to 16, up to 81 kWh.`,
     },
   },
   {
@@ -657,6 +675,16 @@ export const faqList: Faq[] = [
     answer: { uk: "Номінальна енергія — 16,07 кВт·год, з них 14,5–15,3 кВт·год доступні для використання при глибині розряду 90–95%.", en: "Nominal energy is 16.07 kWh, of which 14.5–15.3 kWh is usable at 90–95% depth of discharge." },
   },
   {
+    id: "svit-plus-16000-outage",
+    topic: "backup",
+    pages: ["svit-plus-16000"],
+    question: { uk: "Скільки протримає SVIT PLUS 16000 під час відключень?", en: "How long does SVIT PLUS 16000 last during outages?" },
+    answer: {
+      uk: `З гібридним інвертором батарея тримає будинок з котлом, насосом, холодильником, світлом і роутером (${rt.w("house", "uk")}) близько ${rt.h("house", "svitPlus16000", "uk")} год — це ${rt.outages("svitPlus16000")} відключення по ${outage.hours} години без підзарядки. Для бізнесу час рахують під навантаження; щоб протримати довше, ставлять більший накопичувач або додають сонячні панелі.`,
+      en: `With a hybrid inverter the battery runs a house with a boiler, pump, fridge, lights and router (${rt.w("house", "en")}) for about ${rt.h("house", "svitPlus16000", "en")} h — ${rt.outages("svitPlus16000")} outages of ${outage.hours} hours without recharging. For a business the time is calculated for its load; to last longer, a larger battery system or solar panels are added.`,
+    },
+  },
+  {
     id: "svit-plus-16000-inverters",
     topic: "products",
     pages: ["svit-plus-16000"],
@@ -700,12 +728,32 @@ export const faqList: Faq[] = [
   },
   { id: "bess-outdoor", topic: "products", pages: ["bess"], question: { uk: "Чи можна встановити BESS просто неба?", en: "Can the BESS be installed outdoors?" }, answer: { uk: "Так. Заводський модуль розрахований на встановлення у приміщенні або просто неба.", en: "Yes. The factory module is designed for indoor or outdoor installation." } },
   { id: "bess-scale", topic: "products", pages: ["bess"], question: { uk: "Чи можна збільшити ємність пізніше?", en: "Can capacity be increased later?" }, answer: { uk: "Так. Модулі нарощуються без зупинки системи: від 208 або 261 кВт·год до 1 044 кВт·год.", en: "Yes. Modules scale without stopping the system, from a 208 or 261 kWh base up to 1,044 kWh." } },
+  {
+    id: "bess-gop",
+    topic: "backup",
+    pages: ["bess"],
+    question: { uk: "Як BESS допомагає під час ГОП?", en: "How does a BESS help during power limitation schedules?" },
+    answer: {
+      uk: "Під час графіків обмеження потужності (ГОП) підприємство має брати з мережі не більше заданого рівня. LITHIUMVALLEY покриває решту навантаження з батареї, а якщо мережу вимкнуть повністю, перемикає обладнання на себе менш ніж за 10 мс — виробництво не зупиняється. Ємність 208–1 044 кВт·год підбирають під навантаження й тривалість обмежень.",
+      en: "Under power limitation schedules a business may draw no more than a set level from the grid. LITHIUMVALLEY covers the rest of the load from the battery and, if the grid goes off completely, takes over the equipment in under 10 ms — production does not stop. Capacity from 208 to 1,044 kWh is chosen for the load and the length of the limits.",
+    },
+  },
   { id: "bess-ups", topic: "backup", pages: ["bess"], question: { uk: "Чи працює система як промисловий UPS?", en: "Does the system work as an industrial UPS?" }, answer: { uk: "Так. Перемикання займає менш ніж 10 мс, тому підключене обладнання не помічає зникнення мережі.", en: "Yes. Transfer takes under 10 ms, so connected equipment does not notice the grid outage." } },
   { id: "bess-solar-generator", topic: "solar", pages: ["bess"], question: { uk: "Чи працює BESS із СЕС і генератором?", en: "Does the BESS work with solar and a generator?" }, answer: { uk: "Так. Гібридний інвертор працює із сонячною станцією та дизельним або газовим генератором.", en: "Yes. The hybrid inverter works with solar and with a diesel or gas generator." } },
   { id: "bess-operator", topic: "products", pages: ["bess"], question: { uk: "Чи потрібен постійний оператор?", en: "Is a permanent operator required?" }, answer: { uk: "Ні. EMS автоматично розподіляє потоки між мережею, СЕС, батареєю і навантаженням; стан системи контролюється віддалено.", en: "No. EMS automatically distributes flows between the grid, solar, battery and load, while the system is monitored remotely." } },
   { id: "bess-service", topic: "warranty", pages: ["bess"], question: { uk: "Як часто потрібне обслуговування?", en: "How often is service required?" }, answer: { uk: "Плановий огляд проводять 1–2 рази на рік; також доступна дистанційна діагностика.", en: "A scheduled inspection is performed 1–2 times a year, with remote diagnostics also available." } },
   { id: "bess-installation", topic: "products", pages: ["bess"], question: { uk: "Скільки триває монтаж і запуск?", en: "How long do installation and commissioning take?" }, answer: { uk: "Від кількох днів до 1–2 тижнів залежно від об'єкта. Поставка базового модуля — до 2 тижнів.", en: "From a few days to 1–2 weeks depending on the site. Base-module delivery is within 2 weeks." } },
   { id: "bess-warranty", topic: "warranty", pages: ["bess"], question: { uk: "Яка гарантія на LITHIUMVALLEY?", en: "What is the LITHIUMVALLEY warranty?" }, answer: { uk: "Гарантія на батарейну систему — 10 років, а ресурс конструкції — до 15 років.", en: "The battery system warranty is 10 years, while the structure service life is up to 15 years." } },
+  {
+    id: "hotel-gop",
+    topic: "backup",
+    pages: ["ses-hotel"],
+    question: { uk: "Що робити готелю під час графіків обмеження потужності?", en: "What should a hotel do during power limitation schedules?" },
+    answer: {
+      uk: "Перевести критичне навантаження — рецепцію, системи безпеки, освітлення, холодильне обладнання й насоси — на накопичувач. Гібридна СЕС з батареєю SVIT PLUS 16000 чи LITHIUMVALLEY бере частину споживання на себе, поки діє обмеження потужності (ГОП), і тримає ці лінії, якщо світло вимкнуть повністю. Ємність інженер рахує під навантаження готелю й тривалість обмежень.",
+      en: "Move the critical load — reception, security systems, lighting, refrigeration and pumps — onto a battery. A hybrid plant with an SVIT PLUS 16000 or LITHIUMVALLEY battery takes over part of the consumption while the power limit is in force and keeps these lines running if the power goes off completely. An engineer sizes the capacity for the hotel's load and the length of the limits.",
+    },
+  },
   {
     id: "hotel-full-supply",
     topic: "solar",

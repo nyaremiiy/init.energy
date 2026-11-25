@@ -1,8 +1,11 @@
 import type { Localized } from "@/i18n/config";
 
+import { exceedsOutput, roundHours, runtimeHours } from "@/lib/calc/backup-runtime";
+
 import { appliances } from "./appliances";
 import type { ProductId } from "./products";
 import { routes } from "./routes";
+import { capacityWh, outputLimitW, usableShare } from "./storage";
 import type { SegmentIconId } from "./segments";
 
 /**
@@ -230,6 +233,22 @@ export const backupLoadSets: LoadSet[] = [
 /** Total power of a load set from content/appliances.ts. */
 export function loadSetPowerW(set: LoadSet): number {
   return set.appliances.reduce((sum, id) => sum + (appliances.find((item) => item.id === id)?.powerW ?? 0), 0);
+}
+
+export function loadSetById(id: LoadSet["id"]): LoadSet {
+  const set = backupLoadSets.find((item) => item.id === id);
+  if (!set) throw new Error(`Unknown load set ${id}`);
+  return set;
+}
+
+/**
+ * Hours a product runs a load set, rounded for display (the hub table, region pages,
+ * product texts and FAQ use this one function); null when the load is above its output.
+ */
+export function loadSetHours(setId: LoadSet["id"], id: ProductId): number | null {
+  const loadW = loadSetPowerW(loadSetById(setId));
+  if (exceedsOutput(loadW, outputLimitW(id))) return null;
+  return roundHours(runtimeHours(capacityWh(id), loadW, usableShare));
 }
 
 /** Products in the autonomy table; SVIT PLUS 16000 works with a separate hybrid inverter. */

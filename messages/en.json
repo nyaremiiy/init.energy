@@ -11,7 +11,7 @@
   "solutionsBySegment": {
     "eyebrow": "Solutions",
     "title": "What do you need to power?",
-    "lead": "Choose your property type: each has ready-made backup power and solar generation scenarios built on SVIT and LITHIUMVALLEY batteries.",
+    "lead": "During power outages, a battery system switches your apartment, house or business to battery power by itself. Choose your property type: each has ready-made backup power and solar generation scenarios built on SVIT and LITHIUMVALLEY batteries.",
     "calculatorLink": "Detailed payback calculator",
     "cardNavLabel": "Solution pages: {segment}",
     "recommend": "Recommended",
@@ -424,8 +424,8 @@
     "note": "Thank you for your patience."
   },
   "meta": {
-    "homeTitle": "Turnkey solar panels and backup power across Ukraine",
-    "homeDescription": "INIT ENERGY designs and installs turnkey solar power plants and backup power in Ukraine: SVIT and LITHIUMVALLEY batteries for homes and businesses.",
+    "homeTitle": "Solar panels and backup power for outages in Ukraine",
+    "homeDescription": "Turnkey solar panels and backup power across Ukraine: SVIT, Deye, Victron and Huawei systems keep lights, heating and internet on during power outages.",
     "siteName": "INIT ENERGY",
     "organizationDescription": "Design, supply and installation of turnkey solar power plants and backup power systems in Ukraine.",
     "llmsOutages": {
@@ -492,7 +492,7 @@
   "ses": {
     "meta": {
       "title": "Turnkey solar panels: solar plants for homes and business",
-      "description": "Turnkey solar power plants for homes and businesses: design, installation and service. Over 30 years in the energy sector, 20+ projects, 1 MW+ installed."
+      "description": "Turnkey solar power plants for homes and businesses: a hybrid plant with a battery keeps the power on during outages. Design, installation and service."
     },
     "home": "Home",
     "segments": {
@@ -507,7 +507,7 @@
     "types": {
       "eyebrow": "Plant types",
       "title": "Grid-tied, hybrid or off-grid",
-      "lead": "The plant type decides whether you have power during outages. For most homes and businesses in Ukraine, a hybrid plant with a battery is the best fit.",
+      "lead": "During power outages only a hybrid or off-grid plant with a battery keeps working — a grid-tied plant shuts down with the grid. For most homes and businesses in Ukraine, a hybrid plant with a battery is the best fit.",
       "caption": "Comparison of solar power plant types",
       "feature": "Feature",
       "recommended": "recommended",
@@ -655,7 +655,9 @@
       "coverageA": "Yes, we work across Ukraine: {locative} we size, supply and install solar plants in towns and villages.",
       "coverageACity": "Yes, we work across Ukraine and in every district of Kyiv.",
       "coverageOffice": "Our office {centerLocative}: {address}, phone {phone}.",
-      "coverageCall": "Call {phone} — an engineer will refine the estimate for your address."
+      "coverageCall": "Call {phone} — an engineer will refine the estimate for your address.",
+      "outageQ": "Do solar panels work during a power outage?",
+      "outageA": "It depends on the type of plant. A grid-tied plant shuts down with the grid during an outage, even in full sun. Hybrid and off-grid plants with a battery keep working: during the day the panels power the house and charge the battery, and in the evening and at night the battery takes over. {Locative} a hybrid plant with a battery is installed for this — how many hours it lasts is shown on the “Backup power {locative}” page."
     },
     "lead": {
       "comment": "Town or village where you need the plant, roof area"
@@ -708,13 +710,13 @@
   },
   "sesPayback": {
     "meta": {
-      "title": "Solar panel calculator: system size and payback",
-      "description": "Estimate solar plant capacity, bill savings and SVIT storage for your home or business using PVGIS yield data for every Ukrainian region."
+      "title": "Solar panel calculator: payback and battery backup time",
+      "description": "Estimate solar plant size, savings and payback — and how many hours a battery lasts during power outages. PVGIS yield data for every region of Ukraine."
     },
     "home": "Home",
     "eyebrow": "Payback calculator",
     "title": "Solar panel and solar plant calculator",
-    "lead": "Enter your electricity use, region and the appliances that should stay on during an outage. The calculator estimates solar capacity, SVIT storage and potential savings in about a minute.",
+    "lead": "Enter your electricity use, region and the appliances that should stay on during an outage. The calculator estimates solar capacity and SVIT storage, potential savings and how many hours the battery lasts without power, in about a minute.",
     "steps": [
       "Property and goal",
       "Consumption",
@@ -822,7 +824,7 @@
     "approx": "≈",
     "year": "years",
     "factsLabel": "The calculator in brief",
-    "calcTitle": "Solar and battery calculator",
+    "calcTitle": "Solar and battery backup calculator",
     "maxPlus": "{value}+",
     "productLink": "More about {name}",
     "chartEyebrow": "Generation",
@@ -1020,7 +1022,7 @@
   "backup": {
     "meta": {
       "title": "Turnkey backup power for blackouts and power outages",
-      "description": "Turnkey backup power for apartments, houses and businesses: SVIT batteries and Deye, Victron, Huawei systems. Sizing, installation and service by INIT ENERGY."
+      "description": "Turnkey backup power for power outages — for apartments, houses and businesses: SVIT batteries and Deye, Victron, Huawei systems. Installation and service."
     },
     "home": "Home",
     "breadcrumb": "Backup power",
