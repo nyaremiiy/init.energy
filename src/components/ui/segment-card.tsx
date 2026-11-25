@@ -1,11 +1,8 @@
 import type { LucideIcon } from "lucide-react";
-import { PillLink } from "./pill-link";
-import { ArrowUpRight } from "lucide-react";
-import Link from "next/link";
 
-import { Button } from "./button";
 import { CardLabel } from "./card-label";
 import { Heading } from "./heading";
+import { PillLink } from "./pill-link";
 
 type SegmentCardTone = "light" | "navy" | "dark";
 
@@ -19,13 +16,6 @@ type SegmentCardProps = {
   links: Array<{ label: string; spec?: string; href: string }>;
   navLabel: string;
   tone?: SegmentCardTone;
-  showcase?: {
-    capacity: string;
-    capacityLabel: string;
-    recommendLabel: string;
-    ctaLabel: string;
-    ctaHref: string;
-  };
 };
 
 const toneClasses: Record<
@@ -35,10 +25,6 @@ const toneClasses: Record<
     index: string;
     text: string;
     muted: string;
-    link: string;
-    /** First link of the card: filled light pill. */
-    featuredLink: string;
-    featuredMuted: string;
   }
 > = {
   light: {
@@ -46,27 +32,18 @@ const toneClasses: Record<
     index: "text-ink group-hover:text-white",
     text: "text-ink group-hover:text-white",
     muted: "text-muted group-hover:text-muted-dark",
-    link: "border-line group-hover:border-line-dark focus-visible:outline-ink",
-    featuredLink: "border-line bg-white text-ink hover:border-ink",
-    featuredMuted: "text-muted",
   },
   navy: {
     card: "bg-navy text-white hover:bg-ink",
     index: "text-white",
     text: "text-white",
     muted: "text-muted-dark",
-    link: "border-line-dark focus-visible:outline-white",
-    featuredLink: "border-white bg-white text-ink hover:bg-surface",
-    featuredMuted: "text-muted",
   },
   dark: {
     card: "bg-ink text-white",
     index: "text-white",
     text: "text-white",
     muted: "text-muted-dark",
-    link: "border-line-dark focus-visible:outline-white",
-    featuredLink: "border-white bg-white text-ink hover:bg-surface",
-    featuredMuted: "text-muted",
   },
 };
 
@@ -79,95 +56,8 @@ export function SegmentCard({
   links,
   navLabel,
   tone = "light",
-  showcase,
 }: SegmentCardProps) {
   const classes = toneClasses[tone];
-
-  if (showcase) {
-    const isLight = tone === "light";
-    const muted = isLight ? "text-muted" : "text-muted-dark";
-    const divider = isLight ? "border-line" : "border-line-dark";
-    const focus = isLight
-      ? "focus-visible:outline-ink"
-      : "focus-visible:outline-white";
-
-    return (
-      <article
-        className={`flex h-full min-w-0 flex-col rounded-card p-card-sm lg:p-card ${isLight ? "bg-sky text-ink" : tone === "navy" ? "bg-navy text-white" : "bg-ink text-white"}`}
-      >
-        <div className="flex items-start justify-between gap-4">
-          <CardLabel tone={isLight ? "light" : "dark"} icon={segmentIcon}>
-            {segment}
-          </CardLabel>
-          {index ? (
-            <span
-              aria-hidden
-              className={`font-heading text-eyebrow font-light tabular-nums ${muted}`}
-            >
-              {index}
-            </span>
-          ) : null}
-        </div>
-
-        <div className="mt-8 min-w-0">
-          <p className="font-heading text-number-sm font-light tracking-tight whitespace-nowrap 2xl:text-number">
-            {showcase.capacity}
-          </p>
-          <p className={`mt-2 text-small ${muted}`}>{showcase.capacityLabel}</p>
-        </div>
-
-        <div className="mt-8 flex flex-col gap-3">
-          <Heading as="h3" size="h3" weight="semibold">
-            {title}
-          </Heading>
-          <p className={`text-body leading-relaxed ${muted}`}>{description}</p>
-        </div>
-
-        <div className="mt-auto pt-10">
-          <p
-            className={`mb-3 font-heading text-eyebrow-sm font-medium tracking-eyebrow uppercase sm:text-eyebrow ${muted}`}
-          >
-            {showcase.recommendLabel}
-          </p>
-          <nav aria-label={navLabel}>
-            <ul className={`border-b ${divider}`}>
-              {links.map((link) => (
-                <li key={link.href} className={`border-t ${divider}`}>
-                  <Link
-                    href={link.href}
-                    className={`group flex min-w-0 items-center gap-2 py-3 text-body font-medium transition-colors duration-200 ease-tech focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 ${focus}`}
-                  >
-                    <span className="min-w-0 flex-1 leading-tight">
-                      {link.label}
-                    </span>
-                    {link.spec ? (
-                      <span
-                        className={`shrink-0 text-small whitespace-nowrap tabular-nums ${muted}`}
-                      >
-                        {link.spec}
-                      </span>
-                    ) : null}
-                    <ArrowUpRight
-                      aria-hidden
-                      className="size-4.5 shrink-0 transition-transform duration-200 motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5"
-                    />
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-          <Button
-            href={showcase.ctaHref}
-            variant={isLight ? "outline-light" : "secondary"}
-            className="mt-6 w-full"
-            icon={<ArrowUpRight aria-hidden className="size-4.5" />}
-          >
-            {showcase.ctaLabel}
-          </Button>
-        </div>
-      </article>
-    );
-  }
 
   return (
     <article
