@@ -32,6 +32,14 @@ export function formatDate(iso: string, locale: Locale) {
     : new Intl.DateTimeFormat("uk-UA", { day: "2-digit", month: "2-digit", year: "numeric", timeZone: "UTC" }).format(date);
 }
 
+/** «листопад 2026» / "November 2026" — for «Оновлено: …» lines. */
+export function formatMonthYear(iso: string, locale: Locale) {
+  const date = new Date(`${iso}T12:00:00Z`);
+  return new Intl.DateTimeFormat(locale === "en" ? "en-GB" : "uk-UA", { month: "long", year: "numeric", timeZone: "UTC" })
+    .format(date)
+    .replace(/\s*р\.$/, "");
+}
+
 export function formatPhone(value: string) {
   const digits = value.replace(/\D/g, "");
 

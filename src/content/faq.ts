@@ -1,6 +1,40 @@
-import type { Locale } from "@/lib/format";
+import { roundHours, runtimeHours } from "@/lib/calc/backup-runtime";
+import { chargeAfter } from "@/lib/calc/backup-day";
+import { formatNumber, formatQuantity, type Locale } from "@/lib/format";
 
+import { backupLoadSets, loadSetPowerW, outageExample } from "./backup";
 import type { ProductPageSlug } from "./product-pages";
+import { products } from "./products";
+import { capacityWh, usableShare } from "./storage";
+
+/** Figures of the outage example (content/backup.ts) for the hub FAQ, computed — never typed in. */
+const outage = (() => {
+  const set = backupLoadSets.find((item) => item.id === outageExample.loadSet)!;
+  const loadW = loadSetPowerW(set);
+  const capacity = capacityWh(outageExample.product);
+  const kwh = (value: number, locale: Locale) => formatQuantity({ value: Math.round(value / 100) / 10, unit: "kWh" }, locale);
+  const both = (make: (locale: Locale) => string) => ({ uk: make("uk"), en: make("en") });
+  const load = both((locale) => formatQuantity({ value: loadW, unit: "W" }, locale));
+  const need = both((locale) => kwh(loadW * outageExample.hours, locale));
+  const usable = both((locale) => kwh(capacity * usableShare, locale));
+  const hours = both((locale) => formatNumber(roundHours(runtimeHours(capacity, loadW, usableShare)), locale));
+  const min = both((locale) => formatNumber(Math.round(chargeAfter(outageExample.hours, loadW, capacity)), locale));
+  return {
+    hours: outageExample.hours,
+    product: products[outageExample.product].name,
+    extra: products.svitPlus5000.name,
+    loadUk: load.uk,
+    loadEn: load.en,
+    needUk: need.uk,
+    needEn: need.en,
+    usableUk: usable.uk,
+    usableEn: usable.en,
+    hoursUk: hours.uk,
+    hoursEn: hours.en,
+    minUk: min.uk,
+    minEn: min.en,
+  };
+})();
 
 export type FaqTopic = "backup" | "solar" | "products" | "warranty";
 
@@ -92,6 +126,50 @@ export const faqList: Faq[] = [
     answer: {
       uk: "Ресурс накопичувача вимірюють у циклах заряд-розряд. Батарея SVIT PLUS 5000 (вона ж у складі SVIT HOME) розрахована на понад 10 000 циклів, портативна SVIT 600 — на понад 2 000. Строк у роках залежить від того, як часто система розряджається, тому точний прогноз дасть інженер.",
       en: "Battery life is measured in charge cycles. The SVIT PLUS 5000 battery (also inside SVIT HOME) is rated for over 10,000 cycles, the portable SVIT 600 for over 2,000. The life in years depends on how often the system discharges, so an engineer will give you an exact estimate.",
+    },
+  },
+  // Outage schedules (2026-11-25): stable wording, no daily figures (groups, hours). Numbers come from the runtime calculation.
+  {
+    id: "backup-outage-capacity",
+    topic: "backup",
+    pages: ["backup"],
+    question: {
+      uk: `Скільки ємності потрібно, якщо світла немає по ${outage.hours} години двічі на добу?`,
+      en: `How much capacity do I need if the power is off for ${outage.hours} hours twice a day?`,
+    },
+    answer: {
+      uk: `На одне ${outage.hours}-годинне відключення будинку з котлом, насосом, холодильником, світлом і роутером (${outage.loadUk}) потрібно близько ${outage.needUk} енергії. ${outage.product} дає ${outage.usableUk} корисної ємності — це ≈ ${outage.hoursUk} год, і батарея розряджається приблизно до ${outage.minUk} %. Між двома відключеннями вона має встигнути зарядитися; якщо проміжок короткий або відключення довші, ставлять другу батарею ${outage.extra} чи більший накопичувач.`,
+      en: `One ${outage.hours}-hour outage of a house with a boiler, pump, fridge, lights and router (${outage.loadEn}) needs about ${outage.needEn}. ${outage.product} has ${outage.usableEn} of usable capacity — about ${outage.hoursEn} h, draining the battery to about ${outage.minEn}%. It has to recharge between the two outages; if the gap is short or the outages are longer, a second ${outage.extra} battery or a larger system is added.`,
+    },
+  },
+  {
+    id: "backup-recharge",
+    topic: "backup",
+    pages: ["backup"],
+    question: { uk: "Чи встигне батарея зарядитися між відключеннями?", en: "Will the battery recharge between outages?" },
+    answer: {
+      uk: "Залежить від потужності заряду інвертора й того, скільки годин між відключеннями є світло. Інженер перевірить це під графік вашої черги й за потреби запропонує інвертор з більшим струмом заряду, більшу батарею або сонячні панелі, які заряджають її вдень.",
+      en: "It depends on the inverter's charging power and how many hours the grid is on between outages. An engineer checks this against your group's schedule and, if needed, suggests an inverter with a higher charging current, a larger battery or solar panels that charge it during the day.",
+    },
+  },
+  {
+    id: "backup-gpv-gop",
+    topic: "backup",
+    pages: ["backup"],
+    question: { uk: "Що таке ГПВ і ГОП і що вони означають для бізнесу?", en: "What are rolling blackout and power limitation schedules for a business?" },
+    answer: {
+      uk: "ГПВ — графіки погодинних відключень: світло вимикають за чергами на кілька годин. ГОП — графіки обмеження потужності для підприємств: споживання треба знизити до заданого рівня. Накопичувач тримає критичне навантаження — каси, сервери, холодильне обладнання, — поки мережу вимкнено чи обмежено; для бізнесу систему рахуємо під навантаження, від SVIT PLUS 16000 до LITHIUMVALLEY.",
+      en: "Rolling blackout schedules switch the power off by groups for several hours. Power limitation schedules require businesses to cut their consumption to a set level. A battery system keeps the critical load — tills, servers, refrigeration — running while the grid is off or limited; for businesses we size it to the load, from SVIT PLUS 16000 to LITHIUMVALLEY.",
+    },
+  },
+  {
+    id: "backup-generator-or-battery",
+    topic: "backup",
+    pages: ["backup"],
+    question: { uk: "Генератор чи накопичувач для квартири?", en: "A generator or a battery for an apartment?" },
+    answer: {
+      uk: "Для квартири — накопичувач: генератор у квартирі не поставиш, а система з батареєю працює тихо, без пального й вихлопу, і перемикається сама. Порівняння генератора, ДБЖ і системи з накопичувачем — у таблиці на цій сторінці.",
+      en: "For an apartment, a battery: a generator can't be used indoors, while a battery system is quiet, needs no fuel, gives off no fumes and switches over by itself. The table on this page compares a generator, a UPS and a battery system.",
     },
   },
   {

@@ -1,4 +1,4 @@
-import { regionPaths } from "./insolation";
+import { backupRegionPaths, regionPaths } from "./insolation";
 import { productPages } from "./product-pages";
 import { featuredProjects } from "./projects";
 import { localizePath, type Locale } from "@/i18n/config";
@@ -49,6 +49,8 @@ type FooterLinkLabels = {
   backupHow: string;
   backupEquipment: string;
   backupRuntime: string;
+  backupRegions: string;
+  backupChoice: string;
   svitCatalog: string;
   about: string;
   contacts: string;
@@ -116,6 +118,18 @@ function backupNavigation(locale: Locale): NavEntry[] {
     { href: href(anchors.backupHow), labelKey: "backupHow" },
     { href: href(anchors.backupEquipment), labelKey: "backupEquipment" },
     { href: href(anchors.backupRuntime), labelKey: "backupRuntime" },
+    { href: href(anchors.backupRegions), labelKey: "backupRegions" },
+    { href: href(anchors.faq), labelKey: "faq" },
+    { href: href(anchors.contacts), labelKey: "consultation" },
+  ];
+}
+
+/** Backup power region pages (/rezervne-zhyvlennya/{region}/). */
+function backupRegionNavigation(path: string, locale: Locale): NavEntry[] {
+  const href = (anchor: string) => `${localizePath(path, locale)}#${anchor}`;
+  return [
+    { href: href(anchors.backupChoice), labelKey: "backupChoice" },
+    { href: href(anchors.backupRuntime), labelKey: "backupRuntime" },
     { href: href(anchors.faq), labelKey: "faq" },
     { href: href(anchors.contacts), labelKey: "consultation" },
   ];
@@ -162,6 +176,11 @@ export const pageNavigation: Record<string, NavEntry[]> = {
 for (const path of regionPaths) {
   pageNavigation[path] = regionNavigation(path, "uk");
   pageNavigation[localizePath(path, "en")] = regionNavigation(path, "en");
+}
+
+for (const path of backupRegionPaths) {
+  pageNavigation[path] = backupRegionNavigation(path, "uk");
+  pageNavigation[localizePath(path, "en")] = backupRegionNavigation(path, "en");
 }
 
 /** Product pages: the same anchors as the sticky in-page nav. */

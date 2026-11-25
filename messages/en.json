@@ -40,9 +40,9 @@
     ]
   },
   "productLine": {
-    "eyebrow": "Battery line-up",
-    "title": "SVIT and LITHIUMVALLEY energy storage",
-    "lead": "Energy storage for homes and businesses: the 865 Wh SVIT 600 portable station, 5.12 and 16.07 kWh SVIT home systems and LITHIUMVALLEY industrial systems from 208 kWh.",
+    "eyebrow": "Batteries and systems",
+    "title": "SVIT batteries — and any other system for your site",
+    "lead": "We make SVIT batteries: from a {small} portable station to industrial LITHIUMVALLEY systems from {big}. But we don't tie you to one brand — we also choose, install and service {brands} systems.",
     "catalogLink": "All batteries",
     "productLink": "More about {name}",
     "specsLabel": "{name} specifications",
@@ -61,7 +61,23 @@
     "tablist": "Battery models",
     "details": "More about {name}",
     "compareAll": "Compare all models",
-    "capacityFrom": "from"
+    "capacityFrom": "from",
+    "brands": {
+      "cardLabel": "Partner brands",
+      "services": "sales · installation · service",
+      "label": "Apartment · house · business",
+      "title": "Not only SVIT",
+      "text": "We make batteries, but we take on any backup power system. If Deye, Victron or Huawei suits your site, load or budget better, we'll choose, install and service it.",
+      "points": [
+        "We compare an SVIT option with another brand — you decide",
+        "We combine it with solar panels and your existing wiring",
+        "Installation, setup and service — one team"
+      ],
+      "primary": "Choose a system",
+      "secondary": "How we choose",
+      "stripTitle": "Need another brand? We'll choose and install it",
+      "stripText": "Hybrid inverters with batteries — when they suit your site or budget better."
+    }
   },
   "trust": {
     "eyebrow": "About us",
@@ -291,7 +307,9 @@
       "backupEquipment": "Equipment",
       "backupRuntime": "How long it lasts",
       "regionYield": "Yield in the region",
-      "sesRegions": "By region"
+      "sesRegions": "By region",
+      "backupRegions": "By region",
+      "backupChoice": "Choosing a system"
     },
     "copyright": "© {year} INIT ENERGY",
     "developedBy": "Developed by",
@@ -409,7 +427,20 @@
     "homeTitle": "Turnkey solar panels and backup power across Ukraine",
     "homeDescription": "INIT ENERGY designs and installs turnkey solar power plants and backup power in Ukraine: SVIT and LITHIUMVALLEY batteries for homes and businesses.",
     "siteName": "INIT ENERGY",
-    "organizationDescription": "Design, supply and installation of turnkey solar power plants and backup power systems in Ukraine."
+    "organizationDescription": "Design, supply and installation of turnkey solar power plants and backup power systems in Ukraine.",
+    "llmsOutages": {
+      "intro": "Because of attacks on Ukraine's power system, rolling blackout schedules are in force, and businesses also have power limitation schedules. Regional power companies publish the groups and hours daily; INIT ENERGY sizes a system to your schedule.",
+      "apartment": "Apartment — SVIT 600",
+      "apartmentNote": "a portable power station with no installation: router, lights and a laptop during outages",
+      "house": "House — SVIT HOME",
+      "houseNote": "an inverter with a battery: boiler, pump and fridge, automatic switchover to the battery",
+      "business": "Business and power limits — LITHIUMVALLEY",
+      "businessNote": "an industrial battery system: the business keeps running during outages and power limitations",
+      "solar": "Solar panels during outages",
+      "solarNote": "a hybrid solar plant with a battery works without the grid; a grid-tied one shuts down with it",
+      "hub": "Backup power",
+      "hubNote": "system overview, how many hours each lasts, comparison with a generator and a UPS, region pages"
+    }
   },
   "chrome": {
     "header": {
@@ -438,7 +469,9 @@
         "calculatorLink": "Solar payback calculator",
         "calculatorDescription": "Estimate system size, bill savings and payback for your property.",
         "regionsLink": "Solar by region",
-        "regionsDescription": "Solar yield and a sample plant for every region"
+        "regionsDescription": "Solar yield and a sample plant for every region",
+        "backupRegionsLink": "Backup power by region",
+        "backupRegionsDescription": "Towns, offices and system options for every region"
       },
       "menuCta": {
         "title": "Not sure what to choose?",
@@ -607,7 +640,7 @@
       "links": {
         "calculator": "Solar payback calculator",
         "ses": "Turnkey solar power plants",
-        "backup": "Backup power"
+        "backupRegion": "Backup power {locative}"
       },
       "profitQ": "Are solar panels worth it {locative}?",
       "profitLess": "Yes. A 5 kW plant here produces about {year} kWh a year — {pct}% less than the Ukrainian average, so the same bill needs a slightly larger plant than in the south. The calculator above shows how much you save at your tariff.",
@@ -626,12 +659,26 @@
     },
     "lead": {
       "comment": "Town or village where you need the plant, roof area"
+    },
+    "backupLink": {
+      "title": "Backup power {locative}",
+      "text": "Power during outages: SVIT batteries or Deye, Victron, Huawei systems — for apartments, houses and businesses."
     }
   },
   "regionLinks": {
     "otherTitle": "Solar panels in other regions",
     "allTitle": "Solar panels by region of Ukraine",
-    "text": "Generation, an example plant and payback for every region."
+    "text": "Generation, an example plant and payback for every region.",
+    "backupOtherTitle": "Backup power in other regions",
+    "backupAllTitle": "Backup power by region of Ukraine",
+    "backupText": "Towns, offices, outage schedules and system options for every region.",
+    "homeTitle": "By region of Ukraine",
+    "homeText": "Generation, an example plant and payback — or backup power options for every region.",
+    "tabsLabel": "Which pages to show",
+    "tabs": {
+      "solar": "Solar panels",
+      "backup": "Backup power"
+    }
   },
   "sesRegions": {
     "eyebrow": "By region",
@@ -1006,7 +1053,7 @@
       "svitListLabel": "SVIT models",
       "svitLink": "All SVIT batteries",
       "brandLabel": "Backup power",
-      "brandText": "Inverters and batteries · sales, installation and service"
+      "brandText": "sales · installation · service"
     },
     "runtime": {
       "eyebrow": "Autonomy",
@@ -1052,6 +1099,164 @@
         "solar": "Solar power plants",
         "compare": "Compare SVIT batteries"
       }
+    },
+    "regions": {
+      "eyebrow": "By region",
+      "title": "Backup power in your region",
+      "lead": "Every region has its own page: the towns we work in, the nearest office, outage schedules and system options for apartments, houses and businesses.",
+      "pickTitle": "Choose a region",
+      "count": "{count} pages",
+      "cardLabel": "All of Ukraine",
+      "cardText": "We choose, install and service backup power in every region — on SVIT or on Deye, Victron, Huawei equipment. Pick your region to see the towns we work in and the contacts.",
+      "office": "Office {centerLocative} · {address}",
+      "callLabel": "Call: {phone}",
+      "updated": "Updated: {date}"
+    }
+  },
+  "backupRegionPage": {
+    "meta": {
+      "title": "Backup power {place} for homes and businesses",
+      "titleShort": "Backup power {place}",
+      "descriptionOccupied": "Backup power {locative}: how many hours a battery lasts during power outages. SVIT, Deye, Victron and Huawei systems — sizing by INIT ENERGY, Ukraine.",
+      "serviceType": "Backup power",
+      "descriptions": [
+        "Backup power {area} for power outages: SVIT, Deye, Victron, Huawei for homes and businesses. Installation and service in {cities} and other towns.",
+        "Backup power {area} for power outages: SVIT, Deye, Victron, Huawei. Installation and service in {cities} and other towns."
+      ],
+      "descriptionsCity": [
+        "Backup power in Kyiv for power outages: SVIT, Deye, Victron, Huawei for homes and businesses. Installation and service in {cities} and other districts.",
+        "Backup power in Kyiv for power outages: SVIT, Deye, Victron, Huawei. Installation and service in {cities} and other districts."
+      ],
+      "descriptionShort": "Backup power {area} for power outages: SVIT batteries and Deye, Victron, Huawei systems. Installation and service by INIT ENERGY."
+    },
+    "h1Prefix": "Backup power",
+    "crumbs": {
+      "home": "Home",
+      "backup": "Backup power"
+    },
+    "hero": {
+      "eyebrow": "Backup power · {name}",
+      "lead": "We choose a system for an apartment, house or business — on SVIT batteries or Deye, Victron, Huawei equipment — and size, install and service it {area}, including {cities}.",
+      "leadCity": "We choose a system for an apartment, house or business — on SVIT batteries or Deye, Victron, Huawei equipment — and size, install and service it in every district of Kyiv: {cities} and more.",
+      "leadOccupied": "How long backup power lasts {locative}: systems for an apartment, house or business on SVIT batteries or Deye, Victron, Huawei equipment. An engineer will confirm by phone whether a site visit is possible.",
+      "primary": "Choose a system",
+      "secondary": "Request a quote"
+    },
+    "choice": {
+      "eyebrow": "Choosing a system",
+      "title": "We'll find the best solution, not just our own",
+      "lead": "We make SVIT batteries, but we don't tie you to one brand. We take on any backup power system — for an apartment, house or business — and offer the one that suits your site best.",
+      "stepsLabel": "How we choose a system",
+      "steps": [
+        "You tell us what has to run without power and for how many hours",
+        "An engineer calculates the load and offers options — on SVIT and on other brands",
+        "You pick an option — we install, set up and service it"
+      ],
+      "cta": "Get options",
+      "cards": {
+        "svit": {
+          "label": "INIT ENERGY line",
+          "title": "SVIT batteries",
+          "text": "From the {small} power station with {smallCapacity} to {big} with {bigCapacity}, plus LITHIUMVALLEY systems for businesses."
+        },
+        "brands": {
+          "label": "Other brands",
+          "text": "Hybrid inverters with batteries — when they suit your site, load or budget better."
+        },
+        "solar": {
+          "label": "Hybrid system",
+          "title": "Backup + solar panels",
+          "text": "The battery charges from the sun, and during the day the house runs on its own energy. The system can be expanded at any time."
+        },
+        "existing": {
+          "label": "Expansion and service",
+          "title": "Already have a system?",
+          "text": "We'll add batteries, replace the inverter or take your existing installation into service."
+        }
+      }
+    },
+    "segments": {
+      "title": "Backup power for apartments, houses and businesses {locative}",
+      "lead": "What to install depends on what has to run without the grid and for how many hours. Every type of site has several options — we choose together with you."
+    },
+    "runtime": {
+      "eyebrow": "Autonomy",
+      "title": "How long the system lasts",
+      "lead": "Runtime depends on the battery capacity and what it powers. Compare options for typical sets of appliances — and see how the system gets through a day on an outage schedule.",
+      "calcLink": "Calculate your set",
+      "chartTitle": "Hours without the grid",
+      "chartUnit": "h · appliances on all the time",
+      "legendLabel": "Batteries",
+      "hours": "≈ {hours} h",
+      "footnote": "Usable capacity is {share} of the nominal. The fridge and the pump run in cycles, so in practice the system lasts longer. For businesses we size the system to the load, from SVIT PLUS to LITHIUMVALLEY.",
+      "tableCaption": "Battery runtime without the grid for typical sets of appliances",
+      "tableSet": "Appliance set",
+      "example": {
+        "label": "House · {product}",
+        "text": "Boiler, pump, fridge, lights and router — {load} in total. That covers one {outage}-hour outage, as in the example below.",
+        "formulaLabel": "Runtime = usable capacity ÷ power",
+        "formula": "{usable} ÷ {load} ≈ {hours} h",
+        "more": "Need longer? A second {extra} battery or a larger battery system — we'll size it to your schedule.",
+        "link": "Autonomy calculator"
+      },
+      "day": {
+        "title": "A day with two {hours}-hour outages",
+        "text": "An example rolling blackout schedule: a {load} house on {product}. During {hours} hours without power the battery drains to about {min}%, and when the grid returns it recharges before the next outage.",
+        "legendCharge": "Battery charge",
+        "legendOutage": "Outage",
+        "outage": "no power",
+        "note": "An example for illustration; the charging speed on the chart is approximate. Your schedule is on the {operator} website — we size the capacity to it.",
+        "noteGeneric": "An example for illustration; the charging speed on the chart is approximate. Your regional power company publishes the schedule for your group — we size the capacity to it.",
+        "aria": "Battery charge over a day. Outages from {start1} to {end1} and from {start2} to {end2}: each drains the battery to about {min}%, and between them it recharges from the grid to full."
+      }
+    },
+    "local": {
+      "title": "Backup power {locative}",
+      "lead": "When outage schedules are in force {locative}, a battery system switches your apartment or house to battery power by itself — no generator, noise or fuel.",
+      "coverage": "We work {area}: engineer visits, installation and service.",
+      "coverageOffice": "We work {area}: engineer visits, installation and service. Our office is {centerLocative}, {address}.",
+      "coverageOccupied": "An engineer will confirm by phone whether a site visit is possible.",
+      "areaText": "We choose, install and service backup power {centerLocative} and across the oblast — in towns and villages.",
+      "areaTextCity": "We choose, install and service backup power in every district of the city.",
+      "schedule": {
+        "title": "Sized to your outage schedule",
+        "text": "Rolling blackout schedules {locative} are published by {operator}: every address has its own group. Tell us how many hours in a row your group is usually without power, and we'll size a system to cover them.",
+        "textGeneric": "Rolling blackout schedules are published by your regional power company: every address has its own group. Tell us how many hours in a row your group is usually without power, and we'll size a system to cover them.",
+        "operatorLink": "Schedules on the {operator} website",
+        "link": "Autonomy calculator"
+      },
+      "solar": {
+        "title": "Add solar panels",
+        "text": "{Locative} a 5 kW plant (≈ 10 panels) generates about {year} kWh a year and charges the battery during the day.",
+        "link": "Solar panels {locative}"
+      },
+      "updated": "Updated: {date}"
+    },
+    "faq": {
+      "title": "Questions about backup power {locative}",
+      "lead": "What to choose for an apartment or house, which brands we install, how long a system lasts and how to combine it with solar panels.",
+      "linksTitle": "Useful pages",
+      "links": {
+        "calculator": "Autonomy calculator",
+        "ses": "Solar power plants",
+        "region": "Solar panels {locative}"
+      },
+      "apartmentQ": "Which backup power should I choose for an apartment {centerLocative}?",
+      "apartmentA": "For the router, lights and a laptop, the {station} power station with {capacity} is enough: about {hours} h, from a socket and with no installation. To power the fridge or the whole apartment, an inverter with a battery is installed — {kit} or a system from another brand. The autonomy calculator shows how many hours each option lasts.",
+      "brandsQ": "Do you only install SVIT batteries?",
+      "brandsA": "No. We make SVIT batteries, but we also choose, install and service {brands} systems {locative}. An engineer compares an SVIT option and another brand for your load and budget — you decide.",
+      "brandsAOccupied": "No. We make SVIT batteries, but we also choose {brands} systems. An engineer compares an SVIT option and another brand for your load and budget — you decide.",
+      "solarQ": "Can backup power be combined with solar panels {locative}?",
+      "solarA": "Yes. With a hybrid inverter the battery charges from solar panels during the day. {Locative} a 5 kW plant (≈ 10 panels) generates about {year} kWh a year — monthly generation and the payback calculator are on the “Solar panels {locative}” page.",
+      "runtimeQ": "How long does backup power last during outages {locative}?",
+      "runtimeA": "It depends on the battery capacity and the appliances. A house with a boiler, pump, fridge, lights and router ({load}) runs about {homeHours} h on {home} — one {outage}-hour outage — and about {bigHours} h on {big} with a hybrid inverter.",
+      "runtimeOperator": "{operator} publishes the schedule for your group; an engineer will size the capacity to it.",
+      "runtimeGeneric": "An engineer will size the capacity to your group's schedule.",
+      "coverageA": "Yes, we work across Ukraine: {locative} we choose, install and service backup power in towns and villages.",
+      "coverageACity": "Yes, we work across Ukraine and in every district of Kyiv."
+    },
+    "lead": {
+      "comment": "What has to run without power, for how many hours, town or village"
     }
   }
 }

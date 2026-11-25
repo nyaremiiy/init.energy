@@ -83,6 +83,9 @@ export const anchors = {
   backupHow: "backup-how",
   backupEquipment: "backup-equipment",
   backupRuntime: "backup-runtime",
+  backupRegions: "backup-regions",
+  /** Backup region pages: «Підберемо найкраще рішення». */
+  backupChoice: "backup-choice",
   backupCompare: "backup-compare",
   backupSteps: "backup-steps",
 } as const;

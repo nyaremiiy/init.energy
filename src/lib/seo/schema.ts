@@ -94,6 +94,8 @@ export function websiteSchema(locale: Locale) {
  * The plant service: provider is the organization, area is the country
  * unless `areaServed` names a region (region pages: AdministrativeArea / City).
  */
+type ServiceArea = { type: "AdministrativeArea" | "City"; name: string };
+
 export function serviceSchema(
   locale: Locale,
   input: {
@@ -101,9 +103,16 @@ export function serviceSchema(
     description: string;
     url: string;
     serviceType?: string;
-    areaServed?: { type: "AdministrativeArea" | "City"; name: string };
+    /** One area, or several (a region and its centre on backup region pages). */
+    areaServed?: ServiceArea | ServiceArea[];
   },
 ) {
+  const place = (area: ServiceArea) => ({
+    "@type": area.type,
+    name: area.name,
+    containedInPlace: { "@type": "Country", name: serviceArea[locale] },
+  });
+  const areas = input.areaServed === undefined ? undefined : Array.isArray(input.areaServed) ? input.areaServed : [input.areaServed];
   return {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -113,12 +122,23 @@ export function serviceSchema(
     url: input.url,
     serviceType: input.serviceType ?? input.name,
     provider: { "@id": `${siteUrl}/#organization` },
-    areaServed: input.areaServed
-      ? {
-          "@type": input.areaServed.type,
-          name: input.areaServed.name,
-          containedInPlace: { "@type": "Country", name: serviceArea[locale] },
-        }
-      : { "@type": "Country", name: serviceArea[locale] },
+    areaServed: areas ? (areas.length === 1 ? place(areas[0]) : areas.map(place)) : { "@type": "Country", name: serviceArea[locale] },
+  };
+}
+
+/**
+ * The page around a Service with its revision date: schema.org has no `dateModified` on Service
+ * (it belongs to CreativeWork), so backup pages state it on the WebPage whose main entity is the service.
+ */
+export function servicePageSchema(locale: Locale, input: { name: string; url: string; dateModified: string }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${input.url}#webpage`,
+    url: input.url,
+    name: input.name,
+    inLanguage: locale,
+    dateModified: input.dateModified,
+    mainEntity: { "@id": `${input.url}#service` },
   };
 }
