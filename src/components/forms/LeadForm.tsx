@@ -123,6 +123,8 @@ export function LeadForm({
     const form = event.currentTarget;
     const formData = new FormData(form);
     const url = new URL(window.location.href);
+    // The page address without the anchor (#contacts from the header CTA); query parameters stay.
+    url.hash = "";
 
     formData.set("pageUrl", url.href);
     // UTM / click IDs: this URL, the landing page of the session, or the consented cookie.

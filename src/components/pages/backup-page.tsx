@@ -5,22 +5,22 @@ import { Container } from "@/components/layout/container";
 import { BackupCompare } from "@/components/sections/backup/backup-compare";
 import { BackupEquipment } from "@/components/sections/backup/backup-equipment";
 import { BackupHow } from "@/components/sections/backup/backup-how";
+import { BackupRegions } from "@/components/sections/backup/backup-regions";
 import { BackupRuntime } from "@/components/sections/backup/backup-runtime";
 import { BackupSegments } from "@/components/sections/backup/backup-segments";
 import { FaqSection } from "@/components/sections/home/faq-section";
-import { RegionLinks } from "@/components/sections/region-links";
 import { LeadSection } from "@/components/sections/LeadSection";
 import { PageHero } from "@/components/sections/PageHero";
 import { StepsSection } from "@/components/sections/steps-section";
 import { TrustSection } from "@/components/sections/trust-section";
 import { PromoBanner } from "@/components/ui/promo-banner";
 import { Reveal } from "@/components/ui/reveal";
-import { backupHeroImage, backupSteps } from "@/content/backup";
+import { backupHeroImage, backupSteps, updatedAt } from "@/content/backup";
 import { anchors, routes, sectionHref } from "@/content/routes";
 import { localizePath } from "@/i18n/config";
 import { getLocale, getMessages } from "@/i18n/server";
 import { absoluteUrl } from "@/lib/seo/metadata";
-import { serviceSchema } from "@/lib/seo/schema";
+import { servicePageSchema, serviceSchema } from "@/lib/seo/schema";
 
 const stepIcons = [Gauge, Battery, ReceiptText, Wrench, ShieldCheck];
 
@@ -46,6 +46,7 @@ export function BackupPage() {
           serviceType: t.breadcrumb,
         })}
       />
+      <JsonLd data={servicePageSchema(locale, { name: t.meta.title, url: absoluteUrl(pagePath), dateModified: updatedAt })} />
       <main className="pb-section-sm lg:pb-section">
         <PageHero
           eyebrow={t.hero.eyebrow}
@@ -79,6 +80,7 @@ export function BackupPage() {
           </Container>
         </div>
 
+        <BackupRegions />
         <BackupCompare />
         <TrustSection />
         <StepsSection
@@ -105,8 +107,8 @@ export function BackupPage() {
             ],
           }}
         />
+        {/* No «by region» block above the footer: BackupRegions above already links to every region. */}
         <LeadSection />
-        <RegionLinks variant="all" />
       </main>
     </>
   );

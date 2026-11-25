@@ -1,7 +1,8 @@
 import type { MetadataRoute } from "next";
 
 import { localizedPaths, localizePath } from "@/i18n/config";
-import { regionPaths, updatedAt as insolationUpdatedAt } from "@/content/insolation";
+import { updatedAt as backupUpdatedAt } from "@/content/backup";
+import { backupRegionPaths, regionPaths, updatedAt as insolationUpdatedAt } from "@/content/insolation";
 import { productPages } from "@/content/product-pages";
 import { routes, toPath } from "@/content/routes";
 import { absoluteUrl, languageAlternates } from "@/lib/seo/metadata";
@@ -14,9 +15,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
   // Region pages change with their yield data.
   const regionLastModified = new Date(insolationUpdatedAt);
+  // Backup region pages change with the outage wording (content/backup.ts).
+  const backupLastModified = new Date(backupUpdatedAt);
+  const modifiedAt = (path: string) =>
+    regionPaths.includes(path) ? regionLastModified : backupRegionPaths.includes(path) ? backupLastModified : lastModified;
   const entry = (path: string, url: string) => ({
     url,
-    lastModified: regionPaths.includes(path) ? regionLastModified : lastModified,
+    lastModified: modifiedAt(path),
     alternates: { languages: languageAlternates(path) },
   });
 
@@ -29,6 +34,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     routes.cookies,
     ...productPages.map((page) => toPath(page.slug)),
     ...regionPaths,
+    ...backupRegionPaths,
   ];
 
   return [

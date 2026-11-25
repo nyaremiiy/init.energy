@@ -123,12 +123,12 @@ export const productList: Product[] = [
       slug: "svit-600",
       meta: {
         title: { uk: "Зарядна станція для квартири SVIT 600 — 865 Вт·год", en: "Portable power station for apartments SVIT 600 — 865 Wh" },
-        description: { uk: "Портативна станція SVIT 600: 865 Вт·год, 600 Вт номінально й 1 200 Вт піково, 9 виходів, тиха робота та заряджання від мережі або сонця.", en: "SVIT 600 portable power station with 865 Wh, 600 W rated and 1,200 W peak output, nine ports, quiet operation and solar charging." },
+        description: { uk: "Зарядна станція SVIT 600 для квартири під час відключень світла: 865 Вт·год і 600 Вт — роутер, світло й ноутбук близько {hours.basic.svit600} год. Без монтажу, від розетки.", en: "SVIT 600 power station for apartments during power outages: 865 Wh and 600 W run the router, lights and a laptop for about {hours.basic.svit600} h. No installation." },
       },
       hero: {
         typeLabel: { uk: "Портативна зарядна станція", en: "Portable power station" },
         segmentLabel: { uk: "Квартира й подорожі", en: "Apartment and travel" },
-        lead: { uk: "Енергія, яку можна взяти із собою: 865 Вт·год і 600 Вт чистої синусоїди для техніки вдома, у дорозі та під час відключень.", en: "Portable power for home, travel and outages: 865 Wh of stored energy and a 600 W pure sine wave output for everyday electronics." },
+        lead: { uk: "Енергія, яку можна взяти із собою: 865 Вт·год і 600 Вт чистої синусоїди. Під час відключення світла станція живить роутер, світло й ноутбук близько {hours.basic.svit600} год — без монтажу, від розетки або сонця.", en: "Portable power for home, travel and outages: 865 Wh and a 600 W pure sine wave output. During a power outage it runs the router, lights and a laptop for about {hours.basic.svit600} h — no installation needed." },
         keySpecs: [
           { value: { quantity: { value: 865, unit: "Wh" } }, label: { uk: "ємність", en: "capacity" } },
           { value: { quantity: { value: 600, unit: "W" } }, label: { uk: "номінальна потужність", en: "rated power" } },
@@ -286,8 +286,8 @@ export const productList: Product[] = [
           en: "Home inverter with battery SVIT HOME — 6.2 kW",
         },
         description: {
-          uk: "Готовий комплект резервного живлення: гібридний інвертор VICTOR 6,2 кВт і батарея LiFePO₄ 5,12 кВт·год. Для квартири, будинку, ОСББ і бізнесу.",
-          en: "A ready backup power kit: a 6.2 kW VICTOR hybrid inverter and a 5.12 kWh LiFePO₄ battery. For apartments, houses, housing associations and businesses.",
+          uk: "SVIT HOME — інвертор 6,2 кВт з батареєю 5,12 кВт·год: під час відключень сам перемикає будинок на батарею, котел, насос і холодильник працюють ≈ {hours.house.svitHome} год.",
+          en: "SVIT HOME, a 6.2 kW inverter with a 5.12 kWh battery: during outages it switches the house to battery power and runs the boiler, pump and fridge for ≈ {hours.house.svitHome} h.",
         },
       },
       hero: {
@@ -300,8 +300,8 @@ export const productList: Product[] = [
           en: "Home and small business",
         },
         lead: {
-          uk: "Готовий комплект резервного живлення: гібридний інвертор VICTOR 6,2 кВт і батарея SVIT PLUS 5000 на 5,12 кВт·год на стійці на ніжках. Працює одразу після підключення — від мережі, батареї або сонячних панелей.",
-          en: "A ready backup power kit with a 6.2 kW VICTOR hybrid inverter and a 5.12 kWh SVIT PLUS 5000 battery on a rack on legs. It works as soon as it is connected — from the grid, battery or solar panels.",
+          uk: "Готовий комплект резервного живлення: гібридний інвертор VICTOR 6,2 кВт і батарея SVIT PLUS 5000 на 5,12 кВт·год на стійці на ніжках. Коли вимикають світло, він сам перемикає будинок на батарею: котел, насос, холодильник, світло й роутер працюють близько {hours.house.svitHome} год.",
+          en: "A ready backup power kit with a 6.2 kW VICTOR hybrid inverter and a 5.12 kWh SVIT PLUS 5000 battery on a rack on legs. When the power goes off, it switches the house to the battery by itself: the boiler, pump, fridge, lights and router run for about {hours.house.svitHome} h.",
         },
         keySpecs: [
           {
@@ -776,8 +776,8 @@ export const productList: Product[] = [
           en: "16 kWh LiFePO₄ solar battery — SVIT PLUS 16000",
         },
         description: {
-          uk: "SVIT PLUS 16000: LiFePO₄ батарея 16,07 кВт·год, 51,2 В, 16 комірок EVE 314 А·год, BMS 200 А та 6 000–9 000+ циклів. Гарантія 5 років. Для СЕС і резерву.",
-          en: "SVIT PLUS 16000: 16.07 kWh, 51.2 V LiFePO₄ battery with 16 EVE 314 Ah cells, 200 A BMS, 6,000–9,000+ cycles and a 5-year warranty.",
+          uk: "SVIT PLUS 16000 — батарея LiFePO₄ 16,07 кВт·год для СЕС і резерву під час відключень: 51,2 В, комірки EVE 314 А·год, BMS 200 А, 6 000–9 000+ циклів.",
+          en: "SVIT PLUS 16000: a 16.07 kWh, 51.2 V LiFePO₄ battery for solar and backup during outages — EVE 314 Ah cells, 200 A BMS, 6,000–9,000+ cycles, 5-year warranty.",
         },
       },
       hero: {
@@ -786,8 +786,8 @@ export const productList: Product[] = [
         segmentIcon: "sun",
         tagTone: "light",
         lead: {
-          uk: "Батарея LiFePO₄ на 16,07 кВт·год з 16 призматичних комірок EVE для сонячних станцій, резервного живлення, автономних і гібридних систем. Вбудована BMS з активним балансуванням і зв'язком CAN, RS485 та Bluetooth.",
-          en: "A 16.07 kWh LiFePO₄ battery built from 16 prismatic EVE cells for solar plants, backup power, off-grid and hybrid systems. Its built-in BMS provides active balancing plus CAN, RS485 and Bluetooth communication.",
+          uk: "Батарея LiFePO₄ на 16,07 кВт·год з 16 призматичних комірок EVE для сонячних станцій, резервного живлення, автономних і гібридних систем. З гібридним інвертором тримає будинок з котлом і насосом близько {hours.house.svitPlus16000} год без мережі. Вбудована BMS з активним балансуванням і зв'язком CAN, RS485 та Bluetooth.",
+          en: "A 16.07 kWh LiFePO₄ battery built from 16 prismatic EVE cells for solar plants, backup power, off-grid and hybrid systems. With a hybrid inverter it keeps a house with a boiler and pump running for about {hours.house.svitPlus16000} h without the grid. Its built-in BMS provides active balancing plus CAN, RS485 and Bluetooth communication.",
         },
         keySpecs: [
           { value: { quantity: { value: 16.07, unit: "kWh" } }, label: { uk: "номінальна енергія", en: "nominal energy" } },
@@ -963,7 +963,7 @@ export const productList: Product[] = [
       slug: "bess",
       meta: {
         title: { uk: "Промислова система накопичення енергії BESS — LITHIUMVALLEY", en: "Industrial battery energy storage BESS — LITHIUMVALLEY" },
-        description: { uk: "Промислова BESS LITHIUMVALLEY на 208–1 044 кВт·год: LiFePO₄, інвертори SOLIS до 125 кВт, перемикання до 10 мс і гарантія 10 років для бізнесу та інфраструктури.", en: "LITHIUMVALLEY industrial BESS from 208 to 1,044 kWh: LiFePO₄, SOLIS inverters up to 125 kW, sub-10 ms transfer and a 10-year warranty for business." },
+        description: { uk: "Промислова BESS LITHIUMVALLEY на 208–1 044 кВт·год: підприємство працює під час відключень і графіків обмеження потужності (ГОП), перемикання до 10 мс.", en: "LITHIUMVALLEY industrial BESS, 208–1,044 kWh: your business keeps running during outages and power limitation schedules, with sub-10 ms transfer." },
       },
       hero: {
         typeLabel: { uk: "Промислова система накопичення (BESS)", en: "Industrial battery energy storage system" },
@@ -1018,7 +1018,7 @@ export const productList: Product[] = [
       applications: {
         variant: "sectors",
         title: { uk: "Для кого LITHIUMVALLEY", en: "Who LITHIUMVALLEY is for" },
-        lead: { uk: "Для об'єктів, де відключення зупиняють виробництво, псують продукцію або ставлять під загрозу людей.", en: "For sites where outages stop production, spoil products or put people at risk." },
+        lead: { uk: "Підприємство працює під час відключень і графіків обмеження потужності (ГОП): система бере навантаження на себе там, де відключення зупиняють виробництво, псують продукцію або ставлять під загрозу людей.", en: "The business keeps running during outages and power limitation schedules: the system takes over the load where outages stop production, spoil products or put people at risk." },
         items: [
           { icon: "factory", tag: { uk: "Виробництво", en: "Production" }, title: { uk: "Промисловість і агро", en: "Industry and agriculture" }, text: { uk: "", en: "" }, tone: "sky", sectors: [{ uk: "Виробництво", en: "Manufacturing" }, { uk: "Елеватори, ферми, переробка, зрошення", en: "Elevators, farms, processing and irrigation" }, { uk: "Логістика, склади, холодильні комплекси", en: "Logistics, warehouses and cold storage" }, { uk: "Підприємства з піковими навантаженнями", en: "Sites with peak loads" }], links: [{ label: { uk: "Резерв для бізнесу", en: "Business backup" }, href: routes.backup.business }] },
           { icon: "store", tag: { uk: "Комерція", en: "Commercial" }, title: { uk: "Комерція й офіси", en: "Commercial and offices" }, text: { uk: "", en: "" }, tone: "navy", sectors: [{ uk: "Бізнес-центри й офіси", en: "Business centres and offices" }, { uk: "ТРЦ і комерційна нерухомість", en: "Shopping centres and commercial property" }, { uk: "Дата-центри й серверні", en: "Data centres and server rooms" }, { uk: "Об'єкти із СЕС", en: "Sites with solar" }], links: [{ label: { uk: "СЕС для бізнесу", en: "Solar for business" }, href: routes.services.turnkeySes }] },

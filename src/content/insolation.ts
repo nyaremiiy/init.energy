@@ -38,6 +38,12 @@ export type InsolationRegion = {
   serviceNote?: "occupied";
   /** schema.org type of the area; AdministrativeArea by default. */
   areaType?: "City";
+  /**
+   * Regional power distributor that publishes the outage schedules (backup region pages).
+   * TODO(content): власник перевіряє назву й URL сторінки графіків для кожної області; заповнено лише Львівську (URL — теж TODO).
+   * Without it the page says «графіки публікує ваш обленерго».
+   */
+  gridOperator?: { name: Localized; url?: string };
 };
 
 export const insolationRegions: InsolationRegion[] = [
@@ -357,6 +363,7 @@ export const insolationRegions: InsolationRegion[] = [
       { uk: "Броди", en: "Brody" },
     ],
     office: "lviv",
+    gridOperator: { name: { uk: "Львівобленерго", en: "Lvivoblenergo" } },
   },
   {
     id: "mykolaivska",
@@ -656,6 +663,13 @@ export function regionPath(region: Pick<InsolationRegion, "slug">): string {
 }
 
 export const regionPaths: string[] = insolationRegions.map(regionPath);
+
+/** Backup power region page path. "rezervne-zhyvlennya" = slugs.backup.hub (same import cycle as above). */
+export function backupRegionPath(region: Pick<InsolationRegion, "slug">): string {
+  return `/rezervne-zhyvlennya/${region.slug}/`;
+}
+
+export const backupRegionPaths: string[] = insolationRegions.map(backupRegionPath);
 
 export function regionBySlug(slug: string): InsolationRegion | undefined {
   return insolationRegions.find((region) => region.slug === slug);

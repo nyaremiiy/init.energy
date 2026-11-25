@@ -26,6 +26,7 @@ import { getMessages } from "@/i18n/server";
 import { formatQuantity, type Locale } from "@/lib/format";
 import { format } from "@/lib/messages";
 import { absoluteUrl, buildMetadata } from "@/lib/seo/metadata";
+import { fillHours } from "@/lib/product-text";
 import {
   breadcrumbSchema,
   howToSchema,
@@ -41,7 +42,7 @@ export function buildProductPageMetadata(
 
   return buildMetadata({
     title: page.meta.title[locale],
-    description: page.meta.description[locale],
+    description: fillHours(page.meta.description[locale], locale),
     path: toPath(page.slug),
     locale,
   });
@@ -190,7 +191,8 @@ export function ProductPageView({
           defaultObjectType={page.slug === "bess" ? "business" : page.slug === "svit-600" ? "apartment" : undefined}
           objectTypes={page.slug === "bess" ? ["house", "business", "infrastructure", "other"] : undefined}
         />
-        <RegionLinks variant="all" />
+        {/* Backup products link to the backup region pages, the rest to the solar ones. */}
+        <RegionLinks variant="all" kind={page.slug === "svit-600" || page.slug === "svit-home" ? "backup" : "solar"} />
       </main>
     </>
   );

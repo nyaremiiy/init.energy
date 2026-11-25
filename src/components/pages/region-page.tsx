@@ -5,10 +5,11 @@ import { sesOverviewHeroImage } from "@/components/sections/home/hero-slides";
 import { LeadSection } from "@/components/sections/LeadSection";
 import { PageHero } from "@/components/sections/PageHero";
 import { RegionLinks } from "@/components/sections/region-links";
+import { RegionBackupLink } from "@/components/sections/regions/region-backup-link";
 import { RegionCalculator } from "@/components/sections/regions/region-calculator";
 import { RegionYield } from "@/components/sections/regions/region-yield";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { regionPath, type InsolationRegion } from "@/content/insolation";
+import { backupRegionPath, regionPath, type InsolationRegion } from "@/content/insolation";
 import { anchors, routes } from "@/content/routes";
 import { localizePath, type Locale } from "@/i18n/config";
 import { getMessages } from "@/i18n/server";
@@ -66,6 +67,7 @@ export function RegionPage({ region, locale }: { region: InsolationRegion; local
           ]}
         />
         <RegionYield region={region} locale={locale} />
+        <RegionBackupLink region={region} locale={locale} />
         <RegionCalculator region={region} locale={locale} />
         <FaqSection
           questions={faq}
@@ -77,7 +79,8 @@ export function RegionPage({ region, locale }: { region: InsolationRegion; local
             items: [
               { label: t.faq.links.calculator, href: localizePath(routes.calculators.sesPayback, locale) },
               { label: t.faq.links.ses, href: localizePath(routes.services.turnkeySes, locale) },
-              { label: t.faq.links.backup, href: localizePath(routes.backup.hub, locale) },
+              // The neighbouring page of the same region (solar ↔ backup).
+              { label: format(t.faq.links.backupRegion, { locative: region.locative[locale] }), href: localizePath(backupRegionPath(region), locale) },
             ],
           }}
         />

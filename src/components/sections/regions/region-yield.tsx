@@ -87,8 +87,16 @@ function RegionChart({ region, locale, stats }: Props & { stats: RegionStats }) 
   );
 }
 
-/** «Де працюємо в області»: towns (or Kyiv districts) and a phone — the office one where there is an office. */
-function RegionAreaCard({ region, locale }: Props) {
+/**
+ * «Де працюємо в області»: towns (or Kyiv districts) and a phone — the office one where there is an office.
+ * Shared by the solar and the backup region pages; `text` replaces the solar wording.
+ */
+export function RegionAreaCard({
+  region,
+  locale,
+  text: customText,
+  location = "region_page",
+}: Props & { text?: { region: string; city: string }; location?: string }) {
   const t = getMessages().regionPage.area;
   const office = regionOffice(region);
   const phone = (office ?? offices[0]).phone;
@@ -97,8 +105,8 @@ function RegionAreaCard({ region, locale }: Props) {
   const text = isOccupied(region)
     ? t.textOccupied
     : city
-      ? t.textCity
-      : format(t.text, { centerLocative: region.centerLocative[locale] });
+      ? (customText?.city ?? t.textCity)
+      : format(customText?.region ?? t.text, { centerLocative: region.centerLocative[locale] });
 
   return (
     <article className="flex h-full flex-col gap-6 rounded-card bg-ink-glow p-card-sm text-white lg:p-card">
@@ -122,7 +130,7 @@ function RegionAreaCard({ region, locale }: Props) {
       <ContactLink
         href={phone.href}
         method="phone"
-        location="region_page"
+        location={location}
         aria-label={format(t.callLabel, { phone: phoneText })}
         className="group mt-auto flex items-center gap-4 rounded-tile bg-fill-dark p-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
       >

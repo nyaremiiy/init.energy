@@ -1,8 +1,11 @@
 import type { Localized } from "@/i18n/config";
 
+import { exceedsOutput, roundHours, runtimeHours } from "@/lib/calc/backup-runtime";
+
 import { appliances } from "./appliances";
 import type { ProductId } from "./products";
 import { routes } from "./routes";
+import { capacityWh, outputLimitW, usableShare } from "./storage";
 import type { SegmentIconId } from "./segments";
 
 /**
@@ -15,6 +18,12 @@ import type { SegmentIconId } from "./segments";
  * - whether SVIT batteries connect to Deye / Victron / Huawei inverters, and servicing systems installed by others
  *   (the «Вже маєте систему іншого бренду?» strip and the FAQ question are left out).
  */
+
+/**
+ * When the outage wording on the backup pages was last revised (hub and region pages):
+ * «Оновлено: …» and `dateModified` in the Service JSON-LD. Update with the text about the situation.
+ */
+export const updatedAt = "2026-11-25" as const;
 
 export const backupHeroImage = {
   desktop: "/images/rezervne-zhyvlennya/hero-2560.avif",
@@ -41,6 +50,8 @@ export type BackupSegment = {
   title: Localized;
   text: Localized;
   checks: SegmentCheck[];
+  /** Checks on the backup region pages (owner's mockup 2026-11-25: «not only SVIT»). */
+  regionChecks: SegmentCheck[];
   /** Planned segment page (renders «в розробці» until it is built). */
   href: string;
   image: { src: string; alt: Localized; position?: "top" };
@@ -61,6 +72,11 @@ export const backupSegments: BackupSegment[] = [
       { text: { uk: "SVIT 600 — без монтажу", en: "SVIT 600 — no installation" } },
       // The mockup said «вбудована система»; SVIT HOME is a free-standing kit (no wall mounting).
       { text: { uk: "SVIT HOME — комплект з інвертором", en: "SVIT HOME — kit with an inverter" } },
+    ],
+    regionChecks: [
+      { text: { uk: "Роутер, світло, ноутбук, холодильник", en: "Router, lights, laptop, fridge" } },
+      { text: { uk: "Зарядна станція SVIT 600 — без монтажу", en: "SVIT 600 power station — no installation" } },
+      { text: { uk: "Або інвертор з батареєю: SVIT HOME чи інших брендів", en: "Or an inverter with a battery: SVIT HOME or other brands" } },
     ],
     href: routes.backup.apartment,
     image: {
@@ -85,6 +101,11 @@ export const backupSegments: BackupSegment[] = [
       { brief: "svitHome" },
       { text: { uk: "Можна додати сонячні панелі", en: "Solar panels can be added" } },
     ],
+    regionChecks: [
+      { text: { uk: "Котел, насос, холодильник", en: "Boiler, pump, fridge" } },
+      { text: { uk: "SVIT HOME або гібридний інвертор Deye, Victron, Huawei", en: "SVIT HOME or a Deye, Victron, Huawei hybrid inverter" } },
+      { text: { uk: "Можна додати сонячні панелі", en: "Solar panels can be added" } },
+    ],
     href: routes.backup.house,
     image: {
       src: "/images/home/promo/ses-roof-1920.avif",
@@ -107,6 +128,13 @@ export const backupSegments: BackupSegment[] = [
       { text: { uk: "Розрахунок під навантаження", en: "Sized for your load" } },
       { names: ["svitPlus16000", "lithiumvalley"] },
       { text: { uk: "Або системи Deye, Victron, Huawei", en: "Or Deye, Victron, Huawei systems" } },
+      { text: { uk: "Працює під час ГОП — графіків обмеження потужності", en: "Runs during power limitation schedules for businesses" } },
+    ],
+    regionChecks: [
+      { text: { uk: "Розрахунок під навантаження", en: "Sized for your load" } },
+      { names: ["svitPlus16000", "lithiumvalley"] },
+      { text: { uk: "Або системи Deye, Victron, Huawei", en: "Or Deye, Victron, Huawei systems" } },
+      { text: { uk: "Працює під час ГОП — графіків обмеження потужності", en: "Runs during power limitation schedules for businesses" } },
     ],
     href: routes.backup.business,
     image: {
@@ -148,8 +176,24 @@ export const backupFlow: { id: "grid" | "outage" | "restored"; title: Localized;
   },
 ];
 
-/** Partner brands we sell, install and service (owner's mockup), shown as text. */
-export const backupBrands = ["Deye", "Victron", "Huawei"] as const;
+/**
+ * «Вже маєте систему? Розширимо й обслужимо» on the backup region pages — owner's words 2026-11-25.
+ * TODO(content): якщо власник не підтвердить — false, і картка зникне.
+ */
+export const offerExistingSystems = true;
+
+/**
+ * The example day on the backup region pages: two outages of 4 hours (a rolling
+ * blackout schedule), the house load set on SVIT HOME. Charging speed on the
+ * chart is illustrative — content/ has no charge rate, so no figures about it.
+ */
+export const outageExample = {
+  hours: 4,
+  /** Start hours of the outages. */
+  starts: [8, 18],
+  loadSet: "house" as LoadSet["id"],
+  product: "svitHome" as ProductId,
+};
 
 /** SVIT line shown on the equipment card (INIT ENERGY's own brand). */
 export const svitLine: ProductId[] = ["svit600", "svitHome", "svitPlus5000", "svitPlus16000"];
@@ -189,6 +233,22 @@ export const backupLoadSets: LoadSet[] = [
 /** Total power of a load set from content/appliances.ts. */
 export function loadSetPowerW(set: LoadSet): number {
   return set.appliances.reduce((sum, id) => sum + (appliances.find((item) => item.id === id)?.powerW ?? 0), 0);
+}
+
+export function loadSetById(id: LoadSet["id"]): LoadSet {
+  const set = backupLoadSets.find((item) => item.id === id);
+  if (!set) throw new Error(`Unknown load set ${id}`);
+  return set;
+}
+
+/**
+ * Hours a product runs a load set, rounded for display (the hub table, region pages,
+ * product texts and FAQ use this one function); null when the load is above its output.
+ */
+export function loadSetHours(setId: LoadSet["id"], id: ProductId): number | null {
+  const loadW = loadSetPowerW(loadSetById(setId));
+  if (exceedsOutput(loadW, outputLimitW(id))) return null;
+  return roundHours(runtimeHours(capacityWh(id), loadW, usableShare));
 }
 
 /** Products in the autonomy table; SVIT PLUS 16000 works with a separate hybrid inverter. */

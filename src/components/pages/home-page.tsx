@@ -50,7 +50,7 @@ export function HomePage() {
         <CalculatorSection />
         <FaqSection />
         <LeadSection />
-        <RegionLinks variant="all" />
+        <RegionLinks variant="home" />
       </main>
     </>
   );

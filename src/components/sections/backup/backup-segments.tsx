@@ -28,8 +28,11 @@ function checkText(check: SegmentCheck, locale: Locale): string {
   return `${product.name}: ${parts.join(" · ")}`;
 }
 
-/** «Для кого»: apartment, house and business on photo cards. Segment pages are planned. */
-export function BackupSegments() {
+/**
+ * «Для кого»: apartment, house and business on photo cards. Segment pages are planned.
+ * Region pages pass their own title / lead and get the regional check rows («not only SVIT»).
+ */
+export function BackupSegments({ title, lead, regional = false }: { title?: string; lead?: string; regional?: boolean } = {}) {
   const locale = getLocale();
   const t = getMessages().backup.segments;
 
@@ -38,7 +41,7 @@ export function BackupSegments() {
       <SectionWatermark text="BACKUP" />
       <Container className="relative flex flex-col gap-section-head-sm lg:gap-section-head">
         <Reveal>
-          <SectionHeader eyebrow={t.eyebrow} title={t.title} titleId={titleId} lead={t.lead} />
+          <SectionHeader eyebrow={t.eyebrow} title={title ?? t.title} titleId={titleId} lead={lead ?? t.lead} />
         </Reveal>
 
         <ul className="grid grid-cols-1 gap-4 lg:grid-cols-3">
@@ -66,7 +69,7 @@ export function BackupSegments() {
                       <p className="text-body leading-relaxed text-muted-dark">{segment.text[locale]}</p>
                     </div>
                     <ul className="flex flex-col gap-2 text-small text-white">
-                      {segment.checks.map((check, checkIndex) => (
+                      {(regional ? segment.regionChecks : segment.checks).map((check, checkIndex) => (
                         <li key={checkIndex} className="flex items-start gap-2.5">
                           <Check aria-hidden size={16} strokeWidth={2} className="mt-0.5 shrink-0" />
                           {checkText(check, locale)}
