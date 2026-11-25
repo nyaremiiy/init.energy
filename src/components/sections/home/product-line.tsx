@@ -112,7 +112,7 @@ function compareRow(product: Product, locale: Locale): CompareRow {
   const separate = product.inverter === "separate";
   const power = {
     value: product.compare.powerText?.[locale] ?? (powerSpec ? formatQuantity(powerSpec, locale) : t.notStated),
-    note: separate ? t.separateInverter : product.compare.powerNote?.[locale],
+    note: [product.compare.powerNote?.[locale], separate ? t.separateInverter : undefined].filter(Boolean).join(" · ") || undefined,
   };
 
   const cycles = specQuantity(product, "cycles");

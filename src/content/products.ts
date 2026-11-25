@@ -91,6 +91,23 @@ export type Product = {
   page?: ProductPageContent;
 };
 
+/**
+ * SVIT PLUS 16000 from the owner's datasheet (2026-11-25). The datasheet gives no power in kW:
+ * the discharge power is computed from the max continuous discharge current and the nominal
+ * voltage (owner-approved), and the scaled capacity from the parallel limit — never typed in.
+ */
+const svitPlus16000Datasheet = { capacityKwh: 16.07, voltageV: 51.2, dischargeA: 200, maxParallel: 16 } as const;
+/** 200 A × 51,2 В = 10 240 Вт → 10,2 кВт. */
+const svitPlus16000PowerKw = Math.round((svitPlus16000Datasheet.dischargeA * svitPlus16000Datasheet.voltageV) / 100) / 10;
+/** 16 × 16,07 = 257,1 кВт·год. */
+const svitPlus16000MaxKwh = Math.round(svitPlus16000Datasheet.capacityKwh * svitPlus16000Datasheet.maxParallel * 10) / 10;
+const svitPlus16000Formula: Localized = {
+  uk: `${svitPlus16000Datasheet.dischargeA} А × ${formatNumber(svitPlus16000Datasheet.voltageV, "uk")} В`,
+  en: `${svitPlus16000Datasheet.dischargeA} A × ${formatNumber(svitPlus16000Datasheet.voltageV, "en")} V`,
+};
+const kwhText = (value: number, locale: Locale) => `${formatNumber(value, locale)}\u00a0${locale === "uk" ? "кВт·год" : "kWh"}`;
+const kwText = (value: number, locale: Locale) => `${formatNumber(value, locale)}\u00a0${locale === "uk" ? "кВт" : "kW"}`;
+
 /** Ordered product line: cards and the comparison table read from this list. */
 export const productList: Product[] = [
   {
@@ -756,7 +773,9 @@ export const productList: Product[] = [
     compare: {
       install: { uk: "Для СЕС і автономних систем", en: "For solar and off-grid systems" },
       fits: ["house", "solar"],
-      // TODO(content): output power of SVIT PLUS 16000 is not stated — the table shows «—».
+      // Datasheet has no kW figure: computed discharge power, shown «до …» with its formula.
+      powerText: { uk: `до ${kwText(svitPlus16000PowerKw, "uk")}`, en: `up to ${kwText(svitPlus16000PowerKw, "en")}` },
+      powerNote: svitPlus16000Formula,
     },
     description: {
       uk: "Акумуляторна батарея LiFePO₄ для автономних систем",
@@ -766,8 +785,8 @@ export const productList: Product[] = [
       uk: "Батарея LiFePO₄ на 16,07 кВт·год з 16 комірок EVE для сонячних станцій, резервного живлення, автономних і гібридних систем. Вбудована BMS із CAN, RS485 і Bluetooth, сумісна з інверторами Deye, Growatt, Victron, Luxpower.",
       en: "A 16.07 kWh LiFePO₄ battery built from 16 EVE cells for solar plants, backup power, off-grid and hybrid systems. Built-in BMS with CAN, RS485 and Bluetooth, compatible with Deye, Growatt, Victron and Luxpower inverters.",
     },
-    // TODO(content): parallel connection is not confirmed on /svit-plus-16000/ — a single unit until it is.
-    maxParallel: 1,
+    // Datasheet 2026-11-25: up to 16 batteries in parallel.
+    maxParallel: svitPlus16000Datasheet.maxParallel,
     inverter: "separate",
     capacity: { value: 16.07, unit: "kWh" },
     chemistryLabel: {
@@ -779,17 +798,16 @@ export const productList: Product[] = [
     focusSpecs: ["capacity", "cycles", "chemistry"],
     specs: [
       { key: "capacity", value: { value: 16.07, unit: "kWh" } },
+      // Max continuous discharge power, computed (see svitPlus16000Datasheet).
+      { key: "power", value: { value: svitPlus16000PowerKw, unit: "kW" } },
       {
         key: "cycles",
         value: { value: 6000, unit: "cycles", qualifier: "plus" },
       },
       { key: "chemistry", value: "LiFePO₄" },
     ],
-    // TODO(content): clarify whether IP20 or IP44 applies, and confirm the exact
-    // BMS current within the stated 100–200 A range.
-    // TODO(content): parallel connection, mounting and datasheet PDF are not
-    // stated by the source and are intentionally not rendered.
-    // TODO(content): add approved 1200×630 OG art.
+    // TODO(content): ingress protection is a range «IP20 – IP44» in the datasheet too — clarify which applies.
+    // TODO(content): certification is blank in the datasheet — not published; a PDF datasheet and 1200×630 OG art are not added yet.
     page: {
       slug: "svit-plus-16000",
       meta: {
@@ -798,8 +816,8 @@ export const productList: Product[] = [
           en: "16 kWh LiFePO₄ solar battery — SVIT PLUS 16000",
         },
         description: {
-          uk: "SVIT PLUS 16000 — батарея LiFePO₄ 16,07 кВт·год для СЕС і резерву під час відключень: 51,2 В, комірки EVE 314 А·год, BMS 200 А, 6 000–9 000+ циклів.",
-          en: "SVIT PLUS 16000: a 16.07 kWh, 51.2 V LiFePO₄ battery for solar and backup during outages — EVE 314 Ah cells, 200 A BMS, 6,000–9,000+ cycles, 5-year warranty.",
+          uk: `SVIT PLUS 16000 — батарея LiFePO₄ 16,07 кВт·год для СЕС і резерву під час відключень: 51,2 В, до 16 батарей паралельно (${kwhText(svitPlus16000MaxKwh, "uk")}), 6 000+ циклів.`,
+          en: `SVIT PLUS 16000: a 16.07 kWh, 51.2 V LiFePO₄ battery for solar and backup during outages — up to 16 batteries in parallel (${kwhText(svitPlus16000MaxKwh, "en")}), 6,000+ cycles.`,
         },
       },
       hero: {
@@ -820,7 +838,7 @@ export const productList: Product[] = [
         warranty: {
           title: { uk: "Гарантія", en: "Warranty" },
           value: { uk: "5 років", en: "5 years" },
-          note: { uk: "строк служби — понад 10 років", en: "service life over 10 years" },
+          note: { uk: "строк служби — понад 10 років (орієнтовно)", en: "service life over 10 years (estimated)" },
         },
         tags: [
           { uk: "16 комірок EVE", en: "16 EVE cells" },
@@ -888,7 +906,11 @@ export const productList: Product[] = [
           { label: { uk: "Рекомендований заряд/розряд", en: "Recommended charge/discharge" }, value: { text: { uk: "100–157 А", en: "100–157 A" } } },
           { label: { uk: "Максимальний постійний заряд", en: "Max continuous charge" }, value: { text: { uk: "160–200 А", en: "160–200 A" } } },
           { label: { uk: "Максимальний постійний розряд", en: "Max continuous discharge" }, value: { text: { uk: "200 А", en: "200 A" } } },
-          { label: { uk: "Піковий розряд", en: "Peak discharge" }, value: { text: { uk: "220–250 А, короткочасно", en: "220–250 A, short-term" } } },
+          { label: { uk: "Піковий розряд", en: "Peak discharge" }, value: { text: { uk: "220–250 А, 1–10 с", en: "220–250 A, 1–10 s" } } },
+        ] },
+        { title: { uk: "Потужність і масштабування", en: "Power and scaling" }, rows: [
+          { label: { uk: "Потужність розряду", en: "Discharge power" }, value: { text: { uk: `до ${kwText(svitPlus16000PowerKw, "uk")} (${svitPlus16000Formula.uk})`, en: `up to ${kwText(svitPlus16000PowerKw, "en")} (${svitPlus16000Formula.en})` } } },
+          { label: { uk: "Паралельне підключення", en: "Parallel connection" }, value: { text: { uk: `до ${svitPlus16000Datasheet.maxParallel} батарей · ${kwhText(svitPlus16000MaxKwh, "uk")}`, en: `up to ${svitPlus16000Datasheet.maxParallel} batteries · ${kwhText(svitPlus16000MaxKwh, "en")}` } } },
         ] },
         { title: { uk: "BMS і зв'язок", en: "BMS and communication" }, rows: [
           { label: { uk: "BMS", en: "BMS" }, value: { text: { uk: "16S, 100–200 А", en: "16S, 100–200 A" } } },
@@ -898,21 +920,36 @@ export const productList: Product[] = [
           { label: { uk: "Сумісні інвертори", en: "Compatible inverters" }, value: { text: { uk: "Deye, Growatt, Victron, Luxpower та інші", en: "Deye, Growatt, Victron, Luxpower and others" } } },
         ] },
         { title: { uk: "Корпус і умови", en: "Enclosure and conditions" }, rows: [
-          { label: { uk: "Вага", en: "Weight" }, value: { text: { uk: "135 кг", en: "135 kg" } } },
+          { label: { uk: "Вага", en: "Weight" }, value: { text: { uk: "135 кг (залежно від корпусу)", en: "135 kg (depending on the enclosure)" } } },
           { label: { uk: "Габарити", en: "Dimensions" }, value: { text: { uk: "635 × 630 × 220 мм", en: "635 × 630 × 220 mm" } } },
+          { label: { uk: "Виконання", en: "Mounting" }, value: { text: { uk: "Вертикальне", en: "Vertical" } } },
           { label: { uk: "Ступінь захисту", en: "Ingress protection" }, value: { text: { uk: "IP20 – IP44", en: "IP20 – IP44" } } },
           { label: { uk: "Температура заряду", en: "Charge temperature" }, value: { text: { uk: "0 … +55 °C", en: "0 … +55 °C" } } },
-          { label: { uk: "Температура розряду", en: "Discharge temperature" }, value: { text: { uk: "−20 … +55 °C; підігрів — платна опція", en: "−20 … +55 °C; heating is a paid option" } } },
+          { label: { uk: "Температура розряду", en: "Discharge temperature" }, value: { text: { uk: "−20 … +55 °C (з опціональним підігрівом)", en: "−20 … +55 °C (with optional heating)" } } },
           { label: { uk: "Температура зберігання", en: "Storage temperature" }, value: { text: { uk: "−20 … +35 °C", en: "−20 … +35 °C" } } },
-          { label: { uk: "Охолодження", en: "Cooling" }, value: { text: { uk: "Пасивне", en: "Passive" } } },
+          { label: { uk: "Охолодження", en: "Cooling" }, value: { text: { uk: "Пасивне (природна конвекція)", en: "Passive (natural convection)" } } },
+          { label: { uk: "Опції", en: "Options" }, value: { text: { uk: "Вбудований підігрів", en: "Built-in heating" } } },
         ] },
         { title: { uk: "Ресурс і гарантія", en: "Lifecycle and warranty" }, rows: [
           { label: { uk: "Кількість циклів", en: "Cycle life" }, value: { text: { uk: "6 000–9 000+ при 80–90% DoD", en: "6,000–9,000+ at 80–90% DoD" } } },
-          { label: { uk: "Максимальна глибина розряду", en: "Maximum DoD" }, value: { text: { uk: "95%", en: "95%" } } },
-          { label: { uk: "Строк служби", en: "Service life" }, value: { text: { uk: "Понад 10 років", en: "Over 10 years" } } },
+          { label: { uk: "Максимальна глибина розряду", en: "Maximum DoD" }, value: { text: { uk: "до 95%", en: "up to 95%" } } },
+          { label: { uk: "Строк служби", en: "Service life" }, value: { text: { uk: "Понад 10 років (орієнтовно)", en: "Over 10 years (estimated)" } } },
           { label: { uk: "Гарантія", en: "Warranty" }, value: { text: { uk: "5 років", en: "5 years" } } },
         ] },
       ],
+      scaling: {
+        title: {
+          uk: `Від ${kwhText(svitPlus16000Datasheet.capacityKwh, "uk")} до ${kwhText(svitPlus16000MaxKwh, "uk")} — до ${svitPlus16000Datasheet.maxParallel} батарей`,
+          en: `From ${kwhText(svitPlus16000Datasheet.capacityKwh, "en")} to ${kwhText(svitPlus16000MaxKwh, "en")} — up to ${svitPlus16000Datasheet.maxParallel} batteries`,
+        },
+        lead: {
+          uk: "Почніть з однієї батареї, а щоб протримати довше відключення чи коли зросте споживання — підключіть ще паралельно. Нова система не потрібна.",
+          en: "Start with one battery and connect more in parallel to ride out longer outages or as consumption grows. No new system needed.",
+        },
+        moduleCapacityKwh: svitPlus16000Datasheet.capacityKwh,
+        options: [1, 2, 4, 8, 16],
+        defaultModules: 2,
+      },
       applications: {
         lead: { uk: "Велика ємність закриває добу роботи будинку від сонця або кілька годин резерву для бізнесу.", en: "High capacity can cover a home's day from solar or provide several hours of backup for a business." },
         items: [
