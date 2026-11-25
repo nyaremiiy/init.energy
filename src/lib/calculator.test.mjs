@@ -18,7 +18,7 @@ const unit = {
   svit600: { capacityKwh: 0.865, maxModules: 1 },
   svitHome: { capacityKwh: 5.12, maxModules: 1 },
   svitPlus5000: { capacityKwh: 5.12, maxModules: 16 },
-  svitPlus16000: { capacityKwh: 16.07, maxModules: 1 },
+  svitPlus16000: { capacityKwh: 16.07, maxModules: 16 },
   lithiumvalley: { capacityKwh: 208, maxModules: 5 },
 };
 const candidates = (ids) => ids.map((id) => ({ id, usableDepth: 0.9, ...unit[id] }));
@@ -68,11 +68,19 @@ test("battery: modular product takes the fewest modules", () => {
 });
 
 test("battery: nothing fits → largest option, flagged", () => {
-  // 5000 kWh → 6.94 kW × 24 h × 0.5 ÷ 0.9 = 92.6 kWh > 16 × 5.12 = 81.92
-  const pick = pickBattery(5000, 24, 0.5, house);
-  assert.equal(pick.id, "svitPlus5000");
+  // 20 000 kWh → 27.8 kW × 24 h × 0.5 ÷ 0.9 = 370 kWh > 16 × 16.07 = 257.1
+  const pick = pickBattery(20000, 24, 0.5, house);
+  assert.equal(pick.id, "svitPlus16000");
   assert.equal(pick.modules, 16);
   assert.equal(pick.fits, false);
+});
+
+test("house: past 16 × SVIT PLUS 5000 the calculator scales SVIT PLUS 16000 (datasheet: up to 16)", () => {
+  // 5000 kWh × 24 h → 92.6 kWh > 81.92 → 6 × SVIT PLUS 16000
+  const pick = pickBattery(5000, 24, 0.5, house);
+  assert.equal(pick.id, "svitPlus16000");
+  assert.equal(pick.modules, 6);
+  assert.equal(pick.fits, true);
 });
 
 test("capacity never shrinks as consumption grows, in every segment", () => {
@@ -91,28 +99,31 @@ test("capacity never shrinks as consumption grows, in every segment", () => {
   }
 });
 
-test("SVIT PLUS 16000 is never offered as more than one unit", () => {
+test("no battery is offered above its parallel limit", () => {
   for (const { share, kwh, order } of Object.values(segments)) {
     for (let hours = 2; hours <= 24; hours += 1) {
       for (let monthly = kwh[0]; monthly <= kwh[1]; monthly += kwh[2]) {
         const pick = pickBattery(monthly, hours, share, order);
-        if (pick.id === "svitPlus16000") assert.equal(pick.modules, 1);
         assert.ok(pick.modules <= unit[pick.id].maxModules);
       }
     }
   }
 });
 
-test("business: SVIT PLUS 16000 → SVIT PLUS 5000 × n → LITHIUMVALLEY", () => {
+test("business: SVIT PLUS 16000 × n (up to 16) → LITHIUMVALLEY", () => {
   const { share, order } = segments.business;
-  // 5000 kWh × 2 h → 6.94 × 2 × 0.6 ÷ 0.9 = 9.26 kWh
+  // 5000 kWh × 2 h → 6.94 × 2 × 0.6 ÷ 0.9 = 9.26 kWh → one SVIT PLUS 16000
   assert.equal(pickBattery(5000, 2, share, order).id, "svitPlus16000");
-  // 5000 kWh × 8 h → 37 kWh → 8 × SVIT PLUS 5000
+  // 5000 kWh × 8 h → 37 kWh → 3 × SVIT PLUS 16000 (was 8 × SVIT PLUS 5000 while 16000 was single)
   const mid = pickBattery(5000, 8, share, order);
-  assert.equal(mid.id, "svitPlus5000");
-  assert.equal(mid.modules, 8);
-  // 20 000 kWh × 8 h → 148 kWh → one 208 kWh block
-  assert.equal(pickBattery(20000, 8, share, order).id, "lithiumvalley");
+  assert.equal(mid.id, "svitPlus16000");
+  assert.equal(mid.modules, 3);
+  // 20 000 kWh × 8 h → 148 kWh → 10 × SVIT PLUS 16000
+  assert.equal(pickBattery(20000, 8, share, order).modules, 10);
+  // 50 000 kWh × 8 h → 370 kWh > 257.1 → LITHIUMVALLEY, 2 blocks
+  const big = pickBattery(50000, 8, share, order);
+  assert.equal(big.id, "lithiumvalley");
+  assert.equal(big.modules, 2);
 });
 
 test("backup hours from capacity", () => {

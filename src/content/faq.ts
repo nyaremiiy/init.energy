@@ -36,6 +36,21 @@ const outage = (() => {
   };
 })();
 
+/** SVIT PLUS 16000 in parallel (datasheet: maxParallel in products.ts): the total and two batteries on the house set. */
+const p16 = (() => {
+  const max = products.svitPlus16000.maxParallel;
+  const total = Math.round(capacityWh("svitPlus16000") * max / 100) / 10;
+  const loadW = loadSetPowerW(loadSetById("house"));
+  const two = roundHours(runtimeHours(capacityWh("svitPlus16000") * 2, loadW, usableShare));
+  return {
+    max,
+    totalUk: formatQuantity({ value: total, unit: "kWh" }, "uk"),
+    totalEn: formatQuantity({ value: total, unit: "kWh" }, "en"),
+    twoHoursUk: formatNumber(two, "uk"),
+    twoHoursEn: formatNumber(two, "en"),
+  };
+})();
+
 /** Runtime figures for product answers: the same calculation as the hub table (content/backup.ts). */
 const rt = {
   /** Hours of a load set on a product. */
@@ -680,8 +695,18 @@ export const faqList: Faq[] = [
     pages: ["svit-plus-16000"],
     question: { uk: "Скільки протримає SVIT PLUS 16000 під час відключень?", en: "How long does SVIT PLUS 16000 last during outages?" },
     answer: {
-      uk: `З гібридним інвертором батарея тримає будинок з котлом, насосом, холодильником, світлом і роутером (${rt.w("house", "uk")}) близько ${rt.h("house", "svitPlus16000", "uk")} год — це ${rt.outages("svitPlus16000")} відключення по ${outage.hours} години без підзарядки. Для бізнесу час рахують під навантаження; щоб протримати довше, ставлять більший накопичувач або додають сонячні панелі.`,
-      en: `With a hybrid inverter the battery runs a house with a boiler, pump, fridge, lights and router (${rt.w("house", "en")}) for about ${rt.h("house", "svitPlus16000", "en")} h — ${rt.outages("svitPlus16000")} outages of ${outage.hours} hours without recharging. For a business the time is calculated for its load; to last longer, a larger battery system or solar panels are added.`,
+      uk: `З гібридним інвертором батарея тримає будинок з котлом, насосом, холодильником, світлом і роутером (${rt.w("house", "uk")}) близько ${rt.h("house", "svitPlus16000", "uk")} год — це ${rt.outages("svitPlus16000")} відключення по ${outage.hours} години без підзарядки. Для бізнесу час рахують під навантаження; щоб протримати довше, паралельно підключають до ${p16.max} батарей (до ${p16.totalUk}).`,
+      en: `With a hybrid inverter the battery runs a house with a boiler, pump, fridge, lights and router (${rt.w("house", "en")}) for about ${rt.h("house", "svitPlus16000", "en")} h — ${rt.outages("svitPlus16000")} outages of ${outage.hours} hours without recharging. For a business the time is calculated for its load; to last longer, up to ${p16.max} batteries are connected in parallel (up to ${p16.totalEn}).`,
+    },
+  },
+  {
+    id: "svit-plus-16000-parallel",
+    topic: "products",
+    pages: ["svit-plus-16000"],
+    question: { uk: "Чи можна підключити кілька SVIT PLUS 16000 паралельно?", en: "Can several SVIT PLUS 16000 batteries be connected in parallel?" },
+    answer: {
+      uk: `Так. За технічним паспортом паралельно працюють до ${p16.max} батарей — разом до ${p16.totalUk}. Будинок з котлом, насосом, холодильником, світлом і роутером (${rt.w("house", "uk")}) дві батареї тримають близько ${p16.twoHoursUk} год. Кількість батарей і інвертор інженер підбирає під навантаження й графік відключень.`,
+      en: `Yes. According to the datasheet, up to ${p16.max} batteries work in parallel — up to ${p16.totalEn} in total. Two batteries run a house with a boiler, pump, fridge, lights and router (${rt.w("house", "en")}) for about ${p16.twoHoursEn} h. An engineer chooses the number of batteries and the inverter for your load and outage schedule.`,
     },
   },
   {
@@ -710,7 +735,7 @@ export const faqList: Faq[] = [
     topic: "products",
     pages: ["svit-plus-16000"],
     question: { uk: "Чи можна встановити батарею в неопалюваному приміщенні?", en: "Can the battery be installed in an unheated room?" },
-    answer: { uk: "Розряд можливий від −20 °C, а заряд — від 0 °C. Для холодних приміщень доступний підігрів як опція за доплату.", en: "Discharge is possible from −20 °C, while charging starts at 0 °C. Optional paid heating is available for cold rooms." },
+    answer: { uk: "Розряд можливий від −20 °C, а заряд — від 0 °C. Для холодних приміщень є опція — вбудований підігрів.", en: "Discharge is possible from −20 °C, while charging starts at 0 °C. Built-in heating is available as an option for cold rooms." },
   },
   {
     id: "svit-plus-16000-protections",
@@ -724,7 +749,7 @@ export const faqList: Faq[] = [
     topic: "products",
     pages: ["svit-plus-16000"],
     question: { uk: "Скільки важить і який розмір?", en: "What are its weight and dimensions?" },
-    answer: { uk: "Вага — 135 кг, габарити — 635 × 630 × 220 мм; охолодження пасивне.", en: "It weighs 135 kg and measures 635 × 630 × 220 mm, with passive cooling." },
+    answer: { uk: "Вага — 135 кг (залежно від корпусу), габарити — 635 × 630 × 220 мм, виконання вертикальне; охолодження пасивне.", en: "It weighs 135 kg (depending on the enclosure) and measures 635 × 630 × 220 mm in a vertical design, with passive cooling." },
   },
   { id: "bess-outdoor", topic: "products", pages: ["bess"], question: { uk: "Чи можна встановити BESS просто неба?", en: "Can the BESS be installed outdoors?" }, answer: { uk: "Так. Заводський модуль розрахований на встановлення у приміщенні або просто неба.", en: "Yes. The factory module is designed for indoor or outdoor installation." } },
   { id: "bess-scale", topic: "products", pages: ["bess"], question: { uk: "Чи можна збільшити ємність пізніше?", en: "Can capacity be increased later?" }, answer: { uk: "Так. Модулі нарощуються без зупинки системи: від 208 або 261 кВт·год до 1 044 кВт·год.", en: "Yes. Modules scale without stopping the system, from a 208 or 261 kWh base up to 1,044 kWh." } },

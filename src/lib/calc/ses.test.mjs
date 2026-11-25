@@ -7,7 +7,7 @@ const profile = [0.0339, 0.0416, 0.0709, 0.0986, 0.1279, 0.1443, 0.1433, 0.1279,
 const svit600 = { id: "svit600", capacityKwh: 0.865, maxModules: 1, outputW: 600, needsInverter: false };
 const svitHome = { id: "svitHome", capacityKwh: 5.12, maxModules: 1, outputW: 6200, needsInverter: false };
 const svitPlus5000 = { id: "svitPlus5000", capacityKwh: 5.12, maxModules: 16, needsInverter: true };
-const svitPlus16000 = { id: "svitPlus16000", capacityKwh: 16.07, maxModules: 1, needsInverter: true };
+const svitPlus16000 = { id: "svitPlus16000", capacityKwh: 16.07, maxModules: 16, needsInverter: true };
 const lithiumvalley = { id: "lithiumvalley", capacityKwh: 208, maxModules: 5, needsInverter: false };
 
 const dataset = {
@@ -89,11 +89,11 @@ test("SVIT HOME gives the same hours as the autonomy table on /rezervne-zhyvlenn
   assert.equal(roundHours(result.battery.backupHours), 4.3);
 });
 
-test("SVIT PLUS 16000 is never offered as more than one unit", () => {
+test("SVIT PLUS 16000 is never offered above its parallel limit (16)", () => {
   for (const objectType of ["apartment", "house", "business"]) {
     for (let hours = 2; hours <= 24; hours += 1) {
       const result = calculateSesCore({ ...base, objectType, backupLoads: ["stove", "ac", "pump", "fridge"], backupHours: hours }, dataset);
-      if (result.battery?.id === "svitPlus16000") assert.equal(result.battery.modules, 1);
+      if (result.battery?.id === "svitPlus16000") assert.ok(result.battery.modules <= svitPlus16000.maxModules);
     }
   }
 });
