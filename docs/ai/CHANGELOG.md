@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-25 — Адреса сторінки в заявці без `#…`
+- **Агент:** Claude Code
+- **Гілка:** fix/lead-url-no-hash (статус: змерджено в develop)
+- **Що зроблено:** за `design/lead-url-no-hash`: у заявку потрапляла адреса з якорем (`…/cec/vinnytska-oblast/#contacts`), бо CTA шапки дописує `#contacts`. Тепер `LeadForm` прибирає якір перед відправкою, а сервер ще раз нормалізує `pageUrl` (`stripUrlHash` у `lead-form-schema.ts`; не адреса — лишається як є) — для відвідувачів зі старою сторінкою в кеші. Параметри запиту (`?type=`, UTM) зберігаються. Окремого коду листів / повідомлень з `pageUrl` у проєкті немає.
+- **Перевірено:** тест `stripUrlHash` (`…/#contacts` → `…/`, `…/?type=hotel#contacts` → `…/?type=hotel`), `npm test` (44), lint, build. Production-збірка: сторінка Вінницької області з `?utm_source=test` → «Залишити заявку» в шапці (адреса з `#contacts`) → заявка: у `storage/leads.jsonl` `pageUrl` = `…/cec/vinnytska-oblast/?utm_source=test`. Тестовий рядок видалено.
+- **Файли:** src/components/forms/LeadForm.tsx, src/lib/lead-form-schema.ts, src/lib/lead-form-schema.test.mjs, docs/ai/CHANGELOG.md
+
 ## 2026-11-25 — Фото-картки «Що вам потрібно живити?»: чіткі фото й назви продуктів
 - **Агент:** Claude Code
 - **Гілка:** fix/solution-cards-names-photos (статус: змерджено в develop)
