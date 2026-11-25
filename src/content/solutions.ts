@@ -1,10 +1,10 @@
-import type { Locale, Localized } from "@/i18n/config";
+import { localizePath, type Locale, type Localized } from "@/i18n/config";
 import { getMessagesFor } from "@/i18n/messages";
 import { formatNumber, formatQuantity } from "@/lib/format";
 
 import { products, type ProductId } from "./products";
 import { routes } from "./routes";
-import type { SegmentIconId } from "./segments";
+import type { LoadIconId, SegmentIconId } from "./segments";
 
 export type SolutionLink = {
   label: string;
@@ -24,13 +24,14 @@ export type Solution = {
   description: Localized;
   products: ProductRef[];
   capacityProducts: ProductId[];
-  image?: {
+  /** Photo behind the whole card on the home page. */
+  image: {
     src: string;
     alt: Localized;
   };
-  /** Backup power pages exist in Ukrainian only. */
+  /** What the card powers: exactly four icons with captions (taken from the description). */
+  loads: { icon: LoadIconId; label: Localized }[];
   ctaHref: string;
-  tone: "light" | "navy" | "dark";
 };
 
 export const solutions: Solution[] = [
@@ -49,9 +50,21 @@ export const solutions: Solution[] = [
     },
     products: [{ product: "svit600" }],
     capacityProducts: ["svit600"],
+    image: {
+      src: "/images/rezervne-zhyvlennya/segment-apartment-1280.avif",
+      alt: {
+        uk: "Інвертор і накопичувач на стіні сучасної квартири",
+        en: "An inverter and a battery on the wall of a modern apartment",
+      },
+    },
+    loads: [
+      { icon: "router", label: { uk: "Роутер", en: "Router" } },
+      { icon: "light", label: { uk: "Світло", en: "Lights" } },
+      { icon: "laptop", label: { uk: "Ноутбук", en: "Laptop" } },
+      { icon: "phone", label: { uk: "Телефони", en: "Phones" } },
+    ],
     // Segment pages are planned; the hub is live.
     ctaHref: routes.backup.hub,
-    tone: "light",
   },
   {
     id: "house",
@@ -79,8 +92,13 @@ export const solutions: Solution[] = [
         en: "Solar panels for a private house",
       },
     },
+    loads: [
+      { icon: "boiler", label: { uk: "Котел", en: "Boiler" } },
+      { icon: "pump", label: { uk: "Насос", en: "Pump" } },
+      { icon: "fridge", label: { uk: "Холодильник", en: "Fridge" } },
+      { icon: "solar", label: { uk: "Сонце вдень", en: "Solar by day" } },
+    ],
     ctaHref: routes.backup.hub,
-    tone: "navy",
   },
   {
     id: "business",
@@ -107,8 +125,13 @@ export const solutions: Solution[] = [
         en: "Solar power plant for a business",
       },
     },
+    loads: [
+      { icon: "factory", label: { uk: "Виробництво", en: "Production" } },
+      { icon: "warehouse", label: { uk: "Склад", en: "Warehouse" } },
+      { icon: "hotel", label: { uk: "Готель", en: "Hotel" } },
+      { icon: "critical", label: { uk: "Критичний", en: "Critical site" } },
+    ],
     ctaHref: routes.backup.hub,
-    tone: "dark",
   },
 ];
 
@@ -132,15 +155,16 @@ export function getSolutionLinks(
     return {
       label: ref.count ? `${product.name} × ${ref.count}` : product.name,
       spec: total,
-      href: product.href,
+      href: localizePath(product.href, locale),
     };
   });
 }
 
+/** Headline capacity of a card, split so the unit can be set smaller: «865» + «Вт·год». */
 export function getSolutionCapacity(
   solution: Solution,
   locale: Locale,
-): string {
+): { value: string; unit: string } {
   const values = solution.capacityProducts.map(
     (id) => products[id].capacity.value,
   );
@@ -150,14 +174,17 @@ export function getSolutionCapacity(
   const maximum = Math.max(...values);
 
   if (solution.id === "apartment") {
-    return formatQuantity(first, locale);
+    return { value: formatNumber(first.value, locale), unit };
   }
 
   if (solution.id === "business") {
-    return `${formatNumber(minimum, locale)}+ ${unit}`;
+    return { value: `${formatNumber(minimum, locale)}+`, unit };
   }
 
-  return `${formatNumber(Math.round(minimum), locale)}–${formatNumber(Math.round(maximum), locale)} ${unit}`;
+  return {
+    value: `${formatNumber(Math.round(minimum), locale)}–${formatNumber(Math.round(maximum), locale)}`,
+    unit,
+  };
 }
 
 /* ------------------------------------------------------------------ */

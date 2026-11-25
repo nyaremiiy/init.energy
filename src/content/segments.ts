@@ -1,13 +1,22 @@
 import {
   BatteryCharging,
   Building2,
+  Droplets,
   Ellipsis,
   Factory,
+  Flame,
   Hotel,
   House,
   HousePlus,
   Landmark,
+  Laptop,
+  Lightbulb,
+  Refrigerator,
+  Server,
+  Smartphone,
   Sun,
+  Warehouse,
+  Wifi,
   type LucideIcon,
 } from "lucide-react";
 
@@ -34,4 +43,25 @@ export const objectTypeIcons: Record<ObjectTypeId, LucideIcon> = {
   hotel: Hotel,
   infrastructure: Landmark,
   other: Ellipsis,
+};
+
+/** «What it powers» icons on the home solution cards (content/solutions.ts → loads). */
+export type LoadIconId =
+  | "router" | "light" | "laptop" | "phone"
+  | "boiler" | "pump" | "fridge" | "solar"
+  | "factory" | "warehouse" | "hotel" | "critical";
+
+export const loadIcons: Record<LoadIconId, LucideIcon> = {
+  router: Wifi,
+  light: Lightbulb,
+  laptop: Laptop,
+  phone: Smartphone,
+  boiler: Flame,
+  pump: Droplets,
+  fridge: Refrigerator,
+  solar: Sun,
+  factory: Factory,
+  warehouse: Warehouse,
+  hotel: Hotel,
+  critical: Server,
 };
