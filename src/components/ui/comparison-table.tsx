@@ -1,5 +1,7 @@
 import { Check, Minus, X, type LucideIcon } from "lucide-react";
 
+import { getMessages } from "@/i18n/server";
+
 export type ComparisonStatus = "good" | "limited" | "bad";
 
 export type ComparisonColumn = {
@@ -14,16 +16,14 @@ export type ComparisonRow = {
   id: string;
   label: string;
   icon: LucideIcon;
-  cells: Record<string, { status: ComparisonStatus; text: string }>;
+  /** No `status` — plain text without a mark (e.g. «Кому підходить»). */
+  cells: Record<string, { status?: ComparisonStatus; text: string }>;
 };
 
 type ComparisonTableProps = {
   caption: string;
   /** Hidden header of the row-label column. */
   featureLabel: string;
-  recommendedLabel: string;
-  legendLabel: string;
-  statusLabels: Record<ComparisonStatus, string>;
   columns: ComparisonColumn[];
   rows: ComparisonRow[];
 };
@@ -44,14 +44,20 @@ function StatusMark({ status, label }: { status: ComparisonStatus; label: string
 }
 
 /**
- * Options compared feature by feature (e.g. generator / UPS / inverter + battery).
- * No horizontal scroll: on mobile each row is the feature above its cells; from
+ * The one component for comparing three options feature by feature (backup:
+ * generator / UPS / inverter + battery; /cec/: grid-tied / hybrid / off-grid),
+ * always in a light Panel. «Рекомендуємо», the legend and the status labels are
+ * shared (`messages.compare`).
+ * No horizontal scroll: on mobile each row is the feature above its cells (the
+ * status mark above the text below 640 px); from
  * md a regular table. Explicit ARIA roles keep table semantics on the CSS grid.
  * Built for three options.
  */
-export function ComparisonTable({ caption, featureLabel, recommendedLabel, legendLabel, statusLabels, columns, rows }: ComparisonTableProps) {
+export function ComparisonTable({ caption, featureLabel, columns, rows }: ComparisonTableProps) {
+  const { recommended: recommendedLabel, legendLabel, status: statusLabels } = getMessages().compare;
   const gridCols = "grid-cols-3 md:grid-cols-4";
-  const pad = (index: number) => (index === 0 ? "pr-3 sm:pr-5 md:pl-5" : "px-3 sm:px-5");
+  // Phones: 8 px between the three columns, so a word like «обов'язково» fits a ~100 px cell.
+  const pad = (index: number) => (index === 0 ? "pr-2 sm:pr-5 md:pl-5" : "px-2 sm:px-5");
 
   return (
     <div className="flex flex-col gap-6">
@@ -67,7 +73,8 @@ export function ComparisonTable({ caption, featureLabel, recommendedLabel, legen
               <span
                 key={column.id}
                 role="columnheader"
-                className={`flex flex-col gap-3 font-heading text-body font-semibold ${pad(index)} ${
+                // Phones: 12 px names, so «накопичувач» fits a ~90 px column at 360 px.
+                className={`flex min-w-0 flex-col gap-3 font-heading text-eyebrow-sm font-semibold wrap-anywhere sm:text-body ${pad(index)} ${
                   column.highlight ? "rounded-t-tile bg-ink-glow py-5 text-white" : "py-4 text-ink"
                 }`}
               >
@@ -94,6 +101,9 @@ export function ComparisonTable({ caption, featureLabel, recommendedLabel, legen
         {rows.map((row, rowIndex) => {
           const RowIcon = row.icon;
           const last = rowIndex === rows.length - 1;
+          // A row without marks (e.g. «Кому підходить») has phrases, not yes/no: on phones each option takes
+          // the full width under its own name — a third of 360 px is too narrow for «відключеннями».
+          const textOnly = columns.every((column) => !row.cells[column.id].status);
           return (
             <div key={row.id} role="row" className={`grid border-t border-line ${gridCols}`}>
               <span role="rowheader" className="col-span-3 flex items-center gap-2 pt-4 font-medium text-ink md:col-span-1 md:py-5 md:pr-4">
@@ -102,16 +112,27 @@ export function ComparisonTable({ caption, featureLabel, recommendedLabel, legen
               </span>
               {columns.map((column, index) => {
                 const cell = row.cells[column.id];
+                const layout = textOnly
+                  ? `col-span-3 gap-0.5 md:col-span-1 md:flex-row md:px-5 ${column.highlight ? "px-2 sm:px-5" : ""} ${index === columns.length - 1 ? "pt-2 pb-4" : "py-2"}`
+                  : `gap-1.5 py-4 sm:flex-row sm:gap-2 ${pad(index)}`;
                 return (
                   <span
                     key={column.id}
                     role="cell"
-                    className={`flex items-start gap-2 py-4 md:items-center md:py-5 ${pad(index)} ${
+                    // Phones: the mark above the text, so the text gets the whole (narrow) cell;
+                    // 13 px text, so words like «автоматично» fit a ~90 px cell at 360 px.
+                    className={`flex flex-col items-start text-caption sm:text-small md:items-center md:py-5 ${layout} ${
                       column.highlight ? `bg-white font-medium text-ink ${last ? "rounded-b-tile" : ""}` : cell.status === "bad" ? "text-muted" : "text-ink"
                     }`}
                   >
-                    <StatusMark status={cell.status} label={statusLabels[cell.status]} />
-                    <span className="leading-snug">{cell.text}</span>
+                    {textOnly ? (
+                      <span aria-hidden className="font-normal text-muted md:hidden">
+                        {column.label}
+                      </span>
+                    ) : null}
+                    {cell.status ? <StatusMark status={cell.status} label={statusLabels[cell.status]} /> : null}
+                    {/* wrap-anywhere: a last resort (320 px), a long word never runs into the next column. */}
+                    <span className="min-w-0 leading-snug wrap-anywhere">{cell.text}</span>
                   </span>
                 );
               })}
