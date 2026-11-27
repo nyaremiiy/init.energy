@@ -1,5 +1,5 @@
 import { loadSetById, loadSetHours, loadSetPowerW, outageExample, type LoadSet } from "@/content/backup";
-import { offices } from "@/content/company";
+import { mainPhone } from "@/content/company";
 import type { InsolationRegion } from "@/content/insolation";
 import { partnerBrands } from "@/content/partner-brands";
 import { products, type ProductId } from "@/content/products";
@@ -165,9 +165,9 @@ export function backupFaq(region: InsolationRegion, locale: Locale): RegionFaq[]
       ? format(r.coverageOffice, {
           centerLocative: region.centerLocative[locale],
           address: office.address[locale],
-          phone: formatPhone(office.phone.display),
+          phone: formatPhone((office.phone ?? mainPhone).display),
         })
-      : format(r.coverageCall, { phone: formatPhone(offices[0].phone.display) });
+      : format(r.coverageCall, { phone: formatPhone(mainPhone.display) });
     items.push({
       id: "coverage",
       question: isCity(region) ? r.coverageQCity : format(r.coverageQ, { regionDative: locative.replace(/^(у|в|in)\s+/, "") }),

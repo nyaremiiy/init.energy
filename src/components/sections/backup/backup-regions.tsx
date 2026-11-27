@@ -1,3 +1,5 @@
+import { MapPin } from "lucide-react";
+
 import { Container } from "@/components/layout/container";
 import { ContactLink } from "@/components/ui/contact-link";
 import { Eyebrow } from "@/components/ui/eyebrow";
@@ -56,6 +58,16 @@ export function BackupRegions() {
               <p className="text-body leading-relaxed text-muted-dark">{t.cardText}</p>
               <ul className="mt-auto flex flex-col gap-2">
                 {offices.map((office) => {
+                  const label = format(t.office, { centerLocative: officeCity(office.id), address: office.address[locale] });
+                  // No phone of its own (Kyiv): the address only, no call button.
+                  if (!office.phone) {
+                    return (
+                      <li key={office.id} className="flex items-center gap-2 px-4 py-2 text-small text-muted-dark">
+                        <MapPin aria-hidden className="size-4 shrink-0" />
+                        {label}
+                      </li>
+                    );
+                  }
                   const phone = formatPhone(office.phone.display);
                   return (
                     <li key={office.id}>
@@ -68,9 +80,7 @@ export function BackupRegions() {
                       >
                         <IconButton decorative variant="solid-light" size="sm" icon="phone" className="transition-transform duration-200 ease-tech motion-safe:group-hover:scale-105" />
                         <span className="flex min-w-0 flex-col">
-                          <span className="text-caption text-muted-dark">
-                            {format(t.office, { centerLocative: officeCity(office.id), address: office.address[locale] })}
-                          </span>
+                          <span className="text-caption text-muted-dark">{label}</span>
                           <span className="font-heading text-lead font-semibold whitespace-nowrap tabular-nums">{phone}</span>
                         </span>
                       </ContactLink>

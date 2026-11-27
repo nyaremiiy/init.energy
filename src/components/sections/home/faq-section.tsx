@@ -9,7 +9,7 @@ import { ArrowLink } from "@/components/ui/arrow-link";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
 import { SectionWatermark } from "@/components/ui/section-watermark";
-import { offices } from "@/content/company";
+import { mainPhone } from "@/content/company";
 import {
   faqForPage,
   faqTopics,
@@ -54,7 +54,7 @@ export function FaqSection({
   const messages = getMessages();
   const locale = getLocale();
   const t = messages.faq;
-  const phone = offices[0].phone;
+  const phone = mainPhone;
   const items = questions
     ? questions.map((item) => ({ ...item, topic: "solar" as FaqTopic }))
     : faqForPage(page).map((faq) => ({
