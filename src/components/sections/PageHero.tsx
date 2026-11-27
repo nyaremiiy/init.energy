@@ -75,7 +75,8 @@ export function PageHero(props: PageHeroProps) {
       as="section"
       variant="dark"
       aria-labelledby={content ? titleId : (props as { slides: HeroSlide[] }).slides[0]?.id}
-      className="bg-white pt-panel-sm sm:pt-panel"
+      // 8 px above the hero on every screen (owner, 2026-11-27); side gaps stay 8 / 16 px.
+      className="bg-white pt-panel-sm"
       // Slider on phones: a flex column whose copy is in the flow, so a short screen grows the hero instead of clipping it.
       panelClassName={`hero shadow-soft ${content ? "" : "flex flex-col md:block"}`}
     >

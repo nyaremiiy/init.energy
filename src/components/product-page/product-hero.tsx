@@ -52,7 +52,7 @@ export function ProductHero({ page, product, locale }: ProductHeroProps) {
       as="section"
       variant="dark"
       aria-labelledby="product-title"
-      className="bg-white pt-panel-sm sm:pt-panel"
+      className="bg-white pt-panel-sm"
       panelClassName="bg-ink-glow shadow-soft"
     >
       <Container

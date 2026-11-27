@@ -52,13 +52,15 @@ export function OfficeRotator() {
               {office.city[locale]}, {office.address[locale]}
             </span>
           </span>
-          <a
-            href={office.phone.href}
-            className="inline-flex items-center gap-2 transition-colors hover:text-white"
-          >
-            <Phone aria-hidden className="size-3.5 shrink-0" />
-            {formatPhone(office.phone.display)}
-          </a>
+          {office.phone ? (
+            <a
+              href={office.phone.href}
+              className="inline-flex items-center gap-2 transition-colors hover:text-white"
+            >
+              <Phone aria-hidden className="size-3.5 shrink-0" />
+              {formatPhone(office.phone.display)}
+            </a>
+          ) : null}
         </motion.address>
       </AnimatePresence>
     </div>

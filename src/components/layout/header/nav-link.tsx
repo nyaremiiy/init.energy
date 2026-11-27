@@ -6,6 +6,7 @@ type NavLinkProps = {
   className?: string;
   children: ReactNode;
   onClick?: () => void;
+  "aria-current"?: "page";
 };
 
 export function NavLink({ href, ...props }: NavLinkProps) {

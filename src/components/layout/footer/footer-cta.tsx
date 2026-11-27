@@ -3,7 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ContactLink } from "@/components/ui/contact-link";
 import { Eyebrow } from "@/components/ui/eyebrow";
-import { offices } from "@/content/company";
+import { mainPhone } from "@/content/company";
 import { routes } from "@/content/routes";
 import { localizePath } from "@/i18n/config";
 import { getLocale, getMessages } from "@/i18n/server";
@@ -18,7 +18,7 @@ import { focusClasses } from "./footer-styles";
 export function FooterCta() {
   const t = getMessages().footer.cta;
   const locale = getLocale();
-  const phone = offices[0].phone;
+  const phone = mainPhone;
 
   return (
     <div className="flex flex-col gap-8 border-b border-line-dark pb-16 lg:flex-row lg:items-end lg:justify-between lg:gap-12">

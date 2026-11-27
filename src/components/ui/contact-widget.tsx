@@ -43,7 +43,7 @@ export function ContactWidget() {
     <div
       ref={rootRef}
       data-floating
-      className="fixed right-5 bottom-5 z-40 sm:right-8 sm:bottom-8"
+      className="fixed right-panel-sm bottom-5 z-40 sm:right-panel sm:bottom-8"
     >
       {open ? (
         <div
@@ -75,12 +75,14 @@ export function ContactWidget() {
                 >
                   {office.city[locale]}, {office.address[locale]}
                 </a>
-                <a
-                  href={office.phone.href}
-                  className="font-medium text-white underline underline-offset-4 decoration-line-dark hover:decoration-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-                >
-                  {formatPhone(office.phone.display)}
-                </a>
+                {office.phone ? (
+                  <a
+                    href={office.phone.href}
+                    className="font-medium text-white underline underline-offset-4 decoration-line-dark hover:decoration-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                  >
+                    {formatPhone(office.phone.display)}
+                  </a>
+                ) : null}
               </li>
             ))}
             <li>

@@ -31,7 +31,7 @@ export function SesPaybackHero() {
       as="section"
       variant="dark"
       aria-labelledby="ses-calculator-title"
-      className="pt-panel-sm sm:pt-panel"
+      className="pt-panel-sm"
       panelClassName="bg-ink-glow shadow-soft"
     >
       <Container
