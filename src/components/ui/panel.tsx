@@ -1,5 +1,7 @@
 import type { ComponentPropsWithoutRef, ElementType, ReactNode } from "react";
 
+import { gutter } from "@/components/layout/container";
+
 type PanelVariant = "dark" | "light" | "sky";
 
 type PanelProps = {
@@ -31,7 +33,7 @@ export function Panel({
   ...props
 }: PanelProps) {
   return (
-    <Tag className={`px-panel-sm sm:px-panel ${className ?? ""}`} {...props}>
+    <Tag className={`${gutter.padding} ${className ?? ""}`} {...props}>
       <div
         className={`relative overflow-clip rounded-panel-sm sm:rounded-panel ${variantClasses[variant]} ${panelClassName ?? ""}`}
       >

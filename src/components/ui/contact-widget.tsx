@@ -3,6 +3,7 @@
 import { Phone, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
+import { gutter } from "@/components/layout/container";
 import { companyContacts, offices } from "@/content/company";
 import { useLocale, useMessages } from "@/i18n/client";
 import { formatPhone } from "@/lib/format";
@@ -43,7 +44,7 @@ export function ContactWidget() {
     <div
       ref={rootRef}
       data-floating
-      className="fixed right-panel-sm bottom-5 z-40 sm:right-panel sm:bottom-8"
+      className={`fixed ${gutter.right} bottom-5 z-40 sm:bottom-8`}
     >
       {open ? (
         <div
