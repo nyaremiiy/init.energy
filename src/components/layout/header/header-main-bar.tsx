@@ -12,6 +12,7 @@ import { DesktopNav } from "./desktop-nav";
 import { HeaderLeadCta } from "./header-lead-cta";
 import { mainPhone } from "@/content/company";
 import { MobileMenu } from "./mobile-menu";
+import { RegionsPicker } from "./regions-picker";
 
 export function HeaderMainBar() {
   const primaryPhone = mainPhone;
@@ -44,7 +45,7 @@ export function HeaderMainBar() {
         <div className="hidden shrink-0 lg:block">
           <HeaderLeadCta />
         </div>
-        <MobileMenu />
+        <MobileMenu regions={<RegionsPicker variant="mobile" />} />
       </div>
     </Container>
   );

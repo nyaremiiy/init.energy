@@ -37,7 +37,8 @@ export function HeaderShell({ topBar, mainBar }: HeaderShellProps) {
       >
         {topBar}
       </div>
-      <div className="relative">{mainBar}</div>
+      {/* z-0: its own stacking context (logo, burger overlay, mega menus stay ordered inside), so the top bar's «Регіони» panel opens above it. */}
+      <div className="relative z-0">{mainBar}</div>
     </header>
   );
 }

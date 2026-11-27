@@ -1,10 +1,10 @@
 "use client";
 
-import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowUpRight, ChevronDown, Mail, MapPin, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { IconButton } from "@/components/ui/icon-button";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 
 import { formatPhone } from "@/lib/format";
 
@@ -26,7 +26,8 @@ import { NavLink } from "./nav-link";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { SocialLinks } from "@/components/ui/social-links";
 
-export function MobileMenu() {
+/** `regions`: the server-rendered «Регіони» switch and lists (RegionsPicker variant="mobile"). */
+export function MobileMenu({ regions }: { regions?: ReactNode }) {
   const locale = useLocale();
   const t = useMessages().chrome.header;
   const navItems = getNavItems(locale);
@@ -43,6 +44,8 @@ export function MobileMenu() {
   // the burger stays (after the CTA) so they remain reachable.
   const hasPageLinks = onHome || pageLinks.length > 0;
   const [isOpen, setIsOpen] = useState(false);
+  const [regionsOpen, setRegionsOpen] = useState(false);
+  const regionsId = useId();
   const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -140,6 +143,24 @@ export function MobileMenu() {
                   </section>
                 )),
               )}
+
+              {regions ? (
+                <section aria-label={t.regions.button} className="flex flex-col gap-2">
+                  <button
+                    type="button"
+                    aria-expanded={regionsOpen}
+                    aria-controls={regionsId}
+                    onClick={() => setRegionsOpen((value) => !value)}
+                    className="-mx-3 flex min-h-11 cursor-pointer items-center justify-between gap-3 rounded-tile px-3 transition-colors duration-150 ease-tech active:bg-surface focus-visible:bg-surface focus-visible:outline-2 focus-visible:outline-ink"
+                  >
+                    <Eyebrow as="span">{t.regions.button}</Eyebrow>
+                    <ChevronDown aria-hidden className={`size-4 shrink-0 transition-transform duration-200 ${regionsOpen ? "rotate-180" : ""}`} />
+                  </button>
+                  <div id={regionsId} hidden={!regionsOpen} className="-mx-2">
+                    {regions}
+                  </div>
+                </section>
+              ) : null}
             </nav>
 
             <div className="flex w-full max-w-2xl flex-col items-start gap-4 rounded-card bg-surface p-card-sm">
