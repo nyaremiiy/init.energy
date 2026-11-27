@@ -8,12 +8,13 @@ import { NavLink } from "./nav-link";
  * caption and a muted arrow on the right (or the product capacity before it).
  * Hover / keyboard focus: `surface` background, ink arrow shifted by 2 px.
  */
-export function MenuLink({ link, onNavigate }: { link: NavMenuLink; onNavigate?: () => void }) {
+/** `tight` (mobile menu): 8 px side padding, so the hover background never bleeds past the 8 px page gutter. */
+export function MenuLink({ link, onNavigate, tight = false }: { link: NavMenuLink; onNavigate?: () => void; tight?: boolean }) {
   return (
     <NavLink
       href={link.href}
       onClick={onNavigate}
-      className="group/link flex min-h-11 items-start gap-3 rounded-tile px-3 py-2.5 transition-colors duration-150 ease-tech hover:bg-surface focus-visible:bg-surface focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink active:bg-surface"
+      className={`group/link flex min-h-11 items-start gap-3 rounded-tile ${tight ? "px-2" : "px-3"} py-2.5 transition-colors duration-150 ease-tech hover:bg-surface focus-visible:bg-surface focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink active:bg-surface`}
     >
       <span className="flex min-w-0 flex-1 flex-col gap-0.5">
         <span className="text-body leading-snug font-semibold text-ink">{link.label}</span>

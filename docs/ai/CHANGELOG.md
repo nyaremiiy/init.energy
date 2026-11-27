@@ -15,6 +15,14 @@
 
 ---
 
+## 2026-11-27 — Бічний відступ сайту в одному місці
+- **Агент:** Claude Code
+- **Гілка:** refactor/single-gutter (статус: змерджено в develop)
+- **Що зроблено:** за зауваженням власника бічний відступ більше не прописаний у кількох файлах: `gutter` у `container.tsx` (`padding`, `inset`, `right`) — єдине місце. Його беруть `Container`, `Panel` (поле панелей від краю екрана), шапка над hero (`header-shell`), кнопки «вгору» й контактів; мобільне меню, банер cookie й екран технічних робіт тепер обгорнуті в `Container` замість власних `px-…`. Змінити відступ на всьому сайті = змінити `gutter`. Вигляд не змінився.
+- **Виправлено:** пункти мобільного меню мали виступ фону 12 px (`-mx-3`) — після попередньої задачі (поле 8 px) він виходив за екран на 4 px; тепер 8 px (`-mx-2`, `MenuLink tight`), текст на лінії заголовків.
+- **Перевірено:** production 360 / 1024 / 1440 × головна, `/cec/`, SVIT HOME, `/en/rezervne-zhyvlennya/`: панель hero, контейнери секцій, шапка й плаваючі кнопки — 8 / 16 px від краю; банер cookie — 8 / 16 px (на 1440 центрований, 1080 px); мобільне меню на 360 — вміст на 8 px, нічого не виходить за екран. Lint з `lint:tokens`, `npm test` (47), build.
+- **Файли:** src/components/layout/container.tsx, src/components/ui/{panel,back-to-top,contact-widget}.tsx, src/components/layout/header/{header-shell,mobile-menu,menu-link}.tsx, src/components/consent/CookieBanner.tsx, src/components/pages/maintenance-page.tsx, docs/ai/{CONTEXT,CHANGELOG}.md
+
 ## 2026-11-27 — Секції на тій самій відстані від краю, що й панель hero
 - **Агент:** Claude Code
 - **Гілка:** fix/same-gutters (статус: змерджено в develop)
