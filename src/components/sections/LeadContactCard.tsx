@@ -10,8 +10,8 @@ import { formatPhone } from "@/lib/format";
 const trackingLocation = "lead_section";
 
 /**
- * Contacts at the bottom of the lead section's dark photo panel: one phone
- * per office (Lviv, then Kyiv, in the order of content/company.ts) and the email.
+ * Contacts at the bottom of the lead section's dark photo panel: the phone of
+ * every office that has one (only Lviv: the Kyiv office has none) and the email.
  */
 export function LeadContactCard() {
   const t = getMessages().leadSection.contactCard;
@@ -22,10 +22,11 @@ export function LeadContactCard() {
 
       <div className="flex flex-col gap-3">
         {offices.map((office) => {
+          if (!office.phone) return null;
           const phone = formatPhone(office.phone.display);
           return (
             <ContactLink
-              key={office.phone.href}
+              key={office.id}
               href={office.phone.href}
               method="phone"
               location={trackingLocation}

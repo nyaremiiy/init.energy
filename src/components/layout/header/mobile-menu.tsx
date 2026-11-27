@@ -166,10 +166,12 @@ export function MobileMenu() {
                     <MapPin aria-hidden className="size-4 shrink-0" />
                     {office.city[locale]}, {office.address[locale]}
                   </span>
-                  <a href={office.phone.href} className="inline-flex min-h-11 items-center gap-2 hover:text-ink">
-                    <Phone aria-hidden className="size-4 shrink-0" />
-                    {formatPhone(office.phone.display)}
-                  </a>
+                  {office.phone ? (
+                    <a href={office.phone.href} className="inline-flex min-h-11 items-center gap-2 hover:text-ink">
+                      <Phone aria-hidden className="size-4 shrink-0" />
+                      {formatPhone(office.phone.display)}
+                    </a>
+                  ) : null}
                 </address>
               ))}
               <a href={`mailto:${contactEmail}`} className="inline-flex min-h-11 items-center gap-2 hover:text-ink">

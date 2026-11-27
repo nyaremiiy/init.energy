@@ -5,16 +5,21 @@ import { productList } from "./products";
 // Every claim below is sourced from https://init.energy (checked 2026-11-06);
 // the quotes are kept next to each value. English is a translation of the same facts.
 
+export type Phone = {
+  display: string;
+  href: string;
+};
+
 export type Office = {
   id: string;
   city: Localized;
   address: Localized;
-  phone: {
-    display: string;
-    href: string;
-  };
+  /** Owner's decision (2026-11-27): the Kyiv office has no phone of its own; the company number is `mainPhone`. */
+  phone?: Phone;
   mapHref: string;
 };
+
+const lvivPhone: Phone = { display: "+380671985550", href: "tel:+380671985550" };
 
 export const offices: Office[] = [
   {
@@ -22,7 +27,7 @@ export const offices: Office[] = [
     city: { uk: "Львів", en: "Lviv" },
     // TODO(content): verify the official English spelling of the address.
     address: { uk: "вул. Шевченка, 317б", en: "317b Shevchenka St." },
-    phone: { display: "+380671985550", href: "tel:+380671985550" },
+    phone: lvivPhone,
     mapHref:
       "https://www.google.com/maps/search/?api=1&query=Львів%2C%20вул.%20Шевченка%2C%20317б",
   },
@@ -30,11 +35,13 @@ export const offices: Office[] = [
     id: "kyiv",
     city: { uk: "Київ", en: "Kyiv" },
     address: { uk: "вул. Є.Сверстюка, 19", en: "19 Ye. Sverstiuka St." },
-    phone: { display: "+380675551250", href: "tel:+380675551250" },
     mapHref:
       "https://www.google.com/maps/search/?api=1&query=Київ%2C%20вул.%20Є.%20Сверстюка%2C%2019",
   },
 ];
+
+/** The single company phone (Lviv office, `offices[0]`); also used for the Kyiv office. */
+export const mainPhone: Phone = lvivPhone;
 
 export const companyContacts = {
   email: {

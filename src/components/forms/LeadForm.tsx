@@ -20,7 +20,7 @@ import { Textarea, TextInput } from "@/components/ui/form/controls";
 import { Heading } from "@/components/ui/heading";
 import { InlineLink } from "@/components/ui/inline-link";
 import { useToast } from "@/components/ui/toast";
-import { offices } from "@/content/company";
+import { mainPhone } from "@/content/company";
 import { objectTypeIcons } from "@/content/segments";
 import { routes } from "@/content/routes";
 import { formatPhone } from "@/lib/format";
@@ -69,7 +69,6 @@ export function LeadForm({
   const [submitting, setSubmitting] = useState(false);
   // Inline copy of the last result (the toast may be missed).
   const [result, setResult] = useState<"success" | "failure" | null>(null);
-  const mainPhone = offices[0].phone;
   const toast = useToast();
   const [objectType, setObjectType] = useState<LeadObjectType | undefined>(
     defaultObjectType,

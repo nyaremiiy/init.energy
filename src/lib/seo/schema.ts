@@ -1,5 +1,5 @@
 import { socialLinks } from "@/components/layout/header/header-data";
-import { companyContacts, offices, serviceArea } from "@/content/company";
+import { companyContacts, mainPhone, offices, serviceArea } from "@/content/company";
 import { localizePath, type Locale } from "@/i18n/config";
 import { getMessagesFor } from "@/i18n/messages";
 
@@ -56,7 +56,7 @@ export function organizationSchema(locale: Locale) {
     logo: absoluteUrl("/images/main-logo.svg"),
     description: t.organizationDescription,
     email: companyContacts.email.display,
-    telephone: offices[0].phone.display,
+    telephone: mainPhone.display,
     areaServed: {
       "@type": "Country",
       name: serviceArea[locale],
@@ -67,13 +67,20 @@ export function organizationSchema(locale: Locale) {
       addressLocality: office.city[locale],
       addressCountry: "UA",
     })),
-    contactPoint: offices.map((office) => ({
-      "@type": "ContactPoint",
-      telephone: office.phone.display,
-      contactType: "customer service",
-      areaServed: "UA",
-      availableLanguage: ["uk", "en"],
-    })),
+    // Only offices with their own phone: the Kyiv office has none (owner, 2026-11-27).
+    contactPoint: offices.flatMap((office) =>
+      office.phone
+        ? [
+            {
+              "@type": "ContactPoint",
+              telephone: office.phone.display,
+              contactType: "customer service",
+              areaServed: "UA",
+              availableLanguage: ["uk", "en"],
+            },
+          ]
+        : [],
+    ),
     sameAs: socialLinks.map((link) => link.href),
   };
 }

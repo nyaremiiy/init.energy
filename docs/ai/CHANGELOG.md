@@ -15,6 +15,19 @@
 
 ---
 
+## 2026-11-27 — У київського офісу немає окремого телефону
+- **Агент:** Claude Code
+- **Гілка:** fix/kyiv-no-phone (статус: змерджено в develop)
+- **Що зроблено** (за `design/kyiv-no-phone`, рішення власника): номер київського офісу прибрано з репозиторію; єдиний телефон компанії — львівський +380 67 198 55 50.
+  - `company.ts`: `Office.phone` необов'язковий, у Києва його немає; новий `mainPhone` (львівський номер) — ним тепер користуються шапка, футер-заклик, FAQ, форма заявки, тексти областей.
+  - Списки офісів: футер «Контакти», мобільне меню, ротатор у верхній смузі, віджет контактів, картка «Працюємо по всій Україні» на хабі резерву — під Києвом лише місто й адреса (на хабі — рядок з іконкою адреси замість кнопки дзвінка). Ключі React — `office.id`.
+  - `LeadContactCard` (секція заявки) показує лише телефони без адрес, тож там лишився один номер — Львів; адресу Києва туди не додавав.
+  - Тексти: FAQ сторінок Києва й Київської області (СЕС і резерв) — «Наш офіс у Києві: вул. Є.Сверстюка, 19, телефон +380 67 198 55 50»; картка «Де працюємо» — адреса київського офісу й львівський номер.
+  - JSON-LD: `Organization.telephone` = `mainPhone`, `contactPoint` — один запис. `LocalBusiness` у коді немає.
+  - `llms.txt`: «Київ, вул. Є.Сверстюка, 19» без номера + окремо «Телефон: +380 67 198 55 50».
+- **Перевірено:** у репозиторії й зібраному HTML номера немає; на головній, хабі, `/cec/kyiv/`, `/rezervne-zhyvlennya/kyiv/` усі `tel:` — львівський номер; знімки картки хабу, футера й ротатора (1440). Lint з `lint:tokens`, `npm test` (47), build.
+- **Файли:** src/content/company.ts, src/lib/{region-copy,backup-region-copy}.ts, src/lib/seo/schema.ts, src/app/llms.txt/route.ts, src/components/layout/footer/{footer-contacts,footer-cta}.tsx, src/components/layout/header/{mobile-menu,office-rotator,header-main-bar}.tsx, src/components/ui/contact-widget.tsx, src/components/sections/{LeadContactCard,backup/backup-regions,regions/region-yield,home/faq-section}.tsx, src/components/forms/LeadForm.tsx, docs/ai/{CONTEXT,CHANGELOG}.md
+
 ## 2026-11-25 — SVIT PLUS 16000 за технічним паспортом власника
 - **Агент:** Claude Code
 - **Гілка:** fix/svit-plus-16000-datasheet (статус: змерджено в develop)

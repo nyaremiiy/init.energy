@@ -24,10 +24,11 @@ export function FooterContacts() {
       </Eyebrow>
       <div className="flex flex-col gap-4.5">
         {offices.map((office) => (
-          <div key={office.phone.href} className="flex flex-col gap-1">
+          <div key={office.id} className="flex flex-col gap-1">
             <p className="text-caption text-muted-dark">
               {office.city[locale]} · {office.address[locale]}
             </p>
+            {office.phone ? (
             <ContactLink
               href={office.phone.href}
               method="phone"
@@ -37,6 +38,7 @@ export function FooterContacts() {
               <Phone aria-hidden size={16} strokeWidth={1.7} className="shrink-0" />
               {formatPhone(office.phone.display)}
             </ContactLink>
+            ) : null}
           </div>
         ))}
         <ContactLink

@@ -1,4 +1,4 @@
-import { offices } from "@/content/company";
+import { mainPhone, offices } from "@/content/company";
 import type { InsolationRegion } from "@/content/insolation";
 import type { Locale } from "@/i18n/config";
 import { getMessagesFor } from "@/i18n/messages";
@@ -146,9 +146,9 @@ export function regionFaq(region: InsolationRegion, locale: Locale, stats: Regio
       ? format(f.coverageOffice, {
           centerLocative: region.centerLocative[locale],
           address: office.address[locale],
-          phone: formatPhone(office.phone.display),
+          phone: formatPhone((office.phone ?? mainPhone).display),
         })
-      : format(f.coverageCall, { phone: formatPhone(offices[0].phone.display) });
+      : format(f.coverageCall, { phone: formatPhone(mainPhone.display) });
     items.push({
       id: "coverage",
       question: isCity(region) ? f.coverageQCity : format(f.coverageQ, { regionDative: withoutPreposition(locative) }),

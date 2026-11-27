@@ -10,11 +10,11 @@ import { formatPhone } from "@/lib/format";
 
 import { DesktopNav } from "./desktop-nav";
 import { HeaderLeadCta } from "./header-lead-cta";
-import { offices } from "./header-data";
+import { mainPhone } from "@/content/company";
 import { MobileMenu } from "./mobile-menu";
 
 export function HeaderMainBar() {
-  const primaryPhone = offices[0].phone;
+  const primaryPhone = mainPhone;
   const locale = getLocale();
   const t = getMessages().chrome.header;
 

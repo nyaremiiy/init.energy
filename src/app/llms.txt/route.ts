@@ -1,4 +1,4 @@
-import { companyContacts, offices, serviceArea } from "@/content/company";
+import { companyContacts, mainPhone, offices, serviceArea } from "@/content/company";
 import { faqForPage } from "@/content/faq";
 import { backupRegionPath, regionPath, regionsByLocale } from "@/content/insolation";
 import { productList, productSummary } from "@/content/products";
@@ -63,7 +63,7 @@ export function GET() {
     `> ${uk.meta.organizationDescription}`,
     `> ${en.meta.organizationDescription}`,
     "",
-    `Регіон роботи: ${serviceArea.uk}. Офіси: ${offices.map((office) => `${office.city.uk}, ${office.address.uk}, ${formatPhone(office.phone.display)}`).join("; ")}. Email: ${companyContacts.email.display}.`,
+    `Регіон роботи: ${serviceArea.uk}. Офіси: ${offices.map((office) => [office.city.uk, office.address.uk, office.phone ? formatPhone(office.phone.display) : null].filter(Boolean).join(", ")).join("; ")}. Телефон: ${formatPhone(mainPhone.display)}. Email: ${companyContacts.email.display}.`,
     "",
     "## Основні сторінки",
     "",

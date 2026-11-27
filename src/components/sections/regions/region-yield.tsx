@@ -8,7 +8,7 @@ import { IconButton } from "@/components/ui/icon-button";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
 import { SectionWatermark } from "@/components/ui/section-watermark";
-import { nationwideService, offices } from "@/content/company";
+import { mainPhone, nationwideService } from "@/content/company";
 import { updatedAt, type InsolationRegion } from "@/content/insolation";
 import { anchors } from "@/content/routes";
 import type { Locale } from "@/i18n/config";
@@ -99,7 +99,7 @@ export function RegionAreaCard({
 }: Props & { text?: { region: string; city: string }; location?: string }) {
   const t = getMessages().regionPage.area;
   const office = regionOffice(region);
-  const phone = (office ?? offices[0]).phone;
+  const phone = office?.phone ?? mainPhone;
   const phoneText = formatPhone(phone.display);
   const city = isCity(region);
   const text = isOccupied(region)
