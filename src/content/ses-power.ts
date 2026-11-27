@@ -19,15 +19,19 @@ export type SesPowerHero = { image: HeroImage; alt: Localized };
 
 /**
  * One hero for every plant up to 50 kW (owner's decision 2026-11-27): a house
- * with panels on the roof. The source is 1152 px wide, so there are no larger
- * cuts; phones get its middle (house, chimney, panels) at the native height.
+ * with panels on the roof (owner's file, 4608 × 3456). Cut like the /cec/ hero:
+ * 3:2 for screens, the middle around the chimney for phones. New file names
+ * (not 01-*) so cached copies of the previous photo are not reused (/images/* is cached for 7 days).
  */
 export const smallPlantHero: SesPowerHero = {
   image: {
-    desktop: "/images/cec/power/up-to-50/01-1152.avif",
-    fallback: "/images/cec/power/up-to-50/01-1152.webp",
-    mobile: "/images/cec/power/up-to-50/01-mobile.avif",
-    mobilePortrait: "/images/cec/power/up-to-50/01-portrait.avif",
+    desktop: "/images/cec/power/up-to-50/house-2560.avif",
+    fallback: "/images/cec/power/up-to-50/house-1920.webp",
+    wide: "/images/cec/power/up-to-50/house-1920.avif",
+    laptop: "/images/cec/power/up-to-50/house-1440.avif",
+    tablet: "/images/cec/power/up-to-50/house-1280.avif",
+    mobile: "/images/cec/power/up-to-50/house-750.avif",
+    mobilePortrait: "/images/cec/power/up-to-50/house-portrait.avif",
     type: "image/avif",
   },
   alt: {
