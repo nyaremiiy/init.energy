@@ -14,7 +14,7 @@ import { PowerTypes } from "@/components/sections/ses-power/power-types";
 import { PowerYield } from "@/components/sections/ses-power/power-yield";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { anchors, routes } from "@/content/routes";
-import { sesPowerPath, type SesPowerPage as SesPowerPageData } from "@/content/ses-power";
+import { sesPowerHero, sesPowerPath, type SesPowerPage as SesPowerPageData } from "@/content/ses-power";
 import { localizePath, type Locale } from "@/i18n/config";
 import { getMessages } from "@/i18n/server";
 import { formatNumber } from "@/lib/format";
@@ -45,6 +45,7 @@ export function SesPowerPage({ page, locale }: { page: SesPowerPageData; locale:
   const kw = formatNumber(page.kw, locale);
   const url = absoluteUrl(localizePath(sesPowerPath(page), locale));
   const title = powerTitle(page, locale);
+  const hero = sesPowerHero(page);
 
   return (
     <>
@@ -65,7 +66,7 @@ export function SesPowerPage({ page, locale }: { page: SesPowerPageData; locale:
           lead={powerHeroLead(facts, locale)}
           primaryCta={{ label: t.hero.primary, href: `#${anchors.contacts}` }}
           secondaryCta={{ label: t.hero.secondary, href: `#${anchors.calculator}` }}
-          media={{ type: "picture", image: page.hero.image, alt: page.hero.alt[locale] }}
+          media={{ type: "picture", image: hero.image, alt: hero.alt[locale] }}
           breadcrumbs={[
             { label: t.crumbs.home, href: localizePath(routes.home, locale) },
             { label: t.crumbs.ses, href: localizePath(routes.services.turnkeySes, locale) },

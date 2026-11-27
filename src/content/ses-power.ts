@@ -15,12 +15,37 @@ import type { Localized } from "@/i18n/config";
 
 export type SesPowerSegment = "home" | "business";
 
+export type SesPowerHero = { image: HeroImage; alt: Localized };
+
+/**
+ * One hero for every plant up to 50 kW (owner's decision 2026-11-27): a house
+ * with panels on the roof. The source is 1152 px wide, so there are no larger
+ * cuts; phones get its middle (house, chimney, panels) at the native height.
+ */
+export const smallPlantHero: SesPowerHero = {
+  image: {
+    desktop: "/images/cec/power/up-to-50/01-1152.avif",
+    fallback: "/images/cec/power/up-to-50/01-1152.webp",
+    mobile: "/images/cec/power/up-to-50/01-mobile.avif",
+    mobilePortrait: "/images/cec/power/up-to-50/01-portrait.avif",
+    type: "image/avif",
+  },
+  alt: {
+    uk: "Сонячні панелі на даху приватного будинку",
+    en: "Solar panels on the roof of a private house",
+  },
+};
+
+/** The largest plant that uses `smallPlantHero`, kW. */
+const SMALL_PLANT_MAX_KW = 50;
+
 export type SesPowerPage = {
   kw: number;
   /** /cec/{slug}/ and /en/cec/{slug}/; never one of the region slugs. */
   slug: string;
   segment: SesPowerSegment;
-  hero: { image: HeroImage; alt: Localized };
+  /** Own hero photo; without it a plant up to 50 kW gets `smallPlantHero` (owner, 2026-11-27). */
+  hero?: SesPowerHero;
   /** The consumption slider of the calculator, kWh a month. */
   consumption: { min: number; max: number; step: number; default: number };
   /** Region preselected in the calculator (id in content/insolation.ts). */
@@ -34,28 +59,21 @@ export const sesPowerPages: SesPowerPage[] = [
     kw: 5,
     slug: "5-kvt",
     segment: "home",
-    hero: {
-      // Owner's photo (2026-11-27); temporary until a photo per power arrives.
-      image: {
-        desktop: "/images/cec/power/5-kvt/01-1920.avif",
-        fallback: "/images/cec/power/5-kvt/01-1920.webp",
-        laptop: "/images/cec/power/5-kvt/01-1440.avif",
-        tablet: "/images/cec/power/5-kvt/01-1280.avif",
-        mobile: "/images/cec/power/5-kvt/01-750.avif",
-        mobilePortrait: "/images/cec/power/5-kvt/01-portrait.avif",
-        wide: "/images/cec/power/5-kvt/01-1920.avif",
-        type: "image/avif",
-      },
-      alt: {
-        uk: "Сонячні панелі на скатному даху приватного будинку",
-        en: "Solar panels on the pitched roof of a private house",
-      },
-    },
     consumption: { min: 150, max: 1000, step: 10, default: 450 },
     defaultRegionId: "lvivska",
     updatedAt: "2026-11-27",
   },
 ];
+
+/**
+ * Hero of a power page: its own photo, or the shared one up to 50 kW.
+ * Larger plants need their own photo (TODO(content) when the first one is added).
+ */
+export function sesPowerHero(page: Pick<SesPowerPage, "kw" | "hero">): SesPowerHero {
+  if (page.hero) return page.hero;
+  if (page.kw <= SMALL_PLANT_MAX_KW) return smallPlantHero;
+  throw new Error(`The ${page.kw} kW page needs its own hero photo (content/ses-power.ts).`);
+}
 
 export function sesPowerPath(page: Pick<SesPowerPage, "slug">): string {
   return `/cec/${page.slug}/`;
