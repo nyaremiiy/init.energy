@@ -4,6 +4,7 @@
  * version; everything else stays Ukrainian-only.
  */
 import { backupRegionPaths, regionPaths } from "@/content/insolation";
+import { sesPowerPaths } from "@/content/ses-power";
 
 export const locales = ["uk", "en"] as const;
 export type Locale = (typeof locales)[number];
@@ -34,7 +35,7 @@ const staticLocalizedPaths = [
   "/polityka-cookie/",
 ] as const;
 
-export const localizedPaths: readonly string[] = [...staticLocalizedPaths, ...regionPaths, ...backupRegionPaths];
+export const localizedPaths: readonly string[] = [...staticLocalizedPaths, ...regionPaths, ...backupRegionPaths, ...sesPowerPaths];
 
 export function hasEnglish(path: string): boolean {
   return localizedPaths.includes(path);

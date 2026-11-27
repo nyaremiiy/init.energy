@@ -7,7 +7,7 @@ import { SectionNavLink } from "./section-nav-link";
 
 /**
  * Section links of the current page (home, solar hub, niche pages); nothing
- * elsewhere. Shown only from xl: below that they do not fit next to the
+ * elsewhere. Shown only from `wide` (1440 px): below that they do not fit next to the
  * catalogue menus and the CTA (phones and tablets get them in the burger menu).
  */
 export function HeaderSectionLinks({ byPath }: { byPath: Record<string, NavLink[]> }) {
@@ -16,7 +16,7 @@ export function HeaderSectionLinks({ byPath }: { byPath: Record<string, NavLink[
 
   return (
     <>
-      <ul className="hidden h-full items-center gap-1 text-small font-medium whitespace-nowrap text-muted-dark xl:flex">
+      <ul className="hidden h-full items-center gap-1 text-small font-medium whitespace-nowrap text-muted-dark wide:flex">
         {links.map((item) => (
           <li key={item.href}>
             <SectionNavLink
@@ -27,7 +27,7 @@ export function HeaderSectionLinks({ byPath }: { byPath: Record<string, NavLink[
           </li>
         ))}
       </ul>
-      <span aria-hidden className="hidden h-5 w-px shrink-0 bg-line-dark xl:block" />
+      <span aria-hidden className="hidden h-5 w-px shrink-0 bg-line-dark wide:block" />
     </>
   );
 }

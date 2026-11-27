@@ -15,6 +15,25 @@
 
 ---
 
+## 2026-11-27 — Шаблон «СЕС за потужністю», сторінка /cec/5-kvt/ і меню «Потужності»
+- **Агент:** Claude Code
+- **Гілка:** feature/ses-power-5kw (статус: змерджено в develop)
+- **Що зроблено** (за `design/ses-5kw`):
+  - **Шаблон** `components/pages/ses-power-page.tsx` + секції `components/sections/ses-power/*`, дані `content/ses-power.ts` (перший запис — 5 кВт), маршрут `cec/[slug]` замість `cec/[region]` (області й потужності, `dynamicParams = false`). `/cec/5-kvt/` і `/en/cec/5-kvt/` — повні uk / en тексти, крихти, `localizedPaths`, sitemap, hreflang, `llms.txt`.
+  - **Секції:** hero (фото власника, AVIF 1920 / 1440 / 1280 / 980 q34 / 720 «portrait») · «У цифрах» · «По місяцях» · калькулятор · «По областях» · «Під ключ» · «Мережева, гібридна чи з батареєю» (SVG-схема + `ComparisonTable`) · «Відключення» (вибір приладів) · FAQ (8 питань) · заявка (тип «Будинок», свій коментар) · «Сонячні панелі по областях». «Інші потужності» сховані, доки сторінка одна.
+  - **Числа** (усі з коду, `lib/ses-power-facts.ts`, `lib/calc/ses-power.ts` + 6 тестів): 9 панелей по 550–570 Вт = 4,95–5,13 кВт · ≈ 23 м² · ≈ 5 900 кВт·год на рік, ≈ 490 на місяць · червень ≈ 850, грудень ≈ 170 · від ≈ 5 300 (Волинська) до ≈ 6 800 (Херсонська), +30 % · до ≈ 25 400 ₴ за тарифу 4,32 · підходить будинку на 450–500 кВт·год/міс. · будинок 1 068 Вт: батарея ≈ 5 кВт·год — ≈ 4,3 год, ≈ 16 — ≈ 13,5 год. Калькулятор (Львівська, 450): ≈ 5 400 кВт·год, ≈ 100 %, ≈ 18 000 ₴, надлишок ≈ 1 200 кВт·год — як в еталоні.
+  - **Меню «Потужності»** праворуч від «Рішення»: стовпчик «Для дому» з 5 кВт (≈ 5 900 кВт·год на рік · ≈ 9 панелей), низ — «Підібрати в калькуляторі»; мобільне — акордеон «Потужності СЕС» з пігулками. Стовпчик «Для бізнесу» з'явиться з першою бізнес-сторінкою.
+  - **Узгоджено з рештою сайту:** сторінки областей, карта `/cec/`, сторінки резерву по областях — «станція 5 кВт (≈ 9 панелей)» замість «≈ 10 панелей» (`STATION_PANELS = panelsForKw(5)`, тексти через `{panels}`), FAQ «скільки панелей» — та сама формула. Перелінковка: з карток сегментів `/cec/` («СЕС 5 кВт» у картці «Дім») і з калькулятора окупності («Детальніше про СЕС 5 кВт», коли рекомендація — 5 кВт).
+  - **Нове спільне:** `ui/form/check-tile.tsx` (плитка-чекбокс), `ui/in-view.tsx`, `ui/count-up.tsx`, CSS `.grow-y` / `.grow-x` / `.energy-flow`, `SegmentedTabs wrap`, `NavColumn.caption`, `NavGroup.kind`, `units.MWh`, `calculatorData.calculator: "ses-power"`, брейкпоінт `wide` (1440 px).
+- **Відхилення / рішення:**
+  - **Шапка:** з третім меню ліва група пунктів сторінки (Генерація · Калькулятор · …) на 1280 px не вміщалась (до −151 px на сторінці готелю) — тепер вона з 1440 px (`wide`), нижче — бургер; так на всіх сторінках з лівою групою. Нижній рядок мега-меню переносить кнопку під текст, коли не вміщається.
+  - Відповіді FAQ 2–8 і підписи схеми «Ніч» / «Відключення» в еталоні були порожні — написані з наших даних (ціни, роки гарантії, назви банків не згадуються). У відповіді «Чи вистачить 5 кВт» — без «10 кВт для електроопалення».
+  - Примітка до потужності — «під ваш ввід» (TODO(content): фази — підтвердити в інженерів). «≈ 16 кВт·год — ≈ 45 год» без десятих: години від 20 округлюються до цілих, як у таблиці хабу.
+  - «Розрахувати автономність» веде на калькулятор окупності (`#calculator`). Друге фото (`ses-roof-rows-sky.jpg`) не використане — у брифі для нього немає місця.
+  - Графік «По місяцях»: пікові місяці — `accent`, решта — `scale-2` (токен шкали карти).
+- **Перевірено:** `npm test` (53), lint з `lint:tokens`, build (140 статичних сторінок). Production, headless Edge: 1440 / 360 — без горизонтального скролу й помилок у консолі; один H1, H2 по порядку секцій; JSON-LD Service, WebPage, BreadcrumbList, FAQPage; title 39 / 46, description 152 / 145; у HTML усі 52 адреси областей; шапка 1024–1920 на 10 сторінках без перекриттів; меню «Потужності» з клавіатури; мобільне меню (en, 360). LCP `/cec/5-kvt/` 1,9 с, CLS 0 (360×780, CPU ×4, ~1,6 Мбіт/с; `/cec/` — 1,7 с).
+- **Файли:** src/content/{ses-power,navigation,routes}.ts, src/i18n/config.ts, src/app/{(uk),en}/cec/[slug]/page.tsx, src/app/{sitemap.ts,llms.txt/route.ts,globals.css}, src/components/pages/ses-power-page.tsx, src/components/sections/ses-power/*, src/components/sections/ses/ses-segments.tsx, src/components/sections/regions/{region-yield,ses-regions}.tsx, src/components/calculator/ses-payback-calculator.tsx, src/components/layout/header/{header-data.ts,mega-menu-panel,mobile-menu,header-section-links}.tsx, src/components/ui/{segmented-tabs,in-view,count-up}.tsx, src/components/ui/form/check-tile.tsx, src/lib/{ses-power-facts,ses-power-copy,region-copy,backup-region-copy,calculator-lead}.ts, src/lib/calc/{ses-power.ts,ses-power.test.mjs,region-yield.ts}, public/images/cec/power/5-kvt/*, messages/{uk,en}.json, AGENTS.md, docs/ai/{CONTEXT,CHANGELOG}.md
+
 ## 2026-11-27 — Порівняння варіантів в одному стилі (ComparisonTable)
 - **Агент:** Claude Code
 - **Гілка:** feature/comparison-tables (статус: змерджено в develop)

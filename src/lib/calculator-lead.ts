@@ -8,7 +8,7 @@
  * goal (region for backup only, hours for savings only) are left out.
  */
 
-export type CalculatorKind = "quick" | "ses-payback";
+export type CalculatorKind = "quick" | "ses-payback" | "ses-power";
 
 export type CalculatorValue = string | number | string[];
 

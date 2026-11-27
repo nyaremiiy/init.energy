@@ -3,11 +3,14 @@ import { faqForPage } from "@/content/faq";
 import { backupRegionPath, regionPath, regionsByLocale } from "@/content/insolation";
 import { productList, productSummary } from "@/content/products";
 import { routes, slugs, toPath } from "@/content/routes";
+import { sesPowerPages, sesPowerPath } from "@/content/ses-power";
 import { solutionPages } from "@/content/solutions";
 import { localizePath } from "@/i18n/config";
 import { getMessagesFor } from "@/i18n/messages";
 import { formatNumber, formatPhone } from "@/lib/format";
 import { regionStats } from "@/lib/region-stats";
+import { powerDescription, powerTitle } from "@/lib/ses-power-copy";
+import { powerFacts } from "@/lib/ses-power-facts";
 import { absoluteUrl } from "@/lib/seo/metadata";
 
 /** Built once at build time from the same content as the pages. */
@@ -23,6 +26,9 @@ export function GET() {
   const uk = getMessagesFor("uk");
   const en = getMessagesFor("en");
   const link = (title: string, path: string, note: string) => `- [${title}](${absoluteUrl(path)}): ${note}`;
+  // Solar plant by power (/cec/5-kvt/ …): title and the meta description with the computed numbers.
+  const powerLines = (locale: "uk" | "en") =>
+    sesPowerPages.map((page) => link(powerTitle(page, locale), localizePath(sesPowerPath(page), locale), powerDescription(page, powerFacts(page), locale)));
   // One line per region page: the yearly output of a 5 kW plant there.
   const regionLines = (locale: "uk" | "en") =>
     regionsByLocale(locale).map((region) =>
@@ -77,6 +83,10 @@ export function GET() {
     "",
     ...outageLines("uk"),
     "",
+    "## СЕС за потужністю",
+    "",
+    ...powerLines("uk"),
+    "",
     "## Сонячні панелі по областях",
     "",
     ...regionLines("uk"),
@@ -104,6 +114,10 @@ export function GET() {
     "### Power outages: which page for which task",
     "",
     ...outageLines("en"),
+    "",
+    "### Solar plants by size",
+    "",
+    ...powerLines("en"),
     "",
     "### Solar panels by region",
     "",

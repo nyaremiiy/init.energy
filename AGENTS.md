@@ -100,7 +100,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 ## Форми
 
-Кожен контрол — через компоненти `src/components/ui/form/`: `Field` / `FieldGroup` (підпис, контрол, рядок повідомлення), `TextInput`, `NumberInput` (з `unit`), `Textarea`, `Select`, `RadioPills` (`variant="pills"` або `"tiles"` — плитки з іконками, тип об'єкта в заявці) / `PillRadio`, `CheckChip`, `Checkbox`, `Switch`, `RangeField`, `FormCard`. Стилі полів — лише `inputClasses`. `npm run lint:tokens` падає на `<input>`, `<select>`, `<textarea>` поза `ui/form/` (крім `type="hidden"` і honeypot з `data-honeypot`).
+Кожен контрол — через компоненти `src/components/ui/form/`: `Field` / `FieldGroup` (підпис, контрол, рядок повідомлення), `TextInput`, `NumberInput` (з `unit`), `Textarea`, `Select`, `RadioPills` (`variant="pills"` або `"tiles"` — плитки з іконками, тип об'єкта в заявці) / `PillRadio`, `CheckChip`, `Checkbox`, `Switch`, `RangeField`, `CheckTile` (плитка-чекбокс з іконкою: вибір приладів), `FormCard`. Стилі полів — лише `inputClasses`. `npm run lint:tokens` падає на `<input>`, `<select>`, `<textarea>` поза `ui/form/` (крім `type="hidden"` і honeypot з `data-honeypot`).
 
 - Підпис видно завжди; placeholder — лише приклад («Наприклад, 40»). Позначаємо необов'язкові поля, не обов'язкові.
 - Помилка: рамка ink / white + іконка `AlertCircle` + текст, без червоного; фокус на першому полі з помилкою (`focusFirstInvalid`); у формах заявки місце під повідомлення зарезервоване (`reserveMessage`).

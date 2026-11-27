@@ -9,9 +9,12 @@ import { SectionHeader } from "@/components/ui/section-header";
 import { products } from "@/content/products";
 import { anchors, routes } from "@/content/routes";
 import { segmentIcons } from "@/content/segments";
+import { sesPowerPages, sesPowerPath, type SesPowerSegment } from "@/content/ses-power";
 import { solutions } from "@/content/solutions";
 import { localizePath } from "@/i18n/config";
 import { getLocale, getMessages } from "@/i18n/server";
+import { formatNumber } from "@/lib/format";
+import { format } from "@/lib/messages";
 import Image from "next/image";
 
 const titleId = "ses-segments-title";
@@ -19,14 +22,21 @@ const titleId = "ses-segments-title";
 /** «СЕС для дому й для бізнесу»: two segment cards on photo backgrounds. */
 export function SesSegments() {
   const locale = getLocale();
-  const t = getMessages().ses;
+  const messages = getMessages();
+  const t = messages.ses;
+  // Plant size pages of the segment (/cec/5-kvt/ …), smallest first.
+  const powerLinks = (segment: SesPowerSegment) =>
+    sesPowerPages
+      .filter((page) => page.segment === segment)
+      .toSorted((a, b) => a.kw - b.kw)
+      .map((page) => ({ label: format(messages.sesPower.others.item, { kw: formatNumber(page.kw, locale) }), href: sesPowerPath(page) }));
   const cards = [
-    { solution: solutions.find((item) => item.id === "house"), href: routes.services.house, niches: [] },
-    // Industry pages under the business segment (SILO: hub → niche).
+    { solution: solutions.find((item) => item.id === "house"), href: routes.services.house, niches: powerLinks("home") },
+    // Industry and size pages under the business segment (SILO: hub → niche).
     {
       solution: solutions.find((item) => item.id === "business"),
       href: routes.services.business,
-      niches: [{ label: t.segments.hotel, href: routes.solutions.hotel }],
+      niches: [{ label: t.segments.hotel, href: routes.solutions.hotel }, ...powerLinks("business")],
     },
   ];
 

@@ -5,6 +5,7 @@ import { partnerBrands } from "@/content/partner-brands";
 import { products, type ProductId } from "@/content/products";
 import type { Locale } from "@/i18n/config";
 import { getMessagesFor } from "@/i18n/messages";
+import { STATION_PANELS } from "@/lib/calc/region-yield";
 import { formatNumber, formatPhone, formatQuantity } from "@/lib/format";
 import { format } from "@/lib/messages";
 import { isCity, isOccupied, regionArea, regionOffice, type RegionFaq } from "@/lib/region-copy";
@@ -107,7 +108,7 @@ export function backupScheduleText(region: InsolationRegion, locale: Locale): st
 
 export function backupSolarText(region: InsolationRegion, locale: Locale): string {
   const t = getMessagesFor(locale).backupRegionPage.local.solar;
-  return format(t.text, { Locative: capitalize(region.locative[locale]), year: formatNumber(regionStats(region).year, locale) });
+  return format(t.text, { Locative: capitalize(region.locative[locale]), year: formatNumber(regionStats(region).year, locale), panels: formatNumber(STATION_PANELS, locale) });
 }
 
 export function backupFaq(region: InsolationRegion, locale: Locale): RegionFaq[] {
@@ -142,7 +143,7 @@ export function backupFaq(region: InsolationRegion, locale: Locale): RegionFaq[]
     {
       id: "solar",
       question: format(f.solarQ, { locative }),
-      answer: format(f.solarA, { Locative: capitalize(locative), locative, year: n(regionStats(region).year) }),
+      answer: format(f.solarA, { Locative: capitalize(locative), locative, year: n(regionStats(region).year), panels: n(STATION_PANELS) }),
     },
     {
       id: "runtime",

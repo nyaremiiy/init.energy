@@ -78,6 +78,13 @@ export const anchors = {
   // Solar by region: the section on /cec/ and the region pages (/cec/{region}/).
   sesRegions: "ses-regions",
   regionYield: "region-yield",
+  // Solar plant by power (/cec/5-kvt/ …).
+  powerFigures: "power-figures",
+  powerYield: "power-yield",
+  powerRegions: "power-regions",
+  powerTurnkey: "power-turnkey",
+  powerTypes: "power-types",
+  powerOutage: "power-outage",
   // Backup power hub (/rezervne-zhyvlennya/).
   backupSegments: "backup-segments",
   backupHow: "backup-how",
