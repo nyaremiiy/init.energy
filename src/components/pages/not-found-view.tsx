@@ -41,7 +41,7 @@ export function NotFoundView({ planned }: { planned: boolean }) {
         as="section"
         variant="dark"
         aria-labelledby="not-found-title"
-        className="pt-panel-sm sm:pt-panel"
+        className="pt-panel-sm"
         panelClassName="bg-ink-glow shadow-soft"
       >
         <Container

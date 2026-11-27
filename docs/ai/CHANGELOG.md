@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-27 — Менший відступ над hero
+- **Агент:** Claude Code
+- **Гілка:** fix/hero-top-gap (статус: змерджено в develop)
+- **Що зроблено:** за зауваженням власника білий відступ над першою панеллю сторінки — 8 px на всіх екранах (було 16 px з `sm`); бокові поля без змін (8 / 16 px). Те саме для всіх верхніх панелей: `PageHero` (головна, `/cec/`, області, хаб резерву, готель), hero продуктів, калькулятор окупності, політика cookie, 404 / «в розробці»; шапка (`header-shell.tsx`) стоїть на тих самих 8 px. Висота hero (`.hero` у globals.css) — екран мінус 8 px зверху й 16 px знизу.
+- **Перевірено:** production 1440 (головна, SVIT HOME, калькулятор) і 360: верх панелі й шапки — 8 px, ліворуч 16 / 8 px. Lint з `lint:tokens`, build.
+- **Файли:** src/components/sections/{PageHero,ses-payback/ses-payback-hero}.tsx, src/components/product-page/product-hero.tsx, src/components/pages/{cookie-policy-page,not-found-view}.tsx, src/components/layout/header/header-shell.tsx, src/app/globals.css, docs/ai/CHANGELOG.md
+
 ## 2026-11-27 — «Регіони» відкриваються при наведенні
 - **Агент:** Claude Code
 - **Гілка:** feature/regions-menu-hover (статус: змерджено в develop)
