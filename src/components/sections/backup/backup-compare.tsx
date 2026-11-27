@@ -36,9 +36,6 @@ export function BackupCompare() {
           <ComparisonTable
             caption={t.caption}
             featureLabel={t.feature}
-            recommendedLabel={t.recommended}
-            legendLabel={t.legendLabel}
-            statusLabels={t.status}
             columns={backupCompareColumns.map((column) => ({
               id: column.id,
               label: column.label[locale],

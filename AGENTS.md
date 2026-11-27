@@ -93,6 +93,11 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Ціль натискання на мобільному ≥ 44×44. `Button size="sm"` (40 px) — лише на десктопних банерах і діалогах.
 - `Button` з `loading` показує спінер і блокує кнопку; для submit форм використовуємо його, а не власний спінер.
 
+## Порівняння варіантів
+
+- Порівняння варіантів (3 колонки: «генератор / ДБЖ / накопичувач», «мережева / гібридна / автономна» тощо) — лише `ComparisonTable` (`src/components/ui/comparison-table.tsx`) у світлій `Panel`, як на хабі резерву: іконка над колонкою, рекомендована колонка з «Рекомендуємо», іконка в рядку, позначка статусу + текст, легенда. Тексти «Рекомендуємо», легенди й статусів — спільні `messages.compare`.
+- Таблиці з числами (години автономності, генерація, підбір потужності, порівняння лінійки продуктів) — не порівняння варіантів і лишаються своїми компонентами.
+
 ## Форми
 
 Кожен контрол — через компоненти `src/components/ui/form/`: `Field` / `FieldGroup` (підпис, контрол, рядок повідомлення), `TextInput`, `NumberInput` (з `unit`), `Textarea`, `Select`, `RadioPills` (`variant="pills"` або `"tiles"` — плитки з іконками, тип об'єкта в заявці) / `PillRadio`, `CheckChip`, `Checkbox`, `Switch`, `RangeField`, `FormCard`. Стилі полів — лише `inputClasses`. `npm run lint:tokens` падає на `<input>`, `<select>`, `<textarea>` поза `ui/form/` (крім `type="hidden"` і honeypot з `data-honeypot`).

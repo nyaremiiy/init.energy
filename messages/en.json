@@ -527,6 +527,15 @@
       "hint": "Scroll down"
     }
   },
+  "compare": {
+    "recommended": "Recommended",
+    "legendLabel": "Marks",
+    "status": {
+      "good": "advantage",
+      "limited": "with limits",
+      "bad": "drawback"
+    }
+  },
   "ses": {
     "meta": {
       "title": "Turnkey solar panels: solar plants for homes and business",
@@ -547,10 +556,7 @@
       "title": "Grid-tied, hybrid or off-grid",
       "lead": "During power outages only a hybrid or off-grid plant with a battery keeps working — a grid-tied plant shuts down with the grid. For most homes and businesses in Ukraine, a hybrid plant with a battery is the best fit.",
       "caption": "Comparison of solar power plant types",
-      "feature": "Feature",
-      "recommended": "recommended",
-      "yes": "Yes",
-      "no": "No"
+      "feature": "Feature"
     },
     "hybrid": {
       "eyebrow": "How it works",
@@ -1116,14 +1122,7 @@
       "title": "Generator, UPS or a battery system",
       "lead": "A generator gives plenty of energy but is noisy and needs fuel. A regular UPS lasts minutes. A battery system runs quietly for hours and switches over by itself.",
       "caption": "A generator, a UPS and an inverter with a battery compared",
-      "feature": "Feature",
-      "recommended": "Recommended",
-      "legendLabel": "Marks",
-      "status": {
-        "good": "advantage",
-        "limited": "with limits",
-        "bad": "drawback"
-      }
+      "feature": "Feature"
     },
     "steps": {
       "eyebrow": "Stages",
