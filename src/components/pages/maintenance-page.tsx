@@ -1,5 +1,6 @@
 import { Construction, Wrench } from "lucide-react";
 
+import { Container } from "@/components/layout/container";
 import { Logo } from "@/components/ui/logo";
 import { getMessagesFor } from "@/i18n/messages";
 import type { Locale } from "@/i18n/config";
@@ -9,9 +10,9 @@ export function MaintenancePage({ locale }: { locale: Locale }) {
   const t = getMessagesFor(locale).maintenance;
 
   return (
-    <main className="relative grid min-h-svh overflow-hidden bg-ink px-panel-sm py-8 text-white sm:px-panel">
+    <main className="relative grid min-h-svh overflow-hidden bg-ink py-8 text-white">
       <div aria-hidden className="absolute inset-0 bg-ink-glow" />
-      <div className="relative mx-auto flex w-full max-w-360 flex-col justify-between gap-16">
+      <Container className="relative flex flex-col justify-between gap-16">
         <Logo className="w-28 text-white sm:w-36" />
 
         <section className="grid max-w-2xl gap-8" aria-labelledby="maintenance-title">
@@ -36,7 +37,7 @@ export function MaintenancePage({ locale }: { locale: Locale }) {
         </section>
 
         <p className="text-small text-muted-dark">{t.note}</p>
-      </div>
+      </Container>
     </main>
   );
 }

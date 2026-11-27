@@ -15,6 +15,28 @@
 
 ---
 
+## 2026-11-27 — Шапка на одній лінії з текстом hero
+- **Агент:** Claude Code
+- **Гілка:** fix/header-hero-gutter (статус: змерджено в develop)
+- **Що зроблено:** за зауваженням власника шапка (верхня смуга й основна) — `Container inPanel`, як вміст hero: логотип, «Регіони», кнопки дзвінка / меню / «Залишити заявку» стоять на одній вертикалі з eyebrow і H1 hero — 24 px від краю екрана на телефоні, 48 px з 640 px, 56 px з 1024 px (раніше 16 / 32 px). Після прокрутки шапка на всю ширину — 16 / 32 / 40 px. Значення — ті самі з `container.tsx`, окремих відступів не додано.
+- **Перевірено:** production: головна 360 / 768 / 1440, SVIT HOME і Львівська область 360, `/en/rezervne-zhyvlennya/` 1024 — лівий край логотипа = лівий край H1, правий край останньої кнопки — на тому ж відступі; без горизонтального скролу. Lint з `lint:tokens`, build.
+- **Файли:** src/components/layout/header/{header-main-bar,header-top-bar}.tsx, docs/ai/{CONTEXT,CHANGELOG}.md
+
+## 2026-11-27 — Плаваючий віджет контактів прибрано
+- **Агент:** Claude Code
+- **Гілка:** chore/remove-contact-widget (статус: змерджено в develop)
+- **Що зроблено:** за рішенням власника кругла кнопка контактів у правому нижньому куті (і її панель з адресами, телефоном, email і соцмережами) прибрана з усіх сторінок: видалено `ui/contact-widget.tsx`, підключення в `SiteChrome` і тексти `chrome.contactWidget` (uk/en). Кнопка «вгору» опустилась на її місце (`bottom-5 sm:bottom-8`, раніше стояла над віджетом). Телефон лишився в шапці (кнопка дзвінка на мобільному), футері, секції заявки й FAQ. AGENTS.md: `shadow-soft` — без згадки віджета.
+- **Перевірено:** production 360 / 1440: на сторінці один плаваючий елемент — «Нагору» (8 / 16 px справа, 20 / 32 px знизу); у HTML віджета немає. Lint з `lint:tokens`, `npm test`, build.
+- **Файли:** src/components/ui/{contact-widget (видалено),back-to-top}.tsx, src/components/layout/site-chrome.tsx, messages/{uk,en}.json, AGENTS.md, docs/ai/{CONTEXT,CHANGELOG}.md
+
+## 2026-11-27 — Бічний відступ сайту в одному місці
+- **Агент:** Claude Code
+- **Гілка:** refactor/single-gutter (статус: змерджено в develop)
+- **Що зроблено:** за зауваженням власника бічний відступ більше не прописаний у кількох файлах: `gutter` у `container.tsx` (`padding`, `inset`, `right`) — єдине місце. Його беруть `Container`, `Panel` (поле панелей від краю екрана), шапка над hero (`header-shell`), кнопки «вгору» й контактів; мобільне меню, банер cookie й екран технічних робіт тепер обгорнуті в `Container` замість власних `px-…`. Змінити відступ на всьому сайті = змінити `gutter`. Вигляд не змінився.
+- **Виправлено:** пункти мобільного меню мали виступ фону 12 px (`-mx-3`) — після попередньої задачі (поле 8 px) він виходив за екран на 4 px; тепер 8 px (`-mx-2`, `MenuLink tight`), текст на лінії заголовків.
+- **Перевірено:** production 360 / 1024 / 1440 × головна, `/cec/`, SVIT HOME, `/en/rezervne-zhyvlennya/`: панель hero, контейнери секцій, шапка й плаваючі кнопки — 8 / 16 px від краю; банер cookie — 8 / 16 px (на 1440 центрований, 1080 px); мобільне меню на 360 — вміст на 8 px, нічого не виходить за екран. Lint з `lint:tokens`, `npm test` (47), build.
+- **Файли:** src/components/layout/container.tsx, src/components/ui/{panel,back-to-top,contact-widget}.tsx, src/components/layout/header/{header-shell,mobile-menu,menu-link}.tsx, src/components/consent/CookieBanner.tsx, src/components/pages/maintenance-page.tsx, docs/ai/{CONTEXT,CHANGELOG}.md
+
 ## 2026-11-27 — Секції на тій самій відстані від краю, що й панель hero
 - **Агент:** Claude Code
 - **Гілка:** fix/same-gutters (статус: змерджено в develop)

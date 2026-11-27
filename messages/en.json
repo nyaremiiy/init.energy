@@ -521,10 +521,6 @@
         "mapLink": "All regions on the map"
       }
     },
-    "contactWidget": {
-      "title": "Contacts",
-      "close": "Close contacts"
-    },
     "backToTop": "Back to top",
     "scroll": {
       "label": "Scroll to the next section",

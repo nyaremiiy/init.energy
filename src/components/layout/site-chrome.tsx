@@ -3,7 +3,6 @@ import type { ReactNode } from "react";
 import { Footer } from "@/components/layout/footer/footer";
 import { Header } from "@/components/layout/header/header";
 import { BackToTop } from "@/components/ui/back-to-top";
-import { ContactWidget } from "@/components/ui/contact-widget";
 import { ToastProvider } from "@/components/ui/toast";
 import { ConsentScripts } from "@/components/consent/ConsentScripts";
 import { CookieBanner } from "@/components/consent/CookieBanner";
@@ -29,7 +28,6 @@ export function SiteChrome({
         {children}
         <Footer />
         <BackToTop />
-        <ContactWidget />
         <ConsentScripts />
       </ToastProvider>
       </ConsentProvider>

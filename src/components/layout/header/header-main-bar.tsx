@@ -20,7 +20,8 @@ export function HeaderMainBar() {
   const t = getMessages().chrome.header;
 
   return (
-    <Container data-header-bar className="flex h-20 items-center justify-between gap-6">
+    // inPanel: the header sits in the hero panel — logo on the same line as the hero copy.
+    <Container inPanel data-header-bar className="flex h-20 items-center justify-between gap-6">
       <Link
         href={localizePath("/", locale)}
         aria-label={t.homeLabel}

@@ -25,6 +25,7 @@ import { MenuLink } from "./menu-link";
 import { NavLink } from "./nav-link";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { SocialLinks } from "@/components/ui/social-links";
+import { Container } from "@/components/layout/container";
 
 /** `regions`: the server-rendered «Регіони» switch and lists (RegionsPicker variant="mobile"). */
 export function MobileMenu({ regions }: { regions?: ReactNode }) {
@@ -111,7 +112,8 @@ export function MobileMenu({ regions }: { regions?: ReactNode }) {
           className="fixed inset-0 z-40 bg-ink-glow"
         >
           {/* Only the sheet under the header bar scrolls: the logo and buttons stay on a solid background. */}
-          <div className="absolute inset-x-0 top-20 bottom-0 flex flex-col gap-8 overflow-y-auto overscroll-contain rounded-t-panel-sm bg-white px-panel-sm pt-8 pb-10 text-ink sm:px-panel lg:top-32">
+          <div className="absolute inset-x-0 top-20 bottom-0 overflow-y-auto overscroll-contain rounded-t-panel-sm bg-white pt-8 pb-10 text-ink lg:top-32">
+            <Container className="flex min-h-full flex-col gap-8">
             <nav aria-label={t.mobileMenu} className="flex w-full max-w-2xl flex-col gap-8">
               {pageItems.length > 0 ? (
                 <ul className="flex flex-col gap-1">
@@ -120,7 +122,7 @@ export function MobileMenu({ regions }: { regions?: ReactNode }) {
                       <NavLink
                         href={item.href}
                         onClick={close}
-                        className="-mx-3 flex min-h-11 items-center rounded-tile px-3 text-h3-sm font-semibold transition-colors duration-150 ease-tech active:bg-surface focus-visible:bg-surface focus-visible:outline-2 focus-visible:outline-ink"
+                        className="-mx-2 flex min-h-11 items-center rounded-tile px-2 text-h3-sm font-semibold transition-colors duration-150 ease-tech active:bg-surface focus-visible:bg-surface focus-visible:outline-2 focus-visible:outline-ink"
                       >
                         {item.label}
                       </NavLink>
@@ -133,10 +135,10 @@ export function MobileMenu({ regions }: { regions?: ReactNode }) {
                 group.columns.map((column) => (
                   <section key={column.title} aria-label={column.title} className="flex flex-col gap-2">
                     <Eyebrow as="p">{group.columns.length > 1 ? column.title : group.label}</Eyebrow>
-                    <ul className="-mx-3 flex flex-col gap-1">
+                    <ul className="-mx-2 flex flex-col gap-1">
                       {column.items.map((link) => (
                         <li key={link.href}>
-                          <MenuLink link={link} onNavigate={close} />
+                          <MenuLink link={link} onNavigate={close} tight />
                         </li>
                       ))}
                     </ul>
@@ -151,7 +153,7 @@ export function MobileMenu({ regions }: { regions?: ReactNode }) {
                     aria-expanded={regionsOpen}
                     aria-controls={regionsId}
                     onClick={() => setRegionsOpen((value) => !value)}
-                    className="-mx-3 flex min-h-11 cursor-pointer items-center justify-between gap-3 rounded-tile px-3 transition-colors duration-150 ease-tech active:bg-surface focus-visible:bg-surface focus-visible:outline-2 focus-visible:outline-ink"
+                    className="-mx-2 flex min-h-11 cursor-pointer items-center justify-between gap-3 rounded-tile px-2 transition-colors duration-150 ease-tech active:bg-surface focus-visible:bg-surface focus-visible:outline-2 focus-visible:outline-ink"
                   >
                     <Eyebrow as="span">{t.regions.button}</Eyebrow>
                     <ChevronDown aria-hidden className={`size-4 shrink-0 transition-transform duration-200 ${regionsOpen ? "rotate-180" : ""}`} />
@@ -204,6 +206,7 @@ export function MobileMenu({ regions }: { regions?: ReactNode }) {
             <SocialLinks tone="light" iconClassName="size-6" className="gap-5" />
 
             <LanguageSwitcher tone="light" className="mt-auto" />
+            </Container>
           </div>
         </div>
       ) : null}
