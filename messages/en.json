@@ -505,6 +505,20 @@
         "catalogTitle": "Batteries",
         "catalogFooter": "All models in one table.",
         "catalogCta": "Compare models"
+      },
+      "regions": {
+        "button": "Regions",
+        "title": "Choose your region",
+        "lead": "Sizing, prices and installation for your region",
+        "switchLabel": "Direction",
+        "solar": "Solar plants",
+        "backup": "Backup power",
+        "solarNav": "Solar panels by region",
+        "backupNav": "Backup power by region",
+        "office": "office",
+        "footer": "We work across Ukraine. Offices {places}.",
+        "and": "and",
+        "mapLink": "All regions on the map"
       }
     },
     "contactWidget": {
