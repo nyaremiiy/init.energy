@@ -16,7 +16,7 @@ export function HeaderTopBar() {
   return (
     // z-10 over the main bar (z-0, HeaderShell): the «Регіони» panel opens above it.
     <div className="relative z-10 hidden h-11 border-b border-line-dark text-caption text-muted-dark lg:block">
-      <Container className="flex h-full items-center justify-between gap-6">
+      <Container inPanel className="flex h-full items-center justify-between gap-6">
         <div className="flex items-center gap-4">
           <RegionsMenu label={t.button}>
             <RegionsPicker variant="panel" />
