@@ -111,7 +111,7 @@ export function MobileMenu({ regions }: { regions?: ReactNode }) {
           className="fixed inset-0 z-40 bg-ink-glow"
         >
           {/* Only the sheet under the header bar scrolls: the logo and buttons stay on a solid background. */}
-          <div className="absolute inset-x-0 top-20 bottom-0 flex flex-col gap-8 overflow-y-auto overscroll-contain rounded-t-panel-sm bg-white px-6 pt-8 pb-10 text-ink sm:px-8 lg:top-32 lg:px-10">
+          <div className="absolute inset-x-0 top-20 bottom-0 flex flex-col gap-8 overflow-y-auto overscroll-contain rounded-t-panel-sm bg-white px-panel-sm pt-8 pb-10 text-ink sm:px-panel lg:top-32">
             <nav aria-label={t.mobileMenu} className="flex w-full max-w-2xl flex-col gap-8">
               {pageItems.length > 0 ? (
                 <ul className="flex flex-col gap-1">
