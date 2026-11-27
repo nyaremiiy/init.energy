@@ -187,9 +187,9 @@ export function CookieBanner() {
   return (
     <>
       {showBanner ? (
-        // Width: min(1080px, 100% − 48px) from the side padding + max-w-270; pb-safe keeps it above the iPhone home bar.
+        // Width: min(1080px, 100% − 2 × panel gap) — the same 8 / 16 px from the screen edge as the sections; max-w-270; pb-safe keeps it above the iPhone home bar.
         <div className="pointer-events-none fixed inset-x-0 bottom-0 z-50 pb-safe">
-          <div className="px-3 pb-3 md:px-6 md:pb-6">
+          <div className="px-panel-sm pb-panel-sm sm:px-panel sm:pb-panel">
           <section
             role="region"
             aria-label={t.regionLabel}
