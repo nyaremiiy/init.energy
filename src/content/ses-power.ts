@@ -32,6 +32,8 @@ export const smallPlantHero: SesPowerHero = {
     tablet: "/images/cec/power/up-to-50/house-1280.avif",
     mobile: "/images/cec/power/up-to-50/house-750.avif",
     mobilePortrait: "/images/cec/power/up-to-50/house-portrait.avif",
+    // The roof with the panels is in the upper part: crop from the top (owner, 2026-11-27).
+    position: "top",
     type: "image/avif",
   },
   alt: {
