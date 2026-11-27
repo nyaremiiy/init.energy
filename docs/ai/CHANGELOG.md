@@ -15,6 +15,13 @@
 
 ---
 
+## 2026-11-27 — Плаваючий віджет контактів прибрано
+- **Агент:** Claude Code
+- **Гілка:** chore/remove-contact-widget (статус: змерджено в develop)
+- **Що зроблено:** за рішенням власника кругла кнопка контактів у правому нижньому куті (і її панель з адресами, телефоном, email і соцмережами) прибрана з усіх сторінок: видалено `ui/contact-widget.tsx`, підключення в `SiteChrome` і тексти `chrome.contactWidget` (uk/en). Кнопка «вгору» опустилась на її місце (`bottom-5 sm:bottom-8`, раніше стояла над віджетом). Телефон лишився в шапці (кнопка дзвінка на мобільному), футері, секції заявки й FAQ. AGENTS.md: `shadow-soft` — без згадки віджета.
+- **Перевірено:** production 360 / 1440: на сторінці один плаваючий елемент — «Нагору» (8 / 16 px справа, 20 / 32 px знизу); у HTML віджета немає. Lint з `lint:tokens`, `npm test`, build.
+- **Файли:** src/components/ui/{contact-widget (видалено),back-to-top}.tsx, src/components/layout/site-chrome.tsx, messages/{uk,en}.json, AGENTS.md, docs/ai/{CONTEXT,CHANGELOG}.md
+
 ## 2026-11-27 — Бічний відступ сайту в одному місці
 - **Агент:** Claude Code
 - **Гілка:** refactor/single-gutter (статус: змерджено в develop)

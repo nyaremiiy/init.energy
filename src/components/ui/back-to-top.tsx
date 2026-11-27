@@ -39,7 +39,7 @@ export function BackToTop() {
       inert={!visible}
       // Light ring: the ink button stays visible on dark sections (hero, panels, footer).
       data-floating
-      className={`fixed ${gutter.right} bottom-20 z-40 inline-flex size-12 items-center justify-center rounded-full bg-ink text-white shadow-soft ring-1 ring-faint-dark transition-all duration-200 ease-tech hover:bg-navy hover:ring-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink sm:bottom-24 ${visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-3 opacity-0"}`}
+      className={`fixed ${gutter.right} bottom-5 z-40 inline-flex size-12 items-center justify-center rounded-full bg-ink text-white shadow-soft ring-1 ring-faint-dark transition-all duration-200 ease-tech hover:bg-navy hover:ring-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink sm:bottom-8 ${visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-3 opacity-0"}`}
     >
       <ArrowUpRight aria-hidden className="size-4.5 -rotate-45" />
     </button>
