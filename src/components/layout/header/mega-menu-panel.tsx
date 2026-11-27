@@ -62,9 +62,10 @@ export function MegaMenuPanel({ id, group, open, onNavigate }: MegaMenuPanelProp
         <div className={`grid gap-4 p-5 ${twoColumns ? "grid-cols-2" : "grid-cols-1"}`}>
           {group.columns.map((column) => (
             <div key={column.title} className="flex flex-col gap-2">
-              <Eyebrow as="p" className="px-3 pb-1">
-                {column.title}
-              </Eyebrow>
+              <div className="flex flex-col gap-1 px-3 pb-1">
+                <Eyebrow as="p">{column.title}</Eyebrow>
+                {column.caption ? <p className="text-caption text-muted">{column.caption}</p> : null}
+              </div>
               <ul className="flex flex-col gap-1">
                 {column.items.map((link) => (
                   <li key={link.href}>
@@ -76,8 +77,9 @@ export function MegaMenuPanel({ id, group, open, onNavigate }: MegaMenuPanelProp
           ))}
         </div>
 
-        <div className="flex items-center justify-between gap-4 bg-surface px-8 py-4">
-          <p className="text-small text-muted">{group.footer.text}</p>
+        {/* The button moves under the text only when both do not fit (one-column panels with a long button). */}
+        <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-3 bg-surface px-8 py-4">
+          <p className="grow basis-32 text-small text-muted">{group.footer.text}</p>
           <Button
             href={group.footer.href}
             variant="dark"

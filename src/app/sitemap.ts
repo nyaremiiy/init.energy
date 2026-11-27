@@ -5,6 +5,7 @@ import { updatedAt as backupUpdatedAt } from "@/content/backup";
 import { backupRegionPaths, regionPaths, updatedAt as insolationUpdatedAt } from "@/content/insolation";
 import { productPages } from "@/content/product-pages";
 import { routes, toPath } from "@/content/routes";
+import { sesPowerPages, sesPowerPath } from "@/content/ses-power";
 import { absoluteUrl, languageAlternates } from "@/lib/seo/metadata";
 
 /**
@@ -17,8 +18,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const regionLastModified = new Date(insolationUpdatedAt);
   // Backup region pages change with the outage wording (content/backup.ts).
   const backupLastModified = new Date(backupUpdatedAt);
+  // Power pages: the revision date of each page (content/ses-power.ts).
+  const powerLastModified = new Map(sesPowerPages.map((page) => [sesPowerPath(page), new Date(page.updatedAt)]));
   const modifiedAt = (path: string) =>
-    regionPaths.includes(path) ? regionLastModified : backupRegionPaths.includes(path) ? backupLastModified : lastModified;
+    powerLastModified.get(path) ??
+    (regionPaths.includes(path) ? regionLastModified : backupRegionPaths.includes(path) ? backupLastModified : lastModified);
   const entry = (path: string, url: string) => ({
     url,
     lastModified: modifiedAt(path),
@@ -35,6 +39,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...productPages.map((page) => toPath(page.slug)),
     ...regionPaths,
     ...backupRegionPaths,
+    ...sesPowerPages.map(sesPowerPath),
   ];
 
   return [

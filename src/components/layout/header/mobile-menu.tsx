@@ -26,6 +26,7 @@ import { NavLink } from "./nav-link";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { SocialLinks } from "@/components/ui/social-links";
 import { Container } from "@/components/layout/container";
+import { PillLink } from "@/components/ui/pill-link";
 
 /** `regions`: the server-rendered «Регіони» switch and lists (RegionsPicker variant="mobile"). */
 export function MobileMenu({ regions }: { regions?: ReactNode }) {
@@ -37,16 +38,23 @@ export function MobileMenu({ regions }: { regions?: ReactNode }) {
   const onHome = isHomePath(pathname);
   const pageLinks = pageSectionLinks(pathname, locale);
   // Solar and backup first, then the catalogue (as in the approved mockup).
-  const groups = navItems.filter(isNavGroup).toSorted((a, b) => Number(Boolean(b.footer.contacts)) - Number(Boolean(a.footer.contacts)));
+  const groups = navItems
+    .filter(isNavGroup)
+    .filter((group) => group.kind !== "power")
+    .toSorted((a, b) => Number(Boolean(b.footer.contacts)) - Number(Boolean(a.footer.contacts)));
+  // Plant sizes: an accordion with pills, like «Регіони».
+  const power = navItems.filter(isNavGroup).find((group) => group.kind === "power");
   const solutions = groups.find((group) => group.footer.contacts);
   // Links to sections of the current page (home sections or this page's anchors).
   const pageItems = onHome ? navItems.filter((item): item is NavLinkItem => !isNavGroup(item)) : pageLinks;
-  // Page sections appear in the desktop header only from xl; between lg and xl
+  // Page sections appear in the desktop header only from `wide` (1440 px); between lg and wide
   // the burger stays (after the CTA) so they remain reachable.
   const hasPageLinks = onHome || pageLinks.length > 0;
   const [isOpen, setIsOpen] = useState(false);
   const [regionsOpen, setRegionsOpen] = useState(false);
   const regionsId = useId();
+  const [powerOpen, setPowerOpen] = useState(false);
+  const powerId = useId();
   const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -93,7 +101,7 @@ export function MobileMenu({ regions }: { regions?: ReactNode }) {
   const close = () => setIsOpen(false);
 
   return (
-    <div ref={rootRef} className={hasPageLinks ? "xl:hidden" : "lg:hidden"}>
+    <div ref={rootRef} className={hasPageLinks ? "wide:hidden" : "lg:hidden"}>
       <IconButton
         variant="outline-dark"
         size="sm"
@@ -145,6 +153,37 @@ export function MobileMenu({ regions }: { regions?: ReactNode }) {
                   </section>
                 )),
               )}
+
+              {power ? (
+                <section aria-label={t.menu.powerMobile} className="flex flex-col gap-2">
+                  <button
+                    type="button"
+                    aria-expanded={powerOpen}
+                    aria-controls={powerId}
+                    onClick={() => setPowerOpen((value) => !value)}
+                    className="-mx-2 flex min-h-11 cursor-pointer items-center justify-between gap-3 rounded-tile px-2 transition-colors duration-150 ease-tech active:bg-surface focus-visible:bg-surface focus-visible:outline-2 focus-visible:outline-ink"
+                  >
+                    <Eyebrow as="span">{t.menu.powerMobile}</Eyebrow>
+                    <ChevronDown aria-hidden className={`size-4 shrink-0 transition-transform duration-200 ${powerOpen ? "rotate-180" : ""}`} />
+                  </button>
+                  <div id={powerId} hidden={!powerOpen} className="flex flex-col gap-4 pt-2">
+                    {power.columns.map((column) => (
+                      <div key={column.title} className="flex flex-col gap-2">
+                        <p className="text-small text-muted">{column.title}</p>
+                        <ul className="flex flex-wrap gap-2">
+                          {column.items.map((link) => (
+                            <li key={link.href}>
+                              <PillLink href={link.href} size="compact" onClick={close}>
+                                {link.label}
+                              </PillLink>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              ) : null}
 
               {regions ? (
                 <section aria-label={t.regions.button} className="flex flex-col gap-2">

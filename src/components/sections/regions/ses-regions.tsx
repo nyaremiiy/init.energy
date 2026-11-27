@@ -13,7 +13,7 @@ import { anchors } from "@/content/routes";
 import { ukraineMap } from "@/content/ukraine-map";
 import { localizePath } from "@/i18n/config";
 import { getLocale, getMessages } from "@/i18n/server";
-import { mapBucket, mapThresholds, roundMonth, roundYear, stationYear } from "@/lib/calc/region-yield";
+import { mapBucket, mapThresholds, roundMonth, roundYear, STATION_PANELS, stationYear } from "@/lib/calc/region-yield";
 import { formatNumber } from "@/lib/format";
 import { format } from "@/lib/messages";
 import { leastSunnyRegion, nationalStationYear, regionSpreadPercent, sunniestRegion } from "@/lib/region-stats";
@@ -63,7 +63,7 @@ export function SesRegions() {
             eyebrow={t.eyebrow}
             title={t.title}
             titleId={titleId}
-            lead={format(t.lead, { max: n(south), min: n(west) })}
+            lead={format(t.lead, { max: n(south), min: n(west), panels: n(STATION_PANELS) })}
             aside={<ArrowLink href={`#${anchors.calculator}`}>{t.link}</ArrowLink>}
           />
         </Reveal>
@@ -97,7 +97,7 @@ export function SesRegions() {
                     const region = regionsByMapId.get(location.id);
                     if (!region) return null;
                     const year = stationYear(region.yield);
-                    const values = { year: n(roundYear(year)), month: n(roundMonth(year / 12)) };
+                    const values = { year: n(roundYear(year)), month: n(roundMonth(year / 12)), panels: n(STATION_PANELS) };
                     return (
                       <a
                         key={location.id}

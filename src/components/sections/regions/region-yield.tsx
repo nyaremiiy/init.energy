@@ -13,6 +13,7 @@ import { updatedAt, type InsolationRegion } from "@/content/insolation";
 import { anchors } from "@/content/routes";
 import type { Locale } from "@/i18n/config";
 import { getMessages } from "@/i18n/server";
+import { STATION_PANELS } from "@/lib/calc/region-yield";
 import { formatDate, formatNumber, formatPhone } from "@/lib/format";
 import { format } from "@/lib/messages";
 import { deviationLabel, isCity, isOccupied, regionOffice, signedPercent, yieldLead } from "@/lib/region-copy";
@@ -161,7 +162,7 @@ export function RegionYield({ region, locale }: Props) {
   const n = (value: number) => formatNumber(value, locale);
 
   const cards = [
-    { value: n(stats.year), unit: units.kWh, label: t.yearLabel, note: format(t.yearNote, { month: n(stats.monthAverage) }) },
+    { value: n(stats.year), unit: units.kWh, label: format(t.yearLabel, { panels: n(STATION_PANELS) }), note: format(t.yearNote, { month: n(stats.monthAverage) }) },
     {
       value: signedPercent(stats.deviation, locale),
       label: deviationLabel(stats, locale),
