@@ -57,7 +57,7 @@ export function CookiePolicyPage({ locale }: { locale: Locale }) {
           as="section"
           variant="dark"
           aria-labelledby="cookie-policy-title"
-          className="pt-panel-sm sm:pt-panel"
+          className="pt-panel-sm"
           panelClassName="bg-ink-glow shadow-soft"
         >
           <Container inPanel className="flex flex-col items-start gap-6 pt-28 pb-panel-y-sm lg:pt-36 lg:pb-panel-y">

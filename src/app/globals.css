@@ -200,7 +200,8 @@ button:not(:disabled) {
 
 @media (min-width: 40rem) {
   .hero {
-    min-height: calc(100svh - 2 * var(--spacing-panel));
+    /* 8 px gap above (all screens), 16 px below. */
+    min-height: calc(100svh - var(--spacing-panel-sm) - var(--spacing-panel));
   }
 }
 
