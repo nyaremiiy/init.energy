@@ -2,6 +2,8 @@ import { mainPhone, offices } from "@/content/company";
 import type { InsolationRegion } from "@/content/insolation";
 import type { Locale } from "@/i18n/config";
 import { getMessagesFor } from "@/i18n/messages";
+import { STATION_PANELS } from "@/lib/calc/region-yield";
+import { panelsForKw } from "@/lib/calc/ses-power";
 import { formatNumber, formatPhone } from "@/lib/format";
 import { format } from "@/lib/messages";
 import { houseExamples, regionStats, type RegionStats } from "@/lib/region-stats";
@@ -63,6 +65,7 @@ export function heroLead(region: InsolationRegion, locale: Locale, stats: Region
     locative: region.locative[locale],
     year: formatNumber(stats.year, locale),
     month: formatNumber(stats.monthAverage, locale),
+    panels: formatNumber(STATION_PANELS, locale),
   };
   return format(isOccupied(region) ? t.leadOccupied : t.lead, values);
 }
@@ -85,6 +88,7 @@ export function yieldLead(region: InsolationRegion, locale: Locale, stats: Regio
     Locative: capitalize(region.locative[locale]),
     year: formatNumber(stats.year, locale),
     month: formatNumber(stats.monthAverage, locale),
+    panels: formatNumber(STATION_PANELS, locale),
   });
   const tail = format(t[`lead${direction(stats.deviation)}`], { pct: formatNumber(Math.abs(stats.deviation), locale) });
   return `${start} ${tail}`;
@@ -116,8 +120,8 @@ export function regionFaq(region: InsolationRegion, locale: Locale, stats: Regio
         locative,
         kw: n(stats.kwSmall),
         kwBig: n(stats.kwBig),
-        // ≈ 500 W per panel, as «5 kW ≈ 10 panels» on the page.
-        panels: n(stats.kwSmall * 2),
+        // 550–570 W panels, the same formula as the power pages (5 kW → 9).
+        panels: n(panelsForKw(stats.kwSmall)),
       }),
     },
     {

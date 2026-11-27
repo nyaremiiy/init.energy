@@ -8,56 +8,60 @@ import type { Localized } from "@/i18n/config";
 
 export type PlantTypeId = "grid" | "hybrid" | "off";
 
-export const plantTypes: { id: PlantTypeId; label: Localized }[] = [
+export const plantTypes: { id: PlantTypeId; label: Localized; highlight?: boolean }[] = [
   { id: "grid", label: { uk: "Мережева", en: "Grid-tied" } },
-  { id: "hybrid", label: { uk: "Гібридна", en: "Hybrid" } },
+  { id: "hybrid", label: { uk: "Гібридна", en: "Hybrid" }, highlight: true },
   { id: "off", label: { uk: "Автономна", en: "Off-grid" } },
 ];
 
+export type PlantRowId = "outage" | "battery" | "export" | "dependence" | "fits";
+export type PlantStatus = "good" | "limited" | "bad";
+
+const yes = { uk: "так", en: "yes" };
+const no = { uk: "ні", en: "no" };
+
 // TODO(content): owner to confirm the comparison rows (general facts, not from init.energy).
+/** Rows of the ComparisonTable on /cec/; a cell without `status` is plain text («Кому підходить»). */
 export const plantRows: {
+  id: PlantRowId;
   label: Localized;
-  /** `true` / `false` render as check / cross icons. */
-  values: Record<PlantTypeId, boolean | Localized>;
+  cells: Record<PlantTypeId, { status?: PlantStatus; text: Localized }>;
 }[] = [
   {
+    id: "outage",
     label: { uk: "Працює під час відключення", en: "Works during outages" },
-    values: { grid: false, hybrid: true, off: true },
+    cells: { grid: { status: "bad", text: no }, hybrid: { status: "good", text: yes }, off: { status: "good", text: yes } },
   },
   {
+    id: "battery",
     label: { uk: "Потрібен накопичувач", en: "Needs a battery" },
-    values: { grid: false, hybrid: true, off: true },
-  },
-  {
-    label: {
-      uk: "Віддає надлишки в мережу",
-      en: "Feeds surplus into the grid",
+    cells: {
+      grid: { status: "good", text: no },
+      hybrid: { status: "limited", text: yes },
+      off: { status: "limited", text: { uk: "так, обов'язково", en: "yes, required" } },
     },
-    values: { grid: true, hybrid: true, off: false },
   },
   {
+    id: "export",
+    label: { uk: "Віддає надлишки в мережу", en: "Feeds surplus into the grid" },
+    cells: { grid: { status: "good", text: yes }, hybrid: { status: "good", text: yes }, off: { status: "bad", text: no } },
+  },
+  {
+    id: "dependence",
     label: { uk: "Залежність від мережі", en: "Dependence on the grid" },
-    values: {
-      grid: { uk: "повна", en: "full" },
-      hybrid: { uk: "часткова", en: "partial" },
-      off: { uk: "немає", en: "none" },
+    cells: {
+      grid: { status: "bad", text: { uk: "повна", en: "full" } },
+      hybrid: { status: "limited", text: { uk: "часткова", en: "partial" } },
+      off: { status: "good", text: { uk: "немає", en: "none" } },
     },
   },
   {
+    id: "fits",
     label: { uk: "Кому підходить", en: "Best for" },
-    values: {
-      grid: {
-        uk: "економія там, де світло стабільне",
-        en: "savings where the grid is stable",
-      },
-      hybrid: {
-        uk: "будинки й бізнес з відключеннями",
-        en: "homes and businesses facing outages",
-      },
-      off: {
-        uk: "об'єкти без підключення до мережі",
-        en: "sites with no grid connection",
-      },
+    cells: {
+      grid: { text: { uk: "економія там, де світло стабільне", en: "savings where the grid is stable" } },
+      hybrid: { text: { uk: "будинки й бізнес з відключеннями", en: "homes and businesses facing outages" } },
+      off: { text: { uk: "об'єкти без підключення до мережі", en: "sites with no grid connection" } },
     },
   },
 ];

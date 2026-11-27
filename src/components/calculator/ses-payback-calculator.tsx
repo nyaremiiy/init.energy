@@ -18,6 +18,7 @@ import { appliances } from "@/content/appliances";
 import { insolationRegions, regionPath, regionsByLocale } from "@/content/insolation";
 import { products } from "@/content/products";
 import { anchors } from "@/content/routes";
+import { sesPowerByKw, sesPowerPath } from "@/content/ses-power";
 import { sesCalculatorConfig, type SesGoal, type SesObjectType, type SesPlacement } from "@/content/ses-calculator";
 import { householdTariff } from "@/content/tariffs";
 import { useLocale, useMessages } from "@/i18n/client";
@@ -77,6 +78,7 @@ export function SesPaybackCalculator() {
   const pathname = usePathname();
   // Region page of the chosen region; hidden on that page itself.
   const regionHref = localizePath(regionPath(region), locale);
+  const powerPage = sesPowerByKw(result.kw);
   let stepIndex = 0;
 
   useEffect(() => {
@@ -427,6 +429,12 @@ export function SesPaybackCalculator() {
             </span>
             <span className="text-body text-muted-dark">{result.plantType === "grid" ? t.grid : t.hybrid}</span>
           </p>
+          {/* A page for exactly this plant size (/cec/5-kvt/ …), when there is one. */}
+          {powerPage ? (
+            <ArrowLink href={localizePath(sesPowerPath(powerPage), locale)} tone="dark" wrap className="-mt-3 self-start text-small">
+              {format(t.powerLink, { kw: formatNumber(powerPage.kw, locale) })}
+            </ArrowLink>
+          ) : null}
 
           <dl className="grid grid-cols-2 gap-x-6 gap-y-5">
             <Stat label={t.generation} value={`${t.approx} ${formatNumber(roundTo(result.generationYear, 10), locale)} ${kwh}`} />

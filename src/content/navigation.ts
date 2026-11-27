@@ -1,4 +1,5 @@
 import { backupRegionPaths, regionPaths } from "./insolation";
+import { sesPowerPaths } from "./ses-power";
 import { productPages } from "./product-pages";
 import { featuredProjects } from "./projects";
 import { localizePath, type Locale } from "@/i18n/config";
@@ -40,6 +41,12 @@ type FooterLinkLabels = {
   sesMethod: string;
   sesRegions: string;
   regionYield: string;
+  powerFigures: string;
+  powerYield: string;
+  powerRegions: string;
+  powerTurnkey: string;
+  powerTypes: string;
+  powerOutage: string;
   nicheFacts: string;
   nicheConsumers: string;
   nicheSizing: string;
@@ -111,6 +118,22 @@ function regionNavigation(path: string, locale: Locale): NavEntry[] {
   ];
 }
 
+/** Power pages (/cec/5-kvt/ …): the sections of the template in page order. */
+function powerNavigation(path: string, locale: Locale): NavEntry[] {
+  const href = (anchor: string) => `${localizePath(path, locale)}#${anchor}`;
+  return [
+    { href: href(anchors.powerFigures), labelKey: "powerFigures" },
+    { href: href(anchors.powerYield), labelKey: "powerYield" },
+    { href: href(anchors.calculator), labelKey: "calculator" },
+    { href: href(anchors.powerRegions), labelKey: "powerRegions" },
+    { href: href(anchors.powerTurnkey), labelKey: "powerTurnkey" },
+    { href: href(anchors.powerTypes), labelKey: "powerTypes" },
+    { href: href(anchors.powerOutage), labelKey: "powerOutage" },
+    { href: href(anchors.faq), labelKey: "faq" },
+    { href: href(anchors.contacts), labelKey: "consultation" },
+  ];
+}
+
 /** Backup power hub (/rezervne-zhyvlennya/): its main sections in page order. */
 function backupNavigation(locale: Locale): NavEntry[] {
   const href = (anchor: string) => localizePath(`${routes.backup.hub}#${anchor}`, locale);
@@ -176,6 +199,11 @@ export const pageNavigation: Record<string, NavEntry[]> = {
 for (const path of regionPaths) {
   pageNavigation[path] = regionNavigation(path, "uk");
   pageNavigation[localizePath(path, "en")] = regionNavigation(path, "en");
+}
+
+for (const path of sesPowerPaths) {
+  pageNavigation[path] = powerNavigation(path, "uk");
+  pageNavigation[localizePath(path, "en")] = powerNavigation(path, "en");
 }
 
 for (const path of backupRegionPaths) {

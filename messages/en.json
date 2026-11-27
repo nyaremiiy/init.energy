@@ -278,7 +278,8 @@
     "Wh": "Wh",
     "kWh": "kWh",
     "cycles": "cycles",
-    "V": "V"
+    "V": "V",
+    "MWh": "MWh"
   },
   "quantity": {
     "from": "from {value}",
@@ -333,7 +334,13 @@
       "regionYield": "Yield in the region",
       "sesRegions": "By region",
       "backupRegions": "By region",
-      "backupChoice": "Choosing a system"
+      "backupChoice": "Choosing a system",
+      "powerFigures": "In figures",
+      "powerYield": "Output",
+      "powerRegions": "By region",
+      "powerTurnkey": "Turnkey",
+      "powerTypes": "Grid-tied or hybrid",
+      "powerOutage": "Outages"
     },
     "copyright": "© {year} INIT ENERGY",
     "developedBy": "Developed by",
@@ -482,7 +489,8 @@
         "products": "Products",
         "aboutUs": "About us",
         "projects": "Projects",
-        "contacts": "Contacts"
+        "contacts": "Contacts",
+        "power": "Sizes"
       },
       "columns": {
         "backup": "Backup power",
@@ -504,7 +512,17 @@
         "solutionsCta": "Get a quote",
         "catalogTitle": "Batteries",
         "catalogFooter": "All models in one table.",
-        "catalogCta": "Compare models"
+        "catalogCta": "Compare models",
+        "powerHome": "For homes",
+        "powerHomeNote": "{min}–{max} kW · hybrid with a battery",
+        "powerHomeNoteOne": "{kw} kW · hybrid with a battery",
+        "powerBusiness": "For business",
+        "powerBusinessNote": "from {min} kW · payback and outage limits",
+        "powerYear": "≈ {value} a year",
+        "powerPanels": "≈ {panels} panels",
+        "powerFooter": "Not sure which size you need?",
+        "powerCta": "Size it in the calculator",
+        "powerMobile": "Solar plant sizes"
       },
       "regions": {
         "button": "Regions",
@@ -527,6 +545,15 @@
       "hint": "Scroll down"
     }
   },
+  "compare": {
+    "recommended": "Recommended",
+    "legendLabel": "Marks",
+    "status": {
+      "good": "advantage",
+      "limited": "with limits",
+      "bad": "drawback"
+    }
+  },
   "ses": {
     "meta": {
       "title": "Turnkey solar panels: solar plants for homes and business",
@@ -547,10 +574,7 @@
       "title": "Grid-tied, hybrid or off-grid",
       "lead": "During power outages only a hybrid or off-grid plant with a battery keeps working — a grid-tied plant shuts down with the grid. For most homes and businesses in Ukraine, a hybrid plant with a battery is the best fit.",
       "caption": "Comparison of solar power plant types",
-      "feature": "Feature",
-      "recommended": "recommended",
-      "yes": "Yes",
-      "no": "No"
+      "feature": "Feature"
     },
     "hybrid": {
       "eyebrow": "How it works",
@@ -579,8 +603,8 @@
     },
     "hero": {
       "eyebrow": "Solar power plants · {name}",
-      "lead": "We design, install and service solar power plants for homes and businesses {area}. Here a 5 kW plant (≈ 10 panels) produces about {year} kWh a year — {month} a month on average.",
-      "leadOccupied": "How much energy a solar plant gives {locative}: a 5 kW plant (≈ 10 panels) produces about {year} kWh a year — {month} a month on average. Size a plant for your home with the calculator below.",
+      "lead": "We design, install and service solar power plants for homes and businesses {area}. Here a 5 kW plant (≈ {panels} panels) produces about {year} kWh a year — {month} a month on average.",
+      "leadOccupied": "How much energy a solar plant gives {locative}: a 5 kW plant (≈ {panels} panels) produces about {year} kWh a year — {month} a month on average. Size a plant for your home with the calculator below.",
       "primary": "Size a plant",
       "secondary": "Leave a request",
       "imageAlt": "An installer mounting solar panels on a ground-mounted plant"
@@ -589,11 +613,11 @@
     "yield": {
       "eyebrow": "Sun in the region",
       "title": "How much energy solar panels produce {locative}",
-      "leadStart": "{Locative} a 5 kW plant (≈ 10 panels) produces about {year} kWh a year — {month} a month on average.",
+      "leadStart": "{Locative} a 5 kW plant (≈ {panels} panels) produces about {year} kWh a year — {month} a month on average.",
       "leadLess": "That is {pct}% less than the Ukrainian average, so the same electricity bill needs a slightly larger plant here than in the south.",
       "leadMore": "That is {pct}% more than the Ukrainian average, so the same electricity bill needs a smaller plant here than in the west.",
       "leadEqual": "That is about the Ukrainian average.",
-      "yearLabel": "a year from a 5 kW plant (≈ 10 panels)",
+      "yearLabel": "a year from a 5 kW plant (≈ {panels} panels)",
       "yearNote": "{month} kWh a month on average",
       "deviationLess": "less sun than the Ukrainian average",
       "deviationMore": "more sun than the Ukrainian average",
@@ -705,6 +729,328 @@
       "text": "Power during outages: SVIT batteries or Deye, Victron, Huawei systems — for apartments, houses and businesses."
     }
   },
+  "sesPower": {
+    "meta": {
+      "title": {
+        "home": "{kw} kW solar power plant, turnkey, for your home",
+        "business": "{kw} kW solar power plant, turnkey, for business"
+      },
+      "description": {
+        "home": [
+          "Turnkey {kw} kW solar power plant for your home: {panels} panels of {panelMin}–{panelMax} W, about {year} kWh a year. Output in {count} regions, payback and backup calculator.",
+          "Turnkey {kw} kW solar plant for your home: {panels} panels, about {year} kWh a year. Output in {count} regions, payback and backup calculator."
+        ],
+        "business": [
+          "Turnkey {kw} kW solar power plant for business: {panels} panels of {panelMin}–{panelMax} W, about {year} kWh a year. Output in {count} regions and a payback calculator.",
+          "Turnkey {kw} kW solar plant for business: {panels} panels, about {year} kWh a year. Output in {count} regions and a payback calculator."
+        ]
+      },
+      "serviceType": "Turnkey {kw} kW solar power plant",
+      "pageName": "Turnkey {kw} kW solar power plant"
+    },
+    "crumbs": {
+      "home": "Home",
+      "ses": "Solar power plants",
+      "current": "{kw} kW plant"
+    },
+    "hero": {
+      "eyebrow": "Solar power plants · {kw} kW",
+      "title": "{kw} kW solar power plant, turnkey",
+      "lead": "A {kw} kW plant is {panels} panels of {panelMin}–{panelMax} W and about {year} kWh a year on average across Ukraine. We pick panels and an inverter to your budget, install the plant and look after it for its whole service life.",
+      "primary": "Get a quote",
+      "secondary": "Calculate payback"
+    },
+    "figures": {
+      "eyebrow": "01 / In short",
+      "title": "A {kw} kW plant in figures",
+      "lead": {
+        "home": "A {kw} kW solar plant suits a house that uses {low}–{high} kWh a month: over a year it produces about {year} kWh — as much as such a house consumes.",
+        "business": "A {kw} kW solar plant suits a site that uses {low}–{high} kWh a month: over a year it produces about {year} kWh — as much as such a site consumes."
+      },
+      "power": "Power",
+      "powerNote": "matched to your connection",
+      "panels": "Panels",
+      "panelsNote": "brand to your budget",
+      "area": "Panel area",
+      "areaNote": "a little more on a roof with gaps",
+      "year": "Output a year",
+      "yearNote": "average across Ukraine",
+      "month": "A month",
+      "monthNote": "more in summer, less in winter",
+      "savings": "Savings a year",
+      "savingsValue": "up to {value}",
+      "savingsNote": "at {tariff} UAH, if you use all of it yourself",
+      "currency": "UAH",
+      "m2": "m²",
+      "sources": "Output — PVGIS, average over {count} regions; tariff {tariff} UAH/kWh (Cabinet of Ministers, until {validUntil}).",
+      "updated": "Updated: {date}"
+    },
+    "yield": {
+      "eyebrow": "02 / Output",
+      "title": "How much a {kw} kW plant produces each month",
+      "lead": "The plant produces most {peak1} and {peak2} — about {best} kWh a month — and least {lowest}, about {low}. So in winter part of the energy comes from the grid, and in summer the surplus can be sold.",
+      "chartTitle": "Output by month",
+      "chartUnit": "kWh a month, average across Ukraine",
+      "tableCaption": "Monthly output of a {kw} kW plant, kWh, average across Ukraine",
+      "tableMonth": "Month",
+      "tableKwh": "kWh"
+    },
+    "calculator": {
+      "eyebrow": "03 / Calculator",
+      "title": {
+        "home": "Work out a {kw} kW plant for your house",
+        "business": "Work out a {kw} kW plant for your site"
+      },
+      "lead": "Pick your region and how much you use — the calculator shows what the plant produces, how much of your bill it covers and how many hours a battery lasts.",
+      "region": "Region",
+      "regionHint": "The region decides how much sun you get",
+      "consumption": "Consumption a month",
+      "consumptionHint": "on your electricity bill",
+      "tariff": "Tariff",
+      "tariffUnit": "UAH/kWh",
+      "tariffHint": "Household tariff until {date}",
+      "type": "Plant type",
+      "types": {
+        "grid": "Grid-tied",
+        "hybrid": "Hybrid",
+        "battery": "Hybrid + battery"
+      },
+      "cost": "Plant cost",
+      "costOptional": "optional",
+      "costPlaceholder": "For example, from our quote",
+      "costHint": "Enter it to see the payback",
+      "resultTitle": "Your estimate",
+      "chartLabel": "Monthly output of a {kw} kW plant and your consumption",
+      "legend": {
+        "surplus": "surplus",
+        "grid": "from the grid",
+        "consumption": "your consumption"
+      },
+      "results": {
+        "year": "a {kw} kW plant gives a year {locative}",
+        "coverage": "of your yearly consumption",
+        "savings": "saved a year",
+        "surplus": "summer surplus — can be sold",
+        "reserve": "backup for a {load} W house with a {capacity} kWh battery",
+        "reserveOff": "backup — only with a battery",
+        "payback": "payback",
+        "paybackEmpty": "payback: enter the cost",
+        "years": "yrs"
+      },
+      "advice": {
+        "fits": "For {kwh} kWh a month, {kw} kW is the right size.",
+        "other": "For {kwh} kWh a month, a {kw} kW plant fits —",
+        "otherPage": "see the {kw} kW plant",
+        "otherCalculator": "work it out in the payback calculator",
+        "battery": "For long outages, add a battery."
+      },
+      "cta": "Get a quote with these parameters",
+      "note": "Output — PVGIS; savings — the energy you use yourself × tariff. Without a cost there is no payback.",
+      "summary": {
+        "year": "A {kw} kW plant {locative} gives about {year} kWh a year",
+        "savings": "saves about {savings} hryvnias a year",
+        "payback": "pays back in about {years} years",
+        "reserve": "backs up the house for about {hours} h"
+      },
+      "leadSummary": {
+        "monthly": "{kwh} kWh/mo",
+        "cost": "{cost} UAH",
+        "tariff": "{tariff} UAH/kWh"
+      }
+    },
+    "regions": {
+      "eyebrow": "04 / By region",
+      "title": "How much a {kw} kW plant gives in your region",
+      "lead": "The same {kw} kW plant gives from ≈ {min} kWh a year ({minRegion}) to ≈ {max} kWh ({maxRegion}) — {spread}% more sun in the south. A region name leads to its page with the numbers.",
+      "caption": "{kw} kW plant: output a year by region, kWh (PVGIS), and the difference from the national average",
+      "region": "Region",
+      "scale": "Scale",
+      "year": "A year",
+      "deviation": "Vs average",
+      "estimate": "estimate",
+      "cardTitle": "Work it out for your town",
+      "cardText": "The calculator on this page is already set to {kw} kW — pick your region and how much you use.",
+      "cardLink": "To the calculator"
+    },
+    "turnkey": {
+      "eyebrow": "05 / Turnkey",
+      "title": "What a turnkey {kw} kW plant includes",
+      "lead": "From the survey to launch and service — one team. We are not tied to one brand: we choose equipment so the plant fits your budget.",
+      "steps": [
+        {
+          "title": "Site survey",
+          "text": "An engineer looks at the roof, the connection and what you want to power."
+        },
+        {
+          "title": "Design and quote",
+          "text": "Several panel and inverter options to your budget — you choose."
+        },
+        {
+          "title": "Equipment",
+          "text": "Panels, an inverter and a battery if needed, of any brand — whatever fits your budget."
+        },
+        {
+          "title": "Installation and launch",
+          "text": "We install, connect and set up the plant on your site."
+        },
+        {
+          "title": "Green tariff",
+          "text": "We help with the paperwork to sell the surplus to the grid."
+        },
+        {
+          "title": "Support for its whole life",
+          "text": "A warranty on our work, advice and service for the plant's whole service life."
+        }
+      ],
+      "priceTitle": "What the price depends on",
+      "priceLead": "We price a {kw} kW plant for your site — in a commercial quote.",
+      "priceItems": [
+        "Plant type: grid-tied, hybrid, with a battery",
+        "Brand and power of the panels and inverter",
+        "Roof type or ground mounting",
+        "Single or three phase, the state of the connection",
+        "Distance to the site"
+      ],
+      "creditTitle": "A loan for the plant",
+      "creditText": "We help you find a solar loan at the banks we work with. Terms depend on the bank — the engineer suggests options with the quote.",
+      "creditCta": "Get a quote"
+    },
+    "types": {
+      "eyebrow": "06 / Plant type",
+      "title": "Grid-tied, hybrid or with a battery",
+      "lead": "A grid-tied {kw} kW plant only cuts the bill and switches off with the grid. A hybrid plant works without the grid, and with a battery also at night: with a {capacity} kWh battery a {load} W house runs for about {hours} h.",
+      "link": "Backup power for a house",
+      "tabsLabel": "Plant type",
+      "modesLabel": "When",
+      "modes": {
+        "day": "Day",
+        "night": "Night",
+        "outage": "Outage"
+      },
+      "diagramTitle": "{kw} kW plant diagram",
+      "diagramDesc": "Solar panels feed the inverter; the inverter powers the house and sends the surplus to the grid through a two-way meter; the battery stores energy for the night and outages.",
+      "nodes": {
+        "grid": "Grid",
+        "gridNote": "utility",
+        "gridOff": "no power",
+        "meter": "Meter",
+        "meterNote": "two-way",
+        "inverterHybrid": "Hybrid inverter",
+        "inverterGrid": "Grid-tied inverter",
+        "inverterNote": "{kw} kW",
+        "inverterOff": "off",
+        "panels": "Panels",
+        "panelsNote": "{panels} × {panelMin}–{panelMax} W",
+        "battery": "Battery",
+        "batteryNote": "from {capacity} kWh",
+        "batteryLater": "can be added later",
+        "house": "House",
+        "houseNote": "lights, fridge, boiler"
+      },
+      "captions": {
+        "grid": {
+          "day": "By day the grid-tied inverter sends the panels' energy to the house and the surplus to the grid through the two-way meter.",
+          "night": "At night the panels are idle — the house runs on the grid, as without a plant.",
+          "outage": "In an outage the grid-tied inverter switches off with the grid: the house has no power even by day."
+        },
+        "hybrid": {
+          "day": "By day the hybrid inverter powers the house from the panels and sends the surplus to the grid.",
+          "night": "At night the house runs on the grid. A battery can be added later — the hybrid inverter is ready for it.",
+          "outage": "In an outage the hybrid inverter powers the house from the panels while the sun shines; without a battery there is no power in the evening."
+        },
+        "battery": {
+          "day": "By day the sun powers the house and charges the battery, and the surplus goes to the grid through the two-way meter.",
+          "night": "At night the house runs on the battery, and on the grid once it is empty.",
+          "outage": "In an outage the inverter switches to the battery in an instant: the house runs at night, and by day the panels also charge it."
+        }
+      },
+      "caption": "Grid-tied, hybrid and hybrid plant with a battery compared",
+      "feature": "Feature",
+      "rows": {
+        "bill": "Cuts the electricity bill",
+        "export": "Sells the surplus to the grid",
+        "outage": "During outages",
+        "night": "At night without the grid",
+        "battery": "Battery",
+        "fits": "Best for"
+      },
+      "cells": {
+        "yes": "yes",
+        "no": "no",
+        "outageGrid": "switches off with the grid",
+        "outageHybrid": "by day, while the sun shines",
+        "outageBattery": "day and night",
+        "nightBattery": "yes, from the battery",
+        "batteryGrid": "none",
+        "batteryHybrid": "can be added later",
+        "batteryBattery": "of any brand",
+        "fitsGrid": "rare outages, the goal is savings",
+        "fitsHybrid": "savings and room to grow",
+        "fitsBattery": "scheduled outages"
+      }
+    },
+    "outage": {
+      "eyebrow": "07 / Outages",
+      "title": "A {kw} kW plant during power outages",
+      "lead": "By day a hybrid plant powers the house and charges the battery; in the evening and at night the house runs on the battery. How many hours depends on what is on.",
+      "batteryTitle": "Long outages need a battery",
+      "batteryText": "Panels give energy only by day, while the sun shines. For the house to work in the evening, at night and on cloudy days, the energy has to be stored in a battery. The longer the outage, the larger the capacity — we choose the battery to your schedule and budget: our own SVIT or Deye, Victron, Huawei.",
+      "batteryCta": "Calculate backup time",
+      "pickLead": "Choose what must work without power — we work out how many hours a battery lasts at night:",
+      "setsLabel": "Quick choice",
+      "sets": {
+        "basic": "Minimum",
+        "fridge": "+ fridge",
+        "house": "Whole house"
+      },
+      "appliancesLabel": "Appliances",
+      "total": "Total",
+      "battery": "{capacity} kWh battery",
+      "hours": "≈ {hours} h",
+      "none": "choose appliances",
+      "summary": "Total {power} W: a {small} kWh battery lasts about {smallHours} h, {big} kWh — about {bigHours} h.",
+      "note": "Appliance power — Minfin (index.minfin.com.ua), the pump — a typical 0.75 kW model; hours — 90% of the battery capacity ÷ appliance power."
+    },
+    "faq": {
+      "title": "Questions about a {kw} kW plant",
+      "lead": "How many panels, how much it produces, whether it works without power and how we price it.",
+      "linksTitle": "Useful",
+      "links": {
+        "calculator": "Solar payback calculator",
+        "ses": "Solar power plants",
+        "backup": "Backup power"
+      },
+      "panelsQ": "How many panels does a {kw} kW plant need?",
+      "panelsA": "{panels} panels of {panelMin}–{panelMax} W — {kwMin}–{kwMax} kW in total. The engineer picks the brand and model to your budget.",
+      "areaQ": "How much roof space does a {kw} kW plant take?",
+      "areaA": "The panels alone take about {area} m² ({panels} panels of ≈ {panelArea} m²). With gaps between rows and from the roof edge it is a little more; the engineer decides the exact layout on site.",
+      "yearQ": "How much does a {kw} kW plant produce a year?",
+      "yearA": "On average across Ukraine — about {year} kWh a year, ≈ {month} a month. In the south up to ≈ {max} kWh ({maxRegion}), in the west and north from ≈ {min} ({minRegion}). In summer the plant gives ≈ {best} kWh a month, in December ≈ {december}.",
+      "enoughQ": {
+        "home": "Is {kw} kW enough for a house?",
+        "business": "Is {kw} kW enough for my site?"
+      },
+      "enoughA": {
+        "home": "Yes, if the house uses about {low}–{high} kWh a month: over a year the plant produces about as much as it consumes. If you use more, the calculator above suggests the size.",
+        "business": "Yes, if the site uses about {low}–{high} kWh a month: over a year the plant produces about as much. If you use more, the calculator above suggests the size."
+      },
+      "outageQ": "Does a {kw} kW plant work during a power outage?",
+      "outageA": "A grid-tied one does not: it switches off with the grid. A hybrid plant works without the grid by day while the sun shines, and with a battery at night too: a ≈ {small} kWh battery runs a {load} W house for about {smallHours} h, ≈ {big} kWh — for about {bigHours} h.",
+      "noBatteryQ": "Are solar panels without a battery enough for a long outage?",
+      "noBatteryA": "No. Panels give energy only by day, and even a hybrid plant without a battery cannot power the house in the evening, at night or in cloudy weather. Long outages need a battery — we choose the capacity to your schedule and budget: our own SVIT or Deye, Victron, Huawei.",
+      "priceQ": "How much does a turnkey {kw} kW plant cost?",
+      "priceA": "We price it for your site and give the price in a commercial quote. It depends on the plant type (grid-tied, hybrid, with a battery), the brand and power of the panels and inverter, the roof, the number of phases and the distance to the site. We choose equipment to your budget.",
+      "helpQ": "Do you help with the green tariff and a loan?",
+      "helpA": "Yes. We help with the paperwork to sell the surplus to the grid and find a solar loan at the banks we work with. Terms depend on the bank — the engineer suggests options with the quote."
+    },
+    "lead": {
+      "comment": "Roof, town, how much you use a month — {kw} kW plant"
+    },
+    "others": {
+      "title": "Other plant sizes",
+      "item": "{kw} kW plant"
+    }
+  },
   "regionLinks": {
     "otherTitle": "Solar panels in other regions",
     "allTitle": "Solar panels by region of Ukraine",
@@ -723,7 +1069,7 @@
   "sesRegions": {
     "eyebrow": "By region",
     "title": "Solar panels in your region",
-    "lead": "How much energy solar panels produce depends on the region: in the south a 5 kW plant (≈ 10 panels) gives up to {max} kWh a year, in the west about {min}. Pick your region for its monthly yield, a sample plant and payback.",
+    "lead": "How much energy solar panels produce depends on the region: in the south a 5 kW plant (≈ {panels} panels) gives up to {max} kWh a year, in the west about {min}. Pick your region for its monthly yield, a sample plant and payback.",
     "link": "Calculate for your region",
     "mapTitle": "What a 5 kW plant gives in a year",
     "spreadThird": "The same plant produces almost a third more in the south than in the west.",
@@ -734,7 +1080,7 @@
     "west": "West",
     "mapLabel": "Map of Ukraine: yearly output of a 5 kW plant by region",
     "regionLabel": "{name}: a 5 kW plant ≈ {year} kWh a year",
-    "tooltip": "A 5 kW plant (≈ 10 panels) produces ≈ {year} kWh a year here — {month} a month on average",
+    "tooltip": "A 5 kW plant (≈ {panels} panels) produces ≈ {year} kWh a year here — {month} a month on average",
     "tooltipLink": "Open the region page",
     "legendTitle": "5 kW plant per year, kWh (PVGIS):",
     "legendUpTo": "up to {value}",
@@ -936,7 +1282,8 @@
       "solar": "Solar plant {kw} kW",
       "payback": "payback in about {years} years",
       "battery": "battery {product}"
-    }
+    },
+    "powerLink": "More about a {kw} kW plant"
   },
   "notFound": {
     "metaTitle": "Page in progress — INIT ENERGY",
@@ -1116,14 +1463,7 @@
       "title": "Generator, UPS or a battery system",
       "lead": "A generator gives plenty of energy but is noisy and needs fuel. A regular UPS lasts minutes. A battery system runs quietly for hours and switches over by itself.",
       "caption": "A generator, a UPS and an inverter with a battery compared",
-      "feature": "Feature",
-      "recommended": "Recommended",
-      "legendLabel": "Marks",
-      "status": {
-        "good": "advantage",
-        "limited": "with limits",
-        "bad": "drawback"
-      }
+      "feature": "Feature"
     },
     "steps": {
       "eyebrow": "Stages",
@@ -1267,7 +1607,7 @@
       },
       "solar": {
         "title": "Add solar panels",
-        "text": "{Locative} a 5 kW plant (≈ 10 panels) generates about {year} kWh a year and charges the battery during the day.",
+        "text": "{Locative} a 5 kW plant (≈ {panels} panels) generates about {year} kWh a year and charges the battery during the day.",
         "link": "Solar panels {locative}"
       },
       "updated": "Updated: {date}"
@@ -1287,7 +1627,7 @@
       "brandsA": "No. We make SVIT batteries, but we also choose, install and service {brands} systems {locative}. An engineer compares an SVIT option and another brand for your load and budget — you decide.",
       "brandsAOccupied": "No. We make SVIT batteries, but we also choose {brands} systems. An engineer compares an SVIT option and another brand for your load and budget — you decide.",
       "solarQ": "Can backup power be combined with solar panels {locative}?",
-      "solarA": "Yes. With a hybrid inverter the battery charges from solar panels during the day. {Locative} a 5 kW plant (≈ 10 panels) generates about {year} kWh a year — monthly generation and the payback calculator are on the “Solar panels {locative}” page.",
+      "solarA": "Yes. With a hybrid inverter the battery charges from solar panels during the day. {Locative} a 5 kW plant (≈ {panels} panels) generates about {year} kWh a year — monthly generation and the payback calculator are on the “Solar panels {locative}” page.",
       "runtimeQ": "How long does backup power last during outages {locative}?",
       "runtimeA": "It depends on the battery capacity and the appliances. A house with a boiler, pump, fridge, lights and router ({load}) runs about {homeHours} h on {home} — one {outage}-hour outage — and about {bigHours} h on {big} with a hybrid inverter.",
       "runtimeOperator": "{operator} publishes the schedule for your group; an engineer will size the capacity to it.",

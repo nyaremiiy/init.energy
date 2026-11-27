@@ -4,6 +4,9 @@
 @custom-variant can-hover (@media (width >= 80rem) and (hover: hover) and (pointer: fine));
 
 @theme {
+  /* Header with page links and three menus (Каталог, Рішення, Потужності) fits from 1440 px. */
+  --breakpoint-wide: 90rem;
+
   /* Body text: Inter. Headings and labels: Montserrat. */
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-heading: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
@@ -534,4 +537,47 @@ body[data-menu-open] [data-floating] {
 /* Bottom padding for the home-indicator area of phones (fixed bottom UI). */
 @utility pb-safe {
   padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/*
+ * Grow-in on scroll (power pages: bars of the monthly chart and the region table).
+ * The final state is in the HTML; `InView` sets data-inview="false" only for blocks
+ * below the fold, then "true" when they come into view. `--i` staggers bars by 40 ms.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  .grow-y {
+    transform-origin: bottom;
+    transition: transform 600ms var(--ease-tech);
+    transition-delay: calc(var(--i, 0) * 40ms);
+  }
+
+  .grow-x {
+    transform-origin: left;
+    transition: transform 700ms var(--ease-tech);
+    transition-delay: calc(var(--i, 0) * 20ms);
+  }
+
+  [data-inview="false"] .grow-y {
+    transform: scaleY(0);
+  }
+
+  [data-inview="false"] .grow-x {
+    transform: scaleX(0);
+  }
+}
+
+/*
+ * Energy flow on the plant diagram: the dashes run along the line (from → to),
+ * only while the diagram is on screen (data-running) and without reduced motion.
+ */
+@keyframes energy-flow {
+  to {
+    stroke-dashoffset: -16;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-running="true"] .energy-flow {
+    animation: energy-flow 1s linear infinite;
+  }
 }

@@ -1,5 +1,8 @@
 import { companyContacts, offices, type Office } from "@/content/company";
 import { backupRegionPaths, insolationRegions, regionPaths } from "@/content/insolation";
+import { sesPowerPages, sesPowerPath, sesPowerPaths, type SesPowerSegment } from "@/content/ses-power";
+import { average, roundYear, stationYear } from "@/lib/calc/region-yield";
+import { panelsForKw } from "@/lib/calc/ses-power";
 import { products, type ProductId } from "@/content/products";
 import { featuredProjects } from "@/content/projects";
 import { pageNavigation } from "@/content/navigation";
@@ -28,11 +31,15 @@ export type NavMenuLink = NavLink & {
 
 export type NavColumn = {
   title: string;
+  /** A line under the title («5–30 кВт · гібридні з батареєю»). */
+  caption?: string;
   items: NavMenuLink[];
 };
 
 export type NavGroup = {
   label: string;
+  /** «power»: the plant sizes menu — pills in an accordion on phones. */
+  kind?: "power";
   columns: NavColumn[];
   /**
    * Bottom row of the panel: a line of text and one button. `contacts` leads to the
@@ -143,6 +150,7 @@ export function getNavItems(locale: Locale): NavItem[] {
       ],
       footer: { text: m.solutionsFooter, label: m.solutionsCta, href: sectionHref(anchors.contacts, locale), contacts: true },
     },
+    ...powerGroup(locale),
     section(anchors.solutions, t.nav.solutionsSection),
     section(anchors.products, t.nav.products),
     section(anchors.aboutUs, t.nav.aboutUs),
@@ -151,6 +159,53 @@ export function getNavItems(locale: Locale): NavItem[] {
       ? [section(anchors.projects, t.nav.projects)]
       : []),
     section(anchors.contacts, t.nav.contacts),
+  ];
+}
+
+/**
+ * «Потужності»: the existing power pages (content/ses-power.ts) in «Для дому» and
+ * «Для бізнесу»; a column without pages is left out, no group without any page.
+ * Output and panels use the same formulas as the pages (national average yield).
+ */
+function powerGroup(locale: Locale): NavGroup[] {
+  if (sesPowerPages.length === 0) return [];
+  const messages = getMessagesFor(locale);
+  const m = messages.chrome.header.menu;
+  const n = (value: number) => formatNumber(value, locale);
+  const nationalYield = average(insolationRegions.map((region) => region.yield));
+  const yearText = (kw: number) => {
+    const year = roundYear(stationYear(nationalYield, kw));
+    // From 100 000 kWh a year — in MWh («≈ 118 МВт·год»).
+    return year >= 100_000 ? `${n(Math.round(year / 1000))} ${messages.units.MWh}` : `${n(year)} ${messages.units.kWh}`;
+  };
+  const column = (segment: SesPowerSegment, title: string, caption: (kws: number[]) => string): NavColumn[] => {
+    const pages = sesPowerPages.filter((page) => page.segment === segment).toSorted((a, b) => a.kw - b.kw);
+    if (pages.length === 0) return [];
+    return [
+      {
+        title,
+        caption: caption(pages.map((page) => page.kw)),
+        items: pages.map((page) => ({
+          href: localizePath(sesPowerPath(page), locale),
+          label: `${n(page.kw)} ${messages.units.kW}`,
+          description: `${format(m.powerYear, { value: yearText(page.kw) })} · ${format(m.powerPanels, { panels: n(panelsForKw(page.kw)) })}`,
+        })),
+      },
+    ];
+  };
+
+  return [
+    {
+      kind: "power",
+      label: messages.chrome.header.nav.power,
+      columns: [
+        ...column("home", m.powerHome, (kws) =>
+          kws.length > 1 ? format(m.powerHomeNote, { min: n(kws[0]), max: n(kws[kws.length - 1]) }) : format(m.powerHomeNoteOne, { kw: n(kws[0]) }),
+        ),
+        ...column("business", m.powerBusiness, (kws) => format(m.powerBusinessNote, { min: n(kws[0]) })),
+      ],
+      footer: { text: m.powerFooter, label: m.powerCta, href: localizePath(routes.calculators.sesPayback, locale) },
+    },
   ];
 }
 
@@ -177,6 +232,7 @@ const headerSectionKeys: Record<string, string[]> = {
   // Four links fit next to the menus at 1280 px; «Обладнання» stays in the footer column.
   [routes.backup.hub]: ["backupHow", "backupRuntime", "backupRegions", "faq"],
   ...Object.fromEntries(regionPaths.map((path) => [path, ["regionYield", "calculator", "faq"]])),
+  ...Object.fromEntries(sesPowerPaths.map((path) => [path, ["powerYield", "calculator", "powerTypes", "faq"]])),
   ...Object.fromEntries(backupRegionPaths.map((path) => [path, ["backupChoice", "backupRuntime", "faq"]])),
 };
 

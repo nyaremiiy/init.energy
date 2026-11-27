@@ -1,14 +1,16 @@
 /**
  * Region page numbers: everything comes from the region's yield (kWh a year
  * from 1 kWp) and the monthly profile. Pure, no imports — tested in
- * region-yield.test.mjs. The unit people see is a 5 kW plant (≈ 10 panels),
- * not «kWh from 1 kW».
+ * region-yield.test.mjs. The unit people see is a 5 kW plant (≈ 9 panels of
+ * 550–570 W, ses-power.ts), not «kWh from 1 kW».
  */
+
+import { panelsForKw } from "./ses-power.ts";
 
 /** The example plant on region pages, kW. */
 export const STATION_KW = 5;
-/** Panels in the example plant (≈ 500 W each). */
-export const STATION_PANELS = 10;
+/** Panels in the example plant: the same formula as the power pages (5 kW → 9). */
+export const STATION_PANELS = panelsForKw(STATION_KW);
 
 export function stationYear(yieldPerKw: number, kw = STATION_KW): number {
   return yieldPerKw * kw;
